@@ -1,2 +1,2 @@
 # Cours-IA
-[Art du Prompt](https://sjaubert.github.io/SPCR/TP_Bachelor_Capability_diameter_Butee.html?target=_blank)
+[Art du Prompt](https://sjaubert.github.io/Cours-IA/art_prompt.html?target=_blank)
