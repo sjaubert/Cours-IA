@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Interactif Gemini CLI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chosen Palette: Warm Neutrals -->
+    <!-- Application Structure Plan: J'ai conçu cette application comme un tutoriel guidé, à page unique, avec une barre de navigation latérale persistante. Cette structure a été choisie pour permettre aux utilisateurs de suivre un parcours d'apprentissage linéaire (de l'installation aux concepts avancés) tout en leur donnant la flexibilité de sauter directement à des sections spécifiques pour une référence rapide. Chaque section contient des blocs de code interactifs (avec des boutons de copie) pour faciliter l'expérimentation directe dans le terminal de l'utilisateur. Cette approche est plus efficace qu'un document statique car elle encourage l'apprentissage actif et la consultation facile. -->
+    <!-- Visualization & Content Choices: Le contenu principal est de nature instructionnelle, se concentrant sur les commandes et les scripts. Par conséquent, les choix de présentation sont axés sur la clarté et l'utilisabilité plutôt que sur la visualisation de données. Report Info: Commandes CLI, concepts d'authentification, interaction avec les fichiers. -> Goal: Guider, informer, permettre l'expérimentation. -> Viz/Presentation Method: Blocs de code stylisés, listes ordonnées pour les étapes, icônes Unicode pour l'attrait visuel, et une mise en page HTML/CSS simple pour illustrer le flux de communication du 'Tool'. -> Interaction: Boutons 'Copier' pour chaque extrait de code, navigation latérale cliquable avec mise en évidence de la section active. -> Justification: Cette approche rend l'apprentissage technique simple et direct. Les utilisateurs peuvent copier et coller les commandes sans erreur. -> Library/Method: Vanilla JS pour l'interactivité, Tailwind CSS pour le style. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        :root {
+            --bg-main: #FDFBF8;
+            --bg-sidebar: #F5F1EB;
+            --text-main: #4A4A4A;
+            --text-heading: #2C2C2C;
+            --accent: #D4A373;
+            --accent-dark: #A98458;
+            --code-bg: #2d2d2d;
+            --code-text: #f2f2f2;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+        }
+        h1, h2, h3, h4 {
+            color: var(--text-heading);
+            font-weight: 600;
+        }
+        .sidebar {
+            background-color: var(--bg-sidebar);
+        }
+        .sidebar a {
+            transition: all 0.2s ease-in-out;
+        }
+        .sidebar a.active {
+            background-color: var(--accent);
+            color: white;
+            transform: translateX(4px);
+        }
+        .sidebar a:hover:not(.active) {
+            background-color: #E8E2D9;
+        }
+        .code-block {
+            background-color: var(--code-bg);
+            color: var(--code-text);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            position: relative;
+        }
+        .copy-btn {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background-color: #4a4a4a;
+            color: white;
+            border: none;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: background-color 0.2s;
+        }
+        .copy-btn:hover {
+            background-color: #6a6a6a;
+        }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Source+Code+Pro&display=swap" rel="stylesheet">
+</head>
+<body class="flex flex-col md:flex-row min-h-screen">
+    <aside class="sidebar w-full md:w-64 lg:w-72 p-4 md:p-6 space-y-4 md:sticky md:top-0 md:h-screen transition-all duration-300">
+        <div class="flex items-center gap-3 justify-center md:justify-start px-2">
+            <img src="logo_uimm_placeholder.jpg" alt="Logo de l'institution" class="h-10 w-10 object-contain">
+            <h1 class="text-2xl font-bold">Gemini CLI</h1>
+        </div>
+        <nav id="nav-menu" class="space-y-2">
+            <a href="#introduction" class="block p-3 rounded-lg font-medium">- Introduction</a>
+            <a href="#prerequis" class="block p-3 rounded-lg font-medium">- Prérequis</a>
+            <a href="#installation" class="block p-3 rounded-lg font-medium">- Installation de la CLI</a>
+            <a href="#authentification" class="block p-3 rounded-lg font-medium">- Authentification</a>
+            <a href="#mcp-avances" class="block p-3 rounded-lg font-medium">- Intégration des MCP</a>
+            <a href="#verification" class="block p-3 rounded-lg font-medium">- Vérification et Utilisation</a>
+            <a href="#conclusion" class="block p-3 rounded-lg font-medium">- Conclusion</a>
+        </nav>
+        <div class="mt-auto pt-4 border-t border-gray-300/60 text-xs text-gray-600 text-center md:text-left">
+            <p><strong>Auteur :</strong> S. JAUBERT</p>
+            <p><strong>Institution :</strong> Pôle Formation-UIMM CVDL</p>
+            <p><strong>Créé le : 05/09/2025</strong></p>
+        </div>
+    </aside>
+
+    <main class="flex-1 p-6 md:p-10 lg:p-12 overflow-y-auto">
+        <div class="max-w-4xl mx-auto space-y-16">
+            
+            <section id="introduction">
+                <h2 class="text-3xl font-bold mb-4">Introduction à Gemini CLI et aux Serveurs MCP</h2>
+                <p class="mb-4">
+                    Ce guide explique comment installer l'outil en ligne de commande officiel **Gemini CLI** sur Windows et comment l'étendre avec des **serveurs MCP (Model Context Protocol)** pour interagir avec des services externes comme GitHub, Firecrawl, et les outils de génération multimédia de Google.
+                </p>
+            </section>
+            
+            <section id="prerequis">
+                <h2 class="text-3xl font-bold mb-4">Étape 1 : Prérequis Indispensables</h2>
+                 <ul class="list-disc list-inside space-y-4">
+                    <li><strong>Node.js (v20+)</strong>: <a href="https://nodejs.org/" target="_blank" class="text-blue-600 hover:underline">Télécharger</a></li>
+                    <li><strong>Git et Git Bash</strong>: <a href="https://git-scm.com/download/win" target="_blank" class="text-blue-600 hover:underline">Télécharger</a></li>
+                    <li><strong>Go</strong>: <a href="https://go.dev/dl/" target="_blank" class="text-blue-600 hover:underline">Télécharger</a></li>
+                    <li><strong>Google Cloud SDK</strong>: <a href="https://cloud.google.com/sdk/docs/install" target="_blank" class="text-blue-600 hover:underline">Installer</a></li>
+                </ul>
+            </section>
+
+            <section id="installation">
+                <h2 class="text-3xl font-bold mb-4">Étape 2 : Installation de Gemini CLI</h2>
+                <p>Ouvrez une Invite de commandes (CMD) ou PowerShell et exécutez :</p>
+                <div class="code-block">
+                    <pre><code class="language-bash">npm install -g @google/gemini-cli</code></pre>
+                    <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+                </div>
+            </section>
+
+            <section id="authentification">
+                <h2 class="text-3xl font-bold mb-4">Étape 3 : Authentification</h2>
+                 <p class="mb-4">
+                    Pour la plupart des MCP avancés, l'authentification via Google Cloud est la plus robuste.
+                </p>
+                <div class="code-block">
+                    <pre><code class="language-bash">gcloud auth application-default login</code></pre>
+                    <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+                </div>
+                <p class="mt-2">Suivez les instructions qui s'ouvrent dans votre navigateur. Cette commande configure une authentification qui sera automatiquement détectée par la CLI et la plupart des outils Google.</p>
+            </section>
+
+            <section id="mcp-avances">
+                <h2 class="text-3xl font-bold mb-4">Étape 4 : Intégration des Serveurs MCP Avancés</h2>
+                <p class="mb-4">
+                    C'est ici que l'on étend les capacités de la CLI. Toutes les configurations se font dans le fichier `settings.json` situé dans `C:\Users\VOTRE_NOM\.gemini\`.
+                </p>
+
+                <h3 class="text-xl font-semibold mt-6 mb-2">4.1 MCP via NPX (Firecrawl, Context7)</h3>
+                <p class="mb-2">Ces outils s'installent à la volée via `npx`. Ils permettent d'étendre les connaissances de Gemini. <strong>Firecrawl</strong> permet de lire des pages web et <strong>Context7</strong> d'accéder aux modèles les plus récents.</p>
+                <p class="mb-4"><a href="https://www.firecrawl.dev/" target="_blank" class="text-blue-600 hover:underline font-semibold">➡️ Obtenir une clé API Firecrawl</a> (requise)</p>
+                <p>Ajoutez ce bloc à la section `mcpServers` de votre `settings.json` :</p>
+                <div class="code-block mt-2">
+<pre><code class="language-json">"mcp-server-firecrawl": {
+  "command": "npx",
+  "args": ["-y", "firecrawl-mcp"],
+  "env": {
+    "FIRECRAWL_API_KEY": "VOTRE_CLÉ_API_FIRECRAWL_ICI"
+  }
+},
+"context7": {
+  "command": "npx",
+  "args": ["-y", "@upstash/context7-mcp"]
+}</code></pre>
+                    <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+                </div>
+
+                <h3 class="text-xl font-semibold mt-6 mb-2">4.2 MCP pour GitHub</h3>
+                <p class="mb-2">Pour permettre à Gemini d'interagir avec des dépôts GitHub, vous avez besoin d'un **Personal Access Token (PAT)**.</p>
+                <p class="mb-4"><a href="https://github.com/settings/tokens" target="_blank" class="text-blue-600 hover:underline font-semibold">➡️ Créer un PAT sur GitHub</a> (avec les droits `repo` et `read:user`).</p>
+                <p>D'abord, définissez le token comme variable d'environnement :</p>
+                <div class="code-block mt-2">
+                    <pre><code class="language-bash">setx GITHUB_GEMINI_CLI_PAT "VOTRE_TOKEN_GITHUB_ICI"</code></pre>
+                    <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+                </div>
+                
+                <div class="mt-4 p-4 border rounded-lg bg-green-50 border-green-300">
+                    <h4 class="font-bold text-green-800">Point Clé : Variables d'Environnement Permanentes (`setx`)</h4>
+                    <p class="text-sm text-green-700 mt-2">
+                        Oui, et c'est un point très important. La commande <strong>`setx`</strong> que nous utilisons ici crée des variables d'environnement <strong>permanentes</strong>. Elle les inscrit dans le Registre Windows.
+                    </p>
+                    <p class="text-sm text-green-700 mt-2">
+                        Cela signifie qu'elles sont conservées même après un redémarrage de votre ordinateur ou la fermeture de votre session. C'est la grande différence avec la commande `set` (sans le 'x'), qui ne crée qu'une variable <strong>temporaire</strong>, valable uniquement pour la session du terminal en cours.
+                    </p>
+                     <p class="text-sm text-green-700 mt-2">
+                        En résumé : <strong>`setx` = Permanent</strong>, `set` = Temporaire. Nous utilisons `setx` pour que vous n'ayez à faire cette configuration qu'une seule fois.
+                    </p>
+                </div>
+
+                <p class="mt-4">Ensuite, ajoutez ce serveur à `settings.json` :</p>
+                 <div class="code-block mt-2">
+<pre><code class="language-json">"github": {
+  "httpUrl": "https://api.githubcopilot.com/mcp/",
+  "headers": {
+    "Authorization": "${GITHUB_GEMINI_CLI_PAT}"
+  },
+  "timeout": 5000
+}</code></pre>
+                    <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+                </div>
+
+                <h3 class="text-xl font-semibold mt-6 mb-2">4.3 MCP pour la Génération de Média Google (Imagen, Veo...)</h3>
+                <p class="mb-4">
+                    Cette configuration est plus complexe et requiert des informations spécifiques à votre projet Google Cloud.
+                </p>
+                
+                <div class="p-4 border rounded-lg bg-blue-50 border-blue-300">
+                    <h4 class="font-bold text-blue-800">4.4 Trouver les Informations de votre Projet Google Cloud</h4>
+                    <p class="text-sm text-blue-700 mt-2">Voici comment trouver ou créer les valeurs pour `PROJECT`, `REGION`, et `BUCKET`.</p>
+                    
+                    <h5 class="font-semibold text-blue-800 mt-4">1. ID de Projet (GOOGLE_CLOUD_PROJECT)</h5>
+                    <p class="text-sm text-blue-700 mt-1">C'est l'identifiant unique de votre projet.</p>
+                    <ol class="list-decimal list-inside text-sm text-blue-700 mt-2 space-y-1">
+                        <li>Allez sur la <a href="https://console.cloud.google.com/dashboard" target="_blank" class="text-blue-600 hover:underline">page d'accueil de la Google Cloud Console</a>.</li>
+                        <li>Sur le tableau de bord, cherchez la carte "Infos sur le projet".</li>
+                        <li>Copiez la valeur du champ <strong>"ID"</strong> (ex: `gen-lang-client-0312703037`).</li>
+                    </ol>
+
+                    <h5 class="font-semibold text-blue-800 mt-4">2. Région (GOOGLE_CLOUD_REGION)</h5>
+                    <p class="text-sm text-blue-700 mt-1">C'est la localisation géographique où vos requêtes seront traitées. (ex: `europe-west9` pour Paris, `us-central1` pour les USA).</p>
+                    
+                    <h5 class="font-semibold text-blue-800 mt-4">3. Bucket de Stockage (GOOGLE_STORAGE_BUCKET)</h5>
+                    <p class="text-sm text-blue-700 mt-1">C'est un dossier en ligne où les médias générés seront stockés. Vous devez en créer un.</p>
+                     <ol class="list-decimal list-inside text-sm text-blue-700 mt-2 space-y-1">
+                        <li>Allez sur <a href="https://console.cloud.google.com/storage/browser" target="_blank" class="text-blue-600 hover:underline">Cloud Storage > Buckets</a>.</li>
+                        <li>Cliquez sur <strong>"+ CRÉER"</strong>.</li>
+                        <li><strong>Donnez-lui un nom unique au monde.</strong> (ex: `votre-id-projet-gemini-files`).</li>
+                        <li>Choisissez un emplacement qui correspond à votre région et gardez les autres paramètres par défaut.</li>
+                    </ol>
+                </div>
+                
+                <p class="my-4">Une fois que vous avez ces trois informations, définissez-les comme variables d'environnement avec `setx` :</p>
+                <div class="code-block mt-1">
+<pre><code class="language-bash">setx GOOGLE_CLOUD_PROJECT "votre-id-de-projet-gcp"
+setx GOOGLE_CLOUD_REGION "votre-region-gcp"
+setx GOOGLE_STORAGE_BUCKET "le-nom-de-votre-bucket"</code></pre>
+                    <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+                </div>
+                
+                <p class="my-4">Enfin, installez les serveurs avec **Git Bash** :</p>
+                <div class="code-block mt-1">
+<pre><code class="language-bash"># 1. Cloner le dépôt
+git clone https://github.com/GoogleCloudPlatform/vertex-ai-creative-studio.git
+
+# 2. Naviguer dans le bon dossier
+cd vertex-ai-creative-studio/experiments/mcp-genmedia/mcp-genmedia-go
+
+# 3. Lancer le script d'installation
+./install.sh</code></pre>
+                     <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+                </div>
+                <p class="mt-2">Et ajoutez la configuration correspondante à votre `settings.json` :</p>
+                <div class="code-block mt-1">
+<pre><code class="language-json">"imagen": {
+  "command": "mcp-imagen-go",
+  "env": {
+    "PROJECT_ID": "${GOOGLE_CLOUD_PROJECT}",
+    "LOCATION": "${GOOGLE_CLOUD_REGION}",
+    "GENMEDIA_BUCKET": "${GOOGLE_STORAGE_BUCKET}"
+  }
+}</code></pre>
+                    <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+                </div>
+            </section>
+            
+            <section id="verification">
+                <h2 class="text-3xl font-bold mb-4">Étape 5 : Vérification et Utilisation</h2>
+                <p class="mb-2">Ouvrez une <strong>nouvelle</strong> Invite de commandes. Lancez `gemini` et vérifiez les serveurs :</p>
+                <div class="code-block">
+                    <pre><code>/mcp</code></pre>
+                    <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+                </div>
+                <p class="my-4">Vous devriez voir `github`, `imagen`, `mcp-server-firecrawl`, etc. avec le statut "Ready". Voici quelques exemples :</p>
+                <div class="code-block">
+<pre><code>@imagen Create a photorealistic image of a cat typing on a keyboard
+@firecrawl https://www.lemonde.fr "Summarize this article"
+@github what are the open issues in the expressjs/express repository?
+</code></pre>
+                    <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+                </div>
+            </section>
+
+            <section id="conclusion">
+                <h2 class="text-3xl font-bold mb-4">Conclusion</h2>
+                <p class="mb-4">
+                    En suivant ces étapes, vous avez transformé votre Gemini CLI en une interface de commande unifiée et puissante. Vous pouvez désormais interagir avec des services web, des dépôts de code et des outils de génération de média directement en langage naturel, le tout depuis un seul et même terminal.
+                </p>
+            </section>
+
+        </div>
+    </main>
+
+    <script>
+        function copyCode(button) {
+            const pre = button.parentElement.querySelector('pre');
+            const text = pre.innerText;
+
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            textArea.style.position = 'absolute';
+            textArea.style.left = '-9999px';
+            document.body.appendChild(textArea);
+            
+            textArea.select();
+            
+            try {
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    button.innerText = 'Copié !';
+                    setTimeout(() => {
+                        button.innerText = 'Copier';
+                    }, 2000);
+                } else {
+                     console.error('Erreur de copie: La commande a échoué');
+                }
+            } catch (err) {
+                console.error('Erreur de copie', err);
+            }
+
+            document.body.removeChild(textArea);
+        }
+        
+        const sections = document.querySelectorAll('main section');
+        const navLinks = document.querySelectorAll('#nav-menu a');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.3
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href').substring(1) === entry.target.id) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+    </script>
+</body>
+</html>
+
