@@ -110,7 +110,20 @@
                     <li><strong>Git et Git Bash</strong>: <a href="https://git-scm.com/download/win" target="_blank" class="text-blue-600 hover:underline">Télécharger</a></li>
                     <li><strong>Go</strong>: <a href="https://go.dev/dl/" target="_blank" class="text-blue-600 hover:underline">Télécharger</a></li>
                     <li><strong>Google Cloud SDK</strong>: <a href="https://cloud.google.com/sdk/docs/install" target="_blank" class="text-blue-600 hover:underline">Installer</a></li>
+                    
                 </ul>
+                 <div class="mt-6 p-4 border rounded-lg bg-yellow-50 border-yellow-300">
+                    <h4 class="font-bold text-yellow-800">Dépannage : Erreur "'gcloud' n'est pas reconnu"</h4>
+                    <p class="text-sm text-yellow-700 mt-2">Si vous rencontrez cette erreur sur une nouvelle machine, cela signifie que le dossier du Google Cloud SDK n'est pas dans votre PATH. Voici comment le corriger :</p>
+                    <ol class="list-decimal list-inside text-sm text-yellow-700 mt-2 space-y-1">
+                        <li><strong>Vérifiez que le SDK est bien installé.</strong> Si ce n'est pas le cas, téléchargez-le via le lien ci-dessus.</li>
+                        <li><strong>Trouvez le dossier d'installation du SDK.</strong> Par défaut, il se trouve ici : `C:\Program Files (x86)\Google\Cloud SDK\google-cloud-sdk\bin`. Copiez ce chemin.</li>
+                        <li><strong>Ouvrez les variables d'environnement.</strong> Cherchez "Modifier les variables d'environnement système" dans le menu Démarrer.</li>
+                        <li>Cliquez sur "Variables d'environnement...", puis dans "Variables système", sélectionnez `Path` et cliquez sur "Modifier...".</li>
+                        <li>Cliquez sur "Nouveau", collez le chemin `C:\Program Files (x86)\Google\Cloud SDK\google-cloud-sdk\bin` et validez avec "OK".</li>
+                        <li><strong>Crucial :</strong> Fermez et rouvrez toutes vos fenêtres de terminal pour que les changements soient pris en compte.</li>
+                    </ol>
+                 </div>
             </section>
 
             <section id="installation">
@@ -343,4 +356,7 @@ cd vertex-ai-creative-studio/experiments/mcp-genmedia/mcp-genmedia-go
     </script>
 </body>
 </html>
+
+
+
 
