@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L'Art du Prompt : Guide Interactif</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Sand -->
+    <!-- Application Structure Plan: J'ai conçu cette application comme un parcours d'apprentissage thématique en une seule page. La structure progresse logiquement : 1) Introduction, 2) Anatomie du Prompt (les 6 piliers), 3) un "Constructeur de Prompt" interactif pour la mise en pratique, 4) une section comparative sur les Techniques de base et avancées, 5) une visualisation des concepts avancés, et 6) un rappel sur l'importance du jugement humain. Cette structure a été choisie pour transformer la lecture passive du rapport source en une exploration active et engageante, favorisant une meilleure rétention des concepts clés grâce à l'interaction directe. -->
+    <!-- Visualization & Content Choices: 
+        - Anatomie du Prompt -> Objectif: Organiser/Informer -> Méthode: Cartes interactives en HTML/CSS -> Interaction: Clic pour afficher les détails -> Justification: Clarifie la structure d'un prompt sans surcharger l'interface, focalise l'attention.
+        - Constructeur de Prompt -> Objectif: Engagement/Apprentissage actif -> Méthode: Formulaire HTML avec mise à jour en temps réel par JS -> Interaction: L'utilisateur tape et voit son prompt se construire -> Justification: Apprendre par la pratique est plus efficace.
+        - Techniques de Prompting -> Objectif: Comparer/Informer -> Méthode: Système d'onglets HTML/JS -> Interaction: Clic pour changer de technique -> Justification: Permet une comparaison directe et simple des différentes approches.
+        - Efficacité des Techniques -> Objectif: Comparer/Synthétiser -> Méthode: Diagramme à barres avec Chart.js/Canvas -> Interaction: Survol pour voir les détails -> Justification: Offre une représentation visuelle et mémorable de la montée en complexité et en efficacité des techniques, rendant le concept moins abstrait.
+        - L'Approche Critique -> Objectif: Informer/Alerter -> Méthode: Icônes et listes HTML/CSS -> Interaction: Statique -> Justification: Communique des points de vigilance importants de manière claire et concise. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 400px;
+            max-height: 50vh;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800">
+
+    <header class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-sky-700">L'Art du Prompt</h1>
+            <ul class="hidden md:flex space-x-8">
+                <li><a href="#introduction" class="hover:text-sky-700 transition-colors">Introduction</a></li>
+                <li><a href="#anatomie" class="hover:text-sky-700 transition-colors">Anatomie</a></li>
+                <li><a href="#builder" class="hover:text-sky-700 transition-colors">Constructeur</a></li>
+                <li><a href="#techniques" class="hover:text-sky-700 transition-colors">Techniques</a></li>
+                <li><a href="#critique" class="hover:text-sky-700 transition-colors">Approche Critique</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-6 py-12 md:py-16">
+
+        <section id="introduction" class="text-center mb-20">
+            <h2 class="text-4xl md:text-5xl font-bold mb-4">Dialoguez <span class="text-sky-700">efficacement</span> avec l'IA</h2>
+            <p class="text-lg md:text-xl text-stone-600 max-w-3xl mx-auto">
+                Un prompt est bien plus qu'une simple question. C'est une instruction précise qui guide l'intelligence artificielle. Apprenez à maîtriser cet art pour obtenir des réponses pertinentes, créatives et utiles, et transformez l'IA en un véritable partenaire cognitif.
+            </p>
+        </section>
+
+        <section id="anatomie" class="mb-20">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold">Anatomie d'un Prompt Parfait</h2>
+                <p class="text-stone-600 mt-2">Un prompt efficace se compose de 6 ingrédients clés. Pensez-y comme à une recette.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="anatomy-grid">
+            </div>
+        </section>
+
+        <section id="builder" class="mb-20 bg-white p-8 rounded-2xl shadow-lg border border-stone-200">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold">Le Constructeur de Prompt</h2>
+                <p class="text-stone-600 mt-2">Mettez la théorie en pratique ! Remplissez les champs ci-dessous pour construire votre propre prompt structuré.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+                <div>
+                    <div id="builder-form" class="space-y-4"></div>
+                </div>
+                <div class="sticky top-24">
+                    <label class="font-bold text-stone-700 text-lg">Votre prompt final :</label>
+                    <pre class="bg-stone-100 p-4 rounded-lg mt-2 whitespace-pre-wrap text-sm text-stone-700 min-h-[200px] border border-stone-200"><code id="prompt-output"></code></pre>
+                </div>
+            </div>
+        </section>
+
+        <section id="techniques" class="mb-20">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold">Techniques de Prompting</h2>
+                <p class="text-stone-600 mt-2">Explorez différentes stratégies pour affiner vos demandes, des plus simples aux plus complexes.</p>
+            </div>
+            <div>
+                <div class="flex justify-center border-b border-stone-200 mb-8" id="technique-tabs">
+                </div>
+                <div id="technique-content">
+                </div>
+            </div>
+        </section>
+
+        <section id="effectiveness-chart" class="mb-20">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold">Visualisation de l'Efficacité</h2>
+                <p class="text-stone-600 mt-2">Ce graphique illustre comment des techniques plus avancées peuvent améliorer la qualité des résultats.</p>
+            </div>
+            <div class="bg-white p-4 md:p-8 rounded-2xl shadow-lg border border-stone-200">
+                <div class="chart-container">
+                    <canvas id="promptEffectivenessChart"></canvas>
+                </div>
+            </div>
+        </section>
+        
+        <section id="critique" class="text-center bg-sky-700 text-white py-12 px-6 rounded-2xl">
+            <h2 class="text-3xl font-bold mb-4">L'Humain reste l'Expert</h2>
+            <p class="max-w-3xl mx-auto mb-8">
+                Un bon prompt est le début du chemin, pas la destination. L'IA est un partenaire, pas un substitut à votre expertise. Ne faites jamais une confiance aveugle.
+            </p>
+            <div class="flex flex-wrap justify-center gap-8 text-left">
+                <div class="bg-sky-600 p-6 rounded-lg max-w-sm">
+                    <h3 class="font-bold text-lg mb-2">🚨 Hallucinations</h3>
+                    <p class="text-sky-100">L'IA peut inventer des faits ou des sources. Vérifiez toujours les informations critiques.</p>
+                </div>
+                <div class="bg-sky-600 p-6 rounded-lg max-w-sm">
+                    <h3 class="font-bold text-lg mb-2">🧠 Biais</h3>
+                    <p class="text-sky-100">L'IA reproduit les biais de ses données. Soyez vigilant face aux stéréotypes.</p>
+                </div>
+                <div class="bg-sky-600 p-6 rounded-lg max-w-sm">
+                    <h3 class="font-bold text-lg mb-2">🔄 Itération</h3>
+                    <p class="text-sky-100">La première réponse est rarement parfaite. Analysez, critiquez et affinez votre demande.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-stone-800 text-white text-center py-6 mt-20">
+        <p>&copy; 2025 L'Art du Prompt. Un guide interactif pour une meilleure collaboration avec l'IA.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            
+            const anatomyData = [
+                { id: 'role', title: '1. Rôle & Contexte', icon: '👤', description: "Donnez une personnalité et un cadre à l'IA.", example: "Ex: Tu es un professeur d'histoire spécialisé sur la Seconde Guerre mondiale..." },
+                { id: 'objective', title: '2. Objectif Précis', icon: '🎯', description: "Indiquez clairement la finalité de votre demande.", example: "Ex: Je veux faire comprendre les enjeux et les grandes étapes du débarquement..." },
+                { id: 'task', title: '3. Tâche Claire', icon: '📝', description: "Décrivez l'action que l'IA doit réaliser.", example: "Ex: Crée une séquence pédagogique complète de 3 séances de 50 minutes." },
+                { id: 'constraints', title: '4. Contraintes', icon: '⛓️', description: "Spécifiez les limites et les éléments à prendre en compte.", example: "Ex: Le matériel est limité (pas d'internet), la classe a 28 élèves..." },
+                { id: 'format', title: '5. Format & Exemples', icon: '🎨', description: "Demandez une structure de réponse et donnez des modèles.", example: "Ex: Présente le résultat sous forme de tableau avec les colonnes: Objectifs, Activités..." },
+                { id: 'steps', title: '6. Étapes Critiques', icon: '👣', description: "Guidez le raisonnement de l'IA pour les tâches complexes.", example: "Ex: Procède étape par étape : 1) Analyse, 2) Conception, 3) Évaluation." }
+            ];
+
+            const anatomyGrid = document.getElementById('anatomy-grid');
+            anatomyData.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'bg-white p-6 rounded-xl shadow-md border border-stone-200 cursor-pointer hover:shadow-lg hover:-translate-y-1 transition-all';
+                card.innerHTML = `
+                    <div class="flex items-center text-2xl font-bold mb-3">
+                        <span class="mr-3">${item.icon}</span>
+                        <h3>${item.title}</h3>
+                    </div>
+                    <p class="text-stone-600 mb-4">${item.description}</p>
+                    <div class="hidden bg-stone-100 p-3 rounded-md text-sm">
+                        <p class="text-stone-700">${item.example}</p>
+                    </div>
+                `;
+                card.addEventListener('click', () => {
+                    card.querySelector('div:last-child').classList.toggle('hidden');
+                });
+                anatomyGrid.appendChild(card);
+            });
+
+            const builderForm = document.getElementById('builder-form');
+            const promptOutput = document.getElementById('prompt-output');
+            const promptInputs = {};
+
+            anatomyData.forEach(item => {
+                const div = document.createElement('div');
+                const label = document.createElement('label');
+                label.className = 'block font-bold text-stone-700 mb-1';
+                label.textContent = item.title;
+                const textarea = document.createElement('textarea');
+                textarea.id = `input-${item.id}`;
+                textarea.rows = 2;
+                textarea.className = 'w-full p-2 border border-stone-300 rounded-md focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition';
+                textarea.placeholder = item.description;
+                
+                div.appendChild(label);
+                div.appendChild(textarea);
+                builderForm.appendChild(div);
+
+                promptInputs[item.id] = textarea;
+                textarea.addEventListener('input', updatePromptPreview);
+            });
+
+            function updatePromptPreview() {
+                let fullPrompt = '';
+                anatomyData.forEach(item => {
+                    const value = promptInputs[item.id].value.trim();
+                    if (value) {
+                        const titleForPrompt = item.title.substring(item.title.indexOf(' ')+1).replace('&', 'et');
+                        fullPrompt += `**${titleForPrompt.toUpperCase()}**:\n${value}\n\n`;
+                    }
+                });
+                promptOutput.textContent = fullPrompt.trim() ? fullPrompt.trim() : 'Votre prompt apparaîtra ici...';
+            }
+            updatePromptPreview();
+
+            const techniquesData = {
+                'zero-shot': {
+                    title: 'Zero-Shot',
+                    description: "La technique la plus simple. Vous posez une question directe sans donner d'exemple. Idéal pour des tâches simples.",
+                    exampleBefore: `"Fais un poème sur la mer."`,
+                    exampleAfter: `"Explique le théorème de Pythagore de manière simple pour un élève de 10 ans."`
+                },
+                'few-shot': {
+                    title: 'Few-Shot',
+                    description: "Vous donnez à l'IA un ou plusieurs exemples pour lui montrer le format attendu. Très efficace pour améliorer la qualité.",
+                    exampleBefore: `"Traduis 'break a leg'."`,
+                    exampleAfter: `"Tâche: Traduire des expressions idiomatiques.\nExemple: 'It's raining cats and dogs' -> 'Il pleut des cordes'.\nMaintenant traduis: 'Bite the bullet'."`
+                },
+                'chain-of-thought': {
+                    title: 'Chain-of-Thought (CoT)',
+                    description: "Pour les problèmes complexes, demandez à l'IA de réfléchir étape par étape avant de donner la réponse finale.",
+                    exampleBefore: `"Si j'ai 5 pommes et j'en mange 2, puis je donne la moitié du reste, combien m'en reste-t-il ?"`,
+                    exampleAfter: `"Si j'ai 5 pommes et j'en mange 2, puis je donne la moitié du reste, combien m'en reste-t-il ? Pense étape par étape."`
+                },
+                'chaining': {
+                    title: 'Prompt Chaining',
+                    description: "Découpez une tâche complexe en une série de prompts plus petits, en affinant la réponse à chaque étape.",
+                    exampleBefore: `"Écris une histoire complète sur un voyage sur Mars."`,
+                    exampleAfter: `1. "Donne-moi 3 idées de personnages pour une histoire sur Mars."\n2. "Développe le deuxième personnage."\n3. "Écris le premier chapitre de son point de vue."`
+                }
+            };
+            
+            const techniqueTabs = document.getElementById('technique-tabs');
+            const techniqueContent = document.getElementById('technique-content');
+            let firstTab = true;
+
+            for (const key in techniquesData) {
+                const technique = techniquesData[key];
+                const button = document.createElement('button');
+                button.textContent = technique.title;
+                button.dataset.target = key;
+                button.className = `px-4 py-2 text-lg font-medium border-b-2 transition-all ` + (firstTab ? 'border-sky-700 text-sky-700' : 'border-transparent text-stone-500 hover:border-stone-400 hover:text-stone-800');
+                
+                button.addEventListener('click', (e) => {
+                    document.querySelectorAll('#technique-tabs button').forEach(btn => {
+                        btn.className = 'px-4 py-2 text-lg font-medium border-b-2 transition-all border-transparent text-stone-500 hover:border-stone-400 hover:text-stone-800';
+                    });
+                    e.target.className = 'px-4 py-2 text-lg font-medium border-b-2 transition-all border-sky-700 text-sky-700';
+
+                    document.querySelectorAll('#technique-content > div').forEach(contentDiv => {
+                        contentDiv.classList.add('hidden');
+                    });
+                    document.getElementById(`content-${key}`).classList.remove('hidden');
+                });
+                
+                techniqueTabs.appendChild(button);
+
+                const contentDiv = document.createElement('div');
+                contentDiv.id = `content-${key}`;
+                if (!firstTab) contentDiv.classList.add('hidden');
+                contentDiv.innerHTML = `
+                    <div class="bg-white p-8 rounded-lg border border-stone-200">
+                        <p class="text-stone-600 mb-6">${technique.description}</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="font-bold text-red-600 mb-2">Avant (Moins Efficace)</h4>
+                                <pre class="bg-red-50 text-red-800 p-3 rounded-md text-sm border border-red-200"><code>${technique.exampleBefore}</code></pre>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-green-600 mb-2">Après (Plus Efficace)</h4>
+                                <pre class="bg-green-50 text-green-800 p-3 rounded-md text-sm border border-green-200"><code>${technique.exampleAfter}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                techniqueContent.appendChild(contentDiv);
+                
+                firstTab = false;
+            }
+
+            const ctx = document.getElementById('promptEffectivenessChart').getContext('2d');
+            const promptEffectivenessChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Zero-Shot', 'Few-Shot', 'Chain-of-Thought', 'Prompt Chaining'],
+                    datasets: [{
+                        label: 'Qualité Potentielle du Résultat',
+                        data: [50, 75, 85, 90],
+                        backgroundColor: [
+                            'rgba(56, 189, 248, 0.6)',
+                            'rgba(14, 165, 233, 0.6)',
+                            'rgba(2, 132, 199, 0.6)',
+                            'rgba(7, 89, 133, 0.6)',
+                        ],
+                        borderColor: [
+                            'rgb(56, 189, 248)',
+                            'rgb(14, 165, 233)',
+                            'rgb(2, 132, 199)',
+                            'rgb(7, 89, 133)',
+                        ],
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            title: {
+                                display: true,
+                                text: 'Qualité / Complexité'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.y !== null) {
+                                        label += context.parsed.y + '%';
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
