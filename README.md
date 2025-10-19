@@ -6,3 +6,5 @@
 [Installation MCP Workspace](https://sjaubert.github.io/Cours-IA/gemini-cli_workspace.html?target=_blank)
 
 [ Guide Interactif Art du Prompt](https://sjaubert.github.io/Cours-IA/Guide_Interactif_Prompt.html?target=_blank)
+
+[ Guide Interactif Art du Prompt](https://sjaubert.github.io/Cours-IA/Guide_Interactif_Prompt.html?target=_blank)
