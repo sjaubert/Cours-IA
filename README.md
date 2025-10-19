@@ -1,4 +1,4 @@
-# Cours-IA - Pôle Formation UIMM CVDL (S. Jaubert)
+# Pôle Formation UIMM CVDL (S. Jaubert) ![Logo UIMM](logo_uimm_placeholder.jpg)
 [Art du Prompt](https://sjaubert.github.io/Cours-IA/art_prompt.html?target=_blank)
 
 [Installation Gemini-cli](https://sjaubert.github.io/Cours-IA/Gemin-cli%20V2.html?target=_blank)
