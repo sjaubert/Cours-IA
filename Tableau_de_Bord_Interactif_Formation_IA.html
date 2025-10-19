@@ -1,0 +1,460 @@
+<!-- Chosen Palette: Calm Harmony -->
+<!-- Application Structure Plan: L'application est structurée comme un tableau de bord vertical avec une barre de navigation latérale fixe pour un accès rapide aux 8 modules. Cette structure a été choisie pour transformer un long document de formation en une expérience d'apprentissage non-linéaire et gérable. Chaque module est une section repliable (accordéon) pour éviter la surcharge d'informations. À l'intérieur, les concepts clés sont des éléments interactifs à bascule, et les ateliers pratiques intègrent des zones de texte pour la prise de notes directe. Ce design transforme l'utilisateur d'un lecteur passif en un apprenant actif, ce qui est l'objectif principal pour un support de formation. Le flux utilisateur est simple : naviguer via la barre latérale, déplier un module pour se concentrer, interagir avec les concepts pour apprendre, et taper dans les ateliers pour appliquer. -->
+<!-- Visualization & Content Choices: La structure du rapport (8 modules) est transformée en une architecture de SPA pour une meilleure organisation et navigation. Objectif : Organiser -> Méthode : Sections repliables (accordéon) -> Interaction : Clic pour afficher/masquer -> Justification : Permet de se concentrer sur un module à la fois. | Info : Concepts clés -> Objectif : Informer -> Méthode : Cartes interactives à bascule -> Interaction : Clic pour révéler l'explication -> Justification : Encourage l'engagement actif plutôt que la lecture passive. | Info : Ateliers pratiques -> Objectif : Appliquer -> Méthode : Zones de texte HTML (<textarea>) -> Interaction : Saisie de texte par l'utilisateur -> Justification : Transforme le document en un cahier de travail fonctionnel et personnalisé. | Bibliothèque/Méthode : La structure et l'interactivité sont entièrement réalisées avec du HTML sémantique, Tailwind CSS pour le style, et du JavaScript vanilla pour la logique d'interaction (accordéons, navigation fluide, mise en évidence de la section active). Aucun graphique n'étant présent dans le rapport source, Chart.js n'est pas utilisé. -->
+<!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau de Bord Interactif - Formation IA</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F9FAFB;
+            color: #1F2937;
+        }
+        .sidebar-link-active {
+            background-color: #4F46E5;
+            color: #FFFFFF;
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body class="antialiased">
+    <div class="bg-gray-900 text-white text-center p-3 font-semibold">
+        Pôle Formation - UIMM CVDL S. Jaubert
+    </div>
+    <div class="relative min-h-screen md:flex">
+        <aside class="hidden md:block md:w-64 lg:w-72 bg-gray-800 text-white p-4 lg:p-6 fixed top-0 left-0 h-full overflow-y-auto">
+            <div class="flex items-center space-x-3 mb-6">
+                <img src="https://placehold.co/40x40/FFFFFF/1F2937?text=LOGO" alt="Logo UIMM" class="h-10 w-10 rounded-md">
+                <h1 class="text-xl lg:text-2xl font-bold">Formation IA</h1>
+            </div>
+            <nav id="sidebar-nav" class="space-y-2">
+            </nav>
+        </aside>
+
+        <main class="md:ml-64 lg:ml-72 flex-1 p-4 sm:p-6 lg:p-10">
+            <header class="mb-8">
+                <h1 class="text-3xl sm:text-4xl font-bold text-gray-900">Cahier de Bord de l'Apprenant</h1>
+                <p class="mt-2 text-lg text-gray-600">Votre compagnon interactif pour la formation "L'IA au Service de l'Entreprise".</p>
+            </header>
+
+            <div id="module-container" class="space-y-8">
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const modulesData = [
+            {
+                id: 'module-1',
+                title: "Module 1 : La Révolution de l'IA Générative",
+                learningObjectives: [
+                    "Le principe fondamental derrière les IA comme ChatGPT ou Gemini.",
+                    "Pourquoi cette technologie est une rupture majeure pour les métiers intellectuels.",
+                    "Comment votre propre expérience peut vous aider à comprendre l'IA."
+                ],
+                keyConcepts: [
+                    { 
+                        title: "Le Moteur de Prédiction", 
+                        content: `Imaginez une autocomplétion surpuissante. C'est l'idée la plus importante à retenir.<br><br><div class='p-3 bg-indigo-50 border-l-4 border-indigo-500 rounded-r-lg'><strong class='text-indigo-800'>Un LLM (Grand Modèle de Langage) est un moteur statistique qui prédit le mot (ou "token") suivant le plus probable dans une séquence de texte.</strong></div><br>Il ne "comprend" pas le sens comme un humain, il calcule des probabilités. Quand vous écrivez \`La capitale de la France est...\`, il a vu des milliards de fois que le mot qui suit est \`Paris\`.`
+                    },
+                    {
+                        title: "L'Architecture Transformer et l'Attention",
+                        content: `C'est l'innovation technique qui a tout changé. Avant, les IA tentaient de "résumer" une phrase entière en un seul concept, ce qui était très limité. Le mécanisme d'**Attention** permet au modèle de "regarder" les mots les plus importants dans votre question pour générer chaque mot de la réponse, lui donnant une mémoire et une compréhension du contexte bien plus fines.`
+                    }
+                ],
+                workshop: {
+                    title: "La Prédiction Humaine",
+                    objective: "Vivre l'expérience d'un LLM pour comprendre son fonctionnement.",
+                    steps: [
+                        "Le formateur va vous présenter des débuts de phrases.",
+                        "Pour chaque phrase, écrivez sur un post-it le mot qui vous semble être la suite la plus logique.",
+                        "Nous comparerons nos prédictions humaines à celles de l'IA."
+                    ],
+                    notes: [
+                        { label: "Phrase 1 (Business)" },
+                        { label: "Phrase 2 (Technique)" },
+                        { label: "Phrase 3 (Créative)" },
+                    ]
+                }
+            },
+            {
+                id: 'module-2',
+                title: 'Module 2 : Sous le Capot de l\'IA - Comment "pense" un LLM ?',
+                learningObjectives: [
+                    'La notion de Token : la brique de base du langage de l\'IA.',
+                    'Les causes des hallucinations et des réponses étranges.',
+                    'Comment piloter la "créativité" de l\'IA avec des paramètres comme la Température.'
+                ],
+                keyConcepts: [
+                    {
+                        title: "Le Monde des Tokens",
+                        content: `Une IA ne lit pas des mots, mais des <strong>tokens</strong>. Un token est un morceau de mot.<br><ul><li class='ml-4'>• \`Bonjour\` -> 1 token (\`Bonjour\`)</li><li class='ml-4'>• \`IA générative\` -> 3 tokens (\`IA\`, \` gén\`, \`érative\`)</li></ul><br><div class='p-3 bg-yellow-50 border-l-4 border-yellow-500 rounded-r-lg'><strong class='text-yellow-800'>Pourquoi c'est important ?</strong> L'IA est très forte pour manipuler des tokens entiers, mais très mauvaise pour les "casser". C'est pourquoi elle peut se tromper en comptant les lettres dans un mot ou en l'inversant. C'est une limite fondamentale à connaître !</div>`
+                    },
+                    {
+                        title: "Les Réglages de la Créativité",
+                        content: `<ul>
+                            <li class='mb-2'><strong>🌡️ Température :</strong> C'est le thermostat du hasard.
+                                <ul class='list-disc ml-6 mt-1'>
+                                    <li>\`T = 0.1\` : L'IA est "ennuyeuse" mais factuelle. Idéal pour résumer un texte ou extraire des informations.</li>
+                                    <li>\`T = 0.9\` : L'IA est "créative" et prend des risques. Parfait pour brainstormer des idées ou trouver des slogans.</li>
+                                </ul>
+                            </li>
+                            <li><strong>Top-K / Top-P :</strong> Des filtres pour empêcher l'IA de choisir des mots trop improbables, même à haute température. C'est une sécurité pour éviter qu'elle ne déraille complètement.</li>
+                        </ul>`
+                    }
+                ],
+                workshop: {
+                    title: "Le Thermostat de l'IA",
+                    objective: "Observer l'impact direct de la température sur la nature des réponses.",
+                    prompt: "Rédigez un slogan pour un café vendu sur la lune.",
+                    notes: [
+                        { label: "Slogan (Température Basse)"},
+                        { label: "Slogan (Température Moyenne)"},
+                        { label: "Slogan (Température Élevée)"},
+                    ]
+                }
+            },
+            {
+                id: 'module-3',
+                title: "Module 3 : L'Art du Prompt Engineering - Les Techniques Fondamentales",
+                learningObjectives: [
+                    "À donner des instructions claires avec les approches Zero-shot, One-shot et Few-shot.",
+                    "À donner une \"personnalité\" et des règles à l'IA avec les Rôles.",
+                    "À forcer l'IA à vous donner une réponse dans un format précis (JSON, Markdown, etc.)."
+                ],
+                keyConcepts: [
+                    {
+                        title: "Donner des exemples, la meilleure des instructions",
+                        content: `<ul>
+                                    <li class='mb-1'><strong>Zero-shot :</strong> Une instruction directe. \`Traduis "Hello" en français.\`</li>
+                                    <li class='mb-1'><strong>One-shot :</strong> Une instruction avec un exemple. \`Traduis "Hello" en français. Exemple : "Car" -> "Voiture".\`</li>
+                                    <li><strong>Few-shot :</strong> Une instruction avec plusieurs exemples. C'est la technique <strong>la plus efficace</strong> pour enseigner un format ou un style complexe.</li>
+                                 </ul>`
+                    },
+                    {
+                        title: "Le Scénario de la Conversation : Les Rôles",
+                        content: `Un prompt moderne est une conversation structurée.<br><br>
+                                 <div class='space-y-2'>
+                                     <p><strong>System :</strong> 👤 <strong>Le metteur en scène.</strong> C'est ici que vous donnez les instructions de fond, la personnalité et les règles du jeu à l'IA. <em>Ex: "Tu es un expert en logistique. Tes réponses doivent être concises et basées sur des faits."</em></p>
+                                     <p><strong>User :</strong> 🗣️ <strong>Votre réplique.</strong> C'est votre question ou votre instruction.</p>
+                                     <p><strong>Assistant :</strong> 🤖 <strong>La réplique de l'IA.</strong></p>
+                                 </div>`
+                    }
+                ],
+                workshop: {
+                    title: "De la Pizza au JSON",
+                    objective: "Utiliser la technique du few-shot pour transformer un langage naturel en un format de données structuré.",
+                    prompt: `Créez un prompt qui transforme des commandes de pizza textuelles en un objet JSON propre, en vous basant sur des exemples.<br><br><strong>Exemple d'entrée :</strong> \`Je voudrais une grande pizza, moitié reine, moitié 4 fromages.\`<br><strong>Exemple de sortie attendue (JSON) :</strong> <pre class='bg-gray-100 p-2 rounded-md mt-1 text-sm'>{\n  "taille": "grande",\n  "type": "moitié-moitié",\n  ...\n}</pre>`,
+                    notes: [{ label: "Ébauche de votre prompt (pensez à inclure au moins 2 exemples)" }]
+                }
+            },
+            {
+                id: 'module-4',
+                title: "Module 4 : Techniques de Raisonnement Avancées",
+                learningObjectives: [
+                    'À forcer l\'IA à "réfléchir" avant de répondre avec le Chain of Thought.',
+                    'À obtenir des réponses plus pertinentes en utilisant la technique du Step-back.'
+                ],
+                keyConcepts: [
+                    {
+                        title: '🧠 Chain of Thought (CoT) : "Réfléchissons étape par étape"',
+                        content: `C'est la phrase magique. L'IA n'ayant pas de monologue intérieur, cette instruction la force à écrire son raisonnement avant de donner la réponse finale. Cela améliore drastiquement sa performance sur les problèmes de logique, de maths ou de planification.<br><br>
+                        <strong>Sans CoT :</strong> "Le résultat est 42." (Peut-être faux)<br>
+                        <strong>Avec CoT :</strong> "D'abord, je dois calculer A. Ensuite, je dois additionner B. A+B = 42. Donc le résultat est 42." (Le raisonnement est visible et souvent plus correct).`
+                    },
+                    {
+                        title: '🔎 Step-back Prompting : "Prendre du recul"',
+                        content: `Avant de répondre à une question très spécifique, on demande à l'IA de réfléchir à un principe général. Cela l'aide à activer des connaissances plus larges et à donner une réponse plus profonde et moins superficielle.<br><br>
+                        <strong>Question directe :</strong> "Comment améliorer la rétention de mon équipe ?"<br>
+                        <strong>Question avec Step-back :</strong> "Quels sont les principes fondamentaux de la motivation d'une équipe ? En te basant sur ces principes, comment puis-je améliorer la rétention de mon équipe ?"`
+                    }
+                ],
+                workshop: {
+                    title: "Analyse de Cas avec CoT",
+                    objective: "Résoudre un problème métier complexe en guidant l'IA avec le Chain of Thought.",
+                    prompt: `Scénario : "Un client se plaint d'une baisse de performance de notre produit depuis la dernière mise à jour. Quelles pourraient être les causes ?"`,
+                    notes: [{ label: "Ébauche de votre prompt CoT" }]
+                }
+            },
+            {
+                id: 'module-5',
+                title: "Module 5 : Au-delà du Chat - Agents, Outils et Connaissances",
+                learningObjectives: [
+                    "Comment connecter une IA à vos documents internes avec le RAG.",
+                    "Comment donner des \"super-pouvoirs\" à l'IA en lui fournissant des Outils.",
+                    "Le concept d'Agent, une IA capable d'agir."
+                ],
+                keyConcepts: [
+                    {
+                        title: "📚 Retrieval-Augmented Generation (RAG)",
+                        content: `C'est la solution N°1 aux hallucinations et au manque de connaissance de vos données privées.<br><br>
+                        <div class='p-3 bg-green-50 border-l-4 border-green-500 rounded-r-lg'><strong class='text-green-800'>Le RAG, c'est comme un "livre ouvert" pour l'IA.</strong><br>
+                        <ol class='list-decimal ml-5 mt-2'>
+                          <li>Quand vous posez une question, le système va d'abord chercher les documents les plus pertinents dans votre base de connaissances.</li>
+                          <li>Il injecte ces extraits de documents dans le prompt.</li>
+                          <li>Il demande à l'IA : "En te basant <strong>uniquement</strong> sur ce texte, réponds à la question."</li>
+                        </ol></div>`
+                    },
+                    {
+                        title: "🛠️ L'Utilisation d'Outils (Tool Use) et ReAct",
+                        content: `On donne à l'IA la capacité d'utiliser des fonctions externes. Le modèle <strong>ReAct (Reason + Act)</strong> fonctionne en boucle :<br>
+                        <ol class='list-decimal ml-5 mt-2'>
+                          <li><strong>Reason (Penser) :</strong> "Pour répondre, j'ai besoin de connaître le statut de la commande."</li>
+                          <li><strong>Act (Agir) :</strong> L'IA décide d'appeler l'outil \`getOrderStatus(order_id="XYZ")\`.</li>
+                          <li><strong>Observe (Observer) :</strong> Le système exécute l'outil et renvoie le résultat : \`"Statut: En cours de livraison"\`.</li>
+                          <li>L'IA reprend son raisonnement avec cette nouvelle information pour formuler la réponse finale.</li>
+                        </ol>`
+                    }
+                ],
+                workshop: {
+                    title: "Conception d'un Agent de Support",
+                    objective: "Concevoir sur papier un agent capable de résoudre un problème en utilisant des outils.",
+                    prompt: `Scénario : Un client demande "Où est ma commande XYZ ?".`,
+                    notes: [
+                        { label: "Outils nécessaires (ex: getOrderStatus, getCustomerDetails)"},
+                        { label: "Déroulé de la boucle ReAct (Pensée 1, Action 1, ...)"}
+                    ]
+                }
+            },
+            {
+                id: 'module-6',
+                title: "Module 6 : Workflows et Systèmes Complexes",
+                learningObjectives: [
+                    "La différence entre un Agent et un Workflow.",
+                    "Comment modéliser un processus métier en une chaîne de tâches IA."
+                ],
+                keyConcepts: [
+                    {
+                        title: "Agent vs. Workflow",
+                        content: "Un <strong>Agent</strong> est flexible, idéal pour une conversation. Un <strong>Workflow</strong> est une chaîne de montage, idéale pour automatiser un processus complexe et répétable."
+                    },
+                    {
+                        title: "Structure d'un Workflow",
+                        content: `Un workflow est un enchaînement de tâches, où la sortie d'une tâche devient l'entrée de la suivante.<br>
+                        <ul>
+                          <li class='ml-4'>• <strong>Pipeline :</strong> A -> B -> C (linéaire)</li>
+                          <li class='ml-4'>• <strong>DAG (Graphe Orienté Acyclique) :</strong> Une structure plus complexe où une tâche peut en alimenter plusieurs.</li>
+                        </ul>`
+                    }
+                ],
+                workshop: {
+                    title: "Cartographie de votre Workflow",
+                    objective: "Décomposer un de vos processus métier en un workflow de tâches IA.",
+                    prompt: "Exemples de processus : qualifier un nouveau prospect, créer un rapport d'activité, intégrer un nouveau collaborateur.",
+                    notes: [
+                        { label: "Processus choisi"},
+                        { label: "Tâche 1 (Entrée -> Sortie)"},
+                        { label: "Tâche 2 (Entrée -> Sortie)"},
+                        { label: "Tâche 3 (Entrée -> Sortie)"},
+                    ]
+                }
+            },
+            {
+                id: 'module-7',
+                title: "Module 7 : Évaluation et Amélioration Continue",
+                learningObjectives: [
+                    "Pourquoi l'évaluation est non-négociable dans un projet IA.",
+                    "Les différences entre l'évaluation Offline et Online.",
+                    "Comment une IA peut en évaluer une autre (LLM-as-judge)."
+                ],
+                keyConcepts: [
+                    {
+                        title: 'Principe Fondamental',
+                        content: `<div class='p-3 bg-red-50 border-l-4 border-red-500 rounded-r-lg text-red-800'><strong>"Ce qui n'est pas mesuré ne peut pas être amélioré."</strong></div>`
+                    },
+                    {
+                        title: "Types d'Évaluation",
+                        content: `<ul>
+                            <li class='mb-2'><strong>Évaluation Offline :</strong> Tester votre système en laboratoire sur un jeu de données de test, avant de le montrer aux utilisateurs. C'est rapide et permet de comparer des versions.</li>
+                            <li class='mb-2'><strong>Évaluation Online (A/B Test) :</strong> Déployer deux versions de votre système à deux groupes d'utilisateurs et mesurer laquelle performe le mieux sur des métriques réelles (taux de clic, satisfaction, etc.).</li>
+                            <li><strong>LLM-as-judge :</strong> Une technique avancée où l'on utilise un LLM puissant avec un prompt très précis (une grille d'évaluation) pour noter la qualité des réponses d'un autre modèle. C'est plus rapide et moins cher que l'évaluation humaine à grande échelle.</li>
+                        </ul>`
+                    }
+                ],
+                workshop: {
+                    title: "Table Ronde d'Experts",
+                    objective: "Définir des métriques de succès pertinentes pour un projet IA.",
+                    prompt: `Scénario : L'entreprise veut déployer un chatbot IA pour le support interne. Votre rôle : En groupe, mettez-vous dans la peau d'un département (Produit, Technique, Finance) et définissez les 3 indicateurs clés (KPIs) que vous suivriez pour juger du succès du projet.`,
+                    notes: [
+                        { label: "KPI 1"},
+                        { label: "KPI 2"},
+                        { label: "KPI 3"},
+                    ]
+                }
+            },
+            {
+                id: 'module-8',
+                title: "Module 8 : Synthèse et Plan d'Action Stratégique",
+                learningObjectives: [
+                    "À synthétiser les concepts clés de la formation.",
+                    "À repartir avec un plan d'action concret pour démarrer votre premier projet."
+                ],
+                keyConcepts: [
+                    {
+                        title: "Les Deux Piliers à Retenir",
+                        content: `<ol class='list-decimal ml-5 space-y-2'>
+                            <li><strong>Le Principe du Mimétisme :</strong> L'IA imite ses données d'entraînement. Donnez-lui de bons exemples et un bon contexte, elle vous donnera de bons résultats.</li>
+                            <li><strong>L'Empathie avec le Modèle :</strong> Pensez comme la machine. Elle n'a pas de monologue intérieur (-> CoT), elle est facilement distraite (-> prompts concis), et elle n'est pas devin (-> RAG, Outils).</li>
+                        </ol>`
+                    }
+                ],
+                workshop: {
+                    title: "Mon Plan d'Action",
+                    objective: "Transformer la connaissance en action.",
+                    prompt: "Remplissez ce canevas pour votre premier projet IA, même le plus petit.",
+                    notes: [
+                        { label: "1. La Tâche / Le Problème Ciblé (le plus simple possible)"},
+                        { label: "2. Ma Première Solution IA (esquisse de prompt ou de workflow)"},
+                        { label: "3. Mon Prochain Petit Pas (à faire dans les 7 jours)"},
+                    ]
+                }
+            }
+        ];
+
+        const moduleContainer = document.getElementById('module-container');
+        const sidebarNav = document.getElementById('sidebar-nav');
+
+        function createModuleHTML(module) {
+            const workshopNotesHTML = module.workshop.notes.map(note => `
+                <div class="mt-4">
+                    <label class="block text-sm font-medium text-gray-700">${note.label}</label>
+                    <div class="mt-1">
+                        <textarea rows="3" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md p-2"></textarea>
+                    </div>
+                </div>
+            `).join('');
+
+            return `
+                <section id="${module.id}" class="module-section bg-white shadow-md rounded-lg overflow-hidden">
+                    <div class="module-header p-4 sm:p-6 bg-gray-50 cursor-pointer flex justify-between items-center border-b border-gray-200">
+                        <h2 class="text-xl sm:text-2xl font-semibold text-gray-800">${module.title}</h2>
+                        <span class="module-toggle-icon text-2xl text-gray-400 transform transition-transform">-</span>
+                    </div>
+                    <div class="module-content p-4 sm:p-6 space-y-6">
+                        <div class="bg-indigo-50 text-indigo-700 p-4 rounded-lg">
+                            <h3 class="font-bold mb-2">🎯 Ce que vous allez apprendre :</h3>
+                            <ul class="list-disc list-inside space-y-1">
+                                ${module.learningObjectives.map(obj => `<li>${obj}</li>`).join('')}
+                            </ul>
+                        </div>
+
+                        <div>
+                            <h3 class="text-lg font-semibold mb-3 text-gray-700">💡 Concepts Clés</h3>
+                            <div class="space-y-4">
+                                ${module.keyConcepts.map((concept, index) => `
+                                    <div class="concept-item border border-gray-200 rounded-md">
+                                        <div class="concept-header p-3 cursor-pointer flex justify-between items-center bg-gray-50">
+                                            <h4 class="font-medium text-gray-800">${concept.title}</h4>
+                                            <span class="concept-toggle-icon text-xl text-gray-400 transform transition-transform">+</span>
+                                        </div>
+                                        <div class="concept-content p-3 border-t border-gray-200 hidden text-gray-600">
+                                            ${concept.content}
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+
+                        <div class="border-t border-gray-200 pt-6">
+                            <h3 class="text-lg font-semibold mb-3 text-gray-700">🔧 Atelier Pratique : ${module.workshop.title}</h3>
+                            <p class="text-gray-600 mb-2"><strong>Objectif :</strong> ${module.workshop.objective}</p>
+                            ${module.workshop.prompt ? `<p class="text-gray-600 mb-2"><strong>Scénario/Prompt :</strong> ${module.workshop.prompt}</p>` : ''}
+                            ${module.workshop.steps ? `<div class="mb-4"><strong>Déroulé :</strong><ol class="list-decimal ml-5 text-gray-600">${module.workshop.steps.map(s => `<li>${s}</li>`).join('')}</ol></div>` : ''}
+                            <div>
+                                <h4 class="font-medium text-gray-800">✍️ Vos notes :</h4>
+                                ${workshopNotesHTML}
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            `;
+        }
+        
+        function createSidebarLinkHTML(module) {
+            return `
+                <a href="#${module.id}" data-target="${module.id}" class="sidebar-link block px-4 py-2 text-sm rounded-md transition-colors duration-200 hover:bg-gray-700">
+                    ${module.title.split(':')[0]}
+                </a>
+            `;
+        }
+
+        modulesData.forEach(module => {
+            moduleContainer.innerHTML += createModuleHTML(module);
+            sidebarNav.innerHTML += createSidebarLinkHTML(module);
+        });
+
+        moduleContainer.addEventListener('click', function(e) {
+            const moduleHeader = e.target.closest('.module-header');
+            const conceptHeader = e.target.closest('.concept-header');
+
+            if (moduleHeader) {
+                const content = moduleHeader.nextElementSibling;
+                const icon = moduleHeader.querySelector('.module-toggle-icon');
+                content.classList.toggle('hidden');
+                if (content.classList.contains('hidden')) {
+                    icon.textContent = '+';
+                    icon.classList.remove('rotate-180');
+                } else {
+                    icon.textContent = '-';
+                    icon.classList.add('rotate-0');
+                }
+            }
+            
+            if (conceptHeader) {
+                const content = conceptHeader.nextElementSibling;
+                const icon = conceptHeader.querySelector('.concept-toggle-icon');
+                content.classList.toggle('hidden');
+                if (content.classList.contains('hidden')) {
+                    icon.textContent = '+';
+                    icon.classList.remove('rotate-90');
+                } else {
+                    icon.textContent = '-';
+                    icon.classList.add('rotate-90');
+                }
+            }
+        });
+        
+        const sidebarLinks = document.querySelectorAll('.sidebar-link');
+        const moduleSections = document.querySelectorAll('.module-section');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.4 
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                const targetId = entry.target.id;
+                const correspondingLink = document.querySelector(`.sidebar-link[data-target="${targetId}"]`);
+                
+                if (entry.isIntersecting) {
+                    sidebarLinks.forEach(link => link.classList.remove('sidebar-link-active'));
+                    if (correspondingLink) {
+                        correspondingLink.classList.add('sidebar-link-active');
+                    }
+                }
+            });
+        }, observerOptions);
+
+        moduleSections.forEach(section => {
+            observer.observe(section);
+        });
+
+    </script>
+</body>
+
+</html>
+
+
