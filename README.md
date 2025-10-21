@@ -7,3 +7,5 @@
 [ Guide Interactif Art du Prompt](https://sjaubert.github.io/Cours-IA/Guide_Interactif_Prompt.html?target=_blank)
   
 [Tableau de bord - Formation IA](https://sjaubert.github.io/Cours-IA/Tableau_de_Bord_Interactif_Formation_IA.html?target=_blank)
+
+[Atelier Pratiques Gemini CLI - Formation IA](https://sjaubert.github.io/Cours-IA/Ateliers_Pratiques.html?target=_blank)
