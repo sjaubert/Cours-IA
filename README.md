@@ -12,3 +12,5 @@
 
 [Tutoriel Google Apps Script](https://sjaubert.github.io/Cours-IA/tutoriel_google_appsscript.html?target=_blank)
 
+[Tutoriel_Google_Workspace](https://sjaubert.github.io/Cours-IA/Tutoriel_Google_Workspace.html?target=_blank)
+
