@@ -9,3 +9,6 @@
 [Tableau de bord - Formation IA](https://sjaubert.github.io/Cours-IA/Tableau_de_Bord_Interactif_Formation_IA.html?target=_blank)
 
 [Atelier Pratiques Gemini CLI - Formation IA](https://sjaubert.github.io/Cours-IA/Ateliers_Pratiques.html?target=_blank)
+
+[Tutoriel Google Apps Script](https://sjaubert.github.io/Cours-IA/tutoriel_google_appsscript.html?target=_blank)
+
