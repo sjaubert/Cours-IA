@@ -14,3 +14,4 @@
 
 [Tutoriel_Google_Workspace](https://sjaubert.github.io/Cours-IA/Tutoriel_Google_Workspace.html?target=_blank)
 
+[Tutoriel_Automatisation Workspace](https://sjaubert.github.io/Cours-IA/Tutoriel_Automatisation_Workspace.html?target=_blank)
