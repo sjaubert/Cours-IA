@@ -14,6 +14,31 @@
             background-color: #f9f9f9;
             color: #333;
         }
+        
+        /* --- En-tête --- */
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #ecf0f1;
+        }
+        .header img {
+            max-width: 250px; /* Ajustez la taille du logo si besoin */
+            height: auto;
+            margin-bottom: 15px;
+        }
+        .header .structure-name {
+            font-size: 1.8em;
+            font-weight: 600;
+            color: #2c3e50;
+            margin: 10px 0 5px 0;
+        }
+        .header .author-name {
+            font-size: 1.2em;
+            color: #7f8c8d;
+            margin: 0;
+        }
+        
         h1, h2, h3, h4 {
             color: #2c3e50;
             font-weight: 600;
@@ -130,9 +155,15 @@
     </style>
 </head>
 <body>
-    <img src="logo_uimm_placeholder.jpg" alt="Logo UIMM" class="logo">
+
+    <header class="header">
+        <img src="logo_uimm_placeholder.jpg" alt="Logo Pôle Formation UIMM-CVDL">
+        <p class="structure-name">Pôle Formation UIMM-CVDL</p>
+        <p class="author-name">S. Jaubert</p>
+    </header>
+
     <h1>Tutoriel Complet : Connecter Gemini (IA) à votre Google Drive en toute sécurité</h1>
-    <p>S. Jaubert - Pôle Formation UIMM-CVDL</p>
+
     <div class="motivation">
         <h3>◉ La Motivation (Le "Pourquoi ?")</h3>
         <p>L'objectif final est de pouvoir <strong>parler à une IA (Gemini)</strong> et lui demander d'automatiser des tâches sur vos fichiers Google, comme : <i>"Va dans ce Google Sheet, trouve toutes les lignes où la colonne B est 'En attente', et mets 'Pour Revue' dans la colonne F."</i></p>
@@ -181,7 +212,7 @@ cd projet-ia-secure
 npm install @mcpher/gas-fakes</code></pre>
     </div>
     
-    <p>Ensuite, <a href="https://github.com/mcpher/gas-fakes/tree/master/shells" target="_blank" rel="noopener noreferrer">téléchargez le dossier <code>shells</code> depuis le dépôt GitHub</a> et placez-le dans votre dossier <code>projet-ia-secure</code>.</p>
+    <p>Ensuite, <a href="https://github.com/brucemcpherson/gas-fakes/tree/main/shells" target="_blank" rel="noopener noreferrer">téléchargez le dossier <code>shells</code> depuis le dépôt GitHub</a> (lien corrigé) et placez-le dans votre dossier <code>projet-ia-secure</code>.</p>
 
     <h3>C. Configuration Google Cloud (L'Étape du "Mur")</h3>
     <p>C'est ici que vous étiez bloqué. Suivez ce guide <strong>précisément</strong>. Il est conçu pour contourner les bugs de l'interface Google.</p>
