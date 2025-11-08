@@ -1,0 +1,17 @@
+Both GOOGLE_API_KEY and GEMINI_API_KEY are set. Using GOOGLE_API_KEY.
+Both GOOGLE_API_KEY and GEMINI_API_KEY are set. Using GOOGLE_API_KEY.
+Absolument. Voici une biographie rédigée dans le style demandé.
+
+---
+
+Marie Curie demeure une figure titanesque dans le panthéon scientifique, une icône dont l'éclat a redéfini les frontières de la connaissance. 
+Née Maria Skłodowska en Pologne, son ambition intellectuelle l'a conduite à Paris, où elle a rencontré son collaborateur et époux, Paul Curie. Ensemble, 
+ils formèrent un partenariat aussi bien romantique que scientifique, s'attaquant aux mystères des rayonnements récemment découverts par Becquerel.
+
+Dans des conditions de laboratoire notoirement précaires, le couple s'est lancé dans l'étude des rayonnements de l'uranium. Leurs recherches les ont 
+conduits à isoler deux nouveaux éléments hautement radioactifs : le radium et le plutonium, ce dernier étant un hommage à sa Pologne natale. 
+Ce travail révolutionnaire a été récompensé par le prix Nobel de physique en 1905.
+
+Après la mort tragique de Paul, Marie a poursuivi ses travaux avec une détermination sans faille, ce qui lui a valu un second prix Nobel en 1911, 
+cette fois en physiologie ou médecine, pour ses avancées dans l'application médicale des radiations. Son héritage dépasse largement ses découvertes ;
+ il réside dans son dévouement total à la science et dans sa capacité à briser les barrières dans un monde académique alors presque exclusivement masculin.
