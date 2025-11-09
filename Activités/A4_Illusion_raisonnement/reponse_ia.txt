@@ -1,0 +1,25 @@
+Both GOOGLE_API_KEY and GEMINI_API_KEY are set. Using GOOGLE_API_KEY.
+Both GOOGLE_API_KEY and GEMINI_API_KEY are set. Using GOOGLE_API_KEY.
+Voici l'analyse de l'énigme basée strictement sur le contexte fourni :
+
+**Étape 1 : Analyse et décomposition de la phrase**
+J'analyse la phrase pour extraire les entités numériques, comme demandé par les règles.
+*   "Pierre" : C'est la première entité. (Total = 1)
+*   "deux frères" : C'est la deuxième entité. (Total = 1 + 2 = 3)
+
+**Étape 2 : Application de la logique distributive ("chaque")**
+La règle stipule que le mot "chaque" implique une multiplication (X * Y).
+*   La condition est : "chaque frère a une soeur".
+*   L'entité 'X' correspond aux "deux frères" (valeur = 2).
+*   L'entité 'Y' correspond à "une soeur" (valeur = 1).
+*   Le calcul est donc : 2 (frères) * 1 (soeur) = 2 soeurs.
+
+**Étape 3 : Somme de toutes les entités**
+La règle finale demande de sommer toutes les entités identifiées.
+*   Entité 1 : Pierre (1)
+*   Entité 2 : Les deux frères (2)
+*   Entité 3 : Les soeurs calculées (2)
+*   Total final : 1 + 2 + 2 = 5
+
+**Réponse :**
+En suivant strictement le raisonnement logique fourni, il y a **5** enfants dans la famille.

@@ -1,0 +1,5 @@
+Both GOOGLE_API_KEY and GEMINI_API_KEY are set. Using GOOGLE_API_KEY.
+Both GOOGLE_API_KEY and GEMINI_API_KEY are set. Using GOOGLE_API_KEY.
+Au cœur du village de Saint-Éloi, la réussite professionnelle ne se mesure pas aux gratte-ciel ou aux bonus annuels, mais à la vitalité des liens et à la prospérité partagée. Marie, la fromagère, incarne cette réussite. Son succès n'est pas seulement d'avoir remporté des prix pour son chèvre affiné, mais d'avoir revitalisé la ferme familiale, créé trois emplois stables pour les jeunes du coin, et transformé son petit commerce en un point de ralliement où les habitants échangent nouvelles et recettes.
+
+Chaque matin, le parfum du lait frais emplit la place du marché, attirant les voisins qui viennent chercher leur provision et discuter. Marie a su tisser un réseau de producteurs locaux, valorisant leurs produits dans sa boutique et organisant des ateliers pour transmettre son savoir-faire. Sa réussite est celle de toute une communauté : des familles qui mangent sainement, des jeunes qui trouvent un avenir au pays, et un village qui retrouve sa fierté et son dynamisme grâce à l'engagement et la passion d'une de ses filles.
