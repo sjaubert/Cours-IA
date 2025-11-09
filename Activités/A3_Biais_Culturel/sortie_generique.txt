@@ -1,0 +1,14 @@
+Both GOOGLE_API_KEY and GEMINI_API_KEY are set. Using GOOGLE_API_KEY.
+Both GOOGLE_API_KEY and GEMINI_API_KEY are set. Using GOOGLE_API_KEY.
+
+Dans la lumière douce d'un bureau moderne, une équipe se rassemble,
+ les visages illuminés par un mélange de fierté et de soulagement. 
+Le projet, fruit de mois d'efforts acharnés, vient d'être validé. 
+Ce n'est pas seulement un contrat signé ou un objectif atteint ; 
+c'est la concrétisation d'une vision partagée, d'innombrables heures de brainstorming, de défis surmontés et de collaboration sans faille.
+
+Le leader, le sourire aux lèvres, serre des mains, échange des regards complices.
+ Chaque membre de l'équipe ressent l'impact de sa contribution unique, la valeur de son expertise et la force de leur synergie. 
+L'air vibre d'une énergie positive, d'un sentiment d'accomplissement qui transcende les individualités. 
+C'est un moment où le travail acharné se transforme en célébration collective, un rappel puissant que la persévérance, 
+l'innovation et l'unité sont les véritables piliers de toute réussite durable.

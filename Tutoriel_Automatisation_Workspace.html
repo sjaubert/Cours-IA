@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Devenez un Maître de l'Automatisation Google Workspace avec Gemini CLI</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Source+Code+Pro:wght@400;600&display=swap');
+
+        :root {
+            --primary-color: #4285F4; /* Google Blue */
+            --secondary-color: #34A853; /* Google Green */
+            --text-color: #3c4043;
+            --bg-color: #f8f9fa;
+            --header-color: #202124;
+            --code-bg: #202124;
+            --code-color: #e8eaed;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.8;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            padding: 40px 50px;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #dadce0;
+        }
+
+        header h1 {
+            font-size: 3em;
+            color: var(--header-color);
+            margin-bottom: 15px;
+        }
+
+        header .subtitle {
+            font-size: 1.3em;
+            color: #5f6368;
+        }
+
+        h2, h3, h4 {
+            color: var(--header-color);
+            margin-top: 45px;
+        }
+
+        h2 {
+            font-size: 2.2em;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        h3 {
+            font-size: 1.7em;
+            color: var(--secondary-color);
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 10px;
+        }
+        
+        h4 {
+            font-size: 1.3em;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        pre {
+            font-family: 'Source Code Pro', monospace;
+            background-color: var(--code-bg);
+            color: var(--code-color);
+            padding: 25px;
+            border-radius: 8px;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-size: 0.95em;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        code {
+            font-family: 'Source Code Pro', monospace;
+            background-color: #f1f3f4;
+            padding: 4px 7px;
+            border-radius: 4px;
+            color: #d93025;
+        }
+
+        .prompt {
+            background-color: #e8f0fe;
+            border: 1px solid #d2e3fc;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-style: italic;
+            position: relative;
+        }
+        .prompt::before {
+            content: '💬 Votre Prompt à Gemini :';
+            font-weight: 600;
+            display: block;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+            font-style: normal;
+        }
+
+        .info-box {
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border-left: 5px solid;
+            background-color: #f1f3f4;
+            border-color: #fbbc05; /* Google Yellow */
+        }
+
+        .info-box strong {
+            color: var(--header-color);
+        }
+
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        ul {
+            list-style-type: square;
+            padding-left: 20px;
+        }
+        li { margin-bottom: 10px; }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Devenez un Maître de l'Automatisation Google Workspace</h1>
+            <p class="subtitle">Un guide pour néophytes sur la création d'outils et l'automatisation avec Gemini CLI</p>
+        </header>
+
+        <!-- INTRODUCTION -->
+        <div class="section">
+            <h2>Introduction : Votre Assistant Personnel sur Mesure</h2>
+            <p>Imaginez pouvoir dire à votre ordinateur : "Fais-moi un résumé des emails importants de ce matin", "Range tous les fichiers de factures de ce mois-ci dans leurs dossiers clients respectifs" ou "Crée un rapport de performance à partir de ces données".</p>
+            <p>Ce n'est pas de la science-fiction. C'est ce que vous allez apprendre à faire dans ce tutoriel. Nous allons connecter la puissance conversationnelle de <strong>Gemini CLI</strong> avec le moteur d'automatisation de Google, <strong>Google Apps Script (GAS)</strong>, pour transformer vos requêtes en actions concrètes sur votre Drive, Gmail, Sheets, et plus encore.</p>
+            
+            <div class="info-box">
+                <strong>Le trio magique :</strong>
+                <ul>
+                    <li><strong>Vous :</strong> Le stratège qui donne les ordres en langage naturel.</li>
+                    <li><strong>Gemini CLI :</strong> L'interprète intelligent qui traduit vos ordres en code.</li>
+                    <li><strong>Google Apps Script (GAS) :</strong> L'exécutant qui effectue les tâches au sein de l'écosystème Google.</li>
+                </ul>
+            </div>
+            <p>Ce guide est conçu pour les débutants. Aucune connaissance préalable en programmation n'est requise. Nous partirons de zéro pour construire votre compétence pas à pas.</p>
+        </div>
+
+        <!-- PREREQUIS -->
+        <div class="section">
+            <h2>Prérequis : Les Fondations</h2>
+            <p>Avant de construire notre maison, il nous faut les fondations. Assurez-vous d'avoir complété la configuration initiale décrite dans le tutoriel précédent. Si ce n'est pas fait, suivez ce guide : <a href="./Tutoriel_Gemini_Workspace.html" target="_blank">Guide de Configuration Initiale</a>.</p>
+            <p>Pour résumer, vous devez avoir :</p>
+            <ol>
+                <li>Un projet Google Cloud configuré.</li>
+                <li>Les APIs Google Drive, Sheets, et Gmail activées.</li>
+                <li>Le fichier <code>credentials.json</code> placé à la racine de votre projet.</li>
+            </ol>
+        </div>
+
+        <!-- ATELIER GOOGLE DRIVE -->
+        <div class="section">
+            <h2>Atelier 1 : Google Drive, Votre Archiviste Personnel</h2>
+            <p>Commençons par des tâches simples de gestion de fichiers. Google Drive est géré par le "service" <code>DriveApp</code> en GAS.</p>
+
+            <h3>Cas d'usage 1 : Retrouver un fichier et obtenir son lien</h3>
+            <p><strong>Objectif :</strong> Vous avez besoin de partager rapidement le lien d'un document sans avoir à le chercher manuellement.</p>
+            <div class="prompt">
+                "Trouve le fichier nommé 'Présentation Marketing Q3' dans mon Google Drive et donne-moi son URL."
+            </div>
+            <h4>Ce qui se passe en coulisses :</h4>
+            <p>Gemini va générer un script GAS qui utilise <code>DriveApp.getFilesByName()</code> pour rechercher le fichier, puis <code>file.getUrl()</code> pour extraire son lien.</p>
+            <pre><code>// Script simplifié pour l'illustration
+function findFileAndGetUrl() {
+  const fileName = 'Présentation Marketing Q3';
+  const files = DriveApp.getFilesByName(fileName);
+
+  if (files.hasNext()) {
+    const file = files.next();
+    console.log(`Fichier trouvé ! Voici le lien : ${file.getUrl()}`);
+  } else {
+    console.log(`Désolé, le fichier '${fileName}' est introuvable.`);
+  }
+}
+findFileAndGetUrl();
+</code></pre>
+
+            <h3>Cas d'usage 2 : Organiser les factures du mois</h3>
+            <p><strong>Objectif :</strong> Chaque fin de mois, vous voulez déplacer toutes les factures PDF de votre dossier "À trier" vers un dossier structuré par année et par mois.</p>
+            <div class="prompt">
+                "Dans mon Drive, regarde dans le dossier 'À trier'. Prends tous les fichiers PDF, et déplace-les dans le dossier 'Factures/2025/Octobre'. Si les dossiers n'existent pas, crée-les."
+            </div>
+            <h4>Ce qui se passe en coulisses :</h4>
+            <p>C'est une tâche plus complexe. Gemini va devoir :</p>
+            <ol>
+                <li>Trouver le dossier source "À trier".</li>
+                <li>Vérifier l'existence du chemin de destination ("Factures" -> "2025" -> "Octobre") et le créer si besoin (<code>getFoldersByName</code>, <code>createFolder</code>).</li>
+                <li>Lister tous les fichiers PDF dans le dossier source (<code>getFilesByType</code>).</li>
+                <li>Boucler sur chaque fichier et le déplacer (<code>file.moveTo(destinationFolder)</code>).</li>
+            </ol>
+        </div>
+
+        <!-- ATELIER GMAIL -->
+        <div class="section">
+            <h2>Atelier 2 : Gmail, Votre Assistant de Messagerie</h2>
+            <p>Passons à la gestion de vos emails avec le service <code>GmailApp</code>.</p>
+
+            <h3>Cas d'usage 1 : Le briefing matinal</h3>
+            <p><strong>Objectif :</strong> Chaque matin, obtenir un résumé des emails non lus reçus depuis la veille, provenant de contacts importants.</p>
+            <div class="prompt">
+                "Fais-moi un résumé des emails non lus reçus depuis hier. Affiche uniquement l'expéditeur et l'objet pour chaque email."
+            </div>
+            <h4>Ce qui se passe en coulisses :</h4>
+            <p>Gemini va utiliser une requête de recherche Gmail, exactement comme celle que vous pourriez taper dans la barre de recherche de Gmail.</p>
+            <pre><code>// Script simplifié pour l'illustration
+function getMorningBriefing() {
+  // Construit une requête de recherche : non lu, et après la date d'hier
+  const yesterday = new Date();
+  yesterday.setDate(yesterday.getDate() - 1);
+  const searchDate = `${yesterday.getFullYear()}/${yesterday.getMonth() + 1}/${yesterday.getDate()}`;
+  const query = `is:unread after:${searchDate}`;
+
+  const threads = GmailApp.search(query);
+
+  console.log("--- Votre Briefing Matinal ---");
+  threads.forEach(thread => {
+    const message = thread.getMessages()[0]; // On prend le premier message du fil
+    console.log(`De : ${message.getFrom()}`);
+    console.log(`Sujet : ${message.getSubject()}`);
+    console.log("--------------------");
+  });
+}
+getMorningBriefing();
+</code></pre>
+
+            <h3>Cas d'usage 2 : Faire le ménage dans les newsletters</h3>
+            <p><strong>Objectif :</strong> Archiver automatiquement toutes les newsletters de plus d'un mois pour garder une boîte de réception propre.</p>
+            <div class="prompt">
+                "Trouve tous les emails provenant de 'newsletter@exemple.com' qui datent de plus de 30 jours et archive-les."
+            </div>
+            <h4>Ce qui se passe en coulisses :</h4>
+            <p>Similaire au cas précédent, le script utilisera <code>GmailApp.search()</code> avec une requête plus spécifique, puis appliquera une action (<code>thread.moveToArchive()</code>) sur les résultats.</p>
+        </div>
+        
+        <!-- CONCLUSION -->
+        <div class="section">
+            <h2>Partie 3 : De l'Automatisation à la Création d'Outils</h2>
+            <p>Vous avez maintenant vu comment exécuter des tâches uniques. La véritable puissance se révèle lorsque vous transformez ces scripts en <strong>outils réutilisables</strong>.</p>
+            <p>Imaginez que vous utilisez souvent le script de "briefing matinal". Au lieu de retaper le prompt chaque jour, vous pouvez dire à Gemini :</p>
+            <div class="prompt">
+                "Sauvegarde le dernier script de briefing matinal dans un fichier nommé 'briefing.js' et crée un outil permanent appelé 'briefingMatinal' qui exécute ce script."
+            </div>
+            <p>Grâce à la configuration de l'environnement `gas-fakes-mcp`, Gemini peut modifier sa propre configuration pour ajouter ce nouvel outil. Dès lors, vous pourrez simplement taper :</p>
+            <pre><code>briefingMatinal</code></pre>
+            <p>...et la magie opérera. Vous venez de créer votre propre commande personnalisée, votre propre outil dynamique.</p>
+            
+            <div class="info-box">
+                <strong>Votre parcours d'apprentissage :</strong>
+                <ol>
+                    <li><strong>Expérimentez :</strong> Commencez par des prompts simples pour des tâches uniques.</li>
+                    <li><strong>Identifiez les répétitions :</strong> Repérez les tâches que vous demandez souvent.</li>
+                    <li><strong>Créez des outils :</strong> Transformez ces tâches répétitives en outils permanents.</li>
+                </ol>
+            </div>
+            <p>Pour trouver l'inspiration, explorez les milliers d'exemples du dépôt de Kanshi Tanaike. Vous n'avez pas besoin de comprendre le code, mais simplement de voir ce qui est possible, puis de le demander à Gemini.</p>
+            <p><strong>Ressource d'inspiration :</strong> <a href="https://github.com/tanaikech/taking-advantage-of-google-apps-script" target="_blank">Bibliothèque d'exemples Google Apps Script</a></p>
+        </div>
+
+    </div>
+
+</body>
+</html>
