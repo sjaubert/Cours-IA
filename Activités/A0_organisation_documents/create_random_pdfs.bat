@@ -1,7 +1,7 @@
 @echo off
 setlocal enabledelayedexpansion
 
-set "outputDir=C:\Users\s.jaubert\OneDrive - CFAI Centre\IA\Cours\Activités\A0_organisation_documents\incoming"
+set "outputDir=%~dp0incoming"
 
 if not exist "%outputDir%" (
     mkdir "%outputDir%"
