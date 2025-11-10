@@ -1,0 +1,2 @@
+Lis le fichier maintenance_logs.csv et génère un rapport markdown qui indique : le nombre total d’arrêts ce mois-ci, 
+la machine la plus souvent en panne, et une recommandation d’action.
