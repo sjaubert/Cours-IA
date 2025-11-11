@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 3 : Prompt Engineering (Principes)</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; padding: 20px; max-width: 900px; margin: auto; background-color: #f9f9f9; }
+        h1, h2, h3 { color: #333; border-bottom: 2px solid #107C10; padding-bottom: 5px; }
+        .module-header { background-color: #107C10; color: white; padding: 20px; border-radius: 8px; text-align: center; }
+        .content-box { background-color: white; padding: 20px; border-radius: 8px; margin-top: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .prompt-container { position: relative; background-color: #2d2d2d; color: #f1f1f1; padding: 20px; border-radius: 8px; margin: 20px 0; font-family: "Courier New", Courier, monospace; }
+        .prompt-container pre { white-space: pre-wrap; word-wrap: break-word; margin: 0; padding-bottom: 40px; }
+        .prompt-container button {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background-color: #0078D4;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+            transition: background-color 0.2s;
+        }
+        .prompt-container button:hover { background-color: #005a9e; }
+        .ai-links { margin-top: 10px; padding: 10px; background-color: #eef; border-radius: 5px; }
+        .ai-links a { margin: 0 10px; text-decoration: none; font-weight: bold; color: #0056b3; }
+        .activity { border-left: 5px solid #ffc107; padding-left: 15px; background-color: #fff9e6; margin-top: 15px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        ul { padding-left: 20px; }
+    </style>
+</head>
+<body>
+    <div class="module-header">
+        <h1>Jour 1 : Module 3 (14h00 - 15h30)</h1>
+        <h2>Le Cœur de la Compétence – Principes du Prompt Engineering</h2>
+    </div>
+
+    <div class="content-box">
+        <h3>Objectifs Pédagogiques</h3>
+        <ul>
+            <li>Définir le "Prompt Engineering" : L'art de formuler des requêtes précises pour obtenir des réponses pertinentes.</li>
+            <li>Maîtriser la structure RTCCF (les 5 éléments d'un prompt efficace).</li>
+            <li>Appliquer les techniques de base : Zero-shot et Few-shot prompting.</li>
+        </ul>
+    </div>
+
+    <div class="content-box">
+        <h2>Contenu du Cours</h2>
+        
+        <h3>1. L'art du Prompt : Devenir un bon "manager" d'IA</h3>
+        <p>L'IA est un assistant incroyablement compétent mais sans initiative. Le "Prompt Engineering" est l'art de lui donner des instructions claires pour qu'il passe d'exécutant médiocre à collaborateur expert.</p>
+
+        <h3>2. La structure d'un Prompt Efficace : RTCCF</h3>
+        <p>Un prompt de qualité doit contenir ces 5 éléments :</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Élément</th>
+                    <th>Description</th>
+                    <th>Exemple</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>R - Rôle</strong></td>
+                    <td>Dire à l'IA "qui" elle est. Cela charge le contexte et le ton appropriés.</td>
+                    <td>"Tu es un ingénieur en cybersécurité..."</td>
+                </tr>
+                <tr>
+                    <td><strong>T - Tâche</strong></td>
+                    <td>L'action précise que vous attendez.</td>
+                    <td>"...rédige une note d'information..."</td>
+                </tr>
+                <tr>
+                    <td><strong>C - Contexte</strong></td>
+                    <td>Les informations de fond nécessaires pour exécuter la tâche.</td>
+                    <td>"...sur la nouvelle faille 'XYZ' qui affecte nos serveurs."</td>
+                </tr>
+                <tr>
+                    <td><strong>C - Contraintes</strong></td>
+                    <td>Les limites à respecter (ton, longueur, exclusions).</td>
+                    <td>"...en moins de 150 mots, destinée à des managers non-techniques."</td>
+                </tr>
+                <tr>
+                    <td><strong>F - Format</strong></td>
+                    <td>La forme de la sortie attendue (liste, tableau, JSON, etc.).</td>
+                    <td>"...sous forme de liste à puces."</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>3. Techniques de Base</h3>
+        <ul>
+            <li><strong>Zero-Shot Prompting :</strong> La demande directe. Vous ne donnez aucun exemple, juste la tâche. (Ex: "Traduis ce texte en allemand.")</li>
+            <li><strong>Few-Shot (ou One-Shot) Prompting :</strong> Vous donnez 1 à 3 exemples de ce que vous attendez. C'est la meilleure façon d'enseigner à l'IA un format de sortie précis. (Ex: "Voici un exemple de traduction : ... Maintenant, traduis ceci : ...").</li>
+        </ul>
+    </div>
+
+    <div class="content-box activity">
+        <h2>Activité Pratique : "Le Prompt Inefficace" (45 min)</h2>
+        <p><strong>Objectif :</strong> Appliquer la structure RTCCF pour transformer un mauvais prompt en un prompt expert.</p>
+
+        <h3>Étape 1 : Le Prompt Vague (5 min)</h3>
+        <p>En binôme, soumettez ce prompt à une IA. Notez la réponse.</p>
+        <div class="prompt-container">
+            <pre id="prompt-m3-1">Fais-moi un e-mail pour les clients.</pre>
+            <button onclick="copyToClipboard('prompt-m3-1')">Copier le Prompt</button>
+        </div>
+
+        <h3>Étape 2 : Le Prompt Expert (30 min)</h3>
+        <p>Maintenant, réécrivez ce prompt en utilisant la structure RTCCF. <strong>Contexte :</strong> Vous lancez une nouvelle gamme de pompes industrielles (Modèle X1000) plus économes en énergie (-20%). L'e-mail doit informer les clients existants.</p>
+        
+        <div class="prompt-container">
+            <pre id="prompt-m3-2">
+# RÔLE
+Tu es un directeur marketing B2B pour une entreprise d'équipement industriel. Ton ton est professionnel, fiable et orienté vers les bénéfices client.
+
+# TÂCHE
+Rédige un e-mail marketing pour annoncer le lancement de notre nouveau produit, la pompe industrielle X1000.
+
+# CONTEXTE
+Le X1000 remplace l'ancien modèle X900. Son avantage principal est une réduction de 20% de la consommation énergétique. Il est aussi plus silencieux. La cible est nos clients existants qui possèdent le X900.
+
+# CONTRAINTES
+- L'objet de l'e-mail doit être accrocheur.
+- Le texte ne doit pas dépasser 150 mots.
+- N'utilise pas de jargon trop technique.
+- L'appel à l'action est de "planifier une démonstration".
+
+# FORMAT
+Rédige l'objet de l'e-mail et le corps de l'e-mail.
+            </pre>
+            <button onclick="copyToClipboard('prompt-m3-2')">Copier le Prompt</button>
+        </div>
+
+        <h3>Étape 3 : Comparaison (10 min)</h3>
+        <p>Soumettez le nouveau prompt. Comparez la réponse 1 (vague) et la réponse 2 (expert). Discutez des différences en grand groupe.</p>
+    </div>
+    
+    <script>
+        function copyToClipboard(elementId) {
+            var preElement = document.getElementById(elementId);
+            var text = preElement.innerText;
+            navigator.clipboard.writeText(text).then(function() {
+                var button = preElement.nextElementSibling;
+                if(button && button.tagName === 'BUTTON') {
+                    var originalText = button.innerText;
+                    button.innerText = "Copié !";
+                    setTimeout(function() {
+                        button.innerText = originalText;
+                    }, 2000);
+                }
+            }, function(err) {
+                console.error('Erreur lors de la copie : ', err);
+            });
+        }
+    </script>
+</body>
+</html>
