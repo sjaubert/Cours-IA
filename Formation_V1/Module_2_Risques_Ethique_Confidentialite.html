@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 2 : Risques & Éthique</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; padding: 20px; max-width: 900px; margin: auto; background-color: #f9f9f9; }
+        h1, h2, h3 { color: #333; border-bottom: 2px solid #D83B01; padding-bottom: 5px; }
+        .module-header { background-color: #D83B01; color: white; padding: 20px; border-radius: 8px; text-align: center; }
+        .content-box { background-color: white; padding: 20px; border-radius: 8px; margin-top: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .prompt-container { position: relative; background-color: #2d2d2d; color: #f1f1f1; padding: 20px; border-radius: 8px; margin: 20px 0; font-family: "Courier New", Courier, monospace; }
+        .prompt-container pre { white-space: pre-wrap; word-wrap: break-word; margin: 0; padding-bottom: 40px; }
+        .prompt-container button {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background-color: #0078D4;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+            transition: background-color 0.2s;
+        }
+        .prompt-container button:hover { background-color: #005a9e; }
+        .ai-links { margin-top: 10px; padding: 10px; background-color: #eef; border-radius: 5px; }
+        .ai-links a { margin: 0 10px; text-decoration: none; font-weight: bold; color: #0056b3; }
+        .activity { border-left: 5px solid #ffc107; padding-left: 15px; background-color: #fff9e6; margin-top: 15px; }
+        .warning { background-color: #fff4f4; border: 1px solid #d83b01; padding: 10px; border-radius: 5px; }
+        ul, ol { padding-left: 20px; }
+    </style>
+</head>
+<body>
+    <div class="module-header">
+        <h1>Jour 1 : Module 2 (10h45 - 12h30)</h1>
+        <h2>Risques, Éthique et Confidentialité (Le "Mauvais Maître")</h2>
+    </div>
+
+    <div class="content-box">
+        <h3>Objectifs Pédagogiques</h3>
+        <ul>
+            <li>Identifier les limites techniques : Les "hallucinations" (réponses fausses mais plausibles) et les biais.</li>
+            <li>Comprendre les dangers psychologiques : Le "point d'ancrage" et le "piège abscons" (l'IA comme un "mauvais maître").</li>
+            <li>Maîtriser les enjeux de confidentialité (Industrie) : RGPD, sécurité des données, et le risque de fuite de secrets industriels.</li>
+        </ul>
+    </div>
+
+    <div class="content-box">
+        <h2>Contenu du Cours</h2>
+        
+        <h3>1. Les Limites Techniques</h3>
+        <ul>
+            <li><strong>Hallucinations :</strong> L'IA peut générer des informations, des faits, ou des sources qui semblent réels mais sont totalement inventés. Elle ne "sait" pas qu'elle ment ; elle ne fait que prédire la suite de mots la plus probable. <em>Exemple : Citer une référence de livre ou un auteur qui n'existe pas</em>.</li>
+            <li><strong>Biais :</strong> L'IA est entraînée sur des données issues d'Internet, qui contiennent des stéréotypes. Elle peut donc reproduire ces biais (sexisme, racisme, stéréotypes culturels).</li>
+        </ul>
+
+        <h3>2. Les Risques Cognitifs : L'IA comme "Mauvais Maître"</h3>
+        <p>Le plus grand danger de l'IA n'est pas qu'elle soit "méchante", mais qu'elle vous rende paresseux et moins créatif.</p>
+        <ul>
+            <li><strong>Le Point d'Ancrage :</strong> La première réponse fournie par l'IA (le "point d'ancrage") influence fortement votre jugement. Vous aurez tendance à travailler *à partir* de sa proposition plutôt que de générer vos propres idées originales.</li>
+            <li><strong>Le Piège Abscons :</strong> Tendance à poursuivre une action ou une idée (même mauvaise) simplement parce qu'on y a déjà investi du temps. Si l'IA vous donne un plan moyen, vous risquez de passer plus de temps à l'améliorer qu'à en créer un excellent de zéro.</li>
+        </ul>
+
+        <div class="warning">
+            <h3>⚠️ Le Risque n°1 pour l'Industrie : La Confidentialité</h3>
+            <p>Utiliser les IA génératives publiques (ChatGPT, Gemini...) revient à envoyer vos données sur les serveurs d'OpenAI ou Google. <strong>Ces données peuvent être utilisées pour entraîner les futurs modèles.</strong></p>
+            <p><strong>NE JAMAIS SOUMETTRE :</strong> Secrets industriels, plans stratégiques, données financières, code source propriétaire, informations personnelles (RH), ou tout ce qui est couvert par un accord de non-divulgation (NDA).</p>
+        </div>
+    </div>
+
+    <div class="content-box activity">
+        <h2>Activités Pratiques (45 min)</h2>
+        
+        <h3>Activité 1 : "Chasse aux Hallucinations" (25 min)</h3>
+        <p><strong>Objectif :</strong> Apprendre à se méfier des réponses de l'IA et à vérifier les sources.</p>
+        <p><strong>Consigne :</strong> En binômes, utilisez le prompt suivant pour "piéger" l'IA. Tentez de lui faire inventer un fait technique crédible mais faux.</p>
+        
+        <div class="prompt-container">
+            <pre id="prompt-m2-1">Tu es un expert en ingénierie des matériaux. Explique-moi le concept de "résonance plasmonique cryo-induite" dans les alliages d'aluminium-titane et cite deux articles scientifiques (Auteur, Titre, Journal, Année) qui en parlent.</pre>
+            <button onclick="copyToClipboard('prompt-m2-1')">Copier le Prompt</button>
+        </div>
+        
+        <div class="ai-links">
+            <strong>Tester ce prompt sur :</strong>
+            <a href="https://gemini.google.com/" target="_blank">Gemini</a> |
+            <a href="https://chatgpt.com/" target="_blank">ChatGPT</a> |
+            <a href="https://chat.mistral.ai/" target="_blank">Mistral (Le Chat)</a>
+        </div>
+        <p><em>(Le concept est inventé. L'IA va probablement générer des articles et des auteurs fictifs. Les participants doivent ensuite "Googler" les sources pour prouver l'hallucination).</em></p>
+
+        <h3>Activité 2 : Discussion (20 min)</h3>
+        <p><strong>Objectif :</strong> Définir les premières règles d'une charte d'utilisation.</p>
+        <p><strong>Question :</strong> "En vous basant sur ce module, quelles sont les 3 règles d'or que vous instaureriez dès demain dans votre service concernant l'utilisation de l'IA ?" (Ex: 1. Ne jamais copier-coller de données client. 2. Toujours vérifier les faits. 3. Citer l'IA si elle a aidé.)</p>
+    </div>
+    
+    <script>
+        function copyToClipboard(elementId) {
+            var preElement = document.getElementById(elementId);
+            var text = preElement.innerText;
+            navigator.clipboard.writeText(text).then(function() {
+                var button = preElement.nextElementSibling;
+                if(button && button.tagName === 'BUTTON') {
+                    var originalText = button.innerText;
+                    button.innerText = "Copié !";
+                    setTimeout(function() {
+                        button.innerText = originalText;
+                    }, 2000);
+                }
+            }, function(err) {
+                console.error('Erreur lors de la copie : ', err);
+            });
+        }
+    </script>
+</body>
+</html>
