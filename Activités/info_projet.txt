@@ -1,0 +1,5 @@
+Projet Alpha:
+- Objectif: Développer un assistant IA pour la génération de cours.
+- Technologies: Gemini 1.5 Pro, RAG, Gemini CLI.
+- Chef de projet: [Votre Nom]
+- Statut: En développement.
