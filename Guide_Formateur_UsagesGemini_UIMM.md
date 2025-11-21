@@ -6,7 +6,7 @@ layout: default
 ---
 
 <p align="center">
-  <img src="assets/logo_uimm.jpg" alt="Pôle Formation UIMM-CVDL" width="200"/>
+  <img src="assets/logo_uimm_placeholder.jpg" alt="Pôle Formation UIMM-CVDL" width="200"/>
 </p>
 
 # IA appliquée à l’industrie — Automatisation & MCP (7h)
