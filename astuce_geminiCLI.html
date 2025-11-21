@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guide Interactif Gemini-CLI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chosen Palette: Calm Neutrals -->
+    <!-- Application Structure Plan: Conception d'une SPA (Single Page Application) avec une structure à onglets (simulés via JS) pour une navigation claire et thématique. La structure choisie (Accueil, Installation, Paramètres Clés, Usage Avancé, Configuration) segmente logiquement l'information, la rendant plus facile à assimiler qu'une longue page. La section 'Paramètres Clés' répond directement à la demande de l'utilisateur avec des curseurs interactifs (température, etc.) pour une exploration pratique, ce qui est plus efficace pour l'apprentissage qu'une simple documentation textuelle. Le flux utilisateur est de découvrir (Accueil), d'installer (Installation), puis d'explorer les paramètres (Paramètres Clés) avant de passer aux cas plus complexes (Usage Avancé). -->
+    <!-- Visualization & Content Choices: Info Rapport: 'Comment régler la température' (Demande utilisateur). But: Informer et permettre l'expérimentation. Méthode: Curseur interactif (<input type="range">) lié à des explications textuelles dynamiques et un exemple de code. Interaction: L'utilisateur fait glisser le curseur; le JS met à jour la valeur affichée, l'explication (ex: '0.1: Très déterministe' vs '0.9: Très créatif'), et la commande d'exemple. Justification: Répond directement à la demande de l'utilisateur de manière engageante. Méthode: Vanilla JS. | Info Rapport: 'Commandes d'installation et d'utilisation'. But: Informer et faciliter l'utilisation. Méthode: Blocs de code (<pre><code>) avec bouton 'Copier'. Interaction: Clic sur le bouton pour copier la commande. Justification: Fonctionnalité standard et utile pour la documentation technique. Méthode: Vanilla JS. Aucune donnée quantitative n'étant présente, aucun graphique n'est nécessaire. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .tab-btn.active {
+            border-bottom-color: #3B82F6;
+            /* blue-500 */
+            color: #3B82F6;
+        }
+
+        .tab-btn {
+            border-bottom-width: 2px;
+            border-bottom-color: transparent;
+        }
+
+        .code-block {
+            position: relative;
+            background-color: #1F2937;
+            /* gray-800 */
+            color: #F3F4F6;
+            /* gray-100 */
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background-color: #4B5563;
+            /* gray-600 */
+            color: white;
+            border: none;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            font-size: 0.875rem;
+        }
+
+        .copy-btn:hover {
+            background-color: #6B7280;
+            /* gray-500 */
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800 min-h-screen">
+
+    <div class="container mx-auto p-4 md:p-8 max-w-5xl">
+        <header class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-gray-900 mb-2">Guide Interactif Gemini-CLI</h1>
+            <p class="text-lg text-gray-600">Explorez les commandes et paramètres de l'outil en ligne de commande
+                Gemini.</p>
+        </header>
+
+        <!-- Navigation par onglets -->
+        <nav class="flex border-b border-gray-300 mb-6 justify-center">
+            <button
+                class="tab-btn active py-4 px-6 text-lg font-medium text-gray-500 hover:text-blue-500 focus:outline-none"
+                data-tab="accueil">Accueil</button>
+            <button class="tab-btn py-4 px-6 text-lg font-medium text-gray-500 hover:text-blue-500 focus:outline-none"
+                data-tab="installation">Installation</button>
+            <button class="tab-btn py-4 px-6 text-lg font-medium text-gray-500 hover:text-blue-500 focus:outline-none"
+                data-tab="parametres">Paramètres Clés</button>
+            <button class="tab-btn py-4 px-6 text-lg font-medium text-gray-500 hover:text-blue-500 focus:outline-none"
+                data-tab="avance">Usage Avancé</button>
+            <button class="tab-btn py-4 px-6 text-lg font-medium text-gray-500 hover:text-blue-500 focus:outline-none"
+                data-tab="config">Configuration</button>
+        </nav>
+
+        <!-- Contenu des onglets -->
+        <main>
+            <!-- Onglet: Accueil -->
+            <section id="accueil" class="tab-content active bg-white p-6 rounded-lg shadow-sm">
+                <h2 class="text-3xl font-semibold mb-4 text-blue-600">Qu'est-ce que Gemini-CLI ?</h2>
+                <p class="mb-4 text-lg leading-relaxed">
+                    <code>gemini-cli</code> est un outil en ligne de commande non officiel qui vous permet d'interagir
+                    avec l'API Gemini de Google directement depuis votre terminal. C'est un moyen rapide et puissant
+                    d'exécuter des prompts, de générer du contenu, d'analyser des images et d'intégrer la puissance de
+                    Gemini dans vos scripts et workflows.
+                </p>
+                <p class="text-lg leading-relaxed">
+                    Ce guide interactif est conçu pour vous aider à maîtriser ses fonctionnalités. Utilisez les onglets
+                    ci-dessus pour naviguer entre l'installation, la configuration, et les différents paramètres que
+                    vous pouvez ajuster, y compris la <span class="font-medium text-blue-600">température</span> pour
+                    contrôler la créativité des réponses.
+                </p>
+            </section>
+
+            <!-- Onglet: Installation -->
+            <section id="installation" class="tab-content bg-white p-6 rounded-lg shadow-sm">
+                <h2 class="text-3xl font-semibold mb-4 text-blue-600">Installation</h2>
+                <p class="mb-4 text-lg">L'installation se fait généralement via <code>npm</code> (Node.js Package
+                    Manager). Assurez-vous d'avoir Node.js et npm installés sur votre système.</p>
+
+                <h3 class="text-2xl font-semibold mb-3 mt-6">Commande d'installation</h3>
+                <p class="mb-4">Exécutez la commande suivante dans votre terminal pour installer l'outil globalement :
+                </p>
+                <div class="code-block">
+                    <code>npm install -g @google/gemini-cli</code>
+                    <button class="copy-btn" data-clipboard="npm install -g @google/gemini-cli">Copier</button>
+                </div>
+
+                <p class="mt-6 text-lg">Une fois l'installation terminée, vous devriez pouvoir utiliser la commande
+                    <code>gemini</code>.</p>
+            </section>
+
+            <!-- Onglet: Paramètres Clés -->
+            <section id="parametres" class="tab-content bg-white p-6 rounded-lg shadow-sm">
+                <h2 class="text-3xl font-semibold mb-4 text-blue-600">Paramètres Clés (Génération)</h2>
+                <p class="mb-8 text-lg">Ces options vous permettent d'affiner la manière dont le modèle génère les
+                    réponses. La température est la plus courante pour ajuster la "créativité" du modèle.</p>
+
+                <!-- Température -->
+                <div class="mb-8">
+                    <label for="temperature" class="block text-2xl font-semibold mb-2">Température</label>
+                    <p class="text-gray-600 mb-3">Contrôle le degré d'aléatoire dans la réponse. Une valeur plus basse
+                        rend le modèle plus déterministe et moins créatif.</p>
+                    <div class="flex items-center space-x-4">
+                        <input type="range" id="temperature" min="0" max="1" step="0.1" value="0.7"
+                            class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+                        <span id="tempValue" class="font-medium text-lg text-blue-600 w-12 text-right">0.7</span>
+                    </div>
+                    <p id="tempExplanation" class="mt-3 text-md text-gray-700 italic">À 0.7, la réponse sera équilibrée,
+                        créative mais pas totalement aléatoire.</p>
+                </div>
+
+                <!-- Top-P -->
+                <div class="mb-8">
+                    <label for="topP" class="block text-2xl font-semibold mb-2">Top-P</label>
+                    <p class="text-gray-600 mb-3">Utilise l'échantillonnage "nucleus". Le modèle ne considère que les
+                        mots dont la probabilité cumulée atteint cette valeur.</p>
+                    <div class="flex items-center space-x-4">
+                        <input type="range" id="topP" min="0.1" max="1" step="0.1" value="0.9"
+                            class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+                        <span id="topPValue" class="font-medium text-lg text-blue-600 w-12 text-right">0.9</span>
+                    </div>
+                </div>
+
+                <!-- Top-K -->
+                <div class="mb-8">
+                    <label for="topK" class="block text-2xl font-semibold mb-2">Top-K</label>
+                    <p class="text-gray-600 mb-3">Le modèle ne choisit le mot suivant que parmi les 'K' mots les plus
+                        probables.</p>
+                    <div class="flex items-center space-x-4">
+                        <input type="range" id="topK" min="1" max="50" step="1" value="40"
+                            class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+                        <span id="topKValue" class="font-medium text-lg text-blue-600 w-12 text-right">40</span>
+                    </div>
+                </div>
+
+                <h3 class="text-2xl font-semibold mb-3 mt-10">Exemple de Commande Dynamique</h3>
+                <p class="mb-4">Voici comment vous utiliseriez ces paramètres dans une commande. L'exemple se met à jour
+                    lorsque vous bougez les curseurs.</p>
+                <div class="code-block">
+                    <code
+                        id="exampleCommand">gemini "Explique la relativité générale en une phrase" --temperature 0.7 --topP 0.9 --topK 40</code>
+                    <button class="copy-btn" data-clipboard-target="#exampleCommand">Copier</button>
+                </div>
+            </section>
+
+            <!-- Onglet: Usage Avancé -->
+            <section id="avance" class="tab-content bg-white p-6 rounded-lg shadow-sm">
+                <h2 class="text-3xl font-semibold mb-4 text-blue-600">Usage Avancé</h2>
+                <p class="mb-6 text-lg">Au-delà des prompts simples, <code>gemini-cli</code> peut gérer des entrées plus
+                    complexes.</p>
+
+                <h3 class="text-2xl font-semibold mb-3">Piping (Redirection d'entrée)</h3>
+                <p class="mb-4">Vous pouvez "piper" le contenu d'un fichier ou la sortie d'une autre commande
+                    directement dans <code>gemini-cli</code>. C'est extrêmement utile pour résumer du texte ou analyser
+                    des logs.</p>
+                <div class="code-block">
+                    <code>cat rapport.txt | gemini "Résume ce texte en trois points clés"</code>
+                    <button class="copy-btn"
+                        data-clipboard="cat rapport.txt | gemini 'Résume ce texte en trois points clés'">Copier</button>
+                </div>
+
+                <h3 class="text-2xl font-semibold mb-3 mt-8">Prompts Multimodaux (Images)</h3>
+                <p class="mb-4">Vous pouvez passer des images (fichiers locaux ou URL) avec votre texte. Utilisez
+                    l'option <code>--image</code> (ou <code>-i</code>).</p>
+                <div class="code-block">
+                    <code>gemini "Décris ce que tu vois sur cette image" -i ./photo.jpg</code>
+                    <button class="copy-btn"
+                        data-clipboard="gemini 'Décris ce que tu vois sur cette image' -i ./photo.jpg">Copier</button>
+                </div>
+                <div class="code-block mt-4">
+                    <code>gemini "Compare ces deux bâtiments" -i url-image1.com/img.png -i url-image2.com/img.png</code>
+                    <button class="copy-btn"
+                        data-clipboard="gemini 'Compare ces deux bâtiments' -i url-image1.com/img.png -i url-image2.com/img.png">Copier</button>
+                </div>
+
+                <h3 class="text-2xl font-semibold mb-3 mt-8">Mode Conversation (Chat)</h3>
+                <p class="mb-4">Utilisez l'option <code>--chat</code> pour démarrer une session interactive où le modèle
+                    se souvient du contexte de la conversation.</p>
+                <div class="code-block">
+                    <code>gemini --chat</code>
+                    <button class="copy-btn" data-clipboard="gemini --chat">Copier</button>
+                </div>
+            </section>
+
+            <!-- Onglet: Configuration -->
+            <section id="config" class="tab-content bg-white p-6 rounded-lg shadow-sm">
+                <h2 class="text-3xl font-semibold mb-4 text-blue-600">Configuration</h2>
+                <p class="mb-6 text-lg">Pour utiliser <code>gemini-cli</code>, vous devez configurer votre clé API
+                    Gemini.</p>
+
+                <h3 class="text-2xl font-semibold mb-3">Variable d'Environnement (Recommandé)</h3>
+                <p class="mb-4">La méthode la plus simple est de définir une variable d'environnement nommée
+                    <code>GEMINI_API_KEY</code>. L'outil la détectera automatiquement.</p>
+                <div class="code-block">
+                    <code>export GEMINI_API_KEY="VOTRE_CLÉ_API_ICI"</code>
+                    <button class="copy-btn" data-clipboard="export GEMINI_API_KEY='VOTRE_CLÉ_API_ICI'">Copier</button>
+                </div>
+                <p class="mt-4">Ajoutez cette ligne à votre fichier <code>.bashrc</code>, <code>.zshrc</code> ou
+                    <code>.profile</code> pour la rendre permanente.</p>
+
+                <h3 class="text-2xl font-semibold mb-3 mt-8">Option de Commande</h3>
+                <p class="mb-4">Vous pouvez aussi passer la clé à chaque fois avec l'option <code>--api-key</code>, mais
+                    c'est moins sécurisé et moins pratique.</p>
+                <div class="code-block">
+                    <code>gemini "Bonjour" --api-key "VOTRE_CLÉ_API_ICI"</code>
+                    <button class="copy-btn"
+                        data-clipboard="gemini 'Bonjour' --api-key 'VOTRE_CLÉ_API_ICI'">Copier</button>
+                </div>
+            </section>
+        </main>
+
+        <!-- Indicateur de copie -->
+        <div id="copy-indicator"
+            class="fixed bottom-4 right-4 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg transition-opacity duration-300 opacity-0">
+            Copié !
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabs = document.querySelectorAll('.tab-btn');
+            const contents = document.querySelectorAll('.tab-content');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+
+                    const targetId = tab.getAttribute('data-tab');
+                    contents.forEach(content => {
+                        content.classList.remove('active');
+                        if (content.id === targetId) {
+                            content.classList.add('active');
+                        }
+                    });
+                });
+            });
+
+            // Logique pour les curseurs de paramètres
+            const tempSlider = document.getElementById('temperature');
+            const tempValue = document.getElementById('tempValue');
+            const tempExplanation = document.getElementById('tempExplanation');
+
+            const topPSlider = document.getElementById('topP');
+            const topPValue = document.getElementById('topPValue');
+
+            const topKSlider = document.getElementById('topK');
+            const topKValue = document.getElementById('topKValue');
+
+            const exampleCommand = document.getElementById('exampleCommand');
+
+            function updateExampleCommand() {
+                const temp = tempSlider.value;
+                const topP = topPSlider.value;
+                const topK = topKSlider.value;
+                exampleCommand.textContent = `gemini "Explique la relativité générale en une phrase" --temperature ${temp} --topP ${topP} --topK ${topK}`;
+            }
+
+            tempSlider.addEventListener('input', () => {
+                const temp = parseFloat(tempSlider.value);
+                tempValue.textContent = temp.toFixed(1);
+                if (temp < 0.3) {
+                    tempExplanation.textContent = "À " + temp.toFixed(1) + ", la réponse sera très déterministe et factuelle.";
+                } else if (temp < 0.6) {
+                    tempExplanation.textContent = "À " + temp.toFixed(1) + ", la réponse sera fiable avec une légère créativité.";
+                } else if (temp < 0.9) {
+                    tempExplanation.textContent = "À " + temp.toFixed(1) + ", la réponse sera équilibrée, créative mais pas totalement aléatoire.";
+                } else {
+                    tempExplanation.textContent = "À " + temp.toFixed(1) + ", la réponse sera très créative et potentiellement surprenante.";
+                }
+                updateExampleCommand();
+            });
+
+            topPSlider.addEventListener('input', () => {
+                topPValue.textContent = parseFloat(topPSlider.value).toFixed(1);
+                updateExampleCommand();
+            });
+
+            topKSlider.addEventListener('input', () => {
+                topKValue.textContent = topKSlider.value;
+                updateExampleCommand();
+            });
+
+            // Logique de copie
+            const copyButtons = document.querySelectorAll('.copy-btn');
+            const copyIndicator = document.getElementById('copy-indicator');
+
+            copyButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    let textToCopy = "";
+                    const targetId = button.getAttribute('data-clipboard-target');
+                    if (targetId) {
+                        textToCopy = document.querySelector(targetId).textContent;
+                    } else {
+                        textToCopy = button.getAttribute('data-clipboard');
+                    }
+
+                    if (textToCopy) {
+                        const textArea = document.createElement('textarea');
+                        textArea.value = textToCopy;
+                        document.body.appendChild(textArea);
+                        textArea.select();
+                        try {
+                            document.execCommand('copy');
+                            showCopyIndicator();
+                        } catch (err) {
+                            console.error('Erreur lors de la copie', err);
+                        }
+                        document.body.removeChild(textArea);
+                    }
+                });
+            });
+
+            function showCopyIndicator() {
+                copyIndicator.classList.remove('opacity-0');
+                setTimeout(() => {
+                    copyIndicator.classList.add('opacity-0');
+                }, 2000);
+            }
+        });
+    </script>
+</body>
+
+</html>

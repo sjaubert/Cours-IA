@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 8 : Synthèse & Feuille de Route</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; padding: 20px; max-width: 900px; margin: auto; background-color: #f9f9f9; }
+        h1, h2, h3 { color: #333; border-bottom: 2px solid #6264A7; padding-bottom: 5px; }
+        .module-header { background-color: #6264A7; color: white; padding: 20px; border-radius: 8px; text-align: center; }
+        .content-box { background-color: white; padding: 20px; border-radius: 8px; margin-top: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .prompt-container { position: relative; background-color: #2d2d2d; color: #f1f1f1; padding: 20px; border-radius: 8px; margin: 20px 0; font-family: "Courier New", Courier, monospace; }
+        .prompt-container pre { white-space: pre-wrap; word-wrap: break-word; margin: 0; padding-bottom: 40px; }
+        .prompt-container button {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background-color: #0078D4;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+            transition: background-color 0.2s;
+        }
+        .prompt-container button:hover { background-color: #005a9e; }
+        .ai-links { margin-top: 10px; padding: 10px; background-color: #eef; border-radius: 5px; }
+        .ai-links a { margin: 0 10px; text-decoration: none; font-weight: bold; color: #0056b3; }
+        .activity { border-left: 5px solid #ffc107; padding-left: 15px; background-color: #fff9e6; margin-top: 15px; }
+        ul, ol { padding-left: 20px; }
+    </style>
+</head>
+<body>
+    <div class="module-header">
+        <img src="logo_uimm_placeholder.jpg" alt="Logo UIMM Pôle Formation Centre-Val de Loire" style="height: 120px; width: auto; margin-bottom: 15px;">
+        <h1>Jour 2 : Module 8 (16h15 - 17h30)</h1>
+        <h2>Synthèse et Feuille de Route</h2>
+           <h2>Pôle Formation UIMM-CVDL (S. JAUBERT)</h2>
+    </div>
+
+    <div class="content-box">
+        <h3>Objectifs Pédagogiques</h3>
+        <ul>
+            <li>Ancrer les acquis des deux jours de formation.</li>
+            <li>Permettre à chaque participant de repartir avec un plan d'action concret ("Quick-Win").</li>
+            <li>Définir les bases d'une gouvernance de l'IA au sein de son équipe ou de son entreprise.</li>
+        </ul>
+    </div>
+
+    <div class="content-box activity">
+        <h2>Activités Pratiques</h2>
+        
+        <h3>Activité 1 : Atelier "Mon Quick-Win IA" (30 min)</h3>
+        <p><strong>Objectif :</strong> Identifier une application concrète et immédiate de l'IA dans son travail.</p>
+        <p><strong>Consigne :</strong>
+            <ol>
+                <li>Identifiez la tâche la plus chronophage et/ou répétitive que vous effectuez chaque semaine (Ex: "Rédiger le rapport de sécurité hebdomadaire", "Répondre aux 10 mêmes questions clients", "Trier les rapports d'incidents").</li>
+                <li>Rédigez le prompt "parfait" (en utilisant la structure RTCCF) pour automatiser cette tâche.</li>
+            </ol>
+        </p>
+        
+        <div class="prompt-container">
+            <pre id="prompt-m8-1">
+# RÔLE
+(Ex: Tu es un responsable QHSE...)
+
+# TÂCHE
+(Ex: Rédige un résumé d'une page de...)
+
+# CONTEXTE
+(Ex: Voici les 5 rapports d'incidents de la semaine : [Coller les rapports]...)
+
+# CONTRAINTES
+(Ex: Le ton doit être factuel. Le rapport ne doit pas dépasser 200 mots...)
+
+# FORMAT
+(Ex: 1. Résumé des incidents. 2. Actions correctives prises. 3. Point de vigilance pour la semaine prochaine.)
+            </pre>
+            <button onclick="copyToClipboard('prompt-m8-1')">Copier le Prompt</button>
+        </div>
+
+        <h3>Activité 2 : Discussion – Bâtir une Charte d'Usage (30 min)</h3>
+        <p><strong>Objectif :</strong> Co-créer les règles d'or de l'utilisation de l'IA dans l'entreprise.</p>
+        <p><strong>Discussion :</strong> Quelles sont les 3 à 5 règles indispensables pour une charte d'utilisation de l'IA ?</p>
+        <p><strong>Points clés attendus (basés sur les sources) :</strong></p>
+        <ul>
+            <li><strong>Confidentialité avant tout :</strong> "Aucune donnée sensible (client, stratégie, RH, finance, code) ne doit être soumise aux IA publiques."</li>
+            <li><strong>Vérification humaine obligatoire :</strong> "L'IA est un assistant, pas un expert. L'utilisateur est responsable de vérifier l'exactitude (absence d'hallucinations) de la production avant de l'utiliser."</li>
+            <li><strong>Transparence de l'usage :</strong> "Si un document (rapport, e-mail...) a été généré majoritairement par une IA, cela doit être indiqué ou cité."</li>
+            <li><strong>Respect de l'éthique :</strong> "Ne pas utiliser l'IA pour générer du contenu biaisé, discriminatoire ou malveillant."</li>
+            <li><strong>La créativité avant l'ancrage :</strong> "Utiliser l'IA pour augmenter ses idées, et non comme point de départ unique (éviter le point d'ancrage)."</li>
+        </ul>
+    </div>
+
+    <div class="content-box">
+        <h3>Conclusion de la Formation</h3>
+        <ul>
+            <li>Tour de table final : "Avec quoi repartez-vous ?"</li>
+            <li>Remise des attestations et évaluation à chaud.</li>
+        </ul>
+    </div>
+    
+    <script>
+        function copyToClipboard(elementId) {
+            var preElement = document.getElementById(elementId);
+            var text = preElement.innerText;
+            navigator.clipboard.writeText(text).then(function() {
+                var button = preElement.nextElementSibling;
+                if(button && button.tagName === 'BUTTON') {
+                    var originalText = button.innerText;
+                    button.innerText = "Copié !";
+                    setTimeout(function() {
+                        button.innerText = originalText;
+                    }, 2000);
+                }
+            }, function(err) {
+                console.error('Erreur lors de la copie : ', err);
+            });
+        }
+    </script>
+</body>
+</html>

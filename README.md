@@ -17,3 +17,5 @@
 [Tutoriel_Automatisation Workspace](https://sjaubert.github.io/Cours-IA/Tutoriel_Automatisation_Workspace.html?target=_blank)
 
 [Tutoriel_Gemini secure](https://sjaubert.github.io/Cours-IA/tutoriel-gemini-secure.html?target=_blank)
+
+[Astuce GEMINI CLI](https://sjaubert.github.io/Cours-IA/astuce_geminiCLI.html?target=_blank)

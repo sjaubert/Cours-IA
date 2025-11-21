@@ -1,0 +1,501 @@
+Date,MachineID,DureeArretMinutes,TypePanne,NaturePanne,EquipeIntervention
+2025-10-29 06:11,M-003,192,Electrique,Defaut capteur,Equipe_Electro
+2025-10-20 00:44,M-005,74,Electrique,Surchauffe composant,Equipe_Electro
+2025-10-23 02:38,M-001,75,Mecanique,Casse piece,Equipe_Meca
+2025-10-13 01:17,M-002,94,Electrique,Court-circuit,Equipe_Electro
+2025-10-13 22:48,M-003,64,Mecanique,Casse piece,Equipe_Meca
+2025-11-03 01:33,M-003,209,Electrique,Defaut capteur,Equipe_Electro
+2025-10-24 17:13,M-005,100,Hydraulique,Pression faible,Equipe_Hydro
+2025-10-13 05:35,M-005,39,Logiciel,Erreur OS,Equipe_IT
+2025-10-25 00:12,M-004,89,Mecanique,Vibration anormale,Equipe_Meca
+2025-10-18 15:53,M-005,88,Electrique,Surchauffe composant,Equipe_Electro
+2025-11-07 05:49,M-003,47,Logiciel,Erreur OS,Equipe_IT
+2025-11-08 06:52,M-005,43,Mecanique,Bourrage,Equipe_Meca
+2025-11-07 09:44,M-004,37,Mecanique,Casse piece,Equipe_Meca
+2025-10-21 05:14,M-005,85,Electrique,Surchauffe composant,Equipe_Electro
+2025-11-01 09:39,M-005,128,Electrique,Court-circuit,Equipe_Electro
+2025-11-06 12:57,M-004,166,Electrique,Defaut capteur,Equipe_Electro
+2025-11-03 13:48,M-005,235,Electrique,Defaut capteur,Equipe_Electro
+2025-11-02 01:23,M-003,90,Mecanique,Vibration anormale,Equipe_Meca
+2025-11-08 13:43,M-003,128,Electrique,Defaut capteur,Equipe_Electro
+2025-11-02 04:24,M-003,92,Electrique,Court-circuit,Equipe_Electro
+2025-10-23 10:04,M-002,31,Usure,Graissage,Equipe_Meca
+2025-10-27 20:50,M-001,44,Mecanique,Bourrage,Equipe_Meca
+2025-10-22 00:31,M-003,35,Mecanique,Bourrage,Equipe_Meca
+2025-10-21 12:34,M-001,29,Usure,Graissage,Equipe_Meca
+2025-10-14 22:44,M-002,62,Hydraulique,Pression faible,Equipe_Hydro
+2025-11-02 02:44,M-003,203,Electrique,Defaut capteur,Equipe_Electro
+2025-10-29 00:17,M-003,45,Mecanique,Casse piece,Equipe_Meca
+2025-10-20 02:24,M-001,44,Mecanique,Vibration anormale,Equipe_Meca
+2025-10-31 03:54,M-002,39,Logiciel,Conflit reseau,Equipe_IT
+2025-10-15 05:12,M-005,48,Logiciel,Conflit reseau,Equipe_IT
+2025-10-22 12:41,M-003,44,Mecanique,Bourrage,Equipe_Meca
+2025-10-19 04:27,M-004,44,Logiciel,Erreur OS,Equipe_IT
+2025-10-13 16:26,M-005,29,Usure,Graissage,Equipe_Meca
+2025-11-02 02:49,M-003,22,Usure,Nettoyage,Equipe_Meca
+2025-11-01 21:38,M-003,174,Electrique,Surchauffe composant,Equipe_Electro
+2025-10-25 02:45,M-005,61,Mecanique,Casse piece,Equipe_Meca
+2025-10-29 23:44,M-001,66,Hydraulique,Filtre bouche,Equipe_Hydro
+2025-10-14 11:57,M-005,125,Electrique,Surchauffe composant,Equipe_Electro
+2025-11-05 10:47,M-005,162,Electrique,Court-circuit,Equipe_Electro
+2025-10-15 12:53,M-003,78,Electrique,Surchauffe composant,Equipe_Electro
+2025-10-28 13:39,M-002,59,Logiciel,Conflit reseau,Equipe_IT
+2025-10-14 14:27,M-003,120,Hydraulique,Filtre bouche,Equipe_Hydro
+2025-10-17 09:40,M-002,60,Mecanique,Vibration anormale,Equipe_Meca
+2025-10-17 18:44,M-003,235,Electrique,Defaut capteur,Equipe_Electro
+2025-10-23 18:31,M-005,61,Electrique,Defaut capteur,Equipe_Electro
+2025-10-16 02:18,M-002,146,Electrique,Defaut capteur,Equipe_Electro
+2025-10-14 22:25,M-003,84,Mecanique,Bourrage,Equipe_Meca
+2025-11-09 22:34,M-002,94,Electrique,Defaut capteur,Equipe_Electro
+2025-11-07 12:45,M-005,93,Electrique,Court-circuit,Equipe_Electro
+2025-11-04 09:30,M-002,33,Mecanique,Casse piece,Equipe_Meca
+2025-10-27 04:03,M-003,40,Logiciel,Crash application,Equipe_IT
+2025-10-14 07:35,M-002,51,Hydraulique,Filtre bouche,Equipe_Hydro
+2025-10-15 17:36,M-004,54,Mecanique,Casse piece,Equipe_Meca
+2025-10-26 05:02,M-003,193,Electrique,Defaut capteur,Equipe_Electro
+2025-11-08 05:00,M-002,100,Hydraulique,Pression faible,Equipe_Hydro
+2025-11-02 20:43,M-002,30,Mecanique,Vibration anormale,Equipe_Meca
+2025-10-24 07:57,M-003,61,Electrique,Defaut capteur,Equipe_Electro
+2025-11-02 19:48,M-002,212,Electrique,Defaut capteur,Equipe_Electro
+2025-10-20 10:41,M-003,101,Electrique,Court-circuit,Equipe_Electro
+2025-10-22 12:39,M-004,80,Mecanique,Vibration anormale,Equipe_Meca
+2025-10-17 15:39,M-003,102,Hydraulique,Fuite huile,Equipe_Hydro
+2025-10-18 10:48,M-003,31,Mecanique,Bourrage,Equipe_Meca
+2025-11-01 02:10,M-004,87,Hydraulique,Pression faible,Equipe_Hydro
+2025-10-23 07:58,M-004,23,Logiciel,Conflit reseau,Equipe_IT
+2025-10-26 11:31,M-005,54,Mecanique,Bourrage,Equipe_Meca
+2025-11-04 04:53,M-004,30,Mecanique,Bourrage,Equipe_Meca
+2025-11-05 07:31,M-005,80,Hydraulique,Pression faible,Equipe_Hydro
+2025-10-22 13:03,M-003,76,Mecanique,Bourrage,Equipe_Meca
+2025-11-09 15:37,M-002,104,Electrique,Defaut capteur,Equipe_Electro
+2025-10-16 07:26,M-002,81,Electrique,Surchauffe composant,Equipe_Electro
+2025-10-17 17:20,M-003,19,Logiciel,Crash application,Equipe_IT
+2025-10-31 17:32,M-004,72,Mecanique,Casse piece,Equipe_Meca
+2025-10-11 16:01,M-002,52,Logiciel,Erreur OS,Equipe_IT
+2025-11-06 07:09,M-003,59,Mecanique,Casse piece,Equipe_Meca
+2025-10-17 12:00,M-002,44,Mecanique,Vibration anormale,Equipe_Meca
+2025-10-20 08:39,M-002,22,Usure,Nettoyage,Equipe_Meca
+2025-10-25 16:38,M-001,88,Hydraulique,Pression faible,Equipe_Hydro
+2025-10-14 14:14,M-001,22,Usure,Graissage,Equipe_Meca
+2025-10-12 03:50,M-001,235,Electrique,Court-circuit,Equipe_Electro
+2025-10-16 20:34,M-002,40,Usure,Nettoyage,Equipe_Meca
+2025-10-15 09:11,M-001,125,Electrique,Court-circuit,Equipe_Electro
+2025-10-11 16:54,M-002,59,Mecanique,Vibration anormale,Equipe_Meca
+2025-10-11 23:42,M-003,108,Hydraulique,Pression faible,Equipe_Hydro
+2025-11-02 11:05,M-005,71,Electrique,Surchauffe composant,Equipe_Electro
+2025-11-08 10:29,M-005,132,Electrique,Defaut capteur,Equipe_Electro
+2025-10-12 03:46,M-003,115,Hydraulique,Pression faible,Equipe_Hydro
+2025-11-03 06:31,M-003,37,Mecanique,Vibration anormale,Equipe_Meca
+2025-10-14 22:00,M-003,82,Mecanique,Vibration anormale,Equipe_Meca
+2025-10-21 00:10,M-002,42,Mecanique,Bourrage,Equipe_Meca
+2025-11-05 14:25,M-005,91,Electrique,Surchauffe composant,Equipe_Electro
+2025-10-18 20:04,M-005,25,Usure,Graissage,Equipe_Meca
+2025-10-19 00:32,M-003,55,Logiciel,Conflit reseau,Equipe_IT
+2025-10-26 10:39,M-001,239,Electrique,Surchauffe composant,Equipe_Electro
+2025-10-15 02:54,M-003,67,Electrique,Court-circuit,Equipe_Electro
+2025-10-23 17:41,M-003,58,Logiciel,Conflit reseau,Equipe_IT
+2025-11-05 10:32,M-005,73,Mecanique,Casse piece,Equipe_Meca
+2025-11-04 19:23,M-002,33,Logiciel,Conflit reseau,Equipe_IT
+2025-10-20 14:34,M-003,34,Usure,Graissage,Equipe_Meca
+2025-10-15 18:52,M-003,61,Mecanique,Vibration anormale,Equipe_Meca
+2025-10-25 21:45,M-003,37,Mecanique,Bourrage,Equipe_Meca
+2025-10-24 19:55,M-003,193,Electrique,Defaut capteur,Equipe_Electro
+2025-11-02 03:44,M-002,232,Electrique,Surchauffe composant,Equipe_Electro
+2025-10-24 21:06,M-002,54,Mecanique,Bourrage,Equipe_Meca
+2025-10-21 14:59,M-001,60,Mecanique,Casse piece,Equipe_Meca
+2025-10-19 16:04,M-005,79,Mecanique,Vibration anormale,Equipe_Meca
+2025-11-07 09:37,M-004,61,Electrique,Defaut capteur,Equipe_Electro
+2025-10-18 23:11,M-001,75,Mecanique,Bourrage,Equipe_Meca
+2025-10-18 21:54,M-002,47,Mecanique,Casse piece,Equipe_Meca
+2025-11-07 10:27,M-004,203,Electrique,Defaut capteur,Equipe_Electro
+2025-10-12 05:58,M-004,71,Hydraulique,Pression faible,Equipe_Hydro
+2025-10-12 10:29,M-005,86,Mecanique,Vibration anormale,Equipe_Meca
+2025-10-19 12:36,M-003,238,Electrique,Court-circuit,Equipe_Electro
+2025-10-11 18:12,M-001,57,Logiciel,Conflit reseau,Equipe_IT
+2025-11-07 18:43,M-003,213,Electrique,Surchauffe composant,Equipe_Electro
+2025-11-02 14:29,M-004,69,Mecanique,Casse piece,Equipe_Meca
+2025-10-24 09:14,M-004,50,Hydraulique,Pression faible,Equipe_Hydro
+2025-10-30 13:35,M-003,53,Logiciel,Erreur OS,Equipe_IT
+2025-10-29 19:07,M-003,187,Electrique,Court-circuit,Equipe_Electro
+2025-11-06 09:55,M-004,56,Hydraulique,Filtre bouche,Equipe_Hydro
+2025-10-16 16:25,M-001,46,Hydraulique,Fuite huile,Equipe_Hydro
+2025-10-27 10:31,M-003,45,Mecanique,Bourrage,Equipe_Meca
+2025-10-16 19:54,M-003,72,Mecanique,Vibration anormale,Equipe_Meca
+2025-10-17 17:56,M-001,89,Hydraulique,Filtre bouche,Equipe_Hydro
+2025-11-08 08:54,M-004,24,Usure,Remplacement courroie,Equipe_Meca
+2025-10-24 09:53,M-005,186,Electrique,Surchauffe composant,Equipe_Electro
+2025-11-04 00:10,M-005,27,Usure,Nettoyage,Equipe_Meca
+2025-10-17 05:02,M-004,122,Electrique,Court-circuit,Equipe_Electro
+2025-11-01 09:37,M-004,43,Logiciel,Erreur OS,Equipe_IT
+2025-11-06 23:44,M-003,234,Electrique,Defaut capteur,Equipe_Electro
+2025-11-07 00:25,M-003,75,Mecanique,Vibration anormale,Equipe_Meca
+2025-10-30 01:38,M-003,128,Electrique,Defaut capteur,Equipe_Electro
+2025-10-25 14:24,M-004,31,Usure,Remplacement courroie,Equipe_Meca
+2025-11-06 04:54,M-005,60,Hydraulique,Filtre bouche,Equipe_Hydro
+2025-10-15 13:53,M-005,72,Mecanique,Bourrage,Equipe_Meca
+2025-10-13 19:50,M-003,76,Mecanique,Casse piece,Equipe_Meca
+2025-11-02 19:49,M-003,33,Mecanique,Bourrage,Equipe_Meca
+2025-10-20 22:08,M-002,111,Electrique,Defaut capteur,Equipe_Electro
+2025-11-03 05:00,M-002,61,Mecanique,Casse piece,Equipe_Meca
+2025-10-28 08:26,M-005,54,Logiciel,Conflit reseau,Equipe_IT
+2025-11-01 22:13,M-003,100,Electrique,Court-circuit,Equipe_Electro
+2025-10-26 13:10,M-003,104,Electrique,Defaut capteur,Equipe_Electro
+2025-10-19 10:28,M-003,164,Electrique,Surchauffe composant,Equipe_Electro
+2025-11-01 18:53,M-003,114,Hydraulique,Filtre bouche,Equipe_Hydro
+2025-10-22 00:39,M-002,87,Hydraulique,Filtre bouche,Equipe_Hydro
+2025-10-20 09:28,M-005,192,Electrique,Court-circuit,Equipe_Electro
+2025-11-02 08:19,M-003,58,Logiciel,Crash application,Equipe_IT
+2025-10-28 21:44,M-005,32,Mecanique,Casse piece,Equipe_Meca
+2025-11-09 15:51,M-001,71,Mecanique,Vibration anormale,Equipe_Meca
+2025-11-02 01:18,M-005,124,Electrique,Court-circuit,Equipe_Electro
+2025-11-07 14:16,M-005,56,Mecanique,Bourrage,Equipe_Meca
+2025-10-15 04:55,M-003,88,Electrique,Court-circuit,Equipe_Electro
+2025-10-23 21:04,M-003,57,Hydraulique,Fuite huile,Equipe_Hydro
+2025-11-06 12:29,M-004,25,Logiciel,Conflit reseau,Equipe_IT
+2025-10-23 08:48,M-003,35,Usure,Nettoyage,Equipe_Meca
+2025-10-26 08:19,M-001,73,Mecanique,Bourrage,Equipe_Meca
+2025-11-06 10:21,M-003,77,Mecanique,Bourrage,Equipe_Meca
+2025-10-20 03:42,M-002,39,Mecanique,Casse piece,Equipe_Meca
+2025-10-18 05:03,M-003,65,Hydraulique,Pression faible,Equipe_Hydro
+2025-10-29 12:55,M-004,29,Usure,Graissage,Equipe_Meca
+2025-11-08 13:05,M-004,32,Mecanique,Vibration anormale,Equipe_Meca
+2025-10-15 05:09,M-003,68,Mecanique,Vibration anormale,Equipe_Meca
+2025-10-16 09:05,M-003,59,Mecanique,Bourrage,Equipe_Meca
+2025-10-15 04:30,M-005,19,Logiciel,Conflit reseau,Equipe_IT
+2025-11-07 19:39,M-002,181,Electrique,Court-circuit,Equipe_Electro
+2025-10-28 17:39,M-004,216,Electrique,Defaut capteur,Equipe_Electro
+2025-10-27 00:35,M-002,52,Mecanique,Bourrage,Equipe_Meca
+2025-11-04 03:27,M-003,112,Hydraulique,Filtre bouche,Equipe_Hydro
+2025-10-27 00:38,M-003,39,Logiciel,Crash application,Equipe_IT
+2025-11-03 14:51,M-002,167,Electrique,Court-circuit,Equipe_Electro
+2025-10-12 22:05,M-002,236,Electrique,Defaut capteur,Equipe_Electro
+2025-11-07 21:14,M-003,180,Electrique,Court-circuit,Equipe_Electro
+2025-11-08 09:13,M-005,203,Electrique,Defaut capteur,Equipe_Electro
+2025-10-19 05:42,M-005,71,Mecanique,Casse piece,Equipe_Meca
+2025-10-24 12:03,M-005,83,Mecanique,Casse piece,Equipe_Meca
+2025-10-30 13:17,M-001,96,Hydraulique,Pression faible,Equipe_Hydro
+2025-10-12 23:38,M-004,44,Usure,Remplacement courroie,Equipe_Meca
+2025-10-14 22:05,M-003,84,Hydraulique,Filtre bouche,Equipe_Hydro
+2025-11-05 18:59,M-003,39,Usure,Nettoyage,Equipe_Meca
+2025-10-21 13:24,M-003,91,Hydraulique,Filtre bouche,Equipe_Hydro
+2025-10-27 17:26,M-005,162,Electrique,Defaut capteur,Equipe_Electro
+2025-10-30 15:41,M-003,83,Mecanique,Vibration anormale,Equipe_Meca
+2025-10-27 04:42,M-001,68,Mecanique,Vibration anormale,Equipe_Meca
+2025-10-16 06:46,M-002,42,Usure,Nettoyage,Equipe_Meca
+2025-10-30 20:17,M-005,17,Logiciel,Erreur OS,Equipe_IT
+2025-10-28 05:08,M-004,64,Mecanique,Casse piece,Equipe_Meca
+2025-11-05 21:37,M-002,48,Mecanique,Bourrage,Equipe_Meca
+2025-10-17 19:17,M-002,20,Logiciel,Erreur OS,Equipe_IT
+2025-11-08 08:11,M-001,98,Electrique,Defaut capteur,Equipe_Electro
+2025-10-13 05:22,M-002,120,Electrique,Surchauffe composant,Equipe_Electro
+2025-11-02 19:13,M-001,109,Electrique,Court-circuit,Equipe_Electro
+2025-11-07 17:31,M-001,20,Logiciel,Conflit reseau,Equipe_IT
+2025-10-16 07:30,M-003,47,Mecanique,Vibration anormale,Equipe_Meca
+2025-10-17 13:05,M-004,47,Hydraulique,Fuite huile,Equipe_Hydro
+2025-11-08 03:34,M-003,37,Logiciel,Crash application,Equipe_IT
+2025-10-21 06:24,M-002,66,Mecanique,Casse piece,Equipe_Meca
+2025-10-16 06:23,M-004,54,Mecanique,Vibration anormale,Equipe_Meca
+2025-11-02 23:29,M-001,22,Logiciel,Crash application,Equipe_IT
+2025-10-18 00:23,M-003,228,Electrique,Defaut capteur,Equipe_Electro
+2025-10-29 05:48,M-004,59,Mecanique,Vibration anormale,Equipe_Meca
+2025-10-18 22:33,M-004,64,Mecanique,Bourrage,Equipe_Meca
+2025-11-09 05:30,M-003,53,Hydraulique,Fuite huile,Equipe_Hydro
+2025-10-31 21:31,M-003,105,Electrique,Defaut capteur,Equipe_Electro
+2025-11-10 06:07,M-003,161,Electrique,Court-circuit,Equipe_Electro
+2025-10-23 12:07,M-003,21,Usure,Nettoyage,Equipe_Meca
+2025-11-10 04:42,M-003,188,Electrique,Defaut capteur,Equipe_Electro
+2025-10-12 22:58,M-003,118,Hydraulique,Filtre bouche,Equipe_Hydro
+2025-10-29 14:54,M-002,122,Electrique,Defaut capteur,Equipe_Electro
+2025-10-21 08:55,M-005,82,Mecanique,Vibration anormale,Equipe_Meca
+2025-10-27 02:24,M-001,73,Mecanique,Bourrage,Equipe_Meca
+2025-10-22 08:15,M-002,143,Electrique,Surchauffe composant,Equipe_Electro
+2025-10-15 01:53,M-004,41,Logiciel,Erreur OS,Equipe_IT
+2025-10-22 14:07,M-001,46,Mecanique,Casse piece,Equipe_Meca
+2025-10-20 16:13,M-005,146,Electrique,Defaut capteur,Equipe_Electro
+2025-10-18 07:33,M-003,41,Usure,Remplacement courroie,Equipe_Meca
+2025-10-24 16:05,M-003,21,Usure,Remplacement courroie,Equipe_Meca
+2025-11-04 17:32,M-002,40,Mecanique,Casse piece,Equipe_Meca
+2025-10-25 03:36,M-003,151,Electrique,Court-circuit,Equipe_Electro
+2025-10-23 14:27,M-004,125,Electrique,Defaut capteur,Equipe_Electro
+2025-10-16 03:49,M-005,53,Hydraulique,Filtre bouche,Equipe_Hydro
+2025-10-24 21:03,M-004,39,Mecanique,Bourrage,Equipe_Meca
+2025-10-18 20:14,M-001,225,Electrique,Surchauffe composant,Equipe_Electro
+2025-10-22 07:10,M-003,221,Electrique,Defaut capteur,Equipe_Electro
+2025-10-27 06:32,M-004,51,Hydraulique,Pression faible,Equipe_Hydro
+2025-10-12 13:33,M-001,34,Usure,Nettoyage,Equipe_Meca
+2025-10-21 13:43,M-003,200,Electrique,Surchauffe composant,Equipe_Electro
+2025-11-01 13:34,M-005,222,Electrique,Defaut capteur,Equipe_Electro
+2025-10-27 04:32,M-003,47,Mecanique,Vibration anormale,Equipe_Meca
+2025-10-20 16:44,M-003,85,Hydraulique,Pression faible,Equipe_Hydro
+2025-10-13 22:27,M-004,99,Electrique,Defaut capteur,Equipe_Electro
+2025-10-26 08:05,M-001,33,Usure,Graissage,Equipe_Meca
+2025-11-07 12:31,M-004,91,Hydraulique,Pression faible,Equipe_Hydro
+2025-11-10 05:19,M-001,61,Hydraulique,Filtre bouche,Equipe_Hydro
+2025-11-07 16:48,M-001,79,Electrique,Court-circuit,Equipe_Electro
+2025-10-19 15:36,M-004,125,Electrique,Surchauffe composant,Equipe_Electro
+2025-11-03 03:37,M-003,39,Logiciel,Crash application,Equipe_IT
+2025-10-13 19:18,M-001,34,Logiciel,Erreur OS,Equipe_IT
+2025-10-31 03:31,M-005,147,Electrique,Defaut capteur,Equipe_Electro
+2025-10-25 00:35,M-003,52,Mecanique,Casse piece,Equipe_Meca
+2025-10-26 17:21,M-004,39,Usure,Graissage,Equipe_Meca
+2025-11-10 11:49,M-001,29,Usure,Remplacement courroie,Equipe_Meca
+2025-11-07 22:22,M-005,170,Electrique,Defaut capteur,Equipe_Electro
+2025-10-14 01:03,M-005,194,Electrique,Court-circuit,Equipe_Electro
+2025-10-18 14:18,M-001,26,Usure,Nettoyage,Equipe_Meca
+2025-10-28 15:08,M-002,32,Logiciel,Erreur OS,Equipe_IT
+2025-10-30 19:11,M-003,30,Usure,Nettoyage,Equipe_Meca
+2025-10-25 05:19,M-003,77,Mecanique,Bourrage,Equipe_Meca
+2025-10-20 21:05,M-001,21,Usure,Graissage,Equipe_Meca
+2025-10-24 17:43,M-002,72,Electrique,Surchauffe composant,Equipe_Electro
+2025-10-24 11:10,M-003,115,Hydraulique,Filtre bouche,Equipe_Hydro
+2025-10-13 15:35,M-004,45,Logiciel,Conflit reseau,Equipe_IT
+2025-10-18 15:24,M-004,124,Electrique,Defaut capteur,Equipe_Electro
+2025-11-02 10:16,M-002,92,Hydraulique,Filtre bouche,Equipe_Hydro
+2025-11-02 12:52,M-001,77,Electrique,Surchauffe composant,Equipe_Electro
+2025-11-09 11:03,M-001,118,Hydraulique,Filtre bouche,Equipe_Hydro
+2025-10-14 04:30,M-005,40,Logiciel,Crash application,Equipe_IT
+2025-10-18 23:38,M-001,78,Mecanique,Vibration anormale,Equipe_Meca
+2025-11-02 09:50,M-002,35,Mecanique,Vibration anormale,Equipe_Meca
+2025-11-02 18:42,M-002,117,Hydraulique,Filtre bouche,Equipe_Hydro
+2025-10-24 12:26,M-002,222,Electrique,Surchauffe composant,Equipe_Electro
+2025-10-16 17:05,M-003,88,Electrique,Court-circuit,Equipe_Electro
+2025-10-30 04:53,M-003,52,Hydraulique,Fuite huile,Equipe_Hydro
+2025-11-01 22:11,M-005,111,Electrique,Court-circuit,Equipe_Electro
+2025-10-17 19:22,M-005,45,Mecanique,Vibration anormale,Equipe_Meca
+2025-10-30 20:07,M-004,40,Usure,Remplacement courroie,Equipe_Meca
+2025-10-31 05:23,M-003,57,Hydraulique,Fuite huile,Equipe_Hydro
+2025-10-28 21:18,M-001,226,Electrique,Surchauffe composant,Equipe_Electro
+2025-10-17 23:30,M-005,61,Hydraulique,Fuite huile,Equipe_Hydro
+2025-10-28 01:22,M-003,145,Electrique,Court-circuit,Equipe_Electro
+2025-10-26 14:17,M-005,60,Mecanique,Vibration anormale,Equipe_Meca
+2025-10-14 05:47,M-004,129,Electrique,Surchauffe composant,Equipe_Electro
+2025-10-27 11:32,M-003,111,Electrique,Court-circuit,Equipe_Electro
+2025-11-02 03:59,M-004,83,Mecanique,Vibration anormale,Equipe_Meca
+2025-11-09 16:00,M-003,55,Hydraulique,Pression faible,Equipe_Hydro
+2025-11-06 05:48,M-004,212,Electrique,Surchauffe composant,Equipe_Electro
+2025-10-16 23:57,M-003,210,Electrique,Defaut capteur,Equipe_Electro
+2025-10-18 16:26,M-004,172,Electrique,Surchauffe composant,Equipe_Electro
+2025-10-13 19:49,M-003,43,Mecanique,Vibration anormale,Equipe_Meca
+2025-10-17 21:31,M-005,59,Logiciel,Crash application,Equipe_IT
+2025-10-17 13:54,M-002,233,Electrique,Defaut capteur,Equipe_Electro
+2025-10-27 00:19,M-003,118,Electrique,Court-circuit,Equipe_Electro
+2025-11-01 16:41,M-003,59,Mecanique,Vibration anormale,Equipe_Meca
+2025-10-14 09:40,M-003,223,Electrique,Court-circuit,Equipe_Electro
+2025-10-24 17:28,M-003,186,Electrique,Surchauffe composant,Equipe_Electro
+2025-10-16 00:45,M-003,23,Usure,Nettoyage,Equipe_Meca
+2025-10-23 16:30,M-003,112,Electrique,Defaut capteur,Equipe_Electro
+2025-11-07 01:32,M-001,15,Logiciel,Conflit reseau,Equipe_IT
+2025-10-29 21:57,M-005,144,Electrique,Defaut capteur,Equipe_Electro
+2025-10-18 05:18,M-002,78,Mecanique,Bourrage,Equipe_Meca
+2025-10-27 18:59,M-003,27,Logiciel,Conflit reseau,Equipe_IT
+2025-11-06 03:02,M-004,107,Hydraulique,Filtre bouche,Equipe_Hydro
+2025-10-29 20:46,M-003,151,Electrique,Defaut capteur,Equipe_Electro
+2025-10-30 15:41,M-003,77,Mecanique,Vibration anormale,Equipe_Meca
+2025-10-22 19:21,M-003,47,Logiciel,Conflit reseau,Equipe_IT
+2025-11-05 05:25,M-003,31,Mecanique,Bourrage,Equipe_Meca
+2025-10-26 17:48,M-002,83,Electrique,Court-circuit,Equipe_Electro
+2025-10-25 12:42,M-003,95,Electrique,Surchauffe composant,Equipe_Electro
+2025-11-08 06:15,M-003,107,Hydraulique,Filtre bouche,Equipe_Hydro
+2025-10-12 18:00,M-002,78,Electrique,Defaut capteur,Equipe_Electro
+2025-11-04 20:09,M-002,73,Mecanique,Casse piece,Equipe_Meca
+2025-10-30 13:41,M-005,41,Usure,Graissage,Equipe_Meca
+2025-10-21 12:21,M-001,45,Mecanique,Vibration anormale,Equipe_Meca
+2025-10-16 15:46,M-003,59,Mecanique,Casse piece,Equipe_Meca
+2025-11-08 13:12,M-003,90,Hydraulique,Filtre bouche,Equipe_Hydro
+2025-10-27 09:48,M-003,195,Electrique,Defaut capteur,Equipe_Electro
+2025-10-28 07:03,M-002,35,Mecanique,Bourrage,Equipe_Meca
+2025-11-05 22:38,M-002,29,Logiciel,Crash application,Equipe_IT
+2025-10-14 08:04,M-003,43,Mecanique,Bourrage,Equipe_Meca
+2025-10-20 23:24,M-005,60,Mecanique,Vibration anormale,Equipe_Meca
+2025-10-16 13:02,M-003,52,Mecanique,Vibration anormale,Equipe_Meca
+2025-10-14 12:51,M-001,47,Logiciel,Conflit reseau,Equipe_IT
+2025-10-12 17:43,M-001,60,Logiciel,Conflit reseau,Equipe_IT
+2025-10-17 03:48,M-003,79,Hydraulique,Filtre bouche,Equipe_Hydro
+2025-11-09 23:06,M-003,76,Mecanique,Casse piece,Equipe_Meca
+2025-10-18 09:38,M-003,51,Hydraulique,Pression faible,Equipe_Hydro
+2025-10-22 16:15,M-003,113,Electrique,Surchauffe composant,Equipe_Electro
+2025-10-14 01:37,M-005,198,Electrique,Defaut capteur,Equipe_Electro
+2025-10-25 14:50,M-004,131,Electrique,Surchauffe composant,Equipe_Electro
+2025-10-28 12:38,M-002,76,Mecanique,Vibration anormale,Equipe_Meca
+2025-10-30 14:43,M-005,49,Logiciel,Conflit reseau,Equipe_IT
+2025-10-29 21:52,M-003,119,Electrique,Surchauffe composant,Equipe_Electro
+2025-10-27 20:32,M-003,82,Hydraulique,Filtre bouche,Equipe_Hydro
+2025-11-04 03:46,M-005,194,Electrique,Surchauffe composant,Equipe_Electro
+2025-10-12 06:31,M-003,45,Hydraulique,Pression faible,Equipe_Hydro
+2025-11-02 04:38,M-002,122,Electrique,Surchauffe composant,Equipe_Electro
+2025-10-16 20:25,M-003,141,Electrique,Defaut capteur,Equipe_Electro
+2025-10-18 14:36,M-001,38,Logiciel,Crash application,Equipe_IT
+2025-10-26 11:00,M-004,29,Logiciel,Crash application,Equipe_IT
+2025-10-19 04:53,M-001,103,Hydraulique,Pression faible,Equipe_Hydro
+2025-10-11 20:53,M-003,67,Mecanique,Casse piece,Equipe_Meca
+2025-10-18 16:19,M-003,150,Electrique,Surchauffe composant,Equipe_Electro
+2025-10-16 01:13,M-005,39,Logiciel,Erreur OS,Equipe_IT
+2025-10-14 15:29,M-001,63,Mecanique,Casse piece,Equipe_Meca
+2025-10-12 14:25,M-002,69,Electrique,Defaut capteur,Equipe_Electro
+2025-10-19 17:02,M-003,57,Hydraulique,Pression faible,Equipe_Hydro
+2025-10-20 11:07,M-004,106,Hydraulique,Fuite huile,Equipe_Hydro
+2025-10-26 03:08,M-002,32,Usure,Graissage,Equipe_Meca
+2025-10-28 21:38,M-003,74,Mecanique,Casse piece,Equipe_Meca
+2025-11-01 03:48,M-003,54,Hydraulique,Fuite huile,Equipe_Hydro
+2025-11-03 04:07,M-004,227,Electrique,Surchauffe composant,Equipe_Electro
+2025-10-24 11:24,M-005,81,Mecanique,Vibration anormale,Equipe_Meca
+2025-11-01 10:55,M-005,237,Electrique,Defaut capteur,Equipe_Electro
+2025-10-13 00:16,M-002,45,Usure,Remplacement courroie,Equipe_Meca
+2025-10-20 23:53,M-003,38,Usure,Remplacement courroie,Equipe_Meca
+2025-11-05 10:49,M-002,64,Mecanique,Vibration anormale,Equipe_Meca
+2025-11-01 12:28,M-002,34,Usure,Graissage,Equipe_Meca
+2025-10-25 03:21,M-005,232,Electrique,Court-circuit,Equipe_Electro
+2025-11-08 23:49,M-003,42,Usure,Graissage,Equipe_Meca
+2025-10-20 21:01,M-002,104,Electrique,Court-circuit,Equipe_Electro
+2025-10-23 23:27,M-003,84,Mecanique,Vibration anormale,Equipe_Meca
+2025-11-07 04:39,M-001,67,Mecanique,Casse piece,Equipe_Meca
+2025-10-18 21:58,M-005,32,Mecanique,Casse piece,Equipe_Meca
+2025-11-08 01:30,M-001,39,Mecanique,Bourrage,Equipe_Meca
+2025-11-01 20:29,M-002,39,Logiciel,Conflit reseau,Equipe_IT
+2025-10-15 05:47,M-003,211,Electrique,Court-circuit,Equipe_Electro
+2025-10-12 08:02,M-003,20,Usure,Remplacement courroie,Equipe_Meca
+2025-10-18 06:52,M-003,30,Mecanique,Vibration anormale,Equipe_Meca
+2025-10-25 00:41,M-002,60,Mecanique,Bourrage,Equipe_Meca
+2025-11-09 07:12,M-002,71,Hydraulique,Pression faible,Equipe_Hydro
+2025-10-27 00:41,M-003,234,Electrique,Defaut capteur,Equipe_Electro
+2025-10-16 14:25,M-001,55,Mecanique,Bourrage,Equipe_Meca
+2025-11-09 14:21,M-003,48,Hydraulique,Fuite huile,Equipe_Hydro
+2025-11-04 04:03,M-003,109,Hydraulique,Pression faible,Equipe_Hydro
+2025-11-05 14:16,M-005,61,Hydraulique,Fuite huile,Equipe_Hydro
+2025-10-16 23:37,M-004,171,Electrique,Court-circuit,Equipe_Electro
+2025-10-17 16:43,M-003,32,Usure,Graissage,Equipe_Meca
+2025-10-19 04:54,M-002,240,Electrique,Defaut capteur,Equipe_Electro
+2025-11-04 07:47,M-001,56,Mecanique,Casse piece,Equipe_Meca
+2025-10-29 13:25,M-001,70,Hydraulique,Filtre bouche,Equipe_Hydro
+2025-11-04 13:57,M-004,75,Electrique,Surchauffe composant,Equipe_Electro
+2025-10-17 10:52,M-005,78,Mecanique,Vibration anormale,Equipe_Meca
+2025-11-05 17:19,M-001,83,Mecanique,Vibration anormale,Equipe_Meca
+2025-10-14 14:21,M-004,41,Mecanique,Vibration anormale,Equipe_Meca
+2025-10-31 12:06,M-003,104,Electrique,Surchauffe composant,Equipe_Electro
+2025-11-09 17:24,M-004,49,Logiciel,Crash application,Equipe_IT
+2025-10-28 22:20,M-005,40,Usure,Nettoyage,Equipe_Meca
+2025-10-30 03:18,M-003,89,Mecanique,Vibration anormale,Equipe_Meca
+2025-10-24 11:21,M-004,54,Hydraulique,Fuite huile,Equipe_Hydro
+2025-11-03 16:41,M-001,114,Hydraulique,Filtre bouche,Equipe_Hydro
+2025-10-27 06:03,M-003,55,Hydraulique,Filtre bouche,Equipe_Hydro
+2025-10-19 21:41,M-005,42,Logiciel,Conflit reseau,Equipe_IT
+2025-10-14 11:55,M-002,117,Hydraulique,Filtre bouche,Equipe_Hydro
+2025-11-02 14:29,M-002,38,Logiciel,Crash application,Equipe_IT
+2025-10-18 16:17,M-001,69,Electrique,Surchauffe composant,Equipe_Electro
+2025-10-29 20:52,M-003,214,Electrique,Court-circuit,Equipe_Electro
+2025-10-13 13:46,M-004,57,Logiciel,Erreur OS,Equipe_IT
+2025-10-27 02:02,M-004,190,Electrique,Surchauffe composant,Equipe_Electro
+2025-11-10 08:33,M-004,32,Mecanique,Vibration anormale,Equipe_Meca
+2025-10-20 06:18,M-003,28,Usure,Remplacement courroie,Equipe_Meca
+2025-10-26 23:32,M-004,193,Electrique,Surchauffe composant,Equipe_Electro
+2025-11-07 07:43,M-003,28,Usure,Remplacement courroie,Equipe_Meca
+2025-10-16 16:38,M-005,40,Logiciel,Crash application,Equipe_IT
+2025-10-13 12:59,M-004,86,Mecanique,Casse piece,Equipe_Meca
+2025-10-15 04:46,M-004,73,Mecanique,Vibration anormale,Equipe_Meca
+2025-10-16 09:29,M-003,66,Mecanique,Vibration anormale,Equipe_Meca
+2025-10-16 12:25,M-003,105,Hydraulique,Pression faible,Equipe_Hydro
+2025-11-07 17:42,M-003,158,Electrique,Court-circuit,Equipe_Electro
+2025-11-08 18:34,M-003,214,Electrique,Court-circuit,Equipe_Electro
+2025-10-31 23:00,M-002,17,Logiciel,Crash application,Equipe_IT
+2025-10-31 19:06,M-003,57,Mecanique,Casse piece,Equipe_Meca
+2025-10-28 12:43,M-004,22,Usure,Graissage,Equipe_Meca
+2025-11-02 20:33,M-003,70,Hydraulique,Filtre bouche,Equipe_Hydro
+2025-10-18 03:19,M-003,91,Electrique,Defaut capteur,Equipe_Electro
+2025-10-29 10:34,M-004,45,Mecanique,Bourrage,Equipe_Meca
+2025-10-19 03:53,M-002,140,Electrique,Defaut capteur,Equipe_Electro
+2025-10-30 21:58,M-003,83,Mecanique,Casse piece,Equipe_Meca
+2025-10-18 04:04,M-001,193,Electrique,Defaut capteur,Equipe_Electro
+2025-11-02 14:26,M-002,99,Hydraulique,Pression faible,Equipe_Hydro
+2025-11-09 20:40,M-003,58,Hydraulique,Fuite huile,Equipe_Hydro
+2025-10-28 02:59,M-002,79,Mecanique,Bourrage,Equipe_Meca
+2025-10-20 15:06,M-004,77,Mecanique,Vibration anormale,Equipe_Meca
+2025-11-09 05:41,M-002,71,Mecanique,Bourrage,Equipe_Meca
+2025-11-06 20:13,M-004,58,Mecanique,Bourrage,Equipe_Meca
+2025-11-09 14:54,M-004,33,Logiciel,Erreur OS,Equipe_IT
+2025-10-28 20:02,M-003,78,Electrique,Court-circuit,Equipe_Electro
+2025-10-26 03:50,M-004,52,Hydraulique,Fuite huile,Equipe_Hydro
+2025-10-13 18:36,M-001,174,Electrique,Surchauffe composant,Equipe_Electro
+2025-10-18 20:53,M-004,116,Electrique,Surchauffe composant,Equipe_Electro
+2025-10-22 08:46,M-003,64,Mecanique,Bourrage,Equipe_Meca
+2025-10-24 07:01,M-004,45,Logiciel,Erreur OS,Equipe_IT
+2025-11-08 21:10,M-005,150,Electrique,Court-circuit,Equipe_Electro
+2025-10-16 03:49,M-004,41,Usure,Remplacement courroie,Equipe_Meca
+2025-11-04 15:48,M-004,89,Electrique,Defaut capteur,Equipe_Electro
+2025-10-25 02:21,M-003,46,Logiciel,Crash application,Equipe_IT
+2025-11-05 20:23,M-003,59,Logiciel,Crash application,Equipe_IT
+2025-10-21 13:58,M-002,38,Logiciel,Crash application,Equipe_IT
+2025-10-29 04:18,M-003,28,Logiciel,Erreur OS,Equipe_IT
+2025-10-29 17:05,M-001,42,Usure,Nettoyage,Equipe_Meca
+2025-11-06 16:52,M-005,219,Electrique,Court-circuit,Equipe_Electro
+2025-11-04 13:07,M-003,102,Hydraulique,Pression faible,Equipe_Hydro
+2025-10-15 05:25,M-001,166,Electrique,Defaut capteur,Equipe_Electro
+2025-11-05 07:34,M-002,205,Electrique,Surchauffe composant,Equipe_Electro
+2025-10-15 03:03,M-004,54,Logiciel,Crash application,Equipe_IT
+2025-11-08 03:44,M-002,36,Mecanique,Bourrage,Equipe_Meca
+2025-10-19 00:53,M-001,118,Hydraulique,Pression faible,Equipe_Hydro
+2025-11-06 06:34,M-004,23,Usure,Graissage,Equipe_Meca
+2025-11-02 10:27,M-003,69,Hydraulique,Filtre bouche,Equipe_Hydro
+2025-10-20 20:01,M-005,33,Usure,Graissage,Equipe_Meca
+2025-10-15 12:41,M-004,108,Hydraulique,Pression faible,Equipe_Hydro
+2025-10-17 07:26,M-005,75,Mecanique,Vibration anormale,Equipe_Meca
+2025-11-04 01:29,M-003,114,Electrique,Court-circuit,Equipe_Electro
+2025-11-02 10:09,M-003,47,Logiciel,Erreur OS,Equipe_IT
+2025-10-25 02:18,M-003,55,Mecanique,Vibration anormale,Equipe_Meca
+2025-10-13 16:29,M-004,39,Usure,Remplacement courroie,Equipe_Meca
+2025-10-25 19:27,M-003,59,Logiciel,Conflit reseau,Equipe_IT
+2025-11-07 16:57,M-003,71,Mecanique,Bourrage,Equipe_Meca
+2025-10-15 17:40,M-003,86,Mecanique,Bourrage,Equipe_Meca
+2025-11-07 01:02,M-003,70,Mecanique,Casse piece,Equipe_Meca
+2025-10-23 05:29,M-005,52,Mecanique,Casse piece,Equipe_Meca
+2025-10-30 05:09,M-004,161,Electrique,Surchauffe composant,Equipe_Electro
+2025-10-31 22:55,M-004,122,Electrique,Surchauffe composant,Equipe_Electro
+2025-10-24 12:23,M-002,40,Usure,Nettoyage,Equipe_Meca
+2025-10-30 02:54,M-001,173,Electrique,Surchauffe composant,Equipe_Electro
+2025-11-07 09:12,M-003,37,Logiciel,Erreur OS,Equipe_IT
+2025-11-05 15:29,M-002,27,Usure,Nettoyage,Equipe_Meca
+2025-10-16 12:20,M-003,192,Electrique,Court-circuit,Equipe_Electro
+2025-10-30 20:14,M-004,44,Mecanique,Vibration anormale,Equipe_Meca
+2025-10-17 20:17,M-003,36,Mecanique,Casse piece,Equipe_Meca
+2025-11-04 16:35,M-005,32,Usure,Remplacement courroie,Equipe_Meca
+2025-10-16 13:59,M-004,90,Mecanique,Bourrage,Equipe_Meca
+2025-11-02 20:00,M-001,144,Electrique,Surchauffe composant,Equipe_Electro
+2025-11-06 23:35,M-001,34,Logiciel,Crash application,Equipe_IT
+2025-11-06 10:44,M-003,54,Logiciel,Erreur OS,Equipe_IT
+2025-10-19 07:10,M-003,78,Mecanique,Bourrage,Equipe_Meca
+2025-10-26 23:29,M-005,32,Usure,Nettoyage,Equipe_Meca
+2025-10-23 02:06,M-003,32,Mecanique,Casse piece,Equipe_Meca
+2025-10-17 06:21,M-003,168,Electrique,Defaut capteur,Equipe_Electro
+2025-10-15 01:26,M-004,34,Usure,Remplacement courroie,Equipe_Meca
+2025-10-29 14:21,M-001,226,Electrique,Court-circuit,Equipe_Electro
+2025-10-26 19:20,M-004,91,Electrique,Surchauffe composant,Equipe_Electro
+2025-10-19 00:03,M-005,45,Mecanique,Bourrage,Equipe_Meca
+2025-11-03 19:22,M-002,57,Mecanique,Casse piece,Equipe_Meca
+2025-10-11 22:54,M-004,82,Electrique,Court-circuit,Equipe_Electro
+2025-11-03 01:52,M-002,73,Electrique,Surchauffe composant,Equipe_Electro
+2025-11-08 22:44,M-003,190,Electrique,Surchauffe composant,Equipe_Electro
+2025-10-25 21:46,M-005,164,Electrique,Court-circuit,Equipe_Electro
+2025-10-12 11:36,M-005,61,Electrique,Court-circuit,Equipe_Electro
+2025-10-12 16:02,M-003,73,Mecanique,Vibration anormale,Equipe_Meca
+2025-10-18 21:07,M-001,25,Logiciel,Conflit reseau,Equipe_IT
+2025-11-01 12:17,M-004,41,Mecanique,Bourrage,Equipe_Meca
+2025-10-27 10:49,M-005,75,Mecanique,Casse piece,Equipe_Meca
+2025-10-27 17:16,M-004,25,Usure,Nettoyage,Equipe_Meca
+2025-10-30 10:39,M-005,32,Mecanique,Bourrage,Equipe_Meca
+2025-11-06 21:24,M-003,81,Mecanique,Bourrage,Equipe_Meca
+2025-11-07 10:34,M-003,57,Mecanique,Vibration anormale,Equipe_Meca
+2025-10-25 16:54,M-003,56,Mecanique,Bourrage,Equipe_Meca
+2025-10-31 00:16,M-003,75,Mecanique,Vibration anormale,Equipe_Meca
+2025-10-31 19:01,M-005,94,Electrique,Court-circuit,Equipe_Electro
+2025-10-16 06:55,M-004,18,Logiciel,Conflit reseau,Equipe_IT
+2025-11-04 16:00,M-001,72,Electrique,Court-circuit,Equipe_Electro
+2025-10-19 23:57,M-003,195,Electrique,Defaut capteur,Equipe_Electro
+2025-11-08 00:48,M-001,60,Hydraulique,Filtre bouche,Equipe_Hydro
+2025-11-03 16:40,M-003,99,Electrique,Court-circuit,Equipe_Electro
+2025-10-26 14:44,M-005,82,Mecanique,Vibration anormale,Equipe_Meca
+2025-11-03 09:52,M-001,29,Logiciel,Crash application,Equipe_IT
+2025-10-18 15:01,M-003,63,Electrique,Surchauffe composant,Equipe_Electro
+2025-11-04 12:28,M-003,47,Hydraulique,Pression faible,Equipe_Hydro
+2025-11-05 02:33,M-005,79,Mecanique,Casse piece,Equipe_Meca
+2025-10-14 17:52,M-003,66,Hydraulique,Pression faible,Equipe_Hydro
+2025-11-09 21:58,M-002,17,Logiciel,Crash application,Equipe_IT
+2025-11-01 03:47,M-001,193,Electrique,Court-circuit,Equipe_Electro

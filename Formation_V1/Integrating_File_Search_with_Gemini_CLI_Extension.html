@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activité : Gemini CLI Extension File Search</title>
+    <style>
+        body {
+            font-family: monospace;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border: 1px solid #ccc;
+        }
+        h1, h2, h3 {
+            color: #000;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+        }
+        h1 {
+            font-size: 1.8em;
+        }
+        h2 {
+            font-size: 1.5em;
+        }
+        h3 {
+            font-size: 1.2em;
+        }
+        pre {
+            background-color: #eee;
+            padding: 15px;
+            overflow-x: auto;
+            font-family: "Courier New", Courier, monospace;
+            font-size: 0.95em;
+            border: 1px solid #ddd;
+        }
+        code {
+            font-family: "Courier New", Courier, monospace;
+        }
+        .instruction {
+            margin-bottom: 15px;
+        }
+        .step {
+            margin-bottom: 20px;
+        }
+        ul {
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Activité : Intégration File Search (RAG) avec Gemini CLI</h1>
+
+        <h2>Objectif</h2>
+        <p class="instruction">
+            Maîtriser l'installation et l'utilisation de l'extension Gemini CLI <strong>FileSearchStore-extension</strong> pour exécuter une génération augmentée par récupération (RAG) basée sur des documents locaux.
+        </p>
+
+        <h2>Source Requise</h2>
+        <p>Article : <a href="https://medium.com/@tanaike/integrating-file-search-with-the-gemini-cli-extension-0d9e04ecde7d" target="_blank">Integrating File Search with the Gemini CLI Extension</a></p>
+        <p>Dépôt : <a href="https://github.com/tanaikech/FileSearchStore-extension" target="_blank">https://github.com/tanaikech/FileSearchStore-extension</a></p>
+
+        <h2>Section 1 : Prérequis et Installation</h2>
+        <div class="step">
+            <h3>1.1 Configuration Environnement</h3>
+            <p class="instruction">Assurez-vous que Gemini CLI est installé et que la variable d'environnement <code>GEMINI_API_KEY</code> est définie.</p>
+            <pre><code>export GEMINI_API_KEY="VOTRE_CLE_API"</code></pre>
+            <p class="instruction">(Optionnel) Définir le modèle. Le défaut est <code>gemini-1.5-flash</code>.</p>
+            <pre><code>export GEMINI_MODEL="gemini-1.5-pro"</code></pre>
+
+            <h3>1.2 Installation Extension</h3>
+            <p class="instruction">Installez l'extension depuis le dépôt GitHub.</p>
+            <pre><code>gemini extensions install https://github.com/tanaikech/FileSearchStore-extension</code></pre>
+            
+            <h3>1.3 Vérification Installation</h3>
+            <p class="instruction">Listez les outils disponibles pour confirmer l'installation.</p>
+            <pre><code>/mcp desc</code></pre>
+            <p class="instruction">La sortie doit indiquer le serveur MCP <code>file-search-store-extension</code> comme "Ready" avec 11 outils.</p>
+        </div>
+
+        <h2>Section 2 : Création et Alimentation du Magasin (Store)</h2>
+        <div class="step">
+            <h3>2.1 Création Fichier Local</h3>
+            <p class="instruction">Créez un fichier texte local <code>info_projet.txt</code> avec le contenu suivant :</p>
+            <pre><code>Projet Alpha:
+- Objectif: Développer un assistant IA pour la génération de cours.
+- Technologies: Gemini 1.5 Pro, RAG, Gemini CLI.
+- Chef de projet: [Votre Nom]
+- Statut: En développement.</code></pre>
+
+            <h3>2.2 Création File Search Store</h3>
+            <p class="instruction">Créez un nouveau magasin nommé "cours_ia".</p>
+            <pre><code>Create a new file search store named "cours_ia".</code></pre>
+            <p class="instruction">Notez l'ID du magasin retourné par la commande.</p>
+
+            <h3>2.3 Téléversement (Upload) Fichier</h3>
+            <p class="instruction">Téléversez le fichier local <code>info_projet.txt</code> dans le magasin "cours_ia".</p>
+            <pre><code>Upload ./info_projet.txt to the file search store "cours_ia".</code></pre>
+            <p class="instruction">Alternativement, utilisez la référence <code>@</code> :</p>
+            <pre><code>Upload @info_projet.txt to the file search store "cours_ia".</code></pre>
+        </div>
+
+        <h2>Section 3 : Exécution RAG et Vérification</h2>
+        <div class="step">
+            <h3>3.1 Interrogation sans RAG</h3>
+            <p class="instruction">Posez une question sur le contenu du fichier sans spécifier de magasin. Le modèle ne doit pas connaître la réponse.</p>
+            <pre><code>Generate content about "Projet Alpha" using a tool generate_content without the file search stores.</code></pre>
+
+            <h3>3.2 Interrogation avec RAG</h3>
+            <p class="instruction">Posez la même question en utilisant le magasin "cours_ia" pour contextualiser la génération.</p>
+            <pre><code>Generate content about "Projet Alpha" using a tool generate_content with the file search store "cours_ia".</code></pre>
+
+            <h3>3.3 Analyse</h3>
+            <p class="instruction">Comparez les sorties. La seconde réponse doit être factuelle et basée sur le contenu de <code>info_projet.txt</code>, incluant [Votre Nom].</p>
+        </div>
+
+        <h2>Section 4 : Gestion et Nettoyage</h2>
+        <div class="step">
+            <h3>4.1 Listage des Documents</h3>
+            <p class="instruction">Affichez les documents présents dans le magasin "cours_ia".</p>
+            <pre><code>Show the list of documents in "cours_ia".</code></pre>
+            <p class="instruction">Notez l'ID du document téléversé (<code>info_projet.txt</code>).</p>
+
+            <h3>4.2 Suppression Document</h3>
+            <p class="instruction">Supprimez le document en utilisant son ID (remplacez <code>[DOCUMENT_ID]</code>).</p>
+            <pre><code>Delete the document [DOCUMENT_ID].</code></pre>
+
+            <h3>4.3 Suppression File Search Store</h3>
+            <p class="instruction">Listez les magasins pour confirmer la présence de "cours_ia".</p>
+            <pre><code>Show the list of file search stores.</code></pre>
+            <p class="instruction">Supprimez le magasin "cours_ia".</p>
+            <pre><code>Delete the file search store "cours_ia".</code></pre>
+            
+            <h3>4.4 Vérification Finale</h3>
+            <p class="instruction">Listez à nouveau les magasins. "cours_ia" ne doit plus apparaître.</p>
+            <pre><code>Show the list of file search stores.</code></pre>
+        </div>
+    </div>
+</body>
+</html>

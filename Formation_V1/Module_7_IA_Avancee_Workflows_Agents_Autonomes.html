@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 7 : IA Avancée (Agents)</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; padding: 20px; max-width: 900px; margin: auto; background-color: #f9f9f9; }
+        h1, h2, h3 { color: #333; border-bottom: 2px solid #6264A7; padding-bottom: 5px; }
+        .module-header { background-color: #6264A7; color: white; padding: 20px; border-radius: 8px; text-align: center; }
+        .content-box { background-color: white; padding: 20px; border-radius: 8px; margin-top: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .prompt-container { position: relative; background-color: #2d2d2d; color: #f1f1f1; padding: 20px; border-radius: 8px; margin: 20px 0; font-family: "Courier New", Courier, monospace; }
+        .prompt-container pre { white-space: pre-wrap; word-wrap: break-word; margin: 0; padding-bottom: 40px; }
+        .prompt-container button {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background-color: #0078D4;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+            transition: background-color 0.2s;
+        }
+        .prompt-container button:hover { background-color: #005a9e; }
+        .ai-links { margin-top: 10px; padding: 10px; background-color: #eef; border-radius: 5px; }
+        .ai-links a { margin: 0 10px; text-decoration: none; font-weight: bold; color: #0056b3; }
+        .activity { border-left: 5px solid #ffc107; padding-left: 15px; background-color: #fff9e6; margin-top: 15px; }
+        .schema { background-color: #f4f4f4; padding: 15px; border-radius: 5px; text-align: center; font-family: "Courier New", Courier; }
+        ul, ol { padding-left: 20px; }
+    </style>
+</head>
+<body>
+    <div class="module-header">
+        <img src="logo_uimm_placeholder.jpg" alt="Logo UIMM Pôle Formation Centre-Val de Loire" style="height: 120px; width: auto; margin-bottom: 15px;">
+        <h1>Jour 2 : Module 7 (14h00 - 16h00)</h1>
+        <h2>L'IA Avancée – Workflows et Agents Autonomes</h2>
+           <h2>Pôle Formation UIMM-CVDL (S. JAUBERT)</h2>
+    </div>
+
+    <div class="content-box">
+        <h3>Objectifs Pédagogiques</h3>
+        <ul>
+            <li>Différencier l'agence conversationnelle (un chat) de l'agence par workflow (un agent qui agit).</li>
+            <li>Comprendre le RAG (Retrieval-Augmented Generation) comme un outil fondamental d'intégration.</li>
+            <li>Appréhender comment l'IA peut utiliser des "Outils" (Tools) pour interagir avec des systèmes externes (API, Web).</li>
+        </ul>
+    </div>
+
+    <div class="content-box">
+        <h2>Contenu du Cours</h2>
+        
+        <h3>1. Le RAG (Retrieval-Augmented Generation)</h3>
+        <p>Le RAG est la technique qui permet à une IA de répondre à des questions en se basant sur une base de connaissances privée (vos documents).</p>
+        <div class="schema">
+            <strong>Processus RAG :</strong><br>
+            Utilisateur pose une question ➔ L'IA cherche la réponse dans la base de documents (PDFs, etc.) ➔ L'IA utilise les extraits trouvés comme "Contexte" ➔ L'IA génère la réponse.
+        </div>
+        <p>C'est la solution la plus rapide pour déployer une IA qui connaît vos données internes sans avoir à la "fine-tuner" (ce qui est long et coûteux).</p>
+
+        <h3>2. Agence Conversationnelle vs. Workflow</h3>
+        <ul>
+            <li><strong>Agence Conversationnelle (Le "Chat") :</strong> L'IA est très générale, elle peut parler de tout, mais elle ne peut *rien faire*. Elle est forte en généralité, mais faible en force de frappe.</li>
+            <li><strong>Agence par Workflow (L'"Agent") :</strong> L'IA est spécialisée dans une tâche complexe (ex: "gérer le marketing"). Elle est moins générale, mais très forte dans son domaine. Elle décompose un gros objectif en petites tâches.</li>
+        </ul>
+
+        <h3>3. Les "Outils" (Tools) : Donner des mains à l'IA</h3>
+        <p>La vraie puissance des agents vient de leur capacité à utiliser des "Outils". Un outil est une fonction que l'IA peut appeler.</p>
+        <p><strong>Exemple de cycle (ReAct) :</strong></p>
+        <ol>
+            <li><strong>Pensée (Thought) :</strong> L'IA pense : "L'utilisateur veut connaître la météo à Paris. Je dois utiliser l'outil 'get_weather'".</li>
+            <li><strong>Action (Act) :</strong> L'IA appelle l'outil : `get_weather(city="Paris")`.</li>
+            <li><strong>Observation (Observe) :</strong> Le système exécute l'outil, qui renvoie : "15°C, Pluvieux".</li>
+            <li><strong>Pensée (Thought) :</strong> L'IA pense : "J'ai la réponse."</li>
+            <li><strong>Réponse :</strong> L'IA dit à l'utilisateur : "Il fait 15°C et il pleut à Paris."</li>
+        </ol>
+    </div>
+
+    <div class="content-box activity">
+        <h2>Activités Pratiques (1h30)</h2>
+        
+        <h3>Activité 1 : Démonstration RAG (15 min)</h3>
+        <p><strong>Objectif :</strong> Voir la différence entre une IA "nue" et une IA "augmentée".</p>
+        <p><strong>Consigne :</strong> Le formateur charge le PDF `guide_ia_enseignants_1.pdf` (ou un autre document pertinent) dans un outil RAG (ex: Claude, ou un ChatGPT custom).</p>
+        <ol>
+            <li><strong>Prompt 1 (IA Nue) :</strong>
+                <div class="prompt-container">
+                    <pre id="prompt-m7-1">Qu'est-ce que le 'mega-prompt ultime' selon le guide de Philippe Piekoszewski-Cuq ?</pre>
+                    <button onclick="copyToClipboard('prompt-m7-1')">Copier le Prompt</button>
+                </div>
+                <em>(L'IA nue répondra qu'elle ne connaît pas ce guide.)</em>
+            </li>
+            <li><strong>Prompt 2 (IA Augmentée - RAG) :</strong>
+                <div class="prompt-container">
+                    <pre id="prompt-m7-2">Qu'est-ce que le 'mega-prompt ultime' selon le guide chargé en contexte ?</pre>
+                    <button onclick="copyToClipboard('prompt-m7-2')">Copier le Prompt</button>
+                </div>
+                <em>(L'IA (RAG) va trouver la réponse et citer le document.)</em>
+            </li>
+        </ol>
+
+        <h3>Activité 2 : Conception d'un Agent (45 min)</h3>
+        <p><strong>Objectif :</strong> Penser en termes de "workflow" et d'"outils".</p>
+        <p><strong>Consigne :</strong> En groupes, concevez sur papier (ou tableau blanc) un "Agent IA" pour une tâche industrielle. Définissez son objectif et les "Outils" (fonctions) dont il aurait besoin.</p>
+        
+        <h4>Exemple 1 (Agent de Maintenance Prédictive) :</h4>
+        <ul>
+            <li><strong>Objectif :</strong> Prévenir les pannes sur la Ligne 4.</li>
+            <li><strong>Outils requis :</strong>
+                <ol>
+                    <li>`read_sensor_logs(ligne_id)` : Lit les données des capteurs.</li>
+                    <li>`analyze_vibration(data)` : Analyse les anomalies (tâche LLM).</li>
+                    <li>`create_incident_ticket(ligne_id, description)` : Ouvre un ticket dans la GMAO.</li>
+                    <li>`send_email(destinataire, sujet, corps)` : Prévient le chef d'équipe.</li>
+                </ol>
+            </li>
+        </ul>
+
+        <h4>Exemple 2 (Agent d'Optimisation de Stock) :</h4>
+        <ul>
+            <li><strong>Objectif :</strong> Éviter les ruptures de stock sur les matières premières.</li>
+            <li><strong>Outils requis :</strong>
+                <ol>
+                    <li>`get_stock_level(item_sku)` : Vérifie le stock actuel (API de l'ERP).</li>
+                    <li>`get_forecast(item_sku)` : Vérifie les prévisions de vente (API BI).</li>
+                    <li>`calculate_order_need(stock, forecast)` : Calcule le besoin (tâche LLM).</li>
+                    <li>`create_purchase_order(supplier_id, item_sku, quantity)` : Crée un bon de commande.</li>
+                </ol>
+            </li>
+        </ul>
+
+        <h3>Activité 3 : Restitution (30 min)</h3>
+        <p>Chaque groupe présente son agent, ses objectifs et les outils qu'il a imaginés.</p>
+    </div>
+    
+    <script>
+        function copyToClipboard(elementId) {
+            var preElement = document.getElementById(elementId);
+            var text = preElement.innerText;
+            navigator.clipboard.writeText(text).then(function() {
+                var button = preElement.nextElementSibling;
+                if(button && button.tagName === 'BUTTON') {
+                    var originalText = button.innerText;
+                    button.innerText = "Copié !";
+                    setTimeout(function() {
+                        button.innerText = originalText;
+                    }, 2000);
+                }
+            }, function(err) {
+                console.error('Erreur lors de la copie : ', err);
+            });
+        }
+    </script>
+</body>
+</html>

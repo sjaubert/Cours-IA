@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 1 : Introduction & Enjeux</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; padding: 20px; max-width: 900px; margin: auto; background-color: #f9f9f9; }
+        h1, h2, h3 { color: #333; border-bottom: 2px solid #0056b3; padding-bottom: 5px; }
+        .module-header { background-color: #0056b3; color: white; padding: 20px; border-radius: 8px; text-align: center; }
+        .content-box { background-color: white; padding: 20px; border-radius: 8px; margin-top: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .prompt-container { position: relative; background-color: #2d2d2d; color: #f1f1f1; padding: 20px; border-radius: 8px; margin: 20px 0; font-family: "Courier New", Courier, monospace; }
+        .prompt-container pre { white-space: pre-wrap; word-wrap: break-word; margin: 0; padding-bottom: 40px; /* Espace pour le bouton */ }
+        .prompt-container button {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background-color: #0078D4;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+            transition: background-color 0.2s;
+        }
+        .prompt-container button:hover { background-color: #005a9e; }
+        .ai-links { margin-top: 10px; padding: 10px; background-color: #eef; border-radius: 5px; }
+        .ai-links a { margin: 0 10px; text-decoration: none; font-weight: bold; color: #0056b3; }
+        .activity { border-left: 5px solid #ffc107; padding-left: 15px; background-color: #fff9e6; margin-top: 15px; }
+        ul, ol { padding-left: 20px; }
+    </style>
+</head>
+<body>
+    <div class="module-header">
+        <img src="logo_uimm_placeholder.jpg" alt="Logo UIMM Pôle Formation Centre-Val de Loire" style="height: 120px; width: auto; margin-bottom: 15px;">
+        <h1>Jour 1 : Module 1 (09h00 - 10h30)</h1>
+        <h2>Introduction à l'IA Générative et Enjeux Industriels</h2>
+         <h2>Pôle Formation UIMM-CVDL (S. JAUBERT)</h2>
+    </div>
+
+    <div class="content-box">
+        <h3>Objectifs Pédagogiques</h3>
+        <ul>
+            <li>Démystifier l'IA : Qu'est-ce qu'une IA générative (GenAI) ?</li>
+            <li>Comprendre le "moteur" : Le fonctionnement intuitif des LLM (Large Language Models) – des modèles probabilistes qui prédisent le mot suivant.</li>
+            <li>Distinguer les approches : IA symbolique (systèmes experts classiques) vs IA connexionniste (GenAI, réseaux de neurones).</li>
+            <li>Identifier l'impact industriel : L'IA comme nouveau paradigme de travail pour améliorer la performance, automatiser les tâches et optimiser les produits.</li>
+        </ul>
+    </div>
+
+    <div class="content-box">
+        <h2>Contenu du Cours</h2>
+        
+        <h3>1. Démystification : L'IA n'est pas magique</h3>
+        <p>L'IA générative, comme ChatGPT, Gemini ou Mistral, n'est pas une "intelligence" au sens humain. Elle ne "comprend" pas le sens de ce qu'elle écrit.</p>
+        <p>C'est un <strong>modèle probabiliste</strong> (un LLM) entraîné sur des milliards de textes. Son unique objectif est de calculer et de prédire le mot suivant le plus probable dans une séquence, basé sur le contexte que vous lui donnez.</p>
+        
+        <h3>2. L'IA comme nouveau paradigme de travail</h3>
+        <p>Pour l'industrie, l'IA générative n'est pas un simple gadget. Elle permet trois avancées majeures :</p>
+        <ul>
+            <li><strong>Améliorer la performance :</strong> Aider les salariés à produire des résultats de meilleure qualité en moins de temps.</li>
+            <li><strong>Automatiser les tâches :</strong> Libérer les humains des tâches répétitives (rédaction de rapports, synthèses) pour qu'ils se concentrent sur la stratégie.</li>
+            <li><strong>Optimiser les produits :</strong> Alimenter vos produits et services avec des interfaces plus pertinentes et réactives.</li>
+        </ul>
+        
+        <h3>3. Les deux familles d'IA</h3>
+        <p>Pour comprendre où se situe la GenAI, il faut voir les deux grandes approches :</p>
+        <ul>
+            <li><strong>Approche Symbolique (L'IA "classique") :</strong> Basée sur des règles logiques ("SI... ALORS..."). C'est l'IA des "systèmes experts". Elle est déterministe mais rigide.</li>
+            <li><strong>Approche Connexionniste (La GenAI) :</strong> Basée sur les réseaux de neurones, imitant (de très loin) le cerveau. Elle apprend par l'exemple (Machine Learning / Deep Learning). Elle est créative mais non déterministe (elle peut "halluciner").</li>
+        </ul>
+    </div>
+
+    <div class="content-box activity">
+        <h2>Activités Pratiques (45 min)</h2>
+        
+        <h3>Activité 1 : Icebreaker (15 min)</h3>
+        <p><strong>Objectif :</strong> Évaluer le niveau de familiarité du groupe avec l'IA.</p>
+        <p><strong>Consigne :</strong> Tour de table. "Quelle a été votre première, ou votre plus surprenante, interaction avec une IA générative (ChatGPT, Midjourney, etc.) ? Qu'en avez-vous pensé ?"</p>
+
+        <h3>Activité 2 : Démonstration "Modèles en Duel" (30 min)</h3>
+        <p><strong>Objectif :</strong> Comprendre que tous les modèles n'ont pas les mêmes forces ni le même "style".</p>
+        <p><strong>Consigne :</strong> Le formateur utilise le prompt ci-dessous simultanément sur trois modèles différents et projette les résultats. Les participants analysent les différences (ton, précision, format).</p>
+        
+        <div class="prompt-container">
+            <pre id="prompt-m1-1">Rédige un court e-mail (moins de 100 mots) destiné à un client industriel pour l'informer d'un retard de livraison de 3 jours sur la commande 89-B, dû à une rupture d'approvisionnement sur une matière première (acier S235). Reste professionnel et propose une solution.</pre>
+            <button onclick="copyToClipboard('prompt-m1-1')">Copier le Prompt</button>
+        </div>
+        
+        <div class="ai-links">
+            <strong>Tester ce prompt sur :</strong>
+            <a href="https://gemini.google.com/" target="_blank">Gemini</a> |
+            <a href="https://chatgpt.com/" target="_blank">ChatGPT</a> |
+            <a href="https://chat.mistral.ai/" target="_blank">Mistral (Le Chat)</a>
+        </div>
+    </div>
+    
+    <script>
+        function copyToClipboard(elementId) {
+            var preElement = document.getElementById(elementId);
+            var text = preElement.innerText;
+            navigator.clipboard.writeText(text).then(function() {
+                var button = preElement.nextElementSibling;
+                if(button && button.tagName === 'BUTTON') {
+                    var originalText = button.innerText;
+                    button.innerText = "Copié !";
+                    setTimeout(function() {
+                        button.innerText = originalText;
+                    }, 2000);
+                }
+            }, function(err) {
+                console.error('Erreur lors de la copie : ', err);
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 6 : Stratégie d'Entreprise</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; padding: 20px; max-width: 900px; margin: auto; background-color: #f9f9f9; }
+        h1, h2, h3 { color: #333; border-bottom: 2px solid #0078D4; padding-bottom: 5px; }
+        .module-header { background-color: #0078D4; color: white; padding: 20px; border-radius: 8px; text-align: center; }
+        .content-box { background-color: white; padding: 20px; border-radius: 8px; margin-top: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .lesson-list li { background-color: #f4f4f4; padding: 10px; margin-bottom: 10px; border-radius: 5px; }
+        .definitions { margin-top: 20px; }
+        ul, ol { padding-left: 20px; }
+    </style>
+</head>
+<body>
+    <div class="module-header">
+        <img src="logo_uimm_placeholder.jpg" alt="Logo UIMM Pôle Formation Centre-Val de Loire" style="height: 120px; width: auto; margin-bottom: 15px;">
+        <h1>Jour 2 : Module 6 (11h00 - 12h30)</h1>
+        <h2>Stratégie d'Entreprise – Les 7 Leçons de l'Adoption</h2>
+           <h2>Pôle Formation UIMM-CVDL (S. JAUBERT)</h2>
+    </div>
+
+    <div class="content-box">
+        <h3>Objectifs Pédagogiques</h3>
+        <ul>
+            <li>Comprendre comment les entreprises leaders (citées dans le rapport OpenAI) déploient l'IA à grande échelle.</li>
+            <li>Distinguer les deux principales méthodes de personnalisation : l'intégration (RAG) et le "fine-tuning".</li>
+        </ul>
+    </div>
+
+    <div class="content-box">
+        <h2>Contenu du Cours</h2>
+        
+        <h3>Les 7 Leçons des Entreprises Pionnières (basé sur le rapport OpenAI)</h3>
+        <p>Le déploiement réussi de l'IA n'est pas qu'une question technique, c'est une question de stratégie. Voici comment les entreprises leaders s'y prennent :</p>
+        
+        <ol class="lesson-list">
+            <li><strong>Commencer par les Évaluations (Evals) :</strong> Ne pas déployer à l'aveugle. Mesurer systématiquement la performance du modèle sur vos cas d'usage spécifiques (Cas Morgan Stanley).</li>
+            <li><strong>Intégrer l'IA aux Produits :</strong> Utiliser l'IA pour créer de nouvelles expériences client, pas seulement comme un outil interne (Cas Indeed).</li>
+            <li><strong>Investir Tôt :</strong> L'adoption de l'IA crée un avantage concurrentiel cumulatif. Plus tôt vous commencez, plus grand sera l'écart (Cas Klarna).</li>
+            <li><strong>Personnaliser (Fine-tune) :</strong> Adapter les modèles aux spécificités de votre métier et de vos données (Cas Lowe's).</li>
+            <li><strong>Mettre l'IA dans les Mains des Experts Métiers :</strong> Les meilleurs cas d'usage sont souvent trouvés par les employés qui connaissent le terrain, pas seulement par l'IT (Cas BBVA).</li>
+            <li><strong>Débloquer les Développeurs :</strong> Utiliser l'IA pour automatiser le cycle de vie du développement logiciel (CI/CD, tests, documentation) accélère l'innovation (Cas Mercado Libre).</li>
+            <li><strong>Viser l'Automatisation Audacieuse :</strong> Ne vous contentez pas de petites tâches. Identifiez des processus entiers (ex: le support client) et visez leur automatisation (Cas OpenAI).</li>
+        </ol>
+
+        <div class="definitions">
+            <h3>Deux façons de personnaliser l'IA : RAG vs Fine-Tuning</h3>
+            <p>Pour que l'IA connaisse VOS données, il existe deux méthodes :</p>
+            <ul>
+                <li><strong>RAG (Retrieval-Augmented Generation) :</strong> C'est la méthode la plus simple et la plus courante. Vous donnez à l'IA un accès "en lecture seule" à vos documents. L'IA cherche la réponse dans vos fichiers (PDF, base de données...) avant de répondre. C'est le "Contexte" du prompt.</li>
+                <li><strong>Fine-Tuning (Ajustement fin) :</strong> C'est plus complexe. Vous prenez un modèle de base (ex: Mistral) et vous le "ré-entraînez" sur vos propres exemples. Le modèle change *intrinsèquement* pour adopter votre ton, votre style, et vos connaissances.</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

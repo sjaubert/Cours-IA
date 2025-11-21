@@ -1,0 +1,63 @@
+{
+  "general": {
+    "theme": "GitHub",
+    "checkpointing": {
+      "enabled": true
+    },
+    "enablePromptCompletion": true,
+    "preferredEditor": "vscode"
+  },
+  "extensions": {
+    "workspacesWithMigrationNudge": [
+      "C:\\Users\\steph"
+    ],
+    "ide": {
+      "hasSeenNudge": true,
+      "enabled": true
+    },
+    "mcpServers": {
+      "sequential-thinking": {
+        "command": "npx",
+        "args": [
+          "-y",
+          "@modelcontextprotocol/server-sequential-thinking"
+        ]
+      },
+      "playwright": {
+        "command": "npx",
+        "args": [
+          "@playwright/mcp@latest"
+        ]
+      },
+      "blender": {
+        "command": "uvx",
+        "args": [
+          "blender-mcp"
+        ]
+      },
+      "github": {
+        "httpUrl": "https://api.githubcopilot.com/mcp/",
+        "headers": {
+          "Authorization": "${GITHUB_GEMINI_CLI_PAT}"
+        },
+        "timeout": 5000
+      },
+      "HeyGen": {
+        "command": "uvx",
+        "args": [
+          "heygen-mcp"
+        ],
+        "env": {
+          "HEYGEN_API_KEY": "M2E3M2IyYjgzNTVlNGYzNzlkNGM5NzRjOGUwNDkwNjEtMTc1MTY5OTI0OA=="
+        }
+      }
+      /* L'entrée "tools-for-mcp-server-extension" est omise ici */
+    }
+  },
+  "security": {
+    "auth": {
+      "selectedType": "gemini-api-key"
+    }
+  },
+  "ui": {}
+}
