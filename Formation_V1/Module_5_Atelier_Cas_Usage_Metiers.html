@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 5 : Cas d'Usage Métiers</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; padding: 20px; max-width: 900px; margin: auto; background-color: #f9f9f9; }
+        h1, h2, h3 { color: #333; border-bottom: 2px solid #0078D4; padding-bottom: 5px; }
+        .module-header { background-color: #0078D4; color: white; padding: 20px; border-radius: 8px; text-align: center; }
+        .content-box { background-color: white; padding: 20px; border-radius: 8px; margin-top: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .prompt-container { position: relative; background-color: #2d2d2d; color: #f1f1f1; padding: 20px; border-radius: 8px; margin: 20px 0; font-family: "Courier New", Courier, monospace; }
+        .prompt-container pre { white-space: pre-wrap; word-wrap: break-word; margin: 0; padding-bottom: 40px; }
+        .prompt-container button {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background-color: #0078D4;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+            transition: background-color 0.2s;
+        }
+        .prompt-container button:hover { background-color: #005a9e; }
+        .ai-links { margin-top: 10px; padding: 10px; background-color: #eef; border-radius: 5px; }
+        .ai-links a { margin: 0 10px; text-decoration: none; font-weight: bold; color: #0056b3; }
+        .activity { border-left: 5px solid #ffc107; padding-left: 15px; background-color: #fff9e6; margin-top: 15px; }
+        .atelier-split { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .atelier { background-color: #f0f4f8; padding: 15px; border-radius: 8px; }
+        ul { padding-left: 20px; }
+    </style>
+</head>
+<body>
+    <div class="module-header">
+        <img src="logo_uimm_placeholder.jpg" alt="Logo UIMM Pôle Formation Centre-Val de Loire" style="height: 120px; width: auto; margin-bottom: 15px;">
+        <h1>Jour 2 : Module 5 (09h00 - 10h45)</h1>
+        <h2>Atelier Cas d'Usage Métiers (Groupes parallèles)</h2>
+           <h2>Pôle Formation UIMM-CVDL (S. JAUBERT)</h2>
+    </div>
+
+    <div class="content-box">
+        <h3>Objectif Pédagogique</h3>
+        <ul>
+            <li>Mettre en pratique les techniques de prompting (RTCCF, CoT, Itératif) sur des cas d'usages réels et spécifiques à l'industrie.</li>
+        </ul>
+    </div>
+
+    <div class="content-box activity">
+        <h2>Déroulé de l'Activité</h2>
+        <p>Les participants se divisent en deux groupes en fonction de leur profil (Ingénieurs/Techniques ou Managers/Cadres). Chaque groupe travaille sur une série de prompts dédiés à leurs métiers.</p>
+
+        <div class="ai-links">
+            <strong>Outils recommandés :</strong>
+            <a href="https://gemini.google.com/" target="_blank">Gemini</a> |
+            <a href="https://chatgpt.com/" target="_blank">ChatGPT</a> |
+            <a href="https://chat.mistral.ai/" target="_blank">Mistral (Le Chat)</a>
+        </div>
+
+        <div class="atelier-split">
+            <div class="atelier">
+                <h3>Atelier A : Ingénieurs / Étudiants (Technique)</h3>
+                
+                <h4>1. Génération de Code (Boilerplate)</h4>
+                <div class="prompt-container">
+                    <pre id="prompt-m5-a1">Tu es un développeur Python senior. Génère un script Python "boilerplate" qui utilise la librairie 'pandas' pour :
+1. Lire un fichier CSV nommé "data.csv".
+2. Nettoyer les lignes avec des valeurs manquantes.
+3. Calculer la moyenne de la colonne "Valeur".
+4. Sauvegarder le résultat dans un nouveau CSV nommé "resultat.csv".
+Ajoute des commentaires clairs pour chaque étape.</pre>
+                    <button onclick="copyToClipboard('prompt-m5-a1')">Copier le Prompt</button>
+                </div>
+
+                <h4>2. Explication de Code (Legacy)</h4>
+                <div class="prompt-container">
+                    <pre id="prompt-m5-a2">Explique ce que fait la fonction C++ suivante, ligne par ligne, comme tu le ferais à un développeur junior.
+
+(Collez ici votre extrait de code complexe)</pre>
+                    <button onclick="copyToClipboard('prompt-m5-a2')">Copier le Prompt</button>
+                </div>
+
+                <h4>3. Analyse de Données (Logs)</h4>
+                <div class="prompt-container">
+                    <pre id="prompt-m5-a3">Voici un extrait de logs serveur. Identifie les erreurs (code 500 ou 404), regroupe-les par type, et fournis une synthèse des 3 erreurs les plus fréquentes.
+
+(Collez ici un extrait de vos logs)</pre>
+                    <button onclick="copyToClipboard('prompt-m5-a3')">Copier le Prompt</button>
+                </div>
+
+                <h4>4. Rédaction de Documentation Technique</h4>
+                <div class="prompt-container">
+                    <pre id="prompt-m5-a4">Rédige la documentation technique pour la fonction Python ci-dessous. Suis le format "docstring" de Google (Google Style Python Docstrings).
+
+def calculate_efficiency(input_power, output_power):
+    if input_power <= 0:
+        return 0
+    return (output_power / input_power) * 100</pre>
+                    <button onclick="copyToClipboard('prompt-m5-a4')">Copier le Prompt</button>
+                </div>
+            </div>
+
+            <div class="atelier">
+                <h3>Atelier B : Managers / Cadres (Pilotage)</h3>
+                
+                <h4>1. Gestion de Projet (Brainstorming)</h4>
+                <div class="prompt-container">
+                    <pre id="prompt-m5-b1">Tu es un chef de projet senior (PMP). Nous lançons un projet de migration de notre ERP vers SAP S/4HANA.
+Utilise la méthode du Chain-of-Thought :
+1. Identifie les 5 risques majeurs (techniques et humains) de ce projet.
+2. Pour chaque risque, propose une stratégie de mitigation.
+3. Rédige un résumé de 3 phrases pour le comité de pilotage.</pre>
+                    <button onclick="copyToClipboard('prompt-m5-b1')">Copier le Prompt</button>
+                </div>
+
+                <h4>2. Compte Rendu de Réunion (Synthèse)</h4>
+                <div class="prompt-container">
+                    <pre id="prompt-m5-b2">Tu es un assistant de direction. Voici mes notes prises pendant la réunion de projet "X1000". Rédige un compte-rendu (CR) professionnel clair et concis.
+
+# Notes
+- Paul : OK pour budget, mais besoin devis avant vendredi.
+- Marie : Problème sur le design. Le client n'aime pas le bleu. Propose rouge.
+- Jean : Tests techniques OK, sauf module T-105 (cf. panne ligne 2).
+- Prochaine étape : Marie valide la couleur avec client. Jean relance les tests. Paul attend le devis.
+
+# FORMAT ATTENDU
+- Date : [Date du jour]
+- Participants : Paul, Marie, Jean
+- Ordre du jour : Suivi Projet X100
+- Décisions prises : [Liste à puces]
+- Actions à faire (Qui, Quoi, Quand) : [Tableau 3 colonnes]</pre>
+                    <button onclick="copyToClipboard('prompt-m5-b2')">Copier le Prompt</button>
+                </div>
+
+                <h4>3. RH (Rédaction Fiche de Poste)</h4>
+                <div class="prompt-container">
+                    <pre id="prompt-m5-b3">Rédige une fiche de poste pour un "Ingénieur Maintenance Prédictive" dans notre usine (secteur automobile).
+Doit maîtriser : Python, maintenance industrielle, et des notions de Machine Learning.
+Doit avoir 5 ans d'expérience.
+Mets en avant la culture d'innovation de l'entreprise.</pre>
+                    <button onclick="copyToClipboard('prompt-m5-b3')">Copier le Prompt</button>
+                </div>
+
+                <h4>4. Marketing (Formule AIDA)</h4>
+                <div class="prompt-container">
+                    <pre id="prompt-m5-b4">Rédige un court texte (100 mots) pour la page d'accueil de notre site web, vantant notre nouvelle pompe X1000 (économe en énergie).
+Utilise la formule AIDA (Attention, Intérêt, Désir, Action).</pre>
+                    <button onclick="copyToClipboard('prompt-m5-b4')">Copier le Prompt</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function copyToClipboard(elementId) {
+            var preElement = document.getElementById(elementId);
+            var text = preElement.innerText;
+            navigator.clipboard.writeText(text).then(function() {
+                var button = preElement.nextElementSibling;
+                if(button && button.tagName === 'BUTTON') {
+                    var originalText = button.innerText;
+                    button.innerText = "Copié !";
+                    setTimeout(function() {
+                        button.innerText = originalText;
+                    }, 2000);
+                }
+            }, function(err) {
+                console.error('Erreur lors de la copie : ', err);
+            });
+        }
+    </script>
+</body>
+</html>

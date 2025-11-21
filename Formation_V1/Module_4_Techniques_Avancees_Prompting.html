@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 4 : Prompting Avancé</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; padding: 20px; max-width: 900px; margin: auto; background-color: #f9f9f9; }
+        h1, h2, h3 { color: #333; border-bottom: 2px solid #107C10; padding-bottom: 5px; }
+        .module-header { background-color: #107C10; color: white; padding: 20px; border-radius: 8px; text-align: center; }
+        .content-box { background-color: white; padding: 20px; border-radius: 8px; margin-top: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .prompt-container { position: relative; background-color: #2d2d2d; color: #f1f1f1; padding: 20px; border-radius: 8px; margin: 20px 0; font-family: "Courier New", Courier, monospace; }
+        .prompt-container pre { white-space: pre-wrap; word-wrap: break-word; margin: 0; padding-bottom: 40px; }
+        .prompt-container button {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background-color: #0078D4;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+            transition: background-color 0.2s;
+        }
+        .prompt-container button:hover { background-color: #005a9e; }
+        .ai-links { margin-top: 10px; padding: 10px; background-color: #eef; border-radius: 5px; }
+        .ai-links a { margin: 0 10px; text-decoration: none; font-weight: bold; color: #0056b3; }
+        .activity { border-left: 5px solid #ffc107; padding-left: 15px; background-color: #fff9e6; margin-top: 15px; }
+        ul { padding-left: 20px; }
+    </style>
+</head>
+<body>
+    <div class="module-header">
+        <img src="logo_uimm_placeholder.jpg" alt="Logo UIMM Pôle Formation Centre-Val de Loire" style="height: 120px; width: auto; margin-bottom: 15px;">
+        <h1>Jour 1 : Module 4 (15h45 - 17h15)</h1>
+        <h2>Techniques Avancées de Prompting</h2>
+           <h2>Pôle Formation UIMM-CVDL (S. JAUBERT)</h2>
+    </div>
+
+    <div class="content-box">
+        <h3>Objectifs Pédagogiques</h3>
+        <ul>
+            <li>Appliquer la "Chaîne de Pensée" (Chain-of-Thought - CoT) pour forcer l'IA à raisonner.</li>
+            <li>Utiliser les "Mega-Prompts" pour fournir un contexte riche et obtenir un livrable complet.</li>
+            <li>Maîtriser le "Prompting Itératif" (technique de l'entonnoir) pour affiner une réponse.</li>
+        </ul>
+    </div>
+
+    <div class="content-box">
+        <h2>Contenu du Cours</h2>
+        
+        <h3>1. Chain-of-Thought (CoT) : Forcer l'IA à réfléchir</h3>
+        <p>Les LLM n'ont pas de "monologue intérieur". Si vous lui posez une question complexe, elle vous donnera une réponse intuitive, souvent fausse. Le CoT force l'IA à "penser à voix haute", ce qui améliore considérablement la précision.</p>
+        <p><strong>Mauvais Prompt (Zéro-shot) :</strong> "Jean a 5 pommes, il donne 2 pommes à Marie. Marie a maintenant 3 pommes. Combien de pommes ont-ils au total ?" <em>(L'IA risque de répondre 6)</em></p>
+        <p><strong>Bon Prompt (CoT) :</strong> "Jean a 5 pommes, il donne 2 pommes à Marie. Marie a maintenant 3 pommes. Combien de pommes ont-ils au total ? <strong>Réfléchis étape par étape :</strong>"</p>
+        <p>L'IA va alors décomposer : 1. Jean commence avec 5. 2. Jean donne 2, il lui en reste 3. 3. Marie a maintenant 3. 4. Total = 3 (Jean) + 3 (Marie) = 6. <em>(L'IA trouve le bon résultat en raisonnant).</em></p>
+
+        <h3>2. Mega-Prompts : L'IA en mode "Projet"</h3>
+        <p>Un Mega-Prompt consiste à fournir à l'IA un contexte très dense (notes de réunion, cahier des charges, document de référence) et de lui demander un livrable complet. C'est idéal pour la génération de rapports, de synthèses ou de plans détaillés.</p>
+        
+        <h3>3. Prompting Itératif : L'art de l'Entonnoir</h3>
+        <p>Votre première réponse est rarement parfaite. Le prompting itératif consiste à dialoguer avec l'IA pour affiner le résultat.</p>
+        <ul>
+            <li><strong>Tour 1 :</strong> "Donne-moi 10 idées de slogans pour notre pompe X1000."</li>
+            <li><strong>Tour 2 :</strong> "J'aime l'idée 3. Propose 5 variations en mettant l'accent sur l'économie d'énergie."</li>
+            <li><strong>Tour 3 :</strong> "Rends la version 2 plus percutante et moins formelle."</li>
+        </ul>
+    </div>
+
+    <div class="content-box activity">
+        <h2>Activité Pratique : "L'Analyse de Risque" (45 min)</h2>
+        <p><strong>Objectif :</strong> Utiliser le Chain-of-Thought (CoT) pour une tâche d'analyse industrielle complexe.</p>
+        <p><strong>Contexte :</strong> Un rapport d'incident (fictif) indique : "Panne sur la ligne 2. Le capteur T-105 a affiché une surchauffe (110°C), puis l'automate P-200 s'est mis en sécurité. La production a été arrêtée 4h. La maintenance a changé le capteur T-105, mais le problème persiste."</p>
+        
+        <div class="prompt-container">
+            <pre id="prompt-m4-1">
+Tu es un ingénieur de maintenance senior.
+Voici un rapport d'incident : "Panne sur la ligne 2. Le capteur T-105 a affiché une surchauffe (110°C), puis l'automate P-200 s'est mis en sécurité. La production a été arrêtée 4h. La maintenance a changé le capteur T-105, mais le problème persiste."
+
+Analyse ce rapport pour trouver la cause racine probable.
+Réfléchis étape par étape :
+1.  Quels sont les faits avérés ?
+2.  Quelle action a été entreprise ?
+3.  Quel est le résultat de cette action ?
+4.  Qu'est-ce que ce résultat implique sur la cause racine ?
+5.  Liste 3 hypothèses alternatives (autres que le capteur T-105) et propose un plan de vérification pour chacune.
+            </pre>
+            <button onclick="copyToClipboard('prompt-m4-1')">Copier le Prompt</button>
+        </div>
+        <p><strong>Discussion :</strong> Les groupes comparent les hypothèses générées par l'IA. (L'IA devrait déduire que si le changement de capteur n'a rien résolu, le capteur n'était pas la cause, mais qu'il mesurait une surchauffe *réelle*.)</p>
+    </div>
+    
+    <script>
+        function copyToClipboard(elementId) {
+            var preElement = document.getElementById(elementId);
+            var text = preElement.innerText;
+            navigator.clipboard.writeText(text).then(function() {
+                var button = preElement.nextElementSibling;
+                if(button && button.tagName === 'BUTTON') {
+                    var originalText = button.innerText;
+                    button.innerText = "Copié !";
+                    setTimeout(function() {
+                        button.innerText = originalText;
+                    }, 2000);
+                }
+            }, function(err) {
+                console.error('Erreur lors de la copie : ', err);
+            });
+        }
+    </script>
+</body>
+</html>
