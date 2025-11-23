@@ -1,0 +1,11 @@
+Client,Date,Produit,Commentaire,Sentiment
+Jean Dupont,2023-10-01,SuperGadget 3000,"La batterie ne tient pas la charge, c'est inadmissible !",Négatif
+Marie Martin,2023-10-02,SuperGadget 3000,"Design magnifique, j'adore la couleur.",Positif
+Pierre Durand,2023-10-03,SuperGadget 3000,"Livraison en retard et colis abîmé.",Négatif
+Sophie Lefebvre,2023-10-04,SuperGadget 3000,"Le service client est top, merci pour l'aide.",Positif
+Luc Leroy,2023-10-05,SuperGadget 3000,"Ne fonctionne pas avec mon iPhone, remboursez-moi !",Négatif
+Julie Noir,2023-10-06,SuperGadget 3000,"Produit conforme, mais emballage excessif.",Neutre
+Marc Blanc,2023-10-07,SuperGadget 3000,"Impossible de le connecter au Wifi.",Négatif
+Claire Jaune,2023-10-08,SuperGadget 3000,"Meilleur achat de l'année !",Positif
+Paul Vert,2023-10-09,SuperGadget 3000,"Trop cher pour ce que c'est.",Négatif
+Alice Rouge,2023-10-10,SuperGadget 3000,"Fonctionne bien, mais la notice est illisible.",Neutre

@@ -1,0 +1,20 @@
+NOM : Martin
+PRENOM : Thomas
+POSTE VISE : Chef de Projet
+
+EXPERIENCE PROFESSIONNELLE
+2018 - Présent : Chef de Projet Senior chez TechSolutions
+- Gestion d'une équipe de 10 personnes
+- Pilotage de projets internationaux
+- Méthodologie Agile / Scrum
+
+2015 - 2018 : Développeur Full Stack
+- Développement d'applications web
+
+FORMATION
+- Master en Informatique, Université de Paris
+
+LANGUES
+- Français : Langue maternelle
+- Anglais : Courant (C1)
+- Espagnol : Débutant
