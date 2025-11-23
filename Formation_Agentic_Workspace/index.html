@@ -29,7 +29,10 @@
             color: var(--text-main);
         }
 
-        h1, h2, h3, h4 {
+        h1,
+        h2,
+        h3,
+        h4 {
             color: var(--text-heading);
             font-weight: 600;
         }
@@ -105,9 +108,7 @@
     <aside
         class="sidebar w-full md:w-72 lg:w-80 p-6 space-y-6 md:sticky md:top-0 md:h-screen flex flex-col border-r border-gray-200">
         <div class="flex items-center gap-3 px-2">
-            <div
-                class="h-10 w-10 bg-indigo-600 rounded-lg flex items-center justify-center text-white font-bold text-xl shadow-lg">
-                A</div>
+            <img src="assets/logo_uimm_placeholder.jpg" alt="Logo UIMM" class="h-12 w-auto object-contain">
             <div>
                 <h1 class="text-xl font-bold leading-tight">Agentic<br>Automation</h1>
                 <p class="text-xs text-gray-500 font-medium">Support de Formation</p>
@@ -124,7 +125,8 @@
 
             <div class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 mt-6 px-3">Ateliers</div>
             <a href="#atelier-rh" class="block px-3 py-2 rounded-lg text-sm font-medium">4. RH : Recrutement</a>
-            <a href="#atelier-marketing" class="block px-3 py-2 rounded-lg text-sm font-medium">5. Marketing : Sentiments</a>
+            <a href="#atelier-marketing" class="block px-3 py-2 rounded-lg text-sm font-medium">5. Marketing :
+                Sentiments</a>
             <a href="#atelier-finance" class="block px-3 py-2 rounded-lg text-sm font-medium">6. Finance : Audit</a>
             <a href="#atelier-general" class="block px-3 py-2 rounded-lg text-sm font-medium">7. Synthèse</a>
         </nav>
@@ -132,8 +134,9 @@
         <div class="pt-6 border-t border-gray-200">
             <div class="flex items-center gap-3">
                 <div class="text-xs text-gray-500">
-                    <p class="font-semibold">Formation Cadres</p>
+                    <p class="font-semibold">Pôle Formation UIMM-CVDL</p>
                     <p>IA & Productivité</p>
+                    <p>S. Jaubert</p>
                 </div>
             </div>
         </div>
@@ -146,37 +149,48 @@
             <!-- Header -->
             <section id="header" class="space-y-6">
                 <div class="bg-indigo-50 border-l-4 border-indigo-600 p-6 rounded-r-lg">
-                    <h2 class="text-3xl font-bold text-indigo-900 mb-2">Formation : L'IA Agentique au Service de l'Entreprise</h2>
-                    <p class="text-indigo-800 text-lg">De la théorie à la pratique : maîtrisez vos assistants virtuels.</p>
+                    <h2 class="text-3xl font-bold text-indigo-900 mb-2">Formation : L'IA Agentique au Service de
+                        l'Entreprise</h2>
+                    <p class="text-indigo-800 text-lg">De la théorie à la pratique : maîtrisez vos assistants virtuels.
+                    </p>
                 </div>
                 <p class="text-lg leading-relaxed text-gray-600">
-                    Ce module de formation pratique vous guidera dans l'installation et l'utilisation d'agents IA capables d'interagir avec vos fichiers et vos outils Google Workspace.
+                    Ce module de formation pratique vous guidera dans l'installation et l'utilisation d'agents IA
+                    capables d'interagir avec vos fichiers et vos outils Google Workspace.
                 </p>
             </section>
 
             <!-- Prerequisites -->
             <section id="prerequis" class="space-y-6 pt-10 border-t border-gray-100">
                 <h2 class="text-2xl font-bold flex items-center gap-3">
-                    <span class="bg-gray-100 text-gray-600 h-8 w-8 rounded-full flex items-center justify-center text-sm">1</span>
+                    <span
+                        class="bg-gray-100 text-gray-600 h-8 w-8 rounded-full flex items-center justify-center text-sm">1</span>
                     Prérequis Techniques
                 </h2>
                 <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm space-y-4">
-                    <p class="text-gray-600">Assurez-vous que les éléments suivants sont installés sur votre poste Windows :</p>
+                    <p class="text-gray-600">Assurez-vous que les éléments suivants sont installés sur votre poste
+                        Windows :</p>
                     <ul class="list-disc list-inside space-y-2 text-sm text-gray-700 ml-4">
-                        <li><strong>Node.js (v20+)</strong> : <a href="https://nodejs.org/" target="_blank" class="text-indigo-600 hover:underline">Télécharger</a></li>
-                        <li><strong>Git & Git Bash</strong> : <a href="https://git-scm.com/downloads" target="_blank" class="text-indigo-600 hover:underline">Télécharger</a></li>
-                        <li><strong>Go</strong> : <a href="https://go.dev/dl/" target="_blank" class="text-indigo-600 hover:underline">Télécharger</a></li>
-                        <li><strong>Google Cloud SDK</strong> : <a href="https://cloud.google.com/sdk/docs/install" target="_blank" class="text-indigo-600 hover:underline">Installer</a></li>
+                        <li><strong>Node.js (v20+)</strong> : <a href="https://nodejs.org/" target="_blank"
+                                class="text-indigo-600 hover:underline">Télécharger</a></li>
+                        <li><strong>Git & Git Bash</strong> : <a href="https://git-scm.com/downloads" target="_blank"
+                                class="text-indigo-600 hover:underline">Télécharger</a></li>
+                        <li><strong>Go</strong> : <a href="https://go.dev/dl/" target="_blank"
+                                class="text-indigo-600 hover:underline">Télécharger</a></li>
+                        <li><strong>Google Cloud SDK</strong> : <a href="https://cloud.google.com/sdk/docs/install"
+                                target="_blank" class="text-indigo-600 hover:underline">Installer</a></li>
                     </ul>
 
                     <div class="mt-6">
                         <h4 class="font-semibold text-gray-800 mb-2">Configuration de la Clé API Gemini</h4>
-                        <p class="text-sm text-gray-600 mb-2">Ouvrez votre terminal (PowerShell ou Git Bash) et exécutez :</p>
+                        <p class="text-sm text-gray-600 mb-2">Ouvrez votre terminal (PowerShell ou Git Bash) et exécutez
+                            :</p>
                         <div class="code-block">
                             <pre><code class="language-bash">setx GEMINI_API_KEY "AIzaSy..."</code></pre>
                             <button class="copy-btn" onclick="copyCode(this)">Copier</button>
                         </div>
-                        <p class="text-xs text-gray-500 mt-1 italic">*Remplacez "AIzaSy..." par votre véritable clé API.</p>
+                        <p class="text-xs text-gray-500 mt-1 italic">*Remplacez "AIzaSy..." par votre véritable clé API.
+                        </p>
                     </div>
 
                     <div class="mt-6">
@@ -192,17 +206,22 @@
             <!-- Installation ToolsForMCPServer -->
             <section id="install-tools" class="space-y-6 pt-10 border-t border-gray-100">
                 <h2 class="text-2xl font-bold flex items-center gap-3">
-                    <span class="bg-indigo-100 text-indigo-600 h-8 w-8 rounded-full flex items-center justify-center text-sm">2</span>
+                    <span
+                        class="bg-indigo-100 text-indigo-600 h-8 w-8 rounded-full flex items-center justify-center text-sm">2</span>
                     Installation : ToolsForMCPServer
                 </h2>
-                <p class="text-gray-600">Cette extension permet à Gemini d'exécuter du code Python et d'interagir avec Google Apps Script.</p>
+                <p class="text-gray-600">Cette extension permet à Gemini d'exécuter du code Python et d'interagir avec
+                    Google Apps Script.</p>
 
                 <div class="space-y-6">
                     <!-- Step 1 -->
                     <div class="bg-white p-6 rounded-xl border border-gray-200">
                         <h3 class="font-bold text-gray-800 mb-2">1. Copier le projet Google Apps Script</h3>
-                        <p class="text-sm text-gray-600 mb-4">Connectez-vous à votre compte Google et cliquez sur le lien ci-dessous pour copier le projet :</p>
-                        <a href="https://script.google.com/home/projects/1Qm9LgtuQLxDzdLUoJPrOEpmyTBivZZsCLiSUC7q-D3Gi4fISvxgcITWb" target="_blank" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700">
+                        <p class="text-sm text-gray-600 mb-4">Connectez-vous à votre compte Google et cliquez sur le
+                            lien ci-dessous pour copier le projet :</p>
+                        <a href="https://script.google.com/home/projects/1Qm9LgtuQLxDzdLUoJPrOEpmyTBivZZsCLiSUC7q-D3Gi4fISvxgcITWb"
+                            target="_blank"
+                            class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700">
                             Copier le Projet Apps Script ↗
                         </a>
                     </div>
@@ -211,20 +230,25 @@
                     <div class="bg-white p-6 rounded-xl border border-gray-200">
                         <h3 class="font-bold text-gray-800 mb-2">2. Déployer en tant qu'Application Web</h3>
                         <ol class="list-decimal list-inside space-y-2 text-sm text-gray-600 ml-2">
-                            <li>Dans l'éditeur de script, cliquez sur <strong>Déployer</strong> > <strong>Nouveau déploiement</strong>.</li>
+                            <li>Dans l'éditeur de script, cliquez sur <strong>Déployer</strong> > <strong>Nouveau
+                                    déploiement</strong>.</li>
                             <li>Sélectionnez le type : <strong>Application Web</strong>.</li>
                             <li>Description : "Mon Serveur MCP".</li>
                             <li>Exécuter en tant que : <strong>Moi</strong> (Me).</li>
-                            <li>Qui a accès : <strong>N'importe qui</strong> (Anyone). <span class="text-xs text-gray-400">(Sécurisé par l'URL unique)</span></li>
+                            <li>Qui a accès : <strong>N'importe qui</strong> (Anyone). <span
+                                    class="text-xs text-gray-400">(Sécurisé par l'URL unique)</span></li>
                             <li>Cliquez sur <strong>Déployer</strong> et autorisez l'accès.</li>
-                            <li><strong>Copiez l'URL de l'application Web</strong> (ex: <code>https://script.google.com/.../exec</code>).</li>
+                            <li><strong>Copiez l'URL de l'application Web</strong> (ex:
+                                <code>https://script.google.com/.../exec</code>).
+                            </li>
                         </ol>
                     </div>
 
                     <!-- Step 3 -->
                     <div class="bg-white p-6 rounded-xl border border-gray-200">
                         <h3 class="font-bold text-gray-800 mb-2">3. Configurer l'environnement (Windows)</h3>
-                        <p class="text-sm text-gray-600 mb-2">Remplacez l'URL ci-dessous par celle que vous venez de copier :</p>
+                        <p class="text-sm text-gray-600 mb-2">Remplacez l'URL ci-dessous par celle que vous venez de
+                            copier :</p>
                         <div class="code-block">
                             <pre><code class="language-bash">setx MCP_WEB_APPS_URL "https://script.google.com/macros/s/###/exec?accessKey=sample"</code></pre>
                             <button class="copy-btn" onclick="copyCode(this)">Copier</button>
@@ -245,7 +269,8 @@
             <!-- Installation FileSearchStore -->
             <section id="install-files" class="space-y-6 pt-10 border-t border-gray-100">
                 <h2 class="text-2xl font-bold flex items-center gap-3">
-                    <span class="bg-indigo-100 text-indigo-600 h-8 w-8 rounded-full flex items-center justify-center text-sm">3</span>
+                    <span
+                        class="bg-indigo-100 text-indigo-600 h-8 w-8 rounded-full flex items-center justify-center text-sm">3</span>
                     Installation : FileSearchStore
                 </h2>
                 <p class="text-gray-600">Pour permettre à Gemini de lire et analyser vos fichiers locaux.</p>
@@ -268,7 +293,9 @@
             <!-- Atelier RH -->
             <section id="atelier-rh" class="space-y-6 pt-10 border-t-2 border-indigo-100">
                 <div class="flex items-center gap-4">
-                    <div class="h-12 w-12 bg-pink-100 text-pink-600 rounded-lg flex items-center justify-center text-2xl">👥</div>
+                    <div
+                        class="h-12 w-12 bg-pink-100 text-pink-600 rounded-lg flex items-center justify-center text-2xl">
+                        👥</div>
                     <div>
                         <h2 class="text-2xl font-bold text-gray-800">Atelier RH : Assistant de Recrutement</h2>
                         <p class="text-pink-600 font-medium">Objectif : Filtrer des CVs automatiquement</p>
@@ -277,7 +304,8 @@
 
                 <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
                     <p class="text-gray-600 mb-4">
-                        <strong>Scénario :</strong> Vous avez reçu plusieurs CVs pour un poste de Chef de Projet. Vous cherchez des candidats avec plus de 5 ans d'expérience et un bon niveau d'anglais.
+                        <strong>Scénario :</strong> Vous avez reçu plusieurs CVs pour un poste de Chef de Projet. Vous
+                        cherchez des candidats avec plus de 5 ans d'expérience et un bon niveau d'anglais.
                     </p>
                     <div class="bg-gray-50 p-4 rounded-lg border border-gray-200 mb-4">
                         <p class="text-xs font-bold text-gray-500 uppercase mb-2">Fichiers fournis :</p>
@@ -287,7 +315,7 @@
                             <li><code>data/candidats/CV_Lucas_Dubois.txt</code></li>
                         </ul>
                     </div>
-                    
+
                     <div class="space-y-4">
                         <p class="font-semibold text-gray-800">Prompt à tester :</p>
                         <div class="code-block">
@@ -301,7 +329,9 @@
             <!-- Atelier Marketing -->
             <section id="atelier-marketing" class="space-y-6 pt-10 border-t border-gray-100">
                 <div class="flex items-center gap-4">
-                    <div class="h-12 w-12 bg-purple-100 text-purple-600 rounded-lg flex items-center justify-center text-2xl">📈</div>
+                    <div
+                        class="h-12 w-12 bg-purple-100 text-purple-600 rounded-lg flex items-center justify-center text-2xl">
+                        📈</div>
                     <div>
                         <h2 class="text-2xl font-bold text-gray-800">Atelier Marketing : Analyse de Sentiments</h2>
                         <p class="text-purple-600 font-medium">Objectif : Comprendre les retours clients</p>
@@ -310,7 +340,8 @@
 
                 <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
                     <p class="text-gray-600 mb-4">
-                        <strong>Scénario :</strong> Suite au lancement du "SuperGadget 3000", vous avez exporté les commentaires clients. Vous devez identifier les problèmes majeurs.
+                        <strong>Scénario :</strong> Suite au lancement du "SuperGadget 3000", vous avez exporté les
+                        commentaires clients. Vous devez identifier les problèmes majeurs.
                     </p>
                     <div class="bg-gray-50 p-4 rounded-lg border border-gray-200 mb-4">
                         <p class="text-xs font-bold text-gray-500 uppercase mb-2">Fichier fourni :</p>
@@ -318,7 +349,7 @@
                             <li><code>data/retours_clients.csv</code></li>
                         </ul>
                     </div>
-                    
+
                     <div class="space-y-4">
                         <p class="font-semibold text-gray-800">Prompt à tester :</p>
                         <div class="code-block">
@@ -332,7 +363,9 @@
             <!-- Atelier Finance -->
             <section id="atelier-finance" class="space-y-6 pt-10 border-t border-gray-100">
                 <div class="flex items-center gap-4">
-                    <div class="h-12 w-12 bg-green-100 text-green-600 rounded-lg flex items-center justify-center text-2xl">💶</div>
+                    <div
+                        class="h-12 w-12 bg-green-100 text-green-600 rounded-lg flex items-center justify-center text-2xl">
+                        💶</div>
                     <div>
                         <h2 class="text-2xl font-bold text-gray-800">Atelier Finance : Audit de Facturation</h2>
                         <p class="text-green-600 font-medium">Objectif : Détecter les incohérences</p>
@@ -341,7 +374,8 @@
 
                 <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
                     <p class="text-gray-600 mb-4">
-                        <strong>Scénario :</strong> Vous devez vérifier que les factures émises correspondent bien aux devis signés.
+                        <strong>Scénario :</strong> Vous devez vérifier que les factures émises correspondent bien aux
+                        devis signés.
                     </p>
                     <div class="bg-gray-50 p-4 rounded-lg border border-gray-200 mb-4">
                         <p class="text-xs font-bold text-gray-500 uppercase mb-2">Fichiers fournis :</p>
@@ -350,7 +384,7 @@
                             <li><code>data/finance/devis_signes.csv</code></li>
                         </ul>
                     </div>
-                    
+
                     <div class="space-y-4">
                         <p class="font-semibold text-gray-800">Prompt à tester :</p>
                         <div class="code-block">
@@ -364,7 +398,9 @@
             <!-- Atelier Synthèse -->
             <section id="atelier-general" class="space-y-6 pt-10 border-t border-gray-100">
                 <div class="flex items-center gap-4">
-                    <div class="h-12 w-12 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center text-2xl">📝</div>
+                    <div
+                        class="h-12 w-12 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center text-2xl">
+                        📝</div>
                     <div>
                         <h2 class="text-2xl font-bold text-gray-800">Atelier Synthèse : Résumé de Rapport</h2>
                         <p class="text-blue-600 font-medium">Objectif : Gagner du temps de lecture</p>
@@ -373,7 +409,8 @@
 
                 <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
                     <p class="text-gray-600 mb-4">
-                        <strong>Scénario :</strong> Vous devez présenter les points clés du rapport annuel en réunion dans 10 minutes.
+                        <strong>Scénario :</strong> Vous devez présenter les points clés du rapport annuel en réunion
+                        dans 10 minutes.
                     </p>
                     <div class="bg-gray-50 p-4 rounded-lg border border-gray-200 mb-4">
                         <p class="text-xs font-bold text-gray-500 uppercase mb-2">Fichier fourni :</p>
@@ -381,7 +418,7 @@
                             <li><code>data/Rapport_Annuel.txt</code></li>
                         </ul>
                     </div>
-                    
+
                     <div class="space-y-4">
                         <p class="font-semibold text-gray-800">Prompt à tester :</p>
                         <div class="code-block">
@@ -395,7 +432,7 @@
             <!-- Footer -->
             <footer class="pt-10 pb-6 border-t border-gray-200 text-center text-gray-500 text-sm">
                 <p>Formation IA & Automatisation - Support Pédagogique</p>
-                <p class="mt-2">Généré par Antigravity pour la Formation Cadres</p>
+                <p class="mt-2">S. Jaubert</p>
             </footer>
 
         </div>
@@ -452,4 +489,5 @@
         });
     </script>
 </body>
+
 </html>
