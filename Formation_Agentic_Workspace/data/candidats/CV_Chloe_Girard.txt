@@ -1,0 +1,26 @@
+NOM : Girard
+PRENOM : Chloé
+POSTE VISE : Chef de Projet E-commerce
+
+EXPERIENCE PROFESSIONNELLE
+2019 - Présent : E-commerce Manager chez OnlineRetail
+- Gestion de site e-commerce (CA 10M€/an)
+- Optimisation du tunnel de conversion
+- Management équipe de 5 personnes
+2016 - 2019 : Chef de Projet Web chez WebAgency
+- Refonte de sites e-commerce
+
+FORMATION
+- Master E-business, Université Paris-Dauphine
+- Licence Marketing
+
+LANGUES
+- Français : Langue maternelle
+- Anglais : Courant
+- Italien : Intermédiaire
+
+COMPETENCES
+- Shopify, Magento, WooCommerce
+- Google Analytics, SEO
+- Marketing digital
+- Gestion de projet

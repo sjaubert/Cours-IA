@@ -1,0 +1,25 @@
+NOM : Laurent
+PRENOM : Nicolas
+POSTE VISE : Expert Cybersécurité
+
+EXPERIENCE PROFESSIONNELLE
+2017 - Présent : Security Engineer chez SecureIT
+- Audit de sécurité des systèmes d'information
+- Gestion des incidents de sécurité
+- Pentesting et analyses de vulnérabilités
+2015 - 2017 : Analyste Sécurité chez BankSecure
+- Surveillance des menaces
+
+FORMATION
+- Master Cybersécurité, Télécom Paris
+- Licence Informatique
+
+LANGUES
+- Français : Langue maternelle
+- Anglais : Bilingue
+
+COMPETENCES
+- Pentesting, OSINT
+- SIEM, IDS/IPS
+- ISO 27001, RGPD
+- Python, C++, Bash

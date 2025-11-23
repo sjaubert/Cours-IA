@@ -1,0 +1,24 @@
+NOM : Roux
+PRENOM : Antoine
+POSTE VISE : Ingénieur DevOps
+
+EXPERIENCE PROFESSIONNELLE
+2018 - Présent : DevOps Engineer chez CloudTech
+- Administration d'infrastructures cloud (AWS, Azure)
+- Mise en place de pipelines CI/CD
+2016 - 2018 : Administrateur Systèmes chez IT Services
+- Gestion de serveurs Linux et Windows
+
+FORMATION
+- Ingénieur Informatique, INSA Lyon
+- DUT Réseaux et Télécommunications
+
+LANGUES
+- Français : Langue maternelle
+- Anglais : Courant
+
+COMPETENCES
+- Docker, Kubernetes, Terraform
+- Jenkins, GitLab CI, GitHub Actions
+- AWS, Azure, GCP
+- Linux, Bash, Python

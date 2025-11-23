@@ -18,3 +18,291 @@ Client: Entreprise C
 Montant HT: 300.00 €
 TVA (20%): 60.00 €
 Montant TTC: 360.00 €
+
+FACTURE F2023-1004
+Date: 06/10/2023
+Client: TechSolutions SARL
+Montant HT: 2500.00 €
+TVA (20%): 500.00 €
+Montant TTC: 3000.00 €
+
+FACTURE F2023-1005
+Date: 07/10/2023
+Client: Digital Partners
+Montant HT: 1850.00 €
+TVA (20%): 370.00 €
+Montant TTC: 2220.00 €
+
+FACTURE F2023-1006
+Date: 08/10/2023
+Client: Innovation Lab
+Montant HT: 3200.00 €
+TVA (20%): 640.00 €
+Montant TTC: 3840.00 €
+
+FACTURE F2023-1008
+Date: 10/10/2023
+Client: Global Services
+Montant HT: 4500.00 €
+TVA (20%): 900.00 €
+Montant TTC: 5400.00 €
+
+FACTURE F2023-1009
+Date: 11/10/2023
+Client: Cloud Expert
+Montant HT: 1200.00 €
+TVA (20%): 240.00 €
+Montant TTC: 1440.00 €
+
+FACTURE F2023-1010
+Date: 12/10/2023
+Client: Data Systems
+Montant HT: 2850.00 €
+TVA (20%): 570.00 €
+Montant TTC: 3420.00 €
+
+FACTURE F2023-1011
+Date: 13/10/2023
+Client: SecureIT France
+Montant HT: 3500.00 €
+TVA (20%): 700.00 €
+Montant TTC: 4200.00 €
+
+FACTURE F2023-1012
+Date: 14/10/2023
+Client: WebAgency Pro
+Montant HT: 950.00 €
+TVA (20%): 190.00 €
+Montant TTC: 1140.00 €
+
+FACTURE F2023-1013
+Date: 15/10/2023
+Client: Marketing Plus
+Montant HT: 1600.00 €
+TVA (20%): 320.00 €
+Montant TTC: 1920.00 €
+
+FACTURE F2023-1014
+Date: 16/10/2023
+Client: Consulting Group
+Montant HT: 5200.00 €
+TVA (20%): 1040.00 €
+Montant TTC: 6240.00 €
+
+FACTURE F2023-1015
+Date: 17/10/2023
+Client: Finance Solutions
+Montant HT: 2200.00 €
+TVA (20%): 440.00 €
+Montant TTC: 2640.00 €
+
+FACTURE F2023-1017
+Date: 19/10/2023
+Client: LogisTech
+Montant HT: 3800.00 €
+TVA (20%): 760.00 €
+Montant TTC: 4560.00 €
+
+FACTURE F2023-1018
+Date: 20/10/2023
+Client: EcoTrade
+Montant HT: 890.00 €
+TVA (20%): 178.00 €
+Montant TTC: 1068.00 €
+
+FACTURE F2023-1019
+Date: 21/10/2023
+Client: SmartCity
+Montant HT: 4200.00 €
+TVA (20%): 840.00 €
+Montant TTC: 5040.00 €
+
+FACTURE F2023-1020
+Date: 22/10/2023
+Client: MediaCorp
+Montant HT: 1750.00 €
+TVA (20%): 350.00 €
+Montant TTC: 2100.00 €
+
+FACTURE F2023-1021
+Date: 23/10/2023
+Client: HealthTech
+Montant HT: 2900.00 €
+TVA (20%): 580.00 €
+Montant TTC: 3480.00 €
+
+FACTURE F2023-1022
+Date: 24/10/2023
+Client: EduPlatform
+Montant HT: 1100.00 €
+TVA (20%): 220.00 €
+Montant TTC: 1320.00 €
+
+FACTURE F2023-1023
+Date: 25/10/2023
+Client: RealEstate Pro
+Montant HT: 6500.00 €
+TVA (20%): 1300.00 €
+Montant TTC: 7800.00 €
+
+FACTURE F2023-1024
+Date: 26/10/2023
+Client: AutoMobile Services
+Montant HT: 3300.00 €
+TVA (20%): 660.00 €
+Montant TTC: 3960.00 €
+
+FACTURE F2023-1026
+Date: 28/10/2023
+Client: TravelOnline
+Montant HT: 2400.00 €
+TVA (20%): 480.00 €
+Montant TTC: 2880.00 €
+
+FACTURE F2023-1027
+Date: 29/10/2023
+Client: SportConnect
+Montant HT: 1350.00 €
+TVA (20%): 270.00 €
+Montant TTC: 1620.00 €
+
+FACTURE F2023-1028
+Date: 30/10/2023
+Client: FashionHub
+Montant HT: 2100.00 €
+TVA (20%): 420.00 €
+Montant TTC: 2520.00 €
+
+FACTURE F2023-1029
+Date: 31/10/2023
+Client: GreenEnergy
+Montant HT: 7800.00 €
+TVA (20%): 1560.00 €
+Montant TTC: 9360.00 €
+
+FACTURE F2023-1030
+Date: 01/10/2023
+Client: BuildCo
+Montant HT: 4700.00 €
+TVA (20%): 940.00 €
+Montant TTC: 5640.00 €
+
+FACTURE F2023-1032
+Date: 03/10/2023
+Client: InsurTech
+Montant HT: 2800.00 €
+TVA (20%): 560.00 €
+Montant TTC: 3360.00 €
+
+FACTURE F2023-1033
+Date: 04/10/2023
+Client: RetailChain
+Montant HT: 5400.00 €
+TVA (20%): 1080.00 €
+Montant TTC: 6480.00 €
+
+FACTURE F2023-1034
+Date: 05/10/2023
+Client: BioMed
+Montant HT: 4100.00 €
+TVA (20%): 820.00 €
+Montant TTC: 4920.00 €
+
+FACTURE F2023-1035
+Date: 06/10/2023
+Client: Aerospace Ltd
+Montant HT: 8900.00 €
+TVA (20%): 1780.00 €
+Montant TTC: 10680.00 €
+
+FACTURE F2023-1036
+Date: 07/10/2023
+Client: ChemLab
+Montant HT: 3400.00 €
+TVA (20%): 680.00 €
+Montant TTC: 4080.00 €
+
+FACTURE F2023-1037
+Date: 08/10/2023
+Client: PharmaCorp
+Montant HT: 6200.00 €
+TVA (20%): 1240.00 €
+Montant TTC: 7440.00 €
+
+FACTURE F2023-1039
+Date: 10/10/2023
+Client: MiningCo
+Montant HT: 5800.00 €
+TVA (20%): 1160.00 €
+Montant TTC: 6960.00 €
+
+FACTURE F2023-1040
+Date: 11/10/2023
+Client: EnergyPlus
+Montant HT: 4450.00 €
+TVA (20%): 890.00 €
+Montant TTC: 5340.00 €
+
+FACTURE F2023-1041
+Date: 12/10/2023
+Client: WaterWorks
+Montant HT: 2300.00 €
+TVA (20%): 460.00 €
+Montant TTC: 2760.00 €
+
+FACTURE F2023-1042
+Date: 13/10/2023
+Client: TransportHub
+Montant HT: 3900.00 €
+TVA (20%): 780.00 €
+Montant TTC: 4680.00 €
+
+FACTURE F2023-1043
+Date: 14/10/2023
+Client: TelcoNet
+Montant HT: 5600.00 €
+TVA (20%): 1120.00 €
+Montant TTC: 6720.00 €
+
+FACTURE F2023-1045
+Date: 16/10/2023
+Client: PackagingSolutions
+Montant HT: 2050.00 €
+TVA (20%): 410.00 €
+Montant TTC: 2460.00 €
+
+FACTURE F2023-1046
+Date: 17/10/2023
+Client: DesignStudio
+Montant HT: 1800.00 €
+TVA (20%): 360.00 €
+Montant TTC: 2160.00 €
+
+FACTURE F2023-1047
+Date: 18/10/2023
+Client: ArchitectCo
+Montant HT: 4900.00 €
+TVA (20%): 980.00 €
+Montant TTC: 5880.00 €
+
+FACTURE F2023-1048
+Date: 19/10/2023
+Client: EngineeringPlus
+Montant HT: 5100.00 €
+TVA (20%): 1020.00 €
+Montant TTC: 6120.00 €
+
+FACTURE F2023-1051
+Date: 22/10/2023
+Client: TechInnovate
+Montant HT: 3750.00 €
+TVA (20%): 750.00 €
+Montant TTC: 4500.00 €
+
+FACTURE F2023-1016
+Date: 18/10/2023
+Client: HR Innovations
+Montant HT: 1450.00 €
+TVA (20%): 290.00 €
+Montant TTC: 1740.00 €
+

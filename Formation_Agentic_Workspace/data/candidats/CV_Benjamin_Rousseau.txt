@@ -1,0 +1,26 @@
+NOM : Rousseau
+PRENOM : Benjamin
+POSTE VISE : Ingénieur IA/Machine Learning
+
+EXPERIENCE PROFESSIONNELLE
+2019 - Présent : ML Engineer chez AI Solutions
+- Développement de modèles de deep learning
+- Déploiement de modèles en production
+- Optimisation de performances
+2017 - 2019 : Data Scientist chez ResearchLab
+- Recherche en NLP et Computer Vision
+
+FORMATION
+- Doctorat Machine Learning, Université Paris-Saclay
+- Master Data Science
+- Licence Mathématiques
+
+LANGUES
+- Français : Langue maternelle
+- Anglais : Bilingue
+
+COMPETENCES
+- Python, TensorFlow, PyTorch
+- Scikit-learn, Pandas, NumPy
+- NLP, Computer Vision
+- MLOps, Docker, Kubernetes

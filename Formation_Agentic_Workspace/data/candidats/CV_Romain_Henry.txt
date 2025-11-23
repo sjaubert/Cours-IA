@@ -1,0 +1,26 @@
+NOM : Henry
+PRENOM : Romain
+POSTE VISE : Ingénieur Réseau
+
+EXPERIENCE PROFESSIONNELLE
+2017 - Présent : Network Engineer chez TelecomCorp
+- Conception et déploiement d'infrastructures réseau
+- Administration Cisco, Fortinet
+- Support N3
+2015 - 2017 : Technicien Réseau chez NetworkServices
+- Maintenance infrastructure réseau
+
+FORMATION
+- Master Réseaux et Télécommunications, Télécom SudParis
+- Licence Réseaux Informatiques
+- Certifications : CCNP, JNCIA
+
+LANGUES
+- Français : Langue maternelle
+- Anglais : Courant
+
+COMPETENCES
+- Cisco (Routeurs, Switches)
+- Fortinet, Palo Alto
+- VPN, MPLS, BGP, OSPF
+- Wireshark, Nagios

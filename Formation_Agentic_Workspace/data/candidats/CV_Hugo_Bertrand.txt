@@ -1,0 +1,27 @@
+NOM : Bertrand
+PRENOM : Hugo
+POSTE VISE : Développeur Frontend
+
+EXPERIENCE PROFESSIONNELLE
+2019 - Présent : Frontend Developer chez WebTech
+- Développement d'interfaces React et Vue.js
+- Intégration responsive
+- Optimisation performances web
+2017 - 2019 : Intégrateur Web chez CreativeAgency
+- Intégration HTML/CSS/JavaScript
+
+FORMATION
+- Master Développement Web, Université de Lille
+- Licence Informatique
+
+LANGUES
+- Français : Langue maternelle
+- Anglais : Courant
+- Portugais : Intermédiaire
+
+COMPETENCES
+- React, Vue.js, Angular
+- HTML5, CSS3, SASS
+- JavaScript, TypeScript
+- Webpack, Vite, Git
+- Responsive Design, Accessibilité

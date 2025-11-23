@@ -1,0 +1,26 @@
+NOM : Leclerc
+PRENOM : Vincent
+POSTE VISE : Business Analyst
+
+EXPERIENCE PROFESSIONNELLE
+2017 - Présent : Business Analyst chez ConsultingGroup
+- Analyse des besoins métiers
+- Rédaction de cahiers des charges
+- Accompagnement projets SI
+2015 - 2017 : Assistant MOA chez BankingSector
+- Support fonctionnel
+
+FORMATION
+- Master MIAGE, Université de Toulouse
+- Licence Informatique de Gestion
+
+LANGUES
+- Français : Langue maternelle
+- Anglais : Bilingue
+- Portugais : Notions
+
+COMPETENCES
+- Analyse fonctionnelle
+- UML, BPMN
+- SQL, Excel avancé
+- Méthodologies Agile

@@ -1,0 +1,24 @@
+NOM : Lefebvre
+PRENOM : Marie
+POSTE VISE : Développeuse Full Stack
+
+EXPERIENCE PROFESSIONNELLE
+2020 - Présent : Développeuse Senior chez TechSolutions
+- Développement d'applications web avec React et Node.js
+- Architecture de microservices
+2018 - 2020 : Développeuse Junior chez WebAgency
+- Création de sites web responsifs
+
+FORMATION
+- Master Informatique, Université de Paris
+- Licence Informatique
+
+LANGUES
+- Français : Langue maternelle
+- Anglais : Courant
+- Espagnol : Notions
+
+COMPETENCES
+- JavaScript, TypeScript, Python
+- React, Angular, Vue.js
+- Docker, Kubernetes

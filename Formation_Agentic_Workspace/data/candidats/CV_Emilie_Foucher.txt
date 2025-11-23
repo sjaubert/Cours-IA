@@ -1,0 +1,26 @@
+NOM : Foucher
+PRENOM : Émilie
+POSTE VISE : Scrum Master
+
+EXPERIENCE PROFESSIONNELLE
+2018 - Présent : Scrum Master chez AgileTeam
+- Animation de 3 équipes Scrum (30 personnes)
+- Coaching agile et amélioration continue
+- Facilitation de cérémonies agiles
+2016 - 2018 : Product Owner chez DevShop
+- Gestion du backlog produit
+
+FORMATION
+- Master Management de Projets, IAE Lille
+- Licence Gestion
+- Certifications : PSM II, PSPO I
+
+LANGUES
+- Français : Langue maternelle
+- Anglais : Bilingue
+- Néerlandais : Notions
+
+COMPETENCES
+- Scrum, Kanban, SAFe
+- JIRA, Confluence
+- Facilitation, Coaching

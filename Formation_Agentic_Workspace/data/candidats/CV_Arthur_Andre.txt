@@ -1,0 +1,28 @@
+NOM : André
+PRENOM : Arthur
+POSTE VISE : Responsable Infrastructure
+
+EXPERIENCE PROFESSIONNELLE
+2015 - Présent : Infrastructure Manager chez TechCorp
+- Gestion d'infrastructure de 500+ serveurs
+- Stratégie cloud et migration
+- Management d'équipe de 12 personnes
+- Budgets IT
+2012 - 2015 : Ingénieur Système chez HostingProvider
+- Administration systèmes Linux/Windows
+
+FORMATION
+- Ingénieur Systèmes et Réseaux, ESIEA
+- Master Infrastructure et Cloud
+
+LANGUES
+- Français : Langue maternelle
+- Anglais : Bilingue
+- Allemand : Intermédiaire
+
+COMPETENCES
+- VMware, Hyper-V
+- AWS, Azure, GCP
+- Ansible, Terraform
+- Monitoring (Zabbix, Prometheus)
+- ITIL, ISO 27001

@@ -1,0 +1,26 @@
+NOM : Morel
+PRENOM : Kévin
+POSTE VISE : Ingénieur Support Technique
+
+EXPERIENCE PROFESSIONNELLE
+2019 - Présent : Technical Support Engineer chez CloudSolutions
+- Support technique niveau 2 et 3
+- Résolution d'incidents complexes
+- Documentation technique
+2017 - 2019 : Technicien Support chez ITHelpdesk
+- Support utilisateurs niveau 1
+
+FORMATION
+- Licence Professionnelle Informatique, IUT Montpellier
+- BTS Services Informatiques aux Organisations
+
+LANGUES
+- Français : Langue maternelle
+- Anglais : Courant
+- Arabe : Langue maternelle
+
+COMPETENCES
+- Windows, Linux, macOS
+- Active Directory, Office 365
+- Ticketing (ServiceNow, Zendesk)
+- Résolution de problèmes

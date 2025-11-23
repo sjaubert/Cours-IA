@@ -1,0 +1,25 @@
+NOM : Bonnet
+PRENOM : Julien
+POSTE VISE : Développeur Backend
+
+EXPERIENCE PROFESSIONNELLE
+2018 - Présent : Backend Developer chez APICompany
+- Développement d'API REST et GraphQL
+- Optimisation de performances
+- Architecture microservices
+2016 - 2018 : Développeur Full Stack chez WebStartup
+- Développement features backend et frontend
+
+FORMATION
+- Master Génie Logiciel, Université de Grenoble
+- Licence Informatique
+
+LANGUES
+- Français : Langue maternelle
+- Anglais : Courant
+
+COMPETENCES
+- Node.js, Express, NestJS
+- Python, Django, FastAPI
+- PostgreSQL, Redis, Elasticsearch
+- Docker, RabbitMQ

@@ -1,0 +1,23 @@
+NOM : Moreau
+PRENOM : Pierre
+POSTE VISE : Analyste de Données
+
+EXPERIENCE PROFESSIONNELLE
+2019 - Présent : Data Analyst chez DataCorp
+- Analyse de données clients pour optimisation marketing
+- Création de tableaux de bord avec PowerBI
+2017 - 2019 : Stagiaire Analyste chez InsightLab
+- Nettoyage et préparation de données
+
+FORMATION
+- Master Data Science, Université de Lyon
+- Licence Mathématiques Appliquées
+
+LANGUES
+- Français : Langue maternelle
+- Anglais : Courant
+
+COMPETENCES
+- Python, R, SQL
+- PowerBI, Tableau
+- Machine Learning, Statistiques

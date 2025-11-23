@@ -1,0 +1,26 @@
+NOM : Chevalier
+PRENOM : Mathilde
+POSTE VISE : Responsable Qualité Logiciel
+
+EXPERIENCE PROFESSIONNELLE
+2016 - Présent : QA Manager chez SoftwareQuality
+- Définition de stratégies de test
+- Management d'équipe de testeurs (10 personnes)
+- Automatisation des tests
+2014 - 2016 : Ingénieur Test chez QualityLab
+- Tests fonctionnels et non-fonctionnels
+
+FORMATION
+- Ingénieur Informatique, ENSEIRB-MATMECA
+- Certifications : ISTQB Advanced, Agile Tester
+
+LANGUES
+- Français : Langue maternelle
+- Anglais : Courant
+- Allemand : Courant
+
+COMPETENCES
+- Selenium, Cypress, JUnit
+- JIRA, TestRail, Xray
+- Performance testing (JMeter)
+- CI/CD, Jenkins

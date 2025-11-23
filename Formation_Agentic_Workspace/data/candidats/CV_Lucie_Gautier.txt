@@ -1,0 +1,28 @@
+NOM : Gautier
+PRENOM : Lucie
+POSTE VISE : Chef de Projet Informatique
+
+EXPERIENCE PROFESSIONNELLE
+2016 - Présent : Chef de Projet SI chez DigitalTransform
+- Pilotage de projets de transformation digitale
+- Gestion de budgets > 500K€
+- Management transversal
+- Relation client
+2014 - 2016 : Assistante Chef de Projet chez IT Services
+- Support gestion de projet
+
+FORMATION
+- Master Management des Systèmes d'Information, Université Paris-Dauphine
+- Licence Informatique
+- Certifications : PMP, Prince2
+
+LANGUES
+- Français : Langue maternelle
+- Anglais : Bilingue
+- Espagnol : Courant
+
+COMPETENCES
+- Gestion de projet (Waterfall, Agile)
+- MS Project, JIRA
+- Budget et planning
+- Leadership

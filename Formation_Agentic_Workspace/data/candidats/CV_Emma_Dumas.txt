@@ -1,0 +1,27 @@
+NOM : Dumas
+PRENOM : Emma
+POSTE VISE : Data Engineer
+
+EXPERIENCE PROFESSIONNELLE
+2018 - Présent : Data Engineer chez BigData Solutions
+- Construction de pipelines de données
+- ETL et intégration de données
+- Optimisation de workflows Spark
+2016 - 2018 : Junior Data Engineer chez DataFactory
+- Développement scripts Python
+
+FORMATION
+- Master Big Data et Intelligence Artificielle, Université de Nice
+- Licence Informatique
+
+LANGUES
+- Français : Langue maternelle
+- Anglais : Courant
+- Italien : Courant
+
+COMPETENCES
+- Python, Scala, Java
+- Spark, Hadoop, Kafka
+- Airflow, Luigi
+- SQL, NoSQL (Cassandra, MongoDB)
+- AWS (S3, EMR, Glue)

@@ -1,0 +1,26 @@
+NOM : Blanc
+PRENOM : David
+POSTE VISE : Administrateur Base de Données
+
+EXPERIENCE PROFESSIONNELLE
+2016 - Présent : DBA Senior chez DataCenter
+- Administration de bases Oracle, MySQL, PostgreSQL
+- Optimisation de performances
+- Gestion des sauvegardes et récupération
+2014 - 2016 : DBA Junior chez IT Services
+- Maintenance bases de données
+
+FORMATION
+- Master Systèmes d'Information, Université de Bordeaux
+- Licence Informatique
+- Certifications : Oracle DBA, PostgreSQL
+
+LANGUES
+- Français : Langue maternelle
+- Anglais : Courant
+
+COMPETENCES
+- Oracle, MySQL, PostgreSQL, MongoDB
+- SQL, PL/SQL
+- Réplication, Clustering
+- Scripting Bash, Python
