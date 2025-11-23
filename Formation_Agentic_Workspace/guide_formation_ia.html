@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formation IA & Productivité : Gemini CLI & MCP</title>
+    <style>
+        :root {
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --accent: #3b82f6;
+            --accent-glow: rgba(59, 130, 246, 0.5);
+            --code-bg: #020617;
+            --success: #10b981;
+            --warning: #f59e0b;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 4rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--bg-secondary);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(90deg, #60a5fa, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            color: var(--text-primary);
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--accent);
+            padding-left: 1rem;
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+
+        .card {
+            background-color: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: transform 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            border-color: rgba(59, 130, 246, 0.3);
+        }
+
+        code {
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-size: 0.9em;
+            color: #e2e8f0;
+        }
+
+        pre {
+            background-color: var(--code-bg);
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        pre code {
+            background-color: transparent;
+            padding: 0;
+            color: #a5b4fc;
+        }
+
+        .step-number {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            background-color: var(--accent);
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 0.5rem;
+            transition: background-color 0.2s;
+        }
+
+        .btn:hover {
+            background-color: #2563eb;
+        }
+
+        .alert {
+            background-color: rgba(245, 158, 11, 0.1);
+            border-left: 4px solid var(--warning);
+            padding: 1rem;
+            margin-bottom: 1rem;
+            color: #fbbf24;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .badge-req {
+            background-color: rgba(16, 185, 129, 0.2);
+            color: var(--success);
+        }
+
+        .badge-usecase {
+            background-color: rgba(59, 130, 246, 0.2);
+            color: var(--accent);
+        }
+
+        ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Syntax Highlighting Sim */
+        .cmd-prompt {
+            color: var(--success);
+            user-select: none;
+            margin-right: 8px;
+        }
+
+        .comment {
+            color: #64748b;
+            font-style: italic;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <header>
+            <div class="badge badge-usecase">Formation Cadres & Dirigeants</div>
+            <h1>L'IA au Service de l'Entreprise</h1>
+            <p>Connecter Gemini à vos données réelles : Google Workspace, Fichiers et Automatisation.</p>
+        </header>
+
+        <section id="prerequisites">
+            <h2>1. Les Fondations Techniques</h2>
+            <p>Avant de transformer notre productivité, nous devons préparer notre environnement de travail. Voici les
+                outils essentiels pour communiquer avec l'IA.</p>
+
+            <div class="card">
+                <h3>🛠️ La Boîte à Outils</h3>
+                <p>Assurez-vous que les éléments suivants sont installés sur votre poste de travail :</p>
+                <ul>
+                    <li><strong>Node.js (v20+) :</strong> Le moteur qui fera tourner nos scripts. <a
+                            href="https://nodejs.org/" target="_blank" class="btn">Télécharger</a></li>
+                    <li><strong>Git & Git Bash :</strong> Pour récupérer les outils et exécuter les commandes Linux sous
+                        Windows. <a href="https://git-scm.com/downloads" target="_blank" class="btn">Télécharger</a>
+                    </li>
+                    <li><strong>Go (Langage) :</strong> Nécessaire pour certaines extensions MCP. <a
+                            href="https://go.dev/dl/" target="_blank" class="btn">Télécharger</a></li>
+                    <li><strong>Google Cloud SDK :</strong> Pour l'authentification sécurisée. <a
+                            href="https://cloud.google.com/sdk/docs/install" target="_blank" class="btn">Installer</a>
+                    </li>
+                </ul>
+                <div class="alert">
+                    <strong>Important :</strong> Assurez-vous d'avoir installé l'extension Chrome "Google Antigravity"
+                    si vous utilisez l'interface web, ou préparez-vous à utiliser le terminal.
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>🔑 Configuration de la Clé API</h3>
+                <p>Pour que Gemini fonctionne, il a besoin d'une clé d'accès (API Key). Une fois obtenue via Google AI
+                    Studio, nous devons l'inscrire durablement dans votre système Windows.</p>
+                <p>Ouvrez votre terminal (Invite de commandes ou PowerShell) et tapez :</p>
+                <pre><span class="cmd-prompt">></span>setx GEMINI_API_KEY "AIzaSy..." <span class="comment">REM Remplacez par votre clé réelle</span></pre>
+                <p><em>Note : Redémarrez votre terminal après cette commande pour qu'elle soit prise en compte.</em></p>
+                <p>Mise à jour de Gemini CLI vers la dernière version :</p>
+                <pre><span class="cmd-prompt">></span>npm install -g @google/gemini-cli@latest</pre>
+            </div>
+        </section>
+
+        <section id="mcp-server">
+            <h2>2. Le Pont vers Google Workspace</h2>
+            <p>Nous allons installer <strong>ToolsForMCPServer</strong>. C'est une extension révolutionnaire développée
+                par Kanshi Tanaike qui permet à Gemini de "parler" directement à vos Google Sheets, Docs, et Scripts.
+            </p>
+
+            <div class="card">
+                <h3><span class="step-number">1</span>Installation du CLI & Authentification</h3>
+                <p>Si ce n'est pas déjà fait, installez le client Gemini et connectez-vous :</p>
+                <pre><span class="cmd-prompt">></span>npm install -g @google/gemini-cli
+<span class="cmd-prompt">></span>gemini login</pre>
+                <p>Cela ouvrira une fenêtre navigateur pour valider l'accès à votre compte Google.</p>
+            </div>
+
+            <div class="card">
+                <h3><span class="step-number">2</span>Copie du Projet "Cerveau" (Google Apps Script)</h3>
+                <p>Nous devons déployer un petit script sur le cloud de Google qui servira d'intermédiaire.</p>
+                <ol>
+                    <li>Connectez-vous à votre compte Google.</li>
+                    <li>Cliquez sur ce lien pour copier le projet source : <br>
+                        <a href="https://script.google.com/home/projects/1Qm9LgtuQLxDzdLUoJPrOEpmyTBivZZsCLiSUC7q-D3Gi4fISvxgcITWb"
+                            target="_blank" class="btn">Copier le Projet Script</a>
+                    </li>
+                    <li>Le projet va s'ouvrir automatiquement dans l'éditeur de script.</li>
+                </ol>
+            </div>
+
+            <div class="card">
+                <h3><span class="step-number">3</span>Déploiement de l'Application Web</h3>
+                <p>C'est l'étape cruciale pour rendre le script accessible à votre IA locale.</p>
+                <ul>
+                    <li>Dans l'éditeur, cliquez en haut à droite sur <strong>Déployer</strong> > <strong>Nouveau
+                            déploiement</strong>.</li>
+                    <li>Type de déploiement : cliquez sur la roue dentée et choisissez <strong>Application Web</strong>.
+                    </li>
+                    <li>Description : "Serveur MCP Gemini".</li>
+                    <li><strong>Exécuter en tant que :</strong> Choisissez <code>Moi</code> (Votre compte).</li>
+                    <li><strong>Qui a accès :</strong> Choisissez <code>Tout le monde</code> (Anyone).</li>
+                </ul>
+                <div class="alert">
+                    ⚠️ <strong>Sécurité :</strong> Choisir "Tout le monde" permet à votre script d'être appelé depuis
+                    Internet, ce qui est nécessaire pour l'outil MCP local. La sécurité est assurée par l'URL unique
+                    (impossible à deviner) et la clé d'accès (accessKey) dans le code.
+                </div>
+                <p>Cliquez sur <strong>Déployer</strong>, autorisez l'accès, puis <strong>copiez l'URL de l'application
+                        Web</strong> (elle finit par <code>/exec</code>).</p>
+            </div>
+
+            <div class="card">
+                <h3><span class="step-number">4</span>Configuration des Variables d'Environnement</h3>
+                <p>Nous devons dire à votre ordinateur où se trouve ce script. Sous Windows, utilisez la commande
+                    suivante :</p>
+                <pre><span class="cmd-prompt">></span>setx MCP_WEB_APPS_URL "https://script.google.com/macros/s/###/exec?accessKey=sample"</pre>
+                <p><em>Attention : Remplacez l'URL par la vôtre. Si vous n'avez pas changé le code du script, laissez
+                        <code>accessKey=sample</code>.</em></p>
+                <p>Redémarrez votre terminal une nouvelle fois.</p>
+            </div>
+
+            <div class="card">
+                <h3><span class="step-number">5</span>Installation de l'Extension</h3>
+                <p>Lions le tout dans Gemini :</p>
+                <pre><span class="cmd-prompt">></span>gemini extensions install https://github.com/tanaikech/ToolsForMCPServer-extension</pre>
+                <p>Pour tester, lancez <code>gemini</code> puis tapez <code>/mcp</code>. Si vous voyez une liste
+                    d'outils, la connexion est établie !</p>
+            </div>
+        </section>
+
+        <section id="file-search">
+            <h2>3. La Mémoire Documentaire</h2>
+            <p>Pour que l'IA puisse travailler sur vos fichiers locaux (PDF, CSV, Rapports), nous installons l'extension
+                <strong>FileSearchStore</strong>.</p>
+
+            <div class="card">
+                <h3>Installation Rapide</h3>
+                <pre><span class="cmd-prompt">></span>gemini extensions install https://github.com/tanaikech/FileSearchStore-extension</pre>
+                <p>Vérifiez l'installation avec la commande :</p>
+                <pre><span class="cmd-prompt">></span>/mcp desc</pre>
+                <p>Vous devriez voir apparaître les 11 outils de gestion de fichiers.</p>
+            </div>
+        </section>
+
+        <section id="use-cases">
+            <h2>4. Ateliers Pratiques : L'IA au Travail</h2>
+            <p>Maintenant que la machine est prête, passons aux scénarios réels. Ces exercices sont conçus pour simuler
+                des tâches de cadres en entreprise.</p>
+            <p><em>Environnement : Ces commandes sont à taper dans l'interface Gemini CLI (après avoir lancé la commande
+                    <code>gemini</code>).</em></p>
+
+            <div class="card">
+                <div class="badge badge-usecase">Scénario : Stratégie & Synthèse</div>
+                <h3>🧠 Le Synthétiseur de Connaissances</h3>
+                <p><strong>Contexte :</strong> Vous devez présenter demain matin les tendances du marché des
+                    "Semi-conducteurs". Vous avez téléchargé un livre blanc technique de 50 pages (PDF).</p>
+                <p><strong>L'Action :</strong> Au lieu de lire, nous demandons à l'IA d'analyser, synthétiser et
+                    préparer vos slides.</p>
+                <p><strong>Prompt (Commande) :</strong></p>
+                <pre>@file-search-store Ajoute le fichier 'market_report_2024.pdf' à ta mémoire.
+Ensuite, analyse-le et fournis-moi :
+1. Un résumé exécutif en 5 points clés.
+2. Une liste des 3 risques majeurs cités.
+3. Le plan détaillé d'une présentation PowerPoint de 10 slides basée sur ce contenu.</pre>
+            </div>
+
+            <div class="card">
+                <div class="badge badge-usecase">Scénario : Relation Client</div>
+                <h3>📊 L'Analyste de Feedback Client</h3>
+                <p><strong>Contexte :</strong> Le service client vous a envoyé un export brut (CSV) des 500 derniers
+                    retours clients. La direction veut savoir "ce qui ne va pas".</p>
+                <p><strong>L'Action :</strong> Analyse sémantique et proposition d'actions correctives.</p>
+                <p><strong>Prompt (Commande) :</strong></p>
+                <pre>@file-search-store Lis le fichier 'retours_clients.csv'.
+Agis comme un Directeur de l'Expérience Client.
+1. Identifie les 3 thèmes de plainte les plus récurrents.
+2. Pour chaque thème, cite un verbatim client "choc".
+3. Rédige une proposition de réponse diplomate et empathique pour le problème numéro 1.</pre>
+            </div>
+
+            <div class="card">
+                <div class="badge badge-usecase">Scénario : Ressources Humaines</div>
+                <h3>🤝 L'Assistant de Recrutement 2.0</h3>
+                <p><strong>Contexte :</strong> Vous avez reçu 50 CVs au format PDF dans un dossier pour un poste de
+                    "Chef de Projet Senior". Le tri manuel est fastidieux.</p>
+                <p><strong>L'Action :</strong> Filtrage intelligent sur critères spécifiques.</p>
+                <p><strong>Prompt (Commande) :</strong></p>
+                <pre>@file-search-store Scanne tous les fichiers PDF du dossier 'Candidats'.
+Je cherche un profil spécifique. Crée un tableau comparatif (Markdown) des candidats qui répondent à CES deux critères :
+1. Plus de 5 ans d'expérience en gestion de projet.
+2. Mentionnent 'Agile' ou 'Scrum' et un niveau d'anglais courant.
+Ajoute une colonne 'Score de pertinence /10' basé sur leur expérience.</pre>
+            </div>
+
+            <div class="card">
+                <div class="badge badge-usecase">Scénario : Administration & Automation</div>
+                <h3>⚡ L'Orchestrateur Google Workspace</h3>
+                <p><strong>Contexte :</strong> Vous devez organiser une réunion de crise suite aux résultats financiers
+                    et envoyer les invitations.</p>
+                <p><strong>L'Action :</strong> Interagir directement avec Gmail et Calendar via le serveur MCP.</p>
+                <p><strong>Prompt (Commande) :</strong></p>
+                <pre>@mcp-server Utilise mes outils Workspace.
+1. Cherche dans mes emails non lus celui provenant de 'finance@entreprise.com' contenant 'Rapport Trimestriel'.
+2. Résume le contenu de cet email.
+3. Crée un brouillon de réponse dans Gmail pour accuser réception et proposer une réunion lundi prochain à 10h pour en discuter.</pre>
+            </div>
+
+        </section>
+
+        <footer
+            style="text-align: center; margin-top: 4rem; color: var(--text-secondary); border-top: 1px solid var(--bg-secondary); padding-top: 2rem;">
+            <p>Formation IA Avancée - Support Apprenant</p>
+            <p style="font-size: 0.9em;">Basé sur les travaux open-source de Kanshi Tanaike. Adapté pour formation
+                cadres.</p>
+        </footer>
+    </div>
+
+</body>
+
+</html>
