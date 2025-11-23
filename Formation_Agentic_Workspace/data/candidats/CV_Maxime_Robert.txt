@@ -1,0 +1,26 @@
+NOM : Robert
+PRENOM : Maxime
+POSTE VISE : Architecte Logiciel
+
+EXPERIENCE PROFESSIONNELLE
+2015 - Présent : Lead Architect chez TechGiant
+- Conception d'architectures distribuées
+- Définition de standards techniques
+- Mentoring d'équipes de développement
+2012 - 2015 : Développeur Senior chez SoftwareCo
+- Développement backend Java/Spring
+
+FORMATION
+- Ingénieur Informatique, CentraleSupélec
+- Master Architecture Logicielle
+
+LANGUES
+- Français : Langue maternelle
+- Anglais : Bilingue
+- Allemand : Intermédiaire
+
+COMPETENCES
+- Java, Spring, Microservices
+- Architecture hexagonale, DDD
+- Kafka, RabbitMQ
+- MongoDB, PostgreSQL

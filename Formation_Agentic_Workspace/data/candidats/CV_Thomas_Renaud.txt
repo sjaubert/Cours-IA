@@ -1,0 +1,26 @@
+NOM : Renaud
+PRENOM : Thomas
+POSTE VISE : Ingénieur Blockchain
+
+EXPERIENCE PROFESSIONNELLE
+2019 - Présent : Blockchain Developer chez CryptoTech
+- Développement de smart contracts Ethereum
+- Audit de sécurité blockchain
+- Architecture de solutions décentralisées
+2017 - 2019 : Développeur Backend chez FinTech Solutions
+- Développement d'API
+
+FORMATION
+- Master Blockchain et Cryptomonnaies, Université Paris 1
+- Ingénieur Informatique, EPITA
+
+LANGUES
+- Français : Langue maternelle
+- Anglais : Bilingue
+
+COMPETENCES
+- Solidity, Web3.js, Ethers.js
+- Ethereum, Polygon, Binance Smart Chain
+- Hyperledger Fabric
+- Node.js, Python
+- Cryptographie

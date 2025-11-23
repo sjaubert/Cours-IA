@@ -1,0 +1,27 @@
+NOM : Clément
+PRENOM : Matthieu
+POSTE VISE : Ingénieur Données IoT
+
+EXPERIENCE PROFESSIONNELLE
+2018 - Présent : IoT Data Engineer chez SmartDevices
+- Développement de solutions IoT
+- Traitement de flux de données temps réel
+- Intégration capteurs et devices
+2016 - 2018 : Développeur IoT chez ConnectedSolutions
+- Programmation de devices embarqués
+
+FORMATION
+- Master IoT et Systèmes Embarqués, INSA Toulouse
+- Licence Électronique et Informatique
+
+LANGUES
+- Français : Langue maternelle
+- Anglais : Courant
+- Japonais : Notions
+
+COMPETENCES
+- MQTT, CoAP, LoRaWAN
+- Arduino, Raspberry Pi, ESP32
+- Python, C/C++
+- AWS IoT, Azure IoT Hub
+- Time-series databases (InfluxDB)

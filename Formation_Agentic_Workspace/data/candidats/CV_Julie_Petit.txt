@@ -1,0 +1,25 @@
+NOM : Petit
+PRENOM : Julie
+POSTE VISE : Chef de Produit Digital
+
+EXPERIENCE PROFESSIONNELLE
+2021 - Présent : Product Manager chez StartupX
+- Gestion du cycle de vie produit
+- Coordination équipes techniques et marketing
+2019 - 2021 : Product Owner chez DigitalAgency
+- Rédaction de user stories
+- Animation de sprints agiles
+
+FORMATION
+- Master Marketing Digital, ESSEC
+- Licence Gestion
+
+LANGUES
+- Français : Langue maternelle
+- Anglais : Bilingue
+- Italien : Intermédiaire
+
+COMPETENCES
+- Méthodologies Agile/Scrum
+- Analyse de marché
+- UX/UI Design

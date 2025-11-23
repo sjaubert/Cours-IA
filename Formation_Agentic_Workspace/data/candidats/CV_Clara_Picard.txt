@@ -1,0 +1,28 @@
+NOM : Picard
+PRENOM : Clara
+POSTE VISE : Responsable CRM
+
+EXPERIENCE PROFESSIONNELLE
+2016 - Présent : CRM Manager chez RetailGroup
+- Stratégie de fidélisation client
+- Gestion plateforme CRM (Salesforce)
+- Campagnes marketing automation
+- Analyse de données clients
+2014 - 2016 : Chargée CRM chez E-commerce Plus
+- Segmentation et ciblage clients
+
+FORMATION
+- Master Marketing Relationnel, IAE Paris
+- Licence Marketing
+
+LANGUES
+- Français : Langue maternelle
+- Anglais : Courant
+- Chinois : Intermédiaire
+
+COMPETENCES
+- Salesforce, HubSpot
+- Marketing automation
+- Segmentation client
+- SQL, Excel avancé
+- A/B Testing

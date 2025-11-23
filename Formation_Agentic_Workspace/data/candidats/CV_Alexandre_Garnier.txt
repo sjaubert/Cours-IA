@@ -1,0 +1,24 @@
+NOM : Garnier
+PRENOM : Alexandre
+POSTE VISE : Développeur Mobile
+
+EXPERIENCE PROFESSIONNELLE
+2020 - Présent : Mobile Developer chez AppFactory
+- Développement d'applications iOS et Android
+- Publication sur App Store et Google Play
+2018 - 2020 : Développeur Junior chez MobileStudio
+- Maintenance d'applications existantes
+
+FORMATION
+- Master Développement Mobile, Université de Nantes
+- Licence Informatique
+
+LANGUES
+- Français : Langue maternelle
+- Anglais : Courant
+
+COMPETENCES
+- Swift, SwiftUI, Objective-C
+- Kotlin, Java, Flutter
+- Firebase, Realm
+- REST API, GraphQL

@@ -1,0 +1,24 @@
+NOM : Durand
+PRENOM : Camille
+POSTE VISE : Designer UX/UI
+
+EXPERIENCE PROFESSIONNELLE
+2020 - Présent : UX/UI Designer chez CreativeStudio
+- Conception d'interfaces pour applications mobiles et web
+- Recherche utilisateur et tests d'utilisabilité
+2018 - 2020 : Designer Junior chez DesignLab
+- Création de maquettes et prototypes
+
+FORMATION
+- Master Design d'Interaction, École Gobelins
+- Licence Arts Appliqués
+
+LANGUES
+- Français : Langue maternelle
+- Anglais : Courant
+- Japonais : Notions
+
+COMPETENCES
+- Figma, Adobe XD, Sketch
+- Adobe Photoshop, Illustrator
+- Design thinking, Atomic Design
