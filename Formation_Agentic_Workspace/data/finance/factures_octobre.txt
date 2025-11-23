@@ -1,0 +1,20 @@
+FACTURE F2023-1001
+Date: 01/10/2023
+Client: Entreprise A
+Montant HT: 500.00 €
+TVA (20%): 100.00 €
+Montant TTC: 600.00 €
+
+FACTURE F2023-1002
+Date: 02/10/2023
+Client: Entreprise B
+Montant HT: 1200.00 €
+TVA (20%): 240.00 €
+Montant TTC: 1440.00 €
+
+FACTURE F2023-1003
+Date: 05/10/2023
+Client: Entreprise C
+Montant HT: 300.00 €
+TVA (20%): 60.00 €
+Montant TTC: 360.00 €
