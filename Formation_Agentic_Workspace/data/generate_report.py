@@ -1,5 +1,5 @@
 import random
-from datetime import datetime
+from datetime import datetime, timedelta
 
 def generate_report():
     sections = [
@@ -54,19 +54,83 @@ def generate_report():
         ])
     ]
 
+    # Generate Daily Logs
+    daily_logs = []
+    start_date = datetime(2024, 1, 1)
+    
+    clients = [f"Client_{i}" for i in range(1, 51)]
+    products = ["SuperGadget 3000", "MegaWidget X", "UltraTool Pro", "NanoService", "CloudPack"]
+    regions = ["Europe", "Asie", "Amerique", "Afrique"]
+    
+    daily_logs.append("8. JOURNAL DES OPERATIONS 2024")
+    daily_logs.append("Ce journal détaille les opérations quotidiennes significatives pour l'année 2024.")
+    daily_logs.append("")
+
+    for i in range(365):
+        current_date = start_date + timedelta(days=i)
+        date_str = current_date.strftime("%Y-%m-%d")
+        
+        daily_logs.append(f"--- Date: {date_str} ---")
+        
+        # Daily Stats
+        daily_sales = random.randint(5000, 50000)
+        daily_logs.append(f"Ventes journalières totales: {daily_sales} EUR")
+        daily_logs.append(f"Taux de satisfaction client: {random.randint(80, 100)}%")
+        
+        # Random Events (8-15 events per day to generate volume)
+        for _ in range(random.randint(8, 15)):
+            event_type = random.choice(["VENTE", "SUPPORT", "MAINTENANCE", "RH", "LOGISTIQUE", "MARKETING"])
+            
+            if event_type == "VENTE":
+                client = random.choice(clients)
+                product = random.choice(products)
+                amount = random.randint(100, 5000)
+                region = random.choice(regions)
+                daily_logs.append(f"[VENTE] Commande #{random.randint(10000, 99999)} - Client: {client} - Produit: {product} - Région: {region} - Montant: {amount} EUR")
+            
+            elif event_type == "SUPPORT":
+                ticket_id = random.randint(1000, 9999)
+                priority = random.choice(['Basse', 'Moyenne', 'Haute', 'Critique'])
+                status = random.choice(['Ouvert', 'En cours', 'Résolu', 'Fermé'])
+                daily_logs.append(f"[SUPPORT] Ticket #{ticket_id} - Priorité: {priority} - Statut: {status} - Temps de réponse: {random.randint(1, 48)}h")
+            
+            elif event_type == "MAINTENANCE":
+                machine = f"SRV-{random.randint(1, 20)}"
+                action = random.choice(["Mise à jour", "Redémarrage", "Remplacement pièce", "Nettoyage logs"])
+                daily_logs.append(f"[MAINTENANCE] Système: {machine} - Action: {action} - Technicien: Tech_{random.randint(1, 10)}")
+            
+            elif event_type == "RH":
+                action = random.choice(["Entretien", "Formation", "Réunion équipe", "Teambuilding"])
+                daily_logs.append(f"[RH] Activité: {action} - Participants: {random.randint(2, 20)}")
+
+            elif event_type == "LOGISTIQUE":
+                action = random.choice(["Réception stock", "Expédition lot", "Inventaire partiel"])
+                daily_logs.append(f"[LOGISTIQUE] Opération: {action} - Entrepôt: {random.choice(['Paris', 'Lyon', 'Marseille'])}")
+                
+            elif event_type == "MARKETING":
+                campaign = f"Campagne_{random.randint(1, 12)}"
+                daily_logs.append(f"[MARKETING] Lancement {campaign} - Impressions: {random.randint(1000, 50000)} - Clics: {random.randint(50, 2000)}")
+
+        daily_logs.append("") # Empty line separator
+
     with open("Rapport_Annuel.txt", "w", encoding="utf-8") as f:
         f.write("RAPPORT ANNUEL 2024 - ENTREPRISE FICTIVE\n")
-        f.write(f"Généré le : {datetime.now().strftime('%Y-%m-%d %H:%M')}\n\n")
+        f.write(f"Généré le : {datetime.now().strftime('%Y-%m-%d %H:%M')}\n")
+        f.write("VERSION DETAILLEE - DOCUMENT CONFIDENTIEL\n\n")
         
+        # Write static sections
         for title, content in sections:
             f.write(f"{title}\n")
             for line in content:
                 f.write(f"{line}\n")
-                # Add some random filler text to make it look even longer if needed
-                if random.random() > 0.7:
-                     f.write("Note: Ce point a fait l'objet d'une attention particulière du comité de direction.\n")
+                if random.random() > 0.5:
+                     f.write("Note: Analyse approfondie disponible en annexe.\n")
             f.write("\n")
+            
+        # Write daily logs
+        for line in daily_logs:
+            f.write(f"{line}\n")
 
 if __name__ == "__main__":
     generate_report()
-    print("Rapport_Annuel.txt a été régénéré avec succès.")
+    print("Rapport_Annuel.txt (version longue) a été régénéré avec succès.")
