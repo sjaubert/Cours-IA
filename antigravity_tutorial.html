@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intégration Antigravity & Google Workspace</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Space+Grotesk:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #8AB4F8;
+            --secondary: #C58AF9;
+            --accent: #81C995;
+            --background: #0E1117;
+            --surface: #161B22;
+            --surface-hover: #21262D;
+            --text-main: #E6EDF3;
+            --text-muted: #8B949E;
+            --border: #30363D;
+            --glass: rgba(22, 27, 34, 0.7);
+            --gradient-main: linear-gradient(135deg, #8AB4F8 0%, #C58AF9 100%);
+            --code-bg: #0d1117;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--background);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            color: var(--text-main);
+        }
+
+        a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        a:hover {
+            color: var(--secondary);
+            text-decoration: underline;
+        }
+
+        /* Layout */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 3rem;
+        }
+
+        /* Sidebar Navigation */
+        .sidebar {
+            position: sticky;
+            top: 2rem;
+            height: calc(100vh - 4rem);
+            overflow-y: auto;
+            padding-right: 1rem;
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 2rem;
+            display: block;
+        }
+
+        .nav-menu {
+            list-style: none;
+        }
+
+        .nav-item {
+            margin-bottom: 0.5rem;
+        }
+
+        .nav-link {
+            display: block;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            transition: all 0.2s;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            background: var(--surface-hover);
+            color: var(--text-main);
+            transform: translateX(5px);
+        }
+
+        .nav-link.active {
+            border-left: 3px solid var(--primary);
+        }
+
+        /* Main Content */
+        .main-content {
+            min-width: 0;
+        }
+
+        .hero {
+            margin-bottom: 4rem;
+            text-align: center;
+            padding: 4rem 2rem;
+            background: radial-gradient(circle at center, rgba(138, 180, 248, 0.1) 0%, transparent 70%);
+            border-radius: 24px;
+            border: 1px solid var(--border);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Sections */
+        section {
+            margin-bottom: 4rem;
+            scroll-margin-top: 2rem;
+        }
+
+        .section-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section-header h2 {
+            font-size: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .alert {
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            border: 1px solid transparent;
+        }
+
+        .alert-warning {
+            background: rgba(255, 170, 0, 0.1);
+            border-color: rgba(255, 170, 0, 0.3);
+            color: #FFD580;
+        }
+
+        .alert-info {
+            background: rgba(138, 180, 248, 0.1);
+            border-color: rgba(138, 180, 248, 0.3);
+            color: #8AB4F8;
+        }
+
+        /* Code Blocks */
+        .code-block {
+            background: var(--code-bg);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            position: relative;
+            overflow-x: auto;
+            border: 1px solid var(--border);
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.9rem;
+            color: #e6edf3;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background: var(--surface-hover);
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.2s;
+        }
+
+        .copy-btn:hover {
+            background: var(--primary);
+            color: var(--background);
+        }
+
+        /* Steps */
+        .step-list {
+            list-style: none;
+            counter-reset: step-counter;
+        }
+
+        .step-item {
+            position: relative;
+            padding-left: 3rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .step-item::before {
+            counter-increment: step-counter;
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 2rem;
+            height: 2rem;
+            background: var(--surface-hover);
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 2rem;
+            font-weight: bold;
+        }
+
+        .step-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-main);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+            }
+
+            .sidebar {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <nav class="sidebar">
+            <a href="#" class="nav-logo">Antigravity Guide</a>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="#intro" class="nav-link active">Introduction</a></li>
+                <li class="nav-item"><a href="#prerequis" class="nav-link">Prérequis</a></li>
+                <li class="nav-item"><a href="#probleme" class="nav-link">Le Problème</a></li>
+                <li class="nav-item"><a href="#solution" class="nav-link">La Solution (Proxy)</a></li>
+                <li class="nav-item"><a href="#config" class="nav-link">Configuration</a></li>
+                <li class="nav-item"><a href="#validation" class="nav-link">Validation</a></li>
+                <li class="nav-item"><a href="#resume" class="nav-link">Résumé</a></li>
+            </ul>
+        </nav>
+
+        <main class="main-content">
+            <section id="intro" class="hero">
+                <h1>Intégration Antigravity & Google Workspace</h1>
+                <p>Débloquez la puissance de l'extension Google Workspace pour Gemini CLI directement dans votre IDE
+                    Antigravity.</p>
+            </section>
+
+            <section id="prerequis">
+                <div class="section-header">
+                    <h2>Prérequis</h2>
+                </div>
+                <p>Avant de commencer, assurez-vous que votre environnement est prêt :</p>
+                <br>
+                <ul style="list-style-type: disc; margin-left: 1.5rem; color: var(--text-muted);">
+                    <li><strong>Gemini CLI</strong> : Doit être installé et authentifié.</li>
+                    <li><strong><a href="https://github.com/gemini-cli-extensions/workspace" target="_blank">Google
+                                Workspace Extension</a></strong> : Doit être installée et vérifiée.</li>
+                </ul>
+                <div class="alert alert-info" style="margin-top: 1.5rem;">
+                    <strong>Vérification :</strong> Lancez <code>gemini extensions list</code> pour localiser vos
+                    extensions.
+                </div>
+            </section>
+
+            <section id="probleme">
+                <div class="section-header">
+                    <h2>Le Problème de Compatibilité</h2>
+                </div>
+                <p>Vous avez peut-être essayé d'ajouter l'extension Workspace directement dans Antigravity et rencontré
+                    cette erreur :</p>
+
+                <div class="code-block" style="border-color: #ff6b6b;">
+                    Error: invalid tool name ###.$$$ which violates ^[a-zA-Z0-9_-]{1,64}$
+                </div>
+
+                <p><strong>La Cause :</strong> L'extension Google Workspace utilise des points dans les noms d'outils
+                    (ex: <code>docs.create</code>). Or, le client MCP de Google Antigravity impose une expression
+                    régulière stricte qui n'autorise que les caractères alphanumériques, les tirets bas et les traits
+                    d'union.</p>
+            </section>
+
+            <section id="solution">
+                <div class="section-header">
+                    <h2>La Solution : Script Proxy</h2>
+                </div>
+                <p>Pour contourner ce problème sans modifier le code source de l'extension (ce qui casserait les mises à
+                    jour), nous utilisons un script "Proxy" Node.js.</p>
+                <p>Ce script agit comme un intermédiaire :</p>
+                <ol style="margin-left: 1.5rem; margin-top: 1rem; margin-bottom: 1.5rem; color: var(--text-muted);">
+                    <li><strong>Sanitization :</strong> Il remplace les points par des tirets (<code>docs.create</code>
+                        -> <code>docs-create</code>) avant d'envoyer la liste à Antigravity.</li>
+                    <li><strong>Restauration :</strong> Lorsqu'Antigravity appelle un outil, le proxy rétablit le nom
+                        original avant de transmettre la requête à l'extension.</li>
+                </ol>
+
+                <h3>Mise en place</h3>
+                <p>Créez un fichier nommé <code>proxy.js</code> dans le même répertoire que l'extension (généralement
+                    <code>~/.gemini/extensions/google-workspace/dist/</code>) et collez le code suivant :
+                </p>
+
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+                    <pre>/**
+ * Proxy for the MCP server of Google Workspace Extension for Gemini CLI.
+ * It converts characters in tool names that do not match the regex rule
+ * into hyphens for the client.
+ */
+const { spawn } = require("child_process");
+const readline = require("readline");
+const path = require("path");
+const targetScript = process.argv[2];
+
+if (!targetScript) {
+  console.error("Error: Please provide the target script file.");
+  process.exit(1);
+}
+
+const toolNameMap = new Map();
+const serverProcess = spawn("node", [targetScript], {
+  stdio: ["pipe", "pipe", process.stderr],
+});
+
+function sanitizeToolName(originalName) {
+  const sanitized = originalName.replace(/[^a-zA-Z0-9_-]/g, "-");
+  if (sanitized !== originalName) {
+    toolNameMap.set(sanitized, originalName);
+  }
+  return sanitized;
+}
+
+function restoreToolName(sanitizedName) {
+  return toolNameMap.get(sanitizedName) || sanitizedName;
+}
+
+const inputRl = readline.createInterface({
+  input: process.stdin, output: null, terminal: false,
+});
+
+inputRl.on("line", (line) => {
+  try {
+    const request = JSON.parse(line);
+    if (request.method === "tools/call" && request.params && request.params.name) {
+      const originalName = restoreToolName(request.params.name);
+      request.params.name = originalName;
+      serverProcess.stdin.write(JSON.stringify(request) + "\n");
+    } else {
+      serverProcess.stdin.write(line + "\n");
+    }
+  } catch (e) {
+    serverProcess.stdin.write(line + "\n");
+  }
+});
+
+const outputRl = readline.createInterface({
+  input: serverProcess.stdout, output: null, terminal: false,
+});
+
+outputRl.on("line", (line) => {
+  try {
+    const response = JSON.parse(line);
+    if (response.result && Array.isArray(response.result.tools)) {
+      response.result.tools = response.result.tools.map((tool) => {
+        if (tool.name) tool.name = sanitizeToolName(tool.name);
+        return tool;
+      });
+      console.log(JSON.stringify(response));
+    } else {
+      console.log(line);
+    }
+  } catch (e) {
+    console.log(line);
+  }
+});
+
+serverProcess.on("close", (code) => process.exit(code));
+process.on("SIGINT", () => {
+  serverProcess.kill("SIGINT");
+  process.exit();
+});</pre>
+                </div>
+            </section>
+
+            <section id="config">
+                <div class="section-header">
+                    <h2>Configuration Antigravity</h2>
+                </div>
+                <p>Mettez à jour votre fichier <code>mcp_config.json</code> pour router le trafic via le proxy :</p>
+
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+                    <pre>{
+  "mcpServers": {
+    "tools-for-mcp-server-extension": {
+      "command": "node",
+      "args": [
+        "/home/{username}/.gemini/extensions/google-workspace/dist/proxy.js",
+        "/home/{username}/.gemini/extensions/google-workspace/dist/index.js"
+      ]
+    }
+  }
+}</pre>
+                </div>
+                <div class="alert alert-warning">
+                    N'oubliez pas de remplacer <code>{username}</code> par votre nom d'utilisateur réel.
+                </div>
+            </section>
+
+            <section id="validation">
+                <div class="section-header">
+                    <h2>Validation & Tests</h2>
+                </div>
+                <p>Une fois la configuration mise à jour, rafraîchissez les serveurs MCP. L'erreur devrait disparaître.
+                </p>
+                <p>Vous pouvez maintenant tester l'intégration avec des prompts en langage naturel dans Antigravity :
+                </p>
+
+                <div class="step-list">
+                    <div class="step-item">
+                        <div class="step-title">Test 1 : Recherche Drive</div>
+                        <p>Prompt : <em>"Search a file 'sample file for searching' on Google Drive."</em></p>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-title">Test 2 : Lecture Google Docs</div>
+                        <p>Prompt : <em>"Get a text from a Google Document named 'sample Google Document'."</em></p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="resume" class="hero"
+                style="background: radial-gradient(circle at center, rgba(129, 201, 149, 0.1) 0%, transparent 70%);">
+                <h2>Résumé</h2>
+                <p style="margin-top: 1rem;">
+                    Cette solution permet de combiner l'extension officielle Google Workspace (avec son authentification
+                    simplifiée) et l'IDE Google Antigravity. Le script proxy résout élégamment le conflit de nommage,
+                    ouvrant la voie à une automatisation agentique fluide et puissante.
+                </p>
+            </section>
+
+        </main>
+    </div>
+
+    <script>
+        // Navigation active state
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= (sectionTop - 150)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Copy to clipboard
+        function copyCode(btn) {
+            const pre = btn.nextElementSibling;
+            const text = pre.innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                const originalText = btn.innerText;
+                btn.innerText = 'Copié !';
+                setTimeout(() => {
+                    btn.innerText = originalText;
+                }, 2000);
+            });
+        }
+    </script>
+
+</body>
+
+</html>
