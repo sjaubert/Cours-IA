@@ -23,3 +23,6 @@
 [Tutoriel Automatisation Agentique](https://sjaubert.github.io/Cours-IA/Agentic_Automation_Tutorial.html?target=_blank)
 
 [Formation Agentic Workspace](Formation_Agentic_Workspace/index.html)
+
+
+[antigravity_tutorial](https://sjaubert.github.io/Cours-IA/antigravity_tutorial.html?target=_blank)
