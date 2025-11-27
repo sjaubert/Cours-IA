@@ -1,0 +1,3 @@
+Le fichier CSV du répertoire de données suit l'espérance de vie au fil du temps. 
+Créez une application Streamlit interactive permettant à l'utilisateur d'explorer les données 
+de pays ou de groupes de pays spécifiques.

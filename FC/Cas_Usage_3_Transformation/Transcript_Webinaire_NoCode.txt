@@ -1,0 +1,44 @@
+TRANSCRIPTION BRUTE - WEBINAIRE "LE FUTUR DU NO-CODE EN ENTREPRISE"
+Date : 10 Février 2025
+Intervenants :
+- Thomas (Expert Tech)
+- Sarah (Consultante Innovation)
+
+---
+
+Thomas : Ok, est-ce que tout le monde m'entend ? Ouais c'est bon. Alors bonjour à tous, bienvenue dans ce... ce nouveau webinaire sur le No-Code. Aujourd'hui on va parler de... bah de comment ça change la donne dans les grosses boîtes. Avec moi j'ai Sarah. Salut Sarah.
+
+Sarah : Salut Thomas, salut tout le monde. Ravie d'être là.
+
+Thomas : Alors pour commencer, le No-Code, c'est quoi ? Enfin je veux dire, on en entend parler partout mais... concrètement ?
+
+Sarah : Ouais c'est vrai. En gros, c'est permettre à des gens qui savent pas coder, ce qu'on appelle les "Citizen Developers", de créer des applis. Genre des trucs pour gérer des stocks, ou des formulaires RH, sans écrire une seule ligne de code. Juste en glissant-déposant des blocs. C'est hyper puissant.
+
+Thomas : Mais du coup, les DSI, les directeurs informatiques, ils flippent pas un peu ? Genre "Shadow IT" et tout ça ?
+
+Sarah : Ah si, carrément ! C'est le gros sujet. Le Shadow IT, c'est quand les employés utilisent des outils que la DSI connait pas. Et avec le No-Code, ça peut aller très vite. Tu peux te retrouver avec une appli critique faite sur un coin de table par un stagiaire, et le jour où il part, personne sait comment ça marche. Et niveau sécurité des données, c'est... c'est chaud.
+
+Thomas : Ouais je vois. Mais d'un autre côté, ça libère l'innovation non ?
+
+Sarah : Exactement. C'est ça le paradoxe. Si tu bloques tout, tu tues l'agilité. Si tu laisses tout faire, tu risques la cata de sécurité. Donc la solution, c'est la gouvernance. Il faut que la DSI accompagne, qu'elle mette des garde-fous, mais qu'elle laisse faire.
+
+Thomas : Ok. Et niveau outils, on parle de quoi ? Bubble, Airtable ?
+
+Sarah : Ouais, Bubble pour les web apps complexes, c'est le top. Airtable pour tout ce qui est base de données, c'est génial. Et puis t'as Make, anciennement Integromat, pour les automatisations. Genre "si je reçois un mail, ça crée une ligne dans Airtable et ça envoie un Slack". Ça, ça fait gagner un temps fou.
+
+Thomas : Et l'IA là-dedans ?
+
+Sarah : Ah bah l'IA ça va encore accélérer le truc. Maintenant tu peux dire à l'IA "crée-moi une appli de gestion de congés" et elle te génère la base du truc en No-Code. C'est... c'est bluffant. On va vers du "Natural Language to App".
+
+Thomas : Dingue. Bon, on a une question de Julien dans le chat : "Est-ce que c'est fiable pour des gros volumes de données ?".
+
+Sarah : Bonne question. Alors... ça dépend. Pour des millions de lignes, Airtable va ramer. Faudra passer sur du Xano pour le backend. Faut pas croire que le No-Code c'est magique pour tout. Faut choisir les bons outils pour la bonne échelle.
+
+Thomas : Super, merci Sarah. On arrive à la fin... un dernier mot ?
+
+Sarah : Formez-vous ! C'est l'avenir. Même si vous êtes pas tech, mettez les mains dedans.
+
+Thomas : Merci Sarah, merci à tous. À la prochaine !
+
+---
+(Fin de l'enregistrement)

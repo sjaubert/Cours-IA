@@ -1,0 +1,15 @@
+Le fichier CSV du répertoire de données suit l'espérance de vie au fil du temps. 
+Créez une application Streamlit interactive permettant à l'utilisateur d'explorer les données 
+de pays, groupes de pays ou zones géographiques spécifiques et 
+de sélectionner une période. 
+L'utilisateur doit pouvoir choisir entre deux affichages : un 
+graphique regroupant les données des pays sélectionnés et un 
+graphique individuel pour chaque pays. 
+Dans ce dernier cas, les graphiques doivent être disposés en colonnes et en lignes, avec 
+un maximum de quatre graphiques par ligne. 
+Présélectionnez quatre zones géographiques : « Monde », « Amériques », « Asie » et « Europe ». 
+Configurez l'affichage en format large. 
+Ajoutez une barre latérale contenant les instructions d'utilisation 
+et utilisez Plotly pour les graphiques. 
+Les commandes doivent se trouver dans la fenêtre principale. 
+Nommez l'application « lifedash.py ».
