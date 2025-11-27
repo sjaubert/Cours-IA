@@ -29,8 +29,9 @@ def load_data():
         df = pd.read_csv("Long-run life expectancy at birth - Sheet1.csv")
         # Renommer les colonnes pour une manipulation plus aisée
         df.rename(columns={
-            "Entity": "Country",
-            "Life expectancy at birth (years)": "LifeExpectancy"
+            "country": "Country",
+            "year": "Year",
+            "life_expectancy_at_birth": "LifeExpectancy"
         }, inplace=True)
         # Supprimer les lignes avec des données manquantes pour la visualisation
         df.dropna(subset=["Country", "Year", "LifeExpectancy"], inplace=True)
