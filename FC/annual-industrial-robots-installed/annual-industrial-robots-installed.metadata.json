@@ -1,0 +1,55 @@
+{
+  "chart": {
+    "title": "Annual industrial robots installed in top five countries",
+    "subtitle": "Industrial robots are automated, reprogrammable machines that perform a variety of tasks in industrial settings.",
+    "note": "Example machines that are not classified as robots: software (e.g., voice assistants), remote-controlled drones, self-driving cars, “smart” washing machines.",
+    "citation": "International Federation of Robotics (IFR) via AI Index Report (2025)",
+    "originalChartUrl": "https://ourworldindata.org/grapher/annual-industrial-robots-installed?v=1&csvType=full&useColumnShortNames=false",
+    "selection": [
+      "Italy",
+      "France",
+      "Canada",
+      "Taiwan",
+      "China",
+      "Germany",
+      "India",
+      "Japan",
+      "Mexico",
+      "United States",
+      "Thailand",
+      "Spain",
+      "South Korea",
+      "Singapore",
+      "Poland"
+    ]
+  },
+  "columns": {
+    "Annual industrial robots installed": {
+      "titleShort": "Annual industrial robots installed",
+      "titleLong": "Annual industrial robots installed",
+      "descriptionShort": "Industrial robots are automated, reprogrammable machines that perform a variety of tasks in industrial settings.",
+      "descriptionKey": [
+        "The use of robots with AI-based software shows how AI is being applied in the real world.",
+        "Industrial robots are machines used in factories to automate tasks like welding, assembly, and packaging.",
+        "They are defined as automatically controlled, reprogrammable, and multipurpose machines that can move in three or more directions.",
+        "Reprogrammable means their functions can be changed through software without altering their physical parts.",
+        "Multipurpose means they can be adapted for different tasks with mechanical changes.",
+        "Robots are becoming easier to install and more flexible, which means even small production runs can be automated.",
+        "Companies use robots to improve product quality, increase speed, reduce waste, and cut costs."
+      ],
+      "shortUnit": "",
+      "unit": "robots",
+      "timespan": "2011-2023",
+      "type": "Integer",
+      "owidVariableId": 1026152,
+      "shortName": "installations",
+      "lastUpdated": "2025-04-08",
+      "nextUpdate": "2026-04-08",
+      "citationShort": "International Federation of Robotics (IFR) via AI Index Report (2025) – with minor processing by Our World in Data",
+      "citationLong": "International Federation of Robotics (IFR) via AI Index Report (2025) – with minor processing by Our World in Data. “Annual industrial robots installed” [dataset]. International Federation of Robotics (IFR) via AI Index Report, “AI Index Report” [original data].",
+      "fullMetadata": "https://api.ourworldindata.org/v1/indicators/1026152.metadata.json"
+    }
+  },
+  "dateDownloaded": "2025-11-27",
+  "activeFilters": {}
+}
