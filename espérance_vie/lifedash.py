@@ -26,7 +26,7 @@ with st.sidebar:
 def load_data():
     """Charge, nettoie et prépare les données sur l'espérance de vie."""
     try:
-        df = pd.read_csv("Long-run life expectancy at birth - Sheet1.csv")
+        df = pd.read_excel("Long-run life expectancy at birth.xlsx")
         # Renommer les colonnes pour une manipulation plus aisée
         df.rename(columns={
             "country": "Country",
@@ -38,8 +38,8 @@ def load_data():
         return df
     except FileNotFoundError:
         # Affiche un message d'erreur si le fichier n'est pas trouvé
-        st.error("Fichier de données 'Long-run life expectancy at birth - Sheet1.csv' introuvable.")
-        st.info("Veuillez vous assurer que le fichier CSV se trouve dans le même répertoire que l'application.")
+        st.error("Fichier de données 'Long-run life expectancy at birth.xlsx' introuvable.")
+        st.info("Veuillez vous assurer que le fichier Excel se trouve dans le même répertoire que l'application.")
         return pd.DataFrame() # Retourne un DataFrame vide pour éviter d'autres erreurs
 
 # Chargement des données
