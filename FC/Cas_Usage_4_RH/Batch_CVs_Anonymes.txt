@@ -1,0 +1,47 @@
+---
+CANDIDAT A (ID: A-2024)
+Profil : Data Scientist Senior
+Expérience : 6 ans
+Compétences : Python (Expert), AWS (Certifié), Scikit-learn, TensorFlow.
+Parcours :
+- 2020-2024 : Lead Data Scientist chez MedTech Solutions. Mise en place de pipelines ML pour la détection de fraudes. Management de 2 juniors.
+- 2018-2020 : Data Analyst chez Axa.
+Soft Skills : "J'aime former mes collègues et animer des ateliers techniques."
+Formation : Master Big Data, École Polytechnique.
+---
+CANDIDAT B (ID: B-2024)
+Profil : Expert Technique
+Expérience : 8 ans
+Compétences : Python (Guru), C++, Assembly, Kubernetes, AWS.
+Parcours :
+- 2016-2024 : Freelance. "J'ai codé des algorithmes que personne d'autre ne peut comprendre."
+Soft Skills : "Je préfère travailler seul pour ne pas être ralenti par les autres. Les réunions sont une perte de temps."
+Formation : Autodidacte génial.
+---
+CANDIDAT C (ID: C-2024)
+Profil : Junior Potentiel
+Expérience : 2 ans (dont alternance)
+Compétences : Python (Bon niveau), R, Azure (Notions).
+Parcours :
+- 2022-2024 : Alternant Data Scientist chez Sanofi. Travail sur des données cliniques.
+Soft Skills : "Curieux, passionné par le secteur médical. Je cherche une équipe pour apprendre."
+Formation : Master MIAGE.
+---
+CANDIDAT D (ID: D-2024)
+Profil : Consultant Digital
+Expérience : 4 ans
+Compétences : Big Data, AI, Blockchain, Metaverse, NFT, Python (Notions), Excel, PowerPoint.
+Parcours :
+- 2020-2024 : Consultant Digital Transformation. "J'ai disrupté les process de plusieurs clients."
+Soft Skills : "Leadership, Vision, Synergie."
+Formation : École de Commerce.
+---
+CANDIDAT E (ID: E-2024)
+Profil : Chercheur PhD
+Expérience : 10 ans
+Compétences : Python, Deep Learning, Recherche Fondamentale.
+Parcours :
+- 2014-2024 : Chercheur au CNRS. 15 publications sur les réseaux de neurones convolutifs.
+Soft Skills : "Rigueur scientifique absolue."
+Formation : Doctorat en Mathématiques Appliquées.
+---
