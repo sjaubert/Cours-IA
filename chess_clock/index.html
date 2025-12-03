@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chess Clock Premium</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Roboto+Mono:wght@500;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Player 2 (Top, inverted for OTB play usually, but let's keep it simple first, maybe side by side is better for web) -->
+        <!-- Let's do side-by-side for standard web view, maybe rotatable later if requested -->
+
+        <div class="clock-container" id="player2-container">
+            <div class="timer-display" id="player2-time">05:00</div>
+            <div class="player-label">Joueur 2</div>
+        </div>
+
+        <div class="controls-overlay">
+            <div class="controls-bar">
+                <button class="control-btn" id="btn-blitz" title="Blitz 5+3 (Raccourci: 1)">
+                    <span class="icon">⚡</span> 5+3
+                </button>
+                <button class="control-btn" id="btn-rapid1" title="Rapide 10+5 (Raccourci: 2)">
+                    <span class="icon">🐇</span> 10+5
+                </button>
+                <button class="control-btn" id="btn-rapid2" title="Rapide 15+10 (Raccourci: 3)">
+                    <span class="icon">🐢</span> 15+10
+                </button>
+                <div class="separator"></div>
+                <button class="control-btn action-btn" id="btn-pause" title="Pause (Raccourci: P)">
+                    ⏸
+                </button>
+                <button class="control-btn action-btn" id="btn-reset" title="Réinitialiser (Raccourci: R)">
+                    🔄
+                </button>
+            </div>
+            <div class="settings-hint">Appuyez sur <strong>Espace</strong> ou cliquez sur l'horloge pour changer de tour
+            </div>
+        </div>
+
+        <div class="clock-container" id="player1-container">
+            <div class="timer-display" id="player1-time">05:00</div>
+            <div class="player-label">Joueur 1</div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
