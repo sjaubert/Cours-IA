@@ -1,10 +1,10 @@
 # Activité 4 : Planification Prédictive
 
-## 📋 Contexte
+##  Contexte
 
 Vous gérez la maintenance d'une pompe équipée de capteurs (température, vibration, courant). Vous disposez de 12 mois de relevés horaires. Utilisez l'IA pour analyser les données, détecter les dérives et planifier la maintenance préventive.
 
-## ⏱️ Durée : 50 min
+##  Durée : 50 min
 
 ---
 
@@ -118,7 +118,7 @@ Créez un document de synthèse :
 
 ---
 
-## 📊 Critères d'Évaluation
+## Critères d'Évaluation
 
 | Critère | Points |
 |---------|--------|
@@ -128,8 +128,7 @@ Créez un document de synthèse :
 | **Planning** : Recommandations justifiées | 25% |
 
 ---
-
-## 💡 Conseils
+##  Conseils
 
 1. **Visualisez d'abord** : Les graphiques révèlent beaucoup
 2. **Corrélez les paramètres** : Souvent, plusieurs évoluent ensemble
@@ -138,4 +137,4 @@ Créez un document de synthèse :
 
 ---
 
-**Bonne analyse prédictive ! 📈**
+**Bonne analyse prédictive !**
