@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pomodoro Apaisant</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <h1>Focus</h1>
+        </header>
+
+        <div class="timer-container">
+            <div class="timer-ring">
+                <svg class="progress-ring" width="300" height="300">
+                    <circle
+                        class="progress-ring__circle"
+                        stroke="var(--primary-color)"
+                        stroke-width="8"
+                        fill="transparent"
+                        r="140"
+                        cx="150"
+                        cy="150"/>
+                </svg>
+                <div class="time-display" id="time-display">25:00</div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <div class="modes">
+                <button class="mode-btn active" data-mode="pomodoro">Pomodoro</button>
+                <button class="mode-btn" data-mode="shortBreak">Pause Courte</button>
+                <button class="mode-btn" data-mode="longBreak">Pause Longue</button>
+            </div>
+            
+            <div class="actions">
+                <button id="start-btn" class="action-btn">Démarrer</button>
+                <button id="reset-btn" class="action-btn secondary">Réinitialiser</button>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
