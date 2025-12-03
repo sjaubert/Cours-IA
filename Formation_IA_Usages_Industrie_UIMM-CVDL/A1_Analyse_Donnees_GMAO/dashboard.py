@@ -88,10 +88,72 @@ except FileNotFoundError:
 with st.expander("Voir les données brutes (5 premières lignes)"):
     st.dataframe(df.head())
 
+# --- SIDEBAR FILTERS ---
+
+st.sidebar.header("🔍 Filtres")
+
+# 1. Date Range
+min_date = df['Date'].min()
+max_date = df['Date'].max()
+
+# Handle NaT or empty dates if necessary
+if pd.isnull(min_date) or pd.isnull(max_date):
+    st.sidebar.warning("Dates non disponibles pour le filtrage.")
+    start_date, end_date = None, None
+else:
+    start_date = st.sidebar.date_input("Date de début", min_date)
+    end_date = st.sidebar.date_input("Date de fin", max_date)
+
+# 2. Machine ID
+all_machines = sorted(df['ID_Machine'].unique())
+selected_machines = st.sidebar.multiselect("Machine(s)", all_machines, default=all_machines)
+
+# 3. Failure Type
+all_failures = sorted(df['Type_Panne'].unique())
+selected_failures = st.sidebar.multiselect("Type de Panne", all_failures, default=all_failures)
+
+# 4. Technician
+# Simple cleaning for display (optional, can be improved)
+df['Technicien'] = df['Technicien'].fillna('Non renseigné').str.strip()
+all_techs = sorted(df['Technicien'].unique())
+selected_techs = st.sidebar.multiselect("Technicien", all_techs, default=all_techs)
+
+# --- FILTER DATA ---
+
+filtered_df = df.copy()
+
+# Filter by Date
+if start_date and end_date:
+    filtered_df = filtered_df[
+        (filtered_df['Date'].dt.date >= start_date) & 
+        (filtered_df['Date'].dt.date <= end_date)
+    ]
+
+# Filter by Machine
+if selected_machines:
+    filtered_df = filtered_df[filtered_df['ID_Machine'].isin(selected_machines)]
+
+# Filter by Failure Type
+if selected_failures:
+    filtered_df = filtered_df[filtered_df['Type_Panne'].isin(selected_failures)]
+
+# Filter by Technician
+if selected_techs:
+    filtered_df = filtered_df[filtered_df['Technicien'].isin(selected_techs)]
+
+# Show filtered count
+st.sidebar.markdown("---")
+st.sidebar.info(f"**{len(filtered_df)}** interventions sélectionnées")
+
 # --- METRICS CALCULATION ---
 
+# Use filtered_df for calculations
+if filtered_df.empty:
+    st.warning("Aucune donnée ne correspond aux filtres sélectionnés.")
+    st.stop()
+
 # Group by Machine
-machine_stats = df.groupby('ID_Machine').agg(
+machine_stats = filtered_df.groupby('ID_Machine').agg(
     Nombre_Interventions=('ID_Intervention', 'count'),
     Temps_Arret_Total=('Duree_Arret_h_Clean', 'sum')
 ).reset_index()
@@ -105,6 +167,11 @@ machine_stats['MTTR (h)'] = machine_stats['Temps_Arret_Total'] / machine_stats['
 # Calculate MTBF (Mean Time Between Failures)
 # Formula: (Total Time - Total Downtime) / Number of Failures
 # Result in Days for readability (as requested)
+# Note: Using fixed HOURS_IN_YEAR might need adjustment if filtering by short date range, 
+# but keeping standard definition for now or we could use the time range duration.
+# For simplicity in this context, we'll keep the annual base or adjust if needed.
+# Let's stick to the standard annual view for MTBF to avoid confusion, 
+# or note that it's "Annualized MTBF" if the period is shorter.
 machine_stats['MTBF (jours)'] = ((HOURS_IN_YEAR - machine_stats['Temps_Arret_Total']) / machine_stats['Nombre_Interventions']) / 24
 
 # Sort by Total Downtime (Descending)
@@ -115,7 +182,7 @@ machine_stats = machine_stats.sort_values(by='Temps_Arret_Total', ascending=Fals
 col1, col2 = st.columns([2, 1])
 
 with col1:
-    st.subheader("🏆 Top 10 Machines les plus critiques (Temps d'arrêt)")
+    st.subheader("🏆 Top 10 Machines (Filtrées)")
     top_10 = machine_stats.head(10)
     st.dataframe(top_10.style.format({
         'Temps_Arret_Total': '{:.2f}',
@@ -124,10 +191,10 @@ with col1:
     }))
 
 with col2:
-    st.subheader("📈 Indicateurs Globaux")
+    st.subheader("📈 Indicateurs (Filtrés)")
     total_downtime = machine_stats['Temps_Arret_Total'].sum()
     total_interventions = machine_stats['Nombre_Interventions'].sum()
-    avg_mttr = total_downtime / total_interventions
+    avg_mttr = total_downtime / total_interventions if total_interventions > 0 else 0
     
     st.metric("Temps d'arrêt total (h)", f"{total_downtime:.2f}")
     st.metric("Nombre d'interventions", f"{total_interventions}")
@@ -136,7 +203,7 @@ with col2:
 # --- PARETO ANALYSIS ---
 
 st.markdown("---")
-st.subheader("📊 Analyse de Pareto : Règle des 80/20")
+st.subheader("📊 Analyse de Pareto (Données Filtrées)")
 
 # Calculate cumulative percentage
 machine_stats['Cum_Downtime'] = machine_stats['Temps_Arret_Total'].cumsum()
@@ -196,17 +263,20 @@ st.plotly_chart(fig, use_container_width=True)
 critical_machines = machine_stats[machine_stats['Cum_Percent'] <= 80]
 num_critical = len(critical_machines)
 total_machines = len(machine_stats)
-percent_critical = (num_critical / total_machines) * 100
+percent_critical = (num_critical / total_machines) * 100 if total_machines > 0 else 0
 
-st.info(f"💡 **Insight** : {num_critical} machines (soit {percent_critical:.1f}% du parc) représentent environ 80% du temps d'arrêt total.")
+st.info(f"💡 **Insight** : {num_critical} machines (soit {percent_critical:.1f}% du parc sélectionné) représentent environ 80% du temps d'arrêt total.")
 
 # Failure types for critical machines
-st.subheader("🔍 Types de pannes fréquents sur les machines critiques")
+st.subheader("🔍 Types de pannes fréquents (Machines Critiques)")
 critical_ids = critical_machines['ID_Machine'].tolist()
-critical_data = df[df['ID_Machine'].isin(critical_ids)]
+critical_data = filtered_df[filtered_df['ID_Machine'].isin(critical_ids)]
 
-failure_counts = critical_data['Type_Panne'].value_counts().reset_index()
-failure_counts.columns = ['Type de Panne', 'Nombre']
+if not critical_data.empty:
+    failure_counts = critical_data['Type_Panne'].value_counts().reset_index()
+    failure_counts.columns = ['Type de Panne', 'Nombre']
 
-fig_pie = px.pie(failure_counts, values='Nombre', names='Type de Panne', title='Répartition des pannes sur les machines critiques')
-st.plotly_chart(fig_pie)
+    fig_pie = px.pie(failure_counts, values='Nombre', names='Type de Panne', title='Répartition des pannes sur les machines critiques')
+    st.plotly_chart(fig_pie)
+else:
+    st.info("Pas assez de données pour afficher la répartition des pannes.")
