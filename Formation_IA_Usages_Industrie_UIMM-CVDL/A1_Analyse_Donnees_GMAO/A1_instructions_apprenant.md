@@ -1,12 +1,12 @@
 # Activité 1 : Analyse de Données GMAO et Reporting Décisionnel
 
-## 📋 Contexte Professionnel
+##  Contexte Professionnel
 
 Vous êtes technicien de maintenance dans une usine de production. Votre responsable vous demande d'analyser les interventions de maintenance de l'année 2024 pour identifier les machines problématiques et optimiser le plan de maintenance.
 
 Le fichier `interventions_2024.csv` contient **5000 interventions** extraites de la GMAO (Gestion de Maintenance Assistée par Ordinateur), mais les données sont brutes et contiennent des erreurs de saisie.
 
-## 🎯 Objectifs Pédagogiques
+##  Objectifs Pédagogiques
 
 1. Apprendre à utiliser l'IA pour nettoyer et normaliser des données
 2. Calculer des indicateurs clés de maintenance (MTBF, MTTR)
@@ -17,7 +17,7 @@ Le fichier `interventions_2024.csv` contient **5000 interventions** extraites de
 
 **60 minutes**
 
-## 📦 Livrables Attendus
+##  Livrables Attendus
 
 1. Un script Python fonctionnel (`analyse_gmao.py`)
 2. Des graphiques de visualisation (PNG ou dans le script)
@@ -25,7 +25,7 @@ Le fichier `interventions_2024.csv` contient **5000 interventions** extraites de
 
 ---
 
-## 🛠️ Étapes de Travail
+##  Étapes de Travail
 
 ### Étape 1 : Préparation (5 min)
 
@@ -160,14 +160,14 @@ Format : Markdown avec sections claires et chiffres concrets.
 
 ---
 
-## 💡 Conseils
+##  Conseils
 
 1. **Itérez avec Gemini** : Si le code ne fonctionne pas, copiez l'erreur et demandez une correction
 2. **Vérifiez les résultats** : Ne faites pas confiance aveuglément à l'IA, vérifiez la cohérence des chiffres
 3. **Soyez critique** : L'IA peut faire des erreurs de calcul ou d'interprétation
 4. **Contextualisez** : Ajoutez votre expertise métier dans les recommandations
 
-## 📚 Ressources Complémentaires
+##  Ressources Complémentaires
 
 **Formules de référence** :
 
@@ -182,7 +182,7 @@ Format : Markdown avec sections claires et chiffres concrets.
 
 ---
 
-## 🚀 Aller Plus Loin (Optionnel)
+##  Aller Plus Loin (Optionnel)
 
 Si vous terminez en avance :
 
@@ -190,7 +190,8 @@ Si vous terminez en avance :
 2. **Analyse temporelle** : Y a-t-il des périodes de l'année plus critiques ?
 3. **Analyse par technicien** : Identifier les temps de réparation moyens par technicien
 4. **Carte de criticité** : Matrice (Fréquence × Gravité) pour prioriser les actions
+5. **Demander à l'IA de faire une application Streamlit pour visualiser les données**
 
 ---
 
-**Bonne analyse ! 🔧**
+**Bonne analyse ! **
