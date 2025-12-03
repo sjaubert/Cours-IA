@@ -1,0 +1,170 @@
+:root {
+    --bg-color: #121212;
+    --clock-bg-idle: #1e1e1e;
+    --clock-bg-active: #2c3e50;
+    /* Dark Blue-ish */
+    --clock-bg-active-p1: #2980b9;
+    /* Nice Blue */
+    --clock-bg-active-p2: #c0392b;
+    /* Nice Red */
+    --text-color: #e0e0e0;
+    --text-dim: #757575;
+    --accent-color: #f1c40f;
+    --font-main: 'Inter', sans-serif;
+    --font-mono: 'Roboto Mono', monospace;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+    /* Prevent text selection during frantic clicking */
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-main);
+    height: 100vh;
+    overflow: hidden;
+}
+
+.app-container {
+    display: flex;
+    flex-direction: column;
+    /* Stack vertically for mobile/desktop split */
+    height: 100%;
+    width: 100%;
+}
+
+/* For larger screens, maybe side-by-side? Let's stick to vertical split as it's classic for chess apps */
+@media (min-width: 768px) {
+    .app-container {
+        flex-direction: row;
+    }
+}
+
+.clock-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--clock-bg-idle);
+    transition: background-color 0.3s ease, transform 0.1s ease;
+    cursor: pointer;
+    position: relative;
+    border: 4px solid transparent;
+}
+
+.clock-container:active {
+    transform: scale(0.98);
+}
+
+.clock-container.active {
+    /* Color will be set by specific IDs or classes if we want different colors per player */
+    box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.3);
+}
+
+#player1-container.active {
+    background-color: var(--clock-bg-active-p1);
+}
+
+#player2-container.active {
+    background-color: var(--clock-bg-active-p2);
+}
+
+.clock-container.flagged {
+    background-color: #330000;
+    color: #ff5555;
+}
+
+.timer-display {
+    font-family: var(--font-mono);
+    font-size: 15vw;
+    /* Responsive font size */
+    font-weight: 700;
+    line-height: 1;
+}
+
+.player-label {
+    font-size: 1.5rem;
+    border-radius: 50px;
+    display: flex;
+    gap: 0.8rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    pointer-events: auto;
+    /* Re-enable clicks for buttons */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.control-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-color);
+    font-family: var(--font-main);
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    padding: 0.5rem 0.8rem;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.control-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.control-btn.active-mode {
+    background-color: var(--accent-color);
+    color: #000;
+}
+
+.action-btn {
+    font-size: 1.2rem;
+    padding: 0.4rem 0.6rem;
+}
+
+.separator {
+    width: 1px;
+    background-color: rgba(255, 255, 255, 0.2);
+    margin: 0 0.2rem;
+}
+
+.settings-hint {
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    pointer-events: none;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .timer-display {
+        font-size: 20vw;
+    }
+
+    .controls-bar {
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 90vw;
+        border-radius: 20px;
+    }
+
+    .settings-hint {
+        display: none;
+        /* Hide hint on mobile to save space */
+    }
+
+    /* Rotate top player for face-to-face mobile usage */
+    #player2-container .timer-display,
+    #player2-container .player-label {
+        transform: rotate(180deg);
+    }
+}
