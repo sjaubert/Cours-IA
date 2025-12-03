@@ -1,0 +1,154 @@
+:root {
+    --bg-color: #FDFCF0; /* Cream/Off-white */
+    --primary-color: #8FBC8F; /* Sage Green */
+    --secondary-color: #E0E5DF; /* Light Sage/Grey */
+    --text-color: #4A4A4A; /* Soft Grey */
+    --accent-color: #D8BFD8; /* Thistle (Soft Purple) for breaks */
+    --shadow-light: #ffffff;
+    --shadow-dark: #d1d9e6;
+    --font-main: 'Quicksand', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-main);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    transition: background-color 0.5s ease;
+}
+
+.app-container {
+    background: var(--bg-color);
+    padding: 2rem;
+    border-radius: 30px;
+    box-shadow: 20px 20px 60px #d9d8ce, 
+                -20px -20px 60px #ffffff;
+    text-align: center;
+    width: 90%;
+    max-width: 400px;
+}
+
+header h1 {
+    font-weight: 300;
+    letter-spacing: 2px;
+    margin-bottom: 2rem;
+    color: var(--primary-color);
+}
+
+.timer-container {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    margin: 0 auto 2rem;
+}
+
+.progress-ring__circle {
+    transition: stroke-dashoffset 0.35s;
+    transform: rotate(-90deg);
+    transform-origin: 50% 50%;
+    stroke-linecap: round;
+}
+
+.time-display {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 4rem;
+    font-weight: 300;
+    color: var(--text-color);
+}
+
+.controls {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.modes {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.mode-btn {
+    background: transparent;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-family: var(--font-main);
+    font-size: 0.9rem;
+    color: var(--text-color);
+    cursor: pointer;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    opacity: 0.6;
+}
+
+.mode-btn.active {
+    background-color: var(--secondary-color);
+    opacity: 1;
+    font-weight: 500;
+}
+
+.actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.action-btn {
+    padding: 1rem 2.5rem;
+    border: none;
+    border-radius: 50px;
+    font-family: var(--font-main);
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    letter-spacing: 1px;
+}
+
+#start-btn {
+    background-color: var(--primary-color);
+    color: white;
+    box-shadow: 5px 5px 15px rgba(143, 188, 143, 0.4);
+}
+
+#start-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 5px 8px 20px rgba(143, 188, 143, 0.6);
+}
+
+#start-btn:active {
+    transform: translateY(1px);
+}
+
+.action-btn.secondary {
+    background-color: transparent;
+    color: var(--text-color);
+    border: 1px solid var(--secondary-color);
+}
+
+.action-btn.secondary:hover {
+    background-color: var(--secondary-color);
+}
+
+/* Pulse animation for finished timer */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.timer-finished .time-display {
+    animation: pulse 1s infinite;
+    color: var(--primary-color);
+}
