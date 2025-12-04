@@ -10,11 +10,7 @@ Vous gérez la maintenance d'une pompe équipée de capteurs (température, vibr
 
 ## Étape 1 : Génération des Données (5 min)
 
-```bash
-python generer_donnees_capteurs.py
-```
-
-Fichier créé : `releves_capteurs_12mois.csv` (~8760 lignes)
+Vérifiez le fichier `releves_capteurs_12mois.csv`.
 
 ---
 
