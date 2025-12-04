@@ -27,4 +27,4 @@
 
 [antigravity_tutorial](https://sjaubert.github.io/Cours-IA/antigravity_tutorial.html?target=_blank)
 
-[Guide installation antigravity(https://sjaubert.github.io/Cours-IA/antigravity/guide_antigravity.html?target=_blank)
+[Guide installation antigravity](https://sjaubert.github.io/Cours-IA/antigravity/guide_antigravity.html?target=_blank)
