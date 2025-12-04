@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guide Antigravity - Pôle Formation UIMM CVDL</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px;
+            background: #fff;
+        }
+
+        .header {
+            text-align: center;
+            border-bottom: 3px solid #005bbb;
+            padding-bottom: 30px;
+            margin-bottom: 40px;
+        }
+
+        .header img {
+            max-width: 180px;
+            height: auto;
+            margin-bottom: 15px;
+        }
+
+        .structure-name {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #005bbb;
+            margin: 10px 0 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .author-name {
+            font-size: 1.1em;
+            font-style: italic;
+            color: #555;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 2.2em;
+            margin-top: 20px;
+        }
+
+        h2 {
+            color: #005bbb;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+            margin-top: 40px;
+            font-size: 1.5em;
+        }
+
+        h3 {
+            color: #2c3e50;
+            margin-top: 25px;
+            font-size: 1.2em;
+        }
+
+        ul,
+        ol {
+            margin-left: 25px;
+            margin-bottom: 20px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: Consolas, monospace;
+            color: #c7254e;
+        }
+
+        .warning {
+            background: #fff3cd;
+            color: #856404;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 5px solid #ffeeba;
+            margin: 25px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #005bbb;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-top: 10px;
+            font-weight: 500;
+        }
+
+        .btn:hover {
+            background: #004494;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            font-size: 0.9em;
+            color: #777;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <img src="logo_uimm_placeholder.jpg" alt="Logo Pôle Formation UIMM-CVDL">
+        <div class="structure-name">Pôle Formation - UIMM CVDL</div>
+        <div class="author-name">Formateur : S. Jaubert</div>
+        <h1>Guide de Démarrage Antigravity</h1>
+    </div>
+
+    <p><strong>Antigravity</strong> est une plate-forme de développement "agent-first" qui intègre une IA autonome
+        capable de planifier, coder et exécuter des tâches complexes pour accélérer vos projets.</p>
+
+    <h2>1. Prérequis Indispensables</h2>
+    <p>Avant de commencer, assurez-vous impérativement de disposer des éléments suivants sur votre poste :</p>
+    <ul>
+        <li><strong>Git :</strong> Le système de gestion de versions doit être installé. <br>
+            <a href="https://git-scm.com/downloads" target="_blank">Télécharger Git</a>
+        </li>
+        <li><strong>Python :</strong> Le langage Python doit être installé (cochez "Add Python to PATH" à
+            l'installation). <br>
+            <a href="https://www.python.org/downloads/" target="_blank">Télécharger Python</a>
+        </li>
+        <li><strong>Compte Google :</strong> Un compte personnel est requis pour l'authentification.</li>
+    </ul>
+
+    <h2>2. Installation</h2>
+    <ol>
+        <li>Téléchargez l'installateur pour votre OS sur le site officiel.</li>
+        <li>Lancez l'installation et suivez les étapes.</li>
+        <li>Au premier lancement, connectez-vous avec votre compte Google via le navigateur.</li>
+    </ol>
+    <a href="https://antigravity.google/download?hl=fr" class="btn" target="_blank">Télécharger Antigravity</a>
+
+    <h2>3. Connexion à GitHub</h2>
+    <p>Pour sauvegarder vos projets et collaborer, connectez Antigravity à votre compte GitHub :</p>
+    <ol>
+        <li>Ouvrez Antigravity.</li>
+        <li>Accédez aux <strong>Paramètres</strong> (Settings) via l'icône d'engrenage.</li>
+        <li>Allez dans la section <strong>Integrations</strong> ou <strong>Accounts</strong>.</li>
+        <li>Sélectionnez <strong>GitHub</strong> et cliquez sur <strong>Connect</strong>.</li>
+        <li>Autorisez l'accès dans la fenêtre de navigateur qui s'ouvre.</li>
+    </ol>
+
+    <h2>4. Utilisation de base</h2>
+    <h3>L'Agent</h3>
+    <p>L'agent est votre copilote. Vous pouvez lui donner des instructions en langage naturel (ex: "Crée une page web
+        pour..."). Il peut :</p>
+    <ul>
+        <li><strong>Planifier</strong> les étapes d'un projet.</li>
+        <li><strong>Écrire et modifier</strong> du code.</li>
+        <li><strong>Exécuter</strong> des commandes dans le terminal.</li>
+    </ul>
+
+    <h3>Modes de fonctionnement</h3>
+    <ul>
+        <li><strong>Auto :</strong> L'agent prend des décisions autonomes (recommandé).</li>
+        <li><strong>Terminal :</strong> Vous pouvez définir si l'agent a le droit d'exécuter des commandes seul
+            (<em>Auto</em>) ou s'il doit demander la permission.</li>
+    </ul>
+
+    <div class="warning">
+        <strong>Sécurité :</strong> Pensez à configurer la liste des sites web autorisés dans les paramètres pour
+        sécuriser la navigation de l'agent.
+    </div>
+
+    <footer>
+        <p>Support pédagogique - Pôle Formation UIMM CVDL - 03/12/2025</p>
+    </footer>
+</body>
+
+</html>
