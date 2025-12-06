@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import React, { useState, useRef, useEffect, useLayoutEffect, useCallback } from 'react';
 import { saveAs } from 'file-saver';
 import Toolbar from './components/Toolbar';
 import Editor from './components/Editor';
@@ -165,14 +165,15 @@ function App() {
   }, [markdown]);
 
   // Restore selection after markdown update ONLY when needed
-  useEffect(() => {
+  // Using useLayoutEffect to run synchronously before browser paint
+  useLayoutEffect(() => {
     if (shouldRestoreSelection.current && editorRef.current && selectionRef.current) {
       const { start, end } = selectionRef.current;
       editorRef.current.setSelectionRange(start, end);
       editorRef.current.focus();
       shouldRestoreSelection.current = false; // Reset flag
     }
-  }, [markdown]);
+  });
 
   // Export as HTML
   const exportAsHTML = useCallback(() => {
