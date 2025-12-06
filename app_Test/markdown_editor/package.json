@@ -10,13 +10,16 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "file-saver": "^2.0.5",
     "katex": "^0.16.25",
     "lucide-react": "^0.556.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-markdown": "^10.1.0",
+    "react-syntax-highlighter": "^16.1.0",
     "rehype-katex": "^7.0.1",
     "rehype-raw": "^7.0.0",
+    "remark-gfm": "^4.0.1",
     "remark-math": "^6.0.0"
   },
   "devDependencies": {
