@@ -41,13 +41,16 @@ body {
   width: 10px;
   height: 10px;
 }
+
 ::-webkit-scrollbar-track {
   background: var(--bg-primary);
 }
+
 ::-webkit-scrollbar-thumb {
   background: var(--border-color);
   border-radius: 5px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
   background: var(--accent-color);
 }
@@ -77,10 +80,49 @@ body {
   font-weight: 700;
   font-size: 1.5rem;
   background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   letter-spacing: -0.05em;
 }
+
+.header-actions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.header-btn {
+  background: rgba(56, 189, 248, 0.1);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  color: var(--text-primary);
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.header-btn:hover {
+  background: rgba(56, 189, 248, 0.2);
+  border-color: var(--accent-color);
+  transform: translateY(-1px);
+}
+
+.header-btn.clear-btn {
+  background: rgba(239, 68, 68, 0.1);
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
+.header-btn.clear-btn:hover {
+  background: rgba(239, 68, 68, 0.2);
+  border-color: #ef4444;
+}
+
 
 .main-content {
   display: flex;
