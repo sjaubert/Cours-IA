@@ -75,6 +75,7 @@ function App() {
 
   const editorRef = useRef(null);
   const selectionRef = useRef({ start: 0, end: 0 });
+  const shouldRestoreSelection = useRef(false);
 
   // Auto-save to localStorage whenever markdown changes
   useEffect(() => {
@@ -158,14 +159,18 @@ function App() {
     const newSelectionStart = start + prefix.length;
     const newSelectionEnd = newSelectionStart + (selection.length || placeholder.length);
     selectionRef.current = { start: newSelectionStart, end: newSelectionEnd };
+
+    // Flag that we need to restore selection after this update
+    shouldRestoreSelection.current = true;
   }, [markdown]);
 
-  // Restore selection after markdown update
+  // Restore selection after markdown update ONLY when needed
   useEffect(() => {
-    if (editorRef.current && selectionRef.current) {
+    if (shouldRestoreSelection.current && editorRef.current && selectionRef.current) {
       const { start, end } = selectionRef.current;
       editorRef.current.setSelectionRange(start, end);
       editorRef.current.focus();
+      shouldRestoreSelection.current = false; // Reset flag
     }
   }, [markdown]);
 
