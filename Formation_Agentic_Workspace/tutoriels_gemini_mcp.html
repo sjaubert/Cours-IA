@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriels Gemini CLI & MCP - Guide de Navigation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Source+Code+Pro:wght@400;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg-main: #FDFBF8;
+            --text-main: #374151;
+            --text-heading: #111827;
+            --accent: #4F46E5;
+            --accent-light: #E0E7FF;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+        }
+
+        h1,
+        h2,
+        h3 {
+            color: var(--text-heading);
+            font-weight: 600;
+        }
+
+        .tutorial-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .tutorial-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .comparison-table th {
+            background-color: #f9fafb;
+            font-weight: 600;
+            color: var(--text-heading);
+        }
+
+        .comparison-table tr:hover {
+            background-color: #f9fafb;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen">
+
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-16">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="flex items-center gap-4 mb-6">
+                <img src="assets/logo_uimm_placeholder.jpg" alt="Logo UIMM"
+                    class="h-16 w-auto object-contain bg-white rounded-lg p-2">
+                <div>
+                    <h1 class="text-4xl font-bold mb-2">Tutoriels Gemini CLI & MCP</h1>
+
+                    <p class="text-indigo-100 text-lg">Choisissez le parcours adapté à vos besoins</p>
+
+                </div>
+            </div>
+            <p class="text-white/90 max-w-3xl">
+                Deux approches complémentaires pour connecter Gemini à vos données et outils professionnels.
+                Sélectionnez le tutoriel qui correspond le mieux à votre cas d'usage.
+            </p>
+            <span class="text-sm font-semibold text-gray-500">S. Jaubert</span>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto px-6 py-12">
+        <!-- Quick Comparison -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">Quelle extension choisir ?</h2>
+
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                <!-- Card 1: Guide Formation IA -->
+                <a href="guide_formation_ia.html"
+                    class="tutorial-card block bg-white rounded-xl border-2 border-gray-200 p-8 shadow-lg">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="bg-gradient-to-br from-blue-500 to-purple-600 text-white p-3 rounded-lg">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
+                                </path>
+                            </svg>
+                        </div>
+                        <span class="badge bg-blue-100 text-blue-800">Formation Complète</span>
+                    </div>
+
+                    <h3 class="text-2xl font-bold mb-3">Guide Formation IA & Productivité</h3>
+                    <p class="text-gray-600 mb-4">Extensions MCP tierces pour Google Workspace + Fichiers locaux</p>
+
+                    <div class="space-y-2 mb-6">
+                        <div class="flex items-center gap-2 text-sm">
+                            <span class="text-green-600">✓</span>
+                            <span>ToolsForMCPServer (Google Apps Script)</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-sm">
+                            <span class="text-green-600">✓</span>
+                            <span>FileSearchStore (fichiers locaux)</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-sm">
+                            <span class="text-green-600">✓</span>
+                            <span>Ateliers pratiques business</span>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between pt-4 border-t border-gray-200">
+                        <span class="text-sm font-semibold text-gray-500">Niveau : Intermédiaire</span>
+                        <span class="text-indigo-600 font-semibold">Accéder au guide →</span>
+                    </div>
+                </a>
+
+                <!-- Card 2: Gemini CLI Workspace -->
+                <a href="gemini_cli_workspace.html"
+                    class="tutorial-card block bg-white rounded-xl border-2 border-gray-200 p-8 shadow-lg">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="bg-gradient-to-br from-green-500 to-teal-600 text-white p-3 rounded-lg">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z">
+                                </path>
+                            </svg>
+                        </div>
+                        <span class="badge bg-green-100 text-green-800">Extension Officielle</span>
+                    </div>
+
+                    <h3 class="text-2xl font-bold mb-3">Gemini CLI Extension Workspace</h3>
+                    <p class="text-gray-600 mb-4">Extension officielle Google pour services Workspace uniquement</p>
+
+                    <div class="space-y-2 mb-6">
+                        <div class="flex items-center gap-2 text-sm">
+                            <span class="text-green-600">✓</span>
+                            <span>Installation en 1 commande</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-sm">
+                            <span class="text-green-600">✓</span>
+                            <span>Drive, Docs, Calendar, Gmail, Chat</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-sm">
+                            <span class="text-green-600">✓</span>
+                            <span>Workflows développeurs</span>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between pt-4 border-t border-gray-200">
+                        <span class="text-sm font-semibold text-gray-500">Niveau : Débutant</span>
+                        <span class="text-indigo-600 font-semibold">Accéder au guide →</span>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Detailed Comparison Table -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">Comparaison Détaillée</h2>
+
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th class="w-1/3">Critère</th>
+                            <th class="w-1/3">Guide Formation IA</th>
+                            <th class="w-1/3">Extension Workspace</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="font-semibold">Type d'extension</td>
+                            <td>Extensions tierces (communauté)</td>
+                            <td>Extension officielle Google</td>
+                        </tr>
+                        <tr>
+                            <td class="font-semibold">Complexité installation</td>
+                            <td>⚠️ Complexe (Apps Script + config)</td>
+                            <td>✅ Simple (1 commande)</td>
+                        </tr>
+                        <tr>
+                            <td class="font-semibold">Services Google</td>
+                            <td>Sheets, Docs, Gmail, Apps Script</td>
+                            <td>Drive, Docs, Calendar, Gmail, Chat</td>
+                        </tr>
+                        <tr>
+                            <td class="font-semibold">Fichiers locaux</td>
+                            <td>✅ Oui (PDF, CSV, TXT, etc.)</td>
+                            <td>❌ Non</td>
+                        </tr>
+                        <tr>
+                            <td class="font-semibold">Authentification</td>
+                            <td>URL Apps Script + Variables env.</td>
+                            <td>OAuth 2.0 automatique</td>
+                        </tr>
+                        <tr>
+                            <td class="font-semibold">Public cible</td>
+                            <td>Cadres, Managers, Formation</td>
+                            <td>Développeurs, Équipes tech</td>
+                        </tr>
+                        <tr>
+                            <td class="font-semibold">Cas d'usage</td>
+                            <td>Analyse docs, RH, Feedback client</td>
+                            <td>Workflows dev, Automation équipe</td>
+                        </tr>
+                        <tr>
+                            <td class="font-semibold">Maintenance</td>
+                            <td>Communauté (Kanshi Tanaike)</td>
+                            <td>Google (support officiel)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Use Cases -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">Quand utiliser chaque tutoriel ?</h2>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Use Case 1 -->
+                <div class="bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl p-6 border border-blue-200">
+                    <h3 class="text-xl font-bold mb-4 text-blue-900">📚 Choisissez le Guide Formation IA si :</h3>
+                    <ul class="space-y-2 text-gray-700">
+                        <li class="flex items-start gap-2">
+                            <span class="text-blue-600 mt-1">•</span>
+                            <span>Vous devez analyser des <strong>fichiers locaux</strong> (PDF, CSV, rapports)</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-blue-600 mt-1">•</span>
+                            <span>Vous formez des <strong>cadres ou managers</strong> à l'IA</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-blue-600 mt-1">•</span>
+                            <span>Vous avez besoin d'<strong>ateliers pratiques business</strong></span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-blue-600 mt-1">•</span>
+                            <span>Vous voulez une <strong>formation complète</strong> étape par étape</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Use Case 2 -->
+                <div class="bg-gradient-to-br from-green-50 to-teal-50 rounded-xl p-6 border border-green-200">
+                    <h3 class="text-xl font-bold mb-4 text-green-900">⚡ Choisissez l'Extension Workspace si :</h3>
+                    <ul class="space-y-2 text-gray-700">
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-600 mt-1">•</span>
+                            <span>Vous voulez une <strong>installation rapide</strong> (5 minutes)</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-600 mt-1">•</span>
+                            <span>Vous travaillez uniquement avec <strong>Google Workspace</strong></span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-600 mt-1">•</span>
+                            <span>Vous êtes <strong>développeur</strong> ou dans une équipe technique</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-600 mt-1">•</span>
+                            <span>Vous préférez une <strong>solution officielle Google</strong></span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recommendation -->
+        <section class="bg-indigo-50 border-l-4 border-indigo-600 p-8 rounded-r-xl">
+            <h3 class="text-2xl font-bold mb-4 text-indigo-900">💡 Notre Recommandation</h3>
+            <p class="text-gray-700 mb-4">
+                <strong>Les deux approches sont complémentaires !</strong> Si vous débutez avec Gemini CLI, commencez
+                par l'<strong>Extension Workspace</strong> pour sa simplicité.
+                Une fois à l'aise, explorez le <strong>Guide Formation IA</strong> pour débloquer l'analyse de fichiers
+                locaux et des cas d'usage business avancés.
+            </p>
+            <p class="text-gray-700">
+                Pour une formation en entreprise, le <strong>Guide Formation IA</strong> offre un parcours pédagogique
+                complet avec des ateliers pratiques adaptés aux métiers.
+            </p>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-100 mt-16 py-8">
+        <div class="max-w-6xl mx-auto px-6 text-center text-gray-600">
+            <p class="font-semibold mb-2">Pôle Formation UIMM-CVDL</p>
+            <p class="text-sm">Formation IA & Productivité - S. Jaubert</p>
+            <p class="text-xs mt-4 text-gray-500">
+                Basé sur les travaux de Kanshi Tanaike et l'extension officielle Google Workspace
+            </p>
+        </div>
+    </footer>
+
+</body>
+
+</html>
