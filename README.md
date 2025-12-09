@@ -23,7 +23,7 @@
 
 [Formation Agentic Workspace](Formation_Agentic_Workspace/index.html)
 
-<a href="Formation_Agentic_Workspace/guide_formation_ia.html" target="_blank">Guide Formation IA & Productivité : Gemini CLI & MCP</a>
+<a href="https://sjaubert.github.io/Cours-IA/Formation_Agentic_Workspace/guide_formation_ia.html" target="_blank">Guide Formation IA & Productivité : Gemini CLI & MCP</a>
 
 [antigravity_tutorial](https://sjaubert.github.io/Cours-IA/antigravity_tutorial.html?target=_blank)
 
