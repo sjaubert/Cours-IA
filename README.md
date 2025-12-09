@@ -25,6 +25,8 @@
 
 <a href="Formation_Agentic_Workspace/guide_formation_ia.html" target="_blank">Guide Formation IA & Productivité : Gemini CLI & MCP</a>
 
+[Gemini CLI Extension pour Google Workspace](https://sjaubert.github.io/Cours-IA/Formation_Agentic_Workspace/gemini_cli_workspace.html?target=_blank)
+
 [antigravity_tutorial](https://sjaubert.github.io/Cours-IA/antigravity_tutorial.html?target=_blank)
 
 [Guide installation antigravity](https://sjaubert.github.io/Cours-IA/antigravity/guide_antigravity.html?target=_blank)
