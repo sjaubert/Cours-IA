@@ -10,7 +10,7 @@ const CodePreview = ({ context, workflow }) => {
         const activeRole = ROLES.find(r => r.id === context.role)?.label || context.role;
         const activeLevel = LEVELS.find(l => l.id === context.level)?.value || context.level;
 
-        let output = `/initier_contexte_éducatif {\n`;
+        let output = `/initier_contexte_formation {\n`;
         output += `  "role": "${activeRole}",\n`;
         output += `  "niveau": "${activeLevel}",\n`;
         output += `  "sujet": "${context.subject || 'NON DÉFINI'}"\n`;
