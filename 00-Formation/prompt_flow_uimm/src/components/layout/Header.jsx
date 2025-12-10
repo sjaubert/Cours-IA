@@ -17,7 +17,7 @@ const Header = () => {
                 <img
                     src={logo}
                     alt="Pôle Formation UIMM"
-                    style={{ height: '50px', borderRadius: '4px' }}
+                    style={{ height: '70px', borderRadius: '4px' }}
                 />
                 <div>
                     <h1 style={{ margin: 0, fontSize: '1.2rem', fontWeight: 600 }}>PromptFlow Pôle Formation UIMM-CVDL</h1>
