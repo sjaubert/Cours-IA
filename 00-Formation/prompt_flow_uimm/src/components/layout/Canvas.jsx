@@ -1,17 +1,38 @@
-import React from 'react';
-import { useDrop } from 'react-dnd';
+import React, { useRef } from 'react';
+import { useDrop, useDrag } from 'react-dnd';
 import * as Icons from 'lucide-react';
 
-const CanvasItem = ({ item, index, removeStep, addModifier }) => {
+const CanvasItem = ({ item, index, removeStep, addModifier, moveStep, removeModifier }) => {
     const Icon = Icons[item.icon] || Icons.Circle;
+    const ref = useRef(null);
 
-    // Make the Item a drop target for MODIFIERS
-    const [{ isOver, canDrop }, drop] = useDrop(() => ({
+    // Make the item draggable for reordering
+    const [{ isDragging }, drag] = useDrag({
+        type: 'WORKFLOW_ITEM',
+        item: { index },
+        collect: (monitor) => ({
+            isDragging: monitor.isDragging()
+        })
+    });
+
+    // Accept drops from other workflow items for reordering
+    const [{ isOverReorder }, dropReorder] = useDrop({
+        accept: 'WORKFLOW_ITEM',
+        hover: (draggedItem) => {
+            if (draggedItem.index !== index) {
+                moveStep(draggedItem.index, index);
+                draggedItem.index = index;
+            }
+        },
+        collect: (monitor) => ({
+            isOverReorder: monitor.isOver() && monitor.getItemType() === 'WORKFLOW_ITEM'
+        })
+    });
+
+    // Accept drops of MODIFIERS
+    const [{ isOver, canDrop }, dropModifier] = useDrop(() => ({
         accept: 'MODIFIER',
         drop: (modifier, monitor) => {
-            // Stop propagation to the canvas to avoid double handling if we nested them
-            // But here they are siblings in structure effectively? No, Canvas contains Item.
-            // monitor.didDrop() checks if child handled it.
             if (monitor.didDrop()) return;
             addModifier(index, modifier);
         },
@@ -23,9 +44,12 @@ const CanvasItem = ({ item, index, removeStep, addModifier }) => {
 
     const isActive = isOver && canDrop;
 
+    // Combine refs for both drag and drop
+    drag(dropReorder(dropModifier(ref)));
+
     return (
         <div
-            ref={drop}
+            ref={ref}
             style={{
                 background: isActive ? 'rgba(255, 203, 5, 0.1)' : 'var(--bg-card)',
                 border: isActive ? '1px solid var(--color-uimm-yellow)' : '1px solid var(--border-color)',
@@ -37,9 +61,21 @@ const CanvasItem = ({ item, index, removeStep, addModifier }) => {
                 gap: '12px',
                 position: 'relative',
                 borderLeft: '4px solid var(--accent-primary)',
-                transition: 'all 0.2s ease'
+                transition: 'all 0.2s ease',
+                opacity: isDragging ? 0.5 : 1,
+                cursor: 'grab'
             }}
         >
+            {/* Drag handle icon */}
+            <div style={{
+                color: '#666',
+                cursor: 'grab',
+                display: 'flex',
+                alignItems: 'center'
+            }}>
+                <Icons.GripVertical size={16} />
+            </div>
+
             <div style={{
                 width: '32px', height: '32px',
                 borderRadius: '50%', background: 'rgba(255,255,255,0.05)',
@@ -55,14 +91,33 @@ const CanvasItem = ({ item, index, removeStep, addModifier }) => {
                 {/* Modifiers attached to this command */}
                 {item.modifiers && item.modifiers.length > 0 && (
                     <div style={{ display: 'flex', gap: '4px', marginTop: '8px', flexWrap: 'wrap' }}>
-                        {item.modifiers.map((mod, i) => (
-                            <span key={i} style={{
+                        {item.modifiers.map((mod, modIndex) => (
+                            <span key={modIndex} style={{
                                 background: 'rgba(255, 203, 5, 0.2)',
                                 color: 'var(--color-uimm-yellow)',
-                                fontSize: '0.7rem', padding: '2px 6px', borderRadius: '4px',
+                                fontSize: '0.7rem', padding: '2px 8px', borderRadius: '4px',
                                 display: 'flex', alignItems: 'center', gap: '4px'
                             }}>
                                 {mod.label}
+                                <button
+                                    onClick={() => removeModifier(index, modIndex)}
+                                    style={{
+                                        background: 'none',
+                                        border: 'none',
+                                        color: 'var(--color-uimm-yellow)',
+                                        cursor: 'pointer',
+                                        padding: '0',
+                                        marginLeft: '2px',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        opacity: 0.7,
+                                        fontSize: '0.9rem',
+                                        fontWeight: 'bold'
+                                    }}
+                                    title="Retirer ce modificateur"
+                                >
+                                    ×
+                                </button>
                             </span>
                         ))}
                     </div>
@@ -130,6 +185,25 @@ const Canvas = ({ workflow, setWorkflow }) => {
         setWorkflow(prev => prev.filter((_, i) => i !== index));
     };
 
+    const moveStep = (fromIndex, toIndex) => {
+        setWorkflow(prev => {
+            const updated = [...prev];
+            const [removed] = updated.splice(fromIndex, 1);
+            updated.splice(toIndex, 0, removed);
+            return updated;
+        });
+    };
+
+    const removeModifier = (stepIndex, modifierIndex) => {
+        setWorkflow(prev => {
+            const updated = [...prev];
+            const step = { ...updated[stepIndex] };
+            step.modifiers = step.modifiers.filter((_, i) => i !== modifierIndex);
+            updated[stepIndex] = step;
+            return updated;
+        });
+    };
+
     return (
         <div
             ref={drop}
@@ -169,6 +243,8 @@ const Canvas = ({ workflow, setWorkflow }) => {
                                 index={index}
                                 removeStep={removeStep}
                                 addModifier={addModifierToItem}
+                                moveStep={moveStep}
+                                removeModifier={removeModifier}
                             />
                         ))}
                     </div>
