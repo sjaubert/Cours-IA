@@ -12,7 +12,8 @@ const Layout = () => {
         subject: '',
         role: ROLES[0].id,
         level: LEVELS[1].id, // Default Niveau IV
-        sources: { includeWeb: false, includeFiles: false }
+        sources: { includeWeb: false, includeFiles: false },
+        output: { creativity: 'balanced', density: 'standard' }
     });
 
     const [workflow, setWorkflow] = useState([]); // List of commands in the sequence
