@@ -33,4 +33,4 @@
 
 [Tutoriels Gemini CLI & MCP - Guide de Navigation](https://sjaubert.github.io/Cours-IA/Formation_Agentic_Workspace/tutoriels_gemini_mcp.html?target=_blank)
 
-[PromptFlow UIMM - Studio de Création Pédagogique (Application)](https://sjaubert.github.io/Cours-IA/00-Formation/prompt_flow_uimm/index.html)
+[PromptFlow UIMM - Studio de Création Pédagogique (Application)](https://sjaubert.github.io/Cours-IA/00-Formation/prompt_flow_uimm/dist/index.html)
