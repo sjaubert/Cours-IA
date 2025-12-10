@@ -57,16 +57,8 @@ const CodePreview = ({ context, workflow }) => {
 
     const openInGemini = () => {
         const prompt = generatePrompt();
-        const encodedPrompt = encodeURIComponent(prompt);
-        // Check URL length (browsers typically support up to 2000 chars)
-        const url = `https://aistudio.google.com/app/prompts/new_freeform?q=${encodedPrompt}`;
-        if (url.length > 2000) {
-            // Fallback: copy and open
-            navigator.clipboard.writeText(prompt);
-            window.open('https://aistudio.google.com/app/prompts/new_freeform', '_blank');
-        } else {
-            window.open(url, '_blank');
-        }
+        navigator.clipboard.writeText(prompt);
+        window.open('https://gemini.google.com/app', '_blank');
     };
 
     const openInChatGPT = () => {
