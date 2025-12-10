@@ -5,7 +5,7 @@ import logo from '../../assets/logo_uimm_placeholder.jpg';
 const Header = () => {
     return (
         <header style={{
-            height: '60px',
+            height: '80px',
             background: 'var(--bg-panel)',
             borderBottom: '1px solid var(--border-color)',
             display: 'flex',
