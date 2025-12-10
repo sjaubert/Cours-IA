@@ -16,10 +16,15 @@ const CodePreview = ({ context, workflow }) => {
         output += `  "sujet": "${context.subject || 'NON DÉFINI'}"\n`;
         output += `}\n\n`;
 
-        // 2. Sources
         output += `/configurer_sources_données {\n`;
         output += `  "web_search": ${context.sources.includeWeb},\n`;
         output += `  "fichiers_locaux": ${context.sources.includeFiles}\n`;
+        output += `}\n\n`;
+
+        // 3. Output Settings
+        output += `/reglages_sortie {\n`;
+        output += `  "creativite": "${context.output?.creativity || 'balanced'}",\n`;
+        output += `  "densite": "${context.output?.density || 'standard'}"\n`;
         output += `}\n\n`;
 
         // 3. Sequence

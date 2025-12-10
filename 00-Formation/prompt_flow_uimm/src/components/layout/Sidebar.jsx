@@ -140,6 +140,57 @@ const Sidebar = ({ context, setContext }) => {
                 </div>
             </section>
 
+            {/* 3. SORTIE */}
+            <section>
+                <h3 style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', textTransform: 'uppercase', marginBottom: '12px' }}>
+                    3. Sortie
+                </h3>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                    {/* Creativity Slider */}
+                    <div>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}>
+                            <label style={{ fontSize: '0.8rem' }}>Créativité</label>
+                            <span style={{ fontSize: '0.7rem', color: 'var(--accent-primary)' }}>
+                                {context.output?.creativity || 'balanced'}
+                            </span>
+                        </div>
+                        <input
+                            type="range" min="0" max="2" step="1"
+                            value={['precise', 'balanced', 'creative'].indexOf(context.output?.creativity || 'balanced')}
+                            onChange={(e) => {
+                                const vals = ['precise', 'balanced', 'creative'];
+                                setContext(prev => ({
+                                    ...prev,
+                                    output: { ...prev.output, creativity: vals[e.target.value] }
+                                }));
+                            }}
+                            style={{ width: '100%' }}
+                        />
+                    </div>
+
+                    {/* Density Selector */}
+                    <div>
+                        <label style={{ display: 'block', fontSize: '0.8rem', marginBottom: '4px' }}>Densité</label>
+                        <select
+                            value={context.output?.density || 'standard'}
+                            onChange={(e) => setContext(prev => ({
+                                ...prev,
+                                output: { ...prev.output, density: e.target.value }
+                            }))}
+                            style={{
+                                width: '100%', padding: '6px',
+                                background: 'var(--bg-card)', border: '1px solid var(--border-color)',
+                                color: 'white', borderRadius: 'var(--radius-sm)'
+                            }}
+                        >
+                            <option value="brief">Bref</option>
+                            <option value="standard">Standard</option>
+                            <option value="detailed">Détaillé</option>
+                        </select>
+                    </div>
+                </div>
+            </section>
+
             {/* 3. PALETTE */}
             <section style={{ flex: 1 }}>
                 <h3 style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', textTransform: 'uppercase', marginBottom: '12px' }}>
