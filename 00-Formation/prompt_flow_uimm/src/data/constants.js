@@ -23,9 +23,9 @@ export const COMMANDS = [
     { id: 'quiz', label: 'QCM / Quiz', icon: 'HelpCircle', description: 'Vérification des acquis' },
     { id: 'feedback', label: 'Feedback', icon: 'MessageCircle', description: 'Analyse et retour critique' },
     { id: 'synthese', label: 'Synthèse', icon: 'FileText', description: 'Résumé structuré' },
-    { id: 'roleplay', label: 'Jeu de Rôle', icon: 'Users', description: 'Simulation d\'entretien/situation' },
+    { id: 'roleplay', label: 'Jeu de Rôle', icon: 'Users', description: 'Simulation dentretien/situation' },
     { id: 'objectifs', label: 'Objectifs SMART', icon: 'Target', description: 'Objectifs Spécifiques/Mesurables' },
-    { id: 'evaluation', label: 'Évaluation', icon: 'Award', description: 'Grille d\'évaluation compétences' },
+    { id: 'evaluation', label: 'Évaluation', icon: 'Award', description: 'Grille dévaluation compétences' },
     { id: 'plan_formation', label: 'Plan de Formation', icon: 'Map', description: 'Parcours de formation structuré' },
     { id: 'certification', label: 'Certification', icon: 'ShieldCheck', description: 'Validation des acquis professionnels' },
 ];
