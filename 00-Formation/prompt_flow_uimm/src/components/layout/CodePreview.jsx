@@ -92,7 +92,7 @@ const CodePreview = ({ context, workflow }) => {
                         Copier
                     </button>
                     <button
-                        className="btn btn-primary"
+                        className="btn"
                         onClick={openInGemini}
                         style={{ fontSize: '0.8rem', padding: '6px 12px' }}
                         title="Ouvrir dans Google AI Studio avec le prompt"
