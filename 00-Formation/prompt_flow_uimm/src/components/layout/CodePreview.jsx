@@ -1,4 +1,5 @@
 
+// CodePreview: component to generate and display prompt with copy/export actions
 import React from 'react';
 import * as Icons from 'lucide-react';
 import { ROLES, LEVELS } from '../../data/constants';
