@@ -4,6 +4,15 @@ import * as Icons from 'lucide-react';
 import { ROLES, LEVELS } from '../../data/constants';
 
 const CodePreview = ({ context, workflow }) => {
+    const [buttonStatus, setButtonStatus] = React.useState({});
+
+    const handleAction = (key, actionFn) => {
+        actionFn();
+        setButtonStatus(prev => ({ ...prev, [key]: 'success' }));
+        setTimeout(() => {
+            setButtonStatus(prev => ({ ...prev, [key]: 'idle' }));
+        }, 2000);
+    };
 
     const generatePrompt = () => {
         // 1. Role & Context
@@ -73,6 +82,18 @@ const CodePreview = ({ context, workflow }) => {
         window.open('https://claude.ai/new', '_blank');
     };
 
+    const getButtonStyle = (key) => ({
+        fontSize: '0.8rem',
+        padding: '6px 12px',
+        display: 'flex',
+        alignItems: 'center',
+        gap: '4px',
+        borderColor: buttonStatus[key] === 'success' ? '#4ade80' : 'transparent',
+        backgroundColor: buttonStatus[key] === 'success' ? 'rgba(74, 222, 128, 0.1)' : undefined,
+        color: buttonStatus[key] === 'success' ? '#4ade80' : undefined,
+        transition: 'all 0.2s ease'
+    });
+
     return (
         <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
             <div style={{
@@ -84,35 +105,38 @@ const CodePreview = ({ context, workflow }) => {
                 <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
                     <button
                         className="btn"
-                        onClick={copyToClipboard}
-                        style={{ fontSize: '0.8rem', padding: '6px 12px', display: 'flex', alignItems: 'center', gap: '4px' }}
+                        onClick={() => handleAction('copy', copyToClipboard)}
+                        style={getButtonStyle('copy')}
                         title="Copier le prompt"
                     >
-                        <Icons.Copy size={14} />
+                        {buttonStatus['copy'] === 'success' ? <Icons.Check size={14} /> : <Icons.Copy size={14} />}
                         Copier
                     </button>
                     <button
                         className="btn"
-                        onClick={openInGemini}
-                        style={{ fontSize: '0.8rem', padding: '6px 12px' }}
+                        onClick={() => handleAction('gemini', openInGemini)}
+                        style={getButtonStyle('gemini')}
                         title="Ouvrir dans Google AI Studio avec le prompt"
                     >
+                        {buttonStatus['gemini'] === 'success' && <Icons.Check size={14} />}
                         Gemini
                     </button>
                     <button
                         className="btn"
-                        onClick={openInChatGPT}
-                        style={{ fontSize: '0.8rem', padding: '6px 12px' }}
+                        onClick={() => handleAction('chatgpt', openInChatGPT)}
+                        style={getButtonStyle('chatgpt')}
                         title="Copier le prompt et ouvrir ChatGPT"
                     >
+                        {buttonStatus['chatgpt'] === 'success' && <Icons.Check size={14} />}
                         ChatGPT
                     </button>
                     <button
                         className="btn"
-                        onClick={openInClaude}
-                        style={{ fontSize: '0.8rem', padding: '6px 12px' }}
+                        onClick={() => handleAction('claude', openInClaude)}
+                        style={getButtonStyle('claude')}
                         title="Copier le prompt et ouvrir Claude"
                     >
+                        {buttonStatus['claude'] === 'success' && <Icons.Check size={14} />}
                         Claude
                     </button>
                 </div>
