@@ -52,7 +52,12 @@ const CodePreview = ({ context, workflow }) => {
                     modifiersStr = ' ' + step.modifiers.map(m => m.command).join(' ');
                 }
 
-                output += `  ${stepName}: [${commandName}]${modifiersStr}\n`;
+                let customContext = '';
+                if (step.customInstructions && step.customInstructions.trim() !== '') {
+                    customContext = ` {${step.customInstructions}}`;
+                }
+
+                output += `  ${stepName}: [${commandName}]${modifiersStr}${customContext}\n`;
             });
         }
         output += `}\n`;

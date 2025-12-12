@@ -2,8 +2,10 @@ import React, { useRef } from 'react';
 import { useDrop, useDrag } from 'react-dnd';
 import * as Icons from 'lucide-react';
 
-const CanvasItem = ({ item, index, removeStep, addModifier, moveStep, removeModifier }) => {
-    const Icon = Icons[item.icon] || Icons.Circle;
+const CanvasItem = ({ item, index, removeStep, addModifier, moveStep, removeModifier, updateStep }) => {
+    // Robust fallback: try item.icon, then HelpCircle, then generic Circle.
+    // Ensure we always have a valid component.
+    const Icon = Icons[item.icon] ? Icons[item.icon] : (Icons.HelpCircle || Icons.Circle || Icons.Box);
     const ref = useRef(null);
 
     // Make the item draggable for reordering
@@ -122,6 +124,26 @@ const CanvasItem = ({ item, index, removeStep, addModifier, moveStep, removeModi
                         ))}
                     </div>
                 )}
+
+                {/* Custom Instruction Input */}
+                <textarea
+                    placeholder="Instructions spécifiques (ex: Durée 15min, Format Tableau, Ton humoristique...)"
+                    value={item.customInstructions || ''}
+                    onChange={(e) => updateStep(index, { customInstructions: e.target.value })}
+                    style={{
+                        width: '100%',
+                        marginTop: '12px',
+                        padding: '8px',
+                        background: 'rgba(255, 255, 255, 0.03)',
+                        border: '1px solid var(--border-color)',
+                        borderRadius: '4px',
+                        color: 'var(--text-primary)',
+                        fontSize: '0.85rem',
+                        resize: 'vertical',
+                        minHeight: '60px',
+                        fontFamily: 'inherit'
+                    }}
+                />
             </div>
 
             <button
@@ -194,6 +216,14 @@ const Canvas = ({ workflow, setWorkflow }) => {
         });
     };
 
+    const updateStep = (index, updates) => {
+        setWorkflow(prev => {
+            const updated = [...prev];
+            updated[index] = { ...updated[index], ...updates };
+            return updated;
+        });
+    };
+
     const removeModifier = (stepIndex, modifierIndex) => {
         setWorkflow(prev => {
             const updated = [...prev];
@@ -245,6 +275,7 @@ const Canvas = ({ workflow, setWorkflow }) => {
                                 addModifier={addModifierToItem}
                                 moveStep={moveStep}
                                 removeModifier={removeModifier}
+                                updateStep={updateStep} // Pass the update function
                             />
                         ))}
                     </div>
