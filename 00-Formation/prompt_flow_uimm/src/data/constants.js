@@ -28,6 +28,7 @@ export const COMMANDS = [
     { id: 'evaluation', label: 'Évaluation', icon: 'Award', description: 'Grille dévaluation compétences' },
     { id: 'plan_formation', label: 'Plan de Formation', icon: 'Map', description: 'Parcours de formation structuré' },
     { id: 'certification', label: 'Certification', icon: 'ShieldCheck', description: 'Validation des acquis professionnels' },
+    { id: 'mindmap', label: 'Carte Mentale', icon: 'BookOpen', description: 'Visualisation structurée des concepts' },
 ];
 
 export const MODIFIERS = [
@@ -45,4 +46,7 @@ export const MODIFIERS = [
     { id: 'no_emoji', label: 'No Emoji', command: '/NO-EMOJI', icon: 'Ban' },
     { id: 'casual', label: 'Ton Cool', command: '/CASUAL-TONE', icon: 'Smile' },
     { id: 'code_only', label: 'Code Seul', command: '/CODE-ONLY', icon: 'Terminal' },
+    { id: 'time_limit', label: 'Temps Limité', command: '/TIME-LIMIT', icon: 'Clock' },
+    { id: 'custom_format', label: 'Format Spécifique', command: '/CUSTOM-FORMAT', icon: 'Layout' },
+    { id: 'rich_context', label: 'Contexte Riche', command: '/RICH-CONTEXT', icon: 'BookOpen' },
 ];
