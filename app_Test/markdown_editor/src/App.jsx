@@ -101,6 +101,7 @@ function App() {
     let placeholder = '';
 
     switch (type) {
+      // Text Formatting
       case 'bold':
         prefix = '**';
         suffix = '**';
@@ -116,6 +117,47 @@ function App() {
         suffix = '</u>';
         placeholder = 'underlined text';
         break;
+
+      // Headings
+      case 'h1':
+        prefix = '# ';
+        suffix = '';
+        placeholder = 'Heading 1';
+        break;
+      case 'h2':
+        prefix = '## ';
+        suffix = '';
+        placeholder = 'Heading 2';
+        break;
+      case 'h3':
+        prefix = '### ';
+        suffix = '';
+        placeholder = 'Heading 3';
+        break;
+
+      // Lists & Quotes
+      case 'ul':
+        prefix = '- ';
+        suffix = '';
+        placeholder = 'List item';
+        break;
+      case 'ol':
+        prefix = '1. ';
+        suffix = '';
+        placeholder = 'List item';
+        break;
+      case 'quote':
+        prefix = '> ';
+        suffix = '';
+        placeholder = 'Quote text';
+        break;
+      case 'code-block':
+        prefix = '\n```\n';
+        suffix = '\n```\n';
+        placeholder = 'code here';
+        break;
+
+      // Math Basic
       case 'latex-inline':
         prefix = '$';
         suffix = '$';
@@ -126,6 +168,94 @@ function App() {
         suffix = '\n$$\n';
         placeholder = '\\int_{-\\infty}^{\\infty} e^{-x^2} dx = \\sqrt{\\pi}';
         break;
+      case 'fraction':
+        prefix = '$\\frac{';
+        suffix = '}$';
+        placeholder = 'a}{b';
+        break;
+      case 'sqrt':
+        prefix = '$\\sqrt{';
+        suffix = '}$';
+        placeholder = 'x';
+        break;
+      case 'power':
+        prefix = '$x^{';
+        suffix = '}$';
+        placeholder = 'n';
+        break;
+      case 'subscript':
+        prefix = '$x_{';
+        suffix = '}$';
+        placeholder = 'i';
+        break;
+
+      // Math Advanced
+      case 'sum':
+        prefix = '$\\sum_{';
+        suffix = '}$';
+        placeholder = 'i=1}^{n';
+        break;
+      case 'integral':
+        prefix = '$\\int_{';
+        suffix = '}$';
+        placeholder = 'a}^{b';
+        break;
+      case 'product':
+        prefix = '$\\prod_{';
+        suffix = '}$';
+        placeholder = 'i=1}^{n';
+        break;
+      case 'limit':
+        prefix = '$\\lim_{';
+        suffix = '}$';
+        placeholder = 'x \\to \\infty';
+        break;
+
+      // Structures
+      case 'matrix':
+        prefix = '\n$$\n\\begin{bmatrix}\n';
+        suffix = '\n\\end{bmatrix}\n$$\n';
+        placeholder = 'a & b \\\\\nc & d';
+        break;
+      case 'vector':
+        prefix = '$\\vec{';
+        suffix = '}$';
+        placeholder = 'v';
+        break;
+      case 'cases':
+        prefix = '\n$$\nf(x) = \\begin{cases}\n';
+        suffix = '\n\\end{cases}\n$$\n';
+        placeholder = 'x^2 & \\text{if } x \\geq 0 \\\\\n-x & \\text{if } x < 0';
+        break;
+
+      // Greek Letters & Symbols
+      case 'alpha':
+        prefix = '$\\alpha$';
+        suffix = '';
+        placeholder = '';
+        break;
+      case 'beta':
+        prefix = '$\\beta$';
+        suffix = '';
+        placeholder = '';
+        break;
+      case 'theta':
+        prefix = '$\\theta$';
+        suffix = '';
+        placeholder = '';
+        break;
+      case 'pi':
+        prefix = '$\\pi$';
+        suffix = '';
+        placeholder = '';
+        break;
+      case 'infinity':
+        prefix = '$\\infty$';
+        suffix = '';
+        placeholder = '';
+        break;
+
+      // File Operations
       case 'save':
         // Manual save (already auto-saving, but provide feedback)
         localStorage.setItem(STORAGE_KEY, markdown);
