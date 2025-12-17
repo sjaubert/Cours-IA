@@ -175,6 +175,7 @@
             padding: 1.5rem;
             margin: 1rem 0;
             border-radius: 10px;
+            display: none;
         }
 
         .answer-zone h4 {
@@ -707,6 +708,30 @@
             Pôle Formation UIMM CVDL - Formation Intelligence Artificielle : Les Biais
         </div>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const questions = document.querySelectorAll('.quiz-question');
+            
+            questions.forEach(question => {
+                const inputs = question.querySelectorAll('input[type="radio"]');
+                const answerZone = question.querySelector('.answer-zone');
+                
+                if (inputs && answerZone) {
+                    inputs.forEach(input => {
+                        input.addEventListener('change', () => {
+                            // Show the answer zone with a simple fade-in effect
+                            answerZone.style.display = 'block';
+                            answerZone.style.opacity = '0';
+                            setTimeout(() => {
+                                answerZone.style.transition = 'opacity 0.5s ease';
+                                answerZone.style.opacity = '1';
+                            }, 10);
+                        });
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
