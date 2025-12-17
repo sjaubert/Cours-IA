@@ -125,24 +125,24 @@
             vertical-align: middle;
         }
 
-        .quiz-question h3 {
-            font-size: 1.25rem;
-            color: #667eea;
-            font-weight: bold;
-            margin-bottom: 1.2rem;
-            padding-bottom: 0.8rem;
-            border-bottom: 2px solid #e9ecef;
-            display: flex;
-            align-items: center;
+        .section .quiz-question h3 {
+            font-size: 1.25rem !important;
+            color: #667eea !important;
+            font-weight: bold !important;
+            margin: 0 0 1.2rem 0 !important;
+            padding-bottom: 0.8rem !important;
+            border-bottom: 2px solid #e9ecef !important;
+            display: flex !important;
+            align-items: center !important;
         }
 
-        .quiz-question p {
-            font-size: 1.05rem;
-            color: #2c3e50;
-            line-height: 1.8;
-            margin-bottom: 1.5rem;
-            display: block;
-            white-space: normal;
+        .section .quiz-question p {
+            font-size: 1.05rem !important;
+            color: #2c3e50 !important;
+            line-height: 1.8 !important;
+            margin: 0 0 1.5rem 0 !important;
+            display: block !important;
+            white-space: normal !important;
         }
 
         .options {
@@ -404,12 +404,11 @@
                 mauvaises réponses, l'objectif est de prendre conscience de vos tendances.</p>
 
             <div class="quiz-question">
-                <h3
-                    style="display: flex; align-items: center; margin-bottom: 1.2rem; font-size: 1.25rem; color: #667eea;">
+                <h3>
                     <span class="quiz-number">1</span>
                     <strong>Biais de confirmation</strong>
                 </h3>
-                <p style="font-size: 1.05rem; color: #2c3e50; line-height: 1.8; margin-bottom: 1.5rem;">
+                <p>
                     Vous cherchez des informations sur un nouveau produit que vous envisagez d'acheter. Quelle est votre
                     tendance naturelle ?
                 </p>
@@ -437,12 +436,11 @@
             </div>
 
             <div class="quiz-question">
-                <h3
-                    style="display: flex; align-items: center; margin-bottom: 1.2rem; font-size: 1.25rem; color: #667eea;">
+                <h3>
                     <span class="quiz-number">2</span>
                     <strong>Biais d'ancrage</strong>
                 </h3>
-                <p style="font-size: 1.05rem; color: #2c3e50; line-height: 1.8; margin-bottom: 1.5rem;">
+                <p>
                     Un vendeur vous propose un produit initialement à 1000€, "soldé aujourd'hui à 600€". Votre réaction
                     ?
                 </p>
@@ -469,12 +467,11 @@
             </div>
 
             <div class="quiz-question">
-                <h3
-                    style="display: flex; align-items: center; margin-bottom: 1.2rem; font-size: 1.25rem; color: #667eea;">
+                <h3>
                     <span class="quiz-number">3</span>
                     <strong>Biais de disponibilité</strong>
                 </h3>
-                <p style="font-size: 1.05rem; color: #2c3e50; line-height: 1.8; margin-bottom: 1.5rem;">
+                <p>
                     Après avoir vu plusieurs reportages sur des accidents d'avion, vous devez choisir un moyen de
                     transport pour vos vacances. Votre réaction ?
                 </p>
@@ -501,12 +498,11 @@
             </div>
 
             <div class="quiz-question">
-                <h3
-                    style="display: flex; align-items: center; margin-bottom: 1.2rem; font-size: 1.25rem; color: #667eea;">
+                <h3>
                     <span class="quiz-number">4</span>
                     <strong>Biais de stéréotype</strong>
                 </h3>
-                <p style="font-size: 1.05rem; color: #2c3e50; line-height: 1.8; margin-bottom: 1.5rem;">
+                <p>
                     En lisant un CV, vous remarquez un prénom étranger. Votre première pensée ?
                 </p>
                 <div class="options">
@@ -533,12 +529,11 @@
             </div>
 
             <div class="quiz-question">
-                <h3
-                    style="display: flex; align-items: center; margin-bottom: 1.2rem; font-size: 1.25rem; color: #667eea;">
+                <h3>
                     <span class="quiz-number">5</span>
                     <strong>Biais de groupe (Groupthink)</strong>
                 </h3>
-                <p style="font-size: 1.05rem; color: #2c3e50; line-height: 1.8; margin-bottom: 1.5rem;">
+                <p>
                     Lors d'une réunion d'équipe, tout le monde semble d'accord sur une décision, mais vous avez des
                     doutes. Que faites-vous ?
                 </p>
@@ -709,13 +704,13 @@
         </div>
     </div>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const questions = document.querySelectorAll('.quiz-question');
-            
+
             questions.forEach(question => {
                 const inputs = question.querySelectorAll('input[type="radio"]');
                 const answerZone = question.querySelector('.answer-zone');
-                
+
                 if (inputs && answerZone) {
                     inputs.forEach(input => {
                         input.addEventListener('change', () => {
