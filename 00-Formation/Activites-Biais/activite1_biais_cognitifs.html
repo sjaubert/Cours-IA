@@ -147,17 +147,23 @@
 
         .options {
             margin: 1rem 0;
-            padding-left: 1rem;
+            padding-left: 0;
+            display: block;
+            width: 100%;
+            overflow: visible;
         }
 
         .option {
-            padding: 0.8rem;
-            margin: 0.5rem 0;
+            padding: 1rem;
+            margin: 0.8rem 0;
             background: #f8f9fa;
             border-radius: 8px;
             cursor: pointer;
             transition: all 0.3s ease;
             border: 2px solid transparent;
+            display: block;
+            width: 100%;
+            min-height: 50px;
         }
 
         .option:hover {
@@ -165,8 +171,19 @@
             border-color: #667eea;
         }
 
+        .option label,
+        label.option {
+            cursor: pointer;
+            display: block;
+            width: 100%;
+            word-wrap: break-word;
+            white-space: normal;
+            line-height: 1.6;
+        }
+
         .option input[type="radio"] {
             margin-right: 10px;
+            flex-shrink: 0;
         }
 
         .answer-zone {
