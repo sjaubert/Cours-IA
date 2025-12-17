@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formation IA : Les Biais - Index</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 2rem;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            color: #667eea;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 1.3rem;
+            margin-bottom: 3rem;
+            font-style: italic;
+        }
+
+        .intro {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .intro h2 {
+            margin-bottom: 1rem;
+        }
+
+        .intro p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .activities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .activity-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-top: 5px solid;
+        }
+
+        .activity-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .activity-card.act1 {
+            border-top-color: #667eea;
+        }
+
+        .activity-card.act2 {
+            border-top-color: #f5576c;
+        }
+
+        .activity-card.act3 {
+            border-top-color: #fa709a;
+        }
+
+        .activity-card.act4 {
+            border-top-color: #4facfe;
+        }
+
+        .activity-card.act5 {
+            border-top-color: #a8edea;
+        }
+
+        .activity-card.act6 {
+            border-top-color: #ff6b9d;
+        }
+
+        .activity-card.guide {
+            border-top-color: #2c3e50;
+        }
+
+        .activity-number {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .activity-card.guide .activity-number {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+        }
+
+        .activity-card h3 {
+            color: #333;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .duration {
+            background: #e8f4f8;
+            color: #17a2b8;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            display: inline-block;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .activity-card p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .objectives {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+        }
+
+        .objectives h4 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .objectives ul {
+            margin-left: 1.5rem;
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+
+        .btn {
+            display: block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .info-box {
+            background: #d1ecf1;
+            border-left: 5px solid #17a2b8;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 10px;
+        }
+
+        .info-box h3 {
+            color: #0c5460;
+            margin-bottom: 1rem;
+        }
+
+        .info-box ul {
+            line-height: 2;
+            margin-left: 1.5rem;
+        }
+
+        .structure-box {
+            background: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 10px;
+        }
+
+        .structure-box h3 {
+            color: #856404;
+            margin-bottom: 1rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        th {
+            background: #667eea;
+            color: white;
+            padding: 1rem;
+            text-align: left;
+        }
+
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.5rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .activities-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .uimm-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+        }
+
+        .uimm-header {
+            background: white;
+            padding: 1.5rem 2rem;
+            margin-bottom: 2rem;
+            border-radius: 15px 15px 0 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .uimm-logo {
+            max-height: 60px;
+            height: auto;
+        }
+
+        .uimm-title {
+            color: #2c3e50;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .uimm-footer {
+            background: #2c3e50;
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+            margin-top: 3rem;
+            border-radius: 0 0 15px 15px;
+            font-size: 0.95rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="uimm-header">
+            <img src="logo_uimm.jpg" alt="UIMM Logo" class="uimm-logo">
+            <div class="uimm-title">Pôle Formation UIMM CVDL</div>
+        </div>
+
+        <h1>Formation IA : Les Biais</h1>
+        <p class="subtitle">Comprendre, identifier et éviter les biais en intelligence artificielle</p>
+
+        <div class="intro">
+            <h2>Bienvenue dans cette formation d'une journée</h2>
+            <p>Cette formation vous permettra de développer un esprit critique face aux systèmes d'IA, d'identifier les
+                principaux types de biais, et d'élaborer des stratégies concrètes pour les éviter dans votre pratique
+                professionnelle.</p>
+        </div>
+
+        <div class="structure-box">
+            <h3>Structure de la Formation</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Horaire</th>
+                        <th>Activité</th>
+                        <th>Type</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>9h00 - 9h45</strong></td>
+                        <td>Activité 1 : Les Biais Cognitifs</td>
+                        <td>Quiz & Réflexion</td>
+                    </tr>
+                    <tr>
+                        <td><strong>9h45 - 10h30</strong></td>
+                        <td>Activité 2 : Le Piège de la Première Impression</td>
+                        <td>Expérimentation LLM</td>
+                    </tr>
+                    <tr>
+                        <td><strong>10h30 - 11h30</strong></td>
+                        <td>Activité 3 : Biais de Sélection des Données</td>
+                        <td>Études de Cas</td>
+                    </tr>
+                    <tr>
+                        <td><strong>11h30 - 11h45</strong></td>
+                        <td>PAUSE</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td><strong>11h45 - 12h30</strong></td>
+                        <td>Activité 4 : Biais de Confirmation</td>
+                        <td>Débat avec IA</td>
+                    </tr>
+                    <tr>
+                        <td><strong>12h30 - 13h30</strong></td>
+                        <td>DÉJEUNER</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td><strong>13h30 - 14h30</strong></td>
+                        <td>Activité 5 : Biais Culturels</td>
+                        <td>Expérimentations</td>
+                    </tr>
+                    <tr>
+                        <td><strong>14h30 - 15h45</strong></td>
+                        <td>Activité 6 : Jeu de Rôle Professionnel</td>
+                        <td>Travail en groupe</td>
+                    </tr>
+                    <tr>
+                        <td><strong>15h45 - 16h00</strong></td>
+                        <td>PAUSE</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td><strong>16h00 - 17h00</strong></td>
+                        <td>Synthèse et Plan d'action</td>
+                        <td>Présentations</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2 style="text-align: center; color: #667eea; margin: 3rem 0 2rem 0; font-size: 2rem;">Les Activités</h2>
+
+        <div class="activities-grid">
+            <div class="activity-card act1">
+                <div class="activity-number">ACTIVITÉ 1</div>
+                <h3>Les Biais Cognitifs</h3>
+                <div class="duration">45 minutes</div>
+                <p>Comprendre ses propres biais cognitifs et leur lien avec les biais de l'IA.</p>
+                <div class="objectives">
+                    <h4>Objectifs :</h4>
+                    <ul>
+                        <li>Quiz interactif sur 5 biais cognitifs</li>
+                        <li>Cas concret : Amazon</li>
+                        <li>Réflexion personnelle</li>
+                    </ul>
+                </div>
+                <a href="activite1_biais_cognitifs.html" class="btn">Accéder à l'activité</a>
+            </div>
+
+            <div class="activity-card act2">
+                <div class="activity-number">ACTIVITÉ 2</div>
+                <h3>Le Piège de la Première Impression</h3>
+                <div class="duration">45 minutes</div>
+                <p>Expérimenter comment le contexte initial biaise les réponses des LLM.</p>
+                <div class="objectives">
+                    <h4>Objectifs :</h4>
+                    <ul>
+                        <li>Biais d'ancrage avec LLM</li>
+                        <li>Expérimentations pratiques</li>
+                        <li>Bonnes pratiques</li>
+                    </ul>
+                </div>
+                <a href="activite2_premiere_impression.html" class="btn">Accéder à l'activité</a>
+            </div>
+
+            <div class="activity-card act3">
+                <div class="activity-number">ACTIVITÉ 3</div>
+                <h3>Biais de Sélection des Données</h3>
+                <div class="duration">60 minutes</div>
+                <p>Analyser des cas réels d'échecs dus aux données biaisées.</p>
+                <div class="objectives">
+                    <h4>Cas d'étude :</h4>
+                    <ul>
+                        <li>Amazon (recrutement)</li>
+                        <li>COMPAS (justice prédictive)</li>
+                        <li>Reconnaissance faciale (biais raciaux)</li>
+                    </ul>
+                </div>
+                <a href="activite3_biais_selection.html" class="btn">Accéder à l'activité</a>
+            </div>
+
+            <div class="activity-card act4">
+                <div class="activity-number">ACTIVITÉ 4</div>
+                <h3>Biais de Confirmation</h3>
+                <div class="duration">45 minutes</div>
+                <p>Démontrer que l'IA peut argumenter n'importe quelle position.</p>
+                <div class="objectives">
+                    <h4>Objectifs :</h4>
+                    <ul>
+                        <li>Débat en équipes</li>
+                        <li>4 sujets proposés</li>
+                        <li>Stratégies de mitigation</li>
+                    </ul>
+                </div>
+                <a href="activite4_biais_confirmation.html" class="btn">Accéder à l'activité</a>
+            </div>
+
+            <div class="activity-card act5">
+                <div class="activity-number">ACTIVITÉ 5</div>
+                <h3>Biais Culturels</h3>
+                <div class="duration">60 minutes</div>
+                <p>Identifier les stéréotypes culturels dans l'IA générative.</p>
+                <div class="objectives">
+                    <h4>Expérimentations :</h4>
+                    <ul>
+                        <li>Stéréotypes de genre</li>
+                        <li>Biais géographiques</li>
+                        <li>Biais linguistiques</li>
+                    </ul>
+                </div>
+                <a href="activite5_biais_culturels.html" class="btn">Accéder à l'activité</a>
+            </div>
+
+            <div class="activity-card act6">
+                <div class="activity-number">ACTIVITÉ 6</div>
+                <h3>Jeu de Rôle Professionnel</h3>
+                <div class="duration">75 minutes</div>
+                <p>Résoudre des problèmes de biais dans des scénarios réalistes.</p>
+                <div class="objectives">
+                    <h4>6 scénarios :</h4>
+                    <ul>
+                        <li>Service client / Recrutement</li>
+                        <li>Formation / Performances</li>
+                        <li>Marketing / Maintenance</li>
+                    </ul>
+                </div>
+                <a href="activite6_jeu_role.html" class="btn">Accéder à l'activité</a>
+            </div>
+
+            <div class="activity-card guide">
+                <div class="activity-number">GUIDE FORMATEUR</div>
+                <h3>Guide Complet d'Animation</h3>
+                <div class="duration">Ressource</div>
+                <p>Instructions détaillées pour animer la formation avec succès.</p>
+                <div class="objectives">
+                    <h4>Contenu :</h4>
+                    <ul>
+                        <li>Déroulé minute par minute</li>
+                        <li>Conseils d'animation</li>
+                        <li>Gestion des situations difficiles</li>
+                    </ul>
+                </div>
+                <a href="guide_formateur.html" class="btn">Accéder au guide</a>
+            </div>
+        </div>
+
+        <div class="info-box">
+            <h3>Points Clés de la Formation</h3>
+            <ul>
+                <li>Comprendre le lien entre biais cognitifs humains et biais de l'IA</li>
+                <li>Identifier les principaux types de biais (sélection, confirmation, culturels, stéréotypes)</li>
+                <li>Analyser des cas concrets d'échecs dus aux biais</li>
+                <li>Expérimenter directement avec des LLM pour observer les biais en action</li>
+                <li>Développer un esprit critique face aux outputs de l'IA</li>
+                <li>Élaborer des stratégies de mitigation applicables en contexte professionnel</li>
+            </ul>
+        </div>
+
+        <div
+            style="text-align: center; margin-top: 3rem; padding: 2rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 15px; color: white;">
+            <h2 style="margin-bottom: 1rem;">Prêt à commencer ?</h2>
+            <p style="font-size: 1.1rem; margin-bottom: 1.5rem;">Cliquez sur l'activité 1 pour débuter votre parcours de
+                formation.</p>
+            <a href="activite1_biais_cognitifs.html"
+                style="display: inline-block; background: white; color: #667eea; padding: 1rem 3rem; border-radius: 25px; text-decoration: none; font-weight: bold; font-size: 1.2rem;">Commencer
+                la formation</a>
+        </div>
+
+        <div class="uimm-footer">
+            Pôle Formation UIMM CVDL - Formation Intelligence Artificielle : Les Biais
+        </div>
+    </div>
+</body>
+
+</html>

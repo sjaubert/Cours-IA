@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activité 2 - Le Piège de la Première Impression</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            min-height: 100vh;
+            padding: 2rem;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            color: #f5576c;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        .duration {
+            text-align: center;
+            background: #17a2b8;
+            color: white;
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+
+        .section {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 5px solid #f5576c;
+        }
+
+        .section h2 {
+            color: #f5576c;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+
+        .section h3 {
+            color: #f093fb;
+            margin: 1.5rem 0 1rem 0;
+            font-size: 1.4rem;
+        }
+
+        .objetifs {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+        }
+
+        .objetifs h2 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .objetifs ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .objetifs li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .objetifs li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .experiment {
+            background: white;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border: 3px solid #f5576c;
+        }
+
+        .experiment-number {
+            display: inline-block;
+            background: #f5576c;
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .prompt-box {
+            background: #2c3e50;
+            color: #2ecc71;
+            padding: 1.5rem;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            margin: 1rem 0;
+            position: relative;
+        }
+
+        .prompt-box::before {
+            content: "PROMPT";
+            position: absolute;
+            top: -10px;
+            left: 10px;
+            background: #f5576c;
+            color: white;
+            padding: 0.2rem 0.8rem;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .response-box {
+            background: #ecf0f1;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            position: relative;
+            border-left: 5px solid #3498db;
+        }
+
+        .response-box::before {
+            content: "RÉPONSE ATTENDUE";
+            position: absolute;
+            top: -10px;
+            left: 10px;
+            background: #3498db;
+            color: white;
+            padding: 0.2rem 0.8rem;
+            border-radius: 5px;
+            font-size: 0.8rem;
+        }
+
+        .your-turn {
+            background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 1.5rem 0;
+        }
+
+        .your-turn h3 {
+            color: #155724;
+            margin-bottom: 1rem;
+        }
+
+        .instruction-box {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            border-left: 5px solid #28a745;
+        }
+
+        .warning-box {
+            background: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 10px;
+        }
+
+        .info-box {
+            background: #d1ecf1;
+            border-left: 5px solid #17a2b8;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 10px;
+            color: #0c5460;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .comparison-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .comparison-card h4 {
+            color: #f5576c;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 120px;
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+            resize: vertical;
+            transition: border-color 0.3s ease;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #f5576c;
+        }
+
+        .analysis-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .analysis-table th {
+            background: #f5576c;
+            color: white;
+            padding: 1rem;
+            text-align: left;
+        }
+
+        .analysis-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .analysis-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin: 1rem 0;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(245, 87, 108, 0.4);
+        }
+
+        .tip-box {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+        }
+
+        .uimm-header {
+            background: white;
+            padding: 1.5rem 2rem;
+            margin-bottom: 2rem;
+            border-radius: 15px 15px 0 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .uimm-logo {
+            max-height: 60px;
+            height: auto;
+        }
+
+        .uimm-title {
+            color: #2c3e50;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .uimm-footer {
+            background: #2c3e50;
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+            margin-top: 3rem;
+            border-radius: 0 0 15px 15px;
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.5rem;
+            }
+
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .uimm-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="uimm-header">
+            <img src="logo_uimm.jpg" alt="UIMM Logo" class="uimm-logo">
+            <div class="uimm-title">Pôle Formation UIMM CVDL</div>
+        </div>
+
+        <h1>Activité 2 : Le Piège de la Première Impression</h1>
+        <p class="subtitle">Comment le contexte initial biaise les réponses de l'IA</p>
+
+        <div class="duration">Durée : 45 minutes</div>
+
+        <div class="objetifs">
+            <h2>Objectifs</h2>
+            <ul>
+                <li>Expérimenter le biais d'ancrage avec un LLM</li>
+                <li>Comprendre comment le contexte initial influence les réponses</li>
+                <li>Identifier les risques de manipulation par le contexte</li>
+                <li>Développer un esprit critique face aux réponses de l'IA</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Introduction</h2>
+            <p>Le biais d'ancrage est l'un des biais cognitifs les plus puissants : la première information que nous
+                recevons (l'"ancre") influence fortement notre jugement ultérieur. Les LLM sont particulièrement
+                sensibles à ce biais car ils génèrent leurs réponses en se basant sur le contexte fourni dans le prompt.
+            </p>
+
+            <div class="info-box">
+                <h4>Le saviez-vous ?</h4>
+                <p>Dans une expérience célèbre, des juges expérimentés ont été influencés par un nombre aléatoire
+                    lorsqu'ils devaient fixer une peine. Si on leur montrait un dé affichant un nombre élevé avant de
+                    délibérer, ils prononçaient des peines plus lourdes. Les LLM fonctionnent de manière similaire : le
+                    contexte initial "ancre" leur génération de texte.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Expérimentation Guidée</h2>
+
+            <div class="experiment">
+                <div class="experiment-number">Expérience 1 : Contexte Positif vs Négatif</div>
+
+                <h3>Scénario A : Contexte Positif</h3>
+                <div class="prompt-box">
+                    Les véhicules électriques représentent une avancée majeure dans la lutte contre le changement
+                    climatique. Ils émettent zéro émission locale, réduisent la pollution de l'air en ville, et sont de
+                    plus en plus abordables grâce aux progrès technologiques.
+
+                    Question : Quels sont les avantages et inconvénients des véhicules électriques ?
+                </div>
+
+                <div class="response-box">
+                    <p><strong>Observation attendue :</strong> La réponse mettra l'accent sur les avantages, avec des
+                        inconvénients minimisés ou présentés comme temporaires.</p>
+                </div>
+
+                <h3 style="margin-top: 2rem;">Scénario B : Contexte Négatif</h3>
+                <div class="prompt-box">
+                    Les véhicules électriques posent de sérieux problèmes environnementaux. L'extraction du lithium
+                    détruit des écosystèmes, la production de batteries est très polluante, et l'électricité utilisée
+                    provient souvent de centrales à charbon.
+
+                    Question : Quels sont les avantages et inconvénients des véhicules électriques ?
+                </div>
+
+                <div class="response-box">
+                    <p><strong>Observation attendue :</strong> La réponse mettra l'accent sur les inconvénients, avec
+                        des avantages minimisés ou relativisés.</p>
+                </div>
+
+                <div class="warning-box">
+                    <h4>Point d'attention</h4>
+                    <p>Même si la question finale est exactement la même, le contexte initial "ancre" la réponse dans
+                        une direction particulière. L'IA ne cherche pas la vérité objective, elle génère un texte
+                        cohérent avec le contexte fourni.</p>
+                </div>
+            </div>
+
+            <div class="experiment">
+                <div class="experiment-number">Expérience 2 : Biais Numérique</div>
+
+                <h3>Scénario A : Ancre Haute</h3>
+                <div class="prompt-box">
+                    Une étude récente montre que 85% des employés souhaitent davantage de télétravail.
+
+                    Question : Estime le pourcentage d'employés qui souhaiteraient télétravailler 3 jours par semaine ou
+                    plus.
+                </div>
+
+                <h3 style="margin-top: 2rem;">Scénario B : Ancre Basse</h3>
+                <div class="prompt-box">
+                    Une étude récente montre que 15% des employés souhaitent davantage de télétravail.
+
+                    Question : Estime le pourcentage d'employés qui souhaiteraient télétravailler 3 jours par semaine ou
+                    plus.
+                </div>
+
+                <div class="info-box">
+                    <h4>Observation</h4>
+                    <p>Le chiffre initial (85% vs 15%) influence fortement l'estimation que fera l'IA, même si aucune
+                        donnée réelle n'est fournie pour répondre à la question spécifique.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>A Votre Tour : Expérimentation Pratique</h2>
+
+            <div class="your-turn">
+                <h3>Instructions</h3>
+                <div class="instruction-box">
+                    <ol style="line-height: 2; margin-left: 1.5rem;">
+                        <li>Formez des groupes de 2-3 personnes</li>
+                        <li>Choisissez un sujet qui peut avoir différents points de vue (ex: intelligence artificielle
+                            en entreprise, réseaux sociaux, télétravail, etc.)</li>
+                        <li>Créez deux prompts avec des contextes opposés mais la même question finale</li>
+                        <li>Testez ces prompts sur un LLM (Gemini, ChatGPT, etc.)</li>
+                        <li>Analysez les différences dans les réponses</li>
+                        <li>Documentez vos observations ci-dessous</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="comparison-grid">
+                <div class="comparison-card">
+                    <h4>Prompt avec Contexte 1</h4>
+                    <textarea placeholder="Écrivez votre premier prompt avec son contexte..."></textarea>
+                    <h4 style="margin-top: 1rem;">Réponse obtenue</h4>
+                    <textarea placeholder="Collez ou résumez la réponse de l'IA..."></textarea>
+                </div>
+
+                <div class="comparison-card">
+                    <h4>Prompt avec Contexte 2</h4>
+                    <textarea placeholder="Écrivez votre second prompt avec son contexte..."></textarea>
+                    <h4 style="margin-top: 1rem;">Réponse obtenue</h4>
+                    <textarea placeholder="Collez ou résumez la réponse de l'IA..."></textarea>
+                </div>
+            </div>
+
+            <h3>Grille d'Analyse</h3>
+            <table class="analysis-table">
+                <thead>
+                    <tr>
+                        <th>Critère d'analyse</th>
+                        <th>Réponse 1</th>
+                        <th>Réponse 2</th>
+                        <th>Différences observées</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Tonalité générale</strong></td>
+                        <td><textarea style="min-height: 60px;"></textarea></td>
+                        <td><textarea style="min-height: 60px;"></textarea></td>
+                        <td><textarea style="min-height: 60px;"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Arguments mis en avant</strong></td>
+                        <td><textarea style="min-height: 60px;"></textarea></td>
+                        <td><textarea style="min-height: 60px;"></textarea></td>
+                        <td><textarea style="min-height: 60px;"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Arguments minimisés</strong></td>
+                        <td><textarea style="min-height: 60px;"></textarea></td>
+                        <td><textarea style="min-height: 60px;"></textarea></td>
+                        <td><textarea style="min-height: 60px;"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Exemples donnés</strong></td>
+                        <td><textarea style="min-height: 60px;"></textarea></td>
+                        <td><textarea style="min-height: 60px;"></textarea></td>
+                        <td><textarea style="min-height: 60px;"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Conclusion suggérée</strong></td>
+                        <td><textarea style="min-height: 60px;"></textarea></td>
+                        <td><textarea style="min-height: 60px;"></textarea></td>
+                        <td><textarea style="min-height: 60px;"></textarea></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>Réflexion et Débriefing</h2>
+
+            <div style="background: white; padding: 1.5rem; border-radius: 10px; margin: 1rem 0;">
+                <h3>Question 1 : Impact du biais d'ancrage</h3>
+                <p>Comment le contexte initial a-t-il influencé les réponses de l'IA dans votre expérience ?</p>
+                <textarea></textarea>
+            </div>
+
+            <div style="background: white; padding: 1.5rem; border-radius: 10px; margin: 1rem 0;">
+                <h3>Question 2 : Risques professionnels</h3>
+                <p>Imaginez que vous utilisiez un LLM pour préparer une présentation ou un rapport. Quels risques le
+                    biais d'ancrage pourrait-il poser ?</p>
+                <textarea></textarea>
+            </div>
+
+            <div style="background: white; padding: 1.5rem; border-radius: 10px; margin: 1rem 0;">
+                <h3>Question 3 : Manipulation intentionnelle</h3>
+                <p>Comment quelqu'un pourrait-il exploiter ce biais pour manipuler les réponses d'une IA et induire les
+                    autres en erreur ?</p>
+                <textarea></textarea>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Applications Concrètes et Risques</h2>
+
+            <div class="tip-box">
+                <h3>Cas d'usage à risque</h3>
+                <ul style="line-height: 2;">
+                    <li><strong>Recherche d'information :</strong> Si vous cherchez à confirmer une hypothèse, vous
+                        risquez de formuler des prompts biaisés qui ne donneront que des réponses allant dans votre
+                        sens.</li>
+
+                    <li><strong>Analyse de données :</strong> Le contexte dans lequel vous présentez des données à l'IA
+                        peut fortement influencer l'interprétation et les conclusions.</li>
+
+                    <li><strong>Aide à la décision :</strong> Une IA consultée pour évaluer des options peut être
+                        biaisée par la manière dont vous présentez le problème initial.</li>
+
+                    <li><strong>Génération de contenu :</strong> Les articles, rapports ou présentations générés
+                        refléteront le biais du contexte initial.</li>
+                </ul>
+            </div>
+
+            <div class="warning-box">
+                <h4>Exemple réel : Biais dans les chatbots de service client</h4>
+                <p>Une entreprise a découvert que son chatbot IA donnait des réponses très différentes selon que le
+                    client avait été classé comme "VIP" ou "standard" dans le système. Le contexte initial ("client
+                    VIP") ancrait les réponses vers plus de flexibilité et d'options, tandis que "client standard"
+                    générait des réponses plus rigides. Ce biais n'était pas intentionnel mais résultait du contexte
+                    fourni au modèle.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Bonnes Pratiques pour Éviter le Biais d'Ancrage</h2>
+
+            <div class="info-box">
+                <h3>Stratégies de mitigation</h3>
+                <ol style="line-height: 2; margin-left: 1.5rem;">
+                    <li><strong>Testez plusieurs formulations :</strong> Posez la même question avec différents
+                        contextes pour identifier les biais.</li>
+
+                    <li><strong>Demandez des contre-arguments :</strong> Après une première réponse, demandez
+                        explicitement à l'IA de présenter le point de vue opposé.</li>
+
+                    <li><strong>Utilisez des prompts neutres :</strong> Formulez vos questions de manière aussi
+                        objective que possible, sans orienter la réponse.</li>
+
+                    <li><strong>Vérifiez avec des sources externes :</strong> Ne vous fiez jamais uniquement à l'IA,
+                        croisez avec des sources fiables.</li>
+
+                    <li><strong>Soyez conscient de vos propres biais :</strong> Reconnaissez que vous pourriez
+                        inconsciemment formuler des prompts biaisés.</li>
+
+                    <li><strong>Documentez vos prompts :</strong> Gardez une trace de comment vous avez formulé vos
+                        questions pour analyse ultérieure.</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Points Clés à Retenir</h2>
+
+            <div class="tip-box">
+                <ul style="list-style: none; padding-left: 0;">
+                    <li style="margin: 0.5rem 0;">✓ Le contexte initial influence fortement les réponses des LLM</li>
+                    <li style="margin: 0.5rem 0;">✓ Les LLM ne cherchent pas la vérité mais génèrent du texte cohérent
+                        avec le contexte</li>
+                    <li style="margin: 0.5rem 0;">✓ Le biais d'ancrage peut être exploité intentionnellement ou se
+                        produire inconsciemment</li>
+                    <li style="margin: 0.5rem 0;">✓ Tester plusieurs formulations est essentiel pour identifier les
+                        biais</li>
+                    <li style="margin: 0.5rem 0;">✓ L'esprit critique et la vérification externe restent indispensables
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 2rem;">
+            <button class="btn"
+                onclick="if(confirm('Avez-vous complété l\'expérimentation et l\'analyse ?')) alert('Excellent travail ! Vous êtes maintenant plus conscient des biais d\ancrage dans l\'IA.')">Terminer
+                l'activité</button>
+        </div>
+
+        <div class="uimm-footer">
+            Pôle Formation UIMM CVDL - Formation Intelligence Artificielle : Les Biais
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activité 3 - Le Biais de Sélection des Données</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            min-height: 100vh;
+            padding: 2rem;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            color: #fa709a;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        .duration {
+            text-align: center;
+            background: #17a2b8;
+            color: white;
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+
+        .section {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 5px solid #fa709a;
+        }
+
+        .section h2 {
+            color: #fa709a;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+
+        .section h3 {
+            color: #ff8a65;
+            margin: 1.5rem 0 1rem 0;
+            font-size: 1.4rem;
+        }
+
+        .objetifs {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+        }
+
+        .objetifs h2 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .objetifs ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .objetifs li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .objetifs li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .case-study {
+            background: white;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            border-top: 5px solid #fa709a;
+        }
+
+        .case-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #f8f9fa;
+        }
+
+        .case-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-right: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .case-title {
+            flex-grow: 1;
+        }
+
+        .case-title h3 {
+            color: #fa709a;
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+        .case-title p {
+            color: #666;
+            margin: 0.3rem 0 0 0;
+            font-style: italic;
+        }
+
+        .stat-box {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+        }
+
+        .impact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .impact-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid #fa709a;
+        }
+
+        .impact-card h4 {
+            color: #fa709a;
+            margin-bottom: 1rem;
+        }
+
+        .analysis-section {
+            background: #fff3cd;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1.5rem 0;
+            border-left: 5px solid #ffc107;
+        }
+
+        .analysis-section h4 {
+            color: #856404;
+            margin-bottom: 1rem;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 100px;
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+            resize: vertical;
+            transition: border-color 0.3s ease;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #fa709a;
+        }
+
+        .warning-box {
+            background: #f8d7da;
+            border-left: 5px solid #dc3545;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 10px;
+            color: #721c24;
+        }
+
+        .info-box {
+            background: #d1ecf1;
+            border-left: 5px solid #17a2b8;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 10px;
+            color: #0c5460;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+            margin: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-left: 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2rem;
+            top: 0;
+            width: 15px;
+            height: 15px;
+            background: #fa709a;
+            border-radius: 50%;
+            transform: translateX(-6px);
+        }
+
+        .timeline-item h4 {
+            color: #fa709a;
+            margin-bottom: 0.5rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        th {
+            background: #fa709a;
+            color: white;
+            padding: 1rem;
+            text-align: left;
+        }
+
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        tr:hover {
+            background: #f8f9fa;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin: 1rem 0;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(250, 112, 154, 0.4);
+        }
+
+        .question-box {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            border-left: 5px solid #28a745;
+        }
+
+        .uimm-header {
+            background: white;
+            padding: 1.5rem 2rem;
+            margin-bottom: 2rem;
+            border-radius: 15px 15px 0 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .uimm-logo {
+            max-height: 60px;
+            height: auto;
+        }
+
+        .uimm-title {
+            color: #2c3e50;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .uimm-footer {
+            background: #2c3e50;
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+            margin-top: 3rem;
+            border-radius: 0 0 15px 15px;
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.5rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .impact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .uimm-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="uimm-header">
+            <img src="logo_uimm.jpg" alt="UIMM Logo" class="uimm-logo">
+            <div class="uimm-title">Pôle Formation UIMM CVDL</div>
+        </div>
+
+        <h1>Activité 3 : Le Biais de Sélection des Données</h1>
+        <p class="subtitle">Quand les données d'entraînement créent des discriminations systémiques</p>
+
+        <div class="duration">Durée : 60 minutes</div>
+
+        <div class="objetifs">
+            <h2>Objectifs</h2>
+            <ul>
+                <li>Comprendre comment les données biaisées créent des IA discriminantes</li>
+                <li>Analyser des cas réels de biais de sélection</li>
+                <li>Identifier les sources de biais dans les données</li>
+                <li>Proposer des stratégies pour des données plus équitables</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Introduction : Le Principe "Garbage In, Garbage Out"</h2>
+            <p>Le biais de sélection survient lorsque les données utilisées pour entraîner un système d'IA ne sont pas
+                représentatives de la population ou de la réalité qu'il est censé modéliser. C'est l'un des biais les
+                plus courants et les plus dangereux car il est souvent invisible jusqu'à ce que le système soit déployé.
+            </p>
+
+            <div class="info-box">
+                <h4>Principe fondamental</h4>
+                <p>Une IA n'apprend que ce qui est présent dans ses données d'entraînement. Si les données sont
+                    biaisées, l'IA sera biaisée. Si certains groupes sont sous-représentés ou mal représentés, l'IA ne
+                    saura pas bien les traiter. C'est mathématiquement inévitable.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Cas d'Étude 1 : Amazon et le Recrutement Automatisé</h2>
+
+            <div class="case-study">
+                <div class="case-header">
+                    <div class="case-icon">🏢</div>
+                    <div class="case-title">
+                        <h3>Amazon HR Tool (2014-2018)</h3>
+                        <p>Discrimination systématique des candidatures féminines</p>
+                    </div>
+                </div>
+
+                <h3>Contexte</h3>
+                <p>En 2014, Amazon a développé un outil d'IA pour automatiser le tri des CV et identifier les meilleurs
+                    candidats pour des postes techniques. L'objectif était de gagner du temps et d'améliorer
+                    l'objectivité du recrutement.</p>
+
+                <h3>Les Données d'Entraînement</h3>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h4>Source des données</h4>
+                        <p>10 ans de CV soumis à Amazon (2004-2014)</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>Composition</h4>
+                        <p>Majorité écrasante de CV masculins pour les postes techniques</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>Historique de recrutement</h4>
+                        <p>Principalement des hommes embauchés dans le passé pour ces postes</p>
+                    </div>
+                </div>
+
+                <h3>Le Biais Découvert</h3>
+                <div class="warning-box">
+                    <p><strong>Problème identifié :</strong> L'IA pénalisait systématiquement :</p>
+                    <ul style="margin-left: 2rem; margin-top: 1rem; line-height: 2;">
+                        <li>Les CV contenant le mot "femme" (ex: "capitaine de l'équipe de football féminine")</li>
+                        <li>Les diplômées de deux universités exclusivement féminines</li>
+                        <li>Subtilement, d'autres indicateurs corrélés au genre</li>
+                    </ul>
+                </div>
+
+                <h3>Pourquoi est-ce arrivé ?</h3>
+                <div class="impact-grid">
+                    <div class="impact-card">
+                        <h4>Données historiques biaisées</h4>
+                        <p>Le secteur tech était (et reste) majoritairement masculin. Les données reflétaient cette
+                            réalité historique discriminatoire.</p>
+                    </div>
+                    <div class="impact-card">
+                        <h4>Apprentissage de corrélations</h4>
+                        <p>L'IA a appris que "être un homme" était corrélé avec "être recruté". Elle a transformé cette
+                            corrélation en critère de sélection.</p>
+                    </div>
+                    <div class="impact-card">
+                        <h4>Amplification du biais</h4>
+                        <p>Au lieu de corriger le biais historique, l'IA l'a automatisé et amplifié en le rendant
+                            systématique.</p>
+                    </div>
+                </div>
+
+                <h3>Conséquence</h3>
+                <div class="stat-box">
+                    <div class="stat-number">2018</div>
+                    <div class="stat-label">Projet abandonné après 4 ans de tentatives de correction</div>
+                </div>
+                <p style="text-align: center; margin-top: 1rem;">Amazon a finalement abandonné le projet, reconnaissant
+                    l'impossibilité de garantir l'absence de biais avec ces données.</p>
+
+                <div class="analysis-section">
+                    <h4>Votre analyse - Groupe 1</h4>
+                    <p><strong>Question :</strong> Identifiez au moins 3 décisions différentes qui auraient pu être
+                        prises en amont pour éviter ce problème.</p>
+                    <textarea></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Cas d'Étude 2 : COMPAS et la Justice Prédictive</h2>
+
+            <div class="case-study">
+                <div class="case-header">
+                    <div class="case-icon">⚖️</div>
+                    <div class="case-title">
+                        <h3>COMPAS (Correctional Offender Management Profiling)</h3>
+                        <p>Biais racial dans l'évaluation du risque de récidive</p>
+                    </div>
+                </div>
+
+                <h3>Contexte</h3>
+                <p>COMPAS est un algorithme utilisé par les tribunaux américains pour évaluer le risque qu'un prévenu
+                    récidive. Il influence les décisions de libération conditionnelle et de détermination des peines.
+                </p>
+
+                <h3>Le Biais Découvert (ProPublica, 2016)</h3>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Groupe</th>
+                            <th>Taux de faux positifs</th>
+                            <th>Taux de faux négatifs</th>
+                            <th>Impact</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Prévenus noirs</strong></td>
+                            <td>45%</td>
+                            <td>23%</td>
+                            <td>Risque surévalué : personnes classées à haut risque alors qu'elles ne récidivaient pas
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Prévenus blancs</strong></td>
+                            <td>23%</td>
+                            <td>48%</td>
+                            <td>Risque sous-évalué : personnes classées à faible risque mais qui récidivaient</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="warning-box">
+                    <h4>Conséquence concrète</h4>
+                    <p>À niveau de risque réel équivalent, une personne noire avait 2 fois plus de chances d'être
+                        classée "haut risque" qu'une personne blanche, impactant directement la durée d'incarcération.
+                    </p>
+                </div>
+
+                <h3>Sources du Biais</h3>
+                <div class="impact-grid">
+                    <div class="impact-card">
+                        <h4>Données historiques</h4>
+                        <p>Entraîné sur des données d'arrestations et de condamnations passées, déjà biaisées par le
+                            profilage racial dans les forces de l'ordre.</p>
+                    </div>
+                    <div class="impact-card">
+                        <h4>Variables proxy</h4>
+                        <p>L'algorithme utilisait des variables comme le code postal, le niveau d'éducation, qui sont
+                            des "proxies" (substituts) pour la race.</p>
+                    </div>
+                    <div class="impact-card">
+                        <h4>Boucle de rétroaction</h4>
+                        <p>Plus de surveillance dans certains quartiers = plus d'arrestations = données encore plus
+                            biaisées.</p>
+                    </div>
+                </div>
+
+                <div class="analysis-section">
+                    <h4>Votre analyse - Groupe 2</h4>
+                    <p><strong>Question :</strong> Pourquoi est-il particulièrement problématique d'utiliser l'IA dans
+                        le système judiciaire ? Quels principes fondamentaux sont en jeu ?</p>
+                    <textarea></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Cas d'Étude 3 : Reconnaissance Faciale et Biais Ethnique</h2>
+
+            <div class="case-study">
+                <div class="case-header">
+                    <div class="case-icon">📸</div>
+                    <div class="case-title">
+                        <h3>Systèmes de Reconnaissance Faciale</h3>
+                        <p>Taux d'erreur variables selon l'ethnie et le genre</p>
+                    </div>
+                </div>
+
+                <h3>Résultats de l'Étude MIT (2018)</h3>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Groupe démographique</th>
+                            <th>Taux d'erreur moyen</th>
+                            <th>Différence</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Hommes à peau claire</strong></td>
+                            <td>0.8%</td>
+                            <td>Référence</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Femmes à peau claire</strong></td>
+                            <td>7.1%</td>
+                            <td>×9</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Hommes à peau foncée</strong></td>
+                            <td>12.0%</td>
+                            <td>×15</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Femmes à peau foncée</strong></td>
+                            <td>34.7%</td>
+                            <td>×43</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="stat-box">
+                    <div class="stat-number">×43</div>
+                    <div class="stat-label">Une femme noire a 43 fois plus de risques d'être mal identifiée qu'un homme
+                        blanc</div>
+                </div>
+
+                <h3>Origine du Biais</h3>
+                <div class="info-box">
+                    <h4>Datasets déséquilibrés</h4>
+                    <p>Les datasets d'entraînement (comme ImageNet, LFW) contenaient majoritairement des visages de
+                        personnes blanches et masculines, souvent issus de contextes occidentaux. Les femmes et les
+                        personnes de couleur étaient largement sous-représentées.</p>
+                </div>
+
+                <h3>Impacts Réels</h3>
+                <ul style="line-height: 2; margin-left: 2rem;">
+                    <li><strong>Erreurs d'identification judiciaire :</strong> Plusieurs cas d'arrestations erronées de
+                        personnes noires</li>
+                    <li><strong>Accès refusé :</strong> Systèmes de sécurité qui ne reconnaissent pas certaines
+                        personnes</li>
+                    <li><strong>Surveillance disproportionnée :</strong> Plus de "faux positifs" dans certaines
+                        communautés</li>
+                </ul>
+
+                <div class="analysis-section">
+                    <h4>Votre analyse - Groupe 3</h4>
+                    <p><strong>Question :</strong> Comment pourrait-on constituer un dataset d'entraînement réellement
+                        représentatif pour la reconnaissance faciale ? Quels défis anticipez-vous ?</p>
+                    <textarea></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Synthèse : Les Sources de Biais de Sélection</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Type de biais</th>
+                        <th>Description</th>
+                        <th>Exemple</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Sous-représentation</strong></td>
+                        <td>Certains groupes sont peu présents dans les données</td>
+                        <td>Peu de femmes dans les données de recrutement tech</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Données historiques biaisées</strong></td>
+                        <td>Les données reflètent des discriminations passées</td>
+                        <td>Historique d'arrestations avec profilage racial</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Biais de collecte</strong></td>
+                        <td>La méthode de collecte favorise certains groupes</td>
+                        <td>Photos collectées principalement dans des pays occidentaux</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Variables proxy</strong></td>
+                        <td>Utilisation de variables corrélées à des attributs protégés</td>
+                        <td>Code postal comme proxy de l'origine ethnique</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Biais de survie</strong></td>
+                        <td>Seuls les "succès" sont dans les données</td>
+                        <td>Uniquement les CV de personnes embauchées par le passé</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Biais temporel</strong></td>
+                        <td>Les données sont obsolètes</td>
+                        <td>Modèles médicaux basés sur des études d'il y a 20 ans</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>Exercice de Groupe : Audit de Dataset</h2>
+
+            <div class="question-box">
+                <h3>Scénario</h3>
+                <p>Votre entreprise souhaite développer un outil d'IA pour l'un des cas suivants (choisissez-en un) :
+                </p>
+                <ul style="margin-left: 2rem; line-height: 2;">
+                    <li><strong>A.</strong> Assistant IA pour le service client</li>
+                    <li><strong>B.</strong> Système de recommandation de formations pour les employés</li>
+                    <li><strong>C.</strong> Outil d'analyse de CV pour le recrutement</li>
+                    <li><strong>D.</strong> Chatbot de conseil en orientation de carrière</li>
+                </ul>
+            </div>
+
+            <div class="question-box">
+                <h3>Cas choisi :</h3>
+                <textarea style="min-height: 50px;"></textarea>
+            </div>
+
+            <div class="question-box">
+                <h3>Question 1 : Identification des risques</h3>
+                <p>Quels types de biais de sélection pourraient affecter les données d'entraînement de ce système ?</p>
+                <textarea></textarea>
+            </div>
+
+            <div class="question-box">
+                <h3>Question 2 : Sources de données</h3>
+                <p>D'où viendraient les données d'entraînement ? Quels groupes risquent d'être sous-représentés ou mal
+                    représentés ?</p>
+                <textarea></textarea>
+            </div>
+
+            <div class="question-box">
+                <h3>Question 3 : Impact potentiel</h3>
+                <p>Si ces biais ne sont pas corrigés, quel impact concret pourrait-il y avoir sur les utilisateurs ?</p>
+                <textarea></textarea>
+            </div>
+
+            <div class="question-box">
+                <h3>Question 4 : Stratégies de mitigation</h3>
+                <p>Proposez au moins 3 mesures concrètes pour réduire les biais de sélection dans votre cas.</p>
+                <textarea></textarea>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Bonnes Pratiques pour des Données Équitables</h2>
+
+            <div class="impact-grid">
+                <div class="impact-card">
+                    <h4>1. Audit de représentativité</h4>
+                    <p>Analyser la composition démographique des données et identifier les déséquilibres.</p>
+                </div>
+                <div class="impact-card">
+                    <h4>2. Diversification active</h4>
+                    <p>Collecter intentionnellement des données de groupes sous-représentés.</p>
+                </div>
+                <div class="impact-card">
+                    <h4>3. Données synthétiques</h4>
+                    <p>Générer des données artificielles pour équilibrer les groupes minoritaires.</p>
+                </div>
+                <div class="impact-card">
+                    <h4>4. Validation croisée</h4>
+                    <p>Tester les performances sur différents sous-groupes démographiques.</p>
+                </div>
+                <div class="impact-card">
+                    <h4>5. Transparence</h4>
+                    <p>Documenter la composition des données et les limites connues.</p>
+                </div>
+                <div class="impact-card">
+                    <h4>6. Équipes diverses</h4>
+                    <p>Inclure des perspectives variées dans la collecte et l'analyse des données.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Points Clés à Retenir</h2>
+
+            <div class="info-box">
+                <ul style="list-style: none; padding-left: 0;">
+                    <li style="margin: 0.5rem 0;">✓ Les données biaisées créent inévitablement des IA biaisées</li>
+                    <li style="margin: 0.5rem 0;">✓ Le biais de sélection est souvent invisible jusqu'au déploiement
+                    </li>
+                    <li style="margin: 0.5rem 0;">✓ Les données historiques perpétuent les discriminations passées</li>
+                    <li style="margin: 0.5rem 0;">✓ La représentativité doit être intentionnellement recherchée</li>
+                    <li style="margin: 0.5rem 0;">✓ L'audit des données est une étape essentielle avant tout
+                        développement</li>
+                    <li style="margin: 0.5rem 0;">✓ Certains biais peuvent être impossibles à corriger complètement</li>
+                </ul>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 2rem;">
+            <button class="btn"
+                onclick="if(confirm('Avez-vous analysé tous les cas d\'étude ?')) alert('Excellent ! Vous êtes maintenant conscient des dangers du biais de sélection.')">Terminer
+                l'activité</button>
+        </div>
+
+        <div class="uimm-footer">
+            Pôle Formation UIMM CVDL - Formation Intelligence Artificielle : Les Biais
+        </div>
+    </div>
+</body>
+
+</html>

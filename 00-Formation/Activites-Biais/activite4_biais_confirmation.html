@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activité 4 - Biais de Confirmation avec les LLM</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            min-height: 100vh;
+            padding: 2rem;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            color: #4facfe;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        .duration {
+            text-align: center;
+            background: #17a2b8;
+            color: white;
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+
+        .section {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 5px solid #4facfe;
+        }
+
+        .section h2 {
+            color: #4facfe;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+
+        .objetifs {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+        }
+
+        .objetifs h2 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .objetifs ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .objetifs li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .objetifs li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .challenge-box {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            color: white;
+        }
+
+        .challenge-box h3 {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .debate-topic {
+            background: white;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-top: 5px solid #4facfe;
+        }
+
+        .team-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 1.5rem 0;
+        }
+
+        .team-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .team-pour {
+            border-left: 5px solid #28a745;
+        }
+
+        .team-contre {
+            border-left: 5px solid #dc3545;
+        }
+
+        .team-card h4 {
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .team-pour h4 {
+            color: #28a745;
+        }
+
+        .team-contre h4 {
+            color: #dc3545;
+        }
+
+        .prompt-template {
+            background: #2c3e50;
+            color: #2ecc71;
+            padding: 1.5rem;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            margin: 1rem 0;
+            position: relative;
+        }
+
+        .prompt-template::before {
+            content: "PROMPT SUGGÉRÉ";
+            position: absolute;
+            top: -10px;
+            left: 10px;
+            background: #4facfe;
+            color: white;
+            padding: 0.2rem 0.8rem;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .results-area {
+            background: #ecf0f1;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+        }
+
+        .results-area h5 {
+            color: #4facfe;
+            margin-bottom: 0.5rem;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 120px;
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+            resize: vertical;
+            transition: border-color 0.3s ease;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #4facfe;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .comparison-table th {
+            background: #4facfe;
+            color: white;
+            padding: 1rem;
+            text-align: left;
+        }
+
+        .comparison-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #e9ecef;
+            vertical-align: top;
+        }
+
+        .info-box {
+            background: #d1ecf1;
+            border-left: 5px solid #17a2b8;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 10px;
+            color: #0c5460;
+        }
+
+        .warning-box {
+            background: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 10px;
+        }
+
+        .danger-box {
+            background: #f8d7da;
+            border-left: 5px solid #dc3545;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 10px;
+            color: #721c24;
+        }
+
+        .strategy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .strategy-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-top: 3px solid #4facfe;
+        }
+
+        .strategy-card h4 {
+            color: #4facfe;
+            margin-bottom: 1rem;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin: 1rem 0;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(79, 172, 254, 0.4);
+        }
+
+        .uimm-header {
+            background: white;
+            padding: 1.5rem 2rem;
+            margin-bottom: 2rem;
+            border-radius: 15px 15px 0 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .uimm-logo {
+            max-height: 60px;
+            height: auto;
+        }
+
+        .uimm-title {
+            color: #2c3e50;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .uimm-footer {
+            background: #2c3e50;
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+            margin-top: 3rem;
+            border-radius: 0 0 15px 15px;
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.5rem;
+            }
+
+            .team-section {
+                grid-template-columns: 1fr;
+            }
+
+            .uimm-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="uimm-header">
+            <img src="logo_uimm.jpg" alt="UIMM Logo" class="uimm-logo">
+            <div class="uimm-title">Pôle Formation UIMM CVDL</div>
+        </div>
+
+        <h1>Activité 4 : Biais de Confirmation avec les LLM</h1>
+        <p class="subtitle">Comment l'IA peut défendre n'importe quelle position</p>
+
+        <div class="duration">Durée : 45 minutes</div>
+
+        <div class="objetifs">
+            <h2>Objectifs</h2>
+            <ul>
+                <li>Démontrer que l'IA peut argumenter pour ou contre n'importe quelle position</li>
+                <li>Comprendre les risques de manipulation par le biais de confirmation</li>
+                <li>Développer un esprit critique face aux arguments générés par l'IA</li>
+                <li>Apprendre à formuler des prompts neutres et équilibrés</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Introduction</h2>
+            <p>Le biais de confirmation est notre tendance à chercher, interpréter et privilégier les informations qui
+                confirment nos croyances existantes. Avec les LLM, ce biais devient particulièrement dangereux : l'IA
+                peut générer des arguments convaincants pour n'importe quelle position, donnant l'illusion d'une
+                validation objective à nos opinions.</p>
+
+            <div class="danger-box">
+                <h4>Le danger</h4>
+                <p>Un LLM bien prompté peut générer des arguments apparemment rationnels et sourcés pour soutenir des
+                    positions complètement opposées, voire des théories du complot. Il ne cherche pas la vérité, il
+                    génère du texte plausible.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Le Défi : Le Grand Débat IA</h2>
+
+            <div class="challenge-box">
+                <h3>Règles de l'exercice</h3>
+                <p>Votre groupe va être divisé en deux équipes. Chaque équipe recevra une position opposée sur un même
+                    sujet. Votre mission : utiliser un LLM pour construire les meilleurs arguments possibles pour votre
+                    position, MÊME SI vous n'êtes pas personnellement d'accord avec elle.</p>
+            </div>
+
+            <h3>Sujets de débat proposés</h3>
+
+            <div class="debate-topic">
+                <h4>Sujet 1 : L'IA en entreprise</h4>
+                <div class="team-section">
+                    <div class="team-card team-pour">
+                        <h4>POUR : L'IA augmentera la productivité</h4>
+                        <p>Position : L'IA améliore la productivité des employés et devrait être adoptée massivement.
+                        </p>
+                    </div>
+                    <div class="team-card team-contre">
+                        <h4>CONTRE : L'IA menace l'emploi</h4>
+                        <p>Position : L'IA détruit plus d'emplois qu'elle n'en crée et devrait être limitée.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="debate-topic">
+                <h4>Sujet 2 : Le télétravail</h4>
+                <div class="team-section">
+                    <div class="team-card team-pour">
+                        <h4>POUR : Le télétravail est l'avenir</h4>
+                        <p>Position : Le télétravail améliore la qualité de vie et la productivité.</p>
+                    </div>
+                    <div class="team-card team-contre">
+                        <h4>CONTRE : Le présentiel est essentiel</h4>
+                        <p>Position : Le travail en présentiel est crucial pour la collaboration et l'innovation.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="debate-topic">
+                <h4>Sujet 3 : Les réseaux sociaux</h4>
+                <div class="team-section">
+                    <div class="team-card team-pour">
+                        <h4>POUR : Les réseaux connectent</h4>
+                        <p>Position : Les réseaux sociaux rapprochent les gens et démocratisent l'information.</p>
+                    </div>
+                    <div class="team-card team-contre">
+                        <h4>CONTRE : Les réseaux divisent</h4>
+                        <p>Position : Les réseaux sociaux polarisent la société et nuisent à la santé mentale.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="debate-topic">
+                <h4>Sujet 4 : La surveillance numérique</h4>
+                <div class="team-section">
+                    <div class="team-card team-pour">
+                        <h4>POUR : Sécurité avant tout</h4>
+                        <p>Position : La surveillance numérique est nécessaire pour la sécurité publique.</p>
+                    </div>
+                    <div class="team-card team-contre">
+                        <h4>CONTRE : Vie privée essentielle</h4>
+                        <p>Position : La surveillance numérique menace nos libertés fondamentales.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Phase 1 : Construction des Arguments (20 min)</h2>
+
+            <div class="info-box">
+                <h4>Instructions pour votre équipe</h4>
+                <ol style="line-height: 2; margin-left: 1.5rem;">
+                    <li>Choisissez un sujet et une position (pour ou contre)</li>
+                    <li>Rédigez un prompt qui guidera l'IA vers votre position</li>
+                    <li>Utilisez l'IA pour générer vos meilleurs arguments</li>
+                    <li>Affinez et itérez pour obtenir les arguments les plus convaincants</li>
+                    <li>Documentez votre processus ci-dessous</li>
+                </ol>
+            </div>
+
+            <h3>Votre Position Assignée</h3>
+            <textarea style="min-height: 60px;"
+                placeholder="Notez votre sujet et position (ex: Sujet 1 - POUR)"></textarea>
+
+            <h3>Prompts Utilisés</h3>
+            <div class="prompt-template">
+                Exemple de prompt biaisé :
+
+                Tu es un expert reconnu en [domaine]. Les études récentes montrent clairement que [votre position].
+
+                Rédige une argumentation détaillée et convaincante expliquant pourquoi [votre position] en fournissant :
+                - 5 arguments principaux avec des exemples concrets
+                - Des données statistiques qui soutiennent cette position
+                - Des contre-arguments aux objections communes
+                - Une conclusion forte
+
+                Sois persuasif et factuel.
+            </div>
+
+            <div class="results-area">
+                <h5>Version 1 de votre prompt :</h5>
+                <textarea></textarea>
+            </div>
+
+            <div class="results-area">
+                <h5>Version 2 (après itération) :</h5>
+                <textarea></textarea>
+            </div>
+
+            <div class="results-area">
+                <h5>Réponse de l'IA - Arguments clés obtenus :</h5>
+                <textarea style="min-height: 200px;"></textarea>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Phase 2 : Comparaison et Réflexion (15 min)</h2>
+
+            <div class="warning-box">
+                <h4>Débriefing en grand groupe</h4>
+                <p>Chaque équipe présente ses arguments. Observez comment des arguments convaincants peuvent être
+                    générés pour des positions opposées.</p>
+            </div>
+
+            <h3>Tableau Comparatif des Arguments</h3>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th style="width: 30%;">Critère</th>
+                        <th style="width: 35%;">Position POUR</th>
+                        <th style="width: 35%;">Position CONTRE</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Argument principal</strong></td>
+                        <td><textarea></textarea></td>
+                        <td><textarea></textarea></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Type de données citées</strong></td>
+                        <td><textarea></textarea></td>
+                        <td><textarea></textarea></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Exemples utilisés</strong></td>
+                        <td><textarea></textarea></td>
+                        <td><textarea></textarea></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Tone général</strong></td>
+                        <td><textarea></textarea></td>
+                        <td><textarea></textarea></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Points faibles identifiés</strong></td>
+                        <td><textarea></textarea></td>
+                        <td><textarea></textarea></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>Phase 3 : Analyse Critique (10 min)</h2>
+
+            <div style="background: white; padding: 1.5rem; border-radius: 10px; margin: 1rem 0;">
+                <h3>Question 1 : Facilité de manipulation</h3>
+                <p>Comment avez-vous trouvé l'expérience de faire argumenter l'IA pour une position que vous ne partagez
+                    peut-être pas ? Était-ce facile d'obtenir des arguments convaincants ?</p>
+                <textarea></textarea>
+            </div>
+
+            <div style="background: white; padding: 1.5rem; border-radius: 10px; margin: 1rem 0;">
+                <h3>Question 2 : Qualité des arguments</h3>
+                <p>Les arguments générés vous semblaient-ils crédibles ? Auriez-vous pu les distinguer d'arguments
+                    écrits par un humain ?</p>
+                <textarea></textarea>
+            </div>
+
+            <div style="background: white; padding: 1.5rem; border-radius: 10px; margin: 1rem 0;">
+                <h3>Question 3 : Risques identifiés</h3>
+                <p>Quels risques voyez-vous dans l'utilisation de l'IA pour trouver des arguments qui confirment nos
+                    croyances préexistantes ?</p>
+                <textarea></textarea>
+            </div>
+
+            <div style="background: white; padding: 1.5rem; border-radius: 10px; margin: 1rem 0;">
+                <h3>Question 4 : Applications professionnelles</h3>
+                <p>Dans quel contexte professionnel ce type de manipulation pourrait-il être problématique ? Donnez des
+                    exemples concrets.</p>
+                <textarea></textarea>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Cas Concrets de Biais de Confirmation avec l'IA</h2>
+
+            <div class="strategy-grid">
+                <div class="strategy-card">
+                    <h4>Recherche sélective</h4>
+                    <p><strong>Problème :</strong> Un manager demande à l'IA de "prouver" que son projet va réussir en
+                        ignorant les signaux d'alerte.</p>
+                    <p><strong>Impact :</strong> Décisions basées sur une vision biaisée, échec non anticipé.</p>
+                </div>
+
+                <div class="strategy-card">
+                    <h4>Justification a posteriori</h4>
+                    <p><strong>Problème :</strong> Utiliser l'IA pour trouver des raisons qui justifient une décision
+                        déjà prise.</p>
+                    <p><strong>Impact :</strong> Illusion de rationalité, aveuglement aux alternatives.</p>
+                </div>
+
+                <div class="strategy-card">
+                    <h4>Bulles de filtres</h4>
+                    <p><strong>Problème :</strong> Ne consulter l'IA qu'avec des contextes qui vont dans notre sens.</p>
+                    <p><strong>Impact :</strong> Renforcement des préjugés, polarisation des opinions.</p>
+                </div>
+
+                <div class="strategy-card">
+                    <h4>Fausse objectivité</h4>
+                    <p><strong>Problème :</strong> Croire que l'IA est objective alors qu'on l'a orientée avec le
+                        prompt.</p>
+                    <p><strong>Impact :</strong> Confiance excessive, décisions non challengées.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Stratégies pour Contrer le Biais de Confirmation</h2>
+
+            <div class="info-box">
+                <h3>1. La méthode du "Devil's Advocate"</h3>
+                <p>Après avoir obtenu une réponse qui confirme votre hypothèse, demandez explicitement à l'IA de
+                    présenter les arguments contraires les plus forts.</p>
+                <div class="prompt-template" style="margin-top: 1rem;">
+                    Maintenant, joue le rôle d'un avocat du diable : présente les 5 arguments les plus forts CONTRE
+                    cette position, même s'ils contredisent complètement ce que tu viens de dire.
+                </div>
+            </div>
+
+            <div class="info-box">
+                <h3>2. Le prompt neutre</h3>
+                <p>Formulez des questions qui demandent une analyse équilibrée plutôt qu'une position.</p>
+                <div class="prompt-template" style="margin-top: 1rem;">
+                    Analyse de manière objective et équilibrée [sujet]. Présente :
+                    - Les principaux arguments pour et contre
+                    - Les données factuelles disponibles (avec sources)
+                    - Les nuances et zones d'incertitude
+                    - Les contextes où chaque position peut être valide
+
+                    Évite de prendre parti et souligne les limites de l'analyse.
+                </div>
+            </div>
+
+            <div class="info-box">
+                <h3>3. La vérification croisée</h3>
+                <ul style="line-height: 2; margin-left: 1.5rem; margin-top: 1rem;">
+                    <li>Testez le même sujet avec plusieurs LLM différents</li>
+                    <li>Variez les formulations de vos prompts</li>
+                    <li>Comparez les réponses et identifiez les divergences</li>
+                    <li>Vérifiez les "faits" cités avec des sources externes fiables</li>
+                </ul>
+            </div>
+
+            <div class="info-box">
+                <h3>4. La transparence du processus</h3>
+                <ul style="line-height: 2; margin-left: 1.5rem; margin-top: 1rem;">
+                    <li>Documentez vos prompts et les réponses obtenues</li>
+                    <li>Partagez avec vos collègues pour avoir des perspectives différentes</li>
+                    <li>Reconnaissez explicitement quand vous utilisez l'IA pour explorer une hypothèse</li>
+                    <li>Ne présentez jamais les outputs de l'IA comme des faits neutres</li>
+                </ul>
+            </div>
+
+            <div class="info-box">
+                <h3>5. La pause réflexive</h3>
+                <p style="margin-bottom: 1rem;">Avant d'utiliser l'IA, posez-vous ces questions :</p>
+                <ul style="line-height: 2; margin-left: 1.5rem;">
+                    <li>Qu'est-ce que je crois déjà sur ce sujet ?</li>
+                    <li>Est-ce que je cherche à confirmer cette croyance ou à la tester ?</li>
+                    <li>Serais-je prêt à changer d'avis si l'IA me donne des informations contraires ?</li>
+                    <li>Comment pourrais-je formuler ma question de la manière la plus neutre possible ?</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Points Clés à Retenir</h2>
+
+            <div class="danger-box">
+                <ul style="list-style: none; padding-left: 0;">
+                    <li style="margin: 0.5rem 0;">✓ Les LLM peuvent générer des arguments convaincants pour n'importe
+                        quelle position</li>
+                    <li style="margin: 0.5rem 0;">✓ L'IA ne cherche pas la vérité, elle génère du texte cohérent avec le
+                        prompt</li>
+                    <li style="margin: 0.5rem 0;">✓ Le biais de confirmation est facile à exploiter et dangereux avec
+                        l'IA</li>
+                    <li style="margin: 0.5rem 0;">✓ La formulation du prompt influence massivement la réponse</li>
+                    <li style="margin: 0.5rem 0;">✓ Toujours demander le contre-argumentaire et vérifier avec des
+                        sources externes</li>
+                    <li style="margin: 0.5rem 0;">✓ L'esprit critique est votre meilleure défense</li>
+                </ul>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 2rem;">
+            <button class="btn"
+                onclick="if(confirm('Avez-vous réalisé le débat et l\'analyse ?')) alert('Bravo ! Vous savez maintenant comment l\'IA peut être manipulée pour confirmer n\'importe quelle croyance.')">Terminer
+                l'activité</button>
+        </div>
+
+        <div class="uimm-footer">
+            Pôle Formation UIMM CVDL - Formation Intelligence Artificielle : Les Biais
+        </div>
+    </div>
+</body>
+
+</html>
