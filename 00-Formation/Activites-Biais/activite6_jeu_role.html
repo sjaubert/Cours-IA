@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activité 6 - Jeu de Rôle : Cas d'Usage Professionnel</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+            min-height: 100vh;
+            padding: 2rem;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            color: #ff6b9d;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        .duration {
+            text-align: center;
+            background: #17a2b8;
+            color: white;
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+
+        .section {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 5px solid #ff6b9d;
+        }
+
+        .section h2 {
+            color: #ff6b9d;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+
+        .objetifs {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+        }
+
+        .objetifs h2 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .objetifs ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .objetifs li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .objetifs li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .scenario-card {
+            background: white;
+            padding: 2.5rem;
+            margin: 2rem 0;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            border-top: 5px solid #ff6b9d;
+        }
+
+        .scenario-badge {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            display: inline-block;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+        }
+
+        .scenario-title {
+            font-size: 1.6rem;
+            color: #ff6b9d;
+            margin-bottom: 1rem;
+        }
+
+        .context-box {
+            background: #e7f3ff;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            border-left: 5px solid #0066cc;
+        }
+
+        .context-box h4 {
+            color: #0066cc;
+            margin-bottom: 0.5rem;
+        }
+
+        .roles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .role-card {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 5px solid #28a745;
+        }
+
+        .role-card h4 {
+            color: #28a745;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .role-card ul {
+            line-height: 2;
+            margin-left: 1.5rem;
+        }
+
+        .bias-alert {
+            background: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 10px;
+        }
+
+        .bias-alert h4 {
+            color: #856404;
+            margin-bottom: 0.5rem;
+        }
+
+        .questions-box {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .questions-box h4 {
+            color: #ff6b9d;
+            margin-bottom: 1rem;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 100px;
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+            resize: vertical;
+            transition: border-color 0.3s ease;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #ff6b9d;
+        }
+
+        .solution-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .solution-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-top: 3px solid #28a745;
+        }
+
+        .solution-card h4 {
+            color: #28a745;
+            margin-bottom: 1rem;
+        }
+
+        .timeline {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 1.5rem 0;
+        }
+
+        .timeline-step {
+            display: flex;
+            margin: 1.5rem 0;
+            align-items: flex-start;
+        }
+
+        .step-number {
+            background: #ff6b9d;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .step-content {
+            flex-grow: 1;
+        }
+
+        .step-content h4 {
+            color: #ff6b9d;
+            margin-bottom: 0.5rem;
+        }
+
+        .info-box {
+            background: #d1ecf1;
+            border-left: 5px solid #17a2b8;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 10px;
+            color: #0c5460;
+        }
+
+        .danger-box {
+            background: #f8d7da;
+            border-left: 5px solid #dc3545;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 10px;
+            color: #721c24;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin: 1rem 0.5rem;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 107, 157, 0.4);
+        }
+
+        .presentation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .presentation-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.5rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .roles-grid,
+            .solution-grid,
+            .presentation-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .uimm-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+        }
+
+        .uimm-header {
+            background: white;
+            padding: 1.5rem 2rem;
+            margin-bottom: 2rem;
+            border-radius: 15px 15px 0 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .uimm-logo {
+            max-height: 60px;
+            height: auto;
+        }
+
+        .uimm-title {
+            color: #2c3e50;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .uimm-footer {
+            background: #2c3e50;
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+            margin-top: 3rem;
+            border-radius: 0 0 15px 15px;
+            font-size: 0.95rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="uimm-header">
+            <img src="logo_uimm.jpg" alt="UIMM Logo" class="uimm-logo">
+            <div class="uimm-title">Pôle Formation UIMM CVDL</div>
+        </div>
+
+        <h1>Activité 6 : Jeu de Rôle Professionnel</h1>
+        <p class="subtitle">Identifier et résoudre des problèmes de biais dans des scénarios réalistes</p>
+
+        <div class="duration">Durée : 75 minutes</div>
+
+        <div class="objetifs">
+            <h2>Objectifs</h2>
+            <ul>
+                <li>Appliquer les connaissances sur les biais à des situations professionnelles réelles</li>
+                <li>Développer des stratégies concrètes pour identifier et mitiger les biais</li>
+                <li>Travailler en équipe pour résoudre des problèmes complexes</li>
+                <li>Présenter et défendre des solutions devant le groupe</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Déroulement de l'Activité</h2>
+
+            <div class="timeline">
+                <div class="timeline-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Formation des groupes (5 min)</h4>
+                        <p>Groupes de 3-4 personnes. Chaque groupe choisit un scénario parmi les 6 proposés.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Analyse du scénario (20 min)</h4>
+                        <p>Lire le scénario, identifier les biais, analyser les risques et impacts.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Élaboration de solutions (25 min)</h4>
+                        <p>Proposer des solutions concrètes et praticables pour mitiger les biais identifiés.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h4>Préparation de la présentation (10 min)</h4>
+                        <p>Préparer une présentation de 5 minutes maximum pour le groupe.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h4>Présentations et discussion (15 min)</h4>
+                        <p>Chaque groupe présente son cas et ses solutions. Questions du groupe et du formateur.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Scénario 1 : Service Client Automatisé</h2>
+
+            <div class="scenario-card">
+                <div class="scenario-badge">SCÉNARIO 1</div>
+                <h3 class="scenario-title">Chatbot de service client discriminatoire</h3>
+
+                <div class="context-box">
+                    <h4>Contexte</h4>
+                    <p>Votre entreprise (e-commerce) a déployé un chatbot IA pour le service client. Après quelques
+                        mois, des plaintes émergent : certains clients rapportent recevoir des réponses moins
+                        détaillées, plus froides, ou être systématiquement redirigés vers les FAQ alors que d'autres
+                        obtiennent un service personnalisé.</p>
+                </div>
+
+                <div class="bias-alert">
+                    <h4>Biais suspectés</h4>
+                    <ul style="margin-left: 1.5rem; line-height: 2;">
+                        <li>Le chatbot utilise l'historique d'achat pour "prioriser" certains clients</li>
+                        <li>L'analyse de sentiment détecte l'urgence différemment selon le style de communication</li>
+                        <li>Certains noms ou adresses email semblent conduire à des traitements différents</li>
+                    </ul>
+                </div>
+
+                <div class="roles-grid">
+                    <div class="role-card">
+                        <h4>Responsable Service Client</h4>
+                        <ul>
+                            <li>Préoccupé par la satisfaction client</li>
+                            <li>Reçoit les plaintes directement</li>
+                            <li>Veut une solution rapide</li>
+                        </ul>
+                    </div>
+
+                    <div class="role-card">
+                        <h4>Data Scientist</h4>
+                        <ul>
+                            <li>A conçu l'algorithme</li>
+                            <li>Défend les choix techniques</li>
+                            <li>Doit proposer des corrections</li>
+                        </ul>
+                    </div>
+
+                    <div class="role-card">
+                        <h4>Directeur Éthique & Conformité</h4>
+                        <ul>
+                            <li>Évalue les risques légaux</li>
+                            <li>Veut garantir l'équité</li>
+                            <li>Peut bloquer le système si nécessaire</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="questions-box">
+                    <h4>Questions pour votre groupe</h4>
+                    <ol style="line-height: 2; margin-left: 1.5rem;">
+                        <li>Quels types de biais sont à l'œuvre ? (Sélection, confirmation, stéréotype, etc.)</li>
+                        <li>Comment ces biais se sont-ils retrouvés dans le système ?</li>
+                        <li>Quel est l'impact réel sur les clients ?</li>
+                        <li>Quelles données faudrait-il auditer ?</li>
+                        <li>Quelles solutions proposez-vous à court terme et à long terme ?</li>
+                        <li>Comment prévenir ce problème à l'avenir ?</li>
+                    </ol>
+                </div>
+
+                <div style="margin-top: 1.5rem;">
+                    <h4>Vos réponses et solutions</h4>
+                    <textarea style="min-height: 200px;"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Scénario 2 : Recrutement et IA</h2>
+
+            <div class="scenario-card">
+                <div class="scenario-badge">SCÉNARIO 2</div>
+                <h3 class="scenario-title">Pré-sélection automatisée des candidatures</h3>
+
+                <div class="context-box">
+                    <h4>Contexte</h4>
+                    <p>Votre DRH veut implémenter un système d'IA pour pré-sélectionner les CV. Le système analyserait
+                        les 200+ candidatures reçues par mois et ne garderait que les 20 "meilleures" pour examen
+                        humain. Le dataset d'entraînement : les CV des 500 derniers recrutements (sur 10 ans).</p>
+                </div>
+
+                <div class="danger-box">
+                    <h4>Signaux d'alarme</h4>
+                    <ul style="margin-left: 1.5rem; line-height: 2;">
+                        <li>L'entreprise est majoritairement masculine (70%)</li>
+                        <li>Peu de diversité ethnique dans les effectifs actuels</li>
+                        <li>Plusieurs postes ont des intitulés genrés ("Chef de projet H/F" mais historiquement occupés
+                            par des hommes)</li>
+                        <li>Les données incluent les noms des candidats</li>
+                    </ul>
+                </div>
+
+                <div class="roles-grid">
+                    <div class="role-card">
+                        <h4>DRH</h4>
+                        <ul>
+                            <li>Veut gagner du temps</li>
+                            <li>Croit en l'objectivité de l'IA</li>
+                            <li>Budget limité</li>
+                        </ul>
+                    </div>
+
+                    <div class="role-card">
+                        <h4>Référent Diversité</h4>
+                        <ul>
+                            <li>Inquiet des biais potentiels</li>
+                            <li>Veut améliorer la diversité</li>
+                            <li>Craint une automatisation de la discrimination</li>
+                        </ul>
+                    </div>
+
+                    <div class="role-card">
+                        <h4>Consultant IA externe</h4>
+                        <ul>
+                            <li>Doit évaluer la faisabilité</li>
+                            <li>Connaît les risques techniques</li>
+                            <li>Peut recommander de ne pas faire</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="questions-box">
+                    <h4>Mission de votre groupe</h4>
+                    <p>Vous êtes le comité de décision. Vous devez :</p>
+                    <ol style="line-height: 2; margin-left: 1.5rem;">
+                        <li>Lister tous les biais potentiels dans ce scénario</li>
+                        <li>Évaluer si le projet devrait être lancé tel quel</li>
+                        <li>Si oui : quelles garanties exiger ? Si non : quelles alternatives ?</li>
+                        <li>Proposer un protocole de validation avant déploiement</li>
+                        <li>Définir des KPI pour mesurer l'équité du système</li>
+                    </ol>
+                </div>
+
+                <div style="margin-top: 1.5rem;">
+                    <h4>Votre recommandation</h4>
+                    <textarea style="min-height: 200px;"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Scénario 3 : Assistant IA pour la Formation</h2>
+
+            <div class="scenario-card">
+                <div class="scenario-badge">SCÉNARIO 3</div>
+                <h3 class="scenario-title">Recommandation de parcours de formation</h3>
+
+                <div class="context-box">
+                    <h4>Contexte</h4>
+                    <p>Votre entreprise déploie un assistant IA qui recommande des parcours de formation aux employés
+                        basés sur leur profil, historique, et performances. L'objectif : personnaliser le développement
+                        professionnel et identifier les talents pour des promotions.</p>
+                </div>
+
+                <div class="bias-alert">
+                    <h4>Observations problématiques</h4>
+                    <ul style="margin-left: 1.5rem; line-height: 2;">
+                        <li>Les femmes reçoivent plus de recommandations pour des formations "soft skills"</li>
+                        <li>Les hommes sont plus orientés vers des formations techniques et de management</li>
+                        <li>Les employés de plus de 50 ans reçoivent moins de suggestions de formations avancées</li>
+                        <li>Les recommandations semblent renforcer les parcours existants plutôt que favoriser la
+                            mobilité</li>
+                    </ul>
+                </div>
+
+                <div class="questions-box">
+                    <h4>Analyse requise</h4>
+                    <ol style="line-height: 2; margin-left: 1.5rem;">
+                        <li>Identifiez les biais de sélection, de confirmation, et de stéréotype</li>
+                        <li>Comment l'IA a-t-elle "appris" ces patterns discriminatoires ?</li>
+                        <li>Quel impact sur les carrières et la mobilité interne ?</li>
+                        <li>Comment auditer les recommandations de manière systématique ?</li>
+                        <li>Proposez une refonte du système pour le rendre équitable</li>
+                    </ol>
+                </div>
+
+                <div style="margin-top: 1.5rem;">
+                    <h4>Votre plan d'action</h4>
+                    <textarea style="min-height: 200px;"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Scénario 4 : Analyse de Performances et IA</h2>
+
+            <div class="scenario-card">
+                <div class="scenario-badge">SCÉNARIO 4</div>
+                <h3 class="scenario-title">Évaluation prédictive des employés</h3>
+
+                <div class="context-box">
+                    <h4>Contexte</h4>
+                    <p>Le management souhaite utiliser l'IA pour prédire les performances futures des employés et
+                        optimiser les augmentations de salaire et promotions. Le système analyse : emails, participation
+                        aux réunions, temps de travail, outputs produits, évaluations passées.</p>
+                </div>
+
+                <div class="danger-box">
+                    <h4>Points de préoccupation</h4>
+                    <ul style="margin-left: 1.5rem; line-height: 2;">
+                        <li>Les employés travaillant de nuit/en horaires décalés sont moins visibles</li>
+                        <li>Les personnes avec enfants (surtout les femmes) ont des patterns de présence différents</li>
+                        <li>Le style de communication varie selon les cultures et personnalités</li>
+                        <li>Les métiers créatifs/R&D ont des outputs moins quantifiables</li>
+                        <li>L'algorithme pourrait favoriser le présentéisme sur la productivité réelle</li>
+                    </ul>
+                </div>
+
+                <div class="questions-box">
+                    <h4>Réflexion éthique</h4>
+                    <ol style="line-height: 2; margin-left: 1.5rem;">
+                        <li>Est-il éthique d'utiliser l'IA pour évaluer les performances ? Pourquoi ?</li>
+                        <li>Quels groupes risquent d'être systématiquement désavantagés ?</li>
+                        <li>Comment définir la "performance" de manière équitable ?</li>
+                        <li>Que faire si l'IA détecte des patterns que les humains ne voient pas ?</li>
+                        <li>Quelle transparence vis-à-vis des employés ?</li>
+                    </ol>
+                </div>
+
+                <div style="margin-top: 1.5rem;">
+                    <h4>Votre position et recommandations</h4>
+                    <textarea style="min-height: 200px;"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Scénario 5 : Génération de Contenu Marketing</h2>
+
+            <div class="scenario-card">
+                <div class="scenario-badge">SCÉNARIO 5</div>
+                <h3 class="scenario-title">Campagne marketing générée par IA</h3>
+
+                <div class="context-box">
+                    <h4>Contexte</h4>
+                    <p>Votre équipe marketing utilise un LLM pour générer du contenu publicitaire pour différentes
+                        cibles démographiques. L'IA adapte automatiquement le message selon le profil client (âge,
+                        genre, localisation, historique d'achat).</p>
+                </div>
+
+                <div class="bias-alert">
+                    <h4>Contenu généré problématique</h4>
+                    <ul style="margin-left: 1.5rem; line-height: 2;">
+                        <li>Produits technologiques : visuels et textes ciblant principalement les hommes</li>
+                        <li>Produits ménagers : ciblant systématiquement les femmes</li>
+                        <li>Produits de luxe : surreprésentant les personnes blanches dans les visuels</li>
+                        <li>Produits financiers : langage plus simple pour certains segments démographiques</li>
+                    </ul>
+                </div>
+
+                <div class="questions-box">
+                    <h4>Défis à résoudre</h4>
+                    <ol style="line-height: 2; margin-left: 1.5rem;">
+                        <li>Comment l'IA reproduit-elle les stéréotypes marketing existants ?</li>
+                        <li>Quel est le risque réputationnel et légal ?</li>
+                        <li>Comment adapter les prompts pour éviter les biais ?</li>
+                        <li>Quel processus de validation mettre en place ?</li>
+                        <li>Comment mesurer la diversité et l'inclusivité du contenu ?</li>
+                    </ol>
+                </div>
+
+                <div style="margin-top: 1.5rem;">
+                    <h4>Votre stratégie de mitigation</h4>
+                    <textarea style="min-height: 200px;"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Scénario 6 : Analyse Prédictive pour la Maintenance</h2>
+
+            <div class="scenario-card">
+                <div class="scenario-badge">SCÉNARIO 6</div>
+                <h3 class="scenario-title">Priorisation des interventions de maintenance</h3>
+
+                <div class="context-box">
+                    <h4>Contexte</h4>
+                    <p>Votre entreprise (services urbains) utilise l'IA pour prioriser les interventions de maintenance
+                        sur le réseau (voirie, éclairage, etc.). L'algorithme prédit où intervenir en priorité basé sur
+                        l'historique des pannes, signalements, et données de capteurs.</p>
+                </div>
+
+                <div class="bias-alert">
+                    <h4>Inégalités territoriales observées</h4>
+                    <ul style="margin-left: 1.5rem; line-height: 2;">
+                        <li>Les quartiers aisés sont systématiquement priorisés</li>
+                        <li>Les zones à faible densité de capteurs sont négligées</li>
+                        <li>L'historique favorise les zones qui signalaient déjà beaucoup</li>
+                        <li>Certains quartiers entrent dans une spirale de dégradation</li>
+                    </ul>
+                </div>
+
+                <div class="questions-box">
+                    <h4>Analyse systémique</h4>
+                    <ol style="line-height: 2; margin-left: 1.5rem;">
+                        <li>Comment les biais historiques se perpétuent-ils ?</li>
+                        <li>Quel est l'impact social et politique ?</li>
+                        <li>Comment intégrer des critères d'équité territoriale ?</li>
+                        <li>Faut-il corriger activement pour compenser les biais historiques ?</li>
+                        <li>Comment communiquer sur l'utilisation de l'IA dans ce contexte sensible ?</li>
+                    </ol>
+                </div>
+
+                <div style="margin-top: 1.5rem;">
+                    <h4>Votre approche équitable</h4>
+                    <textarea style="min-height: 200px;"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Grille de Présentation</h2>
+
+            <div class="info-box">
+                <h4>Structure recommandée pour votre présentation (5 min)</h4>
+                <ol style="line-height: 2; margin-left: 1.5rem; margin-top: 1rem;">
+                    <li><strong>Résumé du scénario (30 sec)</strong> : Quel est le problème ?</li>
+                    <li><strong>Biais identifiés (1 min)</strong> : Quels types de biais et comment se manifestent-ils ?
+                    </li>
+                    <li><strong>Impact (1 min)</strong> : Qui est affecté et comment ?</li>
+                    <li><strong>Solutions (2 min)</strong> : Vos recommandations concrètes</li>
+                    <li><strong>Prévention (30 sec)</strong> : Comment éviter cela à l'avenir ?</li>
+                </ol>
+            </div>
+
+            <div class="presentation-grid">
+                <div class="presentation-card">
+                    <h4>Notes pour la présentation</h4>
+                    <textarea style="min-height: 150px;"></textarea>
+                </div>
+
+                <div class="presentation-card">
+                    <h4>Points clés à souligner</h4>
+                    <textarea style="min-height: 150px;"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Grille d'Évaluation des Solutions</h2>
+
+            <div class="solution-grid">
+                <div class="solution-card">
+                    <h4>Faisabilité</h4>
+                    <p>La solution est-elle réalisable avec des ressources raisonnables ?</p>
+                </div>
+
+                <div class="solution-card">
+                    <h4>Efficacité</h4>
+                    <p>La solution adresse-t-elle réellement les biais identifiés ?</p>
+                </div>
+
+                <div class="solution-card">
+                    <h4>Durabilité</h4>
+                    <p>La solution prévient-elle le retour des biais ?</p>
+                </div>
+
+                <div class="solution-card">
+                    <h4>Équilibre</h4>
+                    <p>La solution équilibre-t-elle bien équité et performance ?</p>
+                </div>
+
+                <div class="solution-card">
+                    <h4>Transparence</h4>
+                    <p>La solution inclut-elle de la transparence et de la responsabilité ?</p>
+                </div>
+
+                <div class="solution-card">
+                    <h4>Scalabilité</h4>
+                    <p>La solution peut-elle s'appliquer à d'autres contextes ?</p>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 2rem;">
+            <button class="btn"
+                onclick="if(confirm('Avez-vous préparé votre analyse et solutions ?')) alert('Prêt pour la présentation !')">Analyse
+                terminée</button>
+            <button class="btn"
+                onclick="if(confirm('Votre présentation est-elle prête ?')) alert('Bon courage pour la présentation !')">Prêt
+                à présenter</button>
+        </div>
+
+        <div class="uimm-footer">
+            Pôle Formation UIMM CVDL - Formation Intelligence Artificielle : Les Biais
+        </div>
+    </div>
+</body>
+
+</html>

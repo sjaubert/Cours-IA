@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activité 1 - Les Biais Cognitifs</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 2rem;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            color: #667eea;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        .section {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 5px solid #667eea;
+        }
+
+        .section h2 {
+            color: #764ba2;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+
+        .section h3 {
+            color: #667eea;
+            margin: 1.5rem 0 1rem 0;
+            font-size: 1.4rem;
+        }
+
+        .objetifs {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+        }
+
+        .objetifs h2 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .objetifs ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .objetifs li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .objetifs li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .quiz-question {
+            background: white;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .quiz-question:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .quiz-number {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 35px;
+            margin-right: 12px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            vertical-align: middle;
+        }
+
+        .quiz-question>p {
+            margin-bottom: 1.2rem !important;
+        }
+
+        .quiz-question>p:first-child {
+            font-size: 1.2rem;
+            color: #667eea;
+            font-weight: bold;
+            margin-bottom: 1rem !important;
+            padding-bottom: 0.8rem;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .quiz-question>p:nth-child(2) {
+            font-size: 1.05rem;
+            color: #333;
+            line-height: 1.7;
+            margin-bottom: 1.5rem !important;
+            padding: 0;
+        }
+
+        .options {
+            margin: 1rem 0;
+            padding-left: 1rem;
+        }
+
+        .option {
+            padding: 0.8rem;
+            margin: 0.5rem 0;
+            background: #f8f9fa;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .option:hover {
+            background: #e9ecef;
+            border-color: #667eea;
+        }
+
+        .option input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        .answer-zone {
+            background: #fff3cd;
+            border: 2px dashed #ffc107;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 10px;
+        }
+
+        .answer-zone h4 {
+            color: #856404;
+            margin-bottom: 0.5rem;
+        }
+
+        .info-box {
+            background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1.5rem 0;
+            color: #155724;
+        }
+
+        .info-box h4 {
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .warning-box {
+            background: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 10px;
+        }
+
+        .case-study {
+            background: white;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .case-study h4 {
+            color: #764ba2;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        th {
+            background: #667eea;
+            color: white;
+            padding: 1rem;
+            text-align: left;
+        }
+
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        tr:hover {
+            background: #f8f9fa;
+        }
+
+        .reflection-area {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 100px;
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+            resize: vertical;
+            transition: border-color 0.3s ease;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin: 1rem 0;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .duration {
+            text-align: center;
+            background: #17a2b8;
+            color: white;
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+
+        .uimm-header {
+            background: white;
+            padding: 1.5rem 2rem;
+            margin-bottom: 2rem;
+            border-radius: 15px 15px 0 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .uimm-logo {
+            max-height: 60px;
+            height: auto;
+        }
+
+        .uimm-title {
+            color: #2c3e50;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .uimm-footer {
+            background: #2c3e50;
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+            margin-top: 3rem;
+            border-radius: 0 0 15px 15px;
+            font-size: 0.95rem;
+        }
+
+        .quiz-question p:first-child {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .quiz-question>p:nth-child(2) {
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.5rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .section h2 {
+                font-size: 1.5rem;
+            }
+
+            .uimm-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="uimm-header">
+            <img src="logo_uimm.jpg" alt="UIMM Logo" class="uimm-logo">
+            <div class="uimm-title">Pôle Formation UIMM CVDL</div>
+        </div>
+
+        <h1>Activité 1 : Les Biais Cognitifs</h1>
+        <p class="subtitle">Comprendre nos propres biais pour mieux comprendre ceux de l'IA</p>
+
+        <div class="duration">Durée : 45 minutes</div>
+
+        <div class="objetifs">
+            <h2>Objectifs</h2>
+            <ul>
+                <li>Identifier ses propres biais cognitifs</li>
+                <li>Comprendre le lien entre biais humains et biais de l'IA</li>
+                <li>Reconnaître les principaux types de biais cognitifs</li>
+                <li>Prendre conscience de l'impact des biais sur nos décisions</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Introduction</h2>
+            <p>Les biais cognitifs sont des déviations systématiques de la pensée rationnelle qui affectent nos
+                jugements et nos décisions. Nous en avons tous, et c'est ce qui nous rend humains. Mais quand ces biais
+                se retrouvent dans les systèmes d'intelligence artificielle que nous créons et utilisons, ils peuvent
+                avoir des conséquences graves.</p>
+
+            <div class="info-box">
+                <h4>Le saviez-vous ?</h4>
+                <p>Les chercheurs ont identifié plus de 180 biais cognitifs différents. L'IA hérite de ces biais de deux
+                    manières : par les données sur lesquelles elle est entraînée (qui reflètent nos décisions biaisées)
+                    et par les choix de conception faits par les développeurs (qui sont eux-mêmes sujets aux biais).</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Quiz : Identifiez vos biais cognitifs</h2>
+            <p>Pour chaque situation, choisissez la réponse qui vous semble la plus naturelle. Il n'y a pas de bonnes ou
+                mauvaises réponses, l'objectif est de prendre conscience de vos tendances.</p>
+
+            <div class="quiz-question">
+                <p><span class="quiz-number">1</span><strong>Biais de confirmation</strong></p>
+                <p>Vous cherchez des informations sur un nouveau produit que vous envisagez d'acheter. Quelle est votre
+                    tendance naturelle ?</p>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q1" value="a">
+                        Chercher activement des avis négatifs pour équilibrer votre jugement
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q1" value="b">
+                        Lire surtout les avis qui confirment que c'est un bon achat
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q1" value="c">
+                        Ignorer les avis et faire confiance à votre première impression
+                    </label>
+                </div>
+                <div class="answer-zone">
+                    <h4>Réflexion :</h4>
+                    <p>Si vous avez choisi B, vous êtes sujet au <strong>biais de confirmation</strong> : nous cherchons
+                        et privilégions les informations qui confirment nos croyances préexistantes. Les algorithmes
+                        d'IA peuvent amplifier ce biais en nous montrant davantage de contenu similaire à ce que nous
+                        avons déjà consulté.</p>
+                </div>
+            </div>
+
+            <div class="quiz-question">
+                <p><span class="quiz-number">2</span><strong>Biais d'ancrage</strong></p>
+                <p>Un vendeur vous propose un produit initialement à 1000€, "soldé aujourd'hui à 600€". Votre réaction ?
+                </p>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q2" value="a">
+                        Penser que c'est une excellente affaire grâce aux 400€ d'économie
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q2" value="b">
+                        Vérifier le prix réel du marché avant de décider
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q2" value="c">
+                        Être méfiant face à cette réduction importante
+                    </label>
+                </div>
+                <div class="answer-zone">
+                    <h4>Réflexion :</h4>
+                    <p>Si vous avez choisi A, vous êtes influencé par le <strong>biais d'ancrage</strong> : la première
+                        information reçue (1000€) devient une référence qui influence notre jugement. Les systèmes de
+                        recommandation peuvent exploiter ce biais en présentant d'abord des options plus chères.</p>
+                </div>
+            </div>
+
+            <div class="quiz-question">
+                <p><span class="quiz-number">3</span><strong>Biais de disponibilité</strong></p>
+                <p>Après avoir vu plusieurs reportages sur des accidents d'avion, vous devez choisir un moyen de
+                    transport pour vos vacances. Votre réaction ?</p>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q3" value="a">
+                        Préférer la voiture car l'avion vous semble plus dangereux
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q3" value="b">
+                        Consulter les statistiques objectives de sécurité
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q3" value="c">
+                        Éviter complètement de penser aux risques
+                    </label>
+                </div>
+                <div class="answer-zone">
+                    <h4>Réflexion :</h4>
+                    <p>Si vous avez choisi A, vous êtes sujet au <strong>biais de disponibilité</strong> : nous
+                        surestimons la probabilité d'événements dont nous nous souvenons facilement. L'IA peut renforcer
+                        ce biais en mettant en avant des contenus sensationnels qui restent en mémoire.</p>
+                </div>
+            </div>
+
+            <div class="quiz-question">
+                <p><span class="quiz-number">4</span><strong>Biais de stéréotype</strong></p>
+                <p>En lisant un CV, vous remarquez un prénom étranger. Votre première pensée ?</p>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q4" value="a">
+                        Me demander si la personne maîtrise bien le français
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q4" value="b">
+                        Évaluer uniquement les compétences et l'expérience listées
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q4" value="c">
+                        Penser que cela apportera de la diversité à l'équipe
+                    </label>
+                </div>
+                <div class="answer-zone">
+                    <h4>Réflexion :</h4>
+                    <p>Si vous avez choisi A, vous êtes influencé par un <strong>stéréotype</strong> : vous faites des
+                        suppositions basées sur l'origine perçue. C'est exactement ce qui s'est passé avec l'outil RH
+                        d'Amazon qui discriminait les candidatures féminines car il avait appris des décisions passées
+                        biaisées.</p>
+                </div>
+            </div>
+
+            <div class="quiz-question">
+                <p><span class="quiz-number">5</span><strong>Biais de groupe (Groupthink)</strong></p>
+                <p>Lors d'une réunion d'équipe, tout le monde semble d'accord sur une décision, mais vous avez des
+                    doutes. Que faites-vous ?</p>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q5" value="a">
+                        Garder vos doutes pour vous pour ne pas ralentir le groupe
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q5" value="b">
+                        Exprimer vos réserves même si c'est inconfortable
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q5" value="c">
+                        Vous dire que si tout le monde est d'accord, vous avez tort
+                    </label>
+                </div>
+                <div class="answer-zone">
+                    <h4>Réflexion :</h4>
+                    <p>Si vous avez choisi A ou C, vous êtes sensible au <strong>biais de groupe</strong> : la tendance
+                        à conformer notre opinion à celle du groupe. Ce biais affecte aussi le développement de l'IA
+                        quand les équipes sont homogènes et ne remettent pas en question leurs hypothèses.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Les Principaux Biais Cognitifs et leur Impact sur l'IA</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Biais Cognitif</th>
+                        <th>Définition</th>
+                        <th>Impact sur l'IA</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Biais de confirmation</strong></td>
+                        <td>Tendance à chercher et privilégier les informations qui confirment nos croyances</td>
+                        <td>Les algorithmes de recommandation créent des "bulles de filtres" en montrant du contenu
+                            similaire</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Biais d'ancrage</strong></td>
+                        <td>La première information reçue influence fortement notre jugement</td>
+                        <td>L'ordre de présentation des résultats par une IA biaise notre choix</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Biais de disponibilité</strong></td>
+                        <td>Surestimation de la probabilité d'événements dont on se souvient facilement</td>
+                        <td>Les IA entraînées sur des données médiatiques surreprésentent les événements rares mais
+                            marquants</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Biais de stéréotype</strong></td>
+                        <td>Généralisation excessive basée sur l'appartenance à un groupe</td>
+                        <td>Les IA reproduisent et amplifient les stéréotypes présents dans les données d'entraînement
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Biais de groupe</strong></td>
+                        <td>Conformité aux opinions du groupe au détriment de l'analyse critique</td>
+                        <td>Les équipes homogènes créent des IA avec des angles morts importants</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Biais de survie</strong></td>
+                        <td>Se concentrer sur les réussites en ignorant les échecs</td>
+                        <td>Les datasets ne contiennent souvent que les cas "qui ont fonctionné", créant une vision
+                            déformée</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>Cas Concret : Le Biais en Cascade</h2>
+
+            <div class="case-study">
+                <h4>Scénario : Recrutement assisté par IA</h4>
+                <p><strong>Situation :</strong> Une entreprise utilise un outil d'IA pour pré-sélectionner des CV.</p>
+
+                <p><strong>Cascade de biais :</strong></p>
+                <ol style="line-height: 2; margin-left: 2rem;">
+                    <li><strong>Biais historique :</strong> L'entreprise a historiquement recruté principalement des
+                        hommes pour certains postes.</li>
+                    <li><strong>Biais dans les données :</strong> L'IA est entraînée sur ces données historiques
+                        biaisées.</li>
+                    <li><strong>Biais algorithmique :</strong> L'IA apprend que "être un homme" est un critère de
+                        succès.</li>
+                    <li><strong>Biais de confirmation des recruteurs :</strong> Les RH font plus confiance aux
+                        recommandations de l'IA, renforçant le biais.</li>
+                    <li><strong>Boucle de rétroaction :</strong> Les nouvelles embauches alimentent le système,
+                        perpétuant le biais.</li>
+                </ol>
+
+                <p style="margin-top: 1rem;"><strong>Résultat :</strong> L'IA discrimine systématiquement les
+                    candidatures féminines. C'est exactement ce qui est arrivé à Amazon en 2018.</p>
+            </div>
+
+            <div class="warning-box">
+                <h4>Point d'attention</h4>
+                <p>Les biais de l'IA ne sont pas de simples bugs techniques. Ils sont le reflet de nos propres biais
+                    humains, amplifiés et automatisés à grande échelle. C'est pourquoi il est crucial de commencer par
+                    prendre conscience de nos propres biais.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Réflexion Personnelle</h2>
+
+            <div class="reflection-area">
+                <h3>Question 1 : Prise de conscience</h3>
+                <p>Après ce quiz, quels biais cognitifs reconnaissez-vous le plus chez vous ? En quoi cela pourrait-il
+                    influencer votre utilisation de l'IA dans votre travail ?</p>
+                <textarea placeholder="Écrivez votre réflexion ici..."></textarea>
+            </div>
+
+            <div class="reflection-area">
+                <h3>Question 2 : Application professionnelle</h3>
+                <p>Pensez à un outil d'IA que vous utilisez ou pourriez utiliser dans votre contexte professionnel.
+                    Quels biais cognitifs pourraient se glisser dans son utilisation ?</p>
+                <textarea placeholder="Écrivez votre réflexion ici..."></textarea>
+            </div>
+
+            <div class="reflection-area">
+                <h3>Question 3 : Stratégies de mitigation</h3>
+                <p>Quelles stratégies pourriez-vous mettre en place pour limiter l'impact de vos propres biais lors de
+                    l'utilisation d'outils d'IA ?</p>
+                <textarea placeholder="Écrivez votre réflexion ici..."></textarea>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Points Clés à Retenir</h2>
+
+            <div class="info-box">
+                <ul style="list-style: none; padding-left: 0;">
+                    <li style="margin: 0.5rem 0;">✓ Les biais cognitifs sont universels et inévitables chez les humains
+                    </li>
+                    <li style="margin: 0.5rem 0;">✓ L'IA hérite de nos biais via les données et les choix de conception
+                    </li>
+                    <li style="margin: 0.5rem 0;">✓ Les biais de l'IA peuvent amplifier et automatiser la discrimination
+                    </li>
+                    <li style="margin: 0.5rem 0;">✓ La prise de conscience est la première étape pour limiter les biais
+                    </li>
+                    <li style="margin: 0.5rem 0;">✓ La diversité des équipes et des perspectives est essentielle</li>
+                </ul>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 2rem;">
+            <button class="btn"
+                onclick="if(confirm('Avez-vous terminé cette activité ?')) alert('Bravo ! Passez à l\'activité suivante.')">Terminer
+                l'activité</button>
+        </div>
+
+        <div class="uimm-footer">
+            Pôle Formation UIMM CVDL - Formation Intelligence Artificielle : Les Biais
+        </div>
+    </div>
+</body>
+
+</html>
