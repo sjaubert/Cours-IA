@@ -97,11 +97,12 @@
 
         .quiz-question {
             background: white;
-            padding: 1.5rem;
-            margin: 1rem 0;
+            padding: 2rem;
+            margin: 1.5rem 0;
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: visible;
         }
 
         .quiz-question:hover {
@@ -129,20 +130,24 @@
         }
 
         .quiz-question>p:first-child {
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             color: #667eea;
             font-weight: bold;
-            margin-bottom: 1rem !important;
+            margin-bottom: 1.2rem !important;
             padding-bottom: 0.8rem;
             border-bottom: 2px solid #e9ecef;
+            display: flex;
+            align-items: center;
         }
 
         .quiz-question>p:nth-child(2) {
             font-size: 1.05rem;
-            color: #333;
-            line-height: 1.7;
+            color: #2c3e50;
+            line-height: 1.8;
             margin-bottom: 1.5rem !important;
             padding: 0;
+            display: block;
+            white-space: normal;
         }
 
         .options {
@@ -660,10 +665,17 @@
             </div>
         </div>
 
-        <div style="text-align: center; margin-top: 2rem;">
-            <button class="btn"
-                onclick="if(confirm('Avez-vous terminé cette activité ?')) alert('Bravo ! Passez à l\'activité suivante.')">Terminer
-                l'activité</button>
+        <div style="text-align: center; margin-top: 3rem;">
+            <div style="display: inline-flex; gap: 1rem; flex-wrap: wrap; justify-content: center;">
+                <button class="btn" onclick="window.location.href='index.html'"
+                    style="background: linear-gradient(135deg, #6c757d 0%, #495057 100%);">
+                    ← Retour à l'accueil
+                </button>
+                <button class="btn" onclick="window.location.href='activite2_premiere_impression.html'"
+                    style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                    Activité suivante →
+                </button>
+            </div>
         </div>
 
         <div class="uimm-footer">
