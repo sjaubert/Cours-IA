@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formation : Biais de l'IA</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #ec4899;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --uimm-blue: #00457C;
+            --uimm-yellow: #FDB913;
+        }
+        
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background-color: var(--dark);
+            color: var(--light);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .slide {
+            min-height: 100vh;
+            padding: 4rem;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border-bottom: 2px solid #334155;
+            position: relative;
+        }
+
+        .header {
+            position: absolute;
+            top: 2rem;
+            left: 4rem;
+            font-size: 0.9rem;
+            opacity: 0.7;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .header img {
+            height: 30px;
+        }
+
+        h1 {
+            font-size: 4rem;
+            background: linear-gradient(to right, #60a5fa, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 2rem;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--primary);
+        }
+
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: bold;
+            color: var(--uimm-yellow);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .quote {
+            font-size: 1.8rem;
+            font-style: italic;
+            border-left: 5px solid var(--primary);
+            padding-left: 2rem;
+            margin: 2rem 0;
+            color: #94a3b8;
+        }
+
+        .btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            margin-top: 2rem;
+            transition: background 0.2s;
+        }
+
+        .btn:hover {
+            background: #1d4ed8;
+        }
+
+        .reveal-content {
+            opacity: 0; /* Hidden by default */
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+            filter: blur(5px);
+        }
+
+        .reveal-content.visible {
+            opacity: 1;
+            transform: translateY(0);
+            filter: blur(0);
+        }
+
+        .timer-container {
+            position: absolute;
+            bottom: 2rem;
+            right: 4rem;
+            font-size: 2rem;
+            font-family: monospace;
+            background: rgba(0,0,0,0.5);
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            display: none;
+        }
+
+        /* Utility classes */
+        .text-accent { color: var(--uimm-yellow); }
+        .text-danger { color: #f87171; }
+        .flex-center { display: flex; align-items: center; justify-content: center; }
+
+    </style>
+</head>
+<body>
+
+    <!-- Slide 1: Titre -->
+    <div class="slide" id="accueil">
+        <div class="header">
+            <span>Pôle Formation UIMM CVDL</span>
+        </div>
+        <h1>Les Biais de l'IA</h1>
+        <p style="font-size: 1.5rem; max-width: 800px;">
+            Comprendre pourquoi les algorithmes ne sont pas neutres et comment garder notre lucidité.
+        </p>
+        <button class="btn" onclick="document.getElementById('intro').scrollIntoView({behavior: 'smooth'})">Commencer la formation</button>
+    </div>
+
+    <!-- Slide 2: Introduction -->
+    <div class="slide" id="intro">
+        <h2>L'IA est-elle raciste ou sexiste ?</h2>
+        <div class="quote">
+            "L'IA n'a pas de conscience, mais elle a une mémoire. Et cette mémoire est pleine de nos préjugés."
+        </div>
+        
+        <div class="content-grid">
+            <div class="card" onclick="reveal(this)">
+                <h3>🔍 Le Constat</h3>
+                <p>Les algorithmes prennent des décisions qui impactent nos vies : recrutement, crédits, justice, information.</p>
+                <div class="reveal-content">
+                    <p class="text-accent">Mais ils reproduisent les inégalités du passé.</p>
+                </div>
+            </div>
+            <div class="card" onclick="reveal(this)">
+                <h3>⚠️ Le Danger</h3>
+                <p>Penser que "C'est l'ordinateur qui l'a dit, donc c'est vrai".</p>
+                <div class="reveal-content">
+                    <p class="text-danger">C'est le Biais d'Automatisation.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 3: Mécanismes -->
+    <div class="slide">
+        <h2>La machine à biais : Comment ça marche ?</h2>
+        <div class="content-grid">
+            <div class="card">
+                <h3>1. Les Données (L'origine)</h3>
+                <p>Principe : <strong>Garbage In, Garbage Out</strong>.</p>
+                <p>Si j'entraîne une IA avec 10 ans de CV d'hommes...</p>
+                <div class="reveal-content visible" style="margin-top:1rem; border-top:1px solid #444; padding-top:1rem;">
+                    Exemple : <span class="text-danger">Amazon (2014)</span>. L'IA rejetait les CV avec le mot "féminin".
+                </div>
+            </div>
+            <div class="card">
+                <h3>2. L'Amplification</h3>
+                <p>L'IA cherche des modèles (patterns) pour simplifier le monde.</p>
+                <p>Résultat : Elle transforme une tendance en règle absolue.</p>
+                <div class="stat-number">x4</div>
+                <p>L'IA associe les femmes à "famille/maison" 4 fois plus que les hommes (UNESCO 2024).</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 4: Actualités -->
+    <div class="slide">
+        <h2>Cas Récent : Workday & Recrutement (2023)</h2>
+        <div class="card" style="max-width: 800px;">
+            <h3>L'Affaire</h3>
+            <p>Un candidat noir de plus de 40 ans postule à 100 jobs via Workday. Rejeté systématiquement.</p>
+            <p>Il crée un profil "plus jeune" et "blanchi" -> <strong>Entretiens obtenus</strong>.</p>
+            <hr style="border-color: #444; margin: 1.5rem 0;">
+            <h3>Le Problème</h3>
+            <ul style="list-style-position: inside;">
+                <li>L'algorithme est une "boîte noire".</li>
+                <li>L'entreprise ne sait pas *pourquoi* l'IA a a refusé.</li>
+                <li>Biais systémique contre les profils atypiques.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Slide 5: Jeu de Rôle -->
+    <div class="slide">
+        <h2>À vous de jouer : Le Comité d'Éthique</h2>
+        <p style="font-size: 1.2rem;">Contexte : Une IA de crédit rejette les demandes issues de quartiers pauvres.</p>
+        
+        <div class="content-grid">
+            <div class="card" style="border-left: 5px solid #2563eb;">
+                <h3>🏢 Directeur Commercial</h3>
+                <p>"On perd des parts de marché ! Il faut lancer l'outil maintenant, il est rapide et rentable."</p>
+            </div>
+            <div class="card" style="border-left: 5px solid #ec4899;">
+                <h3>⚖️ Resp. Éthique</h3>
+                <p>"On ne peut pas discriminer les gens sur leur code postal. C'est illégal et immoral. Stop."</p>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 2rem;">
+            <button class="btn" onclick="startTimer(300)">Lancer le débat (5 min)</button>
+        </div>
+        <div id="timer" class="timer-container">05:00</div>
+    </div>
+
+    <!-- Slide 6: Conclusion -->
+    <div class="slide">
+        <h2>Check-list de Lucidité</h2>
+        <div class="content-grid">
+            <div class="card">
+                <h3>🔍 Représentativité</h3>
+                <p>Qui est absent de mes données ?</p>
+            </div>
+            <div class="card">
+                <h3>🤖 Transparence</h3>
+                <p>Est-ce que je sais que je parle à une IA ?</p>
+            </div>
+            <div class="card">
+                <h3>🧠 Humain dans la boucle</h3>
+                <p>Dernier mot à l'humain.</p>
+            </div>
+        </div>
+        <p style="text-align: center; margin-top: 4rem; opacity: 0.5;">
+            Document réalisé pour le Pôle Formation UIMM CVDL
+        </p>
+    </div>
+
+    <script>
+        function reveal(element) {
+            const content = element.querySelector('.reveal-content');
+            if (content) {
+                content.classList.toggle('visible');
+            }
+        }
+
+        function startTimer(duration) {
+            const timerDisplay = document.getElementById('timer');
+            timerDisplay.style.display = 'block';
+            let timer = duration, minutes, seconds;
+            
+            const interval = setInterval(function () {
+                minutes = parseInt(timer / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                timerDisplay.textContent = minutes + ":" + seconds;
+
+                if (--timer < 0) {
+                    clearInterval(interval);
+                    timerDisplay.textContent = "TEMPS ÉCOULÉ !";
+                    timerDisplay.style.color = "#f87171";
+                }
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
