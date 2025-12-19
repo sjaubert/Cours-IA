@@ -37,7 +37,9 @@
 
 ### Tutoriels Techniques
 - [Tutoriel Google Apps Script](https://sjaubert.github.io/Cours-IA/tutoriel_google_appsscript.html?target=_blank)
-- **[Tutoriels Gemini CLI & MCP - Guide de Navigation](https://sjaubert.github.io/Cours-IA/Formation_Agentic_Workspace/tutoriels_gemini_mcp.html?target=_blank)**
+  ```
+- [Tutoriels Gemini CLI & MCP - Guide de Navigation](https://sjaubert.github.io/Cours-IA/Formation_Agentic_Workspace/tutoriels_gemini_mcp.html?target=_blank)
+  ```
 - [antigravity_tutorial](https://sjaubert.github.io/Cours-IA/antigravity_tutorial.html?target=_blank)
 
 ---
