@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Régression Linéaire Interactive - UIMM CVDL</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 20px;
+        }
+
+        .logo {
+            height: 80px;
+            border-radius: 8px;
+        }
+
+        .title-section {
+            flex: 1;
+            text-align: center;
+        }
+
+        h1 {
+            color: #667eea;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            color: #764ba2;
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+
+        .case-study {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border-left: 5px solid #667eea;
+        }
+
+        .case-study h2 {
+            color: #764ba2;
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+
+        .case-study p {
+            line-height: 1.6;
+            color: #555;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .canvas-container {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        canvas {
+            width: 100%;
+            height: 500px;
+            background: white;
+            border-radius: 8px;
+            cursor: crosshair;
+            border: 2px solid #e0e0e0;
+        }
+
+        .controls {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 25px;
+            border-radius: 12px;
+            color: white;
+        }
+
+        .controls h3 {
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+            padding-bottom: 10px;
+        }
+
+        .stats {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .stat-item {
+            margin: 15px 0;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .stat-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(5px);
+        }
+
+        .stat-label {
+            font-weight: 600;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .stat-value {
+            font-size: 1.4rem;
+            font-weight: 700;
+            font-family: 'Courier New', monospace;
+        }
+
+        .equation {
+            background: rgba(255, 255, 255, 0.95);
+            color: #667eea;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #667eea;
+        }
+
+        .btn-primary:hover {
+            background: #f0f0f0;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-danger {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(231, 76, 60, 0.4);
+        }
+
+        .instructions {
+            background: #fff9e6;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border-left: 4px solid #ffc107;
+        }
+
+        .instructions h4 {
+            color: #f39c12;
+            margin-bottom: 10px;
+        }
+
+        .instructions ul {
+            margin-left: 20px;
+            color: #666;
+        }
+
+        .instructions li {
+            margin: 5px 0;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 968px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .logo {
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="logo_uimm.jpg" alt="Logo UIMM" class="logo">
+            <div class="title-section">
+                <h1>Régression Linéaire Interactive</h1>
+                <div class="subtitle">Pôle Formation UIMM CVDL</div>
+            </div>
+            <div style="width: 80px;"></div>
+        </div>
+
+        <div class="case-study">
+            <h2>Cas d'Étude Industriel</h2>
+            <p>
+                <strong>Contexte :</strong> Contrôle qualité dans une ligne de production de composants métalliques.
+                On étudie la relation entre la <strong>température de traitement thermique (°C)</strong> et
+                l'<strong>indice de dureté du matériau (HRC)</strong>. L'objectif est de modéliser cette relation
+                pour prédire la dureté en fonction de la température appliquée.
+            </p>
+        </div>
+
+        <div class="main-content">
+            <div class="canvas-container">
+                <canvas id="regressionCanvas"></canvas>
+            </div>
+
+            <div class="controls">
+                <h3>Statistiques</h3>
+
+                <div class="equation" id="equation">
+                    y = 0.00x + 0.00
+                </div>
+
+                <div class="stats">
+                    <div class="stat-item">
+                        <div class="stat-label">Coefficient Directeur (m)</div>
+                        <div class="stat-value" id="slope">0.00</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Ordonnée à l'Origine (b)</div>
+                        <div class="stat-value" id="intercept">0.00</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Coefficient R²</div>
+                        <div class="stat-value" id="r2">0.00</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Nombre de Points</div>
+                        <div class="stat-value" id="pointCount">0</div>
+                    </div>
+                </div>
+
+                <button class="btn-primary" onclick="addRandomPoint()">Ajouter un Point</button>
+                <button class="btn-danger" onclick="resetData()">Réinitialiser</button>
+
+                <div class="instructions">
+                    <h4>Instructions</h4>
+                    <ul>
+                        <li>Cliquez pour ajouter des points</li>
+                        <li>Glissez-déposez pour déplacer</li>
+                        <li>Double-clic pour supprimer</li>
+                        <li>La droite s'ajuste automatiquement</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('regressionCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // Data points (industrial case: temperature vs hardness)
+        let points = [
+            { x: 150, y: 25 },
+            { x: 200, y: 32 },
+            { x: 250, y: 38 },
+            { x: 300, y: 45 },
+            { x: 350, y: 52 },
+            { x: 400, y: 58 },
+            { x: 450, y: 65 }
+        ];
+
+        // Axis ranges (Temperature: 100-500°C, Hardness: 0-80 HRC)
+        const xMin = 100, xMax = 500;
+        const yMin = 0, yMax = 80;
+
+        let draggingPoint = null;
+        let dragOffset = { x: 0, y: 0 };
+
+        // Set canvas size
+        function resizeCanvas() {
+            const rect = canvas.getBoundingClientRect();
+            canvas.width = rect.width;
+            canvas.height = rect.height;
+            draw();
+        }
+
+        // Convert screen to data coordinates
+        function screenToData(screenX, screenY) {
+            const margin = 60;
+            const plotWidth = canvas.width - 2 * margin;
+            const plotHeight = canvas.height - 2 * margin;
+
+            const x = xMin + (screenX - margin) / plotWidth * (xMax - xMin);
+            const y = yMax - (screenY - margin) / plotHeight * (yMax - yMin);
+
+            return { x, y };
+        }
+
+        // Convert data to screen coordinates
+        function dataToScreen(x, y) {
+            const margin = 60;
+            const plotWidth = canvas.width - 2 * margin;
+            const plotHeight = canvas.height - 2 * margin;
+
+            const screenX = margin + (x - xMin) / (xMax - xMin) * plotWidth;
+            const screenY = margin + (yMax - y) / (yMax - yMin) * plotHeight;
+
+            return { x: screenX, y: screenY };
+        }
+
+        // Calculate linear regression
+        function linearRegression(points) {
+            const n = points.length;
+            if (n < 2) return { m: 0, b: 0, r2: 0 };
+
+            let sumX = 0, sumY = 0, sumXY = 0, sumX2 = 0, sumY2 = 0;
+
+            points.forEach(p => {
+                sumX += p.x;
+                sumY += p.y;
+                sumXY += p.x * p.y;
+                sumX2 += p.x * p.x;
+                sumY2 += p.y * p.y;
+            });
+
+            const m = (n * sumXY - sumX * sumY) / (n * sumX2 - sumX * sumX);
+            const b = (sumY - m * sumX) / n;
+
+            // Calculate R²
+            const yMean = sumY / n;
+            let ssRes = 0, ssTot = 0;
+            points.forEach(p => {
+                const yPred = m * p.x + b;
+                ssRes += (p.y - yPred) ** 2;
+                ssTot += (p.y - yMean) ** 2;
+            });
+            const r2 = ssTot === 0 ? 1 : 1 - ssRes / ssTot;
+
+            return { m, b, r2 };
+        }
+
+        // Draw everything
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            const margin = 60;
+            const plotWidth = canvas.width - 2 * margin;
+            const plotHeight = canvas.height - 2 * margin;
+
+            // Draw axes
+            ctx.strokeStyle = '#333';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(margin, margin);
+            ctx.lineTo(margin, canvas.height - margin);
+            ctx.lineTo(canvas.width - margin, canvas.height - margin);
+            ctx.stroke();
+
+            // Draw grid
+            ctx.strokeStyle = '#e0e0e0';
+            ctx.lineWidth = 1;
+            for (let i = 0; i <= 5; i++) {
+                const x = margin + (plotWidth / 5) * i;
+                const y = margin + (plotHeight / 5) * i;
+
+                ctx.beginPath();
+                ctx.moveTo(x, margin);
+                ctx.lineTo(x, canvas.height - margin);
+                ctx.stroke();
+
+                ctx.beginPath();
+                ctx.moveTo(margin, y);
+                ctx.lineTo(canvas.width - margin, y);
+                ctx.stroke();
+            }
+
+            // Draw axis labels
+            ctx.fillStyle = '#333';
+            ctx.font = 'bold 12px Arial';
+            ctx.textAlign = 'center';
+
+            // X-axis labels
+            for (let i = 0; i <= 5; i++) {
+                const value = xMin + (xMax - xMin) / 5 * i;
+                const pos = dataToScreen(value, yMin);
+                ctx.fillText(Math.round(value), pos.x, canvas.height - margin + 20);
+            }
+
+            // Y-axis labels
+            ctx.textAlign = 'right';
+            for (let i = 0; i <= 5; i++) {
+                const value = yMin + (yMax - yMin) / 5 * i;
+                const pos = dataToScreen(xMin, value);
+                ctx.fillText(Math.round(value), margin - 10, pos.y + 4);
+            }
+
+            // Axis titles
+            ctx.font = 'bold 14px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillStyle = '#667eea';
+            ctx.fillText('Température (°C)', canvas.width / 2, canvas.height - 10);
+
+            ctx.save();
+            ctx.translate(15, canvas.height / 2);
+            ctx.rotate(-Math.PI / 2);
+            ctx.fillText('Dureté (HRC)', 0, 0);
+            ctx.restore();
+
+            // Calculate and draw regression line
+            if (points.length >= 2) {
+                const { m, b, r2 } = linearRegression(points);
+
+                const p1 = dataToScreen(xMin, m * xMin + b);
+                const p2 = dataToScreen(xMax, m * xMax + b);
+
+                ctx.strokeStyle = '#667eea';
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                ctx.moveTo(p1.x, p1.y);
+                ctx.lineTo(p2.x, p2.y);
+                ctx.stroke();
+
+                // Update stats
+                document.getElementById('slope').textContent = m.toFixed(4);
+                document.getElementById('intercept').textContent = b.toFixed(2);
+                document.getElementById('r2').textContent = r2.toFixed(4);
+                document.getElementById('equation').textContent =
+                    `y = ${m.toFixed(4)}x ${b >= 0 ? '+' : ''} ${b.toFixed(2)}`;
+            }
+
+            // Draw points
+            points.forEach((point, index) => {
+                const screen = dataToScreen(point.x, point.y);
+
+                ctx.fillStyle = draggingPoint === index ? '#e74c3c' : '#764ba2';
+                ctx.strokeStyle = 'white';
+                ctx.lineWidth = 3;
+
+                ctx.beginPath();
+                ctx.arc(screen.x, screen.y, 8, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.stroke();
+            });
+
+            document.getElementById('pointCount').textContent = points.length;
+        }
+
+        // Mouse events
+        canvas.addEventListener('mousedown', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            const mouseX = e.clientX - rect.left;
+            const mouseY = e.clientY - rect.top;
+
+            // Check if clicking on existing point
+            for (let i = 0; i < points.length; i++) {
+                const screen = dataToScreen(points[i].x, points[i].y);
+                const dist = Math.sqrt((mouseX - screen.x) ** 2 + (mouseY - screen.y) ** 2);
+
+                if (dist < 12) {
+                    draggingPoint = i;
+                    dragOffset = {
+                        x: mouseX - screen.x,
+                        y: mouseY - screen.y
+                    };
+                    return;
+                }
+            }
+
+            // Add new point
+            const dataCoords = screenToData(mouseX, mouseY);
+            if (dataCoords.x >= xMin && dataCoords.x <= xMax &&
+                dataCoords.y >= yMin && dataCoords.y <= yMax) {
+                points.push(dataCoords);
+                draw();
+            }
+        });
+
+        canvas.addEventListener('mousemove', (e) => {
+            if (draggingPoint !== null) {
+                const rect = canvas.getBoundingClientRect();
+                const mouseX = e.clientX - rect.left - dragOffset.x;
+                const mouseY = e.clientY - rect.top - dragOffset.y;
+
+                const dataCoords = screenToData(mouseX, mouseY);
+
+                // Clamp to bounds
+                dataCoords.x = Math.max(xMin, Math.min(xMax, dataCoords.x));
+                dataCoords.y = Math.max(yMin, Math.min(yMax, dataCoords.y));
+
+                points[draggingPoint] = dataCoords;
+                draw();
+            }
+        });
+
+        canvas.addEventListener('mouseup', () => {
+            draggingPoint = null;
+        });
+
+        canvas.addEventListener('dblclick', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            const mouseX = e.clientX - rect.left;
+            const mouseY = e.clientY - rect.top;
+
+            // Remove point if double-clicked
+            for (let i = points.length - 1; i >= 0; i--) {
+                const screen = dataToScreen(points[i].x, points[i].y);
+                const dist = Math.sqrt((mouseX - screen.x) ** 2 + (mouseY - screen.y) ** 2);
+
+                if (dist < 12) {
+                    points.splice(i, 1);
+                    draw();
+                    return;
+                }
+            }
+        });
+
+        // Button functions
+        function addRandomPoint() {
+            const x = xMin + Math.random() * (xMax - xMin);
+            const y = yMin + Math.random() * (yMax - yMin);
+            points.push({ x, y });
+            draw();
+        }
+
+        function resetData() {
+            points = [];
+            draw();
+        }
+
+        // Initialize after all variables and functions are defined
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+    </script>
+</body>
+
+</html>
