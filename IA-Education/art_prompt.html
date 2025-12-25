@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formation: Devenir Architecte de Prompts IA en Entreprise</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Calm Harmony (Warm Neutrals with Blue/Purple Accents) -->
+    <!-- Application Structure Plan: A tabbed interface for Day 1/2 and Glossary. Each day features a vertical timeline for navigation and content cards for details. This non-linear but guided structure is chosen for professional audiences who value both overview and deep-dive exploration. Key interactions include an interactive prompt builder and togglable sections to manage information density and encourage hands-on learning. -->
+    <!-- Visualization & Content Choices: 1. Schedule -> Inform -> Bar Chart (Chart.js) -> Quick visual rhythm of the day. 2. 6-Step Method -> Organize -> HTML/CSS Diagram -> Reinforce core concept visually. 3. Workflow -> Organize -> HTML/CSS Diagram -> Clarify chained processes. 4. Atelier Content -> Engage -> Interactive Toggles & Prompt Builder (JS) -> Active learning and experimentation. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* slate-50 */
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 250px;
+            max-height: 300px;
+        }
+        .nav-link.active {
+            border-bottom-color: #4f46e5; /* indigo-600 */
+            color: #4f46e5;
+        }
+        .timeline-link.active {
+            background-color: #e0e7ff; /* indigo-100 */
+            color: #4338ca; /* indigo-800 */
+            font-weight: 600;
+        }
+        .scroll-smooth {
+             scroll-behavior: smooth;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        .section-card {
+            scroll-margin-top: 80px;
+        }
+    </style>
+</head>
+<body class="text-slate-800">
+
+    <div class="container mx-auto p-4 md:p-8">
+        <header class="text-center mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold text-slate-900">Devenir Architecte de Prompts IA en Entreprise</h1>
+            <p class="text-slate-600 mt-2 text-lg">Un parcours de formation interactif sur deux jours pour maîtriser l'IA en milieu professionnel.</p>
+                <div class="mt-auto pt-4 border-t border-gray-300/60 text-xs text-gray-600 text-center md:text-left">
+            <p><strong>Auteur :</strong> S. JAUBERT</p>
+            <p><strong>Institution :</strong> Pôle Formation-UIMM CVDL</p>
+            <p><strong>Créé le : 05/09/2025</strong></p>
+        </div>
+        </header>
+       
+
+        <div class="sticky top-0 bg-f8fafc/80 backdrop-blur-lg z-10 mb-8 border-b border-slate-200">
+            <nav id="main-nav" class="flex justify-center items-center space-x-4 md:space-x-8">
+                <button data-tab="jour1" class="nav-link py-4 px-2 text-lg font-semibold border-b-2 border-transparent transition-colors duration-300 active">Jour 1</button>
+                <button data-tab="jour2" class="nav-link py-4 px-2 text-lg font-semibold border-b-2 border-transparent transition-colors duration-300">Jour 2</button>
+                <button data-tab="glossaire" class="nav-link py-4 px-2 text-lg font-semibold border-b-2 border-transparent transition-colors duration-300">Concepts Clés</button>
+            </nav>
+        </div>
+
+        <main>
+            <!-- Jour 1 Content -->
+            <div id="jour1" class="tab-content">
+                <div class="text-center mb-10">
+                    <h2 class="text-2xl font-bold text-indigo-700">Jour 1 : Les Fondamentaux de l'Ingénierie de Prompt</h2>
+                    <p class="text-slate-500 mt-1">De l'instruction simple à l'interaction critique. Apprendre à dialoguer avec l'IA.</p>
+                </div>
+                <div class="md:grid md:grid-cols-4 md:gap-8">
+                    <aside class="md:col-span-1 mb-8 md:mb-0">
+                        <div class="sticky top-24">
+                            <h3 class="font-semibold mb-3 text-slate-900">Programme du Jour</h3>
+                            <ul id="timeline-jour1" class="space-y-2">
+                                <li><a href="#section1-1" class="timeline-link block p-3 rounded-md hover:bg-slate-100 transition-colors duration-200 active">9h00: Introduction</a></li>
+                                <li><a href="#section1-2" class="timeline-link block p-3 rounded-md hover:bg-slate-100 transition-colors duration-200">9h30: Atelier 1</a></li>
+                                <li><a href="#section1-3" class="timeline-link block p-3 rounded-md hover:bg-slate-100 transition-colors duration-200">10h45: Atelier 2</a></li>
+                                <li><a href="#section1-4" class="timeline-link block p-3 rounded-md hover:bg-slate-100 transition-colors duration-200">14h00: Atelier 3</a></li>
+                                <li><a href="#section1-5" class="timeline-link block p-3 rounded-md hover:bg-slate-100 transition-colors duration-200">15h45: Atelier 4</a></li>
+                                <li><a href="#section1-6" class="timeline-link block p-3 rounded-md hover:bg-slate-100 transition-colors duration-200">17h15: Synthèse</a></li>
+                            </ul>
+                            <div class="mt-6">
+                                <h3 class="font-semibold mb-3 text-slate-900">Rythme de la Journée</h3>
+                                <div class="chart-container !h-48 !max-h-48">
+                                    <canvas id="day1Chart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </aside>
+                    <div class="md:col-span-3 space-y-8">
+                        
+                        <section id="section1-1" class="section-card bg-white p-6 rounded-lg shadow-sm">
+                            <h3 class="text-xl font-bold mb-3 text-slate-900">9h00 - 9h30 : Introduction & Brise-Glace</h3>
+                            <p class="mb-4">Cette session introductive positionne l'IA comme un **partenaire cognitif**. Nous démystifions l'IA pour la voir comme un moteur puissant nécessitant un pilotage expert. Votre rôle d'architecte de prompts commence ici.</p>
+                            <details class="bg-slate-50 p-4 rounded">
+                                <summary class="font-semibold cursor-pointer">Activité: Le Test de Turing Simplifié</summary>
+                                <div class="mt-3">
+                                    <p>En binômes, une personne pose une question simple (ex: "Quelle est la recette de la quiche lorraine ?") à son voisin et à une IA. Le voisin doit deviner quelle réponse est humaine.</p>
+                                    <p class="font-medium mt-2">Débriefing :</p>
+                                    <ul class="list-disc list-inside text-slate-600">
+                                        <li>Qu'est-ce qui a trahi l'IA ? Le style, la précision, le manque de contexte ?</li>
+                                        <li>Cette activité met en lumière l'importance de guider l'IA pour obtenir des réponses plus "humaines" et contextuelles.</li>
+                                    </ul>
+                                </div>
+                            </details>
+                        </section>
+
+                        <section id="section1-2" class="section-card bg-white p-6 rounded-lg shadow-sm">
+                            <h3 class="text-xl font-bold mb-3 text-slate-900">9h30 - 10h30 : Anatomie d'un Prompt Efficace (Atelier 1)</h3>
+                            <p class="mb-4">Nous décomposons la structure d'un prompt performant en 6 étapes clés. Comprendre le "pourquoi" de chaque étape est fondamental pour dialoguer efficacement avec les LLMs.</p>
+                             <div class="flex flex-col items-center my-4 space-y-1 text-center font-semibold text-sm">
+                                <div class="grid grid-cols-3 gap-2 w-full max-w-md">
+                                    <div class="p-2 bg-orange-100 text-orange-800 rounded">2. Objectif</div>
+                                    <div class="p-2 bg-sky-100 text-sky-800 rounded">1. Rôle + Contexte</div>
+                                    <div class="p-2 bg-teal-100 text-teal-800 rounded">3. Tâche</div>
+                                </div>
+                                <div class="flex items-center w-full max-w-md">
+                                    <div class="border-t-2 border-slate-300 w-1/3"></div>
+                                    <div class="p-3 bg-indigo-600 text-white rounded-full mx-2 z-10 text-base">Prompt</div>
+                                    <div class="border-t-2 border-slate-300 w-1/3"></div>
+                                </div>
+                                <div class="grid grid-cols-3 gap-2 w-full max-w-md">
+                                    <div class="p-2 bg-purple-100 text-purple-800 rounded">4. Contraintes</div>
+                                    <div class="p-2 bg-pink-100 text-pink-800 rounded">5. Format</div>
+                                    <div class="p-2 bg-green-100 text-green-800 rounded">6. Étapes</div>
+                                </div>
+                            </div>
+                            <details class="bg-slate-50 p-4 rounded">
+                                <summary class="font-semibold cursor-pointer">Atelier: La Clinique des Prompts</summary>
+                                <div class="mt-3">
+                                    <p class="mb-2">En groupes, "soignez" des prompts "malades" en appliquant la méthode des 6 étapes. L'objectif est de transformer une instruction vague en un brief de mission précis.</p>
+                                    <div id="prompt-builder" class="space-y-3 mt-4">
+                                        <input type="text" data-part="1" class="w-full p-2 border rounded" placeholder="1. Rôle + Contexte (ex: Tu es un expert en...)">
+                                        <input type="text" data-part="2" class="w-full p-2 border rounded" placeholder="2. Objectif Précis (ex: Faire comprendre...)">
+                                        <input type="text" data-part="3" class="w-full p-2 border rounded" placeholder="3. Tâche Claire (ex: Crée une séquence...)">
+                                        <input type="text" data-part="4" class="w-full p-2 border rounded" placeholder="4. Contraintes (ex: Matériel limité, 20 min...)">
+                                        <input type="text" data-part="5" class="w-full p-2 border rounded" placeholder="5. Format + Exemples (ex: Tableau détaillé...)">
+                                        <input type="text" data-part="6" class="w-full p-2 border rounded" placeholder="6. Étapes Critiques (ex: Procède étape par étape...)">
+                                        
+                                        <h4 class="font-semibold pt-3">Prompt assemblé :</h4>
+                                        <pre class="bg-slate-900 text-white p-4 rounded-md text-sm whitespace-pre-wrap min-h-[100px]"><code id="prompt-output"></code></pre>
+                                    </div>
+                                </div>
+                            </details>
+                        </section>
+
+                        <section id="section1-3" class="section-card bg-white p-6 rounded-lg shadow-sm">
+                            <h3 class="text-xl font-bold mb-3 text-slate-900">10h45 - 12h30 : L'Approche Critique & la Chaîne de Pensée (Atelier 2)</h3>
+                             <p class="mb-4">Un bon prompt n'est que le début. Nous apprenons ici à challenger l'IA, à détecter ses biais et à la forcer à "réfléchir" avant de répondre grâce à la technique de la Chaîne de Pensée (Chain-of-Thought).</p>
+                             <details class="bg-slate-50 p-4 rounded">
+                                <summary class="font-semibold cursor-pointer">Atelier: Le Débat des Experts</summary>
+                                <div class="mt-3">
+                                    <p>Simulez un débat entre plusieurs experts pour approfondir un sujet. Après la simulation, identifiez les biais de l'IA (ex: biais pro-technologie) et formulez un nouveau prompt pour la challenger.</p>
+                                    <p class="font-medium mt-2">Exemple de prompt de correction :</p>
+                                    <blockquote class="border-l-4 border-indigo-300 pl-4 mt-1 text-slate-600 italic">
+                                        Ta simulation est intéressante, mais l'expert financier semble ignorer les coûts cachés de la maintenance d'un système IA. Peux-tu reformuler son argumentation en incluant une analyse des coûts de possession sur 5 ans (TCO) ?
+                                    </blockquote>
+                                </div>
+                            </details>
+                        </section>
+
+                        <section id="section1-4" class="section-card bg-white p-6 rounded-lg shadow-sm">
+                            <h3 class="text-xl font-bold mb-3 text-slate-900">14h00 - 15h30 : Le Prompt en Contexte - Few-Shot & RAG (Atelier 3)</h3>
+                            <p class="mb-4">Nous explorons deux techniques puissantes pour donner du contexte à l'IA : le **Few-Shot Learning** (apprendre par l'exemple) et le **RAG** (Retrieval-Augmented Generation), qui consiste à fournir à l'IA la documentation nécessaire pour accomplir sa tâche.</p>
+                             <details class="bg-slate-50 p-4 rounded">
+                                <summary class="font-semibold cursor-pointer">Atelier: Le Recruteur Augmenté</summary>
+                                <div class="mt-3">
+                                    <p>Analysez un CV par rapport à une fiche de poste. D'abord avec un prompt simple (Zéro-Shot), puis en l'améliorant en ajoutant un exemple d'analyse (Few-Shot) pour guider l'IA vers une réponse plus structurée et pertinente.</p>
+                                </div>
+                            </details>
+                        </section>
+
+                        <section id="section1-5" class="section-card bg-white p-6 rounded-lg shadow-sm">
+                            <h3 class="text-xl font-bold mb-3 text-slate-900">15h45 - 17h15 : Structurer la Sortie - Formats & Fiabilité (Atelier 4)</h3>
+                            <p class="mb-4">Pour automatiser des tâches, il faut transformer les réponses textuelles de l'IA en données structurées. Cet atelier se concentre sur la manière de forcer l'IA à répondre dans des formats précis comme le Markdown ou le JSON.</p>
+                             <details class="bg-slate-50 p-4 rounded">
+                                <summary class="font-semibold cursor-pointer">Atelier: Le Traducteur Technique</summary>
+                                <div class="mt-3">
+                                    <p>À partir d'un rapport d'incident en texte brut, construisez un prompt qui oblige l'IA à extraire les informations clés et à les présenter dans une structure Markdown prédéfinie. Expérimentez pour affiner le prompt jusqu'à obtenir une sortie parfaite.</p>
+                                </div>
+                            </details>
+                        </section>
+                        
+                        <section id="section1-6" class="section-card bg-white p-6 rounded-lg shadow-sm">
+                            <h3 class="text-xl font-bold mb-3 text-slate-900">17h15 - 17h30 : Synthèse du Jour 1</h3>
+                            <p class="mb-4">Récapitulatif des compétences acquises : <strong>Dialoguer, Critiquer, Contextualiser, et Structurer</strong>.</p>
+                            <div class="bg-indigo-100 border-l-4 border-indigo-500 text-indigo-700 p-4 rounded" role="alert">
+                              <p class="font-bold">Annonce du Jour 2</p>
+                              <p>Nous avons appris à piloter. Demain, nous construisons l'usine d'assemblage.</p>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Jour 2 Content -->
+            <div id="jour2" class="tab-content hidden">
+                 <div class="text-center mb-10">
+                    <h2 class="text-2xl font-bold text-teal-700">Jour 2 : Construire des Applications IA Robustes</h2>
+                    <p class="text-slate-500 mt-1">De l'expérimentation à l'industrialisation. Penser en "workflows".</p>
+                </div>
+                 <div class="md:grid md:grid-cols-4 md:gap-8">
+                    <aside class="md:col-span-1 mb-8 md:mb-0">
+                        <div class="sticky top-24">
+                            <h3 class="font-semibold mb-3 text-slate-900">Programme du Jour</h3>
+                            <ul id="timeline-jour2" class="space-y-2">
+                                <li><a href="#section2-1" class="timeline-link block p-3 rounded-md hover:bg-slate-100 transition-colors duration-200 active">9h15: Atelier 5</a></li>
+                                <li><a href="#section2-2" class="timeline-link block p-3 rounded-md hover:bg-slate-100 transition-colors duration-200">11h00: Atelier 6</a></li>
+                                <li><a href="#section2-3" class="timeline-link block p-3 rounded-md hover:bg-slate-100 transition-colors duration-200">14h00: Atelier 7</a></li>
+                                <li><a href="#section2-4" class="timeline-link block p-3 rounded-md hover:bg-slate-100 transition-colors duration-200">15h45: Projet Final</a></li>
+                                <li><a href="#section2-5" class="timeline-link block p-3 rounded-md hover:bg-slate-100 transition-colors duration-200">17h15: Conclusion</a></li>
+                            </ul>
+                             <div class="mt-6">
+                                <h3 class="font-semibold mb-3 text-slate-900">Rythme de la Journée</h3>
+                                <div class="chart-container !h-48 !max-h-48">
+                                    <canvas id="day2Chart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </aside>
+                    <div class="md:col-span-3 space-y-8">
+                        <section id="section2-1" class="section-card bg-white p-6 rounded-lg shadow-sm">
+                            <h3 class="text-xl font-bold mb-3 text-slate-900">9h15 - 10h45 : Penser en "Workflows" - L'IA qui pilote l'IA (Atelier 5)</h3>
+                             <p class="mb-4">Les problèmes complexes nécessitent une approche séquentielle. Un workflow consiste à décomposer un objectif en tâches simples et à utiliser les sorties d'un prompt comme entrées pour le suivant, créant une chaîne de valeur automatisée.</p>
+                             <details class="bg-slate-50 p-4 rounded">
+                                <summary class="font-semibold cursor-pointer">Atelier: Le Générateur de Campagne Marketing</summary>
+                                 <div class="mt-3">
+                                    <p>Concevez sur papier un workflow en 3 prompts pour analyser un site web, proposer une idée de produit, et rédiger un e-mail de prospection. La clé est d'assurer la transmission fluide de l'information entre chaque étape.</p>
+                                    <div class="mt-4 p-4 border rounded-md bg-gray-50">
+                                        <div class="flex items-center justify-center space-x-2 text-sm font-semibold">
+                                            <div class="p-2 text-center bg-sky-200 text-sky-800 rounded-lg shadow">Prompt 1<br/>(Analyse)</div>
+                                            <div class="text-2xl text-slate-400">&rarr;</div>
+                                            <div class="p-2 text-center bg-green-200 text-green-800 rounded-lg shadow">Prompt 2<br/>(Idéation)</div>
+                                            <div class="text-2xl text-slate-400">&rarr;</div>
+                                            <div class="p-2 text-center bg-amber-200 text-amber-800 rounded-lg shadow">Prompt 3<br/>(Rédaction)</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </details>
+                        </section>
+                        <section id="section2-2" class="section-card bg-white p-6 rounded-lg shadow-sm">
+                            <h3 class="text-xl font-bold mb-3 text-slate-900">11h00 - 12h30 : L'Agent Autonome - L'IA qui Utilise des Outils (Atelier 6)</h3>
+                            <p class="mb-4">Avec le paradigme **ReAct (Reason & Act)**, nous passons d'une IA qui "sait" à une IA qui "fait". En lui donnant accès à des outils (recherche web, calculatrice), elle peut résoudre des problèmes dynamiques qui nécessitent des informations à jour.</p>
+                             <details class="bg-slate-50 p-4 rounded">
+                                <summary class="font-semibold cursor-pointer">Atelier: L'Assistant de Veille Concurrentielle</summary>
+                                <div class="mt-3">
+                                    <p>Simulez le comportement d'un agent ReAct. Pour répondre à une question complexe, vous ne pouvez "agir" qu'en utilisant des outils prédéfinis (`search`, `get_website_summary`). Écrivez la séquence de "Pensées" et "Actions" que l'IA devrait suivre pour trouver la solution.</p>
+                                </div>
+                            </details>
+                        </section>
+                        <section id="section2-3" class="section-card bg-white p-6 rounded-lg shadow-sm">
+                            <h3 class="text-xl font-bold mb-3 text-slate-900">14h00 - 15h30 : Évaluation et Fiabilisation des Prompts (Atelier 7)</h3>
+                            <p class="mb-4">On ne peut pas améliorer ce qu'on ne mesure pas. Nous introduisons des méthodes d'évaluation robustes, y compris la technique **LLM-as-a-Judge**, où une IA est utilisée pour noter objectivement la performance d'une autre IA.</p>
+                             <details class="bg-slate-50 p-4 rounded">
+                                <summary class="font-semibold cursor-pointer">Atelier: Le Juge IA</summary>
+                                <div class="mt-3">
+                                    <p>Construisez un prompt "juge" pour évaluer deux versions d'un email marketing selon des critères précis (clarté, ton, appel à l'action). Votre prompt doit forcer l'IA à justifier ses notes et à recommander la meilleure version, fournissant ainsi une analyse exploitable.</p>
+                                </div>
+                            </details>
+                        </section>
+                        <section id="section2-4" class="section-card bg-white p-6 rounded-lg shadow-sm">
+                            <h3 class="text-xl font-bold mb-3 text-slate-900">15h45 - 17h15 : Projet Final - Le Défi de la Sobriété</h3>
+                             <p class="mb-4">Cet atelier de synthèse combine toutes les compétences acquises. L'objectif est de résoudre un cas pratique industriel complexe en utilisant un minimum de prompts, introduisant ainsi la notion cruciale de **sobriété numérique** et de "budget computationnel".</p>
+                             <details class="bg-slate-50 p-4 rounded">
+                                <summary class="font-semibold cursor-pointer">Mission: Résoudre un cas industriel</summary>
+                                 <div class="mt-3">
+                                    <p>Le cas : une PME a un problème récurrent de micro-fissures sur des engrenages. Concevez une chaîne de 3 prompts maximum pour l'aider à analyser le problème, explorer des solutions et rédiger une note de synthèse. Exécutez le premier prompt pour valider la viabilité de votre stratégie.</p>
+                                </div>
+                            </details>
+                        </section>
+                        <section id="section2-5" class="section-card bg-white p-6 rounded-lg shadow-sm">
+                            <h3 class="text-xl font-bold mb-3 text-slate-900">17h15 - 17h30 : Conclusion & Plan d'Action Personnel</h3>
+                            <p class="mb-4">Vous êtes passés de simple "utilisateur" à "architecte" de solutions IA. Pour conclure, chaque participant va créer un prompt pour lui-même, afin de construire son propre plan d'action et d'ancrer durablement les compétences acquises.</p>
+                             <details class="bg-slate-50 p-4 rounded">
+                                <summary class="font-semibold cursor-pointer">Activité finale: Votre feuille de route</summary>
+                                <div class="mt-3">
+                                    <p class="font-medium">Prompt à utiliser :</p>
+                                    <blockquote class="border-l-4 border-teal-300 pl-4 mt-1 text-slate-600 italic">
+                                        Tu es un coach en développement professionnel. En me basant sur ce que j'ai appris ces deux derniers jours, crée un plan d'action sur 1 mois pour intégrer le prompt engineering dans mon travail quotidien.
+                                    </blockquote>
+                                </div>
+                            </details>
+                        </section>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Glossaire Content -->
+            <div id="glossaire" class="tab-content hidden">
+                <div class="text-center mb-10">
+                    <h2 class="text-2xl font-bold text-slate-900">Glossaire des Concepts Clés</h2>
+                    <p class="text-slate-500 mt-1">Les définitions essentielles pour maîtriser le langage de l'IA.</p>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="bg-white p-5 rounded-lg shadow-sm">
+                        <h3 class="font-bold text-lg text-indigo-700">Prompt Engineering</h3>
+                        <p class="text-slate-600 mt-1">L'art et la science de concevoir des instructions (prompts) pour guider une IA vers un résultat désiré, de manière efficace, fiable et reproductible.</p>
+                    </div>
+                    <div class="bg-white p-5 rounded-lg shadow-sm">
+                        <h3 class="font-bold text-lg text-indigo-700">Chain-of-Thought (CoT)</h3>
+                        <p class="text-slate-600 mt-1">Technique consistant à demander à l'IA de "réfléchir étape par étape" avant de donner sa réponse finale. Cela améliore la qualité de son raisonnement sur des problèmes complexes.</p>
+                    </div>
+                    <div class="bg-white p-5 rounded-lg shadow-sm">
+                        <h3 class="font-bold text-lg text-indigo-700">Few-Shot Learning</h3>
+                        <p class="text-slate-600 mt-1">Inclure quelques exemples (les "shots") dans le prompt pour montrer à l'IA le format ou le type de réponse attendu. Très efficace pour guider le style et la structure.</p>
+                    </div>
+                    <div class="bg-white p-5 rounded-lg shadow-sm">
+                        <h3 class="font-bold text-lg text-indigo-700">Zero-Shot Learning</h3>
+                        <p class="text-slate-600 mt-1">Capacité d'une IA à répondre à une tâche sans avoir vu d'exemple spécifique dans le prompt. C'est le mode de fonctionnement par défaut.</p>
+                    </div>
+                    <div class="bg-white p-5 rounded-lg shadow-sm">
+                        <h3 class="font-bold text-lg text-indigo-700">RAG (Retrieval-Augmented Generation)</h3>
+                        <p class="text-slate-600 mt-1">Processus où l'IA recherche d'abord des informations pertinentes dans une base de connaissances externe (ex: documents d'entreprise) avant de générer une réponse, la rendant plus factuelle et contextuelle.</p>
+                    </div>
+                    <div class="bg-white p-5 rounded-lg shadow-sm">
+                        <h3 class="font-bold text-lg text-indigo-700">ReAct (Reason & Act)</h3>
+                        <p class="text-slate-600 mt-1">Paradigme où l'IA peut utiliser des "outils" (ex: faire une recherche web, utiliser une calculatrice). Elle alterne entre le raisonnement (Reason) sur ce qu'il faut faire et l'action (Act) en utilisant un outil.</p>
+                    </div>
+                    <div class="bg-white p-5 rounded-lg shadow-sm">
+                        <h3 class="font-bold text-lg text-indigo-700">LLM-as-a-Judge</h3>
+                        <p class="text-slate-600 mt-1">Technique d'évaluation où un LLM est utilisé pour noter la qualité de la réponse d'un autre LLM sur la base de critères précis, permettant une évaluation à grande échelle.</p>
+                    </div>
+                    <div class="bg-white p-5 rounded-lg shadow-sm">
+                        <h3 class="font-bold text-lg text-indigo-700">Biais Algorithmique</h3>
+                        <p class="text-slate-600 mt-1">Tendance systématique d'une IA à produire des résultats qui favorisent ou défavorisent certains groupes ou idées, souvent en raison de données d'entraînement non représentatives.</p>
+                    </div>
+                     <div class="bg-white p-5 rounded-lg shadow-sm">
+                        <h3 class="font-bold text-lg text-indigo-700">Sobriété Numérique</h3>
+                        <p class="text-slate-600 mt-1">Démarche visant à réduire l'impact environnemental du numérique. En prompt engineering, cela signifie obtenir le meilleur résultat avec le moins de requêtes et de calculs possibles.</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabs = document.querySelectorAll('.nav-link');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(item => item.classList.remove('active'));
+                    tab.classList.add('active');
+
+                    const target = tab.getAttribute('data-tab');
+                    tabContents.forEach(content => {
+                        if (content.id === target) {
+                            content.classList.remove('hidden');
+                        } else {
+                            content.classList.add('hidden');
+                        }
+                    });
+                });
+            });
+
+            // Prompt Builder Logic
+            const promptBuilder = document.getElementById('prompt-builder');
+            if (promptBuilder) {
+                const inputs = promptBuilder.querySelectorAll('input');
+                const outputCode = document.getElementById('prompt-output');
+                
+                function updatePrompt() {
+                    let fullPrompt = '';
+                    inputs.forEach(input => {
+                        if (input.value) {
+                             const partLabel = input.placeholder.split('(')[0].trim();
+                             fullPrompt += `${partLabel}:\n${input.value}\n\n`;
+                        }
+                    });
+                    outputCode.textContent = fullPrompt.trim() || 'Commencez à remplir les champs...';
+                }
+                
+                inputs.forEach(input => input.addEventListener('input', updatePrompt));
+                updatePrompt();
+            }
+
+            // Charting
+            const day1Ctx = document.getElementById('day1Chart');
+            if(day1Ctx) {
+                new Chart(day1Ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Intro', 'Atelier 1', 'Atelier 2', 'Atelier 3', 'Atelier 4', 'Synthèse'],
+                        datasets: [{
+                            label: 'Durée (minutes)',
+                            data: [30, 60, 105, 90, 90, 15],
+                            backgroundColor: 'rgba(79, 70, 229, 0.6)',
+                            borderColor: 'rgba(79, 70, 229, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        indexAxis: 'y',
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false } },
+                        scales: { x: { beginAtZero: true } }
+                    }
+                });
+            }
+            
+            const day2Ctx = document.getElementById('day2Chart');
+            if(day2Ctx) {
+                 new Chart(day2Ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Quiz', 'Atelier 5', 'Atelier 6', 'Atelier 7', 'Projet Final', 'Conclusion'],
+                        datasets: [{
+                            label: 'Durée (minutes)',
+                            data: [15, 90, 75, 90, 90, 15],
+                            backgroundColor: 'rgba(13, 148, 136, 0.6)',
+                            borderColor: 'rgba(13, 148, 136, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        indexAxis: 'y',
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false } },
+                        scales: { x: { beginAtZero: true } }
+                    }
+                });
+            }
+
+            // Timeline active state on scroll
+            const sections = document.querySelectorAll('.section-card');
+            const timelines = [document.getElementById('timeline-jour1'), document.getElementById('timeline-jour2')];
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.id;
+                        timelines.forEach(timeline => {
+                            if (!timeline.closest('.tab-content').classList.contains('hidden')) {
+                                timeline.querySelectorAll('a').forEach(link => {
+                                    link.classList.remove('active');
+                                    if (link.getAttribute('href') === `#${id}`) {
+                                        link.classList.add('active');
+                                    }
+                                });
+                            }
+                        });
+                    }
+                });
+            }, { rootMargin: "-50% 0px -50% 0px" });
+
+            sections.forEach(section => observer.observe(section));
+            
+             // Smooth scroll for timeline links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+        });
+    </script>
+
+</body>
+</html>
