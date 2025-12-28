@@ -1,16 +1,16 @@
-﻿# Cours d'Introduction ├á l'Intelligence Artificielle
+# Cours d'Introduction à l'Intelligence Artificielle
 
-## ![Logo UIMM](logo_uimm_placeholder.jpg) P├┤le Formation UIMM CVDL (S. Jaubert)
+## ![Logo UIMM](logo_uimm_placeholder.jpg) Pôle Formation UIMM CVDL (S. Jaubert)
 
 ---
 
-## Table des Mati├¿res
+## Table des Matières
 
 - [Installation et Configuration](#installation-et-configuration)
 - [Guides et Tutoriels](#guides-et-tutoriels)
 - [Formation et Ateliers Pratiques](#formation-et-ateliers-pratiques)
-- [Applications P├®dagogiques](#applications-p├®dagogiques)
-- [Activit├®s Interactives](#activit├®s-interactives)
+- [Applications Pédagogiques](#applications-pédagogiques)
+- [Activités Interactives](#activités-interactives)
 
 ---
 
@@ -23,7 +23,7 @@
 - [Guide installation antigravity](https://sjaubert.github.io/Cours-IA/antigravity/guide_antigravity.html?target=_blank)
 - [Gemini CLI Extension pour Google Workspace](https://sjaubert.github.io/Cours-IA/Formation_Agentic_Workspace/gemini_cli_workspace.html?target=_blank)
 
-### S├®curit├® et Automatisation
+### Sécurité et Automatisation
 
 - [Tutoriel Gemini Secure](https://sjaubert.github.io/Cours-IA/tutoriel-gemini-secure.html?target=_blank)
 - [Tutoriel Automatisation Workspace](https://sjaubert.github.io/Cours-IA/Tutoriel_Automatisation_Workspace.html?target=_blank)
@@ -56,15 +56,15 @@
 ### Parcours de Formation
 
 - [Formation Agentic Workspace](Formation_Agentic_Workspace/index.html)
-- <a href="https://sjaubert.github.io/Cours-IA/Formation_Agentic_Workspace/guide_formation_ia.html" target="_blank">Guide Formation IA & Productivit├® : Gemini CLI & MCP</a>
+- <a href="https://sjaubert.github.io/Cours-IA/Formation_Agentic_Workspace/guide_formation_ia.html" target="_blank">Guide Formation IA & Productivité : Gemini CLI & MCP</a>
 
 ---
 
-## Applications P├®dagogiques
+## Applications Pédagogiques
 
-### Outils de Cr├®ation
+### Outils de Création
 
-- [PromptFlow UIMM - Studio de Cr├®ation P├®dagogique (Application)](https://sjaubert.github.io/Cours-IA/00-Formation/prompt_flow_uimm/dist/index.html)
+- [PromptFlow UIMM - Studio de Création Pédagogique (Application)](https://sjaubert.github.io/Cours-IA/00-Formation/prompt_flow_uimm/dist/index.html)
 
 ### Formations Thématiques
 
@@ -76,61 +76,61 @@
 
 ---
 
-## Activit├®s Interactives
+## Activités Interactives
 
-### Activit├® 1 : Illusion de V├®rit├®
+### Activité 1 : Illusion de Vérité
 
-**Objectif** : D├®montrer que l'IA peut g├®n├®rer des textes tr├¿s cr├®dibles contenant des erreurs factuelles
+**Objectif** : Démontrer que l'IA peut générer des textes très crédibles contenant des erreurs factuelles
 
-- Dossier : `Activit├®s/A1_illusion_v├®rit├®/`
+- Dossier : `Activités/A1_illusion_vérité/`
 
-### Activit├® 2 : Biais de Confirmation
+### Activité 2 : Biais de Confirmation
 
-**Objectif** : Montrer comment l'IA peut argumenter des points de vue oppos├®s selon le contexte
+**Objectif** : Montrer comment l'IA peut argumenter des points de vue opposés selon le contexte
 
-- Dossier : `Activit├®s/A2_Biais_Confirmation/`
+- Dossier : `Activités/A2_Biais_Confirmation/`
 
-### Activit├® 3 : Biais Culturel
+### Activité 3 : Biais Culturel
 
-**Objectif** : Illustrer comment les LLMs refl├¿tent les biais culturels de leurs donn├®es d'entra├«nement
+**Objectif** : Illustrer comment les LLMs reflètent les biais culturels de leurs données d'entraînement
 
-- Dossier : `Activit├®s/A3_Biais_Culturel/`
+- Dossier : `Activités/A3_Biais_Culturel/`
 
-### Activit├® 4 : Illusion de Raisonnement
+### Activité 4 : Illusion de Raisonnement
 
-**Objectif** : D├®montrer que l'IA ne "raisonne" pas au sens humain mais effectue des corr├®lations statistiques
+**Objectif** : Démontrer que l'IA ne "raisonne" pas au sens humain mais effectue des corrélations statistiques
 
-- Dossier : `Activit├®s/A4_Illusion_raisonnement/`
+- Dossier : `Activités/A4_Illusion_raisonnement/`
 
-### Activit├® 5 : IA R├®dactrice de Rapports
+### Activité 5 : IA Rédactrice de Rapports
 
-**Objectif** : Utiliser l'IA pour analyser des donn├®es CSV et g├®n├®rer un rapport de synth├¿se
+**Objectif** : Utiliser l'IA pour analyser des données CSV et générer un rapport de synthèse
 
-- Dossier : `Activit├®s/A5 IA R├®dactrice de rapports/`
+- Dossier : `Activités/A5 IA Rédactrice de rapports/`
 
-### Activit├® 6 : Futur du D├®veloppement avec l'IA
+### Activité 6 : Futur du Développement avec l'IA
 
-**Objectif** : Explorer l'impact de l'IA sur les m├®tiers du d├®veloppement
+**Objectif** : Explorer l'impact de l'IA sur les métiers du développement
 
-- Dossier : `Activit├®s/A6_Futur_Dev_IA/`
+- Dossier : `Activités/A6_Futur_Dev_IA/`
 
-### Activit├® 7 : R├®seaux de Neurones - Visualisation Interactive (NOUVEAU)
+### Activité 7 : Réseaux de Neurones - Visualisation Interactive (NOUVEAU)
 
-**Objectif** : Comprendre le fonctionnement des r├®seaux de neurones par la manipulation interactive
+**Objectif** : Comprendre le fonctionnement des réseaux de neurones par la manipulation interactive
 
-#### Dossier : `Activit├®s/A7_Reseaux_Neurones/`
+#### Dossier : `Activités/A7_Reseaux_Neurones/`
 
 #### Applications Web Interactives
 
-- **[Page d'accueil](Activit├®s/A7_Reseaux_Neurones/index.html)** - Point d'entr├®e vers les deux simulations
-- **[R├®gression Lin├®aire Interactive](Activit├®s/A7_Reseaux_Neurones/1_regression_lineaire.html)** - Manipulation de points et calcul de droite de r├®gression
-- **[R├®seau de Neurones avec Apprentissage Supervis├®](Activit├®s/A7_Reseaux_Neurones/2_reseau_neurones.html)** - Architecture configurable avec entra├«nement par r├®tropropagation
+- **[Page d'accueil](Activités/A7_Reseaux_Neurones/index.html)** - Point d'entrée vers les deux simulations
+- **[Régression Linéaire Interactive](Activités/A7_Reseaux_Neurones/1_regression_lineaire.html)** - Manipulation de points et calcul de droite de régression
+- **[Réseau de Neurones avec Apprentissage Supervisé](Activités/A7_Reseaux_Neurones/2_reseau_neurones.html)** - Architecture configurable avec entraînement par rétropropagation
 
-#### Documentation P├®dagogique
+#### Documentation Pédagogique
 
-- **[README de l'activit├®](Activit├®s/A7_Reseaux_Neurones/README.md)** - Guide complet d'utilisation et conseils p├®dagogiques
-- **[Synth├¿se Architecture](Activit├®s/A7_Reseaux_Neurones/Synthese_Architecture.md)** - Guide visuel rapide sur l'influence des couches et neurones
-- **[Guide Complet Architecture R├®seaux](Activit├®s/A7_Reseaux_Neurones/Guide_Architecture_Reseaux.md)** - Explication d├®taill├®e du choix d'architecture (compromis biais-variance, r├¿gles de d├®cision)
+- **[README de l'activité](Activités/A7_Reseaux_Neurones/README.md)** - Guide complet d'utilisation et conseils pédagogiques
+- **[Synthèse Architecture](Activités/A7_Reseaux_Neurones/Synthese_Architecture.md)** - Guide visuel rapide sur l'influence des couches et neurones
+- **[Guide Complet Architecture Réseaux](Activités/A7_Reseaux_Neurones/Guide_Architecture_Reseaux.md)** - Explication détaillée du choix d'architecture (compromis biais-variance, règles de décision)
 
 #### Ressources Visuelles
 
@@ -142,17 +142,17 @@
 ## Notes Importantes
 
 - Pour une utilisation optimale, utilisez un navigateur moderne (Chrome, Firefox, Edge, Safari)
-- JavaScript doit ├¬tre activ├® pour les activit├®s interactives
-- Les activit├®s sont con├ºues pour un apprentissage progressif
+- JavaScript doit être activé pour les activités interactives
+- Les activités sont conçues pour un apprentissage progressif
 
 ---
 
 ## Contact
 
-**P├┤le Formation UIMM CVDL**  
+**Pôle Formation UIMM CVDL**  
 Formateur : S. Jaubert  
 Formation sur l'Intelligence Artificielle et ses applications
 
 ---
 
-*Derni├¿re mise ├á jour : D├®cembre 2024*
+*Dernière mise à jour : Décembre 2024*
