@@ -167,6 +167,39 @@
             box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
         }
 
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            border-radius: 12px;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            max-height: 80px;
+            background: white;
+            padding: 0.5rem;
+            border-radius: 8px;
+        }
+
+        .header-text h1 {
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+
+        .header-subtitle {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1rem;
+        }
+
         @media print {
             body {
                 background: white;
@@ -182,29 +215,37 @@
 
 <body>
     <div class="container">
-        <h1>🎯 Guide Google AI Studio</h1>
+        <div class="header">
+            <div class="header-content">
+                <img src="assets/logo_uimm.jpg" alt="Logo UIMM-CVDL" class="logo">
+                <div class="header-text">
+                    <h1>Guide Google AI Studio</h1>
+                    <p class="header-subtitle">Pôle Formation UIMM-CVDL</p>
+                </div>
+            </div>
+        </div>
         <p class="subtitle">Maîtrisez les paramètres de l'IA en quelques clics</p>
 
         <div class="guide-section">
-            <h2>✨ Pourquoi utiliser Google AI Studio ?</h2>
+            <h2>Pourquoi utiliser Google AI Studio ?</h2>
             <p><strong>Google AI Studio</strong> est une interface web gratuite qui vous permet de tester les modèles
                 Gemini sans avoir à gérer des clés API ou écrire du code. C'est la solution idéale pour :</p>
             <ul style="margin-left: 2rem; margin-top: 1rem;">
-                <li>✅ Apprendre comment fonctionnent les paramètres de l'IA</li>
-                <li>✅ Expérimenter différentes configurations en temps réel</li>
-                <li>✅ Prototyper vos prompts avant de les intégrer dans vos applications</li>
-                <li>✅ Obtenir du code prêt à l'emploi pour vos projets</li>
+                <li>Apprendre comment fonctionnent les paramètres de l'IA</li>
+                <li>Expérimenter différentes configurations en temps réel</li>
+                <li>Prototyper vos prompts avant de les intégrer dans vos applications</li>
+                <li>Obtenir du code prêt à l'emploi pour vos projets</li>
             </ul>
         </div>
 
         <div class="guide-section">
-            <h2>📋 Étapes pour régler les paramètres</h2>
+            <h2>Étapes pour régler les paramètres</h2>
 
             <ol class="steps">
                 <li>
                     <strong>Accédez à Google AI Studio</strong><br>
                     <a href="https://aistudio.google.com/prompts/new_chat" target="_blank" class="link-button">
-                        🚀 Ouvrir Google AI Studio
+                        Ouvrir Google AI Studio
                     </a>
                     <p style="margin-top: 0.5rem; color: #666;">Vous devrez vous connecter avec un compte Google</p>
                 </li>
@@ -219,7 +260,7 @@
 
                 <li>
                     <strong>Ouvrez les paramètres</strong><br>
-                    Cliquez sur l'icône <strong>⚙️ "Run settings"</strong> située dans le coin supérieur droit de
+                    Cliquez sur l'icône <strong>"Run settings"</strong> située dans le coin supérieur droit de
                     l'interface.
                     <img src="../../../.gemini/antigravity/brain/b5deb1c2-66b9-4ee1-a973-21174041fc0a/ai_studio_settings_guide_1766927981280.png"
                         alt="Interface AI Studio" class="screenshot">
@@ -244,12 +285,16 @@
         </div>
 
         <div class="guide-section">
-            <h2>🎛️ Les paramètres disponibles dans AI Studio</h2>
+            <h2>Les paramètres disponibles dans AI Studio</h2>
+
+            <img src="runsettings.png" alt="Aperçu des Run Settings dans Google AI Studio" class="screenshot"
+                style="margin-bottom: 2rem;">
 
             <table>
                 <thead>
                     <tr>
                         <th>Paramètre</th>
+                        <th>Plage de valeurs</th>
                         <th>Description</th>
                         <th>Valeurs recommandées</th>
                     </tr>
@@ -257,45 +302,89 @@
                 <tbody>
                     <tr>
                         <td><strong>Model</strong></td>
-                        <td>Choix du modèle Gemini (Flash, Pro, etc.)</td>
-                        <td>Gemini 1.5 Flash (rapide) ou Pro (plus puissant)</td>
+                        <td>-</td>
+                        <td>Choix du modèle Gemini (2.0 Flash, 1.5 Flash, 1.5 Pro, etc.)</td>
+                        <td>gemini-2.0-flash-exp (dernière version) ou gemini-1.5-flash</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Safety settings</strong></td>
+                        <td>Block few / Block some / Block most</td>
+                        <td>Niveau de filtrage du contenu potentiellement dangereux ou inapproprié</td>
+                        <td>Block some (par défaut) pour un équilibre entre sécurité et flexibilité</td>
                     </tr>
                     <tr>
                         <td><strong>Temperature</strong></td>
-                        <td>Contrôle la créativité et le caractère aléatoire</td>
-                        <td>0.0-0.3 (factuel), 0.7 (équilibré), 1.2-2.0 (créatif)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Max output tokens</strong></td>
-                        <td>Limite la longueur de la réponse générée</td>
-                        <td>500 (chat), 1000 (code), 2000-4000 (articles)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Top-K</strong></td>
-                        <td>Nombre de tokens candidats considérés</td>
-                        <td>40 (par défaut) ou 0 (désactivé)</td>
+                        <td>0.0 - 2.0</td>
+                        <td>Contrôle la créativité et le caractère aléatoire des réponses</td>
+                        <td>0.0-0.3 (factuel), 1.0 (équilibré), 1.5-2.0 (créatif)</td>
                     </tr>
                     <tr>
                         <td><strong>Top-P</strong></td>
-                        <td>Filtre basé sur la probabilité cumulative</td>
-                        <td>0.9 (recommandé), 0.95 (plus créatif)</td>
+                        <td>0.0 - 1.0</td>
+                        <td>Filtre basé sur la probabilité cumulative (nucleus sampling)</td>
+                        <td>0.95 (par défaut), 0.9 (plus conservateur)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Top-K</strong></td>
+                        <td>0 - 64</td>
+                        <td>Nombre maximum de tokens candidats considérés à chaque étape</td>
+                        <td>40 (par défaut), 0 pour désactiver</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Max output tokens</strong></td>
+                        <td>1 - 8192</td>
+                        <td>Limite stricte du nombre de tokens que le modèle peut générer</td>
+                        <td>500 (chat), 1000-2000 (code), 4000-8192 (articles longs)</td>
                     </tr>
                     <tr>
                         <td><strong>Stop sequences</strong></td>
-                        <td>Texte qui force l'arrêt de la génération</td>
+                        <td>Texte libre</td>
+                        <td>Chaînes de caractères qui forcent l'arrêt de la génération</td>
                         <td>"```" (code), "}" (JSON), "###" (sections)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Response MIME type</strong></td>
+                        <td>text/plain / application/json</td>
+                        <td>Format de réponse attendu (texte brut ou JSON structuré)</td>
+                        <td>text/plain (par défaut), application/json pour des données structurées</td>
                     </tr>
                 </tbody>
             </table>
 
             <div class="tip-box">
-                <strong>💡 Conseil d'expert :</strong> Gardez Top-P à 0.9 et ajustez plutôt Temperature pour contrôler
+                <strong>Conseil d'expert :</strong> Gardez Top-P à 0.95 et ajustez plutôt Temperature pour contrôler
                 la créativité. Ces deux paramètres ont des effets similaires.
+            </div>
+
+            <h3 style="margin-top: 2rem;">Détails sur les paramètres spécifiques</h3>
+
+            <div class="parameter-box" style="margin-top: 1rem;">
+                <strong>Safety settings (Paramètres de sécurité)</strong><br><br>
+                Google AI Studio intègre des filtres de sécurité pour bloquer les contenus potentiellement dangereux
+                (harcèlement, discours haineux, contenu sexuel, contenu dangereux) :
+                <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                    <li><strong>Block few</strong> : Filtrage minimal, autorise la plupart des contenus</li>
+                    <li><strong>Block some</strong> : Filtrage modéré (recommandé par défaut)</li>
+                    <li><strong>Block most</strong> : Filtrage maximal, bloque même les contenus légèrement sensibles
+                    </li>
+                </ul>
+            </div>
+
+            <div class="parameter-box">
+                <strong>Response MIME type (Type de réponse)</strong><br><br>
+                Ce paramètre détermine le format de la réponse attendue :
+                <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                    <li><strong>text/plain</strong> : Texte brut (par défaut) - pour des réponses conversationnelles
+                    </li>
+                    <li><strong>application/json</strong> : Format JSON structuré - idéal quand vous demandez des
+                        données formatées au modèle. Combinez avec une temperature basse (0.0-0.2) pour des résultats
+                        plus fiables.</li>
+                </ul>
             </div>
         </div>
 
         <div class="guide-section">
-            <h2>🔍 Expérimentations recommandées</h2>
+            <h2>Expérimentations recommandées</h2>
 
             <h3>Expérience 1 : Impact de la Temperature</h3>
             <p>Utilisez le même prompt avec différentes températures :</p>
@@ -323,13 +412,23 @@
                 • Temperature = 0.2 (pour du code précis)<br><br>
                 <strong>Observation :</strong> Le modèle s'arrête automatiquement après le bloc de code !
             </div>
+
+            <h3>Expérience 4 : Génération de JSON structuré</h3>
+            <div class="parameter-box">
+                <strong>Prompt :</strong> "Génère une liste de 3 livres célèbres avec leur auteur, année de publication
+                et genre"<br><br>
+                • Response MIME type = <strong>application/json</strong><br>
+                • Temperature = 0.2 (pour des résultats cohérents)<br>
+                • Max output tokens = 500<br><br>
+                <strong>Observation :</strong> Le modèle retourne directement du JSON valide sans balises markdown !
+            </div>
         </div>
 
         <div class="guide-section">
-            <h2>⚠️ Limitations de Google AI Studio</h2>
+            <h2>Limitations de Google AI Studio</h2>
 
             <div class="warning-box">
-                <strong>📌 Important :</strong> Les paramètres suivants ne sont PAS disponibles dans Google AI Studio :
+                <strong>Important :</strong> Les paramètres suivants ne sont PAS disponibles dans Google AI Studio :
                 <ul style="margin-left: 2rem; margin-top: 0.5rem;">
                     <li><strong>Frequency Penalty</strong> - Spécifique à OpenAI</li>
                     <li><strong>Presence Penalty</strong> - Spécifique à OpenAI</li>
@@ -341,52 +440,56 @@
         </div>
 
         <div class="guide-section">
-            <h2>🎓 Préconfigurations recommandées</h2>
+            <h2>Préconfigurations recommandées</h2>
 
-            <h3>📊 Configuration pour tâches factuelles/techniques</h3>
+            <h3>Configuration pour tâches factuelles/techniques</h3>
             <div class="parameter-box">
+                • Model: <strong>gemini-2.0-flash-exp</strong><br>
                 • Temperature: <strong>0.2</strong><br>
-                • Top-P: <strong>0.9</strong><br>
+                • Top-P: <strong>0.95</strong><br>
                 • Top-K: <strong>40</strong><br>
-                • Max tokens: <strong>500-1000</strong><br>
+                • Max tokens: <strong>1000-2000</strong><br>
                 <br>
                 <em>Idéal pour : extraction de données, traduction, classification, génération de code</em>
             </div>
 
-            <h3>💬 Configuration équilibrée (conversation)</h3>
+            <h3>Configuration équilibrée (conversation)</h3>
             <div class="parameter-box">
-                • Temperature: <strong>0.7</strong><br>
-                • Top-P: <strong>0.9</strong><br>
+                • Model: <strong>gemini-2.0-flash-exp</strong><br>
+                • Temperature: <strong>1.0</strong><br>
+                • Top-P: <strong>0.95</strong><br>
                 • Top-K: <strong>40</strong><br>
-                • Max tokens: <strong>500</strong><br>
+                • Max tokens: <strong>500-1000</strong><br>
                 <br>
                 <em>Idéal pour : chat général, explications, questions-réponses</em>
             </div>
 
-            <h3>🎨 Configuration créative</h3>
+            <h3>Configuration créative</h3>
             <div class="parameter-box">
-                • Temperature: <strong>1.2-1.5</strong><br>
+                • Model: <strong>gemini-2.0-flash-exp</strong><br>
+                • Temperature: <strong>1.5-2.0</strong><br>
                 • Top-P: <strong>0.95</strong><br>
                 • Top-K: <strong>40</strong><br>
-                • Max tokens: <strong>2000-4000</strong><br>
+                • Max tokens: <strong>4000-8192</strong><br>
                 <br>
                 <em>Idéal pour : écriture créative, brainstorming, génération d'histoires</em>
             </div>
 
-            <h3>📝 Configuration pour JSON/données structurées</h3>
+            <h3>Configuration pour JSON/données structurées</h3>
             <div class="parameter-box">
+                • Model: <strong>gemini-2.0-flash-exp</strong><br>
                 • Temperature: <strong>0.0</strong><br>
-                • Top-P: <strong>1.0</strong><br>
+                • Top-P: <strong>0.95</strong><br>
                 • Top-K: <strong>40</strong><br>
-                • Max tokens: <strong>200-500</strong><br>
-                • Stop sequences: <strong>}</strong> ou <strong>]</strong><br>
+                • Max tokens: <strong>500-2000</strong><br>
+                • Response MIME type: <strong>application/json</strong><br>
                 <br>
                 <em>Idéal pour : génération de JSON, XML, formats structurés</em>
             </div>
         </div>
 
         <div class="guide-section">
-            <h2>💾 Obtenir le code pour vos applications</h2>
+            <h2>Obtenir le code pour vos applications</h2>
             <p>Une fois que vous avez trouvé la configuration parfaite dans AI Studio :</p>
             <ol class="steps">
                 <li>
@@ -410,19 +513,19 @@
             </ol>
 
             <div class="tip-box">
-                <strong>💡 Astuce :</strong> Vous pouvez aussi sauvegarder vos prompts favoris dans AI Studio pour les
+                <strong>Astuce :</strong> Vous pouvez aussi sauvegarder vos prompts favoris dans AI Studio pour les
                 réutiliser plus tard.
             </div>
         </div>
 
         <div class="guide-section">
-            <h2>🎯 Règles d'or de l'optimisation</h2>
+            <h2>Règles d'or de l'optimisation</h2>
             <ol style="margin-left: 2rem;">
-                <li>✅ <strong>Changez UN paramètre à la fois</strong> pour comprendre son impact</li>
-                <li>✅ <strong>Testez avec plusieurs prompts</strong> pour valider vos réglages</li>
-                <li>✅ <strong>Documentez</strong> vos meilleures configurations</li>
-                <li>✅ <strong>Commencez simple</strong> : Temperature + Max tokens suffisent souvent</li>
-                <li>⛔ <strong>Évitez</strong> de tout régler au maximum (résultats incohérents)</li>
+                <li><strong>Changez UN paramètre à la fois</strong> pour comprendre son impact</li>
+                <li><strong>Testez avec plusieurs prompts</strong> pour valider vos réglages</li>
+                <li><strong>Documentez</strong> vos meilleures configurations</li>
+                <li><strong>Commencez simple</strong> : Temperature + Max tokens suffisent souvent</li>
+                <li><strong>Évitez</strong> de tout régler au maximum (résultats incohérents)</li>
             </ol>
         </div>
 
@@ -431,7 +534,7 @@
             <h2 style="color: white; margin-bottom: 1rem;">Prêt à expérimenter ?</h2>
             <a href="https://aistudio.google.com/prompts/new_chat" target="_blank" class="link-button"
                 style="background: white; color: #667eea;">
-                🚀 Lancer Google AI Studio
+                Lancer Google AI Studio
             </a>
             <p style="margin-top: 1rem; font-size: 0.9rem;">
                 Pôle Formation UIMM-CVDL © 2025
