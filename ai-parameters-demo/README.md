@@ -2,7 +2,7 @@
 
 Application web interactive pour comprendre et expérimenter avec les 7 paramètres qui influencent les réponses de l'intelligence artificielle.
 
-**Pôle Formation UIMM-CVDL**
+## Pôle Formation UIMM-CVDL
 
 ## Description
 
@@ -43,34 +43,65 @@ xdg-open index.html  # Linux
 
 ## Utilisation
 
+### 🌟 Méthode Recommandée : Google AI Studio (Sans API)
+
+La façon la plus simple d'apprendre à utiliser ces paramètres est **Google AI Studio** - aucune clé API à gérer !
+
+1. **Consultez le guide complet**
+   - Ouvrez `guide-ai-studio.html` dans votre navigateur
+   - Suivez les instructions détaillées étape par étape
+
+2. **Accédez directement à AI Studio**
+   - Visitez [Google AI Studio](https://aistudio.google.com/prompts/new_chat)
+   - Cliquez sur l'icône ⚙️ "Run settings" en haut à droite
+   - Ajustez les paramètres dans le panneau latéral
+   - Cliquez sur "Run" pour voir les résultats
+
+3. **Expérimentez**
+   - Modifiez un paramètre à la fois
+   - Observez l'impact sur les réponses
+   - Sauvegardez vos configurations favorites
+
+**Avantages** :
+
+- ✅ Gratuit et sans configuration
+- ✅ Interface visuelle intuitive
+- ✅ Résultats immédiats
+- ✅ Possibilité d'exporter le code pour vos applications
+
+### 🔧 Méthode Alternative : Test via API (Avancé)
+
+Pour les utilisateurs qui souhaitent tester l'API Gemini directement :
+
 1. **Obtenir une clé API Gemini**
-   - Visitez [Google AI Studio](https://makersuite.google.com/app/apikey)
+   - Visitez [Google AI Studio](https://aistudio.google.com/app/apikey)
    - Créez une clé API gratuite
    - Copiez-la
 
-2. **Utiliser l'application**
+2. **Utiliser l'application web**
    - Ouvrez `index.html` dans votre navigateur
    - Collez votre clé API dans le champ prévu
    - Entrez un prompt
    - Choisissez un preset ou ajustez les paramètres manuellement
    - Cliquez sur "Générer la Réponse"
 
-3. **Expérimenter**
-   - Essayez différents presets
-   - Modifiez un paramètre à la fois
-   - Observez l'impact sur les réponses
-   - Utilisez "Copier la Configuration" pour sauvegarder vos réglages
+3. **Copier la configuration**
+   - Utilisez "Copier la Configuration" pour obtenir les paramètres au format JSON
+   - Intégrez-les dans vos propres applications
+
+**Note** : Les paramètres Frequency Penalty et Presence Penalty sont spécifiques à OpenAI et ne sont pas disponibles dans l'API Gemini.
 
 ## Structure du Projet
 
-```
+```text
 ai-parameters-demo/
-├── index.html          # Structure HTML de l'application
-├── style.css           # Styles et design moderne
-├── app.js              # Logique JavaScript et API Gemini
+├── index.html              # Structure HTML de l'application
+├── guide-ai-studio.html    # Guide complet pour utiliser Google AI Studio
+├── style.css               # Styles et design moderne
+├── app.js                  # Logique JavaScript et API Gemini
 ├── assets/
-│   └── logo_uimm.jpg   # Logo UIMM-CVDL
-└── README.md           # Ce fichier
+│   └── logo_uimm.jpg       # Logo UIMM-CVDL
+└── README.md               # Ce fichier
 ```
 
 ## Technologies Utilisées

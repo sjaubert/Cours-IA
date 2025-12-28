@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guide d'utilisation de Google AI Studio - Réglage des Paramètres</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            color: #667eea;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+        }
+
+        .guide-section {
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: #f8f9fa;
+            border-radius: 12px;
+            border-left: 4px solid #667eea;
+        }
+
+        h2 {
+            color: #764ba2;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        h3 {
+            color: #667eea;
+            font-size: 1.3rem;
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .steps {
+            counter-reset: step-counter;
+            list-style: none;
+        }
+
+        .steps li {
+            counter-increment: step-counter;
+            margin-bottom: 1.5rem;
+            padding-left: 3rem;
+            position: relative;
+        }
+
+        .steps li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .parameter-box {
+            background: white;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+            border: 2px solid #e0e0e0;
+        }
+
+        .parameter-box strong {
+            color: #667eea;
+        }
+
+        .warning-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+        }
+
+        .tip-box {
+            background: #d1ecf1;
+            border-left: 4px solid #17a2b8;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+        }
+
+        .screenshot {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin: 1.5rem 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+
+        th,
+        td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background: #667eea;
+            color: white;
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background: #f5f5f5;
+        }
+
+        .link-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            margin: 1rem 0;
+            transition: transform 0.2s;
+        }
+
+        .link-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            .container {
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🎯 Guide Google AI Studio</h1>
+        <p class="subtitle">Maîtrisez les paramètres de l'IA en quelques clics</p>
+
+        <div class="guide-section">
+            <h2>✨ Pourquoi utiliser Google AI Studio ?</h2>
+            <p><strong>Google AI Studio</strong> est une interface web gratuite qui vous permet de tester les modèles
+                Gemini sans avoir à gérer des clés API ou écrire du code. C'est la solution idéale pour :</p>
+            <ul style="margin-left: 2rem; margin-top: 1rem;">
+                <li>✅ Apprendre comment fonctionnent les paramètres de l'IA</li>
+                <li>✅ Expérimenter différentes configurations en temps réel</li>
+                <li>✅ Prototyper vos prompts avant de les intégrer dans vos applications</li>
+                <li>✅ Obtenir du code prêt à l'emploi pour vos projets</li>
+            </ul>
+        </div>
+
+        <div class="guide-section">
+            <h2>📋 Étapes pour régler les paramètres</h2>
+
+            <ol class="steps">
+                <li>
+                    <strong>Accédez à Google AI Studio</strong><br>
+                    <a href="https://aistudio.google.com/prompts/new_chat" target="_blank" class="link-button">
+                        🚀 Ouvrir Google AI Studio
+                    </a>
+                    <p style="margin-top: 0.5rem; color: #666;">Vous devrez vous connecter avec un compte Google</p>
+                </li>
+
+                <li>
+                    <strong>Créez un nouveau prompt</strong><br>
+                    Dans la zone de texte principale, écrivez le prompt que vous souhaitez tester. Par exemple :
+                    <div class="parameter-box">
+                        "Explique-moi le concept de température en intelligence artificielle"
+                    </div>
+                </li>
+
+                <li>
+                    <strong>Ouvrez les paramètres</strong><br>
+                    Cliquez sur l'icône <strong>⚙️ "Run settings"</strong> située dans le coin supérieur droit de
+                    l'interface.
+                    <img src="../../../.gemini/antigravity/brain/b5deb1c2-66b9-4ee1-a973-21174041fc0a/ai_studio_settings_guide_1766927981280.png"
+                        alt="Interface AI Studio" class="screenshot">
+                </li>
+
+                <li>
+                    <strong>Ajustez les paramètres</strong><br>
+                    Un panneau latéral s'ouvre avec les différents paramètres disponibles (détails ci-dessous).
+                </li>
+
+                <li>
+                    <strong>Lancez la génération</strong><br>
+                    Cliquez sur le bouton <strong>"Run"</strong> pour voir la réponse générée avec vos paramètres.
+                </li>
+
+                <li>
+                    <strong>Expérimentez</strong><br>
+                    Modifiez <strong>un seul paramètre à la fois</strong> pour bien comprendre son impact sur la
+                    réponse.
+                </li>
+            </ol>
+        </div>
+
+        <div class="guide-section">
+            <h2>🎛️ Les paramètres disponibles dans AI Studio</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Paramètre</th>
+                        <th>Description</th>
+                        <th>Valeurs recommandées</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Model</strong></td>
+                        <td>Choix du modèle Gemini (Flash, Pro, etc.)</td>
+                        <td>Gemini 1.5 Flash (rapide) ou Pro (plus puissant)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Temperature</strong></td>
+                        <td>Contrôle la créativité et le caractère aléatoire</td>
+                        <td>0.0-0.3 (factuel), 0.7 (équilibré), 1.2-2.0 (créatif)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Max output tokens</strong></td>
+                        <td>Limite la longueur de la réponse générée</td>
+                        <td>500 (chat), 1000 (code), 2000-4000 (articles)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Top-K</strong></td>
+                        <td>Nombre de tokens candidats considérés</td>
+                        <td>40 (par défaut) ou 0 (désactivé)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Top-P</strong></td>
+                        <td>Filtre basé sur la probabilité cumulative</td>
+                        <td>0.9 (recommandé), 0.95 (plus créatif)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Stop sequences</strong></td>
+                        <td>Texte qui force l'arrêt de la génération</td>
+                        <td>"```" (code), "}" (JSON), "###" (sections)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="tip-box">
+                <strong>💡 Conseil d'expert :</strong> Gardez Top-P à 0.9 et ajustez plutôt Temperature pour contrôler
+                la créativité. Ces deux paramètres ont des effets similaires.
+            </div>
+        </div>
+
+        <div class="guide-section">
+            <h2>🔍 Expérimentations recommandées</h2>
+
+            <h3>Expérience 1 : Impact de la Temperature</h3>
+            <p>Utilisez le même prompt avec différentes températures :</p>
+            <div class="parameter-box">
+                <strong>Prompt :</strong> "Écris une courte histoire sur un robot qui découvre les émotions"<br><br>
+                • Testez avec Temperature = 0.0<br>
+                • Testez avec Temperature = 0.7<br>
+                • Testez avec Temperature = 1.5<br><br>
+                <strong>Observation :</strong> Notez comment le style et la créativité changent !
+            </div>
+
+            <h3>Expérience 2 : Contrôle de la longueur</h3>
+            <div class="parameter-box">
+                <strong>Prompt :</strong> "Explique le réchauffement climatique"<br><br>
+                • Testez avec Max output tokens = 100<br>
+                • Testez avec Max output tokens = 500<br>
+                • Testez avec Max output tokens = 2000<br><br>
+                <strong>Observation :</strong> Voyez comment la profondeur de l'explication varie !
+            </div>
+
+            <h3>Expérience 3 : Stop sequences pour le code</h3>
+            <div class="parameter-box">
+                <strong>Prompt :</strong> "Écris une fonction Python qui calcule la factorielle"<br><br>
+                • Ajoutez "```" dans Stop sequences<br>
+                • Temperature = 0.2 (pour du code précis)<br><br>
+                <strong>Observation :</strong> Le modèle s'arrête automatiquement après le bloc de code !
+            </div>
+        </div>
+
+        <div class="guide-section">
+            <h2>⚠️ Limitations de Google AI Studio</h2>
+
+            <div class="warning-box">
+                <strong>📌 Important :</strong> Les paramètres suivants ne sont PAS disponibles dans Google AI Studio :
+                <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                    <li><strong>Frequency Penalty</strong> - Spécifique à OpenAI</li>
+                    <li><strong>Presence Penalty</strong> - Spécifique à OpenAI</li>
+                </ul>
+                <p style="margin-top: 0.5rem;">Gemini utilise plutôt <strong>Temperature</strong> et
+                    <strong>Top-P/Top-K</strong> pour contrôler la diversité et éviter les répétitions.</p>
+            </div>
+        </div>
+
+        <div class="guide-section">
+            <h2>🎓 Préconfigurations recommandées</h2>
+
+            <h3>📊 Configuration pour tâches factuelles/techniques</h3>
+            <div class="parameter-box">
+                • Temperature: <strong>0.2</strong><br>
+                • Top-P: <strong>0.9</strong><br>
+                • Top-K: <strong>40</strong><br>
+                • Max tokens: <strong>500-1000</strong><br>
+                <br>
+                <em>Idéal pour : extraction de données, traduction, classification, génération de code</em>
+            </div>
+
+            <h3>💬 Configuration équilibrée (conversation)</h3>
+            <div class="parameter-box">
+                • Temperature: <strong>0.7</strong><br>
+                • Top-P: <strong>0.9</strong><br>
+                • Top-K: <strong>40</strong><br>
+                • Max tokens: <strong>500</strong><br>
+                <br>
+                <em>Idéal pour : chat général, explications, questions-réponses</em>
+            </div>
+
+            <h3>🎨 Configuration créative</h3>
+            <div class="parameter-box">
+                • Temperature: <strong>1.2-1.5</strong><br>
+                • Top-P: <strong>0.95</strong><br>
+                • Top-K: <strong>40</strong><br>
+                • Max tokens: <strong>2000-4000</strong><br>
+                <br>
+                <em>Idéal pour : écriture créative, brainstorming, génération d'histoires</em>
+            </div>
+
+            <h3>📝 Configuration pour JSON/données structurées</h3>
+            <div class="parameter-box">
+                • Temperature: <strong>0.0</strong><br>
+                • Top-P: <strong>1.0</strong><br>
+                • Top-K: <strong>40</strong><br>
+                • Max tokens: <strong>200-500</strong><br>
+                • Stop sequences: <strong>}</strong> ou <strong>]</strong><br>
+                <br>
+                <em>Idéal pour : génération de JSON, XML, formats structurés</em>
+            </div>
+        </div>
+
+        <div class="guide-section">
+            <h2>💾 Obtenir le code pour vos applications</h2>
+            <p>Une fois que vous avez trouvé la configuration parfaite dans AI Studio :</p>
+            <ol class="steps">
+                <li>
+                    <strong>Cliquez sur "Get code"</strong><br>
+                    Ce bouton se trouve généralement en haut à droite de l'interface.
+                </li>
+                <li>
+                    <strong>Choisissez votre langage</strong><br>
+                    AI Studio génère automatiquement du code pour :
+                    <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                        <li>Python</li>
+                        <li>JavaScript</li>
+                        <li>cURL (ligne de commande)</li>
+                        <li>REST API</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Copiez et intégrez</strong><br>
+                    Le code inclut déjà tous vos paramètres optimisés !
+                </li>
+            </ol>
+
+            <div class="tip-box">
+                <strong>💡 Astuce :</strong> Vous pouvez aussi sauvegarder vos prompts favoris dans AI Studio pour les
+                réutiliser plus tard.
+            </div>
+        </div>
+
+        <div class="guide-section">
+            <h2>🎯 Règles d'or de l'optimisation</h2>
+            <ol style="margin-left: 2rem;">
+                <li>✅ <strong>Changez UN paramètre à la fois</strong> pour comprendre son impact</li>
+                <li>✅ <strong>Testez avec plusieurs prompts</strong> pour valider vos réglages</li>
+                <li>✅ <strong>Documentez</strong> vos meilleures configurations</li>
+                <li>✅ <strong>Commencez simple</strong> : Temperature + Max tokens suffisent souvent</li>
+                <li>⛔ <strong>Évitez</strong> de tout régler au maximum (résultats incohérents)</li>
+            </ol>
+        </div>
+
+        <div
+            style="text-align: center; margin-top: 3rem; padding: 2rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 12px; color: white;">
+            <h2 style="color: white; margin-bottom: 1rem;">Prêt à expérimenter ?</h2>
+            <a href="https://aistudio.google.com/prompts/new_chat" target="_blank" class="link-button"
+                style="background: white; color: #667eea;">
+                🚀 Lancer Google AI Studio
+            </a>
+            <p style="margin-top: 1rem; font-size: 0.9rem;">
+                Pôle Formation UIMM-CVDL © 2025
+            </p>
+        </div>
+    </div>
+</body>
+
+</html>
