@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Les 7 Paramètres qui Contrôlent l'IA - Pôle Formation UIMM-CVDL</title>
+    <meta name="description" content="Découvrez et expérimentez en temps réel les 7 paramètres qui influencent les réponses de l'intelligence artificielle">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <img src="assets/logo_uimm.jpg" alt="Logo UIMM-CVDL" class="logo">
+                <div class="header-text">
+                    <h1>Les 7 Paramètres qui Contrôlent l'IA</h1>
+                    <p class="subtitle">Pôle Formation UIMM-CVDL</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Introduction -->
+    <section class="intro-section">
+        <div class="container">
+            <div class="intro-card">
+                <h2>Maîtrisez les Réglages Cachés de l'IA</h2>
+                <p>Chaque fois que vous interagissez avec ChatGPT, Gemini ou un autre modèle de langage, sept paramètres invisibles façonnent silencieusement la réponse. Changez un seul nombre, et vous passez d'insights brillants à du charabia incohérent.</p>
+                <p>La plupart des utilisateurs ne touchent jamais à ces réglages. Ils restent avec les valeurs par défaut et se demandent pourquoi l'IA semble parfois "stupide". Maîtrisez ces 7 paramètres, et vous obtiendrez de meilleurs résultats que 99% des utilisateurs.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testing Playground -->
+    <section class="playground-section">
+        <div class="container">
+            <h2>Terrain de Test Interactif</h2>
+            <div class="playground-grid">
+                <div class="playground-input">
+                    <div class="api-key-section">
+                        <label for="apiKey">Clé API Gemini</label>
+                        <div class="input-with-toggle">
+                            <input type="password" id="apiKey" placeholder="Entrez votre clé API Gemini">
+                            <button type="button" id="toggleApiKey" class="toggle-btn" aria-label="Afficher/masquer la clé API">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <path d="M10 4C5 4 1.73 7.11 1 10c.73 2.89 4 6 9 6s8.27-3.11 9-6c-.73-2.89-4-6-9-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm0-6.5c-1.38 0-2.5 1.12-2.5 2.5s1.12 2.5 2.5 2.5 2.5-1.12 2.5-2.5-1.12-2.5-2.5-2.5z" fill="currentColor"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <p class="help-text">La clé est stockée uniquement dans votre navigateur</p>
+                    </div>
+                    
+                    <label for="prompt">Votre Prompt</label>
+                    <textarea id="prompt" rows="6" placeholder="Écrivez un prompt ici pour tester les différents paramètres..."></textarea>
+                    
+                    <div class="preset-buttons">
+                        <button class="preset-btn" data-preset="factual">Factuel/Technique</button>
+                        <button class="preset-btn" data-preset="balanced">Équilibré</button>
+                        <button class="preset-btn" data-preset="creative">Créatif</button>
+                        <button class="preset-btn" data-preset="code">Code</button>
+                        <button class="preset-btn" data-preset="json">JSON</button>
+                    </div>
+                    
+                    <button id="generateBtn" class="generate-btn">Générer la Réponse</button>
+                    <button id="copyConfigBtn" class="copy-config-btn">Copier la Configuration</button>
+                </div>
+                
+                <div class="playground-output">
+                    <div class="output-header">
+                        <h3>Réponse</h3>
+                        <div class="output-stats">
+                            <span id="tokenCount">Tokens: -</span>
+                            <span id="generationTime">Temps: -</span>
+                        </div>
+                    </div>
+                    <div id="output" class="output-content">
+                        <p class="placeholder">La réponse s'affichera ici...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Parameters Section -->
+    <section class="parameters-section">
+        <div class="container">
+            <h2>Contrôlez les 7 Paramètres</h2>
+            
+            <!-- Parameter 1: Max Tokens -->
+            <div class="parameter-card">
+                <div class="parameter-header">
+                    <h3>1. Max Tokens (Contrôleur de Longueur)</h3>
+                    <span class="param-value" id="maxTokensValue">500</span>
+                </div>
+                <input type="range" id="maxTokens" min="100" max="4000" step="50" value="500" class="param-slider">
+                <div class="param-labels">
+                    <span>100</span>
+                    <span>4000</span>
+                </div>
+                <div class="parameter-info">
+                    <p><strong>Fonction :</strong> Limite stricte du nombre de tokens que le modèle peut générer.</p>
+                    <ul>
+                        <li><strong>Chat :</strong> 300-500 tokens</li>
+                        <li><strong>Code :</strong> 1000-2000 tokens</li>
+                        <li><strong>Articles :</strong> 2000-4000 tokens</li>
+                        <li><strong>JSON :</strong> 50-200 tokens</li>
+                    </ul>
+                    <p class="tip">Définissez toujours cette valeur pour contrôler les coûts et la vitesse.</p>
+                </div>
+            </div>
+
+            <!-- Parameter 2: Temperature -->
+            <div class="parameter-card">
+                <div class="parameter-header">
+                    <h3>2. Temperature (Cadran de Créativité)</h3>
+                    <span class="param-value" id="temperatureValue">0.7</span>
+                </div>
+                <input type="range" id="temperature" min="0" max="2" step="0.1" value="0.7" class="param-slider">
+                <div class="param-labels">
+                    <span>0.0 (Déterministe)</span>
+                    <span>2.0 (Très créatif)</span>
+                </div>
+                <div class="parameter-info">
+                    <p><strong>Fonction :</strong> Contrôle le caractère aléatoire des réponses.</p>
+                    <ul>
+                        <li><strong>0.0-0.3 (Factuel) :</strong> Code, extraction de données, traduction, classification</li>
+                        <li><strong>0.7-1.0 (Équilibré) :</strong> Conversation générale, explications</li>
+                        <li><strong>1.2-2.0 (Créatif) :</strong> Écriture créative, brainstorming, génération d'histoires</li>
+                    </ul>
+                    <p class="warning">Au-delà de 2.0, les réponses deviennent souvent incohérentes.</p>
+                </div>
+            </div>
+
+            <!-- Parameter 3: Top-P -->
+            <div class="parameter-card">
+                <div class="parameter-header">
+                    <h3>3. Top-P / Nucleus Sampling (Filtre de Qualité)</h3>
+                    <span class="param-value" id="topPValue">0.90</span>
+                </div>
+                <input type="range" id="topP" min="0" max="1" step="0.05" value="0.9" class="param-slider">
+                <div class="param-labels">
+                    <span>0.0</span>
+                    <span>1.0</span>
+                </div>
+                <div class="parameter-info">
+                    <p><strong>Fonction :</strong> N'échantillonne que les tokens dont la probabilité cumulée ≥ P. Coupe la "longue traîne".</p>
+                    <ul>
+                        <li><strong>1.0 :</strong> Aucun filtrage (risqué)</li>
+                        <li><strong>0.95 :</strong> Filtrage léger (créatif)</li>
+                        <li><strong>0.9 :</strong> Valeur par défaut recommandée</li>
+                        <li><strong>0.5 :</strong> Filtrage lourd (conservateur)</li>
+                    </ul>
+                    <p class="tip">Gardez Top-P à 0.9 et ajustez plutôt Temperature.</p>
+                </div>
+            </div>
+
+            <!-- Parameter 4: Top-K -->
+            <div class="parameter-card">
+                <div class="parameter-header">
+                    <h3>4. Top-K (Limiteur de Candidats)</h3>
+                    <span class="param-value" id="topKValue">40</span>
+                </div>
+                <input type="range" id="topK" min="0" max="100" step="1" value="40" class="param-slider">
+                <div class="param-labels">
+                    <span>0 (Désactivé)</span>
+                    <span>100</span>
+                </div>
+                <div class="parameter-info">
+                    <p><strong>Fonction :</strong> Ne considère que les K tokens avec la plus haute probabilité à chaque étape.</p>
+                    <p><strong>Différence avec Top-P :</strong></p>
+                    <ul>
+                        <li><strong>Top-K :</strong> Nombre fixe de tokens</li>
+                        <li><strong>Top-P :</strong> Nombre variable basé sur la masse de probabilité</li>
+                    </ul>
+                    <p class="tip">La plupart des APIs modernes utilisent Top-P plutôt que Top-K. Mettez à 0 pour désactiver.</p>
+                </div>
+            </div>
+
+            <!-- Parameter 5: Frequency Penalty -->
+            <div class="parameter-card">
+                <div class="parameter-header">
+                    <h3>5. Frequency Penalty (Tueur de Répétitions)</h3>
+                    <span class="param-value" id="frequencyPenaltyValue">0.0</span>
+                </div>
+                <input type="range" id="frequencyPenalty" min="0" max="2" step="0.1" value="0" class="param-slider">
+                <div class="param-labels">
+                    <span>0.0</span>
+                    <span>2.0</span>
+                </div>
+                <div class="parameter-info">
+                    <p><strong>Fonction :</strong> Réduit la probabilité proportionnellement à la fréquence d'apparition des tokens.</p>
+                    <p><strong>Quand l'utiliser :</strong></p>
+                    <ul>
+                        <li>Génération longue (articles, histoires)</li>
+                        <li>Écriture créative</li>
+                        <li>Génération de listes</li>
+                    </ul>
+                    <p><strong>Quand NE PAS l'utiliser :</strong></p>
+                    <ul>
+                        <li>Écriture technique (les termes doivent se répéter)</li>
+                        <li>Génération de code</li>
+                        <li>Sorties structurées (JSON/XML)</li>
+                    </ul>
+                    <p class="tip">Commencez à 0.0, augmentez uniquement si vous voyez des répétitions.</p>
+                </div>
+            </div>
+
+            <!-- Parameter 6: Presence Penalty -->
+            <div class="parameter-card">
+                <div class="parameter-header">
+                    <h3>6. Presence Penalty (Moteur de Nouveauté)</h3>
+                    <span class="param-value" id="presencePenaltyValue">0.0</span>
+                </div>
+                <input type="range" id="presencePenalty" min="0" max="2" step="0.1" value="0" class="param-slider">
+                <div class="param-labels">
+                    <span>0.0</span>
+                    <span>2.0</span>
+                </div>
+                <div class="parameter-info">
+                    <p><strong>Fonction :</strong> Pénalise les tokens apparus AU MOINS UNE FOIS (binaire, non proportionnel).</p>
+                    <p><strong>Différence avec Frequency :</strong></p>
+                    <ul>
+                        <li><strong>Frequency :</strong> Pénalise selon le nombre d'occurrences</li>
+                        <li><strong>Presence :</strong> Binaire (utilisé = pénalisé de façon égale)</li>
+                    </ul>
+                    <p><strong>Quand l'utiliser :</strong></p>
+                    <ul>
+                        <li>Brainstorming</li>
+                        <li>Écriture exploratoire</li>
+                        <li>Éviter de "rester bloqué"</li>
+                    </ul>
+                    <p class="warning">Peut faire dériver le sujet. Évitez pour du contenu technique ou cohérent.</p>
+                </div>
+            </div>
+
+            <!-- Parameter 7: Stop Sequences -->
+            <div class="parameter-card">
+                <div class="parameter-header">
+                    <h3>7. Stop Sequences (Frein d'Urgence)</h3>
+                </div>
+                <input type="text" id="stopSequences" placeholder='Exemple: }, ###, ``` (séparés par des virgules)' class="stop-input">
+                <div class="parameter-info">
+                    <p><strong>Fonction :</strong> Force le modèle à s'arrêter lorsque des chaînes spécifiques apparaissent. Le texte d'arrêt N'EST PAS inclus dans la sortie.</p>
+                    <p><strong>Séquences d'arrêt courantes :</strong></p>
+                    <ul>
+                        <li><strong>JSON :</strong> },  ]</li>
+                        <li><strong>Code :</strong> ```</li>
+                        <li><strong>Listes :</strong> \n\n</li>
+                        <li><strong>Sections :</strong> ###, ---</li>
+                        <li><strong>Chat :</strong> User:, Human:</li>
+                    </ul>
+                    <p class="tip">Utilisez des délimiteurs non ambigus pour un contrôle précis.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cheat Sheet -->
+    <section class="cheatsheet-section">
+        <div class="container">
+            <h2>Guide de Référence Rapide</h2>
+            <div class="cheatsheet-grid">
+                <div class="cheat-card">
+                    <h3>Par Type de Tâche</h3>
+                    <ul>
+                        <li><strong>Factuel/Technique</strong><br>temp: 0.0-0.3, penalties: 0.0</li>
+                        <li><strong>Chat Général</strong><br>temp: 0.7-0.9, freq: 0.2-0.4</li>
+                        <li><strong>Créatif</strong><br>temp: 1.2-1.5, freq: 0.6-0.8, presence: 0.4-1.0</li>
+                    </ul>
+                </div>
+                
+                <div class="cheat-card">
+                    <h3>Par Longueur de Sortie</h3>
+                    <ul>
+                        <li><strong>Court (chat)</strong><br>200-500 tokens</li>
+                        <li><strong>Moyen (descriptions)</strong><br>500-1000 tokens</li>
+                        <li><strong>Long (articles)</strong><br>1000-4000 tokens</li>
+                    </ul>
+                </div>
+                
+                <div class="cheat-card">
+                    <h3>Règles d'Or</h3>
+                    <ol>
+                        <li>Toujours définir max_tokens</li>
+                        <li>Ajuster temp OU top_p (pas les deux)</li>
+                        <li>Commencer penalties à 0.0</li>
+                        <li>Changer UN paramètre à la fois</li>
+                        <li>Tester, mesurer, itérer</li>
+                    </ol>
+                </div>
+                
+                <div class="cheat-card">
+                    <h3>Erreurs Courantes</h3>
+                    <ul>
+                        <li>Tout régler haut = incohérence</li>
+                        <li>Ignorer max_tokens = coûts imprévisibles</li>
+                        <li>Penalties sur contenu technique = variables changent</li>
+                        <li>Pas de stop sequences pour JSON = continue après }</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Pôle Formation UIMM-CVDL - Tous droits réservés</p>
+            <p class="footer-note">Cette application utilise l'API Gemini. Les frais d'API sont à la charge de l'utilisateur.</p>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
