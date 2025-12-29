@@ -18,16 +18,16 @@
 
 ### Installation des Outils
 
-- [Installation Gemini-cli](https://sjaubert.github.io/Cours-IA/Gemin-cli%20V2.html?target=_blank)
-- [Installation MCP Workspace](https://sjaubert.github.io/Cours-IA/gemini-cli_workspace.html?target=_blank)
+- [Installation Gemini-cli](https://sjaubert.github.io/Cours-IA/IA-Education/Gemin-cli%20V2.html?target=_blank)
+- [Installation MCP Workspace](https://sjaubert.github.io/Cours-IA/IA-Education/gemini-cli_workspace.html?target=_blank)
 - [Guide installation antigravity](https://sjaubert.github.io/Cours-IA/antigravity/guide_antigravity.html?target=_blank)
 - [Gemini CLI Extension pour Google Workspace](https://sjaubert.github.io/Cours-IA/Formation_Agentic_Workspace/gemini_cli_workspace.html?target=_blank)
 
 ### Sécurité et Automatisation
 
-- [Tutoriel Gemini Secure](https://sjaubert.github.io/Cours-IA/tutoriel-gemini-secure.html?target=_blank)
-- [Tutoriel Automatisation Workspace](https://sjaubert.github.io/Cours-IA/Tutoriel_Automatisation_Workspace.html?target=_blank)
-- [Tutoriel Automatisation Agentique](https://sjaubert.github.io/Cours-IA/Agentic_Automation_Tutorial.html?target=_blank)
+- [Tutoriel Gemini Secure](https://sjaubert.github.io/Cours-IA/IA-Education/tutoriel-gemini-secure.html?target=_blank)
+- [Tutoriel Automatisation Workspace](https://sjaubert.github.io/Cours-IA/IA-Education/Tutoriel_Automatisation_Workspace.html?target=_blank)
+- [Tutoriel Automatisation Agentique](https://sjaubert.github.io/Cours-IA/IA-Education/Agentic_Automation_Tutorial.html?target=_blank)
 
 ---
 
@@ -35,14 +35,14 @@
 
 ### Art du Prompt et Utilisation
 
-- [Guide Interactif Art du Prompt](https://sjaubert.github.io/Cours-IA/Guide_Interactif_Prompt.html?target=_blank)
-- [Astuce GEMINI CLI](https://sjaubert.github.io/Cours-IA/astuce_geminiCLI.html?target=_blank)
+- [Guide Interactif Art du Prompt](https://sjaubert.github.io/Cours-IA/IA-Education/Guide_Interactif_Prompt.html?target=_blank)
+- [Astuce GEMINI CLI](https://sjaubert.github.io/Cours-IA/IA-Education/astuce_geminiCLI.html?target=_blank)
 
 ### Tutoriels Techniques
 
-- [Tutoriel Google Apps Script](https://sjaubert.github.io/Cours-IA/tutoriel_google_appsscript.html?target=_blank)
+- [Tutoriel Google Apps Script](https://sjaubert.github.io/Cours-IA/IA-Education/tutoriel_google_appsscript.html?target=_blank)
 - [Tutoriels Gemini CLI & MCP - Guide de Navigation](https://sjaubert.github.io/Cours-IA/Formation_Agentic_Workspace/tutoriels_gemini_mcp.html?target=_blank)
-- [antigravity_tutorial](https://sjaubert.github.io/Cours-IA/antigravity_tutorial.html?target=_blank)
+- [antigravity_tutorial](https://sjaubert.github.io/Cours-IA/IA-Education/antigravity_tutorial.html?target=_blank)
 
 ---
 
@@ -50,8 +50,8 @@
 
 ### Tableaux de Bord et Suivi
 
-- [Tableau de bord - Formation IA](https://sjaubert.github.io/Cours-IA/Tableau_de_Bord_Interactif_Formation_IA.html?target=_blank)
-- [Atelier Pratiques Gemini CLI - Formation IA](https://sjaubert.github.io/Cours-IA/Ateliers_Pratiques.html?target=_blank)
+- [Tableau de bord - Formation IA](https://sjaubert.github.io/Cours-IA/IA-Education/Tableau_de_Bord_Interactif_Formation_IA.html?target=_blank)
+- [Atelier Pratiques Gemini CLI - Formation IA](https://sjaubert.github.io/Cours-IA/IA-Education/Ateliers_Pratiques.html?target=_blank)
 
 ### Parcours de Formation
 
