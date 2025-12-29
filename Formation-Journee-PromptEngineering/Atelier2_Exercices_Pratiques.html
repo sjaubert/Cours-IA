@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atelier 2 : Exercices Pratiques - Pôle Formation UIMM-CVDL</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            color: white;
+            padding: 2rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .logo {
+            max-width: 120px;
+            height: auto;
+            background: white;
+            padding: 0.5rem;
+            border-radius: 8px;
+        }
+
+        .header-text h1 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .header-text p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 2rem;
+        }
+
+        .toc {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 2rem;
+            max-height: calc(100vh - 4rem);
+            overflow-y: auto;
+        }
+
+        .toc h2 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: #1e3a8a;
+            border-bottom: 2px solid #3b82f6;
+            padding-bottom: 0.5rem;
+        }
+
+        .toc ul {
+            list-style: none;
+        }
+
+        .toc ul ul {
+            margin-left: 1rem;
+        }
+
+        .toc a {
+            color: #333;
+            text-decoration: none;
+            display: block;
+            padding: 0.5rem 0;
+            transition: color 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .toc a:hover {
+            color: #3b82f6;
+            text-decoration: underline;
+        }
+
+        .content {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .content h2 {
+            color: #1e3a8a;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .content h3 {
+            color: #1e40af;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .content h4 {
+            color: #2563eb;
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .duration {
+            background: #dbeafe;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            display: inline-block;
+            margin: 1rem 0;
+            color: #1e40af;
+            font-weight: 500;
+        }
+
+        .objectives {
+            background: #f0fdf4;
+            border-left: 4px solid #22c55e;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        pre {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 4px;
+            padding: 1rem;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+
+        code {
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+
+        .exercise {
+            background: #fefce8;
+            border-left: 4px solid #eab308;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+        }
+
+        .exercise h3 {
+            color: #854d0e;
+            margin-top: 0;
+        }
+
+        .exercise h4 {
+            color: #a16207;
+            margin-top: 1rem;
+        }
+
+        .correction {
+            background: #f0fdf4;
+            border: 2px solid #22c55e;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+
+        .correction h4 {
+            color: #166534;
+            margin-top: 0;
+        }
+
+        .checklist {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .checklist li:before {
+            content: "☐ ";
+            margin-right: 0.5rem;
+        }
+
+        .template {
+            background: #eff6ff;
+            border: 2px dashed #3b82f6;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+
+        .note {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .tip {
+            background: #dbeafe;
+            border-left: 4px solid #3b82f6;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .warning {
+            background: #fee2e2;
+            border-left: 4px solid #ef4444;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        footer {
+            background: #1e3a8a;
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 900px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+
+            .toc {
+                position: static;
+                max-height: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="header-content">
+            <img src="logo_uimm_placeholder.jpg" alt="Logo Pôle Formation UIMM-CVDL" class="logo">
+            <div class="header-text">
+                <h1>Pôle Formation UIMM-CVDL</h1>
+                <p>Atelier 2 : Constructeur de Prompts - Exercices Pratiques</p>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <nav class="toc">
+            <h2>Sommaire</h2>
+            <ul>
+                <li><a href="#introduction">Introduction</a></li>
+                <li><a href="#objectifs">Objectifs Pédagogiques</a></li>
+                <li><a href="#exercice1">Exercice 1 - Email Simple</a></li>
+                <li><a href="#exercice2">Exercice 2 - Procédure Qualité</a></li>
+                <li><a href="#exercice3">Exercice 3 - Formation Interactive</a></li>
+                <li><a href="#exercice4">Exercice 4 - Rapport de Synthèse</a></li>
+                <li><a href="#exercice5">Exercice 5 - Challenge Personnel</a></li>
+                <li><a href="#bilan">Bilan de l'Atelier</a></li>
+                <li><a href="#bibliotheque">Bibliothèque de Prompts</a></li>
+            </ul>
+        </nav>
+
+        <main class="content">
+            <h1>ATELIER 2 : Constructeur de Prompts - Exercices Pratiques</h1>
+
+            <div class="duration">Durée : 1h00</div>
+
+            <h2 id="objectifs">Objectifs Pédagogiques</h2>
+            <div class="objectives">
+                <p>À la fin de cet atelier, les participants seront capables de :</p>
+                <ul>
+                    <li>Construire un prompt structuré de A à Z</li>
+                    <li>Adapter un prompt selon le contexte</li>
+                    <li>Évaluer et améliorer un prompt existant</li>
+                    <li>Utiliser le template universel en autonomie</li>
+                </ul>
+            </div>
+
+            <h2 id="introduction">Introduction (5 min)</h2>
+            <p><strong>Rappel de l'Atelier 1</strong> :</p>
+            <ul>
+                <li>Rapide tour de table : "Quel pilier vous semble le plus important ?"</li>
+                <li>Présentation de l'objectif : "Vous allez créer 5 prompts de A à Z"</li>
+            </ul>
+            <p><strong>Présentation du Constructeur Interactif</strong> :</p>
+            <ul>
+                <li>Si version web disponible : démonstration live</li>
+                <li>Sinon : utilisation du template papier</li>
+            </ul>
+
+            <div class="exercise" id="exercice1">
+                <h2>EXERCICE 1 - Niveau Débutant : "Email Simple" (10 min)</h2>
+
+                <h3>Scénario</h3>
+                <p>Vous devez informer votre équipe d'un changement dans les horaires de la réunion hebdomadaire.</p>
+
+                <h3>Instructions</h3>
+                <p>Utilisez le template pour créer un prompt qui génère cet email.</p>
+
+                <div class="template">
+                    <h4>Template à Remplir</h4>
+                    <pre>
+RÔLE & CONTEXTE :
+_____________________________________________
+
+OBJECTIF :
+_____________________________________________
+
+TÂCHE :
+_____________________________________________
+
+CONTRAINTES :
+_____________________________________________
+
+FORMAT :
+_____________________________________________</pre>
+                </div>
+
+                <div class="correction">
+                    <h4>Corrigé Proposé</h4>
+                    <pre>
+RÔLE & CONTEXTE :
+Tu es un manager d'équipe dans une entreprise industrielle.
+
+OBJECTIF :
+Informer l'équipe du changement d'horaire de la réunion 
+hebdomadaire sans créer de confusion.
+
+TÂCHE :
+Rédige un email professionnel et clair.
+
+CONTRAINTES :
+- Ton professionnel mais chaleureux
+- Maximum 150 mots
+- Préciser l'ancien ET le nouvel horaire
+- Donner la raison du changement
+
+FORMAT :
+Email classique avec :
+- Objet clair
+- Salutation
+- Corps en 3 paragraphes (raison, changement, action)
+- Formule de politesse</pre>
+                </div>
+
+                <h3>Mise en Commun (5 min)</h3>
+                <ul>
+                    <li>2-3 volontaires lisent leur prompt</li>
+                    <li>Le groupe identifie les points forts et ce qui peut être amélioré</li>
+                    <li>Le formateur présente le corrigé</li>
+                </ul>
+            </div>
+
+            <div class="exercise" id="exercice2">
+                <h2>EXERCICE 2 - Niveau Intermédiaire : "Procédure Qualité" (12 min)</h2>
+
+                <h3>Scénario</h3>
+                <p>Vous travaillez dans le service qualité. Suite à plusieurs non-conformités sur une ligne de
+                    production, vous devez créer une procédure de contrôle visuel pour les opérateurs.</p>
+
+                <h3>Contexte Complémentaire</h3>
+                <ul>
+                    <li>Les opérateurs ont des niveaux de formation variés (CAP à BAC+2)</li>
+                    <li>La procédure doit être affichée au poste de travail (format A4)</li>
+                    <li>Elle porte sur le contrôle des dimensions d'une pièce usinée</li>
+                    <li>Temps de contrôle maximum : 2 minutes par pièce</li>
+                </ul>
+
+                <div class="tip">
+                    <h4>Questions Guides</h4>
+                    <p>Avant de commencer, répondez à ces questions :</p>
+                    <ol>
+                        <li>Quel rôle donner à l'IA ? (Expert qualité ? Formateur ?)</li>
+                        <li>Quel est l'objectif principal ? (Clarté ? Exhaustivité ? Rapidité ?)</li>
+                        <li>Quels formats sont adaptés ? (Checklist ? Schéma commenté ?)</li>
+                        <li>Quelles contraintes techniques ? (Mesures, tolérances, outils)</li>
+                    </ol>
+                </div>
+
+                <div class="correction">
+                    <h4>Corrigé Proposé</h4>
+                    <pre>
+RÔLE & CONTEXTE :
+Tu es un ingénieur qualité dans l'industrie automobile avec 10 ans d'expérience.
+Tu t'adresses à des opérateurs de production de niveau CAP à BAC+2.
+
+OBJECTIF :
+Permettre aux opérateurs de réaliser un contrôle visuel et dimensionnel 
+fiable en moins de 2 minutes, réduisant ainsi les non-conformités.
+
+TÂCHE :
+Crée une procédure de contrôle visuel pour une pièce usinée.
+
+CONTRAINTES :
+- Format A4 imprimable
+- Langage simple, pas de jargon technique
+- Intégrer les points de contrôle : dimensions, aspect surface, bavures
+- Temps d'exécution : maximum 2 minutes
+- Référencer les outils : pied à coulisse, jauge de profondeur
+- Inclure les tolérances : ±0.1mm
+
+FORMAT :
+Tableau en 4 colonnes :
+| Étape | Point de Contrôle | Outil | Critère OK/NOK |
+Ajouter une section "Que faire en cas de NOK ?"
+
+ÉTAPES :
+1. Liste d'abord les 5-6 points critiques à contrôler
+2. Organise-les dans l'ordre logique de contrôle
+3. Formule les critères de manière binaire (OK/NOK)
+4. Ajoute les actions en cas de non-conformité</pre>
+                </div>
+            </div>
+
+            <div class="exercise" id="exercice3">
+                <h2>EXERCICE 3 - Niveau Intermédiaire+ : "Formation Interactive" (15 min)</h2>
+
+                <h3>Scénario</h3>
+                <p>Vous êtes formateur et vous devez créer un quiz interactif de 10 questions pour évaluer la
+                    compréhension d'un module de formation sur "Les bases de la cybersécurité".</p>
+
+                <h3>Contexte</h3>
+                <ul>
+                    <li>Public : employés de bureau, tous niveaux (administratifs, commerciaux, RH)</li>
+                    <li>Objectif du quiz : sensibiliser et évaluer les réflexes de sécurité</li>
+                    <li>Format souhaité : QCM avec 4 réponses possibles</li>
+                    <li>Niveau de difficulté : accessible mais pas trop simple</li>
+                    <li>Thèmes à couvrir : mots de passe, phishing, mises à jour, données sensibles</li>
+                </ul>
+
+                <h3>Instructions par Étapes</h3>
+                <p><strong>ÉTAPE 1</strong> (5 min) : Rédigez votre prompt complet</p>
+                <p><strong>ÉTAPE 2</strong> (5 min) : Échangez votre prompt avec votre voisin</p>
+                <ul>
+                    <li>Jouez le rôle de l'IA : qu'est-ce qui n'est pas clair ?</li>
+                    <li>Donnez 2 suggestions d'amélioration</li>
+                </ul>
+                <p><strong>ÉTAPE 3</strong> (5 min) : Améliorez votre prompt selon le feedback reçu</p>
+
+                <div class="tip">
+                    <h4>Grille d'Auto-Évaluation</h4>
+                    <p><strong>Avant l'échange :</strong></p>
+                    <ul class="checklist">
+                        <li>Rôle précis (expert cybersécurité ? formateur ?)</li>
+                        <li>Objectif clair (sensibiliser / évaluer / les deux ?)</li>
+                        <li>Contraintes de difficulté spécifiées</li>
+                        <li>Format exact du QCM précisé</li>
+                        <li>Équilibre entre les thèmes demandé</li>
+                        <li>Ton adapté au public (pas trop technique)</li>
+                    </ul>
+                </div>
+
+                <div class="note">
+                    <h4>Point Pédagogique Fort</h4>
+                    <p>L'exercice 3 avec <strong>peer review</strong> est souvent le déclic : les participants réalisent
+                        que leur prompt "évident" ne l'est pas pour les autres. C'est le moment pédagogique le plus fort
+                        de l'atelier.</p>
+                </div>
+            </div>
+
+            <div class="exercise" id="exercice4">
+                <h2>EXERCICE 4 - Niveau Avancé : "Rapport de Synthèse" (15 min)</h2>
+
+                <h3>Scénario Complexe</h3>
+                <p>Vous êtes responsable de production. Vous avez participé à une réunion de 2h sur l'amélioration
+                    continue. Vous avez des notes désorganisées. Vous devez créer un prompt pour que l'IA vous aide à
+                    produire un rapport de synthèse pour votre direction.</p>
+
+                <div class="template">
+                    <h4>Vos Notes (Fournies aux Participants)</h4>
+                    <pre>
+- Problème ligne 3 : cadence trop lente (actuellement 45 pièces/h, objectif 60)
+- Jean propose de réorganiser le poste d'emballage
+- Coût estimé : 15K€ 
+- Marie pense qu'il faut d'abord former les nouveaux
+- Le budget formation est serré cette année
+- Délai de mise en œuvre si on valide : 3 mois
+- ROI estimé : 12 mois selon les calculs de Sophie
+- Le directeur veut une réponse avant fin de semaine
+- Points positifs : équipe motivée, bon esprit
+- Risques : période de forte charge en juin (mauvais timing ?)
+- Alternative proposée : investir dans un automate (50K€, ROI 18 mois)</pre>
+                </div>
+
+                <h3>Défis Spécifiques</h3>
+                <ul>
+                    <li><strong>Données brutes</strong> : L'IA doit trier et organiser</li>
+                    <li><strong>Public exigeant</strong> : La direction veut du concis et du factuel</li>
+                    <li><strong>Décision attendue</strong> : Le rapport doit faciliter la décision</li>
+                    <li><strong>Objectivité</strong> : Présenter les pour/contre sans biais</li>
+                </ul>
+
+                <div class="tip">
+                    <h4>Éléments Clés à Intégrer</h4>
+                    <ul class="checklist">
+                        <li>Rôle adapté (manager ? analyste ?)</li>
+                        <li>Objectif clair (informer vs convaincre vs décider ?)</li>
+                        <li>Structure du rapport définie (sections ? longueur ?)</li>
+                        <li>Ton approprié pour la direction</li>
+                        <li>Traitement des données brutes expliqué</li>
+                        <li>Éléments obligatoires : contexte, enjeux chiffrés, options, recommandation</li>
+                        <li>Contraintes de longueur (direction = pas de temps)</li>
+                    </ul>
+                </div>
+
+                <div class="note">
+                    <h4>Points Clés pour le Formateur</h4>
+                    <p>Le formateur présente le corrigé et insiste sur :</p>
+                    <ul>
+                        <li>L'importance du <strong>format</strong> (tableau = lecture rapide)</li>
+                        <li>Le <strong>ton neutre</strong> (direction n'aime pas qu'on décide à sa place)</li>
+                        <li>Les <strong>chiffres</strong> (toujours chiffrer pour la direction)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="exercise" id="exercice5">
+                <h2>EXERCICE 5 - Challenge Final : "Créez Votre Propre Cas" (10 min)</h2>
+
+                <p><strong>Maintenant, c'est à vous !</strong> Créez un prompt pour votre propre besoin professionnel.
+                </p>
+
+                <h3>Étapes</h3>
+                <ol>
+                    <li><strong>Identifiez une tâche</strong> que vous répétez souvent (5 min)
+                        <ul>
+                            <li>Exemples : Rédaction de comptes-rendus, Préparation de supports de formation, Réponses à
+                                des demandes clients, Analyses de données, Création de checklist</li>
+                        </ul>
+                    </li>
+                    <li><strong>Rédigez le prompt complet</strong> avec les 6 piliers (5 min)</li>
+                    <li><strong>Testez-le en conditions réelles</strong> (après la formation, en autonomie)</li>
+                </ol>
+
+                <div class="tip">
+                    <h4>Grille d'Auto-Évaluation</h4>
+                    <ul class="checklist">
+                        <li>Le prompt se suffit à lui-même (on comprend tout sans contexte supplémentaire)</li>
+                        <li>Les 6 piliers sont présents</li>
+                        <li>Le format de sortie est précisément défini</li>
+                        <li>Les contraintes sont réalistes et utiles</li>
+                        <li>Le niveau de langage est adapté au public cible</li>
+                        <li>Si tâche complexe, les étapes de raisonnement sont guidées</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h2 id="bilan">Bilan de l'Atelier (5 min)</h2>
+
+            <h3>Questions de Réflexion</h3>
+            <ul>
+                <li>Quel exercice vous a semblé le plus utile ?</li>
+                <li>Quelle difficulté avez-vous rencontrée le plus souvent ?</li>
+                <li>Quel pilier oubliez-vous le plus fréquemment ?</li>
+            </ul>
+
+            <div class="warning">
+                <h3>Les 3 Erreurs Fréquentes Observées</h3>
+                <ol>
+                    <li>Oublier de définir le <strong>public cible</strong> (impact sur le vocabulaire)</li>
+                    <li>Rester vague sur le <strong>format</strong> (l'IA devine et se trompe souvent)</li>
+                    <li>Ne pas donner d'<strong>exemple</strong> pour les formats complexes</li>
+                </ol>
+            </div>
+
+            <div class="tip">
+                <h3>Les 3 Bonnes Pratiques à Retenir</h3>
+                <ol>
+                    <li>Toujours commencer par le template (structure mentale)</li>
+                    <li>Se mettre à la place de l'IA : "Est-ce que j'ai TOUT pour répondre ?"</li>
+                    <li>Tester et <strong>itérer</strong> : le premier prompt n'est jamais parfait</li>
+                </ol>
+            </div>
+
+            <h2 id="bibliotheque">Bibliothèque de Prompts Starter</h2>
+
+            <p><strong>5 Prompts Prêts à l'Emploi remis aux participants :</strong></p>
+
+            <div class="template">
+                <h3>1. Email Professionnel</h3>
+                <pre>
+Rédige un email [ton : formel/chaleureux/neutre] pour [objectif] 
+destiné à [public]. Longueur max [X] mots.
+Structure : objet + salutation + 2-3 paragraphes + formule de politesse.</pre>
+            </div>
+
+            <div class="template">
+                <h3>2. Synthèse de Document</h3>
+                <pre>
+Tu es un analyste. Synthétise ce document en [X] mots maximum.
+Public cible : [qui ?]. 
+Format : [liste à puces / tableau / paragraphe].
+Mets en avant : [éléments clés à extraire].</pre>
+            </div>
+
+            <div class="template">
+                <h3>3. Checklist / Procédure</h3>
+                <pre>
+Crée une checklist pour [tâche] destinée à [public avec niveau].
+Format : tableau [étape | action | critère de validation].
+Contraintes : [temps / outils / niveau de détail].</pre>
+            </div>
+
+            <div class="template">
+                <h3>4. Support de Formation</h3>
+                <pre>
+Tu es un formateur expert en [domaine].
+Crée [type de support] sur [sujet] pour des apprenants [niveau].
+Durée : [X] minutes. Inclus : objectifs pédagogiques, exercices, évaluation.
+Ton : pédagogique et encourageant.</pre>
+            </div>
+
+            <div class="template">
+                <h3>5. Analyse de Données</h3>
+                <pre>
+Analyse ce jeu de données : [décrire ou copier-coller].
+Objectif : [identifier tendances / trouver anomalies / comparer périodes].
+Format de sortie : 
+1. Statistiques clés (tableau)
+2. 3 observations principales
+3. 1 recommandation d'action.</pre>
+            </div>
+
+            <h3>Transition vers Atelier 3</h3>
+            <blockquote>
+                <p>"Vous savez maintenant construire un prompt solide. Mais il existe des <strong>techniques
+                        avancées</strong> qui peuvent multiplier par 2 ou 3 l'efficacité de vos prompts. C'est ce que
+                    nous allons découvrir dans l'atelier suivant : Zero-Shot, Few-Shot, Chain-of-Thought..."</p>
+            </blockquote>
+
+        </main>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Pôle Formation UIMM-CVDL - Tous droits réservés</p>
+        <p>Créé par S. JAUBERT</p>
+    </footer>
+</body>
+
+</html>

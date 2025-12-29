@@ -20,7 +20,8 @@ Ce dossier contient le matériel pédagogique complet pour une formation d'une j
 
 #### Atelier 1 - Les 6 Piliers d'un Prompt Parfait (1h00)
 
-📄 Fichier : [`Atelier1_6Piliers_Guide.md`](Atelier1_6Piliers_Guide.md)
+- **[Version Interactive HTML](Atelier1_6Piliers.html)** (Recommandée pour les stagiaires)
+- [Version Guide Formateur](Atelier1_6Piliers_Guide.md)
 
 Découverte de l'anatomie d'un prompt efficace :
 
@@ -37,7 +38,8 @@ Découverte de l'anatomie d'un prompt efficace :
 
 #### Atelier 2 - Exercices Pratiques (1h00)
 
-📄 Fichier : [`Atelier2_Exercices_Pratiques.md`](Atelier2_Exercices_Pratiques.md)
+- **[Version Interactive HTML](Atelier2_Exercices_Pratiques.html)** (Recommandée pour les stagiaires)
+- [Version Guide Formateur](Atelier2_Exercices_Pratiques.md)
 
 5 exercices progressifs pour maîtriser la construction de prompts :
 
@@ -53,7 +55,8 @@ Découverte de l'anatomie d'un prompt efficace :
 
 #### Atelier 3 - Techniques Avancées (1h30)
 
-📄 Fichier : [`Atelier3_Techniques_Avancees.md`](Atelier3_Techniques_Avancees.md)
+- **[Version Interactive HTML](Atelier3_Techniques_Avancees.html)** (Recommandée pour les stagiaires)
+- [Version Guide Formateur](Atelier3_Techniques_Avancees.md)
 
 Maîtrise de 4 techniques professionnelles :
 
@@ -150,6 +153,14 @@ Chaque guide contient :
 - `Atelier3_Techniques_Avancees.md` (786 lignes)
 
 **Total : Plus de 1700 lignes de contenu structuré**
+
+### Pages HTML Interactives
+
+- [`Atelier1_6Piliers.html`](Atelier1_6Piliers.html) - Version web avec table des matières
+- [`Atelier2_Exercices_Pratiques.html`](Atelier2_Exercices_Pratiques.html) - 5 exercices progressifs
+- [`Atelier3_Techniques_Avancees.html`](Atelier3_Techniques_Avancees.html) - 4 techniques + arbre de décision
+
+**Optimisé pour le partage avec les stagiaires**
 
 ### Logo et Branding
 

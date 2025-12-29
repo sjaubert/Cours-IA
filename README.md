@@ -69,6 +69,7 @@
 ### Formations Thématiques
 
 - [Formation Intelligence Artificielle : Les Biais - Activités Interactives](https://sjaubert.github.io/Cours-IA/00-Formation/Activites-Biais/index.html)
+- **[Formation Prompt Engineering - Programme d'une Journée](Formation-Journee-PromptEngineering/README.md)** - Formation complète sur le Prompt Engineering avec 3 ateliers interactifs : Les 6 Piliers, Exercices Pratiques, et Techniques Avancées
 
 ### Comprendre les Fondamentaux de l'IA
 
