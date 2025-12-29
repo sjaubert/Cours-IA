@@ -1,3 +1,9 @@
+![Logo Pôle Formation UIMM-CVDL](logo_uimm_placeholder.jpg)
+
+# Pôle Formation UIMM-CVDL
+
+---
+
 # ATELIER 1 : Les 6 Piliers d'un Prompt Parfait
 
 ## Durée : 1h00
@@ -16,7 +22,7 @@
 
 ## Déroulé Pédagogique
 
-### 🎬 Introduction (10 min)
+### Introduction (10 min)
 
 **Activité Brise-Glace** : "Le Prompt Raté"
 
@@ -27,9 +33,9 @@
 
 ---
 
-### 📚 Présentation des 6 Piliers (20 min)
+### Présentation des 6 Piliers (20 min)
 
-#### 1. 👤 Rôle & Contexte
+#### 1. Rôle & Contexte
 
 **Pourquoi ?** L'IA adapte son vocabulaire, son ton et sa profondeur selon le rôle.
 
@@ -55,7 +61,7 @@ Trouvez le bon rôle pour expliquer la cybersécurité à :
 
 ---
 
-#### 2. 🎯 Objectif Précis
+#### 2. Objectif Précis
 
 **Pourquoi ?** Sans objectif clair, l'IA ne peut pas cibler sa réponse.
 
@@ -74,14 +80,14 @@ Objectif : Convaincre la direction d'adopter une politique de télétravail
 
 ---
 
-#### 3. 📝 Tâche Claire
+#### 3. Tâche Claire
 
 **Pourquoi ?** L'action à réaliser doit être explicite et sans ambiguïté.
 
 **Exemples de Verbes d'Action** :
 
-- ❌ Faible : "Vois", "Réfléchis", "Pense à"
-- ✅ Fort : "Rédige", "Liste", "Compare", "Analyse", "Synthétise", "Crée"
+- NON - Faible : "Vois", "Réfléchis", "Pense à"
+- OUI - Fort : "Rédige", "Liste", "Compare", "Analyse", "Synthétise", "Crée"
 
 **Exercice** :
 Transformez ces tâches vagues en tâches précises :
@@ -91,7 +97,7 @@ Transformez ces tâches vagues en tâches précises :
 
 ---
 
-#### 4. ⛓️ Contraintes
+#### 4. Contraintes
 
 **Pourquoi ?** Elles cadrent la réponse et la rendent utilisable.
 
@@ -114,7 +120,7 @@ Contraintes :
 
 ---
 
-#### 5. 🎨 Format & Exemples
+#### 5. Format & Exemples
 
 **Pourquoi ?** L'IA comprend mieux ce que vous voulez si vous montrez un modèle.
 
@@ -137,7 +143,7 @@ Format attendu :
 
 ---
 
-#### 6. 👣 Étapes Critiques (Chain-of-Thought)
+#### 6. Étapes Critiques (Chain-of-Thought)
 
 **Pourquoi ?** Pour les tâches complexes, guider le raisonnement améliore la qualité.
 
@@ -152,9 +158,9 @@ Procède en 3 étapes :
 
 ---
 
-### 🎯 EXERCICE PRATIQUE 1 : "Identifier les Piliers Manquants" (15 min)
+### EXERCICE PRATIQUE 1 : "Identifier les Piliers Manquants" (15 min)
 
-**Consigne** : Voici 3 prompts. Pour chacun, identifiez quels piliers sont présents (✅) et lesquels manquent (❌).
+**Consigne** : Voici 3 prompts. Pour chacun, identifiez quels piliers sont présents (OUI - ) et lesquels manquent (NON - ).
 
 #### Prompt A
 
@@ -199,7 +205,7 @@ Fais ça méthodiquement.
 
 ---
 
-### 🎲 JEU : "Le Constructeur de Prompt" (15 min)
+### JEU : "Le Constructeur de Prompt" (15 min)
 
 **Matériel** : Jeu de cartes avec des éléments de prompts
 
@@ -223,50 +229,37 @@ Fais ça méthodiquement.
 
 ---
 
-## 📊 Évaluation Formative
+## Évaluation Formative
 
 **Quiz Rapide** (5 questions en 5 min) :
 
 **Q1** : Parmi ces éléments, lequel N'EST PAS un des 6 piliers ?
 
 - A) Rôle & Contexte
-- B) Budget disponible ❌
-- C) Format & Exemples
+- B) Budget disponible NON - - C) Format & Exemples
 - D) Contraintes
 
 **Q2** : Pourquoi donner un rôle à l'IA ?
 
-- A) C'est plus poli ❌
-- B) Ça adapte le vocabulaire et la profondeur de la réponse ✅
-- C) C'est obligatoire ❌
-- D) Ça accélère le traitement ❌
-
-**Q3** : Quel verbe est le PLUS précis pour une tâche ?
+- A) C'est plus poli NON - - B) Ça adapte le vocabulaire et la profondeur de la réponse OUI - - C) C'est obligatoire NON - - D) Ça accélère le traitement NON - **Q3** : Quel verbe est le PLUS précis pour une tâche ?
 
 - A) "Pense à..."
 - B) "Vois si..."
-- C) "Rédige un tableau comparatif avec..." ✅
-- D) "Regarde..."
+- C) "Rédige un tableau comparatif avec..." OUI - - D) "Regarde..."
 
 **Q4** : Les contraintes servent à :
 
-- A) Limiter la créativité de l'IA ❌
-- B) Cadrer la réponse pour la rendre utilisable ✅
-- C) Compliquer le prompt ❌
-- D) Ralentir l'IA ❌
-
-**Q5** : Quand utiliser "Étapes Critiques" ?
+- A) Limiter la créativité de l'IA NON - - B) Cadrer la réponse pour la rendre utilisable OUI - - C) Compliquer le prompt NON - - D) Ralentir l'IA NON - **Q5** : Quand utiliser "Étapes Critiques" ?
 
 - A) Toujours
 - B) Jamais
-- C) Pour les tâches complexes nécessitant un raisonnement ✅
-- D) Seulement pour les mathématiques
+- C) Pour les tâches complexes nécessitant un raisonnement OUI - - D) Seulement pour les mathématiques
 
 ---
 
-## 📝 Points Clés à Retenir
+## Points Clés à Retenir
 
-### ✅ DO (À Faire)
+### OUI - DO (À Faire)
 
 - Toujours définir le **rôle** et le **contexte**
 - Utiliser des **verbes d'action précis**
@@ -274,7 +267,7 @@ Fais ça méthodiquement.
 - Donner des **exemples** si possible
 - Ajouter des **contraintes** (longueur, ton, public)
 
-### ❌ DON'T (À Éviter)
+### NON - DON'T (À Éviter)
 
 - Les prompts vagues : "Parle-moi de..."
 - Les verbes faibles : "Vois", "Pense"
@@ -284,7 +277,7 @@ Fais ça méthodiquement.
 
 ---
 
-## 🎁 Aide-Mémoire Remis aux Participants
+## Aide-Mémoire Remis aux Participants
 
 **Template de Prompt Universel** :
 
@@ -292,22 +285,22 @@ Fais ça méthodiquement.
 🎭 RÔLE & CONTEXTE :
 Tu es [profession/expertise]. Le contexte est [situation].
 
-🎯 OBJECTIF :
+OBJECTIF :
 L'objectif est de [but précis].
 
-📝 TÂCHE :
+TÂCHE :
 [Verbe d'action] + [objet précis]
 
-⛓️ CONTRAINTES :
+CONTRAINTES :
 - Public : [qui ?]
 - Longueur : [combien ?]
 - Ton : [comment ?]
 - Limitations : [quoi éviter ?]
 
-🎨 FORMAT :
+FORMAT :
 Présente le résultat sous forme de [structure précise].
 
-👣 ÉTAPES (si tâche complexe) :
+ÉTAPES (si tâche complexe) :
 1. [Première étape]
 2. [Deuxième étape]
 3. [Troisième étape]
@@ -315,7 +308,7 @@ Présente le résultat sous forme de [structure précise].
 
 ---
 
-## 📚 Ressources Complémentaires
+## Ressources Complémentaires
 
 **Exemples de Prompts Complets par Métier** :
 
@@ -329,7 +322,7 @@ Présente le résultat sous forme de [structure précise].
 
 ---
 
-## 💡 Transition vers Atelier 2
+## Transition vers Atelier 2
 
 > "Maintenant que vous maîtrisez les 6 piliers, nous allons les mettre en pratique avec le **Constructeur de Prompts Interactif** qui vous guidera étape par étape."
 
@@ -337,29 +330,29 @@ Présente le résultat sous forme de [structure précise].
 
 ## Notes pour le Formateur
 
-### ⏱️ Gestion du Temps
+### Gestion du Temps
 
 - Introduction : 10 min (strict)
 - Présentation 6 piliers : 20 min (3-4 min par pilier)
 - Exercice 1 : 15 min (10 min travail + 5 min correction)
 - Jeu : 15 min (10 min création + 5 min présentation)
 
-### 🎯 Points d'Attention
+### Points d'Attention
 
 - **Ancrage** : Utiliser des exemples du quotidien des participants
 - **Interaction** : Poser des questions ouvertes régulièrement
 - **Adaptation** : Si le public est homogène (ex: tous RH), adapter tous les exemples à ce métier
 - **Engagement** : Faire lever la main, sonder, utiliser le vote
 
-### 🛠️ Matériel Nécessaire
+### Matériel Nécessaire
 
-- ✅ Slides de présentation
-- ✅ Jeu de cartes "Constructeur de Prompt" (imprimer)
-- ✅ Grilles d'analyse des prompts (une par participant)
-- ✅ Aide-mémoire template (une par participant)
-- ✅ Quiz (format papier ou Kahoot)
+- OUI - Slides de présentation
+- OUI - Jeu de cartes "Constructeur de Prompt" (imprimer)
+- OUI - Grilles d'analyse des prompts (une par participant)
+- OUI - Aide-mémoire template (une par participant)
+- OUI - Quiz (format papier ou Kahoot)
 
-### 💬 Variantes Possibles
+### Variantes Possibles
 
 - **Si moins de temps** : Supprimer le jeu, allonger l'exercice 1
 - **Si groupe avancé** : Commencer directement par l'exercice, puis théorie en mode "découverte inversée"

@@ -1,3 +1,9 @@
+![Logo Pôle Formation UIMM-CVDL](logo_uimm_placeholder.jpg)
+
+# Pôle Formation UIMM-CVDL
+
+---
+
 # ATELIER 3 : Techniques de Prompting Avancées
 
 ## Durée : 1h30
@@ -16,7 +22,7 @@
 
 ---
 
-## 🎬 Introduction (10 min)
+## Introduction (10 min)
 
 ### Mise en Situation
 
@@ -49,7 +55,7 @@ COMPLEXITÉ DE LA TÂCHE
 
 ---
 
-## 📚 PARTIE 1 : Zero-Shot (Basique mais Perfectible)
+## PARTIE 1 : Zero-Shot (Basique mais Perfectible)
 
 ### Définition
 
@@ -57,24 +63,24 @@ COMPLEXITÉ DE LA TÂCHE
 
 ### Quand l'utiliser ?
 
-✅ Tâches simples et universelles
-✅ Questions factuelles
-✅ Génération rapide d'idées
-✅ Premières itérations (brouillon)
+OUI - Tâches simples et universelles
+OUI - Questions factuelles
+OUI - Génération rapide d'idées
+OUI - Premières itérations (brouillon)
 
-❌ Formats spécifiques
-❌ Tâches nécessitant un raisonnement
-❌ Cas métier très spécifiques
+NON - Formats spécifiques
+NON - Tâches nécessitant un raisonnement
+NON - Cas métier très spécifiques
 
 ### Exemples
 
-#### ✅ Bon Usage (Tâche Simple)
+#### OUI - Bon Usage (Tâche Simple)
 
 ```
 Donne-moi 5 idées de titres accrocheurs pour un article sur la transition énergétique.
 ```
 
-#### ❌ Mauvais Usage (Tâche Complexe)
+#### NON - Mauvais Usage (Tâche Complexe)
 
 ```
 Analyse les données de production du trimestre et propose des améliorations.
@@ -84,7 +90,7 @@ Analyse les données de production du trimestre et propose des améliorations.
 
 ---
 
-### 🎯 EXERCICE 1 - Zero-Shot : Quand ça marche et quand ça coince (10 min)
+### EXERCICE 1 - Zero-Shot : Quand ça marche et quand ça coince (10 min)
 
 #### Instructions
 
@@ -128,10 +134,10 @@ Crée un plan de formation complet sur la maintenance préventive.
 
 #### Correction
 
-- **A** → ✅ Adapté (définition simple et universelle)
-- **B** → ❌ Inadapté (format spécifique, contexte manquant, données absentes)
-- **C** → ✅ Adapté (traduction directe)
-- **D** → ❌ Inadapté (tâche complexe, beaucoup de paramètres à définir)
+- **A** → OUI - Adapté (définition simple et universelle)
+- **B** → NON - Inadapté (format spécifique, contexte manquant, données absentes)
+- **C** → OUI - Adapté (traduction directe)
+- **D** → NON - Inadapté (tâche complexe, beaucoup de paramètres à définir)
 
 #### Débrief (3 min)
 
@@ -139,7 +145,7 @@ Crée un plan de formation complet sur la maintenance préventive.
 
 ---
 
-## 📚 PARTIE 2 : Few-Shot Learning (La Puissance des Exemples)
+## PARTIE 2 : Few-Shot Learning (La Puissance des Exemples)
 
 ### Définition
 
@@ -168,9 +174,9 @@ Entrée : [nouvelle situation]
 
 ---
 
-### 💡 Exemple Comparatif : Traduction d'Expressions
+### Exemple Comparatif : Traduction d'Expressions
 
-#### ❌ Zero-Shot (Résultat Moyen)
+#### NON - Zero-Shot (Résultat Moyen)
 
 ```
 Traduis cette expression anglaise en français : "Break the ice"
@@ -178,7 +184,7 @@ Traduis cette expression anglaise en français : "Break the ice"
 
 **Réponse possible** : "Casser la glace" ← Littéral, pas idiomatique !
 
-#### ✅ Few-Shot (Résultat Excellent)
+#### OUI - Few-Shot (Résultat Excellent)
 
 ```
 Tâche : Traduire des expressions idiomatiques anglaises en leur équivalent français idiomatique.
@@ -199,7 +205,7 @@ Anglais : "Break the ice"
 
 ---
 
-### 🎯 EXERCICE 2 - Few-Shot : Créer des Exemples Efficaces (20 min)
+### EXERCICE 2 - Few-Shot : Créer des Exemples Efficaces (20 min)
 
 #### Scénario
 
@@ -286,7 +292,7 @@ Maintenant, extrait les informations de cet email :
 [Nouvel email à traiter]
 ```
 
-#### 👥 Mise en Commun
+#### Mise en Commun
 
 - Quels exemples avez-vous choisis ?
 - Pourquoi 2 exemples plutôt qu'un seul ? (Variété des formats)
@@ -294,7 +300,7 @@ Maintenant, extrait les informations de cet email :
 
 ---
 
-## 📚 PARTIE 3 : Chain-of-Thought (CoT) - Guider le Raisonnement
+## PARTIE 3 : Chain-of-Thought (CoT) - Guider le Raisonnement
 
 ### Définition
 
@@ -304,9 +310,9 @@ Maintenant, extrait les informations de cet email :
 
 L'IA a tendance à "sauter" aux conclusions. En la forçant à expliciter son raisonnement, on obtient :
 
-- ✅ Réponses plus précises
-- ✅ Moins d'erreurs logiques
-- ✅ Traçabilité du raisonnement (on peut vérifier)
+- OUI - Réponses plus précises
+- OUI - Moins d'erreurs logiques
+- OUI - Traçabilité du raisonnement (on peut vérifier)
 
 ### La Phrase Magique
 >
@@ -315,9 +321,9 @@ L'IA a tendance à "sauter" aux conclusions. En la forçant à expliciter son ra
 
 ---
 
-### 💡 Exemple Comparatif : Problème de Logique
+### Exemple Comparatif : Problème de Logique
 
-#### ❌ Sans CoT (Erreur Probable)
+#### NON - Sans CoT (Erreur Probable)
 
 ```
 Une équipe de 8 opérateurs travaille sur une ligne. Chaque opérateur produit 15 pièces/heure. 
@@ -325,11 +331,11 @@ La ligne fonctionne 7h/jour. Deux opérateurs sont absents aujourd'hui.
 Combien de pièces seront produites aujourd'hui ?
 ```
 
-**Réponse IA sans CoT** : "840 pièces" ❌ (erreur : a oublié les absents)
+**Réponse IA sans CoT** : "840 pièces" NON - (erreur : a oublié les absents)
 
 ---
 
-#### ✅ Avec CoT (Réponse Correcte)
+#### OUI - Avec CoT (Réponse Correcte)
 
 ```
 Une équipe de 8 opérateurs travaille sur une ligne. Chaque opérateur produit 15 pièces/heure. 
@@ -351,7 +357,7 @@ Réponse finale : 630 pièces seront produites aujourd'hui.
 
 ---
 
-### 🎯 EXERCICE 3 - Chain-of-Thought : Problèmes Complexes (20 min)
+### EXERCICE 3 - Chain-of-Thought : Problèmes Complexes (20 min)
 
 #### Problème 1 : Planification (10 min)
 
@@ -422,7 +428,7 @@ Présente sous forme :
 
 ---
 
-## 📚 PARTIE 4 : Prompt Chaining (La Décomposition Stratégique)
+## PARTIE 4 : Prompt Chaining (La Décomposition Stratégique)
 
 ### Définition
 
@@ -430,10 +436,10 @@ Présente sous forme :
 
 ### Analogie
 
-🏗️ Construire une maison :
+Construire une maison :
 
-- ❌ Un seul prompt : "Construis-moi une maison"
-- ✅ Chaining :
+- NON - Un seul prompt : "Construis-moi une maison"
+- OUI - Chaining :
   1. "Dessine les plans"
   2. "À partir de ces plans, liste les matériaux nécessaires"
   3. "Avec cette liste, estime le budget"
@@ -441,13 +447,13 @@ Présente sous forme :
 
 ---
 
-### 💡 Exemple Guidé : Création d'un Module de Formation
+### Exemple Guidé : Création d'un Module de Formation
 
 #### Tâche Globale
 
 Créer un module de formation complet sur "L'utilisation d'un pied à coulisse" pour des apprentis.
 
-#### Approche Zero-Shot (❌ Résultat Médiocre)
+#### Approche Zero-Shot (NON - Résultat Médiocre)
 
 ```
 Crée un module de formation complet sur l'utilisation d'un pied à coulisse.
@@ -457,7 +463,7 @@ Crée un module de formation complet sur l'utilisation d'un pied à coulisse.
 
 ---
 
-#### Approche Prompt Chaining (✅ Résultat Professionnel)
+#### Approche Prompt Chaining (OUI - Résultat Professionnel)
 
 **Prompt 1 : Définir les Objectifs Pédagogiques**
 
@@ -554,7 +560,7 @@ Niveau : 70% de réussite attendu.
 
 ---
 
-### 🎯 EXERCICE 4 - Prompt Chaining : À Vous de Jouer ! (25 min)
+### EXERCICE 4 - Prompt Chaining : À Vous de Jouer ! (25 min)
 
 #### Mission
 
@@ -598,23 +604,23 @@ Concevez une **chaîne de 4 à 6 prompts** pour générer ce guide de manière s
 
 ---
 
-## 📊 Tableau Comparatif : Quelle Technique Pour Quelle Situation ?
+## Tableau Comparatif : Quelle Technique Pour Quelle Situation ?
 
 | Technique | Complexité | Temps de Préparation | Qualité du Résultat | Cas d'Usage Idéal |
 |-----------|-----------|---------------------|---------------------|-------------------|
-| **Zero-Shot** | ⭐ Faible | ⏱️ <1 min | 🎯 65% | Questions simples, brainstorming, définitions |
-| **Few-Shot** | ⭐⭐ Moyenne | ⏱️ 3-5 min | 🎯 85% | Formats spécifiques, tâches répétitives, extraction de données |
-| **Chain-of-Thought** | ⭐⭐⭐ Élevée | ⏱️ 2-3 min | 🎯 90% | Calculs, analyses, décisions complexes, diagnostics |
-| **Prompt Chaining** | ⭐⭐⭐⭐ Très élevée | ⏱️ 10-20 min | 🎯 95% | Projets multi-étapes, création de contenus élaborés |
+| **Zero-Shot** | Faible | <1 min | 65% | Questions simples, brainstorming, définitions |
+| **Few-Shot** | Moyenne | 3-5 min | 85% | Formats spécifiques, tâches répétitives, extraction de données |
+| **Chain-of-Thought** | Élevée | 2-3 min | 90% | Calculs, analyses, décisions complexes, diagnostics |
+| **Prompt Chaining** | Très élevée | 10-20 min | 95% | Projets multi-étapes, création de contenus élaborés |
 
 ---
 
-## 🎯 QUIZ DE SYNTHÈSE (10 min)
+## QUIZ DE SYNTHÈSE (10 min)
 
 **Question 1** : Pour extraire 50 adresses email d'une liste hétérogène, quelle technique est LA PLUS adaptée ?
 
 - A) Zero-Shot
-- B) Few-Shot ✅ (montrer 2-3 formats d'extraction)
+- B) Few-Shot OUI - (montrer 2-3 formats d'extraction)
 - C) Chain-of-Thought
 - D) Prompt Chaining
 
@@ -624,7 +630,7 @@ Concevez une **chaîne de 4 à 6 prompts** pour générer ce guide de manière s
 
 - A) Zero-Shot
 - B) Few-Shot
-- C) Chain-of-Thought ✅ (forcer le raisonnement étape par étape)
+- C) Chain-of-Thought OUI - (forcer le raisonnement étape par étape)
 - D) Prompt Chaining
 
 ---
@@ -634,14 +640,14 @@ Concevez une **chaîne de 4 à 6 prompts** pour générer ce guide de manière s
 - A) Zero-Shot
 - B) Few-Shot
 - C) Chain-of-Thought
-- D) Prompt Chaining ✅ (décomposition en séquence logique)
+- D) Prompt Chaining OUI - (décomposition en séquence logique)
 
 ---
 
 **Question 4** : Combien d'exemples faut-il typiquement pour du Few-Shot ?
 
 - A) 1 exemple suffit toujours
-- B) 2-3 exemples ✅ (compromis efficacité/effort)
+- B) 2-3 exemples OUI - (compromis efficacité/effort)
 - C) Au moins 10 exemples
 - D) Ça ne sert à rien, mieux vaut tout expliquer par du texte
 
@@ -651,12 +657,11 @@ Concevez une **chaîne de 4 à 6 prompts** pour générer ce guide de manière s
 
 - A) La vitesse de réponse
 - B) La créativité
-- C) La précision du raisonnement ✅
-- D) Le style d'écriture
+- C) La précision du raisonnement OUI - - D) Le style d'écriture
 
 ---
 
-## 🎁 Aide-Mémoire : "Choisir Sa Technique"
+## Aide-Mémoire : "Choisir Sa Technique"
 
 ### Arbre de Décision
 
@@ -696,7 +701,7 @@ Concevez une **chaîne de 4 à 6 prompts** pour générer ce guide de manière s
 
 ---
 
-## 💡 Transition vers Atelier 4
+## Transition vers Atelier 4
 
 > "Vous maîtrisez maintenant les techniques avancées. Il est temps de les appliquer à **vos cas d'usage métier réels**. Dans l'atelier suivant, vous travaillerez en groupe sur des scénarios professionnels concrets."
 
@@ -704,7 +709,7 @@ Concevez une **chaîne de 4 à 6 prompts** pour générer ce guide de manière s
 
 ## Notes pour le Formateur
 
-### ⏱️ Timing Serré - Points de Contrôle
+### Timing Serré - Points de Contrôle
 
 - 10:00 → Fin Introduction
 - 10:20 → Fin Zero-Shot + Exercice 1
@@ -718,27 +723,27 @@ Concevez une **chaîne de 4 à 6 prompts** pour générer ce guide de manière s
 - Exercice 4 peut être donné "à finir pendant la pause"
 - Quiz peut être fait pendant le déjeuner (version Kahoot sur smartphone)
 
-### 🎯 Messages Clés à Marteler
+### Messages Clés à Marteler
 
 1. **Few-Shot = La technique la plus rentable** (peu d'effort, gros gain de qualité)
 2. **CoT = Obligatoire pour calculs/logique** (sinon erreurs quasi garanties)
 3. **Chaining = Pour éviter le prompt "usine à gaz"** (découper pour mieux régner)
 
-### 🛠️ Matériel
+### Matériel
 
-- ✅ Slides avec exemples comparatifs Avant/Après
-- ✅ Exercices imprimés (ou accès IA en direct si possible)
-- ✅ Tableau/paperboard pour l'arbre de décision
-- ✅ Chronomètre pour exercices chronométrés
-- ✅ Aide-mémoire à distribuer
+- OUI - Slides avec exemples comparatifs Avant/Après
+- OUI - Exercices imprimés (ou accès IA en direct si possible)
+- OUI - Tableau/paperboard pour l'arbre de décision
+- OUI - Chronomètre pour exercices chronométrés
+- OUI - Aide-mémoire à distribuer
 
-### 💬 Adaptation Selon Public
+### Adaptation Selon Public
 
 - **Si techniciens/ingénieurs** : Insister sur CoT (ils adorent le raisonnement structuré)
 - **Si commerciaux/RH** : Insister sur Few-Shot (formats répétitifs)
 - **Si managers** : Insister sur Chaining (projets complexes)
 
-### 📸 Moment Fort
+### Moment Fort
 
 L'exercice Few-Shot (extraction d'emails) est souvent le "déclic" : les participants réalisent qu'un bon exemple vaut mieux que 10 lignes d'explication.
 
