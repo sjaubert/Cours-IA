@@ -1,3 +1,9 @@
+![Logo Pôle Formation UIMM-CVDL](logo_uimm_placeholder.jpg)
+
+# Pôle Formation UIMM-CVDL
+
+---
+
 # ATELIER 2 : Constructeur de Prompts - Exercices Pratiques
 
 ## Durée : 1h00
@@ -17,7 +23,7 @@
 
 ## Déroulé Pédagogique
 
-### 🎬 Introduction (5 min)
+### Introduction (5 min)
 
 **Rappel de l'Atelier 1** :
 
@@ -31,7 +37,7 @@
 
 ---
 
-## 📝 EXERCICE 1 - Niveau Débutant : "Email Simple" (10 min)
+## EXERCICE 1 - Niveau Débutant : "Email Simple" (10 min)
 
 ### Scénario
 
@@ -44,42 +50,42 @@ Utilisez le template pour créer un prompt qui génère cet email.
 ### Template à Remplir
 
 ```
-🎭 RÔLE & CONTEXTE :
+RÔLE & CONTEXTE :
 _____________________________________________
 
-🎯 OBJECTIF :
+OBJECTIF :
 _____________________________________________
 
-📝 TÂCHE :
+TÂCHE :
 _____________________________________________
 
-⛓️ CONTRAINTES :
+CONTRAINTES :
 _____________________________________________
 
-🎨 FORMAT :
+FORMAT :
 _____________________________________________
 ```
 
 ### Corrigé Proposé
 
 ```
-🎭 RÔLE & CONTEXTE :
+RÔLE & CONTEXTE :
 Tu es un manager d'équipe dans une entreprise industrielle.
 
-🎯 OBJECTIF :
+OBJECTIF :
 Informer l'équipe du changement d'horaire de la réunion 
 hebdomadaire sans créer de confusion.
 
-📝 TÂCHE :
+TÂCHE :
 Rédige un email professionnel et clair.
 
-⛓️ CONTRAINTES :
+CONTRAINTES :
 - Ton professionnel mais chaleureux
 - Maximum 150 mots
 - Préciser l'ancien ET le nouvel horaire
 - Donner la raison du changement
 
-🎨 FORMAT :
+FORMAT :
 Email classique avec :
 - Objet clair
 - Salutation
@@ -87,7 +93,7 @@ Email classique avec :
 - Formule de politesse
 ```
 
-### 👥 Mise en Commun (5 min)
+### Mise en Commun (5 min)
 
 - 2-3 volontaires lisent leur prompt
 - Le groupe identifie les points forts et ce qui peut être amélioré
@@ -95,7 +101,7 @@ Email classique avec :
 
 ---
 
-## 📝 EXERCICE 2 - Niveau Intermédiaire : "Procédure Qualité" (12 min)
+## EXERCICE 2 - Niveau Intermédiaire : "Procédure Qualité" (12 min)
 
 ### Scénario
 
@@ -112,7 +118,7 @@ Vous travaillez dans le service qualité. Suite à plusieurs non-conformités su
 
 Créez un prompt complet qui permettra de générer cette procédure. Pensez à tous les piliers !
 
-### 💡 Questions Guides
+### Questions Guides
 
 Avant de commencer, répondez à ces questions :
 
@@ -124,18 +130,18 @@ Avant de commencer, répondez à ces questions :
 ### Corrigé Proposé
 
 ```
-🎭 RÔLE & CONTEXTE :
+RÔLE & CONTEXTE :
 Tu es un ingénieur qualité dans l'industrie automobile avec 10 ans d'expérience.
 Tu t'adresses à des opérateurs de production de niveau CAP à BAC+2.
 
-🎯 OBJECTIF :
+OBJECTIF :
 Permettre aux opérateurs de réaliser un contrôle visuel et dimensionnel 
 fiable en moins de 2 minutes, réduisant ainsi les non-conformités.
 
-📝 TÂCHE :
+TÂCHE :
 Crée une procédure de contrôle visuel pour une pièce usinée.
 
-⛓️ CONTRAINTES :
+CONTRAINTES :
 - Format A4 imprimable
 - Langage simple, pas de jargon technique
 - Intégrer les points de contrôle : dimensions, aspect surface, bavures
@@ -143,19 +149,19 @@ Crée une procédure de contrôle visuel pour une pièce usinée.
 - Référencer les outils : pied à coulisse, jauge de profondeur
 - Inclure les tolérances : ±0.1mm
 
-🎨 FORMAT :
+FORMAT :
 Tableau en 4 colonnes :
 | Étape | Point de Contrôle | Outil | Critère OK/NOK |
 Ajouter une section "Que faire en cas de NOK ?"
 
-👣 ÉTAPES :
+ÉTAPES :
 1. Liste d'abord les 5-6 points critiques à contrôler
 2. Organise-les dans l'ordre logique de contrôle
 3. Formule les critères de manière binaire (OK/NOK)
 4. Ajoute les actions en cas de non-conformité
 ```
 
-### 👥 Mise en Commun (3 min)
+### Mise en Commun (3 min)
 
 - Comparaison en binôme : analysez les différences entre vos prompts
 - Chaque binôme identifie 1 bonne idée trouvée chez l'autre
@@ -163,7 +169,7 @@ Ajouter une section "Que faire en cas de NOK ?"
 
 ---
 
-## 📝 EXERCICE 3 - Niveau Intermédiaire+ : "Formation Interactive" (15 min)
+## EXERCICE 3 - Niveau Intermédiaire+ : "Formation Interactive" (15 min)
 
 ### Scénario
 
@@ -214,18 +220,18 @@ Crée un quiz de 10 questions sur la cybersécurité pour des employés.
 ### Exemple de Prompt Amélioré (Bon)
 
 ```
-🎭 RÔLE & CONTEXTE :
+RÔLE & CONTEXTE :
 Tu es un expert en cybersécurité qui forme des employés de bureau 
 sans background technique.
 
-🎯 OBJECTIF :
+OBJECTIF :
 Créer un quiz qui sensibilise aux risques cyber et évalue les bons réflexes
 de sécurité au quotidien.
 
-📝 TÂCHE :
+TÂCHE :
 Génère un quiz interactif de 10 questions.
 
-⛓️ CONTRAINTES :
+CONTRAINTES :
 - Public : employés non-techniques (administratifs, RH, commerciaux)
 - Niveau : Facile à Moyen (80% devrait réussir avec 7/10)
 - Thèmes obligatoires : 
@@ -235,7 +241,7 @@ Génère un quiz interactif de 10 questions.
   * Protection des données (3 questions)
 - Ton : Pédagogique et bienveillant, pas alarmiste
 
-🎨 FORMAT :
+FORMAT :
 Pour chaque question :
 1. Énoncé sous forme de situation concrète (ex: "Vous recevez un email...")
 2. 4 propositions de réponse (A, B, C, D)
@@ -254,14 +260,14 @@ D) Je transfère l'email à mes collègues
 **Explication :** Les banques ne demandent jamais d'informations sensibles par email. 
 Il faut toujours vérifier en contactant directement l'organisme par un canal officiel.
 
-👣 ÉTAPES :
+ÉTAPES :
 1. Identifie pour chaque thème les 2-3 erreurs les plus courantes
 2. Transforme-les en situations concrètes du quotidien
 3. Crée des distracteurs (mauvaises réponses) plausibles mais clairement incorrects
 4. Rédige des explications pédagogiques
 ```
 
-### 👥 Débrief Collectif (5 min)
+### Débrief Collectif (5 min)
 
 - Qu'est-ce qui a été difficile ?
 - Quel feedback avez-vous reçu qui a vraiment amélioré votre prompt ?
@@ -269,7 +275,7 @@ Il faut toujours vérifier en contactant directement l'organisme par un canal of
 
 ---
 
-## 📝 EXERCICE 4 - Niveau Avancé : "Rapport de Synthèse" (15 min)
+## EXERCICE 4 - Niveau Avancé : "Rapport de Synthèse" (15 min)
 
 ### Scénario Complexe
 
@@ -317,19 +323,19 @@ Créez un prompt qui transforme ces notes en rapport structuré pour la directio
 ### Corrigé (Exemple de Prompt Avancé)
 
 ```
-🎭 RÔLE & CONTEXTE :
+RÔLE & CONTEXTE :
 Tu es un responsable de production dans une PME industrielle (100 salariés).
 Tu dois présenter une synthèse décisionnelle à la direction générale (3 personnes).
 Le contexte : réunion sur l'amélioration de la cadence de la ligne 3.
 
-🎯 OBJECTIF :
+OBJECTIF :
 Produire un rapport concis qui aide la direction à décider entre 3 options 
 (réorganisation / formation / automatisation) avec tous les éléments factuels.
 
-📝 TÂCHE :
+TÂCHE :
 À partir de mes notes de réunion (désorganisées), rédige un rapport de synthèse structuré.
 
-⛓️ CONTRAINTES :
+CONTRAINTES :
 - Longueur : Maximum 1 page A4 (500 mots)
 - Ton : Professionnel, factuel, neutre (pas de plaidoyer)
 - Public : Direction générale (non technique, orientée ROI/délais)
@@ -340,7 +346,7 @@ Produire un rapport concis qui aide la direction à décider entre 3 options
   * Avantages et risques de chaque option
   * Recommandation argumentée (mais pas imposée)
 
-🎨 FORMAT :
+FORMAT :
 ## Rapport de Synthèse : Amélioration Cadence Ligne 3
 
 **Contexte et Problème**
@@ -360,18 +366,18 @@ Produire un rapport concis qui aide la direction à décider entre 3 options
 **Décision attendue**
 [Date limite et prochaines étapes]
 
-👣 ÉTAPES :
+ÉTAPES :
 1. Extrait de mes notes les éléments factuels (chiffres, délais, coûts)
 2. Identifie les 3 options mentionnées et leurs caractéristiques
 3. Structure les avantages et risques de chaque option de manière équilibrée
 4. Formule une recommandation basée sur le meilleur ratio ROI/délai/risque
 5. Adopte un ton factuel et concis (direction = peu de temps)
 
-📎 NOTES DE RÉUNION :
+NOTES DE RÉUNION :
 [Copier-coller les notes brutes ici]
 ```
 
-### 👥 Mise en Commun (5 min)
+### Mise en Commun (5 min)
 
 - 2 volontaires présentent leur prompt
 - Le groupe vote : lequel donnerait le meilleur rapport ?
@@ -382,7 +388,7 @@ Produire un rapport concis qui aide la direction à décider entre 3 options
 
 ---
 
-## 📝 EXERCICE 5 - Challenge Final : "Créez Votre Propre Cas" (10 min)
+## EXERCICE 5 - Challenge Final : "Créez Votre Propre Cas" (10 min)
 
 ### Instructions
 
@@ -418,7 +424,7 @@ Maintenant, c'est à vous ! Créez un prompt pour **votre propre besoin professi
 
 ---
 
-## 📊 Bilan de l'Atelier (5 min)
+## Bilan de l'Atelier (5 min)
 
 ### Questions de Réflexion
 
@@ -430,19 +436,19 @@ Maintenant, c'est à vous ! Créez un prompt pour **votre propre besoin professi
 
 **Les 3 Erreurs Fréquentes Observées** :
 
-1. ❌ Oublier de définir le **public cible** (impact sur le vocabulaire)
-2. ❌ Rester vague sur le **format** (l'IA devine et se trompe souvent)
-3. ❌ Ne pas donner d'**exemple** pour les formats complexes
+1. NON - Oublier de définir le **public cible** (impact sur le vocabulaire)
+2. NON - Rester vague sur le **format** (l'IA devine et se trompe souvent)
+3. NON - Ne pas donner d'**exemple** pour les formats complexes
 
 **Les 3 Bonnes Pratiques à Retenir** :
 
-1. ✅ Toujours commencer par le template (structure mentale)
-2. ✅ Se mettre à la place de l'IA : "Est-ce que j'ai TOUT pour répondre ?"
-3. ✅ Tester et **itérer** : le premier prompt n'est jamais parfait
+1. OUI - Toujours commencer par le template (structure mentale)
+2. OUI - Se mettre à la place de l'IA : "Est-ce que j'ai TOUT pour répondre ?"
+3. OUI - Tester et **itérer** : le premier prompt n'est jamais parfait
 
 ---
 
-## 🎁 Document Remis aux Participants
+## Document Remis aux Participants
 
 ### "Bibliothèque de Prompts Starter"
 
@@ -495,7 +501,7 @@ Format de sortie :
 
 ---
 
-## 💡 Transition vers Atelier 3
+## Transition vers Atelier 3
 
 > "Vous savez maintenant construire un prompt solide. Mais il existe des **techniques avancées** qui peuvent multiplier par 2 ou 3 l'efficacité de vos prompts. C'est ce que nous allons découvrir dans l'atelier suivant : Zero-Shot, Few-Shot, Chain-of-Thought..."
 
@@ -503,7 +509,7 @@ Format de sortie :
 
 ## Notes pour le Formateur
 
-### ⏱️ Gestion du Temps (Important)
+### Gestion du Temps (Important)
 
 - Exercice 1 : 10 min (chronomètre visible)
 - Exercice 2 : 12 min (+ 3 min mise en commun)
@@ -513,7 +519,7 @@ Format de sortie :
 
 **⚠️ Si retard** : Sacrifier l'exercice 5 ou le donner en devoir pour le déjeuner.
 
-### 🎯 Points d'Attention
+### Points d'Attention
 
 - **Différenciation** : Les participants avancent à des vitesses différentes
   - Préparer des exercices bonus pour les rapides
@@ -521,21 +527,21 @@ Format de sortie :
 - **Feedback positif** : Valoriser les bonnes idées, même sur les prompts imparfaits
 - **Exemplarité** : Les corrigés sont des **exemples**, pas des vérités absolues
 
-### 🛠️ Matériel Nécessaire
+### Matériel Nécessaire
 
-- ✅ Template papier (4-5 copies par participant car brouillons)
-- ✅ Exercices imprimés avec contextes détaillés
-- ✅ Corrigés projetables
-- ✅ Chronomètre / Timer visible
-- ✅ Bibliothèque de prompts starter (1 par participant)
+- OUI - Template papier (4-5 copies par participant car brouillons)
+- OUI - Exercices imprimés avec contextes détaillés
+- OUI - Corrigés projetables
+- OUI - Chronomètre / Timer visible
+- OUI - Bibliothèque de prompts starter (1 par participant)
 
-### 💬 Adaptations Possibles
+### Adaptations Possibles
 
 - **Si groupe homogène métier** : Remplacer les exercices par des cas 100% métier (ex: tous RH → exercices RH)
 - **Si accès à l'IA en direct** : Tester les prompts en temps réel (très engageant !)
 - **Si groupe expert** : Ajouter des contraintes supplémentaires aux exercices
 
-### 📸 Moment Clé
+### Moment Clé
 
 L'**Exercice 3** (peer review) est souvent le déclic : les participants réalisent que leur prompt "évident" ne l'est pas pour les autres. C'est le moment pédagogique le plus fort de l'atelier.
 
