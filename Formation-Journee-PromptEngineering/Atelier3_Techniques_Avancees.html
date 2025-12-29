@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atelier 3 : Techniques Avancées - Pôle Formation UIMM-CVDL</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            color: white;
+            padding: 2rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .logo {
+            max-width: 120px;
+            height: auto;
+            background: white;
+            padding: 0.5rem;
+            border-radius: 8px;
+        }
+
+        .header-text h1 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .header-text p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 2rem;
+        }
+
+        .toc {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 2rem;
+            max-height: calc(100vh - 4rem);
+            overflow-y: auto;
+        }
+
+        .toc h2 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: #1e3a8a;
+            border-bottom: 2px solid #3b82f6;
+            padding-bottom: 0.5rem;
+        }
+
+        .toc ul {
+            list-style: none;
+        }
+
+        .toc ul ul {
+            margin-left: 1rem;
+        }
+
+        .toc a {
+            color: #333;
+            text-decoration: none;
+            display: block;
+            padding: 0.5rem 0;
+            transition: color 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .toc a:hover {
+            color: #3b82f6;
+            text-decoration: underline;
+        }
+
+        .content {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .content h2 {
+            color: #1e3a8a;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .content h3 {
+            color: #1e40af;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .content h4 {
+            color: #2563eb;
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .duration {
+            background: #dbeafe;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            display: inline-block;
+            margin: 1rem 0;
+            color: #1e40af;
+            font-weight: 500;
+        }
+
+        .objectives {
+            background: #f0fdf4;
+            border-left: 4px solid #22c55e;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        pre {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 4px;
+            padding: 1rem;
+            overflow-x: auto;
+            margin: 1rem 0;
+            font-size: 0.9em;
+        }
+
+        code {
+            font-family: 'Courier New', monospace;
+        }
+
+        .exercise {
+            background: #fefce8;
+            border-left: 4px solid #eab308;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+        }
+
+        .technique-box {
+            background: #f0f9ff;
+            border: 2px solid #0ea5e9;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+        }
+
+        .technique-box h3 {
+            color: #0c4a6e;
+            margin-top: 0;
+        }
+
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .bad {
+            background: #fef2f2;
+            border: 2px solid #ef4444;
+            padding: 1rem;
+            border-radius: 4px;
+        }
+
+        .good {
+            background: #f0fdf4;
+            border: 2px solid #22c55e;
+            padding: 1rem;
+            border-radius: 4px;
+        }
+
+        .bad h4 {
+            color: #991b1b;
+            margin-top: 0;
+        }
+
+        .good h4 {
+            color: #166534;
+            margin-top: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        th,
+        td {
+            border: 1px solid #e5e7eb;
+            padding: 0.75rem;
+            text-align: left;
+        }
+
+        th {
+            background: #f9fafb;
+            font-weight: 600;
+        }
+
+        .note {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .tip {
+            background: #dbeafe;
+            border-left: 4px solid #3b82f6;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .decision-tree {
+            background: #f9fafb;
+            border: 2px solid #6b7280;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+            font-family: monospace;
+            white-space: pre;
+            overflow-x: auto;
+        }
+
+        footer {
+            background: #1e3a8a;
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 900px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+
+            .toc {
+                position: static;
+                max-height: none;
+            }
+
+            .comparison {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="header-content">
+            <img src="logo_uimm_placeholder.jpg" alt="Logo Pôle Formation UIMM-CVDL" class="logo">
+            <div class="header-text">
+                <h1>Pôle Formation UIMM-CVDL</h1>
+                <p>Atelier 3 : Techniques de Prompting Avancées</p>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <nav class="toc">
+            <h2>Sommaire</h2>
+            <ul>
+                <li><a href="#introduction">Introduction</a></li>
+                <li><a href="#objectifs">Objectifs Pédagogiques</a></li>
+                <li><a href="#zero-shot">Partie 1 : Zero-Shot</a></li>
+                <li><a href="#few-shot">Partie 2 : Few-Shot</a></li>
+                <li><a href="#chain-of-thought">Partie 3 : Chain-of-Thought</a></li>
+                <li><a href="#prompt-chaining">Partie 4 : Prompt Chaining</a></li>
+                <li><a href="#comparatif">Tableau Comparatif</a></li>
+                <li><a href="#quiz">Quiz de Synthèse</a></li>
+                <li><a href="#arbre-decision">Arbre de Décision</a></li>
+            </ul>
+        </nav>
+
+        <main class="content">
+            <h1>ATELIER 3 : Techniques de Prompting Avancées</h1>
+
+            <div class="duration">Durée : 1h30</div>
+
+            <h2 id="objectifs">Objectifs Pédagogiques</h2>
+            <div class="objectives">
+                <p>À la fin de cet atelier, les participants seront capables de :</p>
+                <ul>
+                    <li>Différencier les 4 techniques principales : Zero-Shot, Few-Shot, Chain-of-Thought, Prompt
+                        Chaining</li>
+                    <li>Choisir la technique adaptée selon la complexité de la tâche</li>
+                    <li>Appliquer le Few-Shot Learning avec des exemples efficaces</li>
+                    <li>Guider le raisonnement de l'IA avec Chain-of-Thought</li>
+                    <li>Décomposer une tâche complexe en chaîne de prompts</li>
+                </ul>
+            </div>
+
+            <h2 id="introduction">Introduction (10 min)</h2>
+
+            <div class="tip">
+                <h3>Mise en Situation</h3>
+                <p><strong>Question au groupe :</strong></p>
+                <blockquote>
+                    <p>"Vous demandez à un collègue de faire un rapport. Deux approches :</p>
+                    <ul>
+                        <li>A) 'Fais-moi un rapport sur la production'</li>
+                        <li>B) 'Voici 2 rapports que j'ai faits le mois dernier [exemples]. Fais-moi le même format pour
+                            les données de cette semaine.'</li>
+                    </ul>
+                    <p>Laquelle donnera le meilleur résultat ?"</p>
+                </blockquote>
+                <p><strong>C'est exactement le principe du Few-Shot !</strong></p>
+            </div>
+
+            <h3>Vue d'Ensemble</h3>
+            <div class="decision-tree">
+                COMPLEXITÉ DE LA TÂCHE
+                │
+                │ [Prompt Chaining] ← Projet multi-étapes
+                │ ▲
+                │ [Chain-of-Thought] ← Raisonnement complexe
+                │ ▲
+                │ [Few-Shot] ← Qualité et format précis
+                │ ▲
+                │ [Zero-Shot] ← Tâche simple et directe
+                │
+                └────────────────────────────────────────────▶
+                EFFORT DE CRÉATION DU PROMPT
+            </div>
+
+            <div class="technique-box" id="zero-shot">
+                <h2>PARTIE 1 : Zero-Shot (Basique mais Perfectible)</h2>
+
+                <h3>Définition</h3>
+                <p><strong>Zero-Shot</strong> = Poser une question directe sans exemple ni contexte élaboré.</p>
+
+                <h3>Quand l'utiliser ?</h3>
+                <p><strong>OUI</strong> pour :</p>
+                <ul>
+                    <li>Tâches simples et universelles</li>
+                    <li>Questions factuelles</li>
+                    <li>Génération rapide d'idées</li>
+                    <li>Premières itérations (brouillon)</li>
+                </ul>
+
+                <p><strong>NON</strong> pour :</p>
+                <ul>
+                    <li>Formats spécifiques</li>
+                    <li>Tâches nécessitant un raisonnement</li>
+                    <li>Cas métier très spécifiques</li>
+                </ul>
+
+                <h3>Exemples</h3>
+                <div class="comparison">
+                    <div class="good">
+                        <h4>Bon Usage (Tâche Simple)</h4>
+                        <pre>Donne-moi 5 idées de titres accrocheurs 
+pour un article sur la transition énergétique.</pre>
+                    </div>
+
+                    <div class="bad">
+                        <h4>Mauvais Usage (Trop Complexe)</h4>
+                        <pre>Analyse les données de production du trimestre 
+et propose des améliorations.</pre>
+                        <p><strong>Problème :</strong> Trop vague, pas de structure, l'IA va deviner le format.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="technique-box" id="few-shot">
+                <h2>PARTIE 2 : Few-Shot Learning (La Puissance des Exemples)</h2>
+
+                <h3>Définition</h3>
+                <p><strong>Few-Shot</strong> = Donner 1 à 3 exemples pour montrer exactement ce que vous attendez.</p>
+
+                <h3>Pourquoi c'est si efficace ?</h3>
+                <p>L'IA apprend <strong>par imitation</strong>. Un exemple vaut mieux que 10 lignes d'explication.</p>
+
+                <h3>Structure Typique</h3>
+                <pre>
+Tâche : [Description]
+
+Exemple 1 :
+Entrée : [...]
+Sortie attendue : [...]
+
+Exemple 2 :
+Entrée : [...]
+Sortie attendue : [...]
+
+Maintenant, fais la même chose pour :
+Entrée : [nouvelle situation]</pre>
+
+                <h3>Exemple Comparatif</h3>
+                <div class="comparison">
+                    <div class="bad">
+                        <h4>Sans Few-Shot (Résultat Moyen)</h4>
+                        <pre>Traduis cette expression anglaise en français : 
+"Break the ice"</pre>
+                        <p><strong>Réponse possible :</strong> "Casser la glace" ← Littéral, pas idiomatique !</p>
+                    </div>
+
+                    <div class="good">
+                        <h4>Avec Few-Shot (Résultat Excellent)</h4>
+                        <pre>Tâche : Traduire des expressions idiomatiques.
+
+Exemple 1 :
+Anglais : "It's raining cats and dogs"
+Français : "Il pleut des cordes"
+
+Exemple 2 :
+Anglais : "Piece of cake"
+Français : "Un jeu d'enfant"
+
+Maintenant traduis :
+Anglais : "Break the ice"</pre>
+                        <p><strong>Réponse attendue :</strong> "Briser la glace" / "Détendre l'atmosphère"</p>
+                    </div>
+                </div>
+
+                <div class="exercise">
+                    <h3>EXERCICE 2 - Few-Shot (20 min)</h3>
+                    <h4>Scénario</h4>
+                    <p>Vous recevez régulièrement des emails de fournisseurs avec des formats variés. Vous voulez que
+                        l'IA extraie toujours : <strong>nom du fournisseur, produit, quantité, prix unitaire, délai de
+                            livraison</strong>.</p>
+
+                    <p><strong>Mission :</strong> Créez 2 exemples d'emails avec les données extraites, puis rédigez le
+                        prompt Few-Shot complet.</p>
+                </div>
+            </div>
+
+            <div class="technique-box" id="chain-of-thought">
+                <h2>PARTIE 3 : Chain-of-Thought (Guider le Raisonnement)</h2>
+
+                <h3>Définition</h3>
+                <p><strong>Chain-of-Thought</strong> = Demander à l'IA de "raisonner étape par étape" avant de donner la
+                    réponse finale.</p>
+
+                <h3>Pourquoi c'est crucial ?</h3>
+                <p>L'IA a tendance à "sauter" aux conclusions. En la forçant à expliciter son raisonnement :</p>
+                <ul>
+                    <li>Réponses plus précises</li>
+                    <li>Moins d'erreurs logiques</li>
+                    <li>Traçabilité du raisonnement (on peut vérifier)</li>
+                </ul>
+
+                <h3>La Phrase Magique</h3>
+                <div class="tip">
+                    <p><strong>"Réfléchis étape par étape avant de répondre."</strong></p>
+                    <p>Ou : <strong>"Procède par étapes : 1) ... 2) ... 3) ..."</strong></p>
+                </div>
+
+                <h3>Exemple Comparatif</h3>
+                <div class="comparison">
+                    <div class="bad">
+                        <h4>Sans CoT (Erreur Probable)</h4>
+                        <pre>Une équipe de 8 opérateurs travaille sur une ligne. 
+Chaque opérateur produit 15 pièces/heure. 
+La ligne fonctionne 7h/jour. 
+Deux opérateurs sont absents aujourd'hui.
+Combien de pièces seront produites aujourd'hui ?</pre>
+                        <p><strong>Réponse IA sans CoT :</strong> "840 pièces" ❌ (erreur : a oublié les absents)</p>
+                    </div>
+
+                    <div class="good">
+                        <h4>Avec CoT (Réponse Correcte)</h4>
+                        <pre>Une équipe de 8 opérateurs travaille sur une ligne. 
+Chaque opérateur produit 15 pièces/heure. 
+La ligne fonctionne 7h/jour. 
+Deux opérateurs sont absents aujourd'hui.
+Combien de pièces seront produites aujourd'hui ?
+
+<strong>Réfléchis étape par étape avant de donner la réponse finale.</strong></pre>
+                        <p><strong>Réponse IA avec CoT :</strong></p>
+                        <pre>Étape 1 : Nombre d'opérateurs présents = 8 - 2 = 6
+Étape 2 : Production par opérateur/jour = 15 × 7 = 105
+Étape 3 : Production totale = 6 × 105 = 630 pièces
+
+Réponse finale : 630 pièces</pre>
+                    </div>
+                </div>
+
+                <div class="exercise">
+                    <h3>EXERCICE 3 - Chain-of-Thought (20 min)</h3>
+                    <p>Créez un prompt avec Chain-of-Thought pour analyser des données de production hebdomadaire et
+                        identifier les anomalies.</p>
+                </div>
+            </div>
+
+            <div class="technique-box" id="prompt-chaining">
+                <h2>PARTIE 4 : Prompt Chaining (La Décomposition Stratégique)</h2>
+
+                <h3>Définition</h3>
+                <p><strong>Prompt Chaining</strong> = Découper une tâche complexe en une <strong>séquence de prompts
+                        simples</strong>, où chaque sortie devient l'entrée du suivant.</p>
+
+                <h3>Analogie</h3>
+                <p>Construire une maison :</p>
+                <ul>
+                    <li>❌ Un seul prompt : "Construis-moi une maison"</li>
+                    <li>✅ Chaining :
+                        <ol>
+                            <li>"Dessine les plans"</li>
+                            <li>"À partir de ces plans, liste les matériaux nécessaires"</li>
+                            <li>"Avec cette liste, estime le budget"</li>
+                            <li>"Crée le planning de construction basé sur le budget"</li>
+                        </ol>
+                    </li>
+                </ul>
+
+                <h3>Exemple Guidé : Création d'un Module de Formation</h3>
+                <div class="good">
+                    <h4>Prompt 1 : Définir les Objectifs Pédagogiques</h4>
+                    <pre>Tu es un formateur technique.
+Tâche : Définis 5 objectifs pédagogiques SMART pour un module 
+sur "L'utilisation du pied à coulisse".
+Public : Apprentis CAP (1ère année).
+Durée : 2 heures (1h théorie + 1h pratique).
+
+Format : "À la fin de ce module, l'apprenant sera capable de..."</pre>
+                </div>
+
+                <div class="good">
+                    <h4>Prompt 2 : Structurer le Contenu</h4>
+                    <pre>À partir de ces objectifs pédagogiques :
+[Copier-coller les 5 objectifs]
+
+Crée un plan de séquence détaillé pour 2 heures.
+
+Structure :
+| Séquence | Durée | Activité | Modalité | Objectif visé |
+
+Contraintes :
+- Alterner théorie et pratique
+- Progression du simple au complexe
+- Inclure une évaluation finale (10 min)</pre>
+                </div>
+
+                <div class="note">
+                    <p><strong>Note :</strong> On continue ainsi avec les prompts 3, 4, 5... pour créer les supports,
+                        les exercices pratiques, et l'évaluation finale.</p>
+                </div>
+
+                <div class="exercise">
+                    <h3>EXERCICE 4 - Prompt Chaining (25 min)</h3>
+                    <p><strong>Mission :</strong> Concevez une chaîne de 4 à 6 prompts pour créer un guide complet
+                        d'onboarding pour un nouveau collaborateur.</p>
+                </div>
+            </div>
+
+            <h2 id="comparatif">Tableau Comparatif : Quelle Technique Pour Quelle Situation ?</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Technique</th>
+                        <th>Complexité</th>
+                        <th>Temps Préparation</th>
+                        <th>Qualité Résultat</th>
+                        <th>Cas d'Usage Idéal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Zero-Shot</strong></td>
+                        <td>Faible</td>
+                        <td>&lt;1 min</td>
+                        <td>65%</td>
+                        <td>Questions simples, brainstorming, définitions</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Few-Shot</strong></td>
+                        <td>Moyenne</td>
+                        <td>3-5 min</td>
+                        <td>85%</td>
+                        <td>Formats spécifiques, tâches répétitives, extraction</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Chain-of-Thought</strong></td>
+                        <td>Élevée</td>
+                        <td>2-3 min</td>
+                        <td>90%</td>
+                        <td>Calculs, analyses, décisions complexes</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Prompt Chaining</strong></td>
+                        <td>Très élevée</td>
+                        <td>10-20 min</td>
+                        <td>95%</td>
+                        <td>Projets multi-étapes, contenus élaborés</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2 id="quiz">Quiz de Synthèse (10 min)</h2>
+
+            <div class="exercise">
+                <p><strong>Question 1 :</strong> Pour extraire 50 adresses email d'une liste hétérogène, quelle
+                    technique est LA PLUS adaptée ?</p>
+                <ul>
+                    <li>A) Zero-Shot</li>
+                    <li>B) Few-Shot <strong>(OUI - montrer 2-3 formats d'extraction)</strong></li>
+                    <li>C) Chain-of-Thought</li>
+                    <li>D) Prompt Chaining</li>
+                </ul>
+
+                <p><strong>Question 2 :</strong> Vous devez résoudre un problème de logistique avec plusieurs
+                    contraintes interdépendantes. Quelle technique privilégier ?</p>
+                <ul>
+                    <li>A) Zero-Shot</li>
+                    <li>B) Few-Shot</li>
+                    <li>C) Chain-of-Thought <strong>(OUI - forcer le raisonnement étape par étape)</strong></li>
+                    <li>D) Prompt Chaining</li>
+                </ul>
+
+                <p><strong>Question 3 :</strong> Vous créez une campagne marketing complète (personas → messages →
+                    visuels → calendrier). Quelle approche ?</p>
+                <ul>
+                    <li>A) Zero-Shot</li>
+                    <li>B) Few-Shot</li>
+                    <li>C) Chain-of-Thought</li>
+                    <li>D) Prompt Chaining <strong>(OUI - décomposition en séquence logique)</strong></li>
+                </ul>
+
+                <p><strong>Question 4 :</strong> Combien d'exemples faut-il typiquement pour du Few-Shot ?</p>
+                <ul>
+                    <li>A) 1 exemple suffit toujours</li>
+                    <li>B) 2-3 exemples <strong>(OUI - compromis efficacité/effort)</strong></li>
+                    <li>C) Au moins 10 exemples</li>
+                    <li>D) Ça ne sert à rien</li>
+                </ul>
+
+                <p><strong>Question 5 :</strong> La phrase "Réfléchis étape par étape" améliore surtout :</p>
+                <ul>
+                    <li>A) La vitesse de réponse</li>
+                    <li>B) La créativité</li>
+                    <li>C) La précision du raisonnement <strong>(OUI)</strong></li>
+                    <li>D) Le style d'écriture</li>
+                </ul>
+            </div>
+
+            <h2 id="arbre-decision">Aide-Mémoire : Arbre de Décision</h2>
+
+            <div class="decision-tree">
+                ┌─────────────────────────────────────┐
+                │ Ma tâche est-elle SIMPLE ? │
+                │ (définition, traduction, idées...) │
+                └─────────┬───────────────────────────┘
+                │
+                OUI │ NON
+                ▼ ▼
+                ┌──────────┐ ┌──────────────────────────┐
+                │Zero-Shot │ │ Ai-je un FORMAT précis ? │
+                └──────────┘ └───────┬──────────────────┘
+                │
+                OUI │ NON
+                ▼ ▼
+                ┌──────────┐ ┌──────────────────────────────┐
+                │Few-Shot │ │ Tâche nécessite RAISONNEMENT │
+                │+exemples │ │ ou CALCULS ? │
+                └──────────┘ └───────┬──────────────────────┘
+                │
+                OUI │ NON
+                ▼ ▼
+                ┌──────────────┐ ┌─────────────┐
+                │Chain-of- │ │Tâche MULTI- │
+                │Thought │ │ÉTAPES ? │
+                └──────────────┘ └──────┬──────┘
+                │
+                OUI │
+                ▼
+                ┌─────────────┐
+                │Prompt │
+                │Chaining │
+                └─────────────┘
+            </div>
+
+            <h3>Transition</h3>
+            <blockquote>
+                <p>"Vous maîtrisez maintenant les techniques avancées. Il est temps de les appliquer à <strong>vos cas
+                        d'usage métier réels</strong> dans l'atelier suivant."</p>
+            </blockquote>
+
+        </main>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Pôle Formation UIMM-CVDL - Tous droits réservés</p>
+        <p>Créé par S. JAUBERT</p>
+    </footer>
+</body>
+
+</html>

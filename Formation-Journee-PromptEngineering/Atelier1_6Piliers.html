@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atelier 1 : Les 6 Piliers d'un Prompt Parfait - Pôle Formation UIMM-CVDL</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            color: white;
+            padding: 2rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .logo {
+            max-width: 120px;
+            height: auto;
+            background: white;
+            padding: 0.5rem;
+            border-radius: 8px;
+        }
+
+        .header-text h1 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .header-text p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 2rem;
+        }
+
+        .toc {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 2rem;
+            max-height: calc(100vh - 4rem);
+            overflow-y: auto;
+        }
+
+        .toc h2 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: #1e3a8a;
+            border-bottom: 2px solid #3b82f6;
+            padding-bottom: 0.5rem;
+        }
+
+        .toc ul {
+            list-style: none;
+        }
+
+        .toc ul ul {
+            margin-left: 1rem;
+        }
+
+        .toc a {
+            color: #333;
+            text-decoration: none;
+            display: block;
+            padding: 0.5rem 0;
+            transition: color 0.3s;
+        }
+
+        .toc a:hover {
+            color: #3b82f6;
+            text-decoration: underline;
+        }
+
+        .content {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .content h2 {
+            color: #1e3a8a;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .content h3 {
+            color: #1e40af;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .content h4 {
+            color: #2563eb;
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .duration {
+            background: #dbeafe;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            display: inline-block;
+            margin: 1rem 0;
+            color: #1e40af;
+            font-weight: 500;
+        }
+
+        .objectives {
+            background: #f0fdf4;
+            border-left: 4px solid #22c55e;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .objectives ul {
+            margin-left: 1.5rem;
+        }
+
+        pre {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 4px;
+            padding: 1rem;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+
+        code {
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+
+        .example {
+            margin: 1rem 0;
+        }
+
+        .good {
+            background: #f0fdf4;
+            border-left: 4px solid #22c55e;
+            padding: 1rem;
+            margin: 0.5rem 0;
+        }
+
+        .bad {
+            background: #fef2f2;
+            border-left: 4px solid #ef4444;
+            padding: 1rem;
+            margin: 0.5rem 0;
+        }
+
+        .exercise {
+            background: #fefce8;
+            border-left: 4px solid #eab308;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .exercise h4 {
+            color: #854d0e;
+            margin-top: 0;
+        }
+
+        .checklist {
+            list-style: none;
+            margin-left: 1rem;
+        }
+
+        .checklist li:before {
+            content: "☐ ";
+            margin-right: 0.5rem;
+        }
+
+        .template {
+            background: #eff6ff;
+            border: 2px dashed #3b82f6;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+
+        .note {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        th,
+        td {
+            border: 1px solid #e5e7eb;
+            padding: 0.75rem;
+            text-align: left;
+        }
+
+        th {
+            background: #f9fafb;
+            font-weight: 600;
+        }
+
+        footer {
+            background: #1e3a8a;
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 900px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+
+            .toc {
+                position: static;
+                max-height: none;
+            }
+        }
+
+        @media print {
+            .toc {
+                display: none;
+            }
+
+            .container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="header-content">
+            <img src="logo_uimm_placeholder.jpg" alt="Logo Pôle Formation UIMM-CVDL" class="logo">
+            <div class="header-text">
+                <h1>Pôle Formation UIMM-CVDL</h1>
+                <p>Atelier 1 : Les 6 Piliers d'un Prompt Parfait</p>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <nav class="toc">
+            <h2>Sommaire</h2>
+            <ul>
+                <li><a href="#introduction">Introduction</a></li>
+                <li><a href="#objectifs">Objectifs Pédagogiques</a></li>
+                <li><a href="#deroulement">Déroulé Pédagogique</a>
+                    <ul>
+                        <li><a href="#intro-section">Introduction (10 min)</a></li>
+                        <li><a href="#piliers">Les 6 Piliers (20 min)</a>
+                            <ul>
+                                <li><a href="#pilier1">1. Rôle & Contexte</a></li>
+                                <li><a href="#pilier2">2. Objectif Précis</a></li>
+                                <li><a href="#pilier3">3. Tâche Claire</a></li>
+                                <li><a href="#pilier4">4. Contraintes</a></li>
+                                <li><a href="#pilier5">5. Format & Exemples</a></li>
+                                <li><a href="#pilier6">6. Étapes Critiques</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#exercice1">Exercice Pratique 1 (15 min)</a></li>
+                        <li><a href="#jeu">Jeu Constructeur de Prompt (15 min)</a></li>
+                    </ul>
+                </li>
+                <li><a href="#evaluation">Évaluation Formative</a></li>
+                <li><a href="#points-cles">Points Clés à Retenir</a></li>
+                <li><a href="#aide-memoire">Aide-Mémoire</a></li>
+            </ul>
+        </nav>
+
+        <main class="content">
+            <h1 id="introduction">ATELIER 1 : Les 6 Piliers d'un Prompt Parfait</h1>
+
+            <div class="duration">Durée : 1h00</div>
+
+            <h2 id="objectifs">Objectifs Pédagogiques</h2>
+            <div class="objectives">
+                <p>À la fin de cet atelier, les participants seront capables de :</p>
+                <ul>
+                    <li>Identifier les 6 composantes d'un prompt efficace</li>
+                    <li>Analyser un prompt existant et détecter ce qui manque</li>
+                    <li>Comprendre l'impact de chaque pilier sur la qualité de la réponse</li>
+                </ul>
+            </div>
+
+            <h2 id="deroulement">Déroulé Pédagogique</h2>
+
+            <h3 id="intro-section">Introduction (10 min)</h3>
+
+            <div class="exercise">
+                <h4>Activité Brise-Glace : "Le Prompt Raté"</h4>
+                <ul>
+                    <li>Afficher un prompt très vague : <em>"Fais-moi un truc sur la qualité"</em></li>
+                    <li>Demander aux participants : "Qu'est-ce qui ne va pas ?"</li>
+                    <li>Lister ensemble les problèmes identifiés</li>
+                    <li><strong>Transition</strong> : "Voyons comment structurer un bon prompt..."</li>
+                </ul>
+            </div>
+
+            <h3 id="piliers">Présentation des 6 Piliers (20 min)</h3>
+
+            <h4 id="pilier1">1. Rôle & Contexte</h4>
+            <p><strong>Pourquoi ?</strong> L'IA adapte son vocabulaire, son ton et sa profondeur selon le rôle.</p>
+
+            <div class="bad">
+                <strong>Exemple Mauvais :</strong>
+                <pre>Explique-moi la maintenance préventive.</pre>
+            </div>
+
+            <div class="good">
+                <strong>Exemple Bon :</strong>
+                <pre>Tu es un formateur industriel spécialisé en maintenance. 
+Tu t'adresses à des techniciens débutants (niveau CAP/BAC PRO).</pre>
+            </div>
+
+            <div class="exercise">
+                <h4>Exercice Flash (2 min)</h4>
+                <p>Trouvez le bon rôle pour expliquer la cybersécurité à :</p>
+                <ul>
+                    <li>Des dirigeants d'entreprise</li>
+                    <li>Des développeurs juniors</li>
+                    <li>Des enfants de 10 ans</li>
+                </ul>
+            </div>
+
+            <h4 id="pilier2">2. Objectif Précis</h4>
+            <p><strong>Pourquoi ?</strong> Sans objectif clair, l'IA ne peut pas cibler sa réponse.</p>
+
+            <div class="bad">
+                <strong>Exemple Mauvais :</strong>
+                <pre>Parle-moi du télétravail.</pre>
+            </div>
+
+            <div class="good">
+                <strong>Exemple Bon :</strong>
+                <pre>Objectif : Convaincre la direction d'adopter une politique de télétravail 
+2 jours/semaine pour améliorer la rétention des talents.</pre>
+            </div>
+
+            <h4 id="pilier3">3. Tâche Claire</h4>
+            <p><strong>Pourquoi ?</strong> L'action à réaliser doit être explicite et sans ambiguïté.</p>
+
+            <p><strong>Exemples de Verbes d'Action :</strong></p>
+            <ul>
+                <li><strong>NON</strong> - Faible : "Vois", "Réfléchis", "Pense à"</li>
+                <li><strong>OUI</strong> - Fort : "Rédige", "Liste", "Compare", "Analyse", "Synthétise", "Crée"</li>
+            </ul>
+
+            <div class="exercise">
+                <h4>Exercice</h4>
+                <p>Transformez ces tâches vagues en tâches précises :</p>
+                <ul>
+                    <li>"Dis-moi des choses sur la qualité" → ?</li>
+                    <li>"Aide-moi avec mon rapport" → ?</li>
+                </ul>
+            </div>
+
+            <h4 id="pilier4">4. Contraintes</h4>
+            <p><strong>Pourquoi ?</strong> Elles cadrent la réponse et la rendent utilisable.</p>
+
+            <p><strong>Types de Contraintes :</strong></p>
+            <ul>
+                <li><strong>Longueur</strong> : "En maximum 200 mots" / "En 3 bullet points"</li>
+                <li><strong>Ton</strong> : "Formel", "Pédagogique", "Motivant"</li>
+                <li><strong>Public</strong> : "Pour des non-experts", "Niveau technique élevé"</li>
+                <li><strong>Limitations</strong> : "Sans jargon", "Avec exemples industriels uniquement"</li>
+            </ul>
+
+            <div class="good">
+                <strong>Exemple :</strong>
+                <pre>Contraintes :
+- Public : Opérateurs de production (pas de jargon technique)
+- Longueur : Maximum 150 mots
+- Format : Utilise des analogies du quotidien
+- Ton : Encourageant et positif</pre>
+            </div>
+
+            <h4 id="pilier5">5. Format & Exemples</h4>
+            <p><strong>Pourquoi ?</strong> L'IA comprend mieux ce que vous voulez si vous montrez un modèle.</p>
+
+            <p><strong>Exemples de Formats :</strong></p>
+            <ul>
+                <li>Tableau avec colonnes précises</li>
+                <li>Liste à puces structurée</li>
+                <li>Email professionnel</li>
+                <li>Plan de formation avec timing</li>
+                <li>Rapport avec sections numérotées</li>
+            </ul>
+
+            <div class="good">
+                <strong>Exemple avec Format :</strong>
+                <pre>Format attendu :
+| Problème | Cause Racine | Solution Proposée | Délai |
+|----------|--------------|-------------------|-------|
+| ...      | ...          | ...               | ...   |</pre>
+            </div>
+
+            <h4 id="pilier6">6. Étapes Critiques (Chain-of-Thought)</h4>
+            <p><strong>Pourquoi ?</strong> Pour les tâches complexes, guider le raisonnement améliore la qualité.</p>
+
+            <div class="good">
+                <strong>Exemple :</strong>
+                <pre>Procède en 3 étapes :
+1. Analyse d'abord les données fournies et identifie les tendances
+2. Propose 3 hypothèses explicatives
+3. Recommande une action concrète avec justification</pre>
+            </div>
+
+            <h3 id="exercice1">EXERCICE PRATIQUE 1 : "Identifier les Piliers Manquants" (15 min)</h3>
+
+            <div class="exercise">
+                <p><strong>Consigne :</strong> Voici 3 prompts. Pour chacun, identifiez quels piliers sont présents
+                    (OUI) et lesquels manquent (NON).</p>
+
+                <h4>Prompt A :</h4>
+                <pre>Rédige un email pour informer l'équipe du changement de planning.</pre>
+
+                <p><strong>Grille d'Analyse :</strong></p>
+                <ul class="checklist">
+                    <li>Rôle & Contexte</li>
+                    <li>Objectif Précis</li>
+                    <li>Tâche Claire</li>
+                    <li>Contraintes</li>
+                    <li>Format & Exemples</li>
+                    <li>Étapes Critiques</li>
+                </ul>
+
+                <h4>Prompt B :</h4>
+                <pre>Tu es le responsable qualité d'une usine automobile.
+Objectif : Expliquer l'importance du 5S aux nouveaux opérateurs.
+Tâche : Crée une présentation de 5 slides.
+Public : Opérateurs débutants (formation initiale).
+Format : Pour chaque S, donne 1 définition + 1 exemple concret de l'atelier.
+Contraintes : Langage simple, exemples visuels.</pre>
+
+                <p><strong>Grille d'Analyse :</strong> (à remplir)</p>
+
+                <h4>Prompt C :</h4>
+                <pre>Analyse ces données de production et dis-moi ce qui ne va pas.
+Fais ça méthodiquement.</pre>
+
+                <p><strong>Grille d'Analyse :</strong> (à remplir)</p>
+            </div>
+
+            <h3 id="jeu">JEU : "Le Constructeur de Prompt" (15 min)</h3>
+
+            <div class="exercise">
+                <p><strong>Matériel :</strong> Jeu de cartes avec des éléments de prompts</p>
+
+                <p><strong>Règles :</strong></p>
+                <ol>
+                    <li><strong>Équipes de 3-4 personnes</strong></li>
+                    <li>Chaque équipe reçoit :
+                        <ul>
+                            <li>1 carte "Scénario" (ex: "Créer un plan de formation sur la sécurité")</li>
+                            <li>6 cartes vierges (une pour chaque pilier)</li>
+                        </ul>
+                    </li>
+                    <li><strong>Mission :</strong> Remplir les 6 piliers pour ce scénario en 10 minutes</li>
+                    <li><strong>Présentation :</strong> Chaque équipe lit son prompt final (2 min/équipe)</li>
+                    <li><strong>Vote :</strong> Quelle équipe a le prompt le plus complet ?</li>
+                </ol>
+
+                <p><strong>Scénarios Proposés :</strong></p>
+                <ul>
+                    <li>Rédiger une procédure de maintenance pour une machine CNC</li>
+                    <li>Créer un quiz de validation des acquis en fin de formation</li>
+                    <li>Préparer une synthèse de réunion pour la direction</li>
+                    <li>Générer des idées d'amélioration continue pour un atelier</li>
+                    <li>Rédiger une réponse à un client mécontent</li>
+                </ul>
+            </div>
+
+            <h2 id="evaluation">Évaluation Formative</h2>
+
+            <div class="exercise">
+                <h3>Quiz Rapide (5 questions en 5 min)</h3>
+
+                <p><strong>Q1 :</strong> Parmi ces éléments, lequel N'EST PAS un des 6 piliers ?</p>
+                <ul>
+                    <li>A) Rôle & Contexte</li>
+                    <li>B) Budget disponible <strong>(NON)</strong></li>
+                    <li>C) Format & Exemples</li>
+                    <li>D) Contraintes</li>
+                </ul>
+
+                <p><strong>Q2 :</strong> Pourquoi donner un rôle à l'IA ?</p>
+                <ul>
+                    <li>A) C'est plus poli <strong>(NON)</strong></li>
+                    <li>B) Ça adapte le vocabulaire et la profondeur de la réponse <strong>(OUI)</strong></li>
+                    <li>C) C'est obligatoire <strong>(NON)</strong></li>
+                    <li>D) Ça accélère le traitement <strong>(NON)</strong></li>
+                </ul>
+
+                <p><strong>Q3 :</strong> Quel verbe est le PLUS précis pour une tâche ?</p>
+                <ul>
+                    <li>A) "Pense à..."</li>
+                    <li>B) "Vois si..."</li>
+                    <li>C) "Rédige un tableau comparatif avec..." <strong>(OUI)</strong></li>
+                    <li>D) "Regarde..."</li>
+                </ul>
+
+                <p><strong>Q4 :</strong> Les contraintes servent à :</p>
+                <ul>
+                    <li>A) Limiter la créativité de l'IA <strong>(NON)</strong></li>
+                    <li>B) Cadrer la réponse pour la rendre utilisable <strong>(OUI)</strong></li>
+                    <li>C) Compliquer le prompt <strong>(NON)</strong></li>
+                    <li>D) Ralentir l'IA <strong>(NON)</strong></li>
+                </ul>
+
+                <p><strong>Q5 :</strong> Quand utiliser "Étapes Critiques" ?</p>
+                <ul>
+                    <li>A) Toujours</li>
+                    <li>B) Jamais</li>
+                    <li>C) Pour les tâches complexes nécessitant un raisonnement <strong>(OUI)</strong></li>
+                    <li>D) Seulement pour les mathématiques</li>
+                </ul>
+            </div>
+
+            <h2 id="points-cles">Points Clés à Retenir</h2>
+
+            <h3>DO (À Faire)</h3>
+            <ul>
+                <li>Toujours définir le <strong>rôle</strong> et le <strong>contexte</strong></li>
+                <li>Utiliser des <strong>verbes d'action précis</strong></li>
+                <li>Spécifier le <strong>format</strong> attendu</li>
+                <li>Donner des <strong>exemples</strong> si possible</li>
+                <li>Ajouter des <strong>contraintes</strong> (longueur, ton, public)</li>
+            </ul>
+
+            <h3>DON'T (À Éviter)</h3>
+            <ul>
+                <li>Les prompts vagues : "Parle-moi de..."</li>
+                <li>Les verbes faibles : "Vois", "Pense"</li>
+                <li>Oublier le public cible</li>
+                <li>Laisser l'IA deviner le format</li>
+                <li>Les prompts sans contexte</li>
+            </ul>
+
+            <h2 id="aide-memoire">Aide-Mémoire Remis aux Participants</h2>
+
+            <div class="template">
+                <h3>Template de Prompt Universel</h3>
+                <pre>
+RÔLE & CONTEXTE :
+Tu es [profession/expertise]. Le contexte est [situation].
+
+OBJECTIF :
+L'objectif est de [but précis].
+
+TÂCHE :
+[Verbe d'action] + [objet précis]
+
+CONTRAINTES :
+- Public : [qui ?]
+- Longueur : [combien ?]
+- Ton : [comment ?]
+- Limitations : [quoi éviter ?]
+
+FORMAT :
+Présente le résultat sous forme de [structure précise].
+
+ÉTAPES (si tâche complexe) :
+1. [Première étape]
+2. [Deuxième étape]
+3. [Troisième étape]
+                </pre>
+            </div>
+
+            <h3>Exemples de Prompts Complets par Métier</h3>
+            <ul>
+                <li>RH : Rédaction offre d'emploi</li>
+                <li>Qualité : Analyse de non-conformités</li>
+                <li>Maintenance : Procédure de dépannage</li>
+                <li>Commercial : Email de prospection</li>
+                <li>Formation : Création de supports</li>
+            </ul>
+            <p><em>(Voir bibliothèque de prompts)</em></p>
+
+            <h3>Transition vers Atelier 2</h3>
+            <blockquote>
+                <p>"Maintenant que vous maîtrisez les 6 piliers, nous allons les mettre en pratique avec le
+                    <strong>Constructeur de Prompts Interactif</strong> qui vous guidera étape par étape."
+                </p>
+            </blockquote>
+
+        </main>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Pôle Formation UIMM-CVDL - Tous droits réservés</p>
+        <p>Créé par S. JAUBERT</p>
+    </footer>
+</body>
+
+</html>
