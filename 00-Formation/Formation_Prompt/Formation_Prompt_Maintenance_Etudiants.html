@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formation Prompt Engineering - Maintenance Industrielle | UIMM-CVDL</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            color: white;
+            padding: 2rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .logo {
+            max-width: 120px;
+            height: auto;
+            background: white;
+            padding: 0.5rem;
+            border-radius: 8px;
+        }
+
+        .header-text h1 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .header-text p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 2rem;
+        }
+
+        .toc {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 2rem;
+            max-height: calc(100vh - 4rem);
+            overflow-y: auto;
+        }
+
+        .toc h2 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: #1e3a8a;
+            border-bottom: 2px solid #3b82f6;
+            padding-bottom: 0.5rem;
+        }
+
+        .toc ul {
+            list-style: none;
+        }
+
+        .toc ul ul {
+            margin-left: 1rem;
+        }
+
+        .toc a {
+            color: #333;
+            text-decoration: none;
+            display: block;
+            padding: 0.5rem 0;
+            transition: color 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .toc a:hover {
+            color: #3b82f6;
+            text-decoration: underline;
+        }
+
+        .content {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .content h2 {
+            color: #1e3a8a;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .content h3 {
+            color: #1e40af;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .content h4 {
+            color: #2563eb;
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .duration {
+            background: #dbeafe;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            display: inline-block;
+            margin: 1rem 0;
+            color: #1e40af;
+            font-weight: 500;
+        }
+
+        .objectives {
+            background: #f0fdf4;
+            border-left: 4px solid #22c55e;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        pre {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 4px;
+            padding: 1rem;
+            overflow-x: auto;
+            margin: 1rem 0;
+            font-size: 0.9em;
+        }
+
+        code {
+            font-family: 'Courier New', monospace;
+        }
+
+        .exercise {
+            background: #fefce8;
+            border-left: 4px solid #eab308;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+        }
+
+        .exercise h3 {
+            color: #854d0e;
+            margin-top: 0;
+        }
+
+        .case-study {
+            background: #f0f9ff;
+            border: 2px solid #0ea5e9;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+        }
+
+        .case-study h3 {
+            color: #0c4a6e;
+            margin-top: 0;
+        }
+
+        .warning {
+            background: #fef2f2;
+            border-left: 4px solid #ef4444;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .tip {
+            background: #dbeafe;
+            border-left: 4px solid #3b82f6;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .bad {
+            background: #fef2f2;
+            border: 2px solid #ef4444;
+            padding: 1rem;
+            border-radius: 4px;
+        }
+
+        .good {
+            background: #f0fdf4;
+            border: 2px solid #22c55e;
+            padding: 1rem;
+            border-radius: 4px;
+        }
+
+        .bad h4 {
+            color: #991b1b;
+            margin-top: 0;
+        }
+
+        .good h4 {
+            color: #166534;
+            margin-top: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        th,
+        td {
+            border: 1px solid #e5e7eb;
+            padding: 0.75rem;
+            text-align: left;
+        }
+
+        th {
+            background: #f9fafb;
+            font-weight: 600;
+        }
+
+        footer {
+            background: #1e3a8a;
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 900px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+
+            .toc {
+                position: static;
+                max-height: none;
+            }
+
+            .comparison {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="header-content">
+            <img src="logo_uimm_placeholder.jpg" alt="Logo Pôle Formation UIMM-CVDL" class="logo">
+            <div class="header-text">
+                <h1>Pôle Formation UIMM - CVDL</h1>
+                <p>Formation Prompt Engineering pour la Maintenance Industrielle</p>
+                <p style="font-size: 0.9rem; margin-top: 0.5rem;">Formateur : S. Jaubert | Bachelor Maintenance Avancée
+                </p>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <nav class="toc">
+            <h2>Sommaire</h2>
+            <ul>
+                <li><a href="#introduction">Introduction</a></li>
+                <li><a href="#objectifs">Objectifs de Formation</a></li>
+                <li><a href="#module1">Module 1 : Fondamentaux</a></li>
+                <li><a href="#module2">Module 2 : Cas Maintenance</a></li>
+                <li><a href="#module3">Module 3 : Biais et Limites</a></li>
+                <li><a href="#module4">Module 4 : Projet Groupe</a></li>
+                <li><a href="#ressources">Ressources</a></li>
+            </ul>
+        </nav>
+
+        <main class="content">
+            <h1>Formation Prompt Engineering Appliqué à la Maintenance Industrielle</h1>
+
+            <div class="duration">Durée : 4 heures | Format : Présentiel avec travaux pratiques en groupe</div>
+
+            <h2 id="introduction">Introduction</h2>
+
+            <p>Bienvenue dans cette formation qui vous permettra de maîtriser l'utilisation de l'Intelligence
+                Artificielle dans votre futur métier de technicien ou ingénieur de maintenance industrielle.</p>
+
+            <p><strong>Pourquoi cette formation est importante pour vous ?</strong></p>
+            <ul>
+                <li>L'IA devient un outil incontournable dans la maintenance moderne (maintenance prédictive, diagnostic
+                    assisté, documentation technique)</li>
+                <li>Savoir formuler des requêtes efficaces vous fera gagner des heures de travail</li>
+                <li>Comprendre les limites de l'IA vous évitera des erreurs coûteuses</li>
+                <li>Ces compétences sont recherchées par les employeurs</li>
+            </ul>
+
+            <h2 id="objectifs">Objectifs de Formation</h2>
+
+            <div class="objectives">
+                <p>À la fin de cette formation, vous serez capable de :</p>
+                <ul>
+                    <li>Structurer efficacement vos demandes à une IA pour obtenir des réponses pertinentes</li>
+                    <li>Utiliser l'IA pour des tâches concrètes de maintenance (procédures, diagnostics, planification)
+                    </li>
+                    <li>Identifier et éviter les biais et erreurs de l'IA</li>
+                    <li>Évaluer critiquement les réponses fournies par l'IA</li>
+                    <li>Appliquer ces compétences à vos projets professionnels</li>
+                </ul>
+            </div>
+
+            <h2 id="module1">MODULE 1 : Les Fondamentaux du Prompting (1h)</h2>
+
+            <h3>1.1 Qu'est-ce qu'un Prompt Efficace ?</h3>
+
+            <p>Un prompt est une instruction donnée à l'IA. Sa qualité détermine directement la qualité de la réponse
+                obtenue.</p>
+
+            <h4>Les 5 Piliers d'un Bon Prompt</h4>
+
+            <table>
+                <tr>
+                    <th>Pilier</th>
+                    <th>Description</th>
+                    <th>Exemple Maintenance</th>
+                </tr>
+                <tr>
+                    <td><strong>1. Contexte</strong></td>
+                    <td>Définir le cadre et le rôle</td>
+                    <td>"Tu es un expert en maintenance préventive"</td>
+                </tr>
+                <tr>
+                    <td><strong>2. Objectif</strong></td>
+                    <td>Ce que vous voulez obtenir</td>
+                    <td>"Créer une checklist de contrôle hebdomadaire"</td>
+                </tr>
+                <tr>
+                    <td><strong>3. Format</strong></td>
+                    <td>Structure de la réponse</td>
+                    <td>"Sous forme de tableau avec colonnes : Point/Méthode/Fréquence"</td>
+                </tr>
+                <tr>
+                    <td><strong>4. Contraintes</strong></td>
+                    <td>Limites et spécifications</td>
+                    <td>"Pour équipement HVAC, durée max 30 minutes"</td>
+                </tr>
+                <tr>
+                    <td><strong>5. Public</strong></td>
+                    <td>À qui s'adresse le résultat</td>
+                    <td>"Pour techniciens niveau BAC PRO"</td>
+                </tr>
+            </table>
+
+            <div class="exercise">
+                <h3>EXERCICE 1 : Améliorer un Prompt (15 min - Individuel)</h3>
+
+                <h4>Prompt Faible :</h4>
+                <pre>Explique-moi la maintenance préventive.</pre>
+
+                <h4>Votre Mission :</h4>
+                <p>Transformez ce prompt en utilisant les 5 piliers. Contexte : vous devez créer une procédure de
+                    maintenance préventive pour un compresseur d'air industriel.</p>
+
+                <p><strong>Critères de réussite :</strong></p>
+                <ul>
+                    <li>Les 5 piliers sont présents</li>
+                    <li>Le prompt est spécifique à la maintenance</li>
+                    <li>Il génèrera un document utilisable sur le terrain</li>
+                </ul>
+            </div>
+
+            <h3>1.2 Exemples Comparatifs</h3>
+
+            <div class="comparison">
+                <div class="bad">
+                    <h4>Prompt Inefficace</h4>
+                    <pre>Donne-moi des infos sur les roulements.</pre>
+                    <p><strong>Problèmes :</strong></p>
+                    <ul>
+                        <li>Trop vague</li>
+                        <li>Pas de contexte</li>
+                        <li>Pas d'objectif clair</li>
+                    </ul>
+                </div>
+
+                <div class="good">
+                    <h4>Prompt Efficace</h4>
+                    <pre>Contexte : Je suis technicien de maintenance sur une ligne de production.
+Objectif : Diagnostiquer une vibration anormale sur un moteur électrique.
+Tâche : Liste les 5 causes les plus probables liées aux roulements.
+Format : Tableau avec colonnes : Cause / Symptômes / Test de vérification
+Public : Technicien avec outils de base (vibromètre, stéthoscope)</pre>
+                    <p><strong>Qualités :</strong></p>
+                    <ul>
+                        <li>Contexte précis</li>
+                        <li>Objectif diagnostic clair</li>
+                        <li>Format structuré</li>
+                        <li>Adapté au niveau technique</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h2 id="module2">MODULE 2 : Cas d'Usage en Maintenance Industrielle (1h30)</h2>
+
+            <h3>2.1 Création de Procédures de Maintenance</h3>
+
+            <div class="case-study">
+                <h3>Cas Pratique 1 : Procédure de Maintenance Préventive</h3>
+
+                <h4>Contexte :</h4>
+                <p>Vous devez créer une procédure de maintenance préventive mensuelle pour un convoyeur à bande
+                    (longueur 50m, charge 500 kg/m).</p>
+
+                <h4>Prompt Structuré :</h4>
+                <pre>Rôle : Tu es un ingénieur de maintenance avec 15 ans d'expérience en manutention.
+
+Objectif : Créer une procédure de maintenance préventive mensuelle pour prévenir 
+les pannes et prolonger la durée de vie du convoyeur.
+
+Équipement : Convoyeur à bande industriel
+- Longueur : 50 mètres  
+- Charge : 500 kg/m
+- Motorisation : 15 kW
+- Utilisation : 16h/jour, 5j/7
+
+Tâche : Rédige une procédure complète de maintenance préventive.
+
+Format attendu :
+| Étape | Point de Contrôle | Méthode | Outils Nécessaires | Critère OK/NOK | Temps Estimé |
+
+Contraintes :
+- Durée totale intervention : max 4 heures
+- Accessible à un technicien BAC PRO avec 2 ans d'expérience
+- Respecter normes sécurité EN 620
+- Inclure section "Points d'Attention Sécurité"
+
+Étapes logiques :
+1. Contrôles visuels
+2. Contrôles dimensionnels
+3. Graissage et lubrification
+4. Contrôles électriques
+5. Essais fonctionnels</pre>
+            </div>
+
+            <div class="exercise">
+                <h3>EXERCICE 2 : Diagnostic Assisté par IA (25 min - Binômes)</h3>
+
+                <h4>Situation :</h4>
+                <p>Un moteur électrique triphasé 22 kW présente les symptômes suivants :</p>
+                <ul>
+                    <li>Vibrations anormales (mesure : 8 mm/s, norme < 4.5 mm/s)</li>
+                    <li>Échauffement du palier avant (75°C mesuré, température ambiante 25°C)</li>
+                    <li>Bruit métallique intermittent</li>
+                    <li>Pas de problème électrique détecté (courants équilibrés)</li>
+                </ul>
+
+                <h4>Mission :</h4>
+                <p>Par binômes, créez un prompt pour obtenir un diagnostic structuré avec plan d'action.</p>
+
+                <p><strong>Le prompt doit produire :</strong></p>
+                <ol>
+                    <li>Analyse des symptômes</li>
+                    <li>Causes probables classées par priorité</li>
+                    <li>Tests de vérification à effectuer</li>
+                    <li>Actions correctives recommandées</li>
+                    <li>Pièces de rechange éventuelles</li>
+                </ol>
+            </div>
+
+            <h3>2.2 Planification de Maintenance</h3>
+
+            <div class="case-study">
+                <h3>Cas Pratique 2 : Optimisation d'un Planning de Maintenance</h3>
+
+                <h4>Contexte :</h4>
+                <p>Vous gérez la maintenance de 15 équipements critiques avec des fréquences d'intervention différentes.
+                    Vous devez optimiser le planning annuel.</p>
+
+                <h4>Exemple de Prompt :</h4>
+                <pre>Contexte : Je suis responsable maintenance d'une usine avec 15 équipements critiques.
+
+Données :
+- 5 compresseurs (maintenance tous les 3 mois)
+- 3 ponts roulants (maintenance tous les 6 mois)  
+- 4 groupes froids (maintenance tous les 4 mois)
+- 3 transformateurs (maintenance annuelle)
+
+Contraintes :
+- Équipe : 3 techniciens disponibles
+- Durée intervention moyenne : 4 heures par équipement
+- Production ne peut s'arrêter que le week-end
+- Budget : regrouper les interventions pour minimiser les arrêts
+
+Objectif : Créer un planning annuel optimisé.
+
+Format souhaité :
+Calendrier mois par mois avec :
+- Équipements à maintenir
+- Nombre d'heures technicien nécessaires
+- Impact production (heures d'arrêt)
+- Recommandations de regroupement
+
+Fournis également 3 recommandations pour optimiser ce planning.</pre>
+            </div>
+
+            <h3>2.3 Analyse de Données de Maintenance</h3>
+
+            <div class="tip">
+                <h4>Conseil Pratique</h4>
+                <p>L'IA peut analyser des historiques de panne pour identifier des tendances. Utilisez des prompts
+                    structurés pour transformer des données brutes en informations actionables.</p>
+            </div>
+
+            <div class="exercise">
+                <h3>EXERCICE 3 : Analyse d'Historique de Pannes (20 min - Groupe de 3)</h3>
+
+                <h4>Données fournies :</h4>
+                <pre>Historique pannes Pompe centrifuge P-101 (12 derniers mois) :
+Jan : Fuite joint mécanique (arrêt 4h)
+Mar : Vibration excessive roulement (arrêt 6h)
+Avr : Fuite joint mécanique (arrêt 3h)
+Juin : Surchauffe moteur (arrêt 2h)
+Juil : Fuite joint mécanique (arrêt 5h)
+Sept : Vibration excessive roulement (arrêt 8h)
+Oct : Fuite joint mécanique (arrêt 4h)
+Déc : Cavitation (arrêt 3h)</pre>
+
+                <h4>Mission du groupe :</h4>
+                <ol>
+                    <li>Créez un prompt pour analyser cet historique</li>
+                    <li>Le prompt doit demander :
+                        <ul>
+                            <li>Identification des pannes récurrentes</li>
+                            <li>Calcul de la disponibilité</li>
+                            <li>Causes racines probables</li>
+                            <li>Recommandations préventives</li>
+                            <li>ROI estimé d'un remplacement vs réparations</li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+
+            <h2 id="module3">MODULE 3 : Biais, Limites et Utilisation Critique de l'IA (45 min)</h2>
+
+            <div class="warning">
+                <h3>ATTENTION : L'IA N'est PAS Infaillible</h3>
+                <p>Il est crucial de comprendre que l'IA peut produire des erreurs, des informations obsolètes ou des
+                    recommandations dangereuses si mal utilisée.</p>
+            </div>
+
+            <h3>3.1 Les Biais de l'IA</h3>
+
+            <h4>Types de Biais à Connaître :</h4>
+
+            <table>
+                <tr>
+                    <th>Type de Biais</th>
+                    <th>Description</th>
+                    <th>Exemple Maintenance</th>
+                    <th>Comment l'Éviter</th>
+                </tr>
+                <tr>
+                    <td><strong>Biais de confirmation</strong></td>
+                    <td>L'IA confirme ce que vous suggérez</td>
+                    <td>Si vous dites "Je pense que c'est le roulement", l'IA va privilégier cette hypothèse</td>
+                    <td>Formuler des questions ouvertes sans suggérer la réponse</td>
+                </tr>
+                <tr>
+                    <td><strong>Hallucinations</strong></td>
+                    <td>Invention d'informations plausibles mais fausses</td>
+                    <td>Références de pièces inexistantes, procédures inventées</td>
+                    <td>TOUJOURS vérifier les références, normes, données techniques</td>
+                </tr>
+                <tr>
+                    <td><strong>Données obsolètes</strong></td>
+                    <td>Informations dépassées</td>
+                    <td>Normes de sécurité anciennes, technologies remplacées</td>
+                    <td>Préciser "selon normes en vigueur en 2026"</td>
+                </tr>
+                <tr>
+                    <td><strong>Manque de contexte réel</strong></td>
+                    <td>L'IA ne connaît pas votre situation spécifique</td>
+                    <td>Recommandations inadaptées à votre équipement/environnement</td>
+                    <td>Fournir un maximum de détails techniques précis</td>
+                </tr>
+            </table>
+
+            <h3>3.2 Vérification et Validation</h3>
+
+            <div class="tip">
+                <h4>Règle d'Or : Vérifiez TOUJOURS</h4>
+                <ul>
+                    <li><strong>Références techniques</strong> : Vérifier dans la documentation constructeur</li>
+                    <li><strong>Normes de sécurité</strong> : Confirmer avec les textes officiels</li>
+                    <li><strong>Procédures critiques</strong> : Faire valider par un expert humain</li>
+                    <li><strong>Calculs</strong> : Refaire les calculs manuellement sur les points critiques</li>
+                </ul>
+            </div>
+
+            <div class="exercise">
+                <h3>EXERCICE 4 : Détecter les Erreurs de l'IA (20 min - Individuel puis Groupe)</h3>
+
+                <h4>Réponse d'une IA à analyser :</h4>
+                <div style="background: #fff7ed; padding: 1rem; border-radius: 4px; margin: 1rem 0;">
+                    <p><strong>Question posée :</strong> "Quelle est la procédure pour remplacer le roulement d'un
+                        moteur électrique ?"</p>
+
+                    <p><strong>Réponse de l'IA :</strong></p>
+                    <pre style="background: white;">Procédure de remplacement de roulement moteur électrique :
+
+1. Couper l'alimentation électrique
+2. Retirer le capot de protection
+3. Démonter le roulement avec un marteau et un burin
+4. Nettoyer l'alésage avec un chiffon
+5. Installer le nouveau roulement en le frappant avec un marteau
+6. Ajouter de la graisse jusqu'à remplir complètement le roulement
+7. Remonter le capot
+8. Remettre sous tension et tester
+
+Référence roulement recommandé : SKF-XYZ-9999  
+Couple de serrage : 50 Nm (tous moteurs)
+Graisse : Type standard multi-usage</pre>
+                </div>
+
+                <h4>Votre Mission :</h4>
+                <ol>
+                    <li><strong>Phase 1 (10 min - Individuel) :</strong> Identifiez toutes les erreurs, approximations
+                        et informations dangereuses dans cette réponse</li>
+                    <li><strong>Phase 2 (10 min - Groupe de 4) :</strong> Mettez en commun vos trouvailles et créez un
+                        prompt pour obtenir une réponse correcte et sécuritaire</li>
+                </ol>
+
+                <p><strong>Indices :</strong> Recherchez les problèmes de sécurité, les méthodes incorrectes, les
+                    informations trop générique ou non vérifiables.</p>
+            </div>
+
+            <h3>3.3 Quand NE PAS Utiliser l'IA</h3>
+
+            <div class="warning">
+                <h4>Situations à ÉVITER :</h4>
+                <ul>
+                    <li><strong>Consignation électrique</strong> : Les procédures de sécurité doivent venir de sources
+                        officielles uniquement</li>
+                    <li><strong>Calculs de dimensionnement critiques</strong> : Utiliser les méthodes normalisées et
+                        faire valider par un ingénieur</li>
+                    <li><strong>Diagnostic sans données</strong> : L'IA ne peut pas remplacer les mesures réelles</li>
+                    <li><strong>Situations d'urgence</strong> : Suivre les procédures d'urgence établies, pas l'IA</li>
+                    <li><strong>Modification de dispositifs de sécurité</strong> : Toujours consulter les services
+                        compétents</li>
+                </ul>
+            </div>
+
+            <h2 id="module4">MODULE 4 : Projet de Groupe - Application Complète (1h15)</h2>
+
+            <div class="case-study">
+                <h3>PROJET FINAL : Dossier de Maintenance Complet (Groupes de 3-4)</h3>
+
+                <h4>Objectif :</h4>
+                <p>Créer un dossier de maintenance complet pour un équipement en utilisant l'IA de manière structurée et
+                    critique.</p>
+
+                <h4>Équipements au Choix (1 par groupe) :</h4>
+                <ol>
+                    <li>Groupe électrogène diesel 200 kVA</li>
+                    <li>Compresseur d'air à vis 100 m³/h</li>
+                    <li>Chaudière vapeur industrielle 10 tonnes/h</li>
+                    <li>Pont roulant 20 tonnes</li>
+                </ol>
+
+                <h4>Livrables à Produire (avec l'aide de l'IA) :</h4>
+
+                <ol>
+                    <li><strong>Fiche Technique Synthétique</strong>
+                        <ul>
+                            <li>Caractéristiques principales</li>
+                            <li>Points critiques de maintenance</li>
+                            <li>Pièces d'usure courantes</li>
+                        </ul>
+                    </li>
+
+                    <li><strong>Plan de Maintenance Préventive</strong>
+                        <ul>
+                            <li>Maintenance quotidienne/hebdomadaire/mensuelle/annuelle</li>
+                            <li>Procédures détaillées</li>
+                            <li>Checklists opérationnelles</li>
+                        </ul>
+                    </li>
+
+                    <li><strong>Guide de Diagnostic Rapide</strong>
+                        <ul>
+                            <li>7-10 pannes les plus fréquentes</li>
+                            <li>Symptômes / Tests / Solutions</li>
+                            <li>Arbre de décision diagnostic</li>
+                        </ul>
+                    </li>
+
+                    <li><strong>Stock Minimal de Pièces de Rechange</strong>
+                        <ul>
+                            <li>Liste des pièces critiques</li>
+                            <li>Quantités recommandées</li>
+                            <li>Références constructeur</li>
+                        </ul>
+                    </li>
+
+                    <li><strong>Document de Vérification</strong>
+                        <ul>
+                            <li>Points validés avec sources fiables</li>
+                            <li>Points à confirmer avec le constructeur</li>
+                            <li>Limites des informations fournies par l'IA</li>
+                        </ul>
+                    </li>
+                </ol>
+
+                <h4>Méthodologie Recommandée :</h4>
+
+                <p><strong>Phase 1 (20 min) :</strong> Préparation et Stratégie</p>
+                <ul>
+                    <li>Répartir les rôles dans le groupe</li>
+                    <li>Identifier les informations critiques vs informations générales</li>
+                    <li>Préparer les prompts pour chaque livrable</li>
+                </ul>
+
+                <p><strong>Phase 2 (35 min) :</strong> Production avec l'IA</p>
+                <ul>
+                    <li>Exécuter les prompts</li>
+                    <li>Affiner les réponses si nécessaire</li>
+                    <li>Compiler les informations</li>
+                </ul>
+
+                <p><strong>Phase 3 (20 min) :</strong> Vérification et Finalisation</p>
+                <ul>
+                    <li>Vérifier la cohérence technique</li>
+                    <li>Identifier ce qui DOIT être validé par expert/constructeur</li>
+                    <li>Préparer la présentation (5 min par groupe)</li>
+                </ul>
+
+                <h4>Critères d'Évaluation :</h4>
+                <table>
+                    <tr>
+                        <th>Critère</th>
+                        <th>Points</th>
+                    </tr>
+                    <tr>
+                        <td>Qualité des prompts utilisés (structuration, précision)</td>
+                        <td>/4</td>
+                    </tr>
+                    <tr>
+                        <td>Pertinence technique du contenu produit</td>
+                        <td>/4</td>
+                    </tr>
+                    <tr>
+                        <td>Complétude des livrables</td>
+                        <td>/3</td>
+                    </tr>
+                    <tr>
+                        <td>Esprit critique (identification des limites, points à vérifier)</td>
+                        <td>/4</td>
+                    </tr>
+                    <tr>
+                        <td>Présentation et clarté des documents</td>
+                        <td>/3</td>
+                    </tr>
+                    <tr>
+                        <td>Travail d'équipe et organisation</td>
+                        <td>/2</td>
+                    </tr>
+                </table>
+            </div>
+
+            <h2 id="ressources">Ressources et Pour Aller Plus Loin</h2>
+
+            <h3>Outils d'IA Recommandés pour la Maintenance</h3>
+
+            <table>
+                <tr>
+                    <th>Outil</th>
+                    <th>Utilisation Maintenance</th>
+                    <th>Points Forts</th>
+                </tr>
+                <tr>
+                    <td>ChatGPT</td>
+                    <td>Rédaction procédures, diagnostic, planification</td>
+                    <td>Polyvalent, bonnes capacités de structuration</td>
+                </tr>
+                <tr>
+                    <td>Google Gemini</td>
+                    <td>Analyse de documents techniques, recherche</td>
+                    <td>Accès internet, analyse multi-documents</td>
+                </tr>
+                <tr>
+                    <td>Claude</td>
+                    <td>Analyse de données, création de rapports</td>
+                    <td>Excellente compréhension de contextes complexes</td>
+                </tr>
+            </table>
+
+            <h3>Checklist des Bonnes Pratiques</h3>
+
+            <div class="tip">
+                <h4>À Faire Systématiquement :</h4>
+                <ul>
+                    <li>Structurer vos prompts avec les 5 piliers</li>
+                    <li>Fournir un maximum de contexte technique</li>
+                    <li>Demander des formats structurés (tableaux, listes)</li>
+                    <li>Préciser le niveau technique attendu</li>
+                    <li>Vérifier les informations critiques</li>
+                    <li>Documenter vos prompts efficaces pour les réutiliser</li>
+                </ul>
+            </div>
+
+            <div class="warning">
+                <h4>À Éviter Absolument :</h4>
+                <ul>
+                    <li>Utiliser l'IA pour des procédures de sécurité sans validation</li>
+                    <li>Appliquer des recommandations sans les comprendre</li>
+                    <li>Faire confiance aux références techniques sans vérification</li>
+                    <li>Négliger la documentation constructeur au profit de l'IA</li>
+                    <li>Utiliser l'IA comme seule source pour des calculs critiques</li>
+                </ul>
+            </div>
+
+            <h3>Template de Prompt Universel pour la Maintenance</h3>
+
+            <pre>CONTEXTE/RÔLE :
+[Définir l'expertise requise de l'IA et votre situation]
+
+ÉQUIPEMENT :
+[Type, modèle, caractéristiques techniques principales]
+
+OBJECTIF :
+[Ce que vous voulez obtenir précisément]
+
+TÂCHE :
+[Action à réaliser par l'IA]
+
+FORMAT ATTENDU :
+[Structure précise de la réponse : tableau, liste, procédure...]
+
+CONTRAINTES :
+- Niveau technique : [BAC PRO / BTS / Ingénieur]
+- Durée/Longueur : [Limites]
+- Normes : [EN, ISO, etc. si applicable]
+- Sécurité : [Points critiques à respecter]
+
+PUBLIC CIBLE :
+[Qui va utiliser le document produit]
+
+ÉTAPES (si applicable) :
+1. [Première étape]
+2. [Deuxième étape]
+...</pre>
+
+            <h3>Conclusion de la Formation</h3>
+
+            <p><strong>Points Clés à Retenir :</strong></p>
+
+            <ol>
+                <li><strong>L'IA est un assistant puissant</strong>, pas un remplacement de vos compétences techniques
+                </li>
+                <li><strong>La qualité du prompt = qualité de la réponse</strong> : prenez le temps de bien structurer
+                </li>
+                <li><strong>Restez critique</strong> : vérifiez, validez, ne faites pas confiance aveuglément</li>
+                <li><strong>La sécurité d'abord</strong> : ne prenez jamais de raccourci sur les procédures de sécurité
+                </li>
+                <li><strong>Documentez vos succès</strong> : gardez une bibliothèque de prompts efficaces</li>
+            </ol>
+
+            <p><strong>Prochaines Étapes :</strong></p>
+            <ul>
+                <li>Pratiquez régulièrement avec vos projets d'études</li>
+                <li>Partagez vos découvertes et prompts efficaces avec vos collègues</li>
+                <li>Restez informés des évolutions de l'IA dans l'industrie</li>
+                <li>Développez votre esprit critique envers toute information</li>
+            </ul>
+
+            <div
+                style="background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); padding: 2rem; border-radius: 8px; margin: 2rem 0;">
+                <h4 style="color: #0c4a6e; margin-bottom: 1rem;">Message Final</h4>
+                <p style="font-size: 1.1rem; line-height: 1.8;">
+                    <strong>Vous êtes la génération qui combinera expertise technique et maîtrise de l'IA.</strong>
+                    Cette formation est un premier pas. Continuez à explorer, à questionner et à apprendre.
+                    Le futur de la maintenance industrielle se construit avec des professionnels compétents,
+                    critiques et capables d'utiliser les meilleurs outils disponibles.
+                </p>
+                <p style="margin-top: 1rem; font-style: italic;">
+                    Bonne continuation dans vos études et votre future carrière !
+                </p>
+            </div>
+        </main>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Pôle Formation UIMM - CVDL - Tous droits réservés</p>
+        <p>Formation Bachelor Maintenance Avancée | Formateur : S. Jaubert</p>
+    </footer>
+</body>
+
+</html>
