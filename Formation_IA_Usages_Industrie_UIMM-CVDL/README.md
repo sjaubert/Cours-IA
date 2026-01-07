@@ -2,13 +2,14 @@
 
 ## 📚 Vue d'Ensemble
 
-Cette formation propose **5 activités pédagogiques** pour initier des étudiants Bachelor en maintenance industrielle aux usages pratiques de l'IA dans leur métier.
+Cette formation propose **6 activités pédagogiques** pour initier des étudiants Bachelor en maintenance industrielle aux usages pratiques de l'IA dans leur métier. Elle inclut également une [Note de Synthèse sur l'Art du Prompting](Note_Synthese_Prompting_Antigravity.docx) pour guider les interactions.
 
 ---
 
 ## 🎯 Activités Disponibles
 
 ### ✅ Activité 1 : Analyse de Données GMAO et Reporting Décisionnel
+
 **Durée** : 60 min | **Niveau** : Intermédiaire
 
 Transformer des données brutes de GMAO (5000 interventions) en aide à la décision. Nettoyage de données, calcul MTBF/MTTR, diagramme de Pareto, rapport managérial.
@@ -18,6 +19,7 @@ Transformer des données brutes de GMAO (5000 interventions) en aide à la déci
 ---
 
 ### ✅ Activité 2 : Assistant Diagnostic de Pannes Multi-Sources
+
 **Durée** : 45 min | **Niveau** : Débutant
 
 Utiliser l'IA pour diagnostiquer des pannes en exploitant une base documentaire technique (manuels pompes, variateurs, pneumatique). 5 scénarios réalistes.
@@ -27,6 +29,7 @@ Utiliser l'IA pour diagnostiquer des pannes en exploitant une base documentaire 
 ---
 
 ### ✅ Activité 3 : Génération de Procédures de Sécurité et Consignation
+
 **Durée** : 40 min | **Niveau** : Intermédiaire
 
 Générer une procédure de consignation/déconsignation avec l'IA, puis la critiquer et corriger pour conformité aux normes (NFC 18-510). Développe l'esprit critique sur sujets de sécurité.
@@ -36,6 +39,7 @@ Générer une procédure de consignation/déconsignation avec l'IA, puis la crit
 ---
 
 ### ✅ Activité 4 : Planification Prédictive avec Analyse de Tendances
+
 **Durée** : 50 min | **Niveau** : Avancé
 
 Analyser 12 mois de relevés capteurs (température, vibration, courant) pour détecter les dérives, prédire les pannes et optimiser le planning de maintenance.
@@ -45,11 +49,18 @@ Analyser 12 mois de relevés capteurs (température, vibration, courant) pour d�
 ---
 
 ### ✅ Activité 5 : Documentation Technique Interactive et Formation
+
 **Durée** : 35 min | **Niveau** : Débutant
 
 Créer un guide de dépannage rapide (2 pages) pour nouveaux techniciens à partir d'un manuel technique complexe. Synthèse, vulgarisation, création de supports.
 
-📁 `A5_Documentation_Technique/`
+### ✅ Activité 6 : Challenge - Diagnostic de Panne Intermittente sur Convoyeur
+
+**Durée** : 60 min | **Niveau** : Challenge
+
+Analyser des logs d'erreurs (pics d'intensité) et une documentation technique partielle pour résoudre une panne aléatoire. Utilisation avancée du prompting (ROLE/CTCF) pour établir des hypothèses et un protocole de test.
+
+📁 `A6_Diagnostic_Panne_Intermittente/`
 
 ---
 
@@ -62,25 +73,29 @@ Créer un guide de dépannage rapide (2 pages) pour nouveaux techniciens à part
 | A3 - Sécurité | 40 min | Intermédiaire | Esprit critique, normalisation |
 | A4 - Prédictive | 50 min | Avancé | Séries temporelles, anticipation |
 | A5 - Documentation | 35 min | Débutant | Synthèse, vulgarisation |
+| A6 - Challenge | 60 min | Challenge | Diagnostic complexe, ROLE/CTCF |
 
-**Durée totale** : ~4 heures (½ journée de formation)
+**Durée totale** : ~5 heures (1 journée de formation)
 
 ---
 
 ## 🎓 Objectifs Pédagogiques Transversaux
 
 ### Savoirs
+
 - Comprendre les capacités et limites de l'IA
 - Connaître les bonnes pratiques d'interaction (prompts efficaces)
 - Ma îtriser les outils d'analyse de données industrielles
 
 ### Savoir-faire
+
 - Utiliser l'IA comme assistant (pas oracle)
 - Valider et critiquer les outputs IA
 - Générer du code Python avec assistance
 - Créer des documents techniques
 
 ### Savoir-être
+
 - **Esprit critique** : Ne pas faire confiance aveuglément
 - **Rigueur** : Vérification systématique (surtout sécurité)
 - **Initiative** : Explorer, itérer avec l'IA
@@ -91,11 +106,13 @@ Créer un guide de dépannage rapide (2 pages) pour nouveaux techniciens à part
 ## 💻 Prérequis Techniques
 
 ### Logiciels
+
 - **Python 3.8+** (Activités 1 et 4)
 - **Bibliothèques Python** : `pandas`, `matplotlib`, `numpy`
 - **Accès Gemini** (toutes les activités)
 
 ### Installation Python
+
 ```bash
 pip install pandas matplotlib numpy
 ```
@@ -107,6 +124,7 @@ Ou utiliser **Google Colab** (gratuit, dans le navigateur).
 ## 📁 Structure des Activités
 
 Chaque activité contient :
+
 - `README.md` : Guide de démarrage rapide
 - `instructions_apprenant.md` : Instructions détaillées avec prompts suggérés
 - `guide_formateur.md` : Guide pédagogique (objectifs, solutions, grille d'évaluation)
@@ -150,30 +168,38 @@ Chaque activité contient :
 Les activités sont conçues pour être progressives :
 
 **Débutant** (découverte) :
+
 - A2 : Diagnostic assisté
 - A5 : Documentation
 
 **Intermédiaire** (maîtrise) :
+
 - A1 : Analyse GMAO
 - A3 : Procédures sécurité
 
-**Avancé** (expertise) :
+**Avancé / Challenge** (expertise) :
+
 - A4 : Maintenance prédictive
+- A6 : Challenge Diagnostic Intermittent
 
 ---
 
 ## ⚠️ Messages Clés pour les Apprenants
 
 ### 1. L'IA est un **assistant**, pas un **oracle**
+
 → Toujours valider les résultats
 
 ### 2. Esprit critique **obligatoire** (surtout en sécurité)
+
 → Une erreur de procédure = risque d'accident
 
 ### 3. Itération et précision des prompts
+
 → Plus vous êtes précis, meilleure est la réponse
 
 ### 4. L'IA ne remplace pas la compétence métier
+
 → Elle accélère et aide, mais nécessite votre expertise
 
 ---
@@ -181,10 +207,12 @@ Les activités sont conçues pour être progressives :
 ## 📞 Support et Ressources
 
 ### Pendant la Formation
+
 - Guide formateur pour chaque activité
 - Solutions types disponibles (à distribuer en fin d'activité)
 
 ### Après la Formation
+
 - Scripts Python réutilisables
 - Prompts Gemini adaptables à d'autres situations
 - Méthodologies transposables sur équipements réels
@@ -194,6 +222,7 @@ Les activités sont conçues pour être progressives :
 ## 🔄 Évolution Continue
 
 Ces activités sont conçues pour évoluer :
+
 - Utilisez vos **propres données GMAO** (A1)
 - Créez vos **scénarios de pannes** (A2)
 - Adaptez aux **équipements de votre école** (A3-A5)
@@ -203,6 +232,7 @@ Ces activités sont conçues pour évoluer :
 ## 📝 Fichiers Créés
 
 **Total** : 5 activités complètes
+
 - **40+ fichiers** pédagogiques
 - **~600 lignes de code** Python
 - **~8000 mots** de documentation
@@ -210,7 +240,7 @@ Ces activités sont conçues pour évoluer :
 
 ---
 
-## ✨ Bon ne Formation !
+## ✨ Bon ne Formation
 
 Ces activités ont été conçues pour être **réalistes**, **pratiques** et **applicables** directement en milieu industriel.
 

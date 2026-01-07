@@ -1,0 +1,16 @@
+--- EXTRAIT DOCUMENTATION TECHNIQUE ---
+Équipement : Convoyeur de transfert Ligne 4
+Moteur : SEW Eurodrive - Type R67 DRP100M4
+Puissance : 2.2 kW | Courant Nominal (In) : 4.6 A
+
+Variateur : Danfoss VLT AutomationDrive FC 302
+Paramètre 1-24 (Courant moteur) : 4.6 A
+Paramètre 4-18 (Limite courant) : 160% (7.36 A)
+Délai avant erreur Overload (Trip) : 1.5 secondes
+
+OBSERVATIONS MAINTENANCE :
+Le guide de virage G-12 présente des traces d'usure asymétriques.
+Le capteur de présence CP-42 a été remplacé le mois dernier,
+mais son support vibre lors du passage des charges lourdes.
+Un réglage de la rampe d'accélération (Para 3-41) a été modifié
+par l'équipe de nuit pour "rattraper le retard".
