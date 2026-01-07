@@ -1,6 +1,6 @@
 """
-Générateur de rapport HTML pour l'Activité A4
-Crée un document HTML complet avec toutes les analyses
+Générateur de rapport HTML pour l'Activité A4 - VERSION SANS CODE
+Crée un document HTML complet avec explications pour non-programmeurs
 """
 
 import pandas as pd
@@ -20,6 +20,9 @@ SEUILS = {
     'Courant_A': 13
 }
 
+# Logo UIMM en base64 (complet)
+LOGO_BASE64 = "/9j/4AAQSkZJRgABAQEAyADIAAD/2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoHBwYIDAoMDAsKCwsNDhIQDQ4RDgsLEBYQERMUFRUVDAsICAoKCgoKCgoKCgo=/9j/4AAQSkZJRgABAQEAyADIAAD/2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoHBwYIDAoMDAsKCwsNDhIQDQ4RDgsLEBYQERMUFRUVDAsICAoKCgoKCgoKCgo=/9j/4AAQSkZJRgABAQEAyADIAAD/2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoHBwYIDAoMDAsKCwsNDhIQDQ4RDgsLEBYQERMUFRUVDAsICAoKCgoKCgoKCgo=/9j/4AAQSkZJRgABAQEAyADIAAD/2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoHBwYIDAoMDAsKCwsNDhIQDQ4RDgsLEBYQERMUFRUVDAsICAoKCgoKCgoKCgo=/9j/4AAQSkZJRgABAQEAyADIAAD/2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoHBwYIDAoMDAsKCwsNDhIQDQ4RDgsLEBYQERMUFRUVDAsICAoKCgoKCgoKCgo=/9j/4AAQSkZJRgABAQEAyADIAAD/2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoHBwYIDAoMDAsKCwsNDhIQDQ4RDgsLEBYQERMUFRUVDAsICAoKCgoKCgoKCgo=/9j/4AAQSkZJRgABAQEAyADIAAD/2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoHBwYIDAoMDAsKCwsNDhIQDQ4RDgsLEBYQERMUFRUVDAsICAoKCgoKCgoKCgo=/9j/4AAQSkZJRgABAQEAyADIAAD/2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoHBwYIDAoMDAsKCwsNDhIQDQ4RDgsLEBYQERMUFRUVDAsICAoKCgoKCgoKCgo=/9j/4AAQSkZJRgABAQEAyADIAAD/2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoHBwYIDAoMDAsKCwsNDhIQDQ4RDgsLEBYQERMUFRUVDAsICAoKCgoKCgoKCgo="
+
 def fig_to_base64(fig):
     """Convertit une figure matplotlib en base64"""
     buffer = BytesIO()
@@ -36,7 +39,7 @@ def analyze_data():
     df['Timestamp'] = pd.to_datetime(df['Timestamp'])
     df = df.sort_values('Timestamp')
     
-    # Statistiques
+    # Statistiques  
     stats = {}
     for col in ['Temperature_C', 'Vibration_mm_s', 'Courant_A']:
         stats[col] = {
@@ -112,7 +115,7 @@ def analyze_data():
         ax.set_ylabel(title, fontsize=11, fontweight='bold')
         ax.legend(loc='upper left', fontsize=9)
         ax.grid(True, alpha=0.3)
-        ax.text(0.98, 0.95, f"R² = {trends[col]['r2']:.3f}", transform=ax.transAxes, 
+        ax.text(0.98, 0.95, f"R² = {trends[col]['r2']:.3f}", transform=ax.transAxes,  
                 ha='right', va='top', bbox=dict(boxstyle='round', facecolor='wheat', alpha=0.5))
     
     axes[0].set_title('Tendances et Projections - PMP-042', fontsize=13, fontweight='bold')
@@ -176,7 +179,7 @@ def analyze_data():
 print("Analyse en cours...")
 results = analyze_data()
 
-# Créer le HTML
+# Créer le HTML SANS CODE PYTHON - VERSION NON-PROGRAMMEURS
 html_content = f"""<!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -216,7 +219,7 @@ html_content = f"""<!DOCTYPE html>
         }}
         
         .logo-section img {{
-            max-width: 120px;
+            max-width: 200px;
             height: auto;
         }}
         
@@ -257,22 +260,17 @@ html_content = f"""<!DOCTYPE html>
             margin: 20px 0 10px 0;
         }}
         
-        .prompt-section {{
+        h4 {{
+            color: #333;
+            font-size: 16px;
+            margin: 15px 0 8px 0;
+        }}
+        
+        .method-box {{
             background: #f8f9fa;
             border-left: 4px solid #0056b3;
             padding: 20px;
             margin: 20px 0;
-        }}
-        
-        .code-block {{
-            background: #2b2b2b;
-            color: #f8f8f2;
-            padding: 15px;
-            border-radius: 5px;
-            overflow-x: auto;
-            font-family: 'Courier New', monospace;
-            font-size: 13px;
-            margin: 15px 0;
         }}
         
         table {{
@@ -367,13 +365,23 @@ html_content = f"""<!DOCTYPE html>
             font-size: 14px;
             border-top: 1px solid #ddd;
         }}
+        
+        ul {{
+            margin: 15px 0 15px 20px;
+            line-height: 1.8;
+        }}
+        
+        p {{
+            margin: 10px 0;
+            text-align: justify;
+        }}
     </style>
 </head>
 <body>
     <div class="container">
         <header>
             <div class="logo-section">
-                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjQwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyZWN0IHdpZHRoPSIxMjAiIGhlaWdodD0iNDAiIGZpbGw9IiNmZmYiLz48dGV4dCB4PSI2MCIgeT0iMjUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxOCIgZm9udC13ZWlnaHQ9ImJvbGQiIGZpbGw9IiMwMDNkODIiIHRleHQtYW5jaG9yPSJtaWRkbGUiPlVJTU08L3RleHQ+PC9zdmc+" alt="Logo UIMM">
+                <img src="data:image/jpeg;base64,{LOGO_BASE64}" alt="Logo UIMM">
             </div>
             <div class="header-org">Pôle Formation UIMM - CVDL</div>
             <div class="header-program">BACHELOR Industriel 2026</div>
@@ -389,18 +397,9 @@ html_content = f"""<!DOCTYPE html>
             
             <h2>Prompt 1 : Chargement et Visualisation des Données</h2>
             
-            <div class="prompt-section">
-                <h3>Code Python - Chargement des données</h3>
-                <div class="code-block">import pandas as pd
-import matplotlib.pyplot as plt
-
-# Chargement du fichier CSV
-df = pd.read_csv('releves_capteurs_12mois.csv')
-df['Timestamp'] = pd.to_datetime(df['Timestamp'])
-df = df.sort_values('Timestamp')
-
-print(f"Données chargées : {{len(df)}} relevés")
-print(df.head())</div>
+            <div class="method-box">
+                <h3>Méthode utilisée</h3>
+                <p>Les données du fichier CSV ont été chargées et analysées. Pour chaque paramètre (température, vibration, courant), nous avons calculé les statistiques de base qui permettent de comprendre le comportement général de la machine.</p>
             </div>
             
             <h3>Statistiques Descriptives</h3>
@@ -435,27 +434,15 @@ print(df.head())</div>
             </div>
             
             <h3>Graphiques d'évolution sur 12 mois</h3>
+            <p>Les graphiques ci-dessous montrent l'évolution de chaque paramètre au fil du temps. Les lignes rouges pointillées indiquent les seuils critiques à ne pas dépasser.</p>
             <img src="data:image/png;base64,{results['images']['evolution']}" alt="Évolution des paramètres">
             
             <h2>Prompt 2 : Détection de Tendances</h2>
             
-            <div class="prompt-section">
-                <h3>Analyse des tendances (Régression linéaire)</h3>
-                <div class="code-block"># Régression linéaire pour chaque paramètre
-import numpy as np
-
-for col in ['Temperature_C', 'Vibration_mm_s', 'Courant_A']:
-    X = df['days_since_start'].values
-    y = df[col].values
-    
-    # Régression linéaire
-    coef = np.polyfit(X, y, 1)
-    y_pred = coef[0] * X + coef[1]
-    
-    # Calcul R²
-    r2 = 1 - (np.sum((y - y_pred)**2) / np.sum((y - np.mean(y))**2))
-    
-    print(f"{{col}}: Pente = {{coef[0]:.4f}}/jour, R² = {{r2:.3f}}")</div>
+            <div class="method-box">
+                <h3>Analyse de tendances par régression linéaire</h3>
+                <p>Pour chaque paramètre, nous avons tracé une droite de tendance qui représente l'évolution moyenne sur l'année. Cette droite permet de prédire quand les seuils critiques seront atteints si la tendance se poursuit.</p>
+                <p><strong>Le coefficient R²</strong> indique la qualité de cette prédiction : plus il est proche de 1, plus la tendance est régulière et donc la prédiction fiable.</p>
             </div>
             
             <h3>Résultats de l'analyse de tendances</h3>
@@ -493,24 +480,22 @@ for col in ['Temperature_C', 'Vibration_mm_s', 'Courant_A']:
             
             <div class="warning">
                 <strong>Observation importante :</strong> Les trois paramètres montrent une tendance à la hausse progressive. 
-                La vibration présente l'évolution la plus préoccupante avec un coefficient de corrélation R² élevé, 
-                indiquant une dégradation linéaire constante.
+                La vibration présente l'évolution la plus préoccupante avec un excellent coefficient R², 
+                indiquant une dégradation linéaire constante et donc prévisible.
             </div>
             
             <img src="data:image/png;base64,{results['images']['trends']}" alt="Tendances et projections">
             
             <h2>Prompt 3 : Détection d'Anomalies</h2>
             
-            <div class="prompt-section">
-                <h3>Méthode de détection : Moyenne + 2σ</h3>
-                <div class="code-block"># Détection des anomalies
-for col in ['Temperature_C', 'Vibration_mm_s', 'Courant_A']:
-    mean = df[col].mean()
-    std = df[col].std()
-    threshold = mean + 2 * std
-    
-    anomalies = df[df[col] > threshold]
-    print(f"{{col}}: {{len(anomalies)}} anomalies détectées")</div>
+            <div class="method-box">
+                <h3>Méthode de détection : Moyenne + 2 écarts-types (μ+2σ)</h3>
+                <p>Les anomalies sont les valeurs inhabituellement élevées qui sortent de la normale. Nous utilisons une méthode statistique standard :</p>
+                <ul>
+                    <li>Nous calculons la moyenne (μ) et l'écart-type (σ) de chaque paramètre</li>
+                    <li>Toute valeur supérieure à μ+2σ est considérée comme une anomalie</li>
+                    <li>Cette méthode détecte environ 2,5% des valeurs les plus extrêmes</li>
+                </ul>
             </div>
             
             <h3>Anomalies détectées</h3>
@@ -546,7 +531,7 @@ for col in ['Temperature_C', 'Vibration_mm_s', 'Courant_A']:
             
             <h3>Analyse des corrélations</h3>
             
-            <p>Matrice de corrélation entre les paramètres :</p>
+            <p>La matrice de corrélation indique si les paramètres évoluent ensemble ou indépendamment :</p>
             
             <table>
                 <tr>
@@ -576,9 +561,9 @@ for col in ['Temperature_C', 'Vibration_mm_s', 'Courant_A']:
             </table>
             
             <div class="info">
-                <strong>Interprétation :</strong> Une faible corrélation entre les paramètres (<0.3) suggère que les dérives 
-                sont indépendantes. Cela est cohérent avec une usure mécanique progressive due au vieillissement 
-                plutôt qu'à un événement unique affectant tous les paramètres simultanément.
+                <strong>Interprétation :</strong> Les corrélations faibles (inférieures à 0,3) suggèrent que les dérives 
+                sont indépendantes les unes des autres. Cela est cohérent avec une usure mécanique progressive due au vieillissement 
+                naturel de l'équipement, plutôt qu'à un événement unique qui affecterait tous les paramètres simultanément.
             </div>
             
             <h2>Prompt 4 : Recommandations Maintenance</h2>
@@ -588,24 +573,24 @@ for col in ['Temperature_C', 'Vibration_mm_s', 'Courant_A']:
             <p><strong>Usure progressive du roulement de pompe</strong></p>
             
             <p>Analyse des symptômes :</p>
-            <ul style="margin: 15px 0 15px 20px; line-height: 1.8;">
-                <li><strong>Vibration croissante (tendance +{results['trends']['Vibration_mm_s']['slope_month']:.3f} mm/s/mois) :</strong> Symptôme classique d'usure de roulement. Le jeu mécanique augmente avec le temps.</li>
-                <li><strong>Température en hausse légère (+{results['trends']['Temperature_C']['slope_month']:.3f}°C/mois) :</strong> Friction accrue due au désalignement progressif.</li>
-               <li><strong>Courant stable avec variations (+{results['trends']['Courant_A']['slope_month']:.3f} A/mois) :</strong> Charge mécanique fluctuante compensée par le variateur.</li>
+            <ul>
+                <li><strong>Vibration croissante (tendance +{results['trends']['Vibration_mm_s']['slope_month']:.3f} mm/s/mois) :</strong> Symptôme classique d'usure de roulement. Le jeu mécanique augmente avec le temps, créant des vibrations accrues.</li>
+                <li><strong>Température en hausse légère (+{results['trends']['Temperature_C']['slope_month']:.3f}°C/mois) :</strong> La friction augmente à mesure que le désalignement s'accentue.</li>
+               <li><strong>Courant avec légères variations (+{results['trends']['Courant_A']['slope_month']:.3f} A/mois) :</strong> La charge mécanique fluctuante est automatiquement compensée par le variateur de vitesse.</li>
             </ul>
             
             <p><strong>Causes probables :</strong></p>
-            <ul style="margin: 15px 0 15px 20px; line-height: 1.8;">
-                <li>Fatigue du roulement après cycles de fonctionnement</li>
-                <li>Lubrification dégradée ou insuffisante</li>
-                <li>Désalignement mécanique progressif</li>
+            <ul>
+                <li>Fatigue du roulement après de nombreux cycles de fonctionnement</li>
+                <li>Lubrification dégradée ou devenue insuffisante avec le temps</li>
+                <li>Désalignement mécanique progressif de l'arbre</li>
             </ul>
             
             <div class="maintenance-plan">
                 <h2>PLAN DE MAINTENANCE PRÉDICTIVE - PMP-042</h2>
                 
                 <h3>État Actuel (au {results['last_date'].strftime('%d/%m/%Y')})</h3>
-                <ul style="margin: 10px 0 10px 20px; line-height: 1.8;">
+                <ul>
                     <li><strong>Température :</strong> {results['trends']['Temperature_C']['current']:.2f}°C (Tendance : {results['trends']['Temperature_C']['slope_month']:+.2f}°C/mois)</li>
                     <li><strong>Vibration :</strong> {results['trends']['Vibration_mm_s']['current']:.2f} mm/s (Tendance : {results['trends']['Vibration_mm_s']['slope_month']:+.2f} mm/s/mois)</li>
                     <li><strong>Courant :</strong> {results['trends']['Courant_A']['current']:.2f} A (Tendance : {results['trends']['Courant_A']['slope_month']:+.2f} A/mois)</li>
@@ -625,7 +610,7 @@ for col in ['Temperature_C', 'Vibration_mm_s', 'Courant_A']:
                     </tr>
                     <tr>
                         <td>Vibration</td>
-                        <td>7.1 mm/s (ISO 10816)</td>
+                        <td>7,1 mm/s (ISO 10816)</td>
                         <td>{results['trends']['Vibration_mm_s']['date_threshold'].strftime('%d/%m/%Y') if results['trends']['Vibration_mm_s']['date_threshold'] else 'Hors période'}</td>
                     </tr>
                     <tr>
@@ -638,10 +623,10 @@ for col in ['Temperature_C', 'Vibration_mm_s', 'Courant_A']:
                 <h3>Recommandations</h3>
                 
                 <h4>Action Immédiate</h4>
-                <ul style="margin: 10px 0 10px 20px; line-height: 1.8;">
-                    <li>Vérification visuelle et auditive du fonctionnement</li>
-                    <li>Contrôle de la température au toucher (avec précautions)</li>
-                    <li>Commander le roulement de remplacement (délai d'approvisionnement)</li>
+                <ul>
+                    <li>Vérification visuelle et auditive du fonctionnement de la pompe</li>
+                    <li>Contrôle de la température au toucher (avec les précautions de sécurité nécessaires)</li>
+                    <li>Commander le roulement de remplacement auprès du fournisseur (anticipation du délai d'approvisionnement)</li>
                 </ul>
                 
                 <h4>Intervention Planifiée</h4>
@@ -652,11 +637,11 @@ for col in ['Temperature_C', 'Vibration_mm_s', 'Courant_A']:
                     </tr>
                     <tr>
                         <th>Type</th>
-                        <td>Remplacement roulement + Réalignement</td>
+                        <td>Remplacement roulement + Réalignement de l'arbre</td>
                     </tr>
                     <tr>
                         <th>Durée estimée</th>
-                        <td>4-6 heures (arrêt production)</td>
+                        <td>4 à 6 heures (arrêt production nécessaire)</td>
                     </tr>
                     <tr>
                         <th>Pièces nécessaires</th>
@@ -665,19 +650,19 @@ for col in ['Temperature_C', 'Vibration_mm_s', 'Courant_A']:
                 </table>
                 
                 <h4>Surveillance Renforcée</h4>
-                <ul style="margin: 10px 0 10px 20px; line-height: 1.8;">
-                    <li><strong>Fréquence contrôle :</strong> Hebdomadaire jusqu'à l'intervention</li>
-                    <li><strong>Paramètre prioritaire :</strong> Vibration (critère ISO 10816)</li>
-                    <li><strong>Seuil d'alerte anticipé :</strong> 6.0 mm/s (intervention urgente si dépassé)</li>
-                    <li><strong>Méthode de surveillance :</strong> Mesure vibrométrique + Analyse thermographique mensuelle</li>
+                <ul>
+                    <li><strong>Fréquence des contrôles :</strong> Hebdomadaire jusqu'à l'intervention</li>
+                    <li><strong>Paramètre prioritaire :</strong> Vibration (conformément à la norme ISO 10816)</li>
+                    <li><strong>Seuil d'alerte anticipé :</strong> 6,0 mm/s (intervention d'urgence à planifier si dépassé)</li>
+                    <li><strong>Méthodes de surveillance :</strong> Mesure vibrométrique hebdomadaire + thermographie infrarouge mensuelle</li>
                 </ul>
                 
-                <h4>Gain Espéré</h4>
-                <ul style="margin: 10px 0 10px 20px; line-height: 1.8;">
-                    <li><strong>Éviter un arrêt non planifié</strong> avec risque de dommages secondaires (garniture mécanique, accouplement)</li>
-                    <li><strong>Coût arrêt production évité :</strong> Estimation 5 000 € à 10 000 € selon durée panne</li>
-                    <li><strong>Optimisation :</strong> Intervention planifiée en période creuse (week-end ou maintenance programmée)</li>
-                    <li><strong>Allongement de la durée de vie :</strong> Remplacement préventif = +20% de durée de vie globale de la pompe</li>
+                <h4>Gains Espérés</h4>
+                <ul>
+                    <li><strong>Éviter un arrêt non planifié</strong> avec risque de dommages secondaires coûteux (garniture mécanique, accouplement)</li>
+                    <li><strong>Coût arrêt production évité :</strong> Estimation entre 5 000 € et 10 000 € selon la durée d'immobilisation</li>
+                    <li><strong>Optimisation organisationnelle :</strong> Intervention planifiée en période creuse (week-end ou fenêtre de maintenance programmée)</li>
+                    <li><strong>Allongement de la durée de vie :</strong> Le remplacement préventif permet d'augmenter de 20% la durée de vie globale de la pompe</li>
                 </ul>
             </div>
             
@@ -685,11 +670,11 @@ for col in ['Temperature_C', 'Vibration_mm_s', 'Courant_A']:
             
             <p>L'analyse prédictive des 12 mois de données de la pompe PMP-042 révèle une dégradation progressive et 
             prévisible des paramètres de fonctionnement. La tendance linéaire identifiée pour la vibration, avec un excellent 
-            coefficient de détermination (R² > 0.9), permet de planifier une intervention de maintenance avant le dépassement 
+            coefficient de détermination (R² élevé), permet de planifier une intervention de maintenance avant le dépassement 
             des seuils critiques.</p>
             
             <p><strong>Point clé :</strong> Cette approche de maintenance prédictive basée sur les données permet de transformer 
-            une maintenance réactive coûteuse en une maintenance planifiée optimisée, améliorant la disponibilité de l'équipement 
+            une maintenance réactive coûteuse en une maintenance planifiée optimisée, améliorant ainsi la disponibilité de l'équipement 
             et réduisant les coûts globaux de maintenance.</p>
         </div>
         
@@ -710,4 +695,5 @@ with open(output_file, 'w', encoding='utf-8') as f:
 
 print(f"\n[OK] Rapport HTML cree : {output_file}")
 print(f"[OK] Taille : {len(html_content)/1024:.1f} KB")
-print(f"[OK] Analyses completes incluses")
+print(f"[OK] Logo UIMM integre")
+print(f"[OK] Version NON-PROGRAMMEURS (sans blocs de code)")
