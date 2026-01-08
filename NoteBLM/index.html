@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formation NotebookLM - Industrie</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            background: white;
+            border-radius: 25px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 50px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5em;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 1.4em;
+            opacity: 0.95;
+            line-height: 1.6;
+        }
+
+        .hero .icon {
+            font-size: 4em;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .content {
+            padding: 50px;
+        }
+
+        h2 {
+            color: #667eea;
+            font-size: 2.2em;
+            margin-bottom: 25px;
+            border-bottom: 3px solid #764ba2;
+            padding-bottom: 12px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 20px;
+            padding: 35px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            border: 3px solid transparent;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            border-color: #667eea;
+        }
+
+        .card .icon {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .card h3 {
+            color: #667eea;
+            font-size: 1.6em;
+            margin-bottom: 15px;
+        }
+
+        .card p {
+            color: #555;
+            font-size: 1.1em;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1em;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .info-section {
+            background: #e3f2fd;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            border-left: 5px solid #2196f3;
+        }
+
+        .info-section h3 {
+            color: #1976d2;
+            margin-bottom: 15px;
+            font-size: 1.6em;
+        }
+
+        .info-section ul {
+            margin-left: 25px;
+        }
+
+        .info-section li {
+            font-size: 1.15em;
+            margin-bottom: 10px;
+            color: #444;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #ffd700;
+            color: #333;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 0.95em;
+            margin: 5px;
+            font-weight: 600;
+        }
+
+        .footer {
+            background: #2d3436;
+            color: white;
+            padding: 25px;
+            text-align: center;
+            font-size: 0.95em;
+        }
+
+        .footer a {
+            color: #ffd700;
+            text-decoration: none;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #ffd70044 0%, #ff850044 100%);
+            padding: 3px 8px;
+            border-radius: 4px;
+        }
+
+        .uimm-header {
+            background: white;
+            padding: 20px 40px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            border-bottom: 3px solid #0066a1;
+        }
+
+        .uimm-header img {
+            height: 80px;
+            width: auto;
+        }
+
+        .uimm-header h2 {
+            color: #0066a1;
+            font-size: 1.8em;
+            margin: 0;
+            border: none;
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="uimm-header">
+            <img src="logo_uimm_placeholder.jpg" alt="Logo UIMM">
+            <h2>Pôle Formation UIMM - CVDL</h2>
+        </div>
+        <div class="hero">
+            <h1>Formation NotebookLM</h1>
+            <p>Optimisez votre gestion documentaire industrielle avec l'IA</p>
+            <div style="margin-top: 25px;">
+                <span class="badge">Production</span>
+                <span class="badge">Maintenance</span>
+                <span class="badge">Sécurité</span>
+            </div>
+        </div>
+
+        <div class="content">
+            <h2>Supports de Formation</h2>
+
+            <p style="font-size: 1.2em; color: #555; margin-bottom: 40px;">
+                Bienvenue dans la formation NotebookLM pour professionnels de l'industrie.
+                Découvrez comment <span class="highlight">transformer des centaines de pages</span> de documentation
+                technique en <span class="highlight">insights actionnables</span> en quelques minutes.
+            </p>
+
+            <div class="cards">
+                <div class="card">
+                    <h3>Présentation</h3>
+                    <p>Découvrez les fonctionnalités de NotebookLM et ses applications industrielles</p>
+                    <a href="presentation_notebooklm.html" class="btn">Voir le Diaporama</a>
+                    <p style="margin-top: 15px; font-size: 0.9em; color: #777;">10 slides • 20 min</p>
+                </div>
+
+                <div class="card">
+                    <h3>TP Pratique</h3>
+                    <p>Scénario complet : prise en main d'une presse hydraulique industrielle</p>
+                    <a href="scenario_tp_notebooklm.html" class="btn">Démarrer le TP</a>
+                    <p style="margin-top: 15px; font-size: 0.9em; color: #777;">5 étapes • 3 heures</p>
+                </div>
+
+                <div class="card">
+                    <h3>Ressources</h3>
+                    <p>Documents professionnels : manuels, normes ISO, templates maintenance</p>
+                    <a href="ressources_documentaires.html" class="btn">Accéder aux Docs</a>
+                    <p style="margin-top: 15px; font-size: 0.9em; color: #777;">20+ sources • Téléchargeables</p>
+                </div>
+            </div>
+
+            <div class="info-section">
+                <h3>Ce que vous allez apprendre</h3>
+                <ul>
+                    <li><strong>Centraliser</strong> vos documents techniques dans une base unifiée</li>
+                    <li><strong>Interroger</strong> intelligemment des centaines de pages en langage naturel</li>
+                    <li><strong>Extraire</strong> des checklists et procédures opérationnelles</li>
+                    <li><strong>Analyser</strong> les risques et vérifier la conformité aux normes</li>
+                    <li><strong>Produire</strong> des livrables professionnels (rapports, infographies, présentations)
+                    </li>
+                    <li><strong>Gagner un temps considérable</strong> sur l'analyse documentaire</li>
+                </ul>
+            </div>
+
+            <div class="info-section" style="background: #fff3cd; border-left-color: #ffc107;">
+                <h3 style="color: #f57c00;">Configuration Requise</h3>
+                <ul>
+                    <li><strong>Compte Google</strong> (gratuit) - <a href="https://notebooklm.google.com"
+                            target="_blank" style="color: #667eea; font-weight: 600;">notebooklm.google.com</a></li>
+                    <li><strong>Navigateur</strong> moderne (Chrome, Edge, Firefox)</li>
+                    <li><strong>Documents PDF</strong> à analyser (fournis ou apportez les vôtres)</li>
+                    <li><strong>Optionnel</strong> : NotebookLM Pro pour fonctionnalités avancées (jusqu'à 300 sources)
+                    </li>
+                </ul>
+            </div>
+
+            <h2 style="margin-top: 50px;">Par où Commencer ?</h2>
+
+            <div
+                style="background: linear-gradient(135deg, #a29bfe 0%, #6c5ce7 100%); color: white; padding: 35px; border-radius: 15px; margin: 25px 0;">
+                <h3 style="color: white; margin-bottom: 20px; font-size: 1.8em;">Parcours Recommandé</h3>
+                <ol style="font-size: 1.2em; line-height: 2; color: white;">
+                    <li><strong>Étape 1 (20 min) :</strong> Consulter le <a href="presentation_notebooklm.html"
+                            style="color: #ffd700;">diaporama de présentation</a></li>
+                    <li><strong>Étape 2 (10 min) :</strong> Explorer les <a href="ressources_documentaires.html"
+                            style="color: #ffd700;">ressources documentaires</a></li>
+                    <li><strong>Étape 3 (3h) :</strong> Réaliser le <a href="scenario_tp_notebooklm.html"
+                            style="color: #ffd700;">TP pratique</a> en groupe</li>
+                    <li><strong>Étape 4 :</strong> Appliquer à VOS documents professionnels !</li>
+                </ol>
+            </div>
+
+            <h2 style="margin-top: 50px;">Cas d'Usage Industriels</h2>
+
+            <div class="cards" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
+                <div class="card" style="padding: 25px;">
+                    <h4 style="color: #667eea; margin: 10px 0;">Maintenance</h4>
+                    <p style="font-size: 1em; margin: 0;">Plans préventifs, checklists</p>
+                </div>
+
+                <div class="card" style="padding: 25px;">
+                    <h4 style="color: #667eea; margin: 10px 0;">Sécurité</h4>
+                    <p style="font-size: 1em; margin: 0;">Analyse risques, conformité</p>
+                </div>
+
+                <div class="card" style="padding: 25px;">
+                    <h4 style="color: #667eea; margin: 10px 0;">Audit</h4>
+                    <p style="font-size: 1em; margin: 0;">Vérification normes ISO</p>
+                </div>
+
+                <div class="card" style="padding: 25px;">
+                    <h4 style="color: #667eea; margin: 10px 0;">Formation</h4>
+                    <p style="font-size: 1em; margin: 0;">Supports pédagogiques</p>
+                </div>
+            </div>
+
+            <div style="background: #f8f9fa; padding: 30px; border-radius: 15px; margin-top: 40px; text-align: center;">
+                <h3 style="color: #333; margin-bottom: 15px;">Résultat Attendu</h3>
+                <p style="font-size: 1.3em; color: #555; max-width: 700px; margin: 0 auto;">
+                    À la fin de cette formation, vous serez autonome sur NotebookLM et capable de
+                    <strong style="color: #667eea;">réduire de 80% le temps</strong> consacré à l'analyse documentaire
+                    dans vos projets industriels.
+                </p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p><strong>Formation NotebookLM - Industrie 4.0</strong></p>
+            <p style="margin-top: 10px;">
+                Conçu pour les professionnels de la production, maintenance, et sécurité industrielle
+            </p>
+            <p style="margin-top: 15px; opacity: 0.8;">
+                © 2026 • <a href="https://notebooklm.google.com" target="_blank">NotebookLM Official</a>
+            </p>
+        </div>
+    </div>
+</body>
+
+</html>

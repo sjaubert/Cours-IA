@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ressources Documentaires Professionnelles - NotebookLM</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 40px 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 50px 60px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.3em;
+            opacity: 0.95;
+        }
+
+        .content {
+            padding: 60px;
+        }
+
+        h2 {
+            color: #667eea;
+            font-size: 2.2em;
+            margin: 40px 0 20px 0;
+            border-bottom: 4px solid #764ba2;
+            padding-bottom: 15px;
+        }
+
+        h3 {
+            color: #764ba2;
+            font-size: 1.6em;
+            margin: 30px 0 15px 0;
+        }
+
+        p {
+            font-size: 1.15em;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .resource-card {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            border-color: #667eea;
+        }
+
+        .resource-card h4 {
+            color: #667eea;
+            font-size: 1.4em;
+            margin-bottom: 15px;
+        }
+
+        .resource-card .icon {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .resource-card .description {
+            color: #555;
+            margin-bottom: 15px;
+            font-size: 1.05em;
+        }
+
+        .resource-card .link-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .resource-card .link-list li {
+            margin-bottom: 10px;
+        }
+
+        .resource-card a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            transition: color 0.2s;
+        }
+
+        .resource-card a:hover {
+            color: #764ba2;
+            text-decoration: underline;
+        }
+
+        .resource-card a::before {
+            content: "";
+            margin-right: 8px;
+            font-weight: bold;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.85em;
+            margin: 5px 3px;
+            font-weight: 600;
+        }
+
+        .badge.pdf {
+            background: #e74c3c;
+        }
+
+        .badge.web {
+            background: #3498db;
+        }
+
+        .badge.template {
+            background: #27ae60;
+        }
+
+        .info-box {
+            background: #e3f2fd;
+            border-left: 5px solid #2196f3;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 25px 0;
+        }
+
+        .warning-box {
+            background: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 25px 0;
+        }
+
+        .success-box {
+            background: #d4edda;
+            border-left: 5px solid #28a745;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 25px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        thead {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        th {
+            padding: 18px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 15px 18px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tbody tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .download-section {
+            background: linear-gradient(135deg, #a29bfe 0%, #6c5ce7 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 15px;
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        .download-section h3 {
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .download-section p {
+            color: white;
+            opacity: 0.95;
+        }
+
+        .btn {
+            display: inline-block;
+            background: white;
+            color: #6c5ce7;
+            padding: 15px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            margin: 10px;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+    
+        .uimm-header {
+            background: white;
+            padding: 20px 40px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            border-bottom: 3px solid #0066a1;
+        }
+
+        .uimm-header img {
+            height: 80px;
+            width: auto;
+        }
+
+        .uimm-header h2 {
+            color: #0066a1;
+            font-size: 1.8em;
+            margin: 0;
+            border: none;
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- UIMM Header -->
+        <div class="uimm-header">
+            <img src="logo_uimm_placeholder.jpg" alt="Logo UIMM">
+            <h2>Pôle Formation UIMM - CVDL</h2>
+        </div>
+
+        
+        <div class="header">
+            <h1> Ressources Documentaires Professionnelles</h1>
+            <p>Documents techniques pour le TP NotebookLM - Industrie</p>
+        </div>
+
+        <div class="content">
+            <div class="info-box">
+                <h3 style="margin-top: 0; color: #1976d2;"> Comment utiliser ces ressources ?</h3>
+                <p>Ces documents sont destinés à être <strong>importés dans NotebookLM</strong> pour réaliser le TP de
+                    prise en main d'une nouvelle machine industrielle. Vous pouvez :</p>
+                <ul>
+                    <li>Télécharger les manuels PDF directement</li>
+                    <li>Copier les liens pour import direct dans NotebookLM (URL)</li>
+                    <li>Adapter ces ressources à votre contexte industriel spécifique</li>
+                </ul>
+            </div>
+
+            <h2> 1. Manuels Techniques Presses Hydrauliques</h2>
+
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <span class="icon"></span>
+                    <h4>Enerpac - Presses d'Atelier XLP</h4>
+                    <p class="description">Manuel d'utilisation et d'entretien pour presses hydrauliques
+                        professionnelles (25-60 tonnes)</p>
+                    <span class="badge pdf">PDF</span>
+                    <span class="badge">Anglais/Français</span>
+                    <ul class="link-list">
+                        <li><a href="https://www.enerpac.com/en-us/downloads" target="_blank">Centre de téléchargement
+                                Enerpac</a></li>
+                        <li><a href="https://www.enerpac.com/fr-fr/service-support/literature"
+                                target="_blank">Documentation technique FR</a></li>
+                    </ul>
+                </div>
+
+                <div class="resource-card">
+                    <span class="icon"></span>
+                    <h4>Programmes de Maintenance Préventive</h4>
+                    <p class="description">Calendriers et procédures de maintenance pour presses hydrauliques
+                        industrielles</p>
+                    <span class="badge pdf">PDF</span>
+                    <span class="badge template">Template</span>
+                    <ul class="link-list">
+                        <li><a href="https://www.scribd.com/document/417295883/Programme-Maintenance-Preventive-Presse-Hydraulique"
+                                target="_blank">Scribd - Programme détaillé</a></li>
+                        <li><a href="https:////www.harsle.com/fr/presse-hydraulique-guide-entretien/"
+                                target="_blank">Harsle - Guide d'entretien</a></li>
+                    </ul>
+                </div>
+
+                <div class="resource-card">
+                    <span class="icon"></span>
+                    <h4>Manuels Compac & Profi Press</h4>
+                    <p class="description">Documentation pour presses hydrauliques d'atelier (6 à 70 tonnes)</p>
+                    <span class="badge pdf">PDF</span>
+                    <ul class="link-list">
+                        <li><a href="https://www.bati-avenue.com/media/pdf/COMPAC_HP70_G2.pdf" target="_blank">Compac
+                                HP70 - Manuel complet</a></li>
+                        <li><a href="https://www.manomano.fr/conseil/mode-emploi-presse-hydraulique-atelier"
+                                target="_blank">ManoMano - Modes d'emploi</a></li>
+                    </ul>
+                </div>
+
+                <div class="resource-card">
+                    <span class="icon"></span>
+                    <h4>Maintenance Systèmes Hydrauliques</h4>
+                    <p class="description">Information technique sur l'entretien des circuits hydrauliques</p>
+                    <span class="badge web">Web</span>
+                    <ul class="link-list">
+                        <li><a href="https://www.mobil.fr/fr-fr/industrial/pds/gl-xx-industrial-hydraulic-oil-maintenance"
+                                target="_blank">Mobil - Maintenance fluides hydrauliques</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <h2> 2. Protocoles de Sécurité & Normes ISO</h2>
+
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <span class="icon"></span>
+                    <h4>ISO 12100 - Sécurité des Machines</h4>
+                    <p class="description">Norme fondamentale sur l'appréciation et la réduction des risques machines
+                    </p>
+                    <span class="badge web">Web</span>
+                    <span class="badge">Français</span>
+                    <ul class="link-list">
+                        <li><a href="https://www.inrs.fr/media.html?refINRS=ED%206122" target="_blank">INRS - Guide
+                                pratique ISO 12100</a></li>
+                        <li><a href="https://www.picomto.com/blog/audit-conformite-norme-iso-12100"
+                                target="_blank">Picomto - Audit conformité ISO 12100</a></li>
+                        <li><a href="https://www.iso.org/standard/51528.html" target="_blank">ISO.org - ISO
+                                12100:2010</a></li>
+                    </ul>
+                </div>
+
+                <div class="resource-card">
+                    <span class="icon"></span>
+                    <h4>ISO 13849 - Systèmes de Commande</h4>
+                    <p class="description">Parties des systèmes de commande relatives à la sécurité (SRP/CS)</p>
+                    <span class="badge web">Web</span>
+                    <ul class="link-list">
+                        <li><a href="https://www.bmi-axelent.com/blog/les-normes-de-securite-des-machines-que-faut-il-savoir"
+                                target="_blank">BMI Axelent - Synthèse normes sécurité</a></li>
+                        <li><a href="https://www.emerson.com/fr-fr/automation/safety-security/machine-safety/iso-12100"
+                                target="_blank">Emerson - Guide ISO 12100/13849</a></li>
+                    </ul>
+                </div>
+
+                <div class="resource-card">
+                    <span class="icon"></span>
+                    <h4>Guides INRS Sécurité Machines</h4>
+                    <p class="description">Ressources françaises sur la prévention des risques machines industrielles
+                    </p>
+                    <span class="badge pdf">PDF</span>
+                    <span class="badge">Français</span>
+                    <ul class="link-list">
+                        <li><a href="https://www.inrs.fr/media.html?refINRS=ED%206122" target="_blank">ED 6122 -
+                                Appréciation du risque</a></li>
+                        <li><a href="https://travail-emploi.gouv.qc.ca/sante-securite/machines/" target="_blank">Québec
+                                - Sécurité machines</a></li>
+                    </ul>
+                </div>
+
+                <div class="resource-card">
+                    <span class="icon"></span>
+                    <h4>Modèles Rapports d'Audit Sécurité</h4>
+                    <p class="description">Templates pour audits de conformité et évaluations de risques</p>
+                    <span class="badge template">Template</span>
+                    <span class="badge pdf">PDF</span>
+                    <ul class="link-list">
+                        <li><a href="https://www.cerib.com/expertise/audit-securite-machines/" target="_blank">Cerib -
+                                Audit sécurité machines</a></li>
+                        <li><a href="https://www.scribd.com/doc/rapport-audit-securite" target="_blank">Scribd - Modèles
+                                rapports audit</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <h2> 3. Journaux de Maintenance & Templates</h2>
+
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <span class="icon"></span>
+                    <h4>Templates Excel Maintenance</h4>
+                    <p class="description">Feuilles de calcul pour suivi maintenance préventive</p>
+                    <span class="badge template">Template</span>
+                    <span class="badge">Excel</span>
+                    <ul class="link-list">
+                        <li><a href="https://www.documentero.com/templates/equipment-maintenance-log"
+                                target="_blank">Documentero - Equipment Log (Excel)</a></li>
+                        <li><a href="https://www.planification-modele.com/modele-suivi-interventions-maintenance/"
+                                target="_blank">Modèle suivi interventions</a></li>
+                    </ul>
+                </div>
+
+                <div class="resource-card">
+                    <span class="icon"></span>
+                    <h4>Fiches d'Entretien Préventif</h4>
+                    <p class="description">Formulaires de contrôle maintenance préventive complets</p>
+                    <span class="badge pdf">PDF</span>
+                    <span class="badge template">Template</span>
+                    <ul class="link-list">
+                        <li><a href="https://www.safetyculture.com/checklists/equipment-maintenance/"
+                                target="_blank">SafetyCulture - Checklists maintenance</a></li>
+                        <li><a href="https://www.scribd.com/document/fiche-entretien-preventif" target="_blank">Scribd -
+                                Fiches préventif</a></li>
+                    </ul>
+                </div>
+
+                <div class="resource-card">
+                    <span class="icon"></span>
+                    <h4>Historiques Maintenance</h4>
+                    <p class="description">Modèles de fiches historiques pour traçabilité interventions</p>
+                    <span class="badge template">Template</span>
+                    <ul class="link-list">
+                        <li><a href="https://www.ac-poitiers.fr/fiche-historique-maintenance" target="_blank">Modèle
+                                fiche historique</a></li>
+                        <li><a href="https://www.sitemate.com/resources/equipment-maintenance-log/"
+                                target="_blank">Sitemate - Equipment Log</a></li>
+                    </ul>
+                </div>
+
+                <div class="resource-card">
+                    <span class="icon"></span>
+                    <h4>Fiches d'Intervention</h4>
+                    <p class="description">Formulaires intervention maintenance corrective et préventive</p>
+                    <span class="badge template">Template</span>
+                    <span class="badge">Word</span>
+                    <ul class="link-list">
+                        <li><a href="https://www.organilog.com/modeles-documents/fiche-intervention/"
+                                target="_blank">Organilog - Fiche intervention (Word)</a></li>
+                        <li><a href="https://www.upkeep.com/learning/maintenance-log/" target="_blank">UpKeep -
+                                Maintenance Log Guide</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <h2> 4. Rapports d'Incidents & Retours d'Expérience</h2>
+
+            <div class="warning-box">
+                <h3 style="margin-top: 0; color: #f57c00;"> Note Importante</h3>
+                <p>Pour les rapports d'incidents, vous pouvez :</p>
+                <ul>
+                    <li><strong>Utiliser des REX internes</strong> à votre entreprise (anonymisés si nécessaire)</li>
+                    <li><strong>Créer des scénarios fictifs réalistes</strong> basés sur des incidents types</li>
+                    <li><strong>S'inspirer de bases publiques</strong> d'incidents industriels (BARPI, ARIA, etc.)</li>
+                </ul>
+            </div>
+
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <span class="icon"></span>
+                    <h4>Base ARIA (Accidents industriels)</h4>
+                    <p class="description">Base de données française des accidents technologiques</p>
+                    <span class="badge web">Web</span>
+                    <span class="badge">Français</span>
+                    <ul class="link-list">
+                        <li><a href="https://www.aria.developpement-durable.gouv.fr/" target="_blank">ARIA - Base
+                                accidents</a></li>
+                    </ul>
+                </div>
+
+                <div class="resource-card">
+                    <span class="icon"></span>
+                    <h4>Exemples Incidents Presses</h4>
+                    <p class="description">Scénarios type pour le TP (à adapter)</p>
+                    <span class="badge template">Template</span>
+                    <div
+                        style="margin-top: 15px; padding: 15px; background: #f8f9fa; border-radius: 8px; font-size: 0.95em;">
+                        <strong>Exemple 1 :</strong> Défaillance valve sécurité  Surpression<br>
+                        <strong>Exemple 2 :</strong> Interverrouillage défectueux  Accès zone danger<br>
+                        <strong>Exemple 3 :</strong> Maintenance non effectuée  Fuite hydraulique
+                    </div>
+                </div>
+            </div>
+
+            <h2> Récapitulatif pour le TP</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Étape TP</th>
+                        <th>Documents Requis</th>
+                        <th>Où les Trouver</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>1. Centralisation</strong></td>
+                        <td>
+                             Manuel technique (PDF)<br>
+                             Consignes sécurité (PDF/Word)<br>
+                             Extraits ISO (PDF)<br>
+                             Rapport incident (PDF)
+                        </td>
+                        <td>
+                            Enerpac, INRS, Picomto<br>
+                            Créer scénarios fictifs
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>2. Simplification</strong></td>
+                        <td>
+                             Templates maintenance<br>
+                             Checklists procédures
+                        </td>
+                        <td>
+                            Documentero, SafetyCulture<br>
+                            Templates Excel/PDF
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>3. Analyse Risques</strong></td>
+                        <td>
+                             Normes ISO 12100/13849<br>
+                             Guides INRS<br>
+                             REX incidents
+                        </td>
+                        <td>
+                            ISO.org, INRS.fr<br>
+                            Base ARIA
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="download-section">
+                <h3> Pack Complet pour Formateurs</h3>
+                <p>Vous êtes formateur ? Voici comment préparer votre session :</p>
+                <div style="margin-top: 25px;">
+                    <ol style="text-align: left; max-width: 700px; margin: 0 auto; color: white;">
+                        <li style="margin-bottom: 15px;"><strong>Téléchargez</strong> 2-3 manuels PDF (Enerpac, Compac)
+                        </li>
+                        <li style="margin-bottom: 15px;"><strong>Imprimez</strong> les guides ISO depuis INRS</li>
+                        <li style="margin-bottom: 15px;"><strong>Créez</strong> 2 rapports d'incidents fictifs (1 page
+                            chacun)</li>
+                        <li style="margin-bottom: 15px;"><strong>Préparez</strong> un document "Consignes Sécurité
+                            Entreprise" (adapter template)</li>
+                        <li style="margin-bottom: 15px;"><strong>Testez</strong> l'import dans NotebookLM avant la
+                            session</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="success-box">
+                <h3 style="margin-top: 0; color: #155724;"> Checklist Formateur</h3>
+                <p><strong>Avant le TP, assurez-vous d'avoir :</strong></p>
+                <ul>
+                    <li> Au moins 1 manuel technique complet (350+ pages)</li>
+                    <li> 1 document sécurité/norme ISO (extrait 20-30 pages)</li>
+                    <li> 2 rapports d'incidents (réels ou fictifs, 1-2 pages chacun)</li>
+                    <li> 1 template maintenance ou checklist</li>
+                    <li> Accès NotebookLM vérifié pour tous les stagiaires</li>
+                </ul>
+            </div>
+
+            <h2> Conseils Pratiques</h2>
+
+            <h3>Pour l'Import dans NotebookLM</h3>
+            <ul>
+                <li><strong>Format PDF privilégié :</strong> Meilleure reconnaissance que Word/images</li>
+                <li><strong>Nommage clair :</strong> "Manuel_Presse_HP70.pdf" plutôt que "Doc1.pdf"</li>
+                <li><strong>Taille optimale :</strong> PDFs < 50 MB pour import rapide</li>
+                <li><strong>URLs directes :</strong> Certains sites (INRS) permettent l'import direct par lien</li>
+                <li><strong>Langue :</strong> Privilégiez documents français pour stagiaires francophones</li>
+            </ul>
+
+            <h3>Adaptation à Votre Contexte</h3>
+            <p>Ce TP peut être adapté pour :</p>
+            <ul>
+                <li> <strong>Robotique collaborative</strong>  Manuels robots UR/KUKA + normes ISO 10218</li>
+                <li> <strong>Convoyeurs automatisés</strong>  Documentation Interroll + normes EN 619/620</li>
+                <li> <strong>Installations électriques</strong>  Normes NF C + schémas électriques</li>
+                <li> <strong>Systèmes pneumatiques</strong>  Catalogues Festo/SMC + guides maintenance</li>
+            </ul>
+
+        </div>
+    </div>
+</body>
+
+</html>

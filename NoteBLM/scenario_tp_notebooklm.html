@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TP NotebookLM - Prise en Main d'une Nouvelle Machine Industrielle</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 40px 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 50px 60px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.3em;
+            opacity: 0.95;
+        }
+
+        .content {
+            padding: 60px;
+        }
+
+        h2 {
+            color: #667eea;
+            font-size: 2.5em;
+            margin: 40px 0 20px 0;
+            border-bottom: 4px solid #764ba2;
+            padding-bottom: 15px;
+        }
+
+        h3 {
+            color: #764ba2;
+            font-size: 1.8em;
+            margin: 30px 0 15px 0;
+        }
+
+        h4 {
+            color: #555;
+            font-size: 1.4em;
+            margin: 20px 0 10px 0;
+        }
+
+        p {
+            font-size: 1.2em;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        ul,
+        ol {
+            margin-left: 40px;
+            margin-bottom: 20px;
+        }
+
+        li {
+            font-size: 1.15em;
+            margin-bottom: 12px;
+            color: #444;
+        }
+
+        .scenario-box {
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            border-left: 6px solid #e17055;
+        }
+
+        .scenario-box h3 {
+            color: #d63031;
+            margin-top: 0;
+        }
+
+        .objectives-box {
+            background: #e3f2fd;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            border-left: 6px solid #2196f3;
+        }
+
+        .objectives-box h3 {
+            color: #1976d2;
+            margin-top: 0;
+        }
+
+        .step-card {
+            background: white;
+            border: 3px solid #667eea;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 25px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s;
+        }
+
+        .step-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .step-number {
+            background: #667eea;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            font-weight: bold;
+            margin-right: 20px;
+            float: left;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #ffd70044 0%, #ff850044 100%);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .warning-box {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .warning-box strong {
+            color: #f57c00;
+        }
+
+        .success-box {
+            background: #d4edda;
+            border: 2px solid #28a745;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .success-box strong {
+            color: #155724;
+        }
+
+        .resources-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-size: 1.1em;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .resources-table thead {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .resources-table th {
+            padding: 20px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .resources-table td {
+            padding: 15px 20px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .resources-table tbody tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        .resources-table a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .resources-table a:hover {
+            text-decoration: underline;
+        }
+
+        .timeline {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 25px 0;
+        }
+
+        .icon {
+            font-size: 1.8em;
+            margin-right: 10px;
+        }
+
+        code {
+            background: #f4f4f4;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #d63031;
+            font-size: 0.95em;
+        }
+
+        .deliverables {
+            background: linear-gradient(135deg, #a29bfe 0%, #6c5ce7 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+        }
+
+        .deliverables h3 {
+            color: white;
+            border-bottom: 2px solid white;
+            padding-bottom: 10px;
+        }
+
+        .deliverables li {
+            color: white;
+        }
+
+        .footer {
+            background: #2d3436;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            margin: 5px;
+            font-weight: 600;
+        }
+
+        .uimm-header {
+            background: white;
+            padding: 20px 40px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            border-bottom: 3px solid #0066a1;
+        }
+
+        .uimm-header img {
+            height: 80px;
+            width: auto;
+        }
+
+        .uimm-header h2 {
+            color: #0066a1;
+            font-size: 1.8em;
+            margin: 0;
+            border: none;
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- UIMM Header -->
+        <div class="uimm-header">
+            <img src="logo_uimm_placeholder.jpg" alt="Logo UIMM">
+            <h2>Pôle Formation UIMM - CVDL</h2>
+        </div>
+
+
+        <div class="header">
+            <h1> TP NotebookLM</h1>
+            <p>Prise en Main d'une Nouvelle Machine Industrielle avec l'IA</p>
+            <div style="margin-top: 20px;">
+                <span class="badge">Durée: 3h</span>
+                <span class="badge">Niveau: Intermédiaire</span>
+                <span class="badge">Production & Maintenance</span>
+            </div>
+        </div>
+
+        <div class="content">
+            <!-- Contexte -->
+            <h2> Contexte du TP</h2>
+
+            <div class="scenario-box">
+                <h3> Votre Mission</h3>
+                <p><strong>Vous êtes Responsable Production ou Responsable Maintenance</strong> dans une entreprise
+                    industrielle. Votre direction vient d'investir dans une <span class="highlight">nouvelle presse
+                        hydraulique automatisée de 60 tonnes</span> pour améliorer la productivité.</p>
+
+                <p>Cette machine complexe arrive demain sur site. Vous disposez de :</p>
+                <ul>
+                    <li> <strong>Manuel technique constructeur</strong> (350 pages, en anglais)</li>
+                    <li> <strong>Protocoles de sécurité internes</strong> de l'entreprise</li>
+                    <li> <strong>Rapports d'incidents</strong> sur des modèles similaires dans d'autres sites</li>
+                    <li> <strong>Normes ISO</strong> applicables (sécurité machines)</li>
+                </ul>
+
+                <div class="warning-box" style="margin-top: 20px;">
+                    <strong> Problème :</strong> Vous avez <strong>seulement 48h</strong> pour :
+                    <ul style="margin-top: 10px;">
+                        <li>Comprendre le fonctionnement de la machine</li>
+                        <li>Identifier les risques critiques</li>
+                        <li>Préparer les plans de maintenance préventive</li>
+                        <li>Former les opérateurs aux procédures essentielles</li>
+                    </ul>
+                </div>
+
+                <p style="margin-top: 20px;"><strong> Solution :</strong> Vous allez utiliser
+                    <strong>NotebookLM</strong> pour centraliser, analyser et extraire rapidement les informations
+                    critiques de tous ces documents.
+                </p>
+            </div>
+
+            <!-- Objectifs -->
+            <div class="objectives-box">
+                <h3> Objectifs Pédagogiques</h3>
+                <p>À la fin de ce TP, vous serez capable de :</p>
+                <ol>
+                    <li> <strong>Centraliser</strong> des documents techniques hétérogènes dans NotebookLM</li>
+                    <li> <strong>Interroger intelligemment</strong> une base documentaire complexe</li>
+                    <li> <strong>Extraire</strong> des checklists et procédures opérationnelles</li>
+                    <li> <strong>Identifier</strong> les risques critiques et moyens de prévention</li>
+                    <li> <strong>Produire</strong> des livrables professionnels (rapports, infographies,
+                        présentations)</li>
+                    <li> <strong>Gagner un temps considérable</strong> sur l'analyse documentaire industrielle</li>
+                </ol>
+            </div>
+
+            <!-- Compétences -->
+            <h3> Compétences Développées</h3>
+            <ul>
+                <li><strong>Technique :</strong> Maîtrise de NotebookLM, analyse de documentation technique</li>
+                <li><strong>Métier :</strong> Gestion de risques, maintenance préventive, conformité réglementaire</li>
+                <li><strong>Transversale :</strong> Synthèse d'information, prise de décision rapide, communication</li>
+            </ul>
+
+            <!-- Étapes du TP -->
+            <h2> Déroulement du TP</h2>
+
+            <!-- Étape 1 -->
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <div style="margin-left: 80px;">
+                    <h3 style="margin-top: 0; color: #667eea;"> Étape 1 : Centralisation Documentaire (30 min)</h3>
+
+                    <h4>Objectif</h4>
+                    <p>Créer une base de connaissances unifiée dans NotebookLM en important tous les documents
+                        pertinents.</p>
+
+                    <h4>Actions à réaliser</h4>
+                    <ol>
+                        <li>Créer un nouveau Notebook nommé <code>Presse Hydraulique 60T - Mise en Service 2026</code>
+                        </li>
+                        <li>Importer les sources suivantes (voir section "Documents Fournis") :
+                            <ul>
+                                <li>Manuel technique (PDF)</li>
+                                <li>Consignes de sécurité (Word/PDF)</li>
+                                <li>Rapports d'incidents (PDF)</li>
+                                <li>Extraits normes ISO 12100 et ISO 13849 (PDF)</li>
+                            </ul>
+                        </li>
+                        <li>Vérifier que toutes les sources sont bien chargées (panneau Sources à gauche)</li>
+                        <li>Générer une <strong>synthèse automatique</strong> pour avoir une vue d'ensemble</li>
+                    </ol>
+
+                    <div class="success-box">
+                        <strong> Résultat attendu :</strong> Un notebook avec 4-6 sources importées et une synthèse
+                        générale affichée.
+                    </div>
+
+                    <h4>Questions de réflexion</h4>
+                    <ul>
+                        <li>Quels types de fichiers NotebookLM accepte-t-il ?</li>
+                        <li>Comment vérifier que l'import s'est bien déroulé ?</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Étape 2 -->
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <div style="margin-left: 80px;">
+                    <h3 style="margin-top: 0; color: #667eea;"> Étape 2 : Simplification & Extraction (45 min)</h3>
+
+                    <h4>Objectif</h4>
+                    <p>Utiliser NotebookLM pour transformer des centaines de pages en informations actionnables.</p>
+
+                    <h4>Missions</h4>
+
+                    <h4>Mission 2.1 : Checklist de Maintenance Hebdomadaire</h4>
+                    <p><strong>Prompt suggéré :</strong></p>
+                    <blockquote
+                        style="background: #f8f9fa; padding: 15px; border-left: 4px solid #667eea; font-style: italic; margin: 15px 0;">
+                        "En te basant uniquement sur le manuel technique et les consignes de sécurité, extrais les
+                        <strong>10 points critiques</strong> de maintenance préventive hebdomadaire pour cette presse
+                        hydraulique. Présente-les sous forme de checklist opérationnelle avec : action, durée estimée,
+                        et points de vigilance."
+                    </blockquote>
+
+                    <h4>Mission 2.2 : Procédure de Démarrage Simplifiée</h4>
+                    <p><strong>Prompt suggéré :</strong></p>
+                    <blockquote
+                        style="background: #f8f9fa; padding: 15px; border-left: 4px solid #667eea; font-style: italic; margin: 15px 0;">
+                        "Crée une procédure de démarrage simplifiée en 8 étapes maximum pour un opérateur niveau BAC
+                        PRO. Inclus les contrôles visuels pré-démarrage et les points de sécurité obligatoires."
+                    </blockquote>
+
+                    <h4>Mission 2.3 : Identification des Pièces d'Usure</h4>
+                    <p><strong>Prompt suggéré :</strong></p>
+                    <blockquote
+                        style="background: #f8f9fa; padding: 15px; border-left: 4px solid #667eea; font-style: italic; margin: 15px 0;">
+                        "Liste toutes les pièces d'usure mentionnées dans le manuel avec leur <strong>fréquence de
+                            remplacement recommandée</strong> et leurs références constructeur. Présente sous forme de
+                        tableau."
+                    </blockquote>
+
+                    <div class="success-box">
+                        <strong> Résultats attendus :</strong>
+                        <ul>
+                            <li>Checklist de maintenance (10 points)</li>
+                            <li>Procédure de démarrage (8 étapes)</li>
+                            <li>Tableau des pièces d'usure</li>
+                        </ul>
+                    </div>
+
+                    <div class="warning-box">
+                        <strong> Astuce :</strong> Utilisez le bouton "Créer un guide d'étude" dans le panneau Studio
+                        pour générer automatiquement des supports de formation !
+                    </div>
+                </div>
+            </div>
+
+            <!-- Étape 3 -->
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <div style="margin-left: 80px;">
+                    <h3 style="margin-top: 0; color: #667eea;"> Étape 3 : Analyse de Risques (45 min)</h3>
+
+                    <h4>Objectif</h4>
+                    <p>Identifier et prévenir les risques critiques en croisant plusieurs sources documentaires.</p>
+
+                    <h4>Missions</h4>
+
+                    <h4>Mission 3.1 : Identifier les 3 Risques Majeurs</h4>
+                    <p><strong>Prompt suggéré :</strong></p>
+                    <blockquote
+                        style="background: #f8f9fa; padding: 15px; border-left: 4px solid #667eea; font-style: italic; margin: 15px 0;">
+                        "En croisant le manuel technique, les rapports d'incidents et les protocoles de sécurité,
+                        identifie les <strong>3 risques majeurs</strong> pour cette presse hydraulique. Pour chaque
+                        risque, indique :
+                        <ul>
+                            <li>Nature du risque (écrasement, projection, etc.)</li>
+                            <li>Gravité potentielle (arrêt, blessure, etc.)</li>
+                            <li>Situations déclenchantes</li>
+                            <li>Moyens de prévention recommandés</li>
+                        </ul>
+                        Cite précisément tes sources."
+                    </blockquote>
+
+                    <h4>Mission 3.2 : Conformité Normes ISO</h4>
+                    <p><strong>Prompt suggéré :</strong></p>
+                    <blockquote
+                        style="background: #f8f9fa; padding: 15px; border-left: 4px solid #667eea; font-style: italic; margin: 15px 0;">
+                        "Vérifie si la machine respecte les exigences de la norme ISO 12100 concernant :
+                        <ul>
+                            <li>Les protections contre l'accès aux zones dangereuses</li>
+                            <li>Les dispositifs d'arrêt d'urgence</li>
+                            <li>Les interverrouillages de sécurité</li>
+                        </ul>
+                        Liste les points conformes et les éventuelles lacunes."
+                    </blockquote>
+
+                    <h4>Mission 3.3 : Plan de Prévention Intégré</h4>
+                    <p><strong>Prompt suggéré :</strong></p>
+                    <blockquote
+                        style="background: #f8f9fa; padding: 15px; border-left: 4px solid #667eea; font-style: italic; margin: 15px 0;">
+                        "Génère un plan de prévention pour l'installation et la mise en service de cette machine,
+                        incluant :
+                        <ul>
+                            <li>EPI (Équipements de Protection Individuelle) obligatoires</li>
+                            <li>Procédures de consignation/déconsignation</li>
+                            <li>Formation minimale requise des opérateurs</li>
+                            <li>Contrôles périodiques obligatoires</li>
+                        </ul>"
+                    </blockquote>
+
+                    <div class="success-box">
+                        <strong> Résultats attendus :</strong>
+                        <ul>
+                            <li>Rapport des 3 risques majeurs avec citations</li>
+                            <li>Checklist de conformité ISO</li>
+                            <li>Plan de prévention opérationnel</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Étape 4 -->
+            <div class="step-card">
+                <div class="step-number">4</div>
+                <div style="margin-left: 80px;">
+                    <h3 style="margin-top: 0; color: #667eea;"> Étape 4 : Production de Livrables (30 min)</h3>
+
+                    <h4>Objectif</h4>
+                    <p>Créer des supports professionnels pour communiquer efficacement.</p>
+
+                    <h4>Livrables à Produire</h4>
+
+                    <ol>
+                        <li><strong> Présentation PowerPoint</strong>
+                            <ul>
+                                <li>Utilisez le panneau Studio "Créer des slides"</li>
+                                <li>Thème : "Mise en Service Presse Hydraulique 60T - Points Critiques"</li>
+                                <li>Cible : Direction et équipe terrain</li>
+                            </ul>
+                        </li>
+
+                        <li><strong> Infographie</strong>
+                            <ul>
+                                <li>Utilisez le panneau Studio "Créer une infographie"</li>
+                                <li>Sujet : "Les 3 Risques Majeurs et leurs Préventions"</li>
+                                <li>Style : Professionnel, orientation portrait</li>
+                            </ul>
+                        </li>
+
+                        <li><strong> Audio Overview (optionnel)</strong>
+                            <ul>
+                                <li>Générez un podcast IA résumant les points clés</li>
+                                <li>Durée cible : 5-10 minutes</li>
+                                <li>Écoutez-le et notez ce qui est pertinent</li>
+                            </ul>
+                        </li>
+                    </ol>
+
+                    <div class="success-box">
+                        <strong> Résultats attendus :</strong> 3 supports professionnels prêts à être partagés avec
+                        votre équipe.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Étape 5 -->
+            <div class="step-card">
+                <div class="step-number">5</div>
+                <div style="margin-left: 80px;">
+                    <h3 style="margin-top: 0; color: #667eea;"> Étape 5 : Restitution & Débriefing (30 min)</h3>
+
+                    <h4>Présentation en Groupe</h4>
+                    <p>Chaque groupe présente (5-7 minutes) :</p>
+                    <ul>
+                        <li> Les 3 risques identifiés et leurs solutions</li>
+                        <li> La checklist de maintenance créée</li>
+                        <li> Les livrables produits (slide, infographie)</li>
+                        <li> Le temps gagné vs méthode manuelle (estimation)</li>
+                    </ul>
+
+                    <h4>Questions de Débriefing</h4>
+                    <ol>
+                        <li>Combien de temps aurait pris cette analyse sans NotebookLM ?</li>
+                        <li>Quelles ont été les limites rencontrées ?</li>
+                        <li>Les citations fournies étaient-elles toujours pertinentes ?</li>
+                        <li>Comment pourriez-vous utiliser NotebookLM dans votre travail quotidien ?</li>
+                        <li>Quels autres cas d'usage industriels voyez-vous ?</li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- Documents Fournis -->
+            <h2> Documents Fournis pour le TP</h2>
+
+            <p>Les ressources suivantes sont mises à votre disposition. Vous pouvez les télécharger et les importer dans
+                NotebookLM.</p>
+
+            <table class="resources-table">
+                <thead>
+                    <tr>
+                        <th>Type de Document</th>
+                        <th>Description</th>
+                        <th>Source / Lien</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong> Manuel Technique</strong></td>
+                        <td>Guide d'utilisation et maintenance presse hydraulique (Enerpac XLP ou similaire)</td>
+                        <td>
+                            <a href="https://www.enerpac.com/en-us/downloads" target="_blank">Enerpac Manuels</a><br>
+                            <a href="https://www.scribd.com/document/presses-hydrauliques" target="_blank">Scribd -
+                                Programmes Maintenance</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong> Protocoles Sécurité</strong></td>
+                        <td>Consignes de sécurité machines industrielles conformes aux normes</td>
+                        <td>
+                            <a href="https://www.inrs.fr/media.html?refINRS=ED%206122" target="_blank">INRS - Sécurité
+                                Machines</a><br>
+                            Document à adapter selon vos besoins
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong> Rapports d'Incidents</strong></td>
+                        <td>Exemples de retours d'expérience sur presses hydrauliques</td>
+                        <td>
+                            Vous pouvez créer des rapports fictifs basés sur des incidents types :<br>
+                            - Défaillance système hydraulique<br>
+                            - Incident lié aux protections<br>
+                            - Problème de maintenance préventive
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong> Normes ISO</strong></td>
+                        <td>Extraits ISO 12100 (Sécurité des machines) et ISO 13849 (Systèmes de commande)</td>
+                        <td>
+                            <a href="https://www.iso.org/standard/51528.html" target="_blank">ISO 12100:2010</a><br>
+                            <a href="https://www.picomto.com/blog/audit-conformite-norme-iso-12100"
+                                target="_blank">Picomto - Guide ISO 12100</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong> Templates Maintenance</strong></td>
+                        <td>Modèles de fiches de maintenance préventive</td>
+                        <td>
+                            <a href="https://www.documentero.com/templates/equipment-maintenance-log"
+                                target="_blank">Documentero Template</a><br>
+                            <a href="https://www.safetyculture.com/checklists/equipment-maintenance/"
+                                target="_blank">SafetyCulture Templates</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+        <div class="footer">
+            <p><strong>Formation NotebookLM - Industrie 4.0</strong></p>
+            <p>Ce TP a été conçu pour démontrer la puissance de l'IA appliquée aux métiers de la production et de la
+                maintenance industrielle.</p>
+            <p style="margin-top: 15px; opacity: 0.8;">© 2026 - Formation Continue - Tous droits réservés</p>
+        </div>
+    </div>
+</body>
+
+</html>
