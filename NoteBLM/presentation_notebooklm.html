@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NotebookLM - Présentation Formation Entreprise</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            overflow: hidden;
+        }
+
+        .presentation {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slide {
+            display: none;
+            width: 90%;
+            max-width: 1200px;
+            height: 85vh;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 60px;
+            animation: slideIn 0.5s ease;
+        }
+
+        .slide.active {
+            display: flex;
+            flex-direction: column;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        h1 {
+            font-size: 3.5em;
+            color: #667eea;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 2.5em;
+            color: #667eea;
+            margin-bottom: 30px;
+            border-bottom: 4px solid #764ba2;
+            padding-bottom: 15px;
+        }
+
+        h3 {
+            font-size: 1.8em;
+            color: #764ba2;
+            margin: 25px 0 15px 0;
+        }
+
+        p,
+        li {
+            font-size: 1.3em;
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        ul {
+            margin-left: 40px;
+        }
+
+        li {
+            margin-bottom: 20px;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #ffd70033 0%, #ff850033 100%);
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 5px solid #667eea;
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-card h4 {
+            color: #667eea;
+            font-size: 1.4em;
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            font-size: 1.1em;
+            color: #555;
+        }
+
+        .navigation {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            display: flex;
+            gap: 15px;
+        }
+
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 35px;
+            border-radius: 50px;
+            font-size: 1.1em;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s;
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .slide-counter {
+            position: fixed;
+            bottom: 40px;
+            left: 40px;
+            background: white;
+            padding: 10px 25px;
+            border-radius: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #667eea;
+        }
+
+        .icon {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+        }
+
+        .center-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        .workflow-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            gap: 20px;
+        }
+
+        .step {
+            flex: 1;
+            background: white;
+            border: 3px solid #667eea;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            position: relative;
+        }
+
+        .step::after {
+            content: '';
+            position: absolute;
+            right: -30px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2em;
+            color: #764ba2;
+        }
+
+        .step:last-child::after {
+            content: '';
+        }
+
+        .step-number {
+            background: #667eea;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .comparison-item {
+            padding: 25px;
+            border-radius: 15px;
+        }
+
+        .traditional {
+            background: #ffe6e6;
+            border-left: 5px solid #ff4444;
+        }
+
+        .notebooklm {
+            background: #e6ffe6;
+            border-left: 5px solid #44ff44;
+        }
+
+        .subtitle {
+            font-size: 1.5em;
+            color: #555;
+            text-align: center;
+            margin-top: 15px;
+            font-style: italic;
+        }
+    
+        .uimm-header {
+            background: white;
+            padding: 20px 40px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            border-bottom: 3px solid #0066a1;
+        }
+
+        .uimm-header img {
+            height: 80px;
+            width: auto;
+        }
+
+        .uimm-header h2 {
+            color: #0066a1;
+            font-size: 1.8em;
+            margin: 0;
+            border: none;
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="presentation">
+        <!-- UIMM Header -->
+        <div class="uimm-header" style="position: fixed; top: 0; left: 0; right: 0; z-index: 1000;">
+            <img src="logo_uimm_placeholder.jpg" alt="Logo UIMM">
+            <h2>Pôle Formation UIMM - CVDL</h2>
+        </div>
+
+        
+        <!-- Slide 1: Titre -->
+        <div class="slide active">
+            <div class="center-content">
+                <div class="icon"></div>
+                <h1>NotebookLM</h1>
+                <p class="subtitle">Votre Assistant IA pour la Gestion Documentaire Professionnelle</p>
+                <p style="margin-top: 40px; font-size: 1.2em; color: #777;">Formation pour Responsables Production &
+                    Maintenance</p>
+            </div>
+        </div>
+
+        <!-- Slide 2: Qu'est-ce que NotebookLM ? -->
+        <div class="slide">
+            <h2>Qu'est-ce que NotebookLM ?</h2>
+            <p>NotebookLM est un <span class="highlight">assistant IA développé par Google</span> qui révolutionne la
+                façon dont vous travaillez avec vos documents professionnels.</p>
+
+            <h3> Concept Clé</h3>
+            <p>Contrairement aux chatbots classiques qui "inventent" des réponses, NotebookLM :</p>
+            <ul>
+                <li><strong>Travaille uniquement sur VOS documents</strong> - pas d'information aléatoire du web</li>
+                <li><strong>Cite ses sources</strong> - chaque réponse est traçable</li>
+                <li><strong>Analyse et synthétise</strong> - transforme des informations complexes en insights
+                    actionnables</li>
+                <li><strong>Reste dans votre contexte</strong> - comprend vos besoins spécifiques</li>
+            </ul>
+
+            <p
+                style="margin-top: 30px; background: #fff3cd; padding: 20px; border-radius: 10px; border-left: 5px solid #ffc107;">
+                <strong> En bref :</strong> Un espace de travail intelligent où vos documents techniques prennent vie
+                grâce à l'IA.
+            </p>
+        </div>
+
+        <!-- Slide 3: Pourquoi pour l'Industrie ? -->
+        <div class="slide">
+            <h2>Pourquoi NotebookLM en Industrie ?</h2>
+
+            <div class="comparison">
+                <div class="comparison-item traditional">
+                    <h3 style="color: #ff4444;"> Méthode Traditionnelle</h3>
+                    <ul style="font-size: 1.1em;">
+                        <li>Manuels de 300 pages</li>
+                        <li>Informations dispersées</li>
+                        <li>Recherche manuelle chronophage</li>
+                        <li>Risque d'oubli de procédures</li>
+                        <li>Difficultés de formation</li>
+                    </ul>
+                </div>
+
+                <div class="comparison-item notebooklm">
+                    <h3 style="color: #44AA44;"> Avec NotebookLM</h3>
+                    <ul style="font-size: 1.1em;">
+                        <li>Réponses instantanées</li>
+                        <li>Vue d'ensemble centralisée</li>
+                        <li>Extraction des points critiques</li>
+                        <li>Checklists automatiques</li>
+                        <li>Formation accélérée</li>
+                    </ul>
+                </div>
+            </div>
+
+            <p style="margin-top: 30px; text-align: center; font-size: 1.4em; color: #667eea; font-weight: bold;">
+                Gagnez du temps, réduisez les erreurs, améliorez la sécurité 
+            </p>
+        </div>
+
+        <!-- Slide 4: Fonctionnalités Principales -->
+        <div class="slide">
+            <h2>Fonctionnalités Principales</h2>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="icon"></div>
+                    <h4>Sources Multiformats</h4>
+                    <p>Importez PDFs, Word, vidéos YouTube, sites web, images - jusqu'à 300 sources par notebook.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="icon"></div>
+                    <h4>Chat Intelligent</h4>
+                    <p>Posez des questions en langage naturel et obtenez des réponses précises avec citations.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="icon"></div>
+                    <h4>Synthèses Automatiques</h4>
+                    <p>Générez des résumés, tableaux comparatifs, et guides d'étude en un clic.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="icon"></div>
+                    <h4>Audio Discussions</h4>
+                    <p>Écoutez des podcasts IA qui expliquent vos documents pendant vos déplacements.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="icon"></div>
+                    <h4>Infographies</h4>
+                    <p>Créez des infographies visuelles pour communiquer des informations complexes.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="icon"></div>
+                    <h4>Présentations</h4>
+                    <p>Générez automatiquement des diaporamas professionnels à partir de vos sources.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Workflow Type -->
+        <div class="slide">
+            <h2>Workflow en Milieu Industriel</h2>
+
+            <div class="workflow-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h4> Centralisation</h4>
+                    <p>Importez tous vos documents : manuels techniques, procédures, rapports d'incidents</p>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h4> Interrogation</h4>
+                    <p>Posez vos questions : "Quels sont les risques ?", "Procédure de maintenance ?"</p>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h4> Action</h4>
+                    <p>Obtenez des checklists, plans d'action, et recommandations basées sur VOS docs</p>
+                </div>
+            </div>
+
+            <div
+                style="margin-top: 50px; background: #e3f2fd; padding: 25px; border-radius: 15px; border-left: 5px solid #2196f3;">
+                <h3 style="color: #1976d2; margin-top: 0;"> Exemple Concret</h3>
+                <p><strong>Scénario :</strong> Nouvelle presse hydraulique reçue</p>
+                <ul style="margin-top: 15px;">
+                    <li>Import du manuel (350 pages) + consignes sécurité + retours d'expérience</li>
+                    <li>Question : "Quels sont les 10 points de maintenance hebdomadaire ?"</li>
+                    <li>Résultat : Checklist prête en 30 secondes au lieu de 2 heures de lecture</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 6: Cas d'Usage Industrie -->
+        <div class="slide">
+            <h2>Cas d'Usage en Production & Maintenance</h2>
+
+            <h3> Maintenance Préventive</h3>
+            <ul>
+                <li>Extraire les plannings de maintenance à partir des manuels constructeurs</li>
+                <li>Identifier les pièces critiques et leurs fréquences de remplacement</li>
+                <li>Créer des protocoles de contrôle personnalisés</li>
+            </ul>
+
+            <h3> Gestion des Risques</h3>
+            <ul>
+                <li>Analyser les rapports d'incidents passés</li>
+                <li>Identifier les patterns et risques récurrents</li>
+                <li>Générer des plans de prévention basés sur l'historique</li>
+            </ul>
+
+            <h3> Formation & Intégration</h3>
+            <ul>
+                <li>Créer des guides simplifiés pour nouveaux opérateurs</li>
+                <li>Générer des quiz de vérification des connaissances</li>
+                <li>Produire des supports visuels (infographies, présentations)</li>
+            </ul>
+
+            <h3> Conformité & Audit</h3>
+            <ul>
+                <li>Vérifier la conformité aux normes (ISO, CE, etc.)</li>
+                <li>Préparer des dossiers d'audit en quelques clics</li>
+                <li>Extraire les exigences réglementaires pertinentes</li>
+            </ul>
+        </div>
+
+        <!-- Slide 7: Points Clés de Sécurité -->
+        <div class="slide">
+            <h2>Sécurité & Confidentialité</h2>
+
+            <div
+                style="background: #fff3cd; padding: 30px; border-radius: 15px; margin-bottom: 30px; border-left: 5px solid #ffc107;">
+                <h3 style="color: #f57c00; margin-top: 0;"> Vos Données Restent Privées</h3>
+                <ul>
+                    <li><strong>NotebookLM travaille uniquement sur VOS documents</strong></li>
+                    <li>Aucune connexion automatique à Internet pour chercher des infos</li>
+                    <li>Les sources restent dans votre espace de travail</li>
+                    <li>Contrôle total sur ce qui est partagé ou analysé</li>
+                </ul>
+            </div>
+
+            <h3> Avantages par Rapport aux Chatbots Génériques</h3>
+            <ul>
+                <li><strong>Pas d'hallucinations :</strong> Réponses basées uniquement sur vos documents</li>
+                <li><strong>Traçabilité totale :</strong> Chaque réponse cite sa source exacte</li>
+                <li><strong>Contexte métier :</strong> Comprend VOS procédures, VOS équipements</li>
+                <li><strong>Fiabilité :</strong> Idéal pour environnements critiques et réglementés</li>
+            </ul>
+
+            <p style="margin-top: 30px; font-size: 1.2em; font-weight: bold; color: #667eea; text-align: center;">
+                 NotebookLM = Votre expert documentaire personnel, disponible 24/7
+            </p>
+        </div>
+
+        <!-- Slide 8: Limites & Bonnes Pratiques -->
+        <div class="slide">
+            <h2>Limites & Bonnes Pratiques</h2>
+
+            <h3 style="color: #ff9800;"> Ce que NotebookLM NE fait PAS</h3>
+            <ul>
+                <li>N'exécute pas de code ni de commandes</li>
+                <li>Ne remplace pas votre expertise technique</li>
+                <li>Ne se connecte pas à vos systèmes de production</li>
+                <li>Ne prend pas de décisions critiques à votre place</li>
+            </ul>
+
+            <h3 style="color: #4caf50; margin-top: 30px;"> Bonnes Pratiques</h3>
+            <ul>
+                <li><strong>Qualité des sources :</strong> Importez des documents fiables et à jour</li>
+                <li><strong>Questions précises :</strong> Plus votre question est claire, meilleure est la réponse</li>
+                <li><strong>Vérification :</strong> Toujours vérifier les citations et valider les résultats</li>
+                <li><strong>Organisation :</strong> Créez un notebook par projet/machine pour plus de clarté</li>
+                <li><strong>Mise à jour :</strong> Actualisez vos sources quand les procédures évoluent</li>
+            </ul>
+
+            <div style="margin-top: 30px; background: #e1f5fe; padding: 20px; border-radius: 10px;">
+                <p style="font-size: 1.2em;"><strong> Règle d'Or :</strong> NotebookLM est un <strong>assistant
+                        intelligent</strong>, pas un remplaçant de votre jugement professionnel.</p>
+            </div>
+        </div>
+
+        <!-- Slide 9: Commencer -->
+        <div class="slide">
+            <h2>Comment Commencer ?</h2>
+
+            <div
+                style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; border-radius: 15px; margin-bottom: 30px;">
+                <h3 style="color: white; border: none; padding: 0;"> Accès à NotebookLM</h3>
+                <p style="font-size: 1.3em; margin-top: 15px; color: white;">
+                    <strong>URL :</strong> <a href="https://notebooklm.google.com"
+                        style="color: #ffd700; text-decoration: underline;">notebooklm.google.com</a>
+                </p>
+                <p style="color: white;">Gratuit avec un compte Google - Version Pro disponible pour fonctionnalités
+                    avancées</p>
+            </div>
+
+            <h3> Démarrage en 3 Étapes</h3>
+            <div class="workflow-steps" style="margin-top: 20px;">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <p style="font-size: 1.1em;"><strong>Créer un Notebook</strong><br>Donnez-lui un nom clair (ex:
+                        "Presse Hydraulique XY-2000")</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <p style="font-size: 1.1em;"><strong>Importer Sources</strong><br>Ajoutez manuels, procédures,
+                        rapports pertinents</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <p style="font-size: 1.1em;"><strong>Poser Questions</strong><br>Commencez à explorer et obtenir des
+                        insights</p>
+                </div>
+            </div>
+
+            <p style="margin-top: 40px; text-align: center; font-size: 1.3em; color: #667eea; font-weight: bold;">
+                 Passons maintenant à la pratique avec un TP concret !
+            </p>
+        </div>
+
+        <!-- Slide 10: Conclusion -->
+        <div class="slide">
+            <div class="center-content">
+                <div class="icon"></div>
+                <h1 style="font-size: 2.5em;">NotebookLM en Action</h1>
+
+                <div
+                    style="background: #f5f5f5; padding: 40px; border-radius: 20px; margin-top: 40px; max-width: 800px;">
+                    <h3 style="color: #667eea; text-align: center;">Points Clés à Retenir</h3>
+                    <ul style="text-align: left; margin-top: 20px; font-size: 1.2em;">
+                        <li> Assistant IA basé sur VOS documents uniquement</li>
+                        <li> Réponses traçables avec citations</li>
+                        <li> Gain de temps massif sur analyse documentaire</li>
+                        <li> Idéal pour maintenance, sécurité, formation</li>
+                        <li> Gratuit et facile à prendre en main</li>
+                    </ul>
+                </div>
+
+                <p style="margin-top: 50px; font-size: 1.5em; color: #764ba2; font-weight: bold;">
+                     Objectif : Transformer la complexité documentaire en actions claires
+                </p>
+
+                <p style="margin-top: 30px; font-size: 1.2em; color: #666;">
+                    Questions ? Prêts pour le TP ?
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-counter">
+        <span id="current">1</span> / <span id="total">10</span>
+    </div>
+
+    <div class="navigation">
+        <button id="prev" onclick="changeSlide(-1)"> Précédent</button>
+        <button id="next" onclick="changeSlide(1)">Suivant </button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        document.getElementById('total').textContent = totalSlides;
+
+        function showSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (n + totalSlides) % totalSlides;
+            slides[currentSlide].classList.add('active');
+
+            document.getElementById('current').textContent = currentSlide + 1;
+
+            document.getElementById('prev').disabled = currentSlide === 0;
+            document.getElementById('next').disabled = currentSlide === totalSlides - 1;
+        }
+
+        function changeSlide(direction) {
+            showSlide(currentSlide + direction);
+        }
+
+        // Navigation au clavier
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft' && currentSlide > 0) changeSlide(-1);
+            if (e.key === 'ArrowRight' && currentSlide < totalSlides - 1) changeSlide(1);
+        });
+
+        // Initialisation
+        showSlide(0);
+    </script>
+</body>
+
+</html>
