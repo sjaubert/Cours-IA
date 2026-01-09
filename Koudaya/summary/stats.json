@@ -1,0 +1,22 @@
+{
+    "P": {
+        "type": "P",
+        "total_moules": 16,
+        "moules_defectueux": 3,
+        "total_defauts_vis": 30,
+        "taux_non_conformite": 18.75,
+        "taux_defaut_vis": 18.75,
+        "moyenne_globale": 83.4831171875,
+        "timestamp": "09/01/2026 14:29"
+    },
+    "G": {
+        "type": "G",
+        "total_moules": 16,
+        "moules_defectueux": 6,
+        "total_defauts_vis": 33,
+        "taux_non_conformite": 37.5,
+        "taux_defaut_vis": 20.625,
+        "moyenne_globale": 131.12388392857142,
+        "timestamp": "09/01/2026 14:30"
+    }
+}

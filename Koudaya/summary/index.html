@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SATEBA France - Rapport d'Analyse PMET</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <h1>SATEBA <span>France</span></h1>
+            <div class="rail-accent"></div>
+        </div>
+        <p style="text-align: center; color: var(--text-muted); margin-top: 1rem;">
+            Rapport d'Analyse Automatisé • 09/01/2026 14:29
+        </p>
+    </header>
+
+    <main>
+        
+        <!-- P PMET SECTION -->
+        <section class="intro">
+            <h2>Analyse P PMET</h2>
+            <p>Synthèse des mesures pour les profils de type P (Limite < 80mm)</p>
+        </section>
+
+        <div class="grid">
+            <article class="card">
+                <div class="card-number">M</div>
+                <h3>Volume Analysé</h3>
+                <div class="stat-value">16</div>
+                <div class="stat-label">Moules Totaux</div>
+            </article>
+
+            <article class="card">
+                <div class="card-number">%</div>
+                <h3>Non-Conformité</h3>
+                <div class="stat-value status-bad">
+                    18.75%
+                </div>
+                <div class="stat-label">Taux de Rejet</div>
+            </article>
+
+            <article class="card">
+                <div class="card-number">Ø</div>
+                <h3>Moyenne Globale</h3>
+                <div class="stat-value">83.48</div>
+                <div class="stat-label">Millimètres</div>
+            </article>
+        </div>
+
+        <div class="graph-section">
+            <h3 style="color: var(--brand-yellow); margin-bottom: 1rem;">Courbes de Tendance P PMET</h3>
+            <div class="graph-container">
+                <img src="assets/P_PMET_tendances.png" alt="Graphiques P PMET">
+            </div>
+        </div>
+
+        <div style="margin: 4rem 0; text-align: center;"><div class="rail-accent" style="width: 100px; opacity: 0.5;"></div></div>
+
+        <!-- G PMET SECTION -->
+        <section class="intro">
+            <h2>Analyse G PMET</h2>
+            <p>Synthèse des mesures pour les profils de type G (Limite < 130mm)</p>
+        </section>
+
+        <div class="grid">
+            <article class="card">
+                <div class="card-number">M</div>
+                <h3>Volume Analysé</h3>
+                <div class="stat-value">16</div>
+                <div class="stat-label">Moules Totaux</div>
+            </article>
+
+            <article class="card">
+                <div class="card-number">%</div>
+                <h3>Non-Conformité</h3>
+                <div class="stat-value status-bad">
+                    37.50%
+                </div>
+                <div class="stat-label">Taux de Rejet</div>
+            </article>
+
+            <article class="card">
+                <div class="card-number">Ø</div>
+                <h3>Moyenne Globale</h3>
+                <div class="stat-value">131.12</div>
+                <div class="stat-label">Millimètres</div>
+            </article>
+        </div>
+
+         <div class="graph-section">
+            <h3 style="color: var(--brand-yellow); margin-bottom: 1rem;">Courbes de Tendance G PMET</h3>
+            <div class="graph-container">
+                <img src="assets/G_PMET_tendances.png" alt="Graphiques G PMET">
+            </div>
+        </div>
+
+    </main>
+
+    <footer>
+        <div class="signature">
+            <div class="railway-icon">
+                <div class="rail-line"></div>
+                <div class="sleeper"></div>
+                <div class="sleeper"></div>
+                <div class="sleeper"></div>
+                <div class="rail-line"></div>
+            </div>
+            <p>SATEBA France | Rapport Généré Automatiquement</p>
+        </div>
+    </footer>
+</body>
+</html>
