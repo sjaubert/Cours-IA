@@ -7,7 +7,7 @@
         "taux_non_conformite": 18.75,
         "taux_defaut_vis": 18.75,
         "moyenne_globale": 83.4831171875,
-        "timestamp": "12/01/2026 09:56"
+        "timestamp": "15/01/2026 09:42"
     },
     "G": {
         "type": "G",
@@ -17,6 +17,6 @@
         "taux_non_conformite": 37.5,
         "taux_defaut_vis": 20.625,
         "moyenne_globale": 131.12388392857142,
-        "timestamp": "12/01/2026 09:56"
+        "timestamp": "15/01/2026 09:42"
     }
 }
