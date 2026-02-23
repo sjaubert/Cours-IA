@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 5 — Penser avec NotebookLM</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4F46E5;
+            --primary-light: #818CF8;
+            --primary-dark: #3730A3;
+            --accent: #F59E0B;
+            --surface: #F8FAFC;
+            --surface-card: #FFFFFF;
+            --text: #1E293B;
+            --text-muted: #64748B;
+            --success: #10B981;
+            --danger: #EF4444;
+            --module-color: #DC2626;
+            --module-light: #F87171;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+            --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --radius: 16px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--surface);
+            color: var(--text);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Branding Header */
+        .branding-header {
+            background: var(--surface-card);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 30px;
+            border-bottom: 2px solid #E2E8F0;
+        }
+
+        .branding-header .brand-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .branding-header img {
+            height: 50px;
+            width: auto;
+            border-radius: 6px;
+        }
+
+        .branding-header .brand-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .branding-header .brand-name {
+            font-weight: 700;
+            font-size: 0.95em;
+            color: var(--text);
+        }
+
+        .branding-header .brand-trainer {
+            font-weight: 500;
+            font-size: 0.85em;
+            color: var(--text-muted);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--text);
+            color: white;
+            text-align: center;
+            padding: 25px;
+            font-size: 0.85em;
+        }
+
+        .top-nav {
+            background: var(--surface-card);
+            padding: 12px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #E2E8F0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .top-nav a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9em;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: 0.2s;
+        }
+
+        .top-nav a:hover {
+            color: var(--module-color);
+        }
+
+        .module-tag {
+            background: rgba(220, 38, 38, 0.08);
+            color: var(--module-color);
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #DC2626 0%, #991B1B 50%, #7F1D1D 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: '🧠';
+            position: absolute;
+            right: 60px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 8em;
+            opacity: 0.1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero .module-num {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 6px 18px;
+            border-radius: 50px;
+            font-size: 0.85em;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .hero h1 {
+            font-size: 2.8em;
+            font-weight: 900;
+            margin-bottom: 15px;
+            letter-spacing: -0.02em;
+        }
+
+        .hero .subtitle {
+            font-size: 1.15em;
+            opacity: 0.9;
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        .hero-meta {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+
+        .hero-meta span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.9em;
+            font-weight: 500;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 30px;
+        }
+
+        .shift-card {
+            background: linear-gradient(135deg, #FFFBEB, #FEF3C7);
+            border: 2px solid #FDE68A;
+            border-radius: var(--radius);
+            padding: 30px 35px;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .shift-card::before {
+            content: '🧠';
+            position: absolute;
+            top: -15px;
+            left: 25px;
+            font-size: 1.8em;
+            background: var(--surface);
+            padding: 0 8px;
+            border-radius: 8px;
+        }
+
+        .shift-card h3 {
+            color: #92400E;
+            font-size: 1.3em;
+            margin-bottom: 10px;
+            margin-top: 5px;
+        }
+
+        .shift-card p {
+            color: #78350F;
+            font-size: 1.05em;
+            margin-bottom: 8px;
+        }
+
+        .prerequisite {
+            background: linear-gradient(135deg, #EEF2FF, #E0E7FF);
+            border: 1px solid #C7D2FE;
+            border-radius: 12px;
+            padding: 20px 25px;
+            margin-bottom: 30px;
+        }
+
+        .prerequisite h4 {
+            color: var(--primary-dark);
+            margin-bottom: 8px;
+        }
+
+        .prerequisite p {
+            font-size: 0.95em;
+            color: var(--text-muted);
+        }
+
+        h2 {
+            font-size: 1.6em;
+            font-weight: 800;
+            color: var(--text);
+            margin: 50px 0 8px;
+            letter-spacing: -0.01em;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-intro {
+            color: var(--text-muted);
+            font-size: 1em;
+            margin-bottom: 30px;
+        }
+
+        .activity {
+            background: var(--surface-card);
+            border-radius: var(--radius);
+            padding: 30px 35px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid #E2E8F0;
+            margin-bottom: 25px;
+            transition: all 0.3s;
+            border-left: 5px solid var(--module-color);
+        }
+
+        .activity:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+
+        .activity-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .activity-title {
+            font-size: 1.2em;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .activity-duration {
+            font-size: 0.8em;
+            font-weight: 600;
+            color: var(--module-color);
+            background: rgba(220, 38, 38, 0.08);
+            padding: 4px 12px;
+            border-radius: 6px;
+        }
+
+        .activity p {
+            color: var(--text-muted);
+            margin-bottom: 12px;
+        }
+
+        .steps {
+            counter-reset: step;
+            list-style: none;
+            padding: 0;
+            margin: 15px 0;
+        }
+
+        .steps li {
+            counter-increment: step;
+            padding: 10px 10px 10px 50px;
+            position: relative;
+            border-bottom: 1px solid #F1F5F9;
+            font-size: 0.95em;
+        }
+
+        .steps li:last-child {
+            border-bottom: none;
+        }
+
+        .steps li::before {
+            content: counter(step);
+            position: absolute;
+            left: 0;
+            top: 10px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: rgba(220, 38, 38, 0.08);
+            color: var(--module-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.85em;
+        }
+
+        .prompt-box {
+            background: #1E293B;
+            color: #E2E8F0;
+            border-radius: 12px;
+            padding: 20px 25px;
+            margin: 15px 0;
+            font-size: 0.95em;
+            font-family: 'Inter', monospace;
+            line-height: 1.6;
+            border-left: 4px solid var(--accent);
+            position: relative;
+        }
+
+        .prompt-box::before {
+            content: 'Prompt';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            background: var(--accent);
+            color: #1E293B;
+            padding: 2px 10px;
+            border-radius: 4px;
+            font-size: 0.75em;
+            font-weight: 700;
+        }
+
+        .result-box {
+            background: linear-gradient(135deg, #ECFDF5, #D1FAE5);
+            border: 1px solid #A7F3D0;
+            border-radius: 12px;
+            padding: 20px 25px;
+            margin: 15px 0;
+        }
+
+        .result-box strong {
+            color: #065F46;
+        }
+
+        .result-box p {
+            color: #047857;
+        }
+
+        .aha-box {
+            background: linear-gradient(135deg, #FFF7ED, #FFEDD5);
+            border: 2px solid #FDBA74;
+            border-radius: 12px;
+            padding: 20px 25px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .aha-box .emoji {
+            font-size: 2em;
+            margin-bottom: 8px;
+        }
+
+        .aha-box p {
+            color: #9A3412;
+            font-weight: 600;
+            font-size: 1.05em;
+        }
+
+        /* Protocol card */
+        .protocol-card {
+            border: 2px dashed #CBD5E1;
+            border-radius: var(--radius);
+            padding: 30px;
+            margin: 20px 0;
+            background: #FAFAFA;
+        }
+
+        .protocol-card h4 {
+            color: var(--text);
+            margin-bottom: 15px;
+            text-align: center;
+            font-size: 1.2em;
+        }
+
+        .protocol-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            padding: 12px 0;
+            border-bottom: 1px dashed #E2E8F0;
+        }
+
+        .protocol-step:last-child {
+            border-bottom: none;
+        }
+
+        .protocol-num {
+            min-width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 0.9em;
+            color: white;
+        }
+
+        .protocol-num.n1 {
+            background: #7C3AED;
+        }
+
+        .protocol-num.n2 {
+            background: #2563EB;
+        }
+
+        .protocol-num.n3 {
+            background: #059669;
+        }
+
+        .protocol-num.n4 {
+            background: #D97706;
+        }
+
+        .protocol-num.n5 {
+            background: #DC2626;
+        }
+
+        .protocol-content h5 {
+            font-size: 0.95em;
+            color: var(--text);
+            margin-bottom: 3px;
+        }
+
+        .protocol-content p {
+            font-size: 0.85em;
+            color: var(--text-muted);
+            margin: 0;
+        }
+
+        /* Closing */
+        .closing-card {
+            background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 50%, #EC4899 100%);
+            color: white;
+            border-radius: var(--radius);
+            padding: 40px;
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .closing-card h3 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+
+        .closing-card p {
+            font-size: 1.05em;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto 15px;
+        }
+
+        .action-plan {
+            background: var(--surface-card);
+            border-radius: var(--radius);
+            padding: 30px;
+            margin: 25px 0;
+            border: 2px solid var(--module-color);
+        }
+
+        .action-plan h4 {
+            color: var(--module-color);
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .action-plan .question {
+            background: #F8FAFC;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+            border-left: 3px solid var(--module-color);
+        }
+
+        .action-plan .question strong {
+            color: var(--text);
+            font-size: 0.95em;
+        }
+
+        .action-plan .question .answer-space {
+            height: 40px;
+            border: 1px dashed #CBD5E1;
+            border-radius: 6px;
+            margin-top: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #CBD5E1;
+            font-size: 0.85em;
+            font-style: italic;
+        }
+
+        .discussion {
+            background: #F1F5F9;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 15px 0;
+        }
+
+        .discussion h4 {
+            color: var(--text);
+            margin-bottom: 12px;
+            font-size: 1em;
+        }
+
+        .discussion ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .discussion li {
+            padding: 6px 0;
+            font-size: 0.95em;
+            color: var(--text-muted);
+        }
+
+        .discussion li::before {
+            content: '💬 ';
+        }
+
+        .nav-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 50px 0 30px;
+            padding-top: 30px;
+            border-top: 2px solid #E2E8F0;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .nav-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 25px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95em;
+            transition: all 0.3s;
+        }
+
+        .nav-btn.next {
+            background: linear-gradient(135deg, var(--primary), var(--module-color));
+            color: white;
+        }
+
+        .nav-btn.prev {
+            background: #F1F5F9;
+            color: var(--text-muted);
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 40px 20px;
+            }
+
+            .hero h1 {
+                font-size: 2em;
+            }
+
+            .hero::after {
+                display: none;
+            }
+
+            .container {
+                padding: 20px 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="branding-header">
+        <div class="brand-left">
+            <img src="../../logo_uimm_placeholder.jpg" alt="Logo UIMM">
+            <div class="brand-info">
+                <span class="brand-name">Pôle Formation UIMM - CVDL</span>
+                <span class="brand-trainer">Formateur : S. JAUBERT</span>
+            </div>
+        </div>
+    </header>
+
+    <nav class="top-nav">
+        <a href="parcours_formation.html">← Retour au parcours</a>
+        <span class="module-tag">Module 5 / 5</span>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <span class="module-num">MODULE 5 — LE SHIFT FINAL</span>
+            <h1>Penser avec NotebookLM</h1>
+            <p class="subtitle">Voir les patterns invisibles entre des projets distincts. Construire un système de
+                pensée personnel.</p>
+            <div class="hero-meta">
+                <span>⏱ 1h15</span>
+                <span>🧩 2 activités + clôture</span>
+                <span>🎯 Shift n°5</span>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+
+        <div class="shift-card">
+            <h3>Le shift que la plupart ne font jamais</h3>
+            <p>
+                Après avoir appris à questionner, vérifier et produire, la plupart des utilisateurs
+                <strong>plafonnent</strong>.
+                Chaque projet vit dans son propre notebook, sa propre mémoire, son propre espace mental.
+            </p>
+            <p>
+                Ce qu'ils ne voient pas : <strong>les mêmes schémas de pensée se répètent</strong> dans tous leurs
+                projets.
+                L'analyse d'un contrat a appris à détecter les absences. La recherche d'investissement a appris à
+                interroger les chiffres. L'étude d'un cours a appris à questionner les hypothèses.
+            </p>
+            <p>
+                Trois domaines différents. <strong>Un seul pattern cognitif :</strong> chercher ce qui est caché,
+                pas seulement ce qui est présenté.
+            </p>
+            <p style="font-weight: 700;">
+                ➜ Ce pattern reste invisible tant que chaque projet vit dans un espace séparé.
+                Le moment où vous les réunissez et cherchez les connexions, les méta-patterns émergent.
+            </p>
+        </div>
+
+        <div class="prerequisite">
+            <h4>🔗 Ce module est le sommet de la pyramide</h4>
+            <p>Il s'appuie sur les 4 modules précédents. L'apprenant sait : importer des sources (M1),
+                questionner avec précision (M2), vérifier les citations (M3), et produire son propre contenu
+                réinjecté comme source (M4). Il est maintenant prêt à connecter et penser.</p>
+        </div>
+
+        <h2>🧩 Activités</h2>
+        <p class="section-intro">Deux activités pour atteindre le niveau le plus avancé — puis une clôture qui ancre le
+            parcours.</p>
+
+        <!-- Activité 5.1 -->
+        <div class="activity">
+            <div class="activity-header">
+                <span class="activity-title">Activité 5.1 — Le notebook transversal</span>
+                <span class="activity-duration">⏱ 30 min</span>
+            </div>
+            <p>
+                Créer un <strong>second notebook</strong> qui croise des documents de domaines complètement différents
+                pour faire émerger des patterns invisibles.
+            </p>
+
+            <ol class="steps">
+                <li>Créer un <strong>nouveau notebook</strong> intitulé « Connexions transversales »</li>
+                <li>Y importer :
+                    <ul style="margin: 8px 0 0 20px;">
+                        <li>📝 La <strong>Note structurée</strong> du Module 4 (déjà convertie en source → la copier
+                            ici)</li>
+                        <li>📄 Un <strong>document d'un domaine différent</strong> fourni par le formateur
+                            <em>(suggestions : un article sur le management par les indicateurs, un document sur la
+                                gestion
+                                du changement, ou un rapport annuel d'entreprise)</em>
+                        </li>
+                    </ul>
+                </li>
+                <li>Poser la question clé :</li>
+            </ol>
+
+            <div class="prompt-box">
+                En analysant ces deux documents qui viennent de domaines différents,
+                quels sont les points communs et les tensions entre eux ?
+                Y a-t-il des principes sous-jacents qui se retrouvent dans les deux contextes ?
+                Cite les passages pertinents de chaque source.
+            </div>
+
+            <p>➜ <strong>Observer :</strong> NBLM identifie des connexions que vous n'aviez pas vues.
+                Des principes communs émergent entre des domaines apparemment sans rapport.</p>
+
+            <div class="prompt-box">
+                Prompt d'approfondissement :
+
+                Si je devais formuler un principe général qui s'applique aux DEUX contextes,
+                quel serait-il ? Exprime-le en une phrase et argumente-le
+                en citant des éléments de chaque source.
+            </div>
+
+            <div class="aha-box">
+                <div class="emoji">🌐</div>
+                <p>Vous ne voyez plus des documents isolés. Vous voyez des <strong>patterns transversaux</strong>.<br>
+                    C'est la différence entre utiliser NBLM et <strong>penser avec</strong> NBLM.</p>
+            </div>
+        </div>
+
+        <!-- Activité 5.2 -->
+        <div class="activity">
+            <div class="activity-header">
+                <span class="activity-title">Activité 5.2 — Mon système de pensée personnel</span>
+                <span class="activity-duration">⏱ 25 min</span>
+            </div>
+            <p>
+                Chaque participant construit son propre <strong>protocole NBLM</strong> — un framework
+                personnel qui documente sa méthode de travail avec l'outil.
+            </p>
+
+            <h4 style="margin-top: 20px; color: var(--text);">Le protocole à rédiger</h4>
+            <p>Dans une nouvelle Note, rédiger son Framework personnel en utilisant les 5 shifts comme structure :</p>
+
+            <div class="protocol-card">
+                <h4>🧭 Mon Protocole NotebookLM</h4>
+                <div class="protocol-step">
+                    <div class="protocol-num n1">1</div>
+                    <div class="protocol-content">
+                        <h5>Sourcer</h5>
+                        <p>Quelles sources j'importe ? Comment je les sélectionne ? Quelle qualité j'exige ?</p>
+                    </div>
+                </div>
+                <div class="protocol-step">
+                    <div class="protocol-num n2">2</div>
+                    <div class="protocol-content">
+                        <h5>Questionner</h5>
+                        <p>Ma méthode de questionnement. Quel niveau de précision pour quel contexte ?</p>
+                    </div>
+                </div>
+                <div class="protocol-step">
+                    <div class="protocol-num n3">3</div>
+                    <div class="protocol-content">
+                        <h5>Vérifier</h5>
+                        <p>Mon protocole de vérification. Quand est-ce critique ? Quand puis-je faire confiance ?</p>
+                    </div>
+                </div>
+                <div class="protocol-step">
+                    <div class="protocol-num n4">4</div>
+                    <div class="protocol-content">
+                        <h5>Produire</h5>
+                        <p>Les livrables que je produis régulièrement. Comment je réinjecte mes conclusions ?</p>
+                    </div>
+                </div>
+                <div class="protocol-step">
+                    <div class="protocol-num n5">5</div>
+                    <div class="protocol-content">
+                        <h5>Connecter</h5>
+                        <p>Comment je croise les projets ? Quels méta-patterns j'ai identifiés ?</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="result-box">
+                <strong>✓ Ce que l'apprenant a construit :</strong>
+                <p>Un framework personnel et transférable. Pas un ensemble de tricks mémorisés — une méthode
+                    de travail qui fonctionne dans n'importe quel domaine.</p>
+            </div>
+        </div>
+
+        <!-- Clôture -->
+        <div class="activity" style="border-left-color: var(--primary);">
+            <div class="activity-header">
+                <span class="activity-title">Clôture — Présentation & Plan d'action</span>
+                <span class="activity-duration">⏱ 20 min</span>
+            </div>
+
+            <h4 style="color: var(--text);">Tour de table (2 min par participant)</h4>
+            <p>Chaque participant partage :</p>
+            <ol style="margin-left: 20px; color: var(--text-muted); font-size: 0.95em;">
+                <li style="margin-bottom: 8px;">🎯 <strong>Le shift le plus impactant pour moi</strong> (et pourquoi)
+                </li>
+                <li style="margin-bottom: 8px;">💡 <strong>Ce que j'aurais aimé savoir avant</strong> cette formation
+                </li>
+                <li style="margin-bottom: 8px;">📅 <strong>Mon plan d'action pour les 30 prochains jours</strong></li>
+            </ol>
+
+            <div class="action-plan">
+                <h4>📅 Mon plan d'action personnel</h4>
+                <div class="question">
+                    <strong>Quel document vais-je charger en premier lundi matin ?</strong>
+                    <div class="answer-space">Écrire ici...</div>
+                </div>
+                <div class="question">
+                    <strong>Quel livrable récurrent vais-je essayer de produire avec NBLM ?</strong>
+                    <div class="answer-space">Écrire ici...</div>
+                </div>
+                <div class="question">
+                    <strong>À qui vais-je montrer NBLM dans mon équipe ?</strong>
+                    <div class="answer-space">Écrire ici...</div>
+                </div>
+                <div class="question">
+                    <strong>Dans 30 jours, comment saurai-je que NBLM me fait gagner du temps ?</strong>
+                    <div class="answer-space">Écrire ici...</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Closing -->
+        <div class="closing-card">
+            <h3>🏁 Ce que vous avez accompli aujourd'hui</h3>
+            <p>
+                Vous n'avez pas appris 5 tricks isolés. Vous avez construit une <strong>progression</strong> :
+                comprendre → questionner → vérifier → produire → connecter.
+            </p>
+            <p>
+                L'écart entre la personne du Jour 1 (qui upload un PDF et obtient un résumé)
+                et celle d'aujourd'hui (qui croise des domaines, identifie des méta-patterns,
+                et produit des livrables professionnels) — cet écart n'est pas du talent.
+                <strong>C'est de la structure.</strong>
+            </p>
+            <p style="font-size: 1.2em; font-weight: 700; margin-top: 15px;">
+                Vous ne savez plus seulement utiliser NotebookLM.<br>
+                Vous savez <em>penser avec</em>.
+            </p>
+        </div>
+
+        <!-- Final recap -->
+        <h2>📋 Récapitulatif du parcours complet</h2>
+        <div
+            style="background: var(--surface-card); border-radius: var(--radius); padding: 25px 30px; box-shadow: var(--shadow-sm); border: 1px solid #E2E8F0;">
+            <table style="width: 100%; border-collapse: collapse;">
+                <tr style="border-bottom: 1px solid #F1F5F9; background: #F8FAFC;">
+                    <td style="padding: 10px; font-weight: 700; color: var(--text);">Module</td>
+                    <td style="padding: 10px; font-weight: 700; color: var(--text);">Shift</td>
+                    <td style="padding: 10px; font-weight: 700; color: var(--text);">Super-pouvoir acquis</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #F1F5F9;">
+                    <td style="padding: 10px; font-weight: 600;">M1 — Comprendre</td>
+                    <td style="padding: 10px; color: var(--text-muted);">NBLM = pièce fermée</td>
+                    <td style="padding: 10px; color: var(--text-muted);">Choisir les bonnes sources</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #F1F5F9;">
+                    <td style="padding: 10px; font-weight: 600;">M2 — Questionner</td>
+                    <td style="padding: 10px; color: var(--text-muted);">Contrainte = amplificateur</td>
+                    <td style="padding: 10px; color: var(--text-muted);">Poser la bonne question</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #F1F5F9;">
+                    <td style="padding: 10px; font-weight: 600;">M3 — Vérifier</td>
+                    <td style="padding: 10px; color: var(--text-muted);">Citations = filet de sécurité</td>
+                    <td style="padding: 10px; color: var(--text-muted);">Ne rien croire sans preuve</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #F1F5F9;">
+                    <td style="padding: 10px; font-weight: 600;">M4 — Produire</td>
+                    <td style="padding: 10px; color: var(--text-muted);">Output → Input</td>
+                    <td style="padding: 10px; color: var(--text-muted);">Co-penser avec l'IA</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px; font-weight: 600;">M5 — Connecter</td>
+                    <td style="padding: 10px; color: var(--text-muted);">Méta-patterns</td>
+                    <td style="padding: 10px; color: var(--text-muted);">Système de pensée personnel</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="nav-bottom">
+            <a href="M4_produire_boucler.html" class="nav-btn prev">← Module 4</a>
+            <a href="parcours_formation.html" class="nav-btn next"
+                style="background: linear-gradient(135deg, #4F46E5, #7C3AED);">Retour au parcours complet →</a>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>Pôle Formation UIMM - CVDL — Formateur : S. JAUBERT</p>
+    </footer>
+
+</body>
+
+</html>

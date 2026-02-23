@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NotebookLM — Parcours de Formation 7H</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4F46E5;
+            --primary-light: #818CF8;
+            --primary-dark: #3730A3;
+            --accent: #F59E0B;
+            --accent-light: #FCD34D;
+            --surface: #F8FAFC;
+            --surface-card: #FFFFFF;
+            --text: #1E293B;
+            --text-muted: #64748B;
+            --success: #10B981;
+            --danger: #EF4444;
+            --gradient-hero: linear-gradient(135deg, #4F46E5 0%, #7C3AED 50%, #EC4899 100%);
+            --gradient-card: linear-gradient(135deg, rgba(79, 70, 229, 0.05) 0%, rgba(124, 58, 237, 0.05) 100%);
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+            --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.12);
+            --radius: 16px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--surface);
+            color: var(--text);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ─── Hero ─── */
+        .hero {
+            background: var(--gradient-hero);
+            color: white;
+            padding: 80px 40px 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.4;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.85em;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .hero h1 {
+            font-size: 3.2em;
+            font-weight: 900;
+            line-height: 1.15;
+            margin-bottom: 20px;
+            letter-spacing: -0.02em;
+        }
+
+        .hero h1 span {
+            display: block;
+            font-weight: 300;
+            font-size: 0.55em;
+            opacity: 0.9;
+            margin-top: 8px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            line-height: 1.6;
+        }
+
+        .hero-meta {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .hero-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95em;
+            font-weight: 500;
+        }
+
+        .hero-meta-item .icon {
+            font-size: 1.3em;
+        }
+
+        /* ─── Container ─── */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        /* ─── Philosophy ─── */
+        .philosophy {
+            background: var(--surface-card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-md);
+            padding: 50px;
+            margin: -40px auto 50px;
+            position: relative;
+            z-index: 2;
+            max-width: 1100px;
+        }
+
+        .philosophy h2 {
+            font-size: 1.6em;
+            color: var(--primary);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .philosophy p {
+            font-size: 1.05em;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+        }
+
+        .philosophy blockquote {
+            border-left: 4px solid var(--accent);
+            padding: 20px 25px;
+            background: linear-gradient(135deg, #FFFBEB, #FEF3C7);
+            border-radius: 0 12px 12px 0;
+            margin: 25px 0;
+            font-style: italic;
+            font-size: 1.1em;
+            color: #92400E;
+        }
+
+        .anti-pattern {
+            display: flex;
+            gap: 25px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .anti-pattern .vs-card {
+            flex: 1;
+            min-width: 280px;
+            padding: 25px;
+            border-radius: 12px;
+        }
+
+        .vs-card.bad {
+            background: linear-gradient(135deg, #FEF2F2, #FEE2E2);
+            border: 1px solid #FECACA;
+        }
+
+        .vs-card.good {
+            background: linear-gradient(135deg, #ECFDF5, #D1FAE5);
+            border: 1px solid #A7F3D0;
+        }
+
+        .vs-card h4 {
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+
+        .vs-card.bad h4 {
+            color: #DC2626;
+        }
+
+        .vs-card.good h4 {
+            color: #059669;
+        }
+
+        .vs-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .vs-card li {
+            padding: 6px 0;
+            font-size: 0.95em;
+            color: var(--text-muted);
+        }
+
+        .vs-card li::before {
+            margin-right: 8px;
+        }
+
+        .vs-card.bad li::before {
+            content: '✗';
+            color: #DC2626;
+            font-weight: bold;
+        }
+
+        .vs-card.good li::before {
+            content: '✓';
+            color: #059669;
+            font-weight: bold;
+        }
+
+        /* ─── Section ─── */
+        .section-title {
+            font-size: 1.8em;
+            font-weight: 800;
+            color: var(--text);
+            margin: 60px 0 10px;
+            letter-spacing: -0.01em;
+        }
+
+        .section-subtitle {
+            font-size: 1.05em;
+            color: var(--text-muted);
+            margin-bottom: 35px;
+        }
+
+        /* ─── Timeline ─── */
+        .timeline {
+            position: relative;
+            padding-left: 60px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 24px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, var(--primary) 0%, var(--primary-light) 50%, var(--accent) 100%);
+            border-radius: 4px;
+        }
+
+        .tl-item {
+            position: relative;
+            margin-bottom: 20px;
+            animation: fadeInUp 0.5s ease both;
+        }
+
+        .tl-item:nth-child(1) {
+            animation-delay: 0.05s;
+        }
+
+        .tl-item:nth-child(2) {
+            animation-delay: 0.1s;
+        }
+
+        .tl-item:nth-child(3) {
+            animation-delay: 0.15s;
+        }
+
+        .tl-item:nth-child(4) {
+            animation-delay: 0.2s;
+        }
+
+        .tl-item:nth-child(5) {
+            animation-delay: 0.25s;
+        }
+
+        .tl-item:nth-child(6) {
+            animation-delay: 0.3s;
+        }
+
+        .tl-item:nth-child(7) {
+            animation-delay: 0.35s;
+        }
+
+        .tl-item:nth-child(8) {
+            animation-delay: 0.4s;
+        }
+
+        .tl-item:nth-child(9) {
+            animation-delay: 0.45s;
+        }
+
+        .tl-item:nth-child(10) {
+            animation-delay: 0.5s;
+        }
+
+        .tl-item:nth-child(11) {
+            animation-delay: 0.55s;
+        }
+
+        .tl-item:nth-child(12) {
+            animation-delay: 0.6s;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .tl-dot {
+            position: absolute;
+            left: -48px;
+            top: 22px;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--primary);
+            border: 4px solid var(--surface);
+            box-shadow: 0 0 0 3px var(--primary-light);
+            z-index: 1;
+        }
+
+        .tl-item.pause .tl-dot {
+            background: #94A3B8;
+            box-shadow: 0 0 0 3px #CBD5E1;
+            width: 12px;
+            height: 12px;
+            left: -45px;
+            top: 16px;
+        }
+
+        .tl-item.lunch .tl-dot {
+            background: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-light);
+        }
+
+        .tl-card {
+            background: var(--surface-card);
+            border-radius: var(--radius);
+            padding: 25px 30px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid #E2E8F0;
+            transition: all 0.3s ease;
+        }
+
+        .tl-card:hover {
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary-light);
+            transform: translateX(5px);
+        }
+
+        .tl-item.pause .tl-card {
+            background: #F1F5F9;
+            padding: 12px 25px;
+            border: 1px solid #E2E8F0;
+        }
+
+        .tl-item.lunch .tl-card {
+            background: linear-gradient(135deg, #FFFBEB, #FEF3C7);
+            border-color: #FDE68A;
+            padding: 15px 25px;
+        }
+
+        .tl-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tl-time {
+            font-size: 0.85em;
+            font-weight: 700;
+            color: var(--primary);
+            background: rgba(79, 70, 229, 0.08);
+            padding: 4px 12px;
+            border-radius: 6px;
+            white-space: nowrap;
+        }
+
+        .tl-duration {
+            font-size: 0.8em;
+            font-weight: 600;
+            color: var(--text-muted);
+            background: #F1F5F9;
+            padding: 4px 10px;
+            border-radius: 6px;
+        }
+
+        .tl-title {
+            font-size: 1.15em;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .tl-shift {
+            font-size: 0.9em;
+            color: var(--primary-dark);
+            font-weight: 500;
+            margin: 5px 0 10px;
+            font-style: italic;
+        }
+
+        .tl-desc {
+            font-size: 0.95em;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .tl-activities {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+
+        .tl-activity-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.8em;
+            font-weight: 600;
+            padding: 5px 12px;
+            border-radius: 8px;
+            background: rgba(79, 70, 229, 0.06);
+            color: var(--primary);
+            border: 1px solid rgba(79, 70, 229, 0.15);
+        }
+
+        .tl-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 15px;
+            padding: 8px 18px;
+            background: var(--gradient-hero);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 0.85em;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .tl-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(79, 70, 229, 0.4);
+        }
+
+        /* ─── Keys ─── */
+        .keys {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 40px 0 60px;
+        }
+
+        .key-card {
+            background: var(--surface-card);
+            border-radius: var(--radius);
+            padding: 30px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid #E2E8F0;
+            transition: all 0.3s;
+        }
+
+        .key-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-3px);
+        }
+
+        .key-icon {
+            font-size: 2em;
+            margin-bottom: 12px;
+        }
+
+        .key-card h4 {
+            font-size: 1.05em;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+
+        .key-card p {
+            font-size: 0.9em;
+            color: var(--text-muted);
+        }
+
+        /* ─── Branding Header ─── */
+        .branding-header {
+            background: var(--surface-card);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 30px;
+            border-bottom: 2px solid #E2E8F0;
+        }
+
+        .branding-header .brand-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .branding-header img {
+            height: 50px;
+            width: auto;
+            border-radius: 6px;
+        }
+
+        .branding-header .brand-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .branding-header .brand-name {
+            font-weight: 700;
+            font-size: 0.95em;
+            color: var(--text);
+        }
+
+        .branding-header .brand-trainer {
+            font-weight: 500;
+            font-size: 0.85em;
+            color: var(--text-muted);
+        }
+
+        /* ─── Footer ─── */
+        .footer {
+            background: var(--text);
+            color: white;
+            text-align: center;
+            padding: 30px;
+            font-size: 0.9em;
+        }
+
+        .footer a {
+            color: var(--primary-light);
+        }
+
+        /* ─── Responsive ─── */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 50px 20px 40px;
+            }
+
+            .hero h1 {
+                font-size: 2.2em;
+            }
+
+            .philosophy {
+                margin: -20px 15px 30px;
+                padding: 30px;
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+
+            .timeline {
+                padding-left: 45px;
+            }
+
+            .timeline::before {
+                left: 16px;
+            }
+
+            .tl-dot {
+                left: -38px;
+            }
+
+            .tl-item.pause .tl-dot {
+                left: -35px;
+            }
+        }
+
+        @media print {
+            .hero {
+                padding: 30px;
+                background: #4F46E5 !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .tl-card:hover {
+                transform: none;
+                box-shadow: none;
+            }
+
+            .tl-link {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ════════ BRANDING ════════ -->
+    <header class="branding-header">
+        <div class="brand-left">
+            <img src="../../logo_uimm_placeholder.jpg" alt="Logo UIMM">
+            <div class="brand-info">
+                <span class="brand-name">Pôle Formation UIMM - CVDL</span>
+                <span class="brand-trainer">Formateur : S. JAUBERT</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- ════════ HERO ════════ -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">FORMATION PROFESSIONNELLE</div>
+            <h1>NotebookLM<span>Maîtriser l'IA documentaire — De la découverte à la pensée augmentée</span></h1>
+            <p class="hero-subtitle">
+                Un parcours progressif en 5 modules pour apprendre à <strong>penser avec</strong> NotebookLM,
+                pas simplement à l'utiliser.
+            </p>
+            <div class="hero-meta">
+                <div class="hero-meta-item"><span class="icon">⏱</span> 7 heures</div>
+                <div class="hero-meta-item"><span class="icon">📊</span> 5 modules progressifs</div>
+                <div class="hero-meta-item"><span class="icon">🎯</span> ~12 activités pratiques</div>
+                <div class="hero-meta-item"><span class="icon">👥</span> Salariés d'entreprise</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+
+        <!-- ════════ PHILOSOPHIE ════════ -->
+        <div class="philosophy">
+            <h2>🧭 Pourquoi ce parcours est différent</h2>
+            <p>
+                La plupart des formations NotebookLM enseignent des <strong>astuces isolées</strong> :
+                uploader un PDF, poser une question, générer un résumé. Après 5 tutoriels, vous connaissez 5 tricks…
+                et vous n'avez aucune idée de comment ils se connectent.
+            </p>
+            <blockquote>
+                « C'est comme apprendre à cuisiner en regardant 5 vidéos séparées : une sur couper des oignons,
+                une sur faire bouillir des pâtes, une sur assaisonner un steak. Vous savez 5 choses, mais
+                vous ne savez toujours pas préparer un repas. »
+            </blockquote>
+            <p>
+                Ce parcours est construit autour de <strong>5 « shifts » cognitifs</strong>. Chaque module s'appuie sur
+                le précédent. Sautez une étape, et tout ce qui suit fonctionne moins bien.
+            </p>
+            <div class="anti-pattern">
+                <div class="vs-card bad">
+                    <h4>✗ L'approche tutoriel classique</h4>
+                    <ul>
+                        <li>Astuces isolées sans lien</li>
+                        <li>Fonctionnalités démontrées passivement</li>
+                        <li>« ChatGPT avec des étapes en plus »</li>
+                        <li>Abandon après 3 jours</li>
+                    </ul>
+                </div>
+                <div class="vs-card good">
+                    <h4>✓ L'approche de cette formation</h4>
+                    <ul>
+                        <li>Progression séquentielle et cumulative</li>
+                        <li>Manipulation active dès la minute 1</li>
+                        <li>Un outil de pensée, pas un gadget</li>
+                        <li>Fluence durable et transférable</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- ════════ TIMELINE ════════ -->
+        <h2 class="section-title">📅 Déroulé de la journée</h2>
+        <p class="section-subtitle">Chaque module construit sur le précédent. L'ordre n'est pas un choix — c'est la
+            structure.</p>
+
+        <div class="timeline">
+
+            <!-- Accueil -->
+            <div class="tl-item">
+                <div class="tl-dot"></div>
+                <div class="tl-card">
+                    <div class="tl-header">
+                        <span class="tl-time">09h00 – 09h15</span>
+                        <span class="tl-duration">15 min</span>
+                    </div>
+                    <div class="tl-title">☕ Accueil & Ice-breaker</div>
+                    <p class="tl-desc">
+                        Tour de table rapide : « Avez-vous déjà utilisé une IA ? Laquelle ? Pour quoi ? »
+                        Objectif : identifier les représentations initiales et le niveau du groupe.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Module 1 -->
+            <div class="tl-item">
+                <div class="tl-dot"></div>
+                <div class="tl-card">
+                    <div class="tl-header">
+                        <span class="tl-time">09h15 – 10h15</span>
+                        <span class="tl-duration">1h</span>
+                    </div>
+                    <div class="tl-title">Module 1 — Comprendre NotebookLM</div>
+                    <p class="tl-shift">💡 Shift : « NBLM est une pièce fermée. L'IA ne voit que vos documents. »</p>
+                    <p class="tl-desc">
+                        L'insight fondamental : la qualité des résultats dépend des <em>sources</em>, pas des
+                        <em>prompts</em>.
+                        Sans cette compréhension, toutes les techniques qui suivent sous-performent.
+                    </p>
+                    <div class="tl-activities">
+                        <span class="tl-activity-tag">🧪 Le test de l'ignorance</span>
+                        <span class="tl-activity-tag">📂 Mon premier notebook métier</span>
+                        <span class="tl-activity-tag">💬 Débriefing guidé</span>
+                    </div>
+                    <a href="M1_comprendre_nblm.html" class="tl-link">Ouvrir le Module 1 →</a>
+                </div>
+            </div>
+
+            <!-- Pause -->
+            <div class="tl-item pause">
+                <div class="tl-dot"></div>
+                <div class="tl-card">
+                    <div class="tl-header">
+                        <span class="tl-time">10h15 – 10h30</span>
+                        <span class="tl-duration">15 min</span>
+                    </div>
+                    <div class="tl-title">☕ Pause</div>
+                </div>
+            </div>
+
+            <!-- Module 2 -->
+            <div class="tl-item">
+                <div class="tl-dot"></div>
+                <div class="tl-card">
+                    <div class="tl-header">
+                        <span class="tl-time">10h30 – 11h45</span>
+                        <span class="tl-duration">1h15</span>
+                    </div>
+                    <div class="tl-title">Module 2 — L'art de questionner</div>
+                    <p class="tl-shift">🎯 Shift : « Même outil. Même document. Question différente → résultat
+                        complètement différent. »</p>
+                    <p class="tl-desc">
+                        Apprendre la <em>contrainte</em> : restreindre une question pour en augmenter la puissance.
+                        C'est une compétence de pensée, pas un prompt trick.
+                    </p>
+                    <div class="tl-activities">
+                        <span class="tl-activity-tag">🔬 Vague vs Contraint</span>
+                        <span class="tl-activity-tag">📈 Les 5 niveaux de précision</span>
+                        <span class="tl-activity-tag">🏆 Challenge meilleur prompt</span>
+                    </div>
+                    <a href="M2_art_questionner.html" class="tl-link">Ouvrir le Module 2 →</a>
+                </div>
+            </div>
+
+            <!-- Débriefing matinée -->
+            <div class="tl-item pause">
+                <div class="tl-dot"></div>
+                <div class="tl-card">
+                    <div class="tl-header">
+                        <span class="tl-time">11h45 – 12h00</span>
+                        <span class="tl-duration">15 min</span>
+                    </div>
+                    <div class="tl-title">📋 Débriefing matinée — « Qu'avez-vous compris de différent ? »</div>
+                </div>
+            </div>
+
+            <!-- Déjeuner -->
+            <div class="tl-item lunch">
+                <div class="tl-dot"></div>
+                <div class="tl-card">
+                    <div class="tl-header">
+                        <span class="tl-time">12h00 – 13h00</span>
+                        <span class="tl-duration">1h</span>
+                    </div>
+                    <div class="tl-title">🍽 Déjeuner</div>
+                </div>
+            </div>
+
+            <!-- Module 3 -->
+            <div class="tl-item">
+                <div class="tl-dot"></div>
+                <div class="tl-card">
+                    <div class="tl-header">
+                        <span class="tl-time">13h00 – 14h00</span>
+                        <span class="tl-duration">1h</span>
+                    </div>
+                    <div class="tl-title">Module 3 — Vérifier & Citer</div>
+                    <p class="tl-shift">🔍 Shift : « Cliquer sur une citation = la différence entre "l'IA dit" et "voici
+                        la preuve". »</p>
+                    <p class="tl-desc">
+                        Développer le réflexe de vérification. Les citations sont le super-pouvoir de NBLM
+                        — mais seulement si on les utilise systématiquement.
+                    </p>
+                    <div class="tl-activities">
+                        <span class="tl-activity-tag">⚠️ Le piège des citations</span>
+                        <span class="tl-activity-tag">🕵️ Détective documentaire</span>
+                        <span class="tl-activity-tag">💬 Quand vérifier ?</span>
+                    </div>
+                    <a href="M3_verifier_citer.html" class="tl-link">Ouvrir le Module 3 →</a>
+                </div>
+            </div>
+
+            <!-- Pause -->
+            <div class="tl-item pause">
+                <div class="tl-dot"></div>
+                <div class="tl-card">
+                    <div class="tl-header">
+                        <span class="tl-time">14h00 – 14h15</span>
+                        <span class="tl-duration">15 min</span>
+                    </div>
+                    <div class="tl-title">☕ Pause</div>
+                </div>
+            </div>
+
+            <!-- Module 4 -->
+            <div class="tl-item">
+                <div class="tl-dot"></div>
+                <div class="tl-card">
+                    <div class="tl-header">
+                        <span class="tl-time">14h15 – 15h30</span>
+                        <span class="tl-duration">1h15</span>
+                    </div>
+                    <div class="tl-title">Module 4 — De consommateur à producteur</div>
+                    <p class="tl-shift">🔄 Shift : « L'output devient input. La boucle se ferme. NBLM référence VOS
+                        idées. »</p>
+                    <p class="tl-desc">
+                        Le moment charnière : écrire ses propres conclusions, les transformer en sources,
+                        et voir l'IA intégrer sa propre pensée dans ses réponses.
+                    </p>
+                    <div class="tl-activities">
+                        <span class="tl-activity-tag">📝 Ma première Note structurée</span>
+                        <span class="tl-activity-tag">🔄 La boucle créative</span>
+                        <span class="tl-activity-tag">📊 Produire un livrable pro</span>
+                    </div>
+                    <a href="M4_produire_boucler.html" class="tl-link">Ouvrir le Module 4 →</a>
+                </div>
+            </div>
+
+            <!-- Pause -->
+            <div class="tl-item pause">
+                <div class="tl-dot"></div>
+                <div class="tl-card">
+                    <div class="tl-header">
+                        <span class="tl-time">15h30 – 15h45</span>
+                        <span class="tl-duration">15 min</span>
+                    </div>
+                    <div class="tl-title">☕ Pause</div>
+                </div>
+            </div>
+
+            <!-- Module 5 -->
+            <div class="tl-item">
+                <div class="tl-dot"></div>
+                <div class="tl-card">
+                    <div class="tl-header">
+                        <span class="tl-time">15h45 – 17h00</span>
+                        <span class="tl-duration">1h15</span>
+                    </div>
+                    <div class="tl-title">Module 5 — Penser avec NotebookLM</div>
+                    <p class="tl-shift">🧠 Shift : « Voir les patterns invisibles entre des projets distincts. »</p>
+                    <p class="tl-desc">
+                        Le shift final. Croiser des notebooks, détecter les méta-patterns,
+                        construire un système de pensée personnel transférable à tout domaine.
+                    </p>
+                    <div class="tl-activities">
+                        <span class="tl-activity-tag">🌐 Le notebook transversal</span>
+                        <span class="tl-activity-tag">🧩 Mon système de pensée</span>
+                        <span class="tl-activity-tag">🎤 Présentation & clôture</span>
+                    </div>
+                    <a href="M5_penser_avec_nblm.html" class="tl-link">Ouvrir le Module 5 →</a>
+                </div>
+            </div>
+
+            <!-- Clôture -->
+            <div class="tl-item">
+                <div class="tl-dot"></div>
+                <div class="tl-card">
+                    <div class="tl-header">
+                        <span class="tl-time">17h00 – 17h15</span>
+                        <span class="tl-duration">15 min</span>
+                    </div>
+                    <div class="tl-title">🎯 Clôture & Plan d'action personnel</div>
+                    <p class="tl-desc">
+                        Chaque participant rédige son plan d'action pour les 30 prochains jours :
+                        « Quel document vais-je charger en premier lundi matin ? »
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ════════ CLÉS ════════ -->
+        <h2 class="section-title">🔑 Les 6 principes de ce parcours</h2>
+        <div class="keys">
+            <div class="key-card">
+                <div class="key-icon">🔗</div>
+                <h4>Progression séquentielle</h4>
+                <p>Chaque module s'appuie sur le précédent. L'ordre est la structure.</p>
+            </div>
+            <div class="key-card">
+                <div class="key-icon">🖐</div>
+                <h4>Apprentissage par la pratique</h4>
+                <p>Pas de démo passive. Main sur le clavier dès la minute 1.</p>
+            </div>
+            <div class="key-card">
+                <div class="key-icon">💡</div>
+                <h4>Moments de révélation</h4>
+                <p>Chaque module contient un « Aha ! » qui ancre la compréhension.</p>
+            </div>
+            <div class="key-card">
+                <div class="key-icon">💼</div>
+                <h4>Documents personnels</h4>
+                <p>Les participants travaillent avec LEURS vrais documents pro.</p>
+            </div>
+            <div class="key-card">
+                <div class="key-icon">🧠</div>
+                <h4>Réflexion métacognitive</h4>
+                <p>Des débriefings pour comprendre POURQUOI, pas juste COMMENT.</p>
+            </div>
+            <div class="key-card">
+                <div class="key-icon">📦</div>
+                <h4>Livrable concret</h4>
+                <p>Chacun repart avec un vrai output professionnel utilisable.</p>
+            </div>
+        </div>
+
+        <!-- Nav -->
+        <div style="text-align: center; margin: 40px 0 60px;">
+            <a href="M1_comprendre_nblm.html" class="tl-link" style="font-size: 1.1em; padding: 14px 35px;">
+                Commencer le Module 1 →
+            </a>
+            <a href="guide_formateur.html" class="tl-link"
+                style="font-size: 1.1em; padding: 14px 35px; background: linear-gradient(135deg, #059669, #10B981);">
+                📋 Guide Formateur
+            </a>
+            <a href="fiches_activites.html" class="tl-link"
+                style="font-size: 1.1em; padding: 14px 35px; background: linear-gradient(135deg, #D97706, #F59E0B);">
+                📄 Fiches Activités
+            </a>
+        </div>
+
+    </div>
+
+    <footer class="footer">
+        <p>Formation NotebookLM — Parcours progressif 7H</p>
+        <p style="opacity: 0.8; margin-top: 5px;">Pôle Formation UIMM - CVDL — Formateur : S. JAUBERT</p>
+        <p style="opacity: 0.5; margin-top: 5px;">© 2026 — Conçu pour apprendre à penser avec l'IA, pas à la subir.</p>
+    </footer>
+
+</body>
+
+</html>

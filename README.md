@@ -72,6 +72,7 @@
 - **[Formation Prompt Engineering - Programme d'une Journée](Formation-Journee-PromptEngineering/README.md)** - Formation complète sur le Prompt Engineering avec 3 ateliers interactifs : Les 6 Piliers, Exercices Pratiques, et Techniques Avancées
 - **[Formation Prompt Engineering pour la Maintenance Industrielle](00-Formation/Formation_Prompt/Formation_Prompt_Maintenance_Etudiants.html)** - Formation de 4 heures pour étudiants Bachelor Maintenance avec cas d'usage réalistes, travaux de groupe et sensibilisation aux biais de l'IA
 - **[Activité NotebookLM](NoteBLM/index.html)** - Formation complète sur NotebookLM pour professionnels de l'industrie : présentation interactive, TP pratique (prise en main presse hydraulique), et ressources documentaires professionnelles (manuels, normes ISO, templates)
+- **[Formation NotebookLM — Parcours Progressif 7H](NoteBLM/Formation_7H/parcours_formation.html)** - Programme de formation de 7 heures structuré autour de 5 shifts cognitifs progressifs : comprendre l'espace clos, maîtriser le questionnement contraint, vérifier les citations, produire en boucle créative, et penser en méta-patterns. Inclut un [guide formateur](NoteBLM/Formation_7H/guide_formateur.html) et des [fiches activités imprimables](NoteBLM/Formation_7H/fiches_activites.html)
 
 ### Comprendre les Fondamentaux de l'IA
 
