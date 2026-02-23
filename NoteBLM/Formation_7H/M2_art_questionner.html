@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 2 — L'art de questionner</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4F46E5;
+            --primary-light: #818CF8;
+            --primary-dark: #3730A3;
+            --accent: #F59E0B;
+            --accent-light: #FCD34D;
+            --surface: #F8FAFC;
+            --surface-card: #FFFFFF;
+            --text: #1E293B;
+            --text-muted: #64748B;
+            --success: #10B981;
+            --danger: #EF4444;
+            --module-color: #2563EB;
+            --module-light: #60A5FA;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+            --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --radius: 16px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--surface);
+            color: var(--text);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .top-nav {
+            background: var(--surface-card);
+            padding: 12px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #E2E8F0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .top-nav a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9em;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: 0.2s;
+        }
+
+        .top-nav a:hover {
+            color: var(--module-color);
+        }
+
+        .module-tag {
+            background: rgba(37, 99, 235, 0.08);
+            color: var(--module-color);
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 50%, #1E40AF 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: '🎯';
+            position: absolute;
+            right: 60px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 8em;
+            opacity: 0.1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero .module-num {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 6px 18px;
+            border-radius: 50px;
+            font-size: 0.85em;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .hero h1 {
+            font-size: 2.8em;
+            font-weight: 900;
+            margin-bottom: 15px;
+            letter-spacing: -0.02em;
+        }
+
+        .hero .subtitle {
+            font-size: 1.15em;
+            opacity: 0.9;
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        .hero-meta {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+
+        .hero-meta span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.9em;
+            font-weight: 500;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 30px;
+        }
+
+        .shift-card {
+            background: linear-gradient(135deg, #FFFBEB, #FEF3C7);
+            border: 2px solid #FDE68A;
+            border-radius: var(--radius);
+            padding: 30px 35px;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .shift-card::before {
+            content: '🎯';
+            position: absolute;
+            top: -15px;
+            left: 25px;
+            font-size: 1.8em;
+            background: var(--surface);
+            padding: 0 8px;
+            border-radius: 8px;
+        }
+
+        .shift-card h3 {
+            color: #92400E;
+            font-size: 1.3em;
+            margin-bottom: 10px;
+            margin-top: 5px;
+        }
+
+        .shift-card p {
+            color: #78350F;
+            font-size: 1.05em;
+            margin-bottom: 8px;
+        }
+
+        .prerequisite {
+            background: linear-gradient(135deg, #EEF2FF, #E0E7FF);
+            border: 1px solid #C7D2FE;
+            border-radius: 12px;
+            padding: 20px 25px;
+            margin-bottom: 30px;
+        }
+
+        .prerequisite h4 {
+            color: var(--primary-dark);
+            margin-bottom: 8px;
+        }
+
+        .prerequisite p {
+            font-size: 0.95em;
+            color: var(--text-muted);
+        }
+
+        h2 {
+            font-size: 1.6em;
+            font-weight: 800;
+            color: var(--text);
+            margin: 50px 0 8px;
+            letter-spacing: -0.01em;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-intro {
+            color: var(--text-muted);
+            font-size: 1em;
+            margin-bottom: 30px;
+        }
+
+        .activity {
+            background: var(--surface-card);
+            border-radius: var(--radius);
+            padding: 30px 35px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid #E2E8F0;
+            margin-bottom: 25px;
+            transition: all 0.3s;
+            border-left: 5px solid var(--module-color);
+        }
+
+        .activity:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+
+        .activity-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .activity-title {
+            font-size: 1.2em;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .activity-duration {
+            font-size: 0.8em;
+            font-weight: 600;
+            color: var(--module-color);
+            background: rgba(37, 99, 235, 0.08);
+            padding: 4px 12px;
+            border-radius: 6px;
+        }
+
+        .activity p {
+            color: var(--text-muted);
+            margin-bottom: 12px;
+        }
+
+        .steps {
+            counter-reset: step;
+            list-style: none;
+            padding: 0;
+            margin: 15px 0;
+        }
+
+        .steps li {
+            counter-increment: step;
+            padding: 10px 10px 10px 50px;
+            position: relative;
+            border-bottom: 1px solid #F1F5F9;
+            font-size: 0.95em;
+        }
+
+        .steps li:last-child {
+            border-bottom: none;
+        }
+
+        .steps li::before {
+            content: counter(step);
+            position: absolute;
+            left: 0;
+            top: 10px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: rgba(37, 99, 235, 0.08);
+            color: var(--module-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.85em;
+        }
+
+        .prompt-box {
+            background: #1E293B;
+            color: #E2E8F0;
+            border-radius: 12px;
+            padding: 20px 25px;
+            margin: 15px 0;
+            font-size: 0.95em;
+            font-family: 'Inter', monospace;
+            line-height: 1.6;
+            border-left: 4px solid var(--accent);
+            position: relative;
+        }
+
+        .prompt-box::before {
+            content: 'Prompt';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            background: var(--accent);
+            color: #1E293B;
+            padding: 2px 10px;
+            border-radius: 4px;
+            font-size: 0.75em;
+            font-weight: 700;
+        }
+
+        .result-box {
+            background: linear-gradient(135deg, #ECFDF5, #D1FAE5);
+            border: 1px solid #A7F3D0;
+            border-radius: 12px;
+            padding: 20px 25px;
+            margin: 15px 0;
+        }
+
+        .result-box strong {
+            color: #065F46;
+        }
+
+        .result-box p {
+            color: #047857;
+        }
+
+        .aha-box {
+            background: linear-gradient(135deg, #FFF7ED, #FFEDD5);
+            border: 2px solid #FDBA74;
+            border-radius: 12px;
+            padding: 20px 25px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .aha-box .emoji {
+            font-size: 2em;
+            margin-bottom: 8px;
+        }
+
+        .aha-box p {
+            color: #9A3412;
+            font-weight: 600;
+            font-size: 1.05em;
+        }
+
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .comparison-col {
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .comparison-col.before {
+            background: linear-gradient(135deg, #FEF2F2, #FEE2E2);
+            border: 1px solid #FECACA;
+        }
+
+        .comparison-col.after {
+            background: linear-gradient(135deg, #ECFDF5, #D1FAE5);
+            border: 1px solid #A7F3D0;
+        }
+
+        .comparison-col h4 {
+            margin-bottom: 10px;
+            font-size: 1em;
+        }
+
+        .comparison-col.before h4 {
+            color: #DC2626;
+        }
+
+        .comparison-col.after h4 {
+            color: #059669;
+        }
+
+        .comparison-col p {
+            font-size: 0.9em;
+        }
+
+        .level-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            padding: 18px;
+            border-radius: 12px;
+            margin: 12px 0;
+            transition: all 0.3s;
+        }
+
+        .level-card:hover {
+            transform: translateX(5px);
+        }
+
+        .level-num {
+            min-width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1em;
+            color: white;
+        }
+
+        .level-card:nth-child(1) .level-num {
+            background: #94A3B8;
+        }
+
+        .level-card:nth-child(2) .level-num {
+            background: #60A5FA;
+        }
+
+        .level-card:nth-child(3) .level-num {
+            background: #2563EB;
+        }
+
+        .level-card:nth-child(4) .level-num {
+            background: #7C3AED;
+        }
+
+        .level-card:nth-child(5) .level-num {
+            background: #DC2626;
+        }
+
+        .level-card:nth-child(1) {
+            background: #F8FAFC;
+        }
+
+        .level-card:nth-child(2) {
+            background: #EFF6FF;
+        }
+
+        .level-card:nth-child(3) {
+            background: #DBEAFE;
+        }
+
+        .level-card:nth-child(4) {
+            background: #EDE9FE;
+        }
+
+        .level-card:nth-child(5) {
+            background: #FEE2E2;
+        }
+
+        .level-content h5 {
+            font-size: 0.95em;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+
+        .level-content p {
+            font-size: 0.85em;
+            color: var(--text-muted);
+            margin: 0;
+        }
+
+        .challenge-box {
+            background: linear-gradient(135deg, #FDF2F8, #FCE7F3);
+            border: 2px solid #F9A8D4;
+            border-radius: var(--radius);
+            padding: 25px 30px;
+            margin: 20px 0;
+        }
+
+        .challenge-box h4 {
+            color: #BE185D;
+            margin-bottom: 10px;
+        }
+
+        .discussion {
+            background: #F1F5F9;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 15px 0;
+        }
+
+        .discussion h4 {
+            color: var(--text);
+            margin-bottom: 12px;
+            font-size: 1em;
+        }
+
+        .discussion ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .discussion li {
+            padding: 6px 0;
+            font-size: 0.95em;
+            color: var(--text-muted);
+        }
+
+        .discussion li::before {
+            content: '💬 ';
+        }
+
+        .nav-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 50px 0 30px;
+            padding-top: 30px;
+            border-top: 2px solid #E2E8F0;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .nav-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 25px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95em;
+            transition: all 0.3s;
+        }
+
+        .nav-btn.next {
+            background: linear-gradient(135deg, var(--primary), var(--module-color));
+            color: white;
+        }
+
+        .nav-btn.prev {
+            background: #F1F5F9;
+            color: var(--text-muted);
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 40px 20px;
+            }
+
+            .hero h1 {
+                font-size: 2em;
+            }
+
+            .hero::after {
+                display: none;
+            }
+
+            .container {
+                padding: 20px 15px;
+            }
+
+            .comparison {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="top-nav">
+        <a href="parcours_formation.html">← Retour au parcours</a>
+        <span class="module-tag">Module 2 / 5</span>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <span class="module-num">MODULE 2</span>
+            <h1>L'art de questionner</h1>
+            <p class="subtitle">Même outil. Même document. Question différente → résultat complètement différent.</p>
+            <div class="hero-meta">
+                <span>⏱ 1h15</span>
+                <span>🔬 3 activités</span>
+                <span>🎯 Shift n°2</span>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+
+        <div class="shift-card">
+            <h3>Le shift de ce module</h3>
+            <p>
+                Un débutant demande : « De quoi parle ce document ? » et obtient un résumé vague.
+                Puis il apprend la <strong>contrainte</strong> — l'art de restreindre la question :
+            </p>
+            <p>
+                « En te basant <strong>uniquement sur la conclusion et la section 3</strong>, quels sont les arguments
+                clés de l'auteur ?
+                <strong>Cite les phrases exactes.</strong> »
+            </p>
+            <p style="font-weight: 700;">
+                ➜ Ce n'est pas un « prompt trick ». C'est une compétence de pensée qui se transfère à toutes vos
+                conversations, réunions et emails professionnels.
+            </p>
+        </div>
+
+        <div class="prerequisite">
+            <h4>🔗 Ce module s'appuie sur le Module 1</h4>
+            <p>Les participants doivent avoir compris que NBLM ne travaille qu'avec les sources fournies.
+                C'est ce qui rend la contrainte possible : on peut cibler des sections spécifiques parce qu'on sait
+                que l'IA se limite à nos documents.</p>
+        </div>
+
+        <h2>🔬 Activités</h2>
+        <p class="section-intro">Trois activités progressives pour maîtriser l'art de poser la bonne question.</p>
+
+        <!-- Activité 2.1 -->
+        <div class="activity">
+            <div class="activity-header">
+                <span class="activity-title">Activité 2.1 — La question vague vs la question contrainte</span>
+                <span class="activity-duration">⏱ 25 min</span>
+            </div>
+            <p>
+                Tout le groupe utilise le <strong>même document fourni</strong> par le formateur
+                (un rapport de maintenance, un document qualité, ou un process industriel).
+                L'objectif est de mesurer concrètement l'écart entre une question ouverte et une question contrainte.
+            </p>
+
+            <h4 style="margin-top: 20px; color: var(--text);">Phase 1 — La question vague (5 min)</h4>
+            <p>Poser cette question dans le chat :</p>
+            <div class="prompt-box">
+                De quoi parle ce document ?
+            </div>
+            <p>➜ <strong>Observer :</strong> résumé générique, assez superficiel, peu actionnable.</p>
+
+            <h4 style="margin-top: 25px; color: var(--text);">Phase 2 — La question contrainte (10 min)</h4>
+            <p>Poser maintenant cette question :</p>
+            <div class="prompt-box">
+                En te basant uniquement sur la section « Analyse des causes » et la conclusion de ce document,
+                quels sont les 5 facteurs de risque identifiés par l'auteur ?
+                Pour chaque facteur, cite la phrase exacte du document qui le mentionne.
+                Présente le résultat sous forme de tableau avec les colonnes : Facteur, Citation exacte, Page/Section.
+            </div>
+            <p>➜ <strong>Observer la transformation :</strong> réponse structurée, précise, sourcée, directement
+                utilisable.</p>
+
+            <div class="comparison">
+                <div class="comparison-col before">
+                    <h4>✗ Question vague</h4>
+                    <p>« Ce document parle de la maintenance industrielle et de l'importance du suivi des équipements… »
+                        → Résumé générique inutilisable.</p>
+                </div>
+                <div class="comparison-col after">
+                    <h4>✓ Question contrainte</h4>
+                    <p>Tableau structuré avec 5 facteurs, citations exactes, sections identifiées → Directement
+                        utilisable en réunion.</p>
+                </div>
+            </div>
+
+            <div class="aha-box">
+                <div class="emoji">🎯</div>
+                <p>Même outil. Même document. La seule chose qui change, c'est la question.<br>
+                    La contrainte n'est pas une limitation — c'est un amplificateur.</p>
+            </div>
+        </div>
+
+        <!-- Activité 2.2 -->
+        <div class="activity">
+            <div class="activity-header">
+                <span class="activity-title">Activité 2.2 — Les 5 niveaux de précision</span>
+                <span class="activity-duration">⏱ 30 min</span>
+            </div>
+            <p>
+                Progression guidée à travers 5 niveaux de questionnement, du plus basique au plus avancé.
+                <strong>Chaque participant applique sur son propre document professionnel</strong> (du Module 1).
+            </p>
+
+            <div class="level-card">
+                <div class="level-num">1</div>
+                <div class="level-content">
+                    <h5>Niveau 1 — Question ouverte</h5>
+                    <p>« De quoi parle ce document ? » — Résumé large, peu actionnable</p>
+                </div>
+            </div>
+            <div class="prompt-box" style="margin-left: 55px;">
+                Résume ce document en 5 points clés.
+            </div>
+
+            <div class="level-card">
+                <div class="level-num">2</div>
+                <div class="level-content">
+                    <h5>Niveau 2 — Question ciblée sur un sujet</h5>
+                    <p>On choisit un angle précis sans encore cibler de section</p>
+                </div>
+            </div>
+            <div class="prompt-box" style="margin-left: 55px;">
+                Quels sont les risques identifiés dans ce document ? Liste-les par ordre de gravité.
+            </div>
+
+            <div class="level-card">
+                <div class="level-num">3</div>
+                <div class="level-content">
+                    <h5>Niveau 3 — Question contrainte à une section</h5>
+                    <p>On restreint à une partie spécifique du document</p>
+                </div>
+            </div>
+            <div class="prompt-box" style="margin-left: 55px;">
+                En te basant uniquement sur la section « Recommandations », quelles actions correctives sont proposées ?
+                Cite les phrases.
+            </div>
+
+            <div class="level-card">
+                <div class="level-num">4</div>
+                <div class="level-content">
+                    <h5>Niveau 4 — Question avec format imposé</h5>
+                    <p>On impose le format de sortie (tableau, checklist, plan d'action…)</p>
+                </div>
+            </div>
+            <div class="prompt-box" style="margin-left: 55px;">
+                Crée un plan d'action en tableau avec les colonnes : Action, Responsable suggéré, Priorité
+                (haute/moyenne/basse), Échéance recommandée. Base-toi uniquement sur les recommandations du document.
+            </div>
+
+            <div class="level-card">
+                <div class="level-num">5</div>
+                <div class="level-content">
+                    <h5>Niveau 5 — Question croisée multi-sources</h5>
+                    <p>On croise plusieurs sources pour découvrir les convergences et divergences</p>
+                </div>
+            </div>
+            <div class="prompt-box" style="margin-left: 55px;">
+                En croisant [Source A] et [Source B], identifie les points de convergence et les contradictions entre
+                ces deux documents. Présente sous forme de tableau comparatif avec citations.
+            </div>
+
+            <p style="margin-top: 20px;">
+                <strong>📝 Exercice :</strong> Chaque participant choisit un angle pertinent pour son propre document
+                et applique les 5 niveaux successivement. Observer comment chaque niveau apporte plus de valeur.
+            </p>
+
+            <div class="result-box">
+                <strong>✓ Ce que l'apprenant a compris :</strong>
+                <p>La précision de la question détermine directement l'utilité de la réponse. Chaque niveau de
+                    contrainte ajoute de la valeur.</p>
+            </div>
+        </div>
+
+        <!-- Activité 2.3 -->
+        <div class="activity">
+            <div class="activity-header">
+                <span class="activity-title">Activité 2.3 — Challenge « Le meilleur prompt »</span>
+                <span class="activity-duration">⏱ 20 min</span>
+            </div>
+            <p>
+                Un défi en binôme pour mettre en pratique et ancrer la compétence.
+            </p>
+
+            <div class="challenge-box">
+                <h4>🏆 Le défi</h4>
+                <p>En binôme, à partir du <strong>même document fourni</strong>, chaque équipe doit :</p>
+                <ol style="margin: 10px 0 0 20px; color: #831843;">
+                    <li style="margin-bottom: 6px;">Rédiger le <strong>meilleur prompt possible</strong> pour obtenir
+                        une checklist de maintenance hebdomadaire exploitable</li>
+                    <li style="margin-bottom: 6px;">Exécuter le prompt dans NBLM</li>
+                    <li style="margin-bottom: 6px;">Présenter le résultat obtenu au groupe (30 secondes)</li>
+                    <li style="margin-bottom: 6px;">Le groupe <strong>vote</strong> pour la meilleure checklist</li>
+                </ol>
+            </div>
+
+            <div class="discussion">
+                <h4>Discussion post-challenge</h4>
+                <ul>
+                    <li>Qu'est-ce qui différencie les meilleurs prompts des prompts moyens ?</li>
+                    <li>Quels éléments de contrainte ont le plus d'impact ?</li>
+                    <li>La longueur du prompt compte-t-elle, ou la précision ?</li>
+                    <li>Comment cette compétence de questionnement se transfère-t-elle à d'autres contextes ? (réunions,
+                        emails, rapports)</li>
+                </ul>
+            </div>
+
+            <div class="aha-box">
+                <div class="emoji">🧠</div>
+                <p>Ce n'est pas un « prompt trick ». C'est une compétence de pensée.<br>
+                    Quand vous apprenez à contraindre vos questions, vous entraînez votre esprit à être précis sur ce
+                    dont vous avez besoin.</p>
+            </div>
+        </div>
+
+        <!-- Recap -->
+        <h2>📋 Récapitulatif du Module 2</h2>
+        <div
+            style="background: var(--surface-card); border-radius: var(--radius); padding: 25px 30px; box-shadow: var(--shadow-sm); border: 1px solid #E2E8F0;">
+            <table style="width: 100%; border-collapse: collapse;">
+                <tr style="border-bottom: 1px solid #F1F5F9;">
+                    <td style="padding: 10px 0; font-weight: 600; color: var(--text); width: 40%;">Shift acquis</td>
+                    <td style="padding: 10px 0; color: var(--text-muted);">La précision de la question détermine la
+                        pertinence de la réponse.</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #F1F5F9;">
+                    <td style="padding: 10px 0; font-weight: 600; color: var(--text);">Compétences développées</td>
+                    <td style="padding: 10px 0; color: var(--text-muted);">Contraindre, cibler, formater, croiser — les
+                        4 leviers du questionnement</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #F1F5F9;">
+                    <td style="padding: 10px 0; font-weight: 600; color: var(--text);">Livrable</td>
+                    <td style="padding: 10px 0; color: var(--text-muted);">Une checklist professionnelle obtenue via un
+                        prompt de qualité</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px 0; font-weight: 600; color: var(--text);">Fondation posée pour</td>
+                    <td style="padding: 10px 0; color: var(--text-muted);">Module 3 : Vérifier & Citer (comment
+                        s'assurer que les réponses sont fiables)</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="nav-bottom">
+            <a href="M1_comprendre_nblm.html" class="nav-btn prev">← Module 1</a>
+            <a href="M3_verifier_citer.html" class="nav-btn next">Module 3 : Vérifier & Citer →</a>
+        </div>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 1 — Comprendre NotebookLM</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4F46E5;
+            --primary-light: #818CF8;
+            --primary-dark: #3730A3;
+            --accent: #F59E0B;
+            --accent-light: #FCD34D;
+            --surface: #F8FAFC;
+            --surface-card: #FFFFFF;
+            --text: #1E293B;
+            --text-muted: #64748B;
+            --success: #10B981;
+            --danger: #EF4444;
+            --module-color: #7C3AED;
+            --module-light: #A78BFA;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+            --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --radius: 16px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--surface);
+            color: var(--text);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Nav */
+        .top-nav {
+            background: var(--surface-card);
+            padding: 12px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #E2E8F0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .top-nav a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9em;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: 0.2s;
+        }
+
+        .top-nav a:hover {
+            color: var(--module-color);
+        }
+
+        .module-tag {
+            background: rgba(124, 58, 237, 0.08);
+            color: var(--module-color);
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, #7C3AED 0%, #4F46E5 50%, #2563EB 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: '💡';
+            position: absolute;
+            right: 60px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 8em;
+            opacity: 0.1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero .module-num {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 6px 18px;
+            border-radius: 50px;
+            font-size: 0.85em;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .hero h1 {
+            font-size: 2.8em;
+            font-weight: 900;
+            margin-bottom: 15px;
+            letter-spacing: -0.02em;
+        }
+
+        .hero .subtitle {
+            font-size: 1.15em;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .hero-meta {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+
+        .hero-meta span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.9em;
+            font-weight: 500;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 30px;
+        }
+
+        /* Shift card */
+        .shift-card {
+            background: linear-gradient(135deg, #FFFBEB, #FEF3C7);
+            border: 2px solid #FDE68A;
+            border-radius: var(--radius);
+            padding: 30px 35px;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .shift-card::before {
+            content: '💡';
+            position: absolute;
+            top: -15px;
+            left: 25px;
+            font-size: 1.8em;
+            background: var(--surface);
+            padding: 0 8px;
+            border-radius: 8px;
+        }
+
+        .shift-card h3 {
+            color: #92400E;
+            font-size: 1.3em;
+            margin-bottom: 10px;
+            margin-top: 5px;
+        }
+
+        .shift-card p {
+            color: #78350F;
+            font-size: 1.05em;
+        }
+
+        /* Sections */
+        h2 {
+            font-size: 1.6em;
+            font-weight: 800;
+            color: var(--text);
+            margin: 50px 0 8px;
+            letter-spacing: -0.01em;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-intro {
+            color: var(--text-muted);
+            font-size: 1em;
+            margin-bottom: 30px;
+        }
+
+        /* Activity card */
+        .activity {
+            background: var(--surface-card);
+            border-radius: var(--radius);
+            padding: 30px 35px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid #E2E8F0;
+            margin-bottom: 25px;
+            transition: all 0.3s;
+            border-left: 5px solid var(--module-color);
+        }
+
+        .activity:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+
+        .activity-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .activity-title {
+            font-size: 1.2em;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .activity-duration {
+            font-size: 0.8em;
+            font-weight: 600;
+            color: var(--module-color);
+            background: rgba(124, 58, 237, 0.08);
+            padding: 4px 12px;
+            border-radius: 6px;
+        }
+
+        .activity p {
+            color: var(--text-muted);
+            margin-bottom: 12px;
+        }
+
+        /* Steps */
+        .steps {
+            counter-reset: step;
+            list-style: none;
+            padding: 0;
+            margin: 15px 0;
+        }
+
+        .steps li {
+            counter-increment: step;
+            padding: 10px 10px 10px 50px;
+            position: relative;
+            border-bottom: 1px solid #F1F5F9;
+            font-size: 0.95em;
+        }
+
+        .steps li:last-child {
+            border-bottom: none;
+        }
+
+        .steps li::before {
+            content: counter(step);
+            position: absolute;
+            left: 0;
+            top: 10px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: rgba(124, 58, 237, 0.08);
+            color: var(--module-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.85em;
+        }
+
+        /* Prompt box */
+        .prompt-box {
+            background: #1E293B;
+            color: #E2E8F0;
+            border-radius: 12px;
+            padding: 20px 25px;
+            margin: 15px 0;
+            font-size: 0.95em;
+            font-family: 'Inter', monospace;
+            line-height: 1.6;
+            border-left: 4px solid var(--accent);
+            position: relative;
+        }
+
+        .prompt-box::before {
+            content: 'Prompt';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            background: var(--accent);
+            color: #1E293B;
+            padding: 2px 10px;
+            border-radius: 4px;
+            font-size: 0.75em;
+            font-weight: 700;
+        }
+
+        /* Result box */
+        .result-box {
+            background: linear-gradient(135deg, #ECFDF5, #D1FAE5);
+            border: 1px solid #A7F3D0;
+            border-radius: 12px;
+            padding: 20px 25px;
+            margin: 15px 0;
+        }
+
+        .result-box strong {
+            color: #065F46;
+        }
+
+        .result-box p {
+            color: #047857;
+        }
+
+        /* Aha box */
+        .aha-box {
+            background: linear-gradient(135deg, #FFF7ED, #FFEDD5);
+            border: 2px solid #FDBA74;
+            border-radius: 12px;
+            padding: 20px 25px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .aha-box .emoji {
+            font-size: 2em;
+            margin-bottom: 8px;
+        }
+
+        .aha-box p {
+            color: #9A3412;
+            font-weight: 600;
+            font-size: 1.05em;
+        }
+
+        /* Discussion */
+        .discussion {
+            background: #F1F5F9;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 15px 0;
+        }
+
+        .discussion h4 {
+            color: var(--text);
+            margin-bottom: 12px;
+            font-size: 1em;
+        }
+
+        .discussion ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .discussion li {
+            padding: 6px 0;
+            font-size: 0.95em;
+            color: var(--text-muted);
+        }
+
+        .discussion li::before {
+            content: '💬 ';
+        }
+
+        /* Prerequisite */
+        .prereq {
+            background: linear-gradient(135deg, #EEF2FF, #E0E7FF);
+            border: 1px solid #C7D2FE;
+            border-radius: 12px;
+            padding: 20px 25px;
+            margin-bottom: 30px;
+        }
+
+        .prereq h4 {
+            color: var(--primary-dark);
+            margin-bottom: 10px;
+        }
+
+        .prereq ul {
+            margin-left: 20px;
+        }
+
+        .prereq li {
+            font-size: 0.95em;
+            color: var(--text-muted);
+            margin-bottom: 5px;
+        }
+
+        /* Nav bottom */
+        .nav-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 50px 0 30px;
+            padding-top: 30px;
+            border-top: 2px solid #E2E8F0;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .nav-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 25px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95em;
+            transition: all 0.3s;
+        }
+
+        .nav-btn.next {
+            background: linear-gradient(135deg, var(--primary), var(--module-color));
+            color: white;
+        }
+
+        .nav-btn.prev {
+            background: #F1F5F9;
+            color: var(--text-muted);
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 40px 20px;
+            }
+
+            .hero h1 {
+                font-size: 2em;
+            }
+
+            .hero::after {
+                display: none;
+            }
+
+            .container {
+                padding: 20px 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="top-nav">
+        <a href="parcours_formation.html">← Retour au parcours</a>
+        <span class="module-tag">Module 1 / 5</span>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <span class="module-num">MODULE 1</span>
+            <h1>Comprendre NotebookLM</h1>
+            <p class="subtitle">L'insight fondamental : NBLM est une pièce fermée. L'IA ne connaît que ce que vous lui
+                donnez.</p>
+            <div class="hero-meta">
+                <span>⏱ 1 heure</span>
+                <span>🧪 2 activités + 1 débriefing</span>
+                <span>🎯 Shift n°1</span>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+
+        <!-- Shift -->
+        <div class="shift-card">
+            <h3>Le shift de ce module</h3>
+            <p>
+                La plupart des débutants traitent NotebookLM comme un <strong>moteur de recherche plus
+                    intelligent</strong>.
+                Ils s'attendent à ce qu'il sache tout. Ce n'est pas le cas. <strong>Il ne sait que ce que vous lui
+                    donnez.</strong>
+                Ce n'est pas une limitation — c'est <em>tout le concept</em>.
+            </p>
+            <p style="margin-top: 12px;">
+                Quand vous comprenez que NBLM est un <strong>espace clos</strong> où l'IA travaille exclusivement
+                avec vos documents, vous arrêtez d'être déçu par ce qu'il ne peut pas faire et vous commencez
+                à être précis sur ce que vous y mettez.
+            </p>
+            <p style="margin-top: 12px; font-weight: 700;">
+                ➜ Sans ce shift, toutes les techniques des modules suivants sous-performent.
+            </p>
+        </div>
+
+        <!-- Prérequis -->
+        <div class="prereq">
+            <h4>📋 Prérequis avant de commencer</h4>
+            <ul>
+                <li>Chaque participant a un <strong>compte Google</strong> fonctionnel</li>
+                <li>Accès vérifié à <a href="https://notebooklm.google.com" target="_blank"
+                        style="color: var(--primary);">notebooklm.google.com</a></li>
+                <li>Chaque participant a <strong>un document professionnel personnel</strong> (PDF, rapport, process…)
+                </li>
+                <li>Connexion internet stable</li>
+            </ul>
+        </div>
+
+        <!-- ─── Activité 1 ─── -->
+        <h2>🧪 Activités</h2>
+        <p class="section-intro">Manipulation directe dès la première minute. Pas de diaporama, pas de démo passive.</p>
+
+        <div class="activity">
+            <div class="activity-header">
+                <span class="activity-title">Activité 1.1 — Le test de l'ignorance</span>
+                <span class="activity-duration">⏱ 20 min</span>
+            </div>
+            <p>
+                Cette activité fait <em>vivre</em> le concept fondamental de NBLM. Pas de présentation théorique —
+                l'apprenant découvre par lui-même pourquoi les sources sont tout.
+            </p>
+
+            <h4 style="margin-top: 20px; color: var(--text);">Phase 1 — Le notebook vide (7 min)</h4>
+            <ol class="steps">
+                <li>Aller sur <a href="https://notebooklm.google.com" target="_blank"
+                        style="color: var(--primary);">notebooklm.google.com</a></li>
+                <li>Créer un nouveau notebook : <strong>« Test Module 1 »</strong></li>
+                <li><strong>Ne pas ajouter de source</strong> — laisser le notebook complètement vide</li>
+                <li>Dans le chat, poser la question suivante :</li>
+            </ol>
+            <div class="prompt-box">
+                Quelles sont les 5 principales causes de pannes sur les presses hydrauliques industrielles ?
+            </div>
+            <p>➜ <strong>Observer le résultat :</strong> NBLM refuse de répondre ou donne une réponse très limitée, car
+                il n'a aucune source à consulter.</p>
+
+            <h4 style="margin-top: 25px; color: var(--text);">Phase 2 — Le notebook alimenté (10 min)</h4>
+            <ol class="steps">
+                <li>Ajouter comme source une URL pertinente (le formateur en fournit une — par ex. un article Wikipédia
+                    sur les presses hydrauliques, ou un document technique)</li>
+                <li>Attendre que NBLM indexe la source (quelques secondes)</li>
+                <li>Poser <strong>exactement la même question</strong> qu'en Phase 1</li>
+            </ol>
+            <div class="prompt-box">
+                Quelles sont les 5 principales causes de pannes sur les presses hydrauliques industrielles ?
+            </div>
+            <p>➜ <strong>Observer la transformation :</strong> même question, même outil — mais une réponse détaillée,
+                structurée, avec des citations.</p>
+
+            <div class="aha-box">
+                <div class="emoji">💡</div>
+                <p>Moment « Aha ! » — La qualité des réponses dépend des SOURCES, pas des prompts.<br>
+                    NBLM est une pièce fermée : il ne connaît que ce qu'on lui donne.</p>
+            </div>
+
+            <div class="result-box">
+                <strong>✓ Ce que l'apprenant a compris :</strong>
+                <p>NBLM ≠ ChatGPT. Il ne « sait » rien par défaut. La valeur de l'outil vient de CE QUE VOUS Y METTEZ.
+                </p>
+            </div>
+        </div>
+
+        <!-- ─── Activité 2 ─── -->
+        <div class="activity">
+            <div class="activity-header">
+                <span class="activity-title">Activité 1.2 — Mon premier notebook métier</span>
+                <span class="activity-duration">⏱ 25 min</span>
+            </div>
+            <p>
+                Maintenant que le concept est ancré, on passe à la pratique avec les documents réels des participants.
+            </p>
+
+            <ol class="steps">
+                <li>Créer un nouveau notebook avec un <strong>nom professionnel clair</strong><br>
+                    <em>Exemples : « Rapport Qualité Q4 2025 », « Process Soudage Ligne A », « Audit ISO 9001 »</em>
+                </li>
+                <li>Importer <strong>son document professionnel personnel</strong> (PDF, Google Doc, URL…)</li>
+                <li>Observer le panneau « Sources » à gauche — vérifier que le document est bien indexé</li>
+                <li>Cliquer sur le bouton <strong>« Guide du Notebook »</strong> (résumé automatique) — lire la synthèse
+                </li>
+                <li>Poser 3 questions libres à son propre document :
+                    <ul style="margin-top: 8px; margin-left: 20px;">
+                        <li>Une question <strong>factuelle</strong> (« Combien de… ? », « Quelle date… ? »)</li>
+                        <li>Une question <strong>d'analyse</strong> (« Quels sont les principaux risques ? »)</li>
+                        <li>Une question <strong>hors-sujet</strong> (quelque chose qui n'est PAS dans le document)</li>
+                    </ul>
+                </li>
+                <li>Observer comment NBLM gère la question hors-sujet → <strong>confirmation du shift 1</strong></li>
+            </ol>
+
+            <div class="result-box">
+                <strong>✓ Ce que l'apprenant a construit :</strong>
+                <p>Un notebook fonctionnel avec son propre document professionnel, une première expérience de
+                    questionnement,
+                    et la confirmation que NBLM reste dans le périmètre des sources.</p>
+            </div>
+        </div>
+
+        <!-- ─── Débriefing ─── -->
+        <div class="activity" style="border-left-color: var(--accent);">
+            <div class="activity-header">
+                <span class="activity-title">Débriefing guidé</span>
+                <span class="activity-duration">⏱ 15 min</span>
+            </div>
+            <p>Discussion structurée animée par le formateur. L'objectif est d'ancrer le shift et de préparer le terrain
+                pour le Module 2.</p>
+
+            <div class="discussion">
+                <h4>Questions de débriefing</h4>
+                <ul>
+                    <li>En quoi NotebookLM est-il fondamentalement différent de ChatGPT ?</li>
+                    <li>Qu'est-ce qui détermine la qualité des réponses : le prompt ou les sources ?</li>
+                    <li>Qu'est-il arrivé quand vous avez posé une question hors-sujet ?</li>
+                    <li>Dans votre métier, quels documents pourriez-vous charger en priorité ?</li>
+                    <li>Voyez-vous un avantage ou un inconvénient au fait que l'IA ne « sache » rien d'autre ?</li>
+                </ul>
+            </div>
+
+            <div class="aha-box">
+                <div class="emoji">🎓</div>
+                <p>Point à ancrer avant de passer au Module 2 :<br>
+                    « Si la qualité dépend des sources, alors le vrai sujet n'est pas <em>comment demander</em>,
+                    mais <em>quoi donner</em> à l'IA… ET comment poser la bonne question. »</p>
+            </div>
+        </div>
+
+        <!-- ─── Récapitulatif ─── -->
+        <h2>📋 Récapitulatif du Module 1</h2>
+        <div
+            style="background: var(--surface-card); border-radius: var(--radius); padding: 25px 30px; box-shadow: var(--shadow-sm); border: 1px solid #E2E8F0;">
+            <table style="width: 100%; border-collapse: collapse;">
+                <tr style="border-bottom: 1px solid #F1F5F9;">
+                    <td style="padding: 10px 0; font-weight: 600; color: var(--text); width: 40%;">Shift acquis</td>
+                    <td style="padding: 10px 0; color: var(--text-muted);">NBLM = espace clos. Sources &gt; Prompts.
+                    </td>
+                </tr>
+                <tr style="border-bottom: 1px solid #F1F5F9;">
+                    <td style="padding: 10px 0; font-weight: 600; color: var(--text);">Compétences développées</td>
+                    <td style="padding: 10px 0; color: var(--text-muted);">Créer un notebook, importer des sources,
+                        poser des questions, lire une synthèse</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #F1F5F9;">
+                    <td style="padding: 10px 0; font-weight: 600; color: var(--text);">Livrable</td>
+                    <td style="padding: 10px 0; color: var(--text-muted);">Un notebook personnel fonctionnel avec 1
+                        source</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px 0; font-weight: 600; color: var(--text);">Fondation posée pour</td>
+                    <td style="padding: 10px 0; color: var(--text-muted);">Module 2 : L'art de questionner (comment
+                        améliorer les résultats via la contrainte)</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Nav -->
+        <div class="nav-bottom">
+            <a href="parcours_formation.html" class="nav-btn prev">← Parcours</a>
+            <a href="M2_art_questionner.html" class="nav-btn next">Module 2 : L'art de questionner →</a>
+        </div>
+
+    </div>
+
+</body>
+
+</html>

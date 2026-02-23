@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guide Formateur — Formation NotebookLM 7H</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4F46E5;
+            --primary-light: #818CF8;
+            --accent: #F59E0B;
+            --surface: #F8FAFC;
+            --surface-card: #FFFFFF;
+            --text: #1E293B;
+            --text-muted: #64748B;
+            --success: #10B981;
+            --danger: #EF4444;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+            --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --radius: 16px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--surface);
+            color: var(--text);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .top-nav {
+            background: var(--surface-card);
+            padding: 12px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #E2E8F0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .top-nav a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9em;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #059669 0%, #047857 50%, #065F46 100%);
+            color: white;
+            padding: 50px 40px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.5em;
+            font-weight: 900;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 950px;
+            margin: 0 auto;
+            padding: 40px 30px;
+        }
+
+        h2 {
+            font-size: 1.5em;
+            font-weight: 800;
+            color: var(--text);
+            margin: 40px 0 20px;
+            border-bottom: 3px solid var(--primary);
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            font-size: 1.2em;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 25px 0 10px;
+        }
+
+        p,
+        li {
+            font-size: 0.95em;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        ul,
+        ol {
+            margin-left: 25px;
+            margin-bottom: 15px;
+        }
+
+        li {
+            margin-bottom: 6px;
+        }
+
+        .card {
+            background: var(--surface-card);
+            border-radius: var(--radius);
+            padding: 25px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid #E2E8F0;
+            margin-bottom: 20px;
+        }
+
+        .card h4 {
+            font-size: 1.05em;
+            color: var(--text);
+            margin-bottom: 10px;
+        }
+
+        .alert {
+            padding: 20px;
+            border-radius: 12px;
+            margin: 15px 0;
+        }
+
+        .alert-warning {
+            background: #FFFBEB;
+            border: 1px solid #FDE68A;
+        }
+
+        .alert-warning strong {
+            color: #92400E;
+        }
+
+        .alert-warning p {
+            color: #78350F;
+        }
+
+        .alert-danger {
+            background: #FEF2F2;
+            border: 1px solid #FECACA;
+        }
+
+        .alert-danger strong {
+            color: #DC2626;
+        }
+
+        .alert-danger p {
+            color: #991B1B;
+        }
+
+        .alert-success {
+            background: #ECFDF5;
+            border: 1px solid #A7F3D0;
+        }
+
+        .alert-success strong {
+            color: #065F46;
+        }
+
+        .alert-success p {
+            color: #047857;
+        }
+
+        .alert-info {
+            background: #EFF6FF;
+            border: 1px solid #BFDBFE;
+        }
+
+        .alert-info strong {
+            color: #1E40AF;
+        }
+
+        .alert-info p {
+            color: #1D4ED8;
+        }
+
+        .timing-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 0.9em;
+        }
+
+        .timing-table th {
+            background: var(--primary);
+            color: white;
+            padding: 10px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .timing-table td {
+            padding: 10px;
+            border-bottom: 1px solid #E2E8F0;
+        }
+
+        .timing-table tr:hover {
+            background: #F8FAFC;
+        }
+
+        .checklist {
+            list-style: none;
+            padding: 0;
+        }
+
+        .checklist li {
+            padding: 8px 0 8px 30px;
+            position: relative;
+            border-bottom: 1px solid #F1F5F9;
+        }
+
+        .checklist li::before {
+            content: '☐';
+            position: absolute;
+            left: 0;
+            font-size: 1.1em;
+        }
+
+        .tip {
+            background: linear-gradient(135deg, #EDE9FE, #DDD6FE);
+            border: 1px solid #C4B5FD;
+            border-radius: 12px;
+            padding: 18px;
+            margin: 12px 0;
+        }
+
+        .tip strong {
+            color: #6D28D9;
+        }
+
+        .tip p {
+            color: #5B21B6;
+            font-size: 0.9em;
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+
+            .top-nav {
+                display: none;
+            }
+
+            .hero {
+                padding: 25px;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .card {
+                page-break-inside: avoid;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 1.8em;
+            }
+
+            .container {
+                padding: 20px 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="top-nav">
+        <a href="parcours_formation.html">← Retour au parcours</a>
+    </nav>
+
+    <section class="hero">
+        <h1>📋 Guide Formateur</h1>
+        <p>Formation NotebookLM — Parcours progressif 7H</p>
+    </section>
+
+    <div class="container">
+
+        <!-- ═══ PHILOSOPHIE ═══ -->
+        <h2>🧭 Philosophie d'animation</h2>
+
+        <div class="alert alert-danger">
+            <strong>⛔ Ce qu'il ne faut PAS faire</strong>
+            <p>Ne transformez pas cette formation en tutoriel. Pas de démonstration passive de fonctionnalités.
+                Pas de « voici le bouton pour importer un PDF ». Les participants découvrent par la manipulation.</p>
+        </div>
+
+        <div class="alert alert-success">
+            <strong>✅ Ce qu'il faut faire</strong>
+            <p>Poser des questions. Laisser les apprenants galérer 2 minutes avant d'intervenir.
+                Provoquer les « Aha ! » moments en pointant vers ce qu'ils viennent de découvrir.
+                Animer les débriefings pour ancrer la compréhension.</p>
+        </div>
+
+        <div class="card">
+            <h4>Les 3 règles d'or du formateur</h4>
+            <ol>
+                <li><strong>Manipulation d'abord, explication ensuite.</strong> L'apprenant doit vivre le shift avant de
+                    l'entendre.</li>
+                <li><strong>Le silence est votre ami.</strong> Après une question, comptez jusqu'à 7 avant d'aider. Le
+                    malaise productif est l'espace où l'apprentissage a lieu.</li>
+                <li><strong>Chaque module prépare le suivant.</strong> Faites toujours le lien : « Ce que vous venez de
+                    faire, c'est exactement ce dont vous aurez besoin au module suivant. »</li>
+            </ol>
+        </div>
+
+        <!-- ═══ PREPARATION ═══ -->
+        <h2>📦 Préparation avant la formation</h2>
+
+        <h3>J-7 : Logistique</h3>
+        <ul class="checklist">
+            <li>Vérifier que tous les participants ont un <strong>compte Google</strong> fonctionnel</li>
+            <li>Tester l'accès à <a href="https://notebooklm.google.com">notebooklm.google.com</a> depuis le réseau de
+                formation</li>
+            <li>Préparer 1-2 <strong>documents de référence communs</strong> (rapport technique, document qualité,
+                process interne — idéalement 20-50 pages)</li>
+            <li>Préparer 1 <strong>document transversal</strong> pour le Module 5 (article management, document RH, ou
+                innovation)</li>
+            <li>Envoyer un email aux participants : « Apportez un document professionnel personnel en PDF »</li>
+            <li>Prévoir une connexion Wi-Fi stable avec au moins 5 Mbps par participant</li>
+        </ul>
+
+        <h3>J-1 : Vérification</h3>
+        <ul class="checklist">
+            <li>Créer un notebook test et vérifier que tout fonctionne (import, chat, Notes, Studio)</li>
+            <li>Imprimer les <a href="fiches_activites.html">fiches activités</a> (1 exemplaire par participant)</li>
+            <li>Préparer 3-4 <strong>affirmations « Détective documentaire »</strong> basées sur le document de
+                référence (Module 3)</li>
+            <li>Ouvrir tous les fichiers HTML du parcours sur votre ordinateur de présentation</li>
+            <li>Tester le vidéoprojecteur</li>
+        </ul>
+
+        <div class="alert alert-warning">
+            <strong>⚠️ Attention : documents personnels</strong>
+            <p>Prévenez les participants que les documents chargés dans NBLM sont traités par Google.
+                S'ils travaillent avec des données sensibles/confidentielles, ils peuvent utiliser des documents
+                internes non critiques ou les documents de référence fournis.</p>
+        </div>
+
+        <!-- ═══ TIMING ═══ -->
+        <h2>⏱ Timing détaillé</h2>
+
+        <table class="timing-table">
+            <thead>
+                <tr>
+                    <th>Horaire</th>
+                    <th>Module/Activité</th>
+                    <th>Durée</th>
+                    <th>Points d'attention formateur</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="background: #F8FAFC;">
+                    <td>09h00</td>
+                    <td><strong>Accueil & Ice-breaker</strong></td>
+                    <td>15'</td>
+                    <td>Identifier le niveau du groupe. Prendre la température des attentes.</td>
+                </tr>
+
+                <tr>
+                    <td colspan="4" style="background: #EDE9FE; font-weight: 700; color: #6D28D9;">MODULE 1 — Comprendre
+                        NBLM (1h)</td>
+                </tr>
+                <tr>
+                    <td>09h15</td>
+                    <td>1.1 Le test de l'ignorance</td>
+                    <td>20'</td>
+                    <td>Laisser les participants découvrir par eux-mêmes. Ne pas spoiler le résultat !</td>
+                </tr>
+                <tr>
+                    <td>09h35</td>
+                    <td>1.2 Mon premier notebook métier</td>
+                    <td>25'</td>
+                    <td>Circuler, aider sur les formats d'import. Encourager les 3 types de questions.</td>
+                </tr>
+                <tr>
+                    <td>10h00</td>
+                    <td>Débriefing M1</td>
+                    <td>15'</td>
+                    <td>Question clé : « En quoi c'est différent de ChatGPT ? » — Faire émerger les réponses.</td>
+                </tr>
+
+                <tr style="background: #F1F5F9;">
+                    <td>10h15</td>
+                    <td>☕ <strong>Pause</strong></td>
+                    <td>15'</td>
+                    <td>—</td>
+                </tr>
+
+                <tr>
+                    <td colspan="4" style="background: #DBEAFE; font-weight: 700; color: #1E40AF;">MODULE 2 — L'art de
+                        questionner (1h15)</td>
+                </tr>
+                <tr>
+                    <td>10h30</td>
+                    <td>2.1 Vague vs Contraint</td>
+                    <td>25'</td>
+                    <td>S'assurer que TOUS comparent les 2 résultats. Projeter un « avant/après » si possible.</td>
+                </tr>
+                <tr>
+                    <td>10h55</td>
+                    <td>2.2 Les 5 niveaux de précision</td>
+                    <td>30'</td>
+                    <td>Ne pas presser. Chaque participant avance à son rythme sur ses propres documents.</td>
+                </tr>
+                <tr>
+                    <td>11h25</td>
+                    <td>2.3 Challenge « Le meilleur prompt »</td>
+                    <td>20'</td>
+                    <td>Énergie ! C'est ludique. Le vote doit être rapide et amusant.</td>
+                </tr>
+
+                <tr style="background: #F1F5F9;">
+                    <td>11h45</td>
+                    <td><strong>Débriefing matinée</strong></td>
+                    <td>15'</td>
+                    <td>« Qu'avez-vous compris de différent par rapport à ce que vous pensiez ce matin ? »</td>
+                </tr>
+                <tr style="background: #FFFBEB;">
+                    <td>12h00</td>
+                    <td>🍽 <strong>Déjeuner</strong></td>
+                    <td>60'</td>
+                    <td>—</td>
+                </tr>
+
+                <tr>
+                    <td colspan="4" style="background: #D1FAE5; font-weight: 700; color: #065F46;">MODULE 3 — Vérifier &
+                        Citer (1h)</td>
+                </tr>
+                <tr>
+                    <td>13h00</td>
+                    <td>3.1 Le piège des citations</td>
+                    <td>25'</td>
+                    <td>Moment critique : s'assurer que chacun CLIQUE sur au moins 3 citations.</td>
+                </tr>
+                <tr>
+                    <td>13h25</td>
+                    <td>3.2 Détective documentaire</td>
+                    <td>20'</td>
+                    <td>Former des groupes variés. Les affirmations doivent être ambiguës (pas trop facile).</td>
+                </tr>
+                <tr>
+                    <td>13h45</td>
+                    <td>Débriefing M3</td>
+                    <td>15'</td>
+                    <td>Grille « Toujours vérifier / Confiance raisonnable ». Discussion contexte entreprise.</td>
+                </tr>
+
+                <tr style="background: #F1F5F9;">
+                    <td>14h00</td>
+                    <td>☕ <strong>Pause</strong></td>
+                    <td>15'</td>
+                    <td>—</td>
+                </tr>
+
+                <tr>
+                    <td colspan="4" style="background: #FEF3C7; font-weight: 700; color: #92400E;">MODULE 4 — Produire &
+                        Boucler (1h15)</td>
+                </tr>
+                <tr>
+                    <td>14h15</td>
+                    <td>4.1 Ma première Note structurée</td>
+                    <td>20'</td>
+                    <td>Insister : PAS de copier-coller. C'est LEUR pensée, pas celle de l'IA.</td>
+                </tr>
+                <tr>
+                    <td>14h35</td>
+                    <td>4.2 La boucle créative</td>
+                    <td>25'</td>
+                    <td>LE moment clé de la formation. Observer les réactions quand l'IA cite LEUR note.</td>
+                </tr>
+                <tr>
+                    <td>15h00</td>
+                    <td>4.3 Produire un livrable pro</td>
+                    <td>30'</td>
+                    <td>Laisser choisir librement. Guider vers un livrable réaliste et utile.</td>
+                </tr>
+
+                <tr style="background: #F1F5F9;">
+                    <td>15h30</td>
+                    <td>☕ <strong>Pause</strong></td>
+                    <td>15'</td>
+                    <td>—</td>
+                </tr>
+
+                <tr>
+                    <td colspan="4" style="background: #FEE2E2; font-weight: 700; color: #991B1B;">MODULE 5 — Penser
+                        avec NBLM (1h15)</td>
+                </tr>
+                <tr>
+                    <td>15h45</td>
+                    <td>5.1 Le notebook transversal</td>
+                    <td>30'</td>
+                    <td>Fournir le document transversal. Laisser le temps de l'exploration.</td>
+                </tr>
+                <tr>
+                    <td>16h15</td>
+                    <td>5.2 Mon système de pensée personnel</td>
+                    <td>25'</td>
+                    <td>Moment de réflexion individuel. Baisser le ton. Ambiance calme.</td>
+                </tr>
+                <tr>
+                    <td>16h40</td>
+                    <td>Présentations & Plan d'action</td>
+                    <td>20'</td>
+                    <td>2 min max par participant. Strictement chronométré.</td>
+                </tr>
+
+                <tr style="background: #F8FAFC;">
+                    <td>17h00</td>
+                    <td><strong>Clôture</strong></td>
+                    <td>15'</td>
+                    <td>Distribuer le QR code/lien vers les fiches. Rappeler le plan d'action.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- ═══ QUESTIONS DE RELANCE ═══ -->
+        <h2>💬 Questions de relance par module</h2>
+
+        <div class="card">
+            <h4>Module 1 — Si le groupe ne réagit pas au « test de l'ignorance »</h4>
+            <ul>
+                <li>« Qu'avez-vous remarqué de différent entre les deux réponses ? »</li>
+                <li>« D'où vient la réponse de NBLM, d'après vous ? »</li>
+                <li>« Si vous étiez un avocat et que vous deviez prouver quelque chose… préféreriez-vous ChatGPT ou ceci
+                    ? Pourquoi ? »</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h4>Module 2 — Si les prompts des participants restent trop vagues</h4>
+            <ul>
+                <li>« Si vous envoyiez un email à un collègue avec cette question, que vous répondrait-il ? Serait-ce
+                    utile ? »</li>
+                <li>« Essayez d'ajouter : "en te basant uniquement sur…", "cite les phrases exactes", "présente sous
+                    forme de…" »</li>
+                <li>« Qu'est-ce qui manque pour que la réponse soit directement utilisable en réunion ? »</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h4>Module 3 — Si les participants ne vérifient pas les citations</h4>
+            <ul>
+                <li>« Cliquez sur le petit numéro. Que dit vraiment le document ? Est-ce exactement ce que NBLM affirme
+                    ? »</li>
+                <li>« Imaginez que vous utilisiez cette information dans un audit. Seriez-vous à l'aise ? »</li>
+                <li>« Trouvez-moi UN cas où NBLM résume un peu trop vite. Il y en a forcément. »</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h4>Module 4 — Si les participants font du copier-coller dans les Notes</h4>
+            <ul>
+                <li>« L'IA peut résumer. Vous, qu'est-ce que vous pensez ? Quelle est VOTRE conclusion ? »</li>
+                <li>« Si vous deviez présenter cela à votre manager en 30 secondes, que diriez-vous ? Écrivez ça. »</li>
+                <li>« Ajoutez au moins un point que l'IA n'a pas mentionné mais que votre expérience vous dit. »</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h4>Module 5 — Si les participants ne voient pas les connexions</h4>
+            <ul>
+                <li>« Y a-t-il un mot, un concept, ou une idée qui revient dans les deux documents ? »</li>
+                <li>« Si vous deviez expliquer à quelqu'un pourquoi ces deux documents sont complémentaires, que
+                    diriez-vous ? »</li>
+                <li>« Essayez : "Quel principe sous-jacent se retrouve dans les deux contextes ?" »</li>
+            </ul>
+        </div>
+
+        <!-- ═══ GESTION DE GROUPE ═══ -->
+        <h2>👥 Gestion de groupe</h2>
+
+        <div class="card">
+            <h4>Adaptations selon le profil des participants</h4>
+            <table class="timing-table">
+                <tr>
+                    <th>Profil</th>
+                    <th>Adaptation</th>
+                </tr>
+                <tr>
+                    <td><strong>Peu à l'aise avec le numérique</strong></td>
+                    <td>Prévoir +10 min au M1. Binôme avec un participant plus avancé. Guide pas-à-pas imprimé.</td>
+                </tr>
+                <tr>
+                    <td><strong>Très à l'aise / impatient</strong></td>
+                    <td>Lancer directement sur les niveaux 4-5 de la pyramide. Proposer des questions bonus.</td>
+                </tr>
+                <tr>
+                    <td><strong>Sceptiques « c'est juste ChatGPT »</strong></td>
+                    <td>Le test de l'ignorance (M1) et le piège des citations (M3) sont vos meilleurs alliés. Insister
+                        sur la traçabilité.</td>
+                </tr>
+                <tr>
+                    <td><strong>Préoccupés par la confidentialité</strong></td>
+                    <td>Utiliser uniquement les documents de référence fournis. Expliquer la politique Google de
+                        non-utilisation pour entraînement (dans le cadre Business).</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="tip">
+            <strong>💡 Astuce d'animation</strong>
+            <p>Affichez la page <a href="parcours_formation.html" style="color: #6D28D9;">parcours_formation.html</a> en
+                permanence sur un écran secondaire. Les participants
+                voient toujours où ils en sont dans la progression et ce qui vient après.</p>
+        </div>
+
+        <!-- ═══ APRÈS ═══ -->
+        <h2>📧 Après la formation</h2>
+        <div class="card">
+            <h4>Suivi recommandé</h4>
+            <ul>
+                <li><strong>J+1 :</strong> Envoyer un email avec les liens vers les fiches activités et le parcours HTML
+                </li>
+                <li><strong>J+7 :</strong> Un court sondage : « Avez-vous utilisé NBLM cette semaine ? Pour quoi ? »
+                </li>
+                <li><strong>J+30 :</strong> Session de retour d'expérience (30 min en visio) : « Qu'avez-vous fait ?
+                    Qu'est-ce qui a marché ? »</li>
+            </ul>
+        </div>
+
+        <div style="text-align: center; margin: 40px 0;">
+            <a href="parcours_formation.html"
+                style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 30px; background: linear-gradient(135deg, #059669, #10B981); color: white; text-decoration: none; border-radius: 10px; font-weight: 600;">
+                ← Retour au parcours complet
+            </a>
+        </div>
+    </div>
+
+</body>
+
+</html>
