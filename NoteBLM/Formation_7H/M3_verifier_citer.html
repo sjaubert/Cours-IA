@@ -40,6 +40,55 @@
             -webkit-font-smoothing: antialiased;
         }
 
+        /* Branding Header */
+        .branding-header {
+            background: var(--surface-card);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 30px;
+            border-bottom: 2px solid #E2E8F0;
+        }
+
+        .branding-header .brand-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .branding-header img {
+            height: 50px;
+            width: auto;
+            border-radius: 6px;
+        }
+
+        .branding-header .brand-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .branding-header .brand-name {
+            font-weight: 700;
+            font-size: 0.95em;
+            color: var(--text);
+        }
+
+        .branding-header .brand-trainer {
+            font-weight: 500;
+            font-size: 0.85em;
+            color: var(--text-muted);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--text);
+            color: white;
+            text-align: center;
+            padding: 25px;
+            font-size: 0.85em;
+        }
+
         .top-nav {
             background: var(--surface-card);
             padding: 12px 30px;
@@ -564,6 +613,16 @@
 
 <body>
 
+    <header class="branding-header">
+        <div class="brand-left">
+            <img src="../../logo_uimm_placeholder.jpg" alt="Logo UIMM">
+            <div class="brand-info">
+                <span class="brand-name">Pôle Formation UIMM - CVDL</span>
+                <span class="brand-trainer">Formateur : S. JAUBERT</span>
+            </div>
+        </div>
+    </header>
+
     <nav class="top-nav">
         <a href="parcours_formation.html">← Retour au parcours</a>
         <span class="module-tag">Module 3 / 5</span>
@@ -825,6 +884,10 @@
             <a href="M4_produire_boucler.html" class="nav-btn next">Module 4 : Produire & Boucler →</a>
         </div>
     </div>
+
+    <footer class="footer">
+        <p>Pôle Formation UIMM - CVDL — Formateur : S. JAUBERT</p>
+    </footer>
 
 </body>
 
