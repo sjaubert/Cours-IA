@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 4 — De consommateur à producteur</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4F46E5;
+            --primary-light: #818CF8;
+            --primary-dark: #3730A3;
+            --accent: #F59E0B;
+            --surface: #F8FAFC;
+            --surface-card: #FFFFFF;
+            --text: #1E293B;
+            --text-muted: #64748B;
+            --success: #10B981;
+            --danger: #EF4444;
+            --module-color: #D97706;
+            --module-light: #FBBF24;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+            --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --radius: 16px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--surface);
+            color: var(--text);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Branding Header */
+        .branding-header {
+            background: var(--surface-card);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 30px;
+            border-bottom: 2px solid #E2E8F0;
+        }
+
+        .branding-header .brand-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .branding-header img {
+            height: 50px;
+            width: auto;
+            border-radius: 6px;
+        }
+
+        .branding-header .brand-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .branding-header .brand-name {
+            font-weight: 700;
+            font-size: 0.95em;
+            color: var(--text);
+        }
+
+        .branding-header .brand-trainer {
+            font-weight: 500;
+            font-size: 0.85em;
+            color: var(--text-muted);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--text);
+            color: white;
+            text-align: center;
+            padding: 25px;
+            font-size: 0.85em;
+        }
+
+        .top-nav {
+            background: var(--surface-card);
+            padding: 12px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #E2E8F0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .top-nav a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9em;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: 0.2s;
+        }
+
+        .top-nav a:hover {
+            color: var(--module-color);
+        }
+
+        .module-tag {
+            background: rgba(217, 119, 6, 0.08);
+            color: var(--module-color);
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #D97706 0%, #B45309 50%, #92400E 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: '🔄';
+            position: absolute;
+            right: 60px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 8em;
+            opacity: 0.1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero .module-num {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 6px 18px;
+            border-radius: 50px;
+            font-size: 0.85em;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .hero h1 {
+            font-size: 2.6em;
+            font-weight: 900;
+            margin-bottom: 15px;
+            letter-spacing: -0.02em;
+        }
+
+        .hero .subtitle {
+            font-size: 1.15em;
+            opacity: 0.9;
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        .hero-meta {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+
+        .hero-meta span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.9em;
+            font-weight: 500;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 30px;
+        }
+
+        .shift-card {
+            background: linear-gradient(135deg, #FFFBEB, #FEF3C7);
+            border: 2px solid #FDE68A;
+            border-radius: var(--radius);
+            padding: 30px 35px;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .shift-card::before {
+            content: '🔄';
+            position: absolute;
+            top: -15px;
+            left: 25px;
+            font-size: 1.8em;
+            background: var(--surface);
+            padding: 0 8px;
+            border-radius: 8px;
+        }
+
+        .shift-card h3 {
+            color: #92400E;
+            font-size: 1.3em;
+            margin-bottom: 10px;
+            margin-top: 5px;
+        }
+
+        .shift-card p {
+            color: #78350F;
+            font-size: 1.05em;
+            margin-bottom: 8px;
+        }
+
+        .prerequisite {
+            background: linear-gradient(135deg, #EEF2FF, #E0E7FF);
+            border: 1px solid #C7D2FE;
+            border-radius: 12px;
+            padding: 20px 25px;
+            margin-bottom: 30px;
+        }
+
+        .prerequisite h4 {
+            color: var(--primary-dark);
+            margin-bottom: 8px;
+        }
+
+        .prerequisite p {
+            font-size: 0.95em;
+            color: var(--text-muted);
+        }
+
+        h2 {
+            font-size: 1.6em;
+            font-weight: 800;
+            color: var(--text);
+            margin: 50px 0 8px;
+            letter-spacing: -0.01em;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-intro {
+            color: var(--text-muted);
+            font-size: 1em;
+            margin-bottom: 30px;
+        }
+
+        .activity {
+            background: var(--surface-card);
+            border-radius: var(--radius);
+            padding: 30px 35px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid #E2E8F0;
+            margin-bottom: 25px;
+            transition: all 0.3s;
+            border-left: 5px solid var(--module-color);
+        }
+
+        .activity:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+
+        .activity-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .activity-title {
+            font-size: 1.2em;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .activity-duration {
+            font-size: 0.8em;
+            font-weight: 600;
+            color: var(--module-color);
+            background: rgba(217, 119, 6, 0.08);
+            padding: 4px 12px;
+            border-radius: 6px;
+        }
+
+        .activity p {
+            color: var(--text-muted);
+            margin-bottom: 12px;
+        }
+
+        .steps {
+            counter-reset: step;
+            list-style: none;
+            padding: 0;
+            margin: 15px 0;
+        }
+
+        .steps li {
+            counter-increment: step;
+            padding: 10px 10px 10px 50px;
+            position: relative;
+            border-bottom: 1px solid #F1F5F9;
+            font-size: 0.95em;
+        }
+
+        .steps li:last-child {
+            border-bottom: none;
+        }
+
+        .steps li::before {
+            content: counter(step);
+            position: absolute;
+            left: 0;
+            top: 10px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: rgba(217, 119, 6, 0.08);
+            color: var(--module-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.85em;
+        }
+
+        .prompt-box {
+            background: #1E293B;
+            color: #E2E8F0;
+            border-radius: 12px;
+            padding: 20px 25px;
+            margin: 15px 0;
+            font-size: 0.95em;
+            font-family: 'Inter', monospace;
+            line-height: 1.6;
+            border-left: 4px solid var(--accent);
+            position: relative;
+        }
+
+        .prompt-box::before {
+            content: 'Prompt';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            background: var(--accent);
+            color: #1E293B;
+            padding: 2px 10px;
+            border-radius: 4px;
+            font-size: 0.75em;
+            font-weight: 700;
+        }
+
+        .result-box {
+            background: linear-gradient(135deg, #ECFDF5, #D1FAE5);
+            border: 1px solid #A7F3D0;
+            border-radius: 12px;
+            padding: 20px 25px;
+            margin: 15px 0;
+        }
+
+        .result-box strong {
+            color: #065F46;
+        }
+
+        .result-box p {
+            color: #047857;
+        }
+
+        .aha-box {
+            background: linear-gradient(135deg, #FFF7ED, #FFEDD5);
+            border: 2px solid #FDBA74;
+            border-radius: 12px;
+            padding: 20px 25px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .aha-box .emoji {
+            font-size: 2em;
+            margin-bottom: 8px;
+        }
+
+        .aha-box p {
+            color: #9A3412;
+            font-weight: 600;
+            font-size: 1.05em;
+        }
+
+        /* Loop diagram */
+        .loop-diagram {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .loop-step {
+            background: var(--surface-card);
+            border: 2px solid #E2E8F0;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            min-width: 150px;
+            transition: all 0.3s;
+        }
+
+        .loop-step:hover {
+            border-color: var(--module-color);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .loop-step .icon {
+            font-size: 2em;
+            margin-bottom: 8px;
+        }
+
+        .loop-step h4 {
+            font-size: 0.9em;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+
+        .loop-step p {
+            font-size: 0.8em;
+            color: var(--text-muted);
+        }
+
+        .loop-arrow {
+            font-size: 1.5em;
+            color: var(--module-color);
+            font-weight: 700;
+        }
+
+        /* Livrable grid */
+        .livrable-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .livrable-card {
+            background: var(--surface-card);
+            border: 2px solid #E2E8F0;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .livrable-card:hover {
+            border-color: var(--module-color);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .livrable-card .icon {
+            font-size: 2em;
+            margin-bottom: 8px;
+        }
+
+        .livrable-card h4 {
+            font-size: 0.95em;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+
+        .livrable-card p {
+            font-size: 0.8em;
+            color: var(--text-muted);
+        }
+
+        .discussion {
+            background: #F1F5F9;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 15px 0;
+        }
+
+        .discussion h4 {
+            color: var(--text);
+            margin-bottom: 12px;
+            font-size: 1em;
+        }
+
+        .discussion ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .discussion li {
+            padding: 6px 0;
+            font-size: 0.95em;
+            color: var(--text-muted);
+        }
+
+        .discussion li::before {
+            content: '💬 ';
+        }
+
+        .nav-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 50px 0 30px;
+            padding-top: 30px;
+            border-top: 2px solid #E2E8F0;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .nav-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 25px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95em;
+            transition: all 0.3s;
+        }
+
+        .nav-btn.next {
+            background: linear-gradient(135deg, var(--primary), var(--module-color));
+            color: white;
+        }
+
+        .nav-btn.prev {
+            background: #F1F5F9;
+            color: var(--text-muted);
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 40px 20px;
+            }
+
+            .hero h1 {
+                font-size: 2em;
+            }
+
+            .hero::after {
+                display: none;
+            }
+
+            .container {
+                padding: 20px 15px;
+            }
+
+            .loop-diagram {
+                flex-direction: column;
+            }
+
+            .loop-arrow {
+                transform: rotate(90deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="branding-header">
+        <div class="brand-left">
+            <img src="../../logo_uimm_placeholder.jpg" alt="Logo UIMM">
+            <div class="brand-info">
+                <span class="brand-name">Pôle Formation UIMM - CVDL</span>
+                <span class="brand-trainer">Formateur : S. JAUBERT</span>
+            </div>
+        </div>
+    </header>
+
+    <nav class="top-nav">
+        <a href="parcours_formation.html">← Retour au parcours</a>
+        <span class="module-tag">Module 4 / 5</span>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <span class="module-num">MODULE 4</span>
+            <h1>De consommateur à producteur</h1>
+            <p class="subtitle">L'output devient input. La boucle se ferme. NBLM référence désormais VOS idées.</p>
+            <div class="hero-meta">
+                <span>⏱ 1h15</span>
+                <span>📝 3 activités</span>
+                <span>🎯 Shift n°4</span>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+
+        <div class="shift-card">
+            <h3>Le shift de ce module</h3>
+            <p>
+                Jusqu'ici, vous avez <strong>consommé</strong> : posé des questions, lu des réponses, vérifié des
+                citations.
+                C'est le moment de <strong>produire</strong>.
+            </p>
+            <p>
+                Vous allez écrire vos propres conclusions dans une <strong>Note</strong>,
+                puis convertir cette Note en <strong>Source</strong>. L'IA référencera désormais
+                non seulement vos documents originaux, mais aussi <em>votre propre réflexion</em>.
+            </p>
+            <p style="font-weight: 700;">
+                ➜ C'est le moment où NotebookLM cesse d'être un outil de lecture et devient un <strong>outil de
+                    pensée</strong>.
+            </p>
+        </div>
+
+        <div class="prerequisite">
+            <h4>🔗 Ce module s'appuie sur les Modules 1, 2 et 3</h4>
+            <p>Les participants savent importer des sources (M1), poser des questions contraintes (M2) et vérifier
+                les citations (M3). Ils ont maintenant tous les outils pour passer de la consommation à la production.
+            </p>
+        </div>
+
+        <!-- Loop diagram -->
+        <h2>🔄 La boucle créative</h2>
+        <p class="section-intro">Le concept central de ce module : l'output devient input.</p>
+
+        <div class="loop-diagram">
+            <div class="loop-step">
+                <div class="icon">📄</div>
+                <h4>Sources</h4>
+                <p>Vos documents originaux</p>
+            </div>
+            <span class="loop-arrow">→</span>
+            <div class="loop-step">
+                <div class="icon">❓</div>
+                <h4>Questions</h4>
+                <p>Interrogation contrainte</p>
+            </div>
+            <span class="loop-arrow">→</span>
+            <div class="loop-step">
+                <div class="icon">✅</div>
+                <h4>Réponses vérifiées</h4>
+                <p>Citations validées</p>
+            </div>
+            <span class="loop-arrow">→</span>
+            <div class="loop-step" style="border-color: var(--module-color); background: #FFFBEB;">
+                <div class="icon">📝</div>
+                <h4>Votre Note</h4>
+                <p>Votre synthèse personnelle</p>
+            </div>
+            <span class="loop-arrow">→</span>
+            <div class="loop-step" style="border-color: var(--danger); background: #FEF2F2;">
+                <div class="icon">🔄</div>
+                <h4>Note → Source</h4>
+                <p>L'output devient input</p>
+            </div>
+        </div>
+
+        <h2>📝 Activités</h2>
+        <p class="section-intro">Trois activités pour fermer la boucle et produire un livrable professionnel concret.
+        </p>
+
+        <!-- Activité 4.1 -->
+        <div class="activity">
+            <div class="activity-header">
+                <span class="activity-title">Activité 4.1 — Ma première Note structurée</span>
+                <span class="activity-duration">⏱ 20 min</span>
+            </div>
+            <p>
+                À partir des analyses réalisées dans les modules précédents (M2 et M3),
+                chaque participant rédige sa propre synthèse dans une <strong>Note NBLM</strong>.
+                <em>Pas du copier-coller des réponses de l'IA — sa propre réflexion.</em>
+            </p>
+
+            <ol class="steps">
+                <li>Dans le notebook créé au Module 1, ouvrir le panneau <strong>« Notes »</strong></li>
+                <li>Cliquer sur <strong>« + Ajouter une note »</strong></li>
+                <li>Rédiger une synthèse structurée de ce que vous avez appris de votre document :
+                    <ul style="margin: 8px 0 0 20px;">
+                        <li>📌 <strong>3 points clés</strong> que je retiens</li>
+                        <li>⚠️ <strong>1 point de vigilance</strong> identifié</li>
+                        <li>💡 <strong>1 question</strong> que ce document ne résout pas</li>
+                        <li>✅ <strong>Ma recommandation</strong> en 2 phrases</li>
+                    </ul>
+                </li>
+                <li>Donner un titre clair à la note : <em>« Synthèse personnelle — [sujet] »</em></li>
+                <li>Relire et affiner — c'est VOTRE pensée, pas celle de l'IA</li>
+            </ol>
+
+            <div class="result-box">
+                <strong>✓ Ce que l'apprenant a créé :</strong>
+                <p>Une Note personnelle structurée qui reflète sa propre analyse, pas un copier-coller de l'IA.
+                    C'est la première brique de la boucle créative.</p>
+            </div>
+        </div>
+
+        <!-- Activité 4.2 -->
+        <div class="activity">
+            <div class="activity-header">
+                <span class="activity-title">Activité 4.2 — La boucle créative</span>
+                <span class="activity-duration">⏱ 25 min</span>
+            </div>
+            <p>
+                Le moment clé de toute la formation. L'apprenant convertit sa Note en Source
+                et observe que l'IA intègre désormais SA pensée dans ses réponses.
+            </p>
+
+            <ol class="steps">
+                <li>Sélectionner la Note créée à l'activité 4.1</li>
+                <li>Cliquer sur le menu <strong>« ⋮ »</strong> puis <strong>« Convertir en source »</strong></li>
+                <li>Observer le panneau Sources : votre Note apparaît comme une source à part entière !</li>
+                <li>Poser une nouvelle question qui <strong>croise votre Note-devenue-Source avec les documents
+                        originaux</strong> :</li>
+            </ol>
+
+            <div class="prompt-box">
+                En comparant ma synthèse personnelle avec le document technique original,
+                y a-t-il des points de ma recommandation qui ne sont pas suffisamment étayés ?
+                Cite les passages de chaque source qui appuient ou contredisent mes conclusions.
+            </div>
+
+            <p>➜ <strong>Observer le résultat :</strong> NBLM cite maintenant DEUX types de sources — vos documents
+                originaux ET votre propre réflexion. Il fait dialoguer les deux.</p>
+
+            <div class="aha-box">
+                <div class="emoji">🤯</div>
+                <p>« L'IA cite maintenant MES idées à côté du document technique.<br>
+                    Elle fait dialoguer MA pensée avec les sources originales. »<br>
+                    <span style="font-weight: 400; font-size: 0.85em;">C'est le moment où NBLM passe d'outil de lecture
+                        à <strong>outil de pensée</strong>.</span>
+                </p>
+            </div>
+
+            <h4 style="margin-top: 25px; color: var(--text);">Allez plus loin (optionnel)</h4>
+            <div class="prompt-box">
+                Ma synthèse suggère [votre recommandation]. En te basant sur l'ensemble des sources,
+                quels seraient les 3 arguments pour et les 3 arguments contre cette recommandation ?
+            </div>
+
+            <div class="result-box">
+                <strong>✓ Ce que l'apprenant a vécu :</strong>
+                <p>L'output est devenu input. La boucle est fermée. NBLM ne lit plus seulement — il co-pense avec
+                    l'utilisateur.</p>
+            </div>
+        </div>
+
+        <!-- Activité 4.3 -->
+        <div class="activity">
+            <div class="activity-header">
+                <span class="activity-title">Activité 4.3 — Produire un livrable professionnel</span>
+                <span class="activity-duration">⏱ 30 min</span>
+            </div>
+            <p>
+                Chaque participant choisit <strong>un livrable concret</strong> pertinent pour son métier
+                et le produit dans NBLM. L'objectif : repartir avec un output réel utilisable dès lundi matin.
+            </p>
+
+            <h4 style="margin-top: 20px; color: var(--text);">Choisissez votre livrable</h4>
+            <div class="livrable-grid">
+                <div class="livrable-card">
+                    <div class="icon">📊</div>
+                    <h4>Présentation (Slides)</h4>
+                    <p>Pour une réunion d'équipe ou la direction</p>
+                </div>
+                <div class="livrable-card">
+                    <div class="icon">📋</div>
+                    <h4>Synthèse décisionnelle</h4>
+                    <p>Note de 1 page avec recommandations</p>
+                </div>
+                <div class="livrable-card">
+                    <div class="icon">📐</div>
+                    <h4>Infographie</h4>
+                    <p>Visuel pour communiquer un concept</p>
+                </div>
+                <div class="livrable-card">
+                    <div class="icon">🎙</div>
+                    <h4>Audio Overview</h4>
+                    <p>Podcast IA pour un brief d'équipe</p>
+                </div>
+                <div class="livrable-card">
+                    <div class="icon">✅</div>
+                    <h4>Checklist opérationnelle</h4>
+                    <p>Liste de contrôle prête à imprimer</p>
+                </div>
+                <div class="livrable-card">
+                    <div class="icon">📝</div>
+                    <h4>Guide de procédures</h4>
+                    <p>Pas-à-pas simplifié pour opérateurs</p>
+                </div>
+            </div>
+
+            <ol class="steps">
+                <li>Choisir un livrable pertinent pour son contexte professionnel</li>
+                <li>Utiliser le <strong>panneau Studio</strong> de NBLM (à droite) pour générer le livrable :
+                    <ul style="margin: 8px 0 0 20px;">
+                        <li>« Créer des slides » pour une présentation</li>
+                        <li>« Créer une infographie » pour un visuel</li>
+                        <li>« Audio Overview » pour un podcast</li>
+                        <li>Ou rédiger directement dans le chat avec un prompt structuré</li>
+                    </ul>
+                </li>
+                <li><strong>Personnaliser et affiner</strong> — ne pas accepter le premier jet, itérer</li>
+                <li>Sauvegarder le livrable (téléchargement ou copie)</li>
+            </ol>
+
+            <div class="prompt-box">
+                Exemple de prompt pour une synthèse décisionnelle :
+
+                En te basant sur toutes mes sources et ma synthèse personnelle,
+                rédige une note de synthèse pour mon manager.
+                Format : 1 page maximum.
+                Structure : Contexte (3 lignes) → Constats clés (5 bullets) → Recommandation (2 phrases) → Prochaines
+                étapes (3 actions).
+                Ton : professionnel, factuel, orienté décision.
+            </div>
+
+            <div class="result-box">
+                <strong>✓ Ce que l'apprenant repart avec :</strong>
+                <p>Un livrable professionnel concret, réalisé en 30 minutes, qu'il peut utiliser immédiatement dans son
+                    travail.</p>
+            </div>
+        </div>
+
+        <!-- Recap -->
+        <h2>📋 Récapitulatif du Module 4</h2>
+        <div
+            style="background: var(--surface-card); border-radius: var(--radius); padding: 25px 30px; box-shadow: var(--shadow-sm); border: 1px solid #E2E8F0;">
+            <table style="width: 100%; border-collapse: collapse;">
+                <tr style="border-bottom: 1px solid #F1F5F9;">
+                    <td style="padding: 10px 0; font-weight: 600; width: 40%;">Shift acquis</td>
+                    <td style="padding: 10px 0; color: var(--text-muted);">L'output devient input. NBLM est un outil de
+                        co-pensée, pas juste de lecture.</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #F1F5F9;">
+                    <td style="padding: 10px 0; font-weight: 600;">Compétences développées</td>
+                    <td style="padding: 10px 0; color: var(--text-muted);">Écrire des Notes, convertir en Sources,
+                        produire des livrables professionnels</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #F1F5F9;">
+                    <td style="padding: 10px 0; font-weight: 600;">Livrables</td>
+                    <td style="padding: 10px 0; color: var(--text-muted);">1 Note structurée + 1 livrable professionnel
+                        concret (présentation, synthèse, etc.)</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px 0; font-weight: 600;">Fondation posée pour</td>
+                    <td style="padding: 10px 0; color: var(--text-muted);">Module 5 : Penser avec NBLM (croiser les
+                        projets, voir les méta-patterns)</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="nav-bottom">
+            <a href="M3_verifier_citer.html" class="nav-btn prev">← Module 3</a>
+            <a href="M5_penser_avec_nblm.html" class="nav-btn next">Module 5 : Penser avec NBLM →</a>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>Pôle Formation UIMM - CVDL — Formateur : S. JAUBERT</p>
+    </footer>
+
+</body>
+
+</html>

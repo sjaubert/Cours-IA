@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 3 — Vérifier & Citer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4F46E5;
+            --primary-light: #818CF8;
+            --primary-dark: #3730A3;
+            --accent: #F59E0B;
+            --surface: #F8FAFC;
+            --surface-card: #FFFFFF;
+            --text: #1E293B;
+            --text-muted: #64748B;
+            --success: #10B981;
+            --danger: #EF4444;
+            --module-color: #059669;
+            --module-light: #34D399;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+            --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --radius: 16px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--surface);
+            color: var(--text);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Branding Header */
+        .branding-header {
+            background: var(--surface-card);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 30px;
+            border-bottom: 2px solid #E2E8F0;
+        }
+
+        .branding-header .brand-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .branding-header img {
+            height: 50px;
+            width: auto;
+            border-radius: 6px;
+        }
+
+        .branding-header .brand-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .branding-header .brand-name {
+            font-weight: 700;
+            font-size: 0.95em;
+            color: var(--text);
+        }
+
+        .branding-header .brand-trainer {
+            font-weight: 500;
+            font-size: 0.85em;
+            color: var(--text-muted);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--text);
+            color: white;
+            text-align: center;
+            padding: 25px;
+            font-size: 0.85em;
+        }
+
+        .top-nav {
+            background: var(--surface-card);
+            padding: 12px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #E2E8F0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .top-nav a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9em;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: 0.2s;
+        }
+
+        .top-nav a:hover {
+            color: var(--module-color);
+        }
+
+        .module-tag {
+            background: rgba(5, 150, 105, 0.08);
+            color: var(--module-color);
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #059669 0%, #047857 50%, #065F46 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: '🔍';
+            position: absolute;
+            right: 60px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 8em;
+            opacity: 0.1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero .module-num {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 6px 18px;
+            border-radius: 50px;
+            font-size: 0.85em;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .hero h1 {
+            font-size: 2.8em;
+            font-weight: 900;
+            margin-bottom: 15px;
+            letter-spacing: -0.02em;
+        }
+
+        .hero .subtitle {
+            font-size: 1.15em;
+            opacity: 0.9;
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        .hero-meta {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+
+        .hero-meta span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.9em;
+            font-weight: 500;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 30px;
+        }
+
+        .shift-card {
+            background: linear-gradient(135deg, #FFFBEB, #FEF3C7);
+            border: 2px solid #FDE68A;
+            border-radius: var(--radius);
+            padding: 30px 35px;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .shift-card::before {
+            content: '🔍';
+            position: absolute;
+            top: -15px;
+            left: 25px;
+            font-size: 1.8em;
+            background: var(--surface);
+            padding: 0 8px;
+            border-radius: 8px;
+        }
+
+        .shift-card h3 {
+            color: #92400E;
+            font-size: 1.3em;
+            margin-bottom: 10px;
+            margin-top: 5px;
+        }
+
+        .shift-card p {
+            color: #78350F;
+            font-size: 1.05em;
+            margin-bottom: 8px;
+        }
+
+        .prerequisite {
+            background: linear-gradient(135deg, #EEF2FF, #E0E7FF);
+            border: 1px solid #C7D2FE;
+            border-radius: 12px;
+            padding: 20px 25px;
+            margin-bottom: 30px;
+        }
+
+        .prerequisite h4 {
+            color: var(--primary-dark);
+            margin-bottom: 8px;
+        }
+
+        .prerequisite p {
+            font-size: 0.95em;
+            color: var(--text-muted);
+        }
+
+        h2 {
+            font-size: 1.6em;
+            font-weight: 800;
+            color: var(--text);
+            margin: 50px 0 8px;
+            letter-spacing: -0.01em;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-intro {
+            color: var(--text-muted);
+            font-size: 1em;
+            margin-bottom: 30px;
+        }
+
+        .activity {
+            background: var(--surface-card);
+            border-radius: var(--radius);
+            padding: 30px 35px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid #E2E8F0;
+            margin-bottom: 25px;
+            transition: all 0.3s;
+            border-left: 5px solid var(--module-color);
+        }
+
+        .activity:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+
+        .activity-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .activity-title {
+            font-size: 1.2em;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .activity-duration {
+            font-size: 0.8em;
+            font-weight: 600;
+            color: var(--module-color);
+            background: rgba(5, 150, 105, 0.08);
+            padding: 4px 12px;
+            border-radius: 6px;
+        }
+
+        .activity p {
+            color: var(--text-muted);
+            margin-bottom: 12px;
+        }
+
+        .steps {
+            counter-reset: step;
+            list-style: none;
+            padding: 0;
+            margin: 15px 0;
+        }
+
+        .steps li {
+            counter-increment: step;
+            padding: 10px 10px 10px 50px;
+            position: relative;
+            border-bottom: 1px solid #F1F5F9;
+            font-size: 0.95em;
+        }
+
+        .steps li:last-child {
+            border-bottom: none;
+        }
+
+        .steps li::before {
+            content: counter(step);
+            position: absolute;
+            left: 0;
+            top: 10px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: rgba(5, 150, 105, 0.08);
+            color: var(--module-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.85em;
+        }
+
+        .prompt-box {
+            background: #1E293B;
+            color: #E2E8F0;
+            border-radius: 12px;
+            padding: 20px 25px;
+            margin: 15px 0;
+            font-size: 0.95em;
+            font-family: 'Inter', monospace;
+            line-height: 1.6;
+            border-left: 4px solid var(--accent);
+            position: relative;
+        }
+
+        .prompt-box::before {
+            content: 'Prompt';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            background: var(--accent);
+            color: #1E293B;
+            padding: 2px 10px;
+            border-radius: 4px;
+            font-size: 0.75em;
+            font-weight: 700;
+        }
+
+        .result-box {
+            background: linear-gradient(135deg, #ECFDF5, #D1FAE5);
+            border: 1px solid #A7F3D0;
+            border-radius: 12px;
+            padding: 20px 25px;
+            margin: 15px 0;
+        }
+
+        .result-box strong {
+            color: #065F46;
+        }
+
+        .result-box p {
+            color: #047857;
+        }
+
+        .aha-box {
+            background: linear-gradient(135deg, #FFF7ED, #FFEDD5);
+            border: 2px solid #FDBA74;
+            border-radius: 12px;
+            padding: 20px 25px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .aha-box .emoji {
+            font-size: 2em;
+            margin-bottom: 8px;
+        }
+
+        .aha-box p {
+            color: #9A3412;
+            font-weight: 600;
+            font-size: 1.05em;
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, #FEF2F2, #FEE2E2);
+            border: 2px solid #FECACA;
+            border-radius: 12px;
+            padding: 20px 25px;
+            margin: 15px 0;
+        }
+
+        .warning-box strong {
+            color: #DC2626;
+        }
+
+        .warning-box p {
+            color: #991B1B;
+        }
+
+        .citation-demo {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            background: #F8FAFC;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 15px 0;
+            border: 1px solid #E2E8F0;
+        }
+
+        .citation-num {
+            min-width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            background: var(--module-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.8em;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .citation-num:hover {
+            transform: scale(1.15);
+            box-shadow: 0 2px 8px rgba(5, 150, 105, 0.4);
+        }
+
+        .citation-text {
+            font-size: 0.95em;
+            color: var(--text-muted);
+            flex: 1;
+        }
+
+        .citation-text em {
+            color: var(--module-color);
+            font-style: normal;
+            font-weight: 600;
+        }
+
+        .verdict {
+            display: flex;
+            gap: 15px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+
+        .verdict-card {
+            flex: 1;
+            min-width: 200px;
+            padding: 18px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .verdict-card.correct {
+            background: #ECFDF5;
+            border: 2px solid #A7F3D0;
+        }
+
+        .verdict-card.nuance {
+            background: #FFFBEB;
+            border: 2px solid #FDE68A;
+        }
+
+        .verdict-card.wrong {
+            background: #FEF2F2;
+            border: 2px solid #FECACA;
+        }
+
+        .verdict-card .emoji {
+            font-size: 1.5em;
+        }
+
+        .verdict-card p {
+            font-size: 0.85em;
+            margin-top: 5px;
+        }
+
+        .verdict-card.correct p {
+            color: #065F46;
+        }
+
+        .verdict-card.nuance p {
+            color: #92400E;
+        }
+
+        .verdict-card.wrong p {
+            color: #991B1B;
+        }
+
+        .discussion {
+            background: #F1F5F9;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 15px 0;
+        }
+
+        .discussion h4 {
+            color: var(--text);
+            margin-bottom: 12px;
+            font-size: 1em;
+        }
+
+        .discussion ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .discussion li {
+            padding: 6px 0;
+            font-size: 0.95em;
+            color: var(--text-muted);
+        }
+
+        .discussion li::before {
+            content: '💬 ';
+        }
+
+        .nav-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 50px 0 30px;
+            padding-top: 30px;
+            border-top: 2px solid #E2E8F0;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .nav-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 25px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95em;
+            transition: all 0.3s;
+        }
+
+        .nav-btn.next {
+            background: linear-gradient(135deg, var(--primary), var(--module-color));
+            color: white;
+        }
+
+        .nav-btn.prev {
+            background: #F1F5F9;
+            color: var(--text-muted);
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 40px 20px;
+            }
+
+            .hero h1 {
+                font-size: 2em;
+            }
+
+            .hero::after {
+                display: none;
+            }
+
+            .container {
+                padding: 20px 15px;
+            }
+
+            .verdict {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="branding-header">
+        <div class="brand-left">
+            <img src="../../logo_uimm_placeholder.jpg" alt="Logo UIMM">
+            <div class="brand-info">
+                <span class="brand-name">Pôle Formation UIMM - CVDL</span>
+                <span class="brand-trainer">Formateur : S. JAUBERT</span>
+            </div>
+        </div>
+    </header>
+
+    <nav class="top-nav">
+        <a href="parcours_formation.html">← Retour au parcours</a>
+        <span class="module-tag">Module 3 / 5</span>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <span class="module-num">MODULE 3</span>
+            <h1>Vérifier & Citer</h1>
+            <p class="subtitle">Cliquer sur une citation, c'est la différence entre « l'IA dit » et « voici la preuve ».
+            </p>
+            <div class="hero-meta">
+                <span>⏱ 1 heure</span>
+                <span>🕵️ 2 activités + 1 débriefing</span>
+                <span>🎯 Shift n°3</span>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+
+        <div class="shift-card">
+            <h3>Le shift de ce module</h3>
+            <p>
+                NotebookLM fournit des <strong>citations</strong> — des petits numéros à côté de chaque affirmation,
+                qui renvoient directement au texte original de vos documents.
+            </p>
+            <p>
+                Un débutant les <strong>ignore</strong>. Un utilisateur intermédiaire les <strong>clique
+                    systématiquement</strong>.
+                Parce que cliquer une citation, c'est la différence entre « l'IA me dit que… » et « voici la phrase
+                exacte
+                de mon document qui prouve que… ».
+            </p>
+            <p style="font-weight: 700;">
+                ➜ Cette habitude — <em>vérifier avant de faire confiance</em> — devient automatique. Elle transforme
+                un consommateur passif d'outputs IA en un analyste actif qui utilise l'IA comme un outil, pas comme une
+                autorité.
+            </p>
+        </div>
+
+        <div class="prerequisite">
+            <h4>🔗 Ce module s'appuie sur les Modules 1 et 2</h4>
+            <p>Les participants savent poser des questions précises et contraintes. Maintenant, ils vont apprendre à
+                <strong>ne jamais faire confiance</strong> à une réponse sans vérifier les sources derrière.
+            </p>
+        </div>
+
+        <h2>🕵️ Activités</h2>
+        <p class="section-intro">Développer le réflexe de vérification — la compétence la plus critique en contexte
+            professionnel.</p>
+
+        <!-- Activité 3.1 -->
+        <div class="activity">
+            <div class="activity-header">
+                <span class="activity-title">Activité 3.1 — Le piège des citations</span>
+                <span class="activity-duration">⏱ 25 min</span>
+            </div>
+            <p>
+                L'objectif est de montrer que même quand NBLM cite ses sources, il faut <strong>vérifier</strong> :
+                l'IA peut résumer trop vite, omettre une nuance, ou extrapoler légèrement.
+            </p>
+
+            <h4 style="margin-top: 20px; color: var(--text);">Mise en situation</h4>
+            <p>Utiliser le même document que dans le Module 2. Poser des questions volontairement <strong>larges ou
+                    ambiguës</strong> :</p>
+
+            <div class="prompt-box">
+                Ce document recommande-t-il la maintenance préventive mensuelle des équipements hydrauliques ?
+                Cite tes sources.
+            </div>
+
+            <p>NBLM va répondre et fournir des citations numérotées. Par exemple :</p>
+
+            <div
+                style="background: var(--surface-card); border: 1px solid #E2E8F0; border-radius: 12px; padding: 25px; margin: 15px 0;">
+                <p style="color: var(--text); margin-bottom: 10px;"><strong>Réponse de NBLM :</strong></p>
+                <p style="color: var(--text-muted);">
+                    « Oui, le document recommande une maintenance préventive régulière des systèmes hydrauliques
+                    <span
+                        style="display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 4px; background: var(--module-color); color: white; font-size: 0.7em; font-weight: 700; margin: 0 2px;">1</span>
+                    incluant un contrôle mensuel des niveaux de fluide et des joints d'étanchéité
+                    <span
+                        style="display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 4px; background: var(--module-color); color: white; font-size: 0.7em; font-weight: 700; margin: 0 2px;">2</span>.
+                    »
+                </p>
+            </div>
+
+            <h4 style="margin-top: 20px; color: var(--text);">L'exercice de vérification</h4>
+            <ol class="steps">
+                <li><strong>Cliquer sur chaque numéro de citation</strong> — lire le passage source exact</li>
+                <li>Pour chaque citation, se poser 3 questions :
+                    <ul style="margin: 8px 0 0 20px;">
+                        <li>Le document dit-il <strong>exactement</strong> cela ?</li>
+                        <li>Y a-t-il une <strong>nuance</strong> que NBLM a omise ? (ex : « sauf si… », « dans certains
+                            cas… »)</li>
+                        <li>La citation prouve-t-elle <strong>vraiment</strong> l'affirmation, ou est-elle liée de
+                            manière indirecte ?</li>
+                    </ul>
+                </li>
+                <li>Classer chaque affirmation dans l'une des 3 catégories :</li>
+            </ol>
+
+            <div class="verdict">
+                <div class="verdict-card correct">
+                    <div class="emoji">✅</div>
+                    <p><strong>Fidèle</strong><br>Le document dit exactement cela</p>
+                </div>
+                <div class="verdict-card nuance">
+                    <div class="emoji">⚠️</div>
+                    <p><strong>Nuance perdue</strong><br>Vrai dans l'ensemble, mais un détail important est omis</p>
+                </div>
+                <div class="verdict-card wrong">
+                    <div class="emoji">❌</div>
+                    <p><strong>Extrapolation</strong><br>Le document ne dit pas réellement cela</p>
+                </div>
+            </div>
+
+            <div class="warning-box">
+                <strong>⚠️ Le point crucial</strong>
+                <p>NBLM est beaucoup plus fiable qu'un chatbot classique (il travaille uniquement sur vos sources).
+                    Mais il reste un modèle de langage : il peut <strong>résumer trop vite</strong> ou
+                    <strong>inférer une conclusion</strong> qui n'est pas explicitement dans le texte.
+                    Les citations sont votre filet de sécurité — à condition de les utiliser.
+                </p>
+            </div>
+
+            <div class="aha-box">
+                <div class="emoji">🔍</div>
+                <p>Les citations ne sont pas décoratives. Elles sont votre <strong>filet de sécurité</strong>.<br>
+                    Un professionnel qui utilise NBLM clique TOUJOURS sur les citations.</p>
+            </div>
+        </div>
+
+        <!-- Activité 3.2 -->
+        <div class="activity">
+            <div class="activity-header">
+                <span class="activity-title">Activité 3.2 — Détective documentaire</span>
+                <span class="activity-duration">⏱ 20 min</span>
+            </div>
+            <p>
+                En petits groupes (3-4 personnes), les participants jouent le rôle de « détectives »
+                qui doivent prouver ou infirmer des affirmations à partir de NBLM et de la vérification des citations.
+            </p>
+
+            <h4 style="margin-top: 20px; color: var(--text);">Les affirmations à vérifier</h4>
+            <p>Le formateur donne 3-4 affirmations sur le document (certaines vraies, certaines fausses, certaines
+                nuancées) :</p>
+
+            <div
+                style="background: #F8FAFC; border-radius: 12px; padding: 20px; margin: 15px 0; border: 1px solid #E2E8F0;">
+                <p style="margin-bottom: 10px;"><strong>Exemple d'affirmations :</strong></p>
+                <ol style="margin-left: 20px; color: var(--text-muted);">
+                    <li style="margin-bottom: 8px;">« La maintenance préventive doit être effectuée tous les mois. »
+                    </li>
+                    <li style="margin-bottom: 8px;">« Le document identifie 5 risques critiques pour les opérateurs. »
+                    </li>
+                    <li style="margin-bottom: 8px;">« L'arrêt d'urgence doit être testé quotidiennement. »</li>
+                    <li style="margin-bottom: 8px;">« L'auteur recommande de remplacer tous les joints tous les 6 mois.
+                        »</li>
+                </ol>
+                <p style="font-size: 0.85em; font-style: italic; color: var(--text-muted);">
+                    (Le formateur adapte les affirmations au document réellement utilisé en formation)
+                </p>
+            </div>
+
+            <ol class="steps">
+                <li>Chaque groupe choisit une affirmation</li>
+                <li>Utiliser NBLM pour interroger le document sur cette affirmation</li>
+                <li><strong>Cliquer sur chaque citation</strong> pour vérifier ce que le document dit vraiment</li>
+                <li>Rendre le verdict : ✅ Vrai, ⚠️ Partiellement vrai, ❌ Faux</li>
+                <li>Présenter les preuves au groupe (1 minute par groupe)</li>
+            </ol>
+
+            <div class="result-box">
+                <strong>✓ Ce que l'apprenant a développé :</strong>
+                <p>Le réflexe de vérification systématique. La capacité à distinguer
+                    ce que le document dit vraiment de ce que l'IA infère. La rigueur documentaire.</p>
+            </div>
+        </div>
+
+        <!-- Débriefing -->
+        <div class="activity" style="border-left-color: var(--accent);">
+            <div class="activity-header">
+                <span class="activity-title">Débriefing — Quand vérifier ?</span>
+                <span class="activity-duration">⏱ 15 min</span>
+            </div>
+            <p>Discussion structurée sur le niveau de vérification approprié selon le contexte.</p>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 20px 0;">
+                <div style="background: #FEF2F2; border-radius: 12px; padding: 20px; border: 1px solid #FECACA;">
+                    <h4 style="color: #DC2626; margin-bottom: 10px;">🔴 Toujours vérifier</h4>
+                    <ul style="list-style: none; padding: 0; font-size: 0.9em; color: #991B1B;">
+                        <li style="padding: 4px 0;">• Décisions engageant la sécurité</li>
+                        <li style="padding: 4px 0;">• Chiffres et données quantitatives</li>
+                        <li style="padding: 4px 0;">• Conformité réglementaire / audit</li>
+                        <li style="padding: 4px 0;">• Communication vers la direction</li>
+                    </ul>
+                </div>
+                <div style="background: #ECFDF5; border-radius: 12px; padding: 20px; border: 1px solid #A7F3D0;">
+                    <h4 style="color: #059669; margin-bottom: 10px;">🟢 Confiance raisonnable</h4>
+                    <ul style="list-style: none; padding: 0; font-size: 0.9em; color: #065F46;">
+                        <li style="padding: 4px 0;">• Résumés pour usage personnel</li>
+                        <li style="padding: 4px 0;">• Brainstorming et exploration</li>
+                        <li style="padding: 4px 0;">• Première lecture de survol</li>
+                        <li style="padding: 4px 0;">• Préparation de réunion informelle</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="discussion">
+                <h4>Questions de débriefing</h4>
+                <ul>
+                    <li>Avez-vous trouvé des cas où NBLM « résumait trop vite » ?</li>
+                    <li>En quoi les citations de NBLM sont-elles différentes des réponses de ChatGPT ?</li>
+                    <li>Dans votre métier, quels documents nécessitent une vérification maximale ?</li>
+                    <li>Comment cette habitude de vérification pourrait-elle changer votre rapport à l'IA en général ?
+                    </li>
+                </ul>
+            </div>
+
+            <div class="aha-box">
+                <div class="emoji">🎓</div>
+                <p>Vous n'êtes plus un consommateur passif de l'IA.<br>
+                    Vous êtes un <strong>analyste</strong> qui utilise l'IA comme outil, pas comme autorité.</p>
+            </div>
+        </div>
+
+        <!-- Recap -->
+        <h2>📋 Récapitulatif du Module 3</h2>
+        <div
+            style="background: var(--surface-card); border-radius: var(--radius); padding: 25px 30px; box-shadow: var(--shadow-sm); border: 1px solid #E2E8F0;">
+            <table style="width: 100%; border-collapse: collapse;">
+                <tr style="border-bottom: 1px solid #F1F5F9;">
+                    <td style="padding: 10px 0; font-weight: 600; width: 40%;">Shift acquis</td>
+                    <td style="padding: 10px 0; color: var(--text-muted);">Vérifier systématiquement. Ne jamais prendre
+                        une réponse IA comme argent comptant.</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #F1F5F9;">
+                    <td style="padding: 10px 0; font-weight: 600;">Compétences développées</td>
+                    <td style="padding: 10px 0; color: var(--text-muted);">Lire les citations, identifier les nuances
+                        omises, classer la fiabilité.</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #F1F5F9;">
+                    <td style="padding: 10px 0; font-weight: 600;">Habitude ancrée</td>
+                    <td style="padding: 10px 0; color: var(--text-muted);">Le réflexe de cliquer sur chaque citation
+                        avant de valider une information.</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px 0; font-weight: 600;">Fondation posée pour</td>
+                    <td style="padding: 10px 0; color: var(--text-muted);">Module 4 : Produire & Boucler (créer ses
+                        propres contenus et les réinjecter).</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="nav-bottom">
+            <a href="M2_art_questionner.html" class="nav-btn prev">← Module 2</a>
+            <a href="M4_produire_boucler.html" class="nav-btn next">Module 4 : Produire & Boucler →</a>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>Pôle Formation UIMM - CVDL — Formateur : S. JAUBERT</p>
+    </footer>
+
+</body>
+
+</html>

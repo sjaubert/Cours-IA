@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiches Activités — Formation NotebookLM</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4F46E5;
+            --accent: #F59E0B;
+            --surface: #F8FAFC;
+            --surface-card: #FFFFFF;
+            --text: #1E293B;
+            --text-muted: #64748B;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+            --radius: 16px;
+            --m1: #7C3AED;
+            --m2: #2563EB;
+            --m3: #059669;
+            --m4: #D97706;
+            --m5: #DC2626;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--surface);
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        /* Branding Header */
+        .branding-header {
+            background: var(--surface-card);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 30px;
+            border-bottom: 2px solid #E2E8F0;
+        }
+
+        .branding-header .brand-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .branding-header img {
+            height: 50px;
+            width: auto;
+            border-radius: 6px;
+        }
+
+        .branding-header .brand-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .branding-header .brand-name {
+            font-weight: 700;
+            font-size: 0.95em;
+            color: var(--text);
+        }
+
+        .branding-header .brand-trainer {
+            font-weight: 500;
+            font-size: 0.85em;
+            color: var(--text-muted);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--text);
+            color: white;
+            text-align: center;
+            padding: 25px;
+            font-size: 0.85em;
+        }
+
+        .top-nav {
+            background: var(--surface-card);
+            padding: 12px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #E2E8F0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .top-nav a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9em;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 50%, #EC4899 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.2em;
+            font-weight: 900;
+            margin-bottom: 8px;
+        }
+
+        .hero p {
+            opacity: 0.9;
+            font-size: 1em;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 30px 25px;
+        }
+
+        /* Fiche */
+        .fiche {
+            background: var(--surface-card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid #E2E8F0;
+            margin-bottom: 30px;
+            overflow: hidden;
+            page-break-inside: avoid;
+        }
+
+        .fiche-header {
+            padding: 18px 25px;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .fiche-header.m1 {
+            background: var(--m1);
+        }
+
+        .fiche-header.m2 {
+            background: var(--m2);
+        }
+
+        .fiche-header.m3 {
+            background: var(--m3);
+        }
+
+        .fiche-header.m4 {
+            background: var(--m4);
+        }
+
+        .fiche-header.m5 {
+            background: var(--m5);
+        }
+
+        .fiche-header h3 {
+            font-size: 1.1em;
+            font-weight: 700;
+            flex: 1;
+        }
+
+        .fiche-header .duration {
+            font-size: 0.85em;
+            font-weight: 600;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 3px 10px;
+            border-radius: 6px;
+            white-space: nowrap;
+        }
+
+        .fiche-body {
+            padding: 25px;
+        }
+
+        .fiche-body h4 {
+            font-size: 0.95em;
+            font-weight: 700;
+            color: var(--text);
+            margin: 15px 0 8px;
+        }
+
+        .fiche-body h4:first-child {
+            margin-top: 0;
+        }
+
+        .fiche-body p {
+            font-size: 0.9em;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .fiche-body ul,
+        .fiche-body ol {
+            margin-left: 20px;
+            margin-bottom: 12px;
+        }
+
+        .fiche-body li {
+            font-size: 0.9em;
+            color: var(--text-muted);
+            margin-bottom: 5px;
+        }
+
+        .prompt {
+            background: #1E293B;
+            color: #E2E8F0;
+            border-radius: 8px;
+            padding: 15px 18px;
+            margin: 10px 0;
+            font-size: 0.88em;
+            line-height: 1.5;
+            border-left: 3px solid var(--accent);
+        }
+
+        .check {
+            background: #ECFDF5;
+            border: 1px solid #A7F3D0;
+            border-radius: 8px;
+            padding: 12px 15px;
+            margin: 10px 0;
+        }
+
+        .check strong {
+            color: #065F46;
+            font-size: 0.88em;
+        }
+
+        .check p {
+            color: #047857;
+            font-size: 0.85em;
+            margin: 0;
+        }
+
+        .notes {
+            border: 2px dashed #CBD5E1;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 12px 0;
+            min-height: 60px;
+        }
+
+        .notes-label {
+            font-size: 0.8em;
+            color: #94A3B8;
+            font-weight: 600;
+            font-style: italic;
+        }
+
+        .separator {
+            border: none;
+            border-top: 2px dashed #E2E8F0;
+            margin: 5px 0;
+        }
+
+        @media print {
+            body {
+                background: white;
+                font-size: 11pt;
+            }
+
+            .top-nav,
+            .hero {
+                display: none;
+            }
+
+            .container {
+                padding: 0;
+                max-width: 100%;
+            }
+
+            .fiche {
+                box-shadow: none;
+                border: 1px solid #ccc;
+                margin-bottom: 20px;
+            }
+
+            .fiche-header {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .notes {
+                min-height: 50px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="branding-header">
+        <div class="brand-left">
+            <img src="../../logo_uimm_placeholder.jpg" alt="Logo UIMM">
+            <div class="brand-info">
+                <span class="brand-name">Pôle Formation UIMM - CVDL</span>
+                <span class="brand-trainer">Formateur : S. JAUBERT</span>
+            </div>
+        </div>
+    </header>
+
+    <nav class="top-nav">
+        <a href="parcours_formation.html">← Retour au parcours</a>
+        <a href="#" onclick="window.print(); return false;" style="color: var(--accent);">🖨 Imprimer</a>
+    </nav>
+
+    <section class="hero">
+        <h1>📄 Fiches Activités</h1>
+        <p>Formation NotebookLM — 12 activités à imprimer ou projeter</p>
+    </section>
+
+    <div class="container">
+
+        <!-- ═══ MODULE 1 ═══ -->
+
+        <div class="fiche">
+            <div class="fiche-header m1">
+                <h3>Activité 1.1 — Le test de l'ignorance</h3>
+                <span class="duration">⏱ 20 min</span>
+            </div>
+            <div class="fiche-body">
+                <h4>🎯 Objectif</h4>
+                <p>Comprendre que NBLM ne « sait » rien par défaut — il ne connaît que vos sources.</p>
+
+                <h4>📋 Consignes</h4>
+                <ol>
+                    <li>Aller sur <strong>notebooklm.google.com</strong></li>
+                    <li>Créer un notebook <strong>« Test Module 1 »</strong></li>
+                    <li><strong>NE PAS ajouter de source</strong></li>
+                    <li>Poser la question ci-dessous → Observer le résultat</li>
+                    <li>Ajouter une source (URL ou PDF fourni par le formateur)</li>
+                    <li>Poser <strong>la même question</strong> → Observer la transformation</li>
+                </ol>
+
+                <div class="prompt">Quelles sont les 5 principales causes de pannes sur les presses hydrauliques
+                    industrielles ?</div>
+
+                <div class="check">
+                    <strong>✓ Auto-évaluation</strong>
+                    <p>Je comprends pourquoi la réponse a changé. Je peux expliquer la différence entre NBLM et ChatGPT.
+                    </p>
+                </div>
+
+                <div class="notes">
+                    <span class="notes-label">📝 Mes observations :</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="fiche">
+            <div class="fiche-header m1">
+                <h3>Activité 1.2 — Mon premier notebook métier</h3>
+                <span class="duration">⏱ 25 min</span>
+            </div>
+            <div class="fiche-body">
+                <h4>🎯 Objectif</h4>
+                <p>Créer un notebook fonctionnel avec son propre document professionnel.</p>
+
+                <h4>📋 Consignes</h4>
+                <ol>
+                    <li>Créer un nouveau notebook avec un <strong>nom professionnel clair</strong></li>
+                    <li>Importer <strong>votre document personnel</strong> (PDF, Google Doc, URL…)</li>
+                    <li>Vérifier dans le panneau Sources que l'import est OK</li>
+                    <li>Lire le « Guide du Notebook » (résumé automatique)</li>
+                    <li>Poser 3 questions : une factuelle, une d'analyse, une hors-sujet</li>
+                </ol>
+
+                <div class="check">
+                    <strong>✓ Auto-évaluation</strong>
+                    <p>J'ai un notebook avec 1 source. J'ai observé comment NBLM gère une question hors-sujet.</p>
+                </div>
+
+                <div class="notes">
+                    <span class="notes-label">📝 Nom de mon notebook + mes 3 questions :</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══ MODULE 2 ═══ -->
+
+        <div class="fiche">
+            <div class="fiche-header m2">
+                <h3>Activité 2.1 — La question vague vs la question contrainte</h3>
+                <span class="duration">⏱ 25 min</span>
+            </div>
+            <div class="fiche-body">
+                <h4>🎯 Objectif</h4>
+                <p>Mesurer l'écart entre une question ouverte et une question contrainte sur le même document.</p>
+
+                <h4>📋 Consignes</h4>
+                <ol>
+                    <li>Utiliser le <strong>document de référence commun</strong> fourni par le formateur</li>
+                    <li>Poser : <em>« De quoi parle ce document ? »</em> → Noter le résultat</li>
+                    <li>Poser le prompt contraint ci-dessous → Comparer les résultats</li>
+                </ol>
+
+                <div class="prompt">En te basant uniquement sur la section « Analyse des causes » et la conclusion,
+                    quels sont les 5 facteurs de risque identifiés ? Pour chaque facteur, cite la phrase exacte.
+                    Présente en tableau : Facteur | Citation | Section.</div>
+
+                <div class="check">
+                    <strong>✓ Auto-évaluation</strong>
+                    <p>Je vois la différence entre les 2 réponses. Je comprends pourquoi la contrainte améliore la
+                        qualité.</p>
+                </div>
+
+                <div class="notes">
+                    <span class="notes-label">📝 Différences observées entre les 2 réponses :</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="fiche">
+            <div class="fiche-header m2">
+                <h3>Activité 2.2 — Les 5 niveaux de précision</h3>
+                <span class="duration">⏱ 30 min</span>
+            </div>
+            <div class="fiche-body">
+                <h4>🎯 Objectif</h4>
+                <p>Appliquer les 5 niveaux de questionnement sur son propre document.</p>
+
+                <h4>Les 5 niveaux</h4>
+                <ol>
+                    <li><strong>Question ouverte</strong> : « Résume en 5 points. »</li>
+                    <li><strong>Ciblée sur un sujet</strong> : « Quels sont les risques ? Par gravité. »</li>
+                    <li><strong>Contrainte à une section</strong> : « Uniquement dans les recommandations, cite les
+                        phrases. »</li>
+                    <li><strong>Format imposé</strong> : « Tableau avec colonnes Action / Priorité / Échéance. »</li>
+                    <li><strong>Croisée multi-sources</strong> : « Convergences et contradictions entre Source A et B. »
+                    </li>
+                </ol>
+
+                <p>➜ Appliquer les 5 niveaux successivement sur <strong>votre propre document</strong>.</p>
+
+                <div class="check">
+                    <strong>✓ Auto-évaluation</strong>
+                    <p>J'ai testé les 5 niveaux. Je sais identifier quel niveau utiliser selon mon besoin.</p>
+                </div>
+
+                <div class="notes">
+                    <span class="notes-label">📝 Mon meilleur prompt (celui qui a donné le meilleur résultat) :</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="fiche">
+            <div class="fiche-header m2">
+                <h3>Activité 2.3 — Challenge « Le meilleur prompt »</h3>
+                <span class="duration">⏱ 20 min</span>
+            </div>
+            <div class="fiche-body">
+                <h4>🎯 Objectif</h4>
+                <p>En binôme, produire la meilleure checklist possible à partir du même document.</p>
+
+                <h4>📋 Règles du challenge</h4>
+                <ol>
+                    <li>Même document pour tout le monde</li>
+                    <li>Objectif : obtenir la <strong>meilleure checklist de maintenance hebdomadaire</strong></li>
+                    <li>Rédigez votre prompt → Exécutez → Présentez en 30 sec</li>
+                    <li>Vote du groupe pour la meilleure checklist</li>
+                </ol>
+
+                <div class="notes">
+                    <span class="notes-label">📝 Notre prompt :</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══ MODULE 3 ═══ -->
+
+        <div class="fiche">
+            <div class="fiche-header m3">
+                <h3>Activité 3.1 — Le piège des citations</h3>
+                <span class="duration">⏱ 25 min</span>
+            </div>
+            <div class="fiche-body">
+                <h4>🎯 Objectif</h4>
+                <p>Vérifier systématiquement les citations de NBLM et identifier les nuances omises.</p>
+
+                <h4>📋 Consignes</h4>
+                <ol>
+                    <li>Poser le prompt ci-dessous</li>
+                    <li><strong>Cliquer sur CHAQUE citation</strong> (numéro en bleu/vert)</li>
+                    <li>Pour chaque affirmation, classifier : ✅ Fidèle | ⚠️ Nuance perdue | ❌ Extrapolation</li>
+                </ol>
+
+                <div class="prompt">Ce document recommande-t-il la maintenance préventive mensuelle des équipements
+                    hydrauliques ? Cite tes sources.</div>
+
+                <div class="check">
+                    <strong>✓ Auto-évaluation</strong>
+                    <p>J'ai cliqué sur au moins 3 citations. J'ai trouvé au moins 1 cas de « nuance perdue ».</p>
+                </div>
+
+                <div class="notes">
+                    <span class="notes-label">📝 Mes verdicts (✅ / ⚠️ / ❌) :</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="fiche">
+            <div class="fiche-header m3">
+                <h3>Activité 3.2 — Détective documentaire</h3>
+                <span class="duration">⏱ 20 min</span>
+            </div>
+            <div class="fiche-body">
+                <h4>🎯 Objectif</h4>
+                <p>En groupe, prouver ou infirmer des affirmations à l'aide de NBLM + vérification des citations.</p>
+
+                <h4>📋 Consignes</h4>
+                <ol>
+                    <li>Votre groupe reçoit une <strong>affirmation</strong> du formateur</li>
+                    <li>Utilisez NBLM pour interroger le document</li>
+                    <li>Cliquez sur les citations pour vérifier</li>
+                    <li>Verdict : ✅ Vrai | ⚠️ Partiellement vrai | ❌ Faux</li>
+                    <li>Présentez vos preuves au groupe (1 minute)</li>
+                </ol>
+
+                <div class="notes">
+                    <span class="notes-label">📝 Notre affirmation + verdict + preuves :</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══ MODULE 4 ═══ -->
+
+        <div class="fiche">
+            <div class="fiche-header m4">
+                <h3>Activité 4.1 — Ma première Note structurée</h3>
+                <span class="duration">⏱ 20 min</span>
+            </div>
+            <div class="fiche-body">
+                <h4>🎯 Objectif</h4>
+                <p>Rédiger sa propre synthèse dans une Note NBLM (pas du copier-coller !).</p>
+
+                <h4>📋 Structure de votre Note</h4>
+                <ul>
+                    <li>📌 <strong>3 points clés</strong> que je retiens</li>
+                    <li>⚠️ <strong>1 point de vigilance</strong></li>
+                    <li>💡 <strong>1 question</strong> que le document ne résout pas</li>
+                    <li>✅ <strong>Ma recommandation</strong> en 2 phrases</li>
+                </ul>
+
+                <div class="check">
+                    <strong>✓ Auto-évaluation</strong>
+                    <p>Ma Note contient MA pensée, pas un copier-coller de l'IA. Je l'ai titrée clairement.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="fiche">
+            <div class="fiche-header m4">
+                <h3>Activité 4.2 — La boucle créative</h3>
+                <span class="duration">⏱ 25 min</span>
+            </div>
+            <div class="fiche-body">
+                <h4>🎯 Objectif</h4>
+                <p>Convertir sa Note en Source et observer l'IA intégrer SA pensée.</p>
+
+                <h4>📋 Consignes</h4>
+                <ol>
+                    <li>Sélectionner votre Note → Menu « ⋮ » → <strong>« Convertir en source »</strong></li>
+                    <li>Vérifier dans le panneau Sources</li>
+                    <li>Poser le prompt ci-dessous</li>
+                </ol>
+
+                <div class="prompt">En comparant ma synthèse personnelle avec le document technique original, y a-t-il
+                    des points de ma recommandation qui ne sont pas suffisamment étayés ? Cite les passages de chaque
+                    source.</div>
+
+                <div class="check">
+                    <strong>✓ Auto-évaluation</strong>
+                    <p>NBLM cite maintenant MES idées à côté du document. Je vois l'output devenir input.</p>
+                </div>
+
+                <div class="notes">
+                    <span class="notes-label">📝 Ce que j'ai ressenti quand NBLM a cité ma Note :</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="fiche">
+            <div class="fiche-header m4">
+                <h3>Activité 4.3 — Produire un livrable professionnel</h3>
+                <span class="duration">⏱ 30 min</span>
+            </div>
+            <div class="fiche-body">
+                <h4>🎯 Objectif</h4>
+                <p>Produire un livrable concret utilisable dès lundi.</p>
+
+                <h4>📋 Choisissez votre livrable</h4>
+                <p>📊 Présentation | 📋 Synthèse | 📐 Infographie | 🎙 Audio | ✅ Checklist | 📝 Guide de procédure</p>
+
+                <div class="notes">
+                    <span class="notes-label">📝 Livrable choisi + prompt utilisé :</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══ MODULE 5 ═══ -->
+
+        <div class="fiche">
+            <div class="fiche-header m5">
+                <h3>Activité 5.1 — Le notebook transversal</h3>
+                <span class="duration">⏱ 30 min</span>
+            </div>
+            <div class="fiche-body">
+                <h4>🎯 Objectif</h4>
+                <p>Croiser des documents de domaines différents pour faire émerger des patterns invisibles.</p>
+
+                <h4>📋 Consignes</h4>
+                <ol>
+                    <li>Créer un notebook <strong>« Connexions transversales »</strong></li>
+                    <li>Importer : votre Note structurée (M4) + le document fourni par le formateur</li>
+                    <li>Poser la question ci-dessous</li>
+                </ol>
+
+                <div class="prompt">En analysant ces deux documents de domaines différents, quels points communs et
+                    tensions existent ? Y a-t-il des principes sous-jacents qui se retrouvent dans les deux ? Cite les
+                    passages pertinents.</div>
+
+                <div class="notes">
+                    <span class="notes-label">📝 Pattern(s) identifié(s) :</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="fiche">
+            <div class="fiche-header m5">
+                <h3>Activité 5.2 — Mon système de pensée personnel</h3>
+                <span class="duration">⏱ 25 min</span>
+            </div>
+            <div class="fiche-body">
+                <h4>🎯 Objectif</h4>
+                <p>Documenter son propre protocole NBLM en utilisant les 5 shifts comme structure.</p>
+
+                <h4>📋 Mon Protocole NBLM</h4>
+                <div class="notes"><span class="notes-label">1. Sourcer — Comment je sélectionne mes sources :</span>
+                </div>
+                <div class="notes"><span class="notes-label">2. Questionner — Ma méthode de questionnement :</span>
+                </div>
+                <div class="notes"><span class="notes-label">3. Vérifier — Mon protocole de vérification :</span></div>
+                <div class="notes"><span class="notes-label">4. Produire — Les livrables que je crée :</span></div>
+                <div class="notes"><span class="notes-label">5. Connecter — Comment je croise les projets :</span></div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin: 40px 0 20px;">
+            <a href="parcours_formation.html"
+                style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 30px; background: linear-gradient(135deg, #4F46E5, #7C3AED); color: white; text-decoration: none; border-radius: 10px; font-weight: 600;">
+                ← Retour au parcours complet
+            </a>
+        </div>
+
+    </div>
+
+    <footer class="footer">
+        <p>Pôle Formation UIMM - CVDL — Formateur : S. JAUBERT</p>
+    </footer>
+
+</body>
+
+</html>
