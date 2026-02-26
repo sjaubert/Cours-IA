@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html class="dark" lang="fr">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>ANTIGRAVITY AI News Feed - UIMM CVDL</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap"
+        rel="stylesheet" />
+    <!-- Material Symbols -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- Theme Configuration -->
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#135bec",
+                        "primary-dark": "#0f47b8",
+                        "primary-light": "#4a85fd",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                        "glass": "rgba(30, 35, 48, 0.6)",
+                        "glass-border": "rgba(255, 255, 255, 0.08)",
+                        "glass-hover": "rgba(40, 46, 61, 0.8)",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    backgroundImage: {
+                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+                    },
+                    boxShadow: {
+                        'glow': '0 0 20px rgba(19, 91, 236, 0.15)',
+                        'glow-hover': '0 0 30px rgba(19, 91, 236, 0.3)',
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px" },
+                },
+            },
+            // IMPORTANT: safelist pour les classes dynamiques injectées par JS
+            safelist: [
+                'border-l-primary',
+                'border-l-purple-500',
+                'border-l-teal-400',
+                'border-l-orange-500',
+                'border-l-red-500',
+                'text-primary',
+                'text-purple-400',
+                'text-teal-400',
+                'text-orange-500',
+                'text-red-400',
+            ],
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #101622;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #282e39;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #135bec;
+        }
+
+        .glass-panel {
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            background: linear-gradient(135deg, rgba(28, 31, 39, 0.7) 0%, rgba(16, 22, 34, 0.8) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .glass-header {
+            background: rgba(16, 22, 34, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .gradient-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            z-index: 0;
+            opacity: 0.4;
+        }
+    </style>
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display min-h-screen flex flex-col relative overflow-x-hidden">
+    <!-- Ambient Background Effects -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none">
+        <div class="gradient-orb bg-primary w-[500px] h-[500px] top-[-100px] left-[-100px] animate-pulse"></div>
+        <div class="gradient-orb bg-purple-600 w-[600px] h-[600px] bottom-[-200px] right-[-100px] opacity-20"></div>
+        <div class="gradient-orb bg-indigo-900 w-[400px] h-[400px] top-[40%] left-[60%] opacity-30"></div>
+    </div>
+    <!-- Header -->
+    <header class="glass-header sticky top-0 z-50 w-full px-4 lg:px-8 py-4">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <div class="h-10 flex items-center justify-center">
+                    <img src="../logo_uimm_placeholder.jpg" alt="Logo UIMM CVDL"
+                        class="h-full object-contain drop-shadow-md rounded">
+                </div>
+                <div>
+                    <h2 class="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-tight">Pôle
+                        Formation UIMM</h2>
+                    <p class="text-slate-500 dark:text-slate-400 text-xs font-medium tracking-wide">CVDL / ANTIGRAVITY
+                        PROJECT</p>
+                </div>
+            </div>
+            <div class="hidden sm:flex items-center gap-4">
+                <div
+                    class="flex items-center gap-2 px-4 py-2 rounded-full bg-slate-200/50 dark:bg-slate-800/50 border border-slate-300 dark:border-slate-700/50">
+                    <span class="material-symbols-outlined text-primary text-sm">person</span>
+                    <span class="text-sm font-semibold text-slate-700 dark:text-slate-200">Formateur: S. JAUBERT</span>
+                </div>
+                <button id="notify-btn"
+                    class="relative p-2 text-slate-500 dark:text-slate-400 hover:text-primary transition-colors">
+                    <span class="material-symbols-outlined">notifications</span>
+                    <span id="notify-badge"
+                        class="absolute top-2 right-2 size-2 bg-red-500 rounded-full border-2 border-background-dark"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+    <!-- Main Content -->
+    <main class="flex-grow z-10 px-4 lg:px-8 py-8">
+        <div class="max-w-7xl mx-auto flex flex-col lg:flex-row gap-8">
+            <!-- Left Column: Title & Filters (Sticky on Desktop) -->
+            <aside class="lg:w-1/4 flex flex-col gap-8 lg:sticky lg:top-28 h-fit">
+                <div class="space-y-4">
+                    <h1
+                        class="text-4xl lg:text-5xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-200 to-slate-400 drop-shadow-sm">
+                        ANTIGRAVITY<br />AI FEED
+                    </h1>
+                    <p class="text-slate-600 dark:text-slate-400 text-lg leading-relaxed">
+                        Flux d'actualités en temps réel pour l'avenir de l'industrie. Sélectionnées pour la prochaine
+                        génération d'ingénieurs.
+                    </p>
+                </div>
+                <div class="space-y-3">
+                    <p class="text-xs font-bold text-slate-500 dark:text-slate-500 uppercase tracking-widest px-1">
+                        Catégories</p>
+                    <nav id="filter-nav" class="flex flex-col gap-2">
+                        <button data-filter="all"
+                            class="filter-btn active flex items-center gap-3 w-full p-3 rounded-lg bg-primary/10 border border-primary/20 text-primary font-medium transition-all shadow-[0_0_15px_rgba(19,91,236,0.1)]">
+                            <span class="material-symbols-outlined">view_agenda</span>
+                            Toutes les nouveautés
+                        </button>
+                        <button data-filter="RELEASE"
+                            class="filter-btn flex items-center gap-3 w-full p-3 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800/50 text-slate-600 dark:text-slate-400 font-medium transition-all group">
+                            <span
+                                class="material-symbols-outlined group-hover:text-primary transition-colors">new_releases</span>
+                            Releases
+                        </button>
+                        <button data-filter="MODÈLE"
+                            class="filter-btn flex items-center gap-3 w-full p-3 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800/50 text-slate-600 dark:text-slate-400 font-medium transition-all group">
+                            <span
+                                class="material-symbols-outlined group-hover:text-primary transition-colors">neurology</span>
+                            Modèles IA
+                        </button>
+                        <button data-filter="FONCTIONNALITÉ"
+                            class="filter-btn flex items-center gap-3 w-full p-3 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800/50 text-slate-600 dark:text-slate-400 font-medium transition-all group">
+                            <span
+                                class="material-symbols-outlined group-hover:text-primary transition-colors">extension</span>
+                            Fonctionnalités
+                        </button>
+                        <button data-filter="SÉCURITÉ"
+                            class="filter-btn flex items-center gap-3 w-full p-3 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800/50 text-slate-600 dark:text-slate-400 font-medium transition-all group">
+                            <span
+                                class="material-symbols-outlined group-hover:text-primary transition-colors">security</span>
+                            Sécurité
+                        </button>
+                    </nav>
+                </div>
+                <div id="live-status"
+                    class="p-4 rounded-xl bg-gradient-to-br from-primary/20 to-purple-900/20 border border-primary/10 hidden lg:block">
+                    <div class="flex items-center gap-3 mb-2">
+                        <span class="material-symbols-outlined text-primary">bolt</span>
+                        <span class="text-sm font-bold text-white">Statut en direct</span>
+                    </div>
+                    <div id="status-text" class="text-xs text-slate-400">Système opérationnel à 99.9%. Dernière sync : à
+                        l'instant.
+                    </div>
+                </div>
+            </aside>
+            <!-- Right Column: Feed -->
+            <div class="lg:w-3/4 flex flex-col gap-6">
+                <!-- Hero Feature Card -->
+                <article class="glass-panel p-6 rounded-2xl group hover:border-primary/30 transition-all duration-300">
+                    <div class="flex flex-col md:flex-row gap-6">
+                        <div class="w-full md:w-2/5 aspect-video md:aspect-auto relative overflow-hidden rounded-xl">
+                            <div class="absolute inset-0 bg-primary/20 mix-blend-overlay z-10"></div>
+                            <div class="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
+                                style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAF343iotCaFVXAWaJeCLGwFx1F30eQk-1RzaGIN2yzMCmRWnkx4dS8Ou-4XxSIV5sh-iVIrr2pzjIWBCKnrnSJTbKGxVHCVfUsSw8r3oA-_GO4NnT3VpgAvs_iMvdbDErGfqGo7-xzvarnM45SYXw3aCDYwPhNtc3wBz2uVXJEBo_SPSRvwJW8LjoPcTh8RdeelnnO3jo1Cz4m06w3Tn-aPcxS3LHIJoIqATM6bfhLrifFvkM81sxppEJJTYq6Mlu3xi1GyxmUFjI');">
+                            </div>
+                        </div>
+                        <div class="flex flex-col justify-center flex-1">
+                            <div class="flex items-center gap-2 mb-3">
+                                <span
+                                    class="px-2 py-0.5 rounded text-[10px] font-bold bg-red-500/10 text-red-400 border border-red-500/20 tracking-wider">À
+                                    LA UNE</span>
+                                <span class="text-slate-500 text-xs">21 Fév 2026 — v1.18.4</span>
+                            </div>
+                            <h2
+                                class="text-2xl md:text-3xl font-bold text-white mb-3 group-hover:text-primary transition-colors">
+                                Gemini 3.1 Pro + Medium Thinking Mode</h2>
+                            <p class="text-slate-400 text-sm md:text-base mb-6 leading-relaxed">
+                                Mise à jour majeure du 18 février 2026 : Antigravity passe à Gemini 3.1 Pro avec un
+                                nouveau « Medium Thinking Mode » pour un raisonnement équilibré. Score ARC-AGI 2 de
+                                77.1%. Génération d'animations SVG depuis un simple prompt texte. Version 1.18.4
+                                disponible.
+                            </p>
+                            <div class="flex items-center justify-between mt-auto">
+                                <div class="flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-slate-500 text-sm">visibility</span>
+                                    <span class="text-xs text-slate-500">12k vues</span>
+                                </div>
+                                <button id="hero-btn"
+                                    class="flex items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-semibold rounded-lg hover:bg-primary-dark transition-all shadow-glow hover:shadow-glow-hover">
+                                    Lire l'analyse
+                                    <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+                <!-- Feed Grid -->
+                <div id="feed-container" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Les cartes seront injectées ici par JS -->
+                </div>
+                <!-- Load More -->
+                <div class="flex justify-center mt-8">
+                    <button id="load-more-btn"
+                        class="flex items-center gap-2 px-6 py-3 rounded-full bg-slate-800 border border-slate-700 text-slate-300 hover:text-white hover:border-primary hover:bg-slate-700 transition-all text-sm font-semibold">
+                        <span class="material-symbols-outlined text-sm">refresh</span>
+                        Charger plus de nouveautés
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // ============================================
+        // BASE DE DONNÉES DES NOUVEAUTÉS
+        // ============================================
+        const newsData = [
+            {
+                category: "RELEASE",
+                categoryColor: "text-primary",
+                categoryBorder: "border-l-primary",
+                title: "v1.18.3 — Nouveaux écrans de paramétrage",
+                image: "https://lh3.googleusercontent.com/aida-public/AB6AXuBlfY0CD4a3FVDKO507d1UJxL3XXwKwkKPTyrnM3IAEewRuDzry7l4WBc85pABkwUXfaGzqO83a_dJWR5SRgEHkObm3Nh5T5EGTzst6nuzDs1eXBvJvph0_u4qnPDAWdBTq2L8iZalAq4IYs9QO-67m1cnRar3_AMzwak9ihiughcHRK90ICNBWXITGa3NU2nDHSA_Ff8pek3x_FAPFgqdwfMMKsZkPHWwwy541BnaQHH-2eTJEkegfrp1YgypZJUyPToRuTDorL90",
+                description: "Nouveaux écrans de paramétrage pour les modèles et l'intégration terminal. Support du téléchargement d'artefacts. Corrections du Windows auto-updater et du chargement de plugins externes sur macOS.",
+                readTime: "2 min",
+                date: "19 Fév 2026"
+            },
+            {
+                category: "MODÈLE",
+                categoryColor: "text-teal-400",
+                categoryBorder: "border-l-teal-400",
+                title: "Gemini 3.1 Pro — Medium Thinking Mode",
+                image: "https://lh3.googleusercontent.com/aida-public/AB6AXuDROpqIFcFk7ZQANJ-u21RLDCBjYB8hPYjuDkENZ5H4NzOfWFZ6l1EHMG-fDGjJXkq8jdpK_1xsBTCA-Xhy0ZJKReFYd1cTDCJ3ZBEIgKlYbiYWqWkIKS9mhBVxKiz9l2m33kYGnAVId1oMujRofUmbbNVh2iL8EtG7Ekr2ZP9w65_ezjg-Kq9JX5B5wHZXQ262mW6HW-NdxLIoPbUTj8NUAk2_aw5OelbOWnutXQcHqgC-XqrKhQmKiHnyJ-neMGqEiwpuSX1RygA",
+                description: "Mise à jour majeure vers Gemini 3.1 Pro avec un nouveau mode de raisonnement équilibré « Medium Thinking ». Score ARC-AGI 2 de 77.1%. Introduction de la génération d'animations SVG depuis un prompt texte.",
+                readTime: "4 min",
+                date: "18 Fév 2026"
+            },
+            {
+                category: "SÉCURITÉ",
+                categoryColor: "text-red-400",
+                categoryBorder: "border-l-red-500",
+                title: "v1.16.5 — Secure Mode renommé Strict Mode",
+                image: "https://lh3.googleusercontent.com/aida-public/AB6AXuC5j1W5WbrfUsw2k9hTHOsJgbjCrMNsIBzGmXmBt7lHZd6bwxQwtV5ea9K1UG560nPls_JRE7QDR9JVIEpsLcEhBWjIZfmFF0xu1jVeUxWkhBlzPS6sZLIJKtDPbllblB-lPwLcscVRU_GYtYfku74annBF4vTe0gv9ZflfQ217vpeZhttII-DsINq4-idR6oNtmahggCK5QyB8Unsmx1Jm04W5xhC3gRbPJOlk3mz3XE-4wv7lznjGb6i0XtLtUukVzmB98Ngnkww",
+                description: "Bug fixes et améliorations de performances. Accélération des résultats @-mention dans l'Agent Manager. Le « Secure Mode » est renommé « Strict Mode » pour plus de clarté.",
+                readTime: "2 min",
+                date: "3 Fév 2026"
+            },
+            {
+                category: "FONCTIONNALITÉ",
+                categoryColor: "text-purple-400",
+                categoryBorder: "border-l-purple-500",
+                title: "Agent Skills — Mémoire persistante pour agents",
+                image: "https://lh3.googleusercontent.com/aida-public/AB6AXuBLBftFEgwz9WiXQImwpUvYhmkrN6i9A2wSJQE0ORP4KoiXzVFWBzx2N6mHG3NMni1GpXMZ4XxlLgtMQJrfOopN9TkUc28dB7KquUb45UHc3ASBKgju0D5c5CAK9_Imc0D5cv76v9TEn9JsB9QURMDbfqmE9bwqJSQD7Ees3rYSW1MiFsHLy_WWUGIDUJu7V-zD5gGPx6XlmypkVZMvdcNiCRzDQsDg1iNzoExq1J1vpH01RlTHakL2iyQgynldZtGsuQcNCCOz5XI",
+                description: "Introduction des « Skills » : des modules mémoire réutilisables (fichiers Markdown) qui permettent aux agents de retenir styles de code, workflows et structures de fichiers entre les projets.",
+                readTime: "5 min",
+                date: "29 Jan 2026"
+            }
+        ];
+
+        const extraNews = [
+            {
+                category: "MODÈLE",
+                categoryColor: "text-teal-400",
+                categoryBorder: "border-l-teal-400",
+                title: "Gemini 3 Flash — 3x plus rapide",
+                image: "https://lh3.googleusercontent.com/aida-public/AB6AXuCya5BV3MY2t3T4W3ftmpaJigB_sTrJV0Erq4e2f5C2a8Vu4gHneUEFKuNnqNtB5mPxbXSYSu4zN9C6t8XPOZx_miL-MyeCyBn7zhjVwXVLLCAT8iVBsGUIkcJJxJ7jXJNVAA0sUafuLTi2rMbnzZDEJkI_4a3mKT5hb_7ErCpQrAUc8YZiAgxQJodT1R7wVmi1EqQenElOYluR4eOlRmPPpyds09SIObvAzzEvgTF73X5G6lINnUI5WBN3VK2fr1Nieo-p8MDIS0I",
+                description: "Avec Gemini 3 Flash, les agents sont environ 3 fois plus rapides qu'avec Gemini 2.5 Pro tout en conservant des capacités de raisonnement similaires. Moins de limitations de débit pour les utilisateurs.",
+                readTime: "3 min",
+                date: "29 Jan 2026"
+            },
+            {
+                category: "FONCTIONNALITÉ",
+                categoryColor: "text-purple-400",
+                categoryBorder: "border-l-purple-500",
+                title: "MCP — Connexion aux outils externes",
+                image: "https://lh3.googleusercontent.com/aida-public/AB6AXuCiKKY-aURslIdxBImz-Z_IyzI2j6LytT29RpQIF8wprOfMeiCbgoRNoqzzdhvMVjdOetnYYkRqzst97f5lNFFsSk7Fp4NAz3KIydzhqgwTgrg0131hZ-GA9m8uaBmh2guaoM0H5srqXPcYqVRalZANKh53A77vjaC0bUZ111vUgGwE6pLqqD9q9nFv-kfZaSa3-IktR39ut0MsMuo6fRr7_oaWmhHDIuw_-Pwv27HV-nsxvPAlvmoEIdKj33-9Gin9LFCEb47na2Q",
+                description: "Les agents peuvent désormais se connecter directement à des outils externes (bases de données, GitHub, APIs) via le Model Context Protocol. Réduction des « hallucinations » de l'IA grâce à l'accès aux données en temps réel.",
+                readTime: "4 min",
+                date: "29 Jan 2026"
+            },
+            {
+                category: "SÉCURITÉ",
+                categoryColor: "text-red-400",
+                categoryBorder: "border-l-red-500",
+                title: "Terminal Sandboxing pour macOS",
+                image: "https://lh3.googleusercontent.com/aida-public/AB6AXuC5j1W5WbrfUsw2k9hTHOsJgbjCrMNsIBzGmXmBt7lHZd6bwxQwtV5ea9K1UG560nPls_JRE7QDR9JVIEpsLcEhBWjIZfmFF0xu1jVeUxWkhBlzPS6sZLIJKtDPbllblB-lPwLcscVRU_GYtYfku74annBF4vTe0gv9ZflfQ217vpeZhttII-DsINq4-idR6oNtmahggCK5QyB8Unsmx1Jm04W5xhC3gRbPJOlk3mz3XE-4wv7lznjGb6i0XtLtUukVzmB98Ngnkww",
+                description: "Les commandes terminal des agents sont désormais exécutées dans un bac à sable (sandbox) sur macOS. Les développeurs peuvent aussi définir des Allow Lists et Deny Lists pour contrôler ce que les agents peuvent faire.",
+                readTime: "3 min",
+                date: "Jan 2026"
+            },
+            {
+                category: "FONCTIONNALITÉ",
+                categoryColor: "text-purple-400",
+                categoryBorder: "border-l-purple-500",
+                title: "Support des serveurs MCP",
+                image: "https://lh3.googleusercontent.com/aida-public/AB6AXuBLBftFEgwz9WiXQImwpUvYhmkrN6i9A2wSJQE0ORP4KoiXzVFWBzx2N6mHG3NMni1GpXMZ4XxlLgtMQJrfOopN9TkUc28dB7KquUb45UHc3ASBKgju0D5c5CAK9_Imc0D5cv76v9TEn9JsB9QURMDbfqmE9bwqJSQD7Ees3rYSW1MiFsHLy_WWUGIDUJu7V-zD5gGPx6XlmypkVZMvdcNiCRzDQsDg1iNzoExq1J1vpH01RlTHakL2iyQgynldZtGsuQcNCCOz5XI",
+                description: "Ajout du support des serveurs MCP (Model Context Protocol) dans Antigravity, permettant aux agents de se brancher sur des outils et services tiers (Stitch, bases de données, APIs...).",
+                readTime: "4 min",
+                date: "18 Déc 2025"
+            },
+            {
+                category: "RELEASE",
+                categoryColor: "text-primary",
+                categoryBorder: "border-l-primary",
+                title: "Lancement public d'Antigravity",
+                image: "https://lh3.googleusercontent.com/aida-public/AB6AXuAF343iotCaFVXAWaJeCLGwFx1F30eQk-1RzaGIN2yzMCmRWnkx4dS8Ou-4XxSIV5sh-iVIrr2pzjIWBCKnrnSJTbKGxVHCVfUsSw8r3oA-_GO4NnT3VpgAvs_iMvdbDErGfqGo7-xzvarnM45SYXw3aCDYwPhNtc3wBz2uVXJEBo_SPSRvwJW8LjoPcTh8RdeelnnO3jo1Cz4m06w3Tn-aPcxS3LHIJoIqATM6bfhLrifFvkM81sxppEJJTYq6Mlu3xi1GyxmUFjI",
+                description: "Google lance Antigravity en preview publique le 18 novembre 2025 en même temps que Gemini 3. Un IDE « agent-first » gratuit pour Windows, macOS et Linux, avec l'Agent Manager, un navigateur Chrome intégré et les artefacts vérifiables.",
+                readTime: "6 min",
+                date: "18 Nov 2025"
+        ];
+
+        let extraLoaded = false;
+        let currentFilter = 'all';
+
+        // ============================================
+        // GÉNÉRATION DES CARTES
+        // ============================================
+        function createFeedCard(data) {
+            const card = document.createElement('article');
+            card.className = 'glass-panel p-5 rounded-xl hover:bg-white/[0.02] transition-all duration-300 border-l-4 border-l-transparent cursor-pointer';
+            card.dataset.category = data.category;
+
+            card.addEventListener('mouseenter', () => {
+                card.classList.remove('border-l-transparent');
+                card.classList.add(data.categoryBorder);
+            });
+            card.addEventListener('mouseleave', () => {
+                card.classList.add('border-l-transparent');
+                card.classList.remove(data.categoryBorder);
+            });
+
+            card.innerHTML = `
+                <div class="flex justify-between items-start mb-4">
+                    <div class="flex flex-col gap-1">
+                        <span class="text-xs font-bold ${data.categoryColor} tracking-wide">${data.category}</span>
+                        <h3 class="text-lg font-bold text-white leading-tight">${data.title}</h3>
+                    </div>
+                    <button class="bookmark-btn text-slate-500 hover:text-white transition-colors" title="Sauvegarder">
+                        <span class="material-symbols-outlined">bookmark_add</span>
+                    </button>
+                </div>
+                <div class="w-full h-40 rounded-lg overflow-hidden mb-4 relative">
+                    <div class="w-full h-full bg-cover bg-center hover:scale-105 transition-transform duration-500" style="background-image: url('${data.image}');"></div>
+                </div>
+                <p class="text-slate-400 text-sm mb-4 line-clamp-2">
+                    ${data.description}
+                </p>
+                <div class="flex items-center justify-between border-t border-white/5 pt-4">
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs text-slate-500">${data.readTime}</span>
+                        <span class="text-xs text-slate-600">&middot; ${data.date}</span>
+                    </div>
+                    <span class="text-xs font-medium ${data.categoryColor} flex items-center gap-1 opacity-80 hover:opacity-100 transition-opacity">
+                        En savoir plus <span class="material-symbols-outlined text-[16px]">chevron_right</span>
+                    </span>
+                </div>
+            `;
+
+            // Bookmark toggle
+            const bookmarkBtn = card.querySelector('.bookmark-btn');
+            bookmarkBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const icon = bookmarkBtn.querySelector('.material-symbols-outlined');
+                if (icon.textContent === 'bookmark_add') {
+                    icon.textContent = 'bookmark_added';
+                    bookmarkBtn.classList.remove('text-slate-500');
+                    bookmarkBtn.classList.add('text-primary');
+                } else {
+                    icon.textContent = 'bookmark_add';
+                    bookmarkBtn.classList.add('text-slate-500');
+                    bookmarkBtn.classList.remove('text-primary');
+                }
+            });
+
+            return card;
+        }
+
+        // ============================================
+        // RENDU DU FEED
+        // ============================================
+        const feedContainer = document.getElementById('feed-container');
+        const loadBtn = document.getElementById('load-more-btn');
+        const notifyBtn = document.getElementById('notify-btn');
+        const heroBtn = document.getElementById('hero-btn');
+
+        function getAllNews() {
+            return extraLoaded ? [...newsData, ...extraNews] : [...newsData];
+        }
+
+        function renderFeed(filter) {
+            feedContainer.innerHTML = '';
+            const allNews = getAllNews();
+            const filtered = filter === 'all' ? allNews : allNews.filter(n => n.category === filter);
+
+            if (filtered.length === 0) {
+                feedContainer.innerHTML = `
+                    <div class="col-span-2 text-center py-12">
+                        <span class="material-symbols-outlined text-slate-600 text-5xl mb-4 block">search_off</span>
+                        <p class="text-slate-500 text-lg">Aucune nouveauté dans cette catégorie pour le moment.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            filtered.forEach(item => {
+                feedContainer.appendChild(createFeedCard(item));
+            });
+        }
+
+        renderFeed('all');
+
+        // ============================================
+        // FILTRES
+        // ============================================
+        const filterNav = document.getElementById('filter-nav');
+        filterNav.addEventListener('click', (e) => {
+            const btn = e.target.closest('.filter-btn');
+            if (!btn) return;
+
+            // Mise à jour du style actif
+            filterNav.querySelectorAll('.filter-btn').forEach(b => {
+                b.classList.remove('bg-primary/10', 'border', 'border-primary/20', 'text-primary', 'shadow-[0_0_15px_rgba(19,91,236,0.1)]');
+                b.classList.add('hover:bg-slate-200', 'dark:hover:bg-slate-800/50', 'text-slate-600', 'dark:text-slate-400');
+            });
+            btn.classList.add('bg-primary/10', 'border', 'border-primary/20', 'text-primary', 'shadow-[0_0_15px_rgba(19,91,236,0.1)]');
+            btn.classList.remove('hover:bg-slate-200', 'dark:hover:bg-slate-800/50', 'text-slate-600', 'dark:text-slate-400');
+
+            currentFilter = btn.dataset.filter;
+            renderFeed(currentFilter);
+        });
+
+        // ============================================
+        // BOUTON "CHARGER PLUS"
+        // ============================================
+        loadBtn.addEventListener('click', () => {
+            if (extraLoaded) {
+                loadBtn.innerHTML = '<span class="material-symbols-outlined text-sm">check_circle</span> Toutes les nouveautés sont affichées';
+                loadBtn.disabled = true;
+                loadBtn.classList.add('opacity-50', 'cursor-not-allowed');
+                return;
+            }
+
+            loadBtn.innerHTML = '<span class="material-symbols-outlined animate-spin text-sm">refresh</span> Chargement...';
+            loadBtn.disabled = true;
+
+            setTimeout(() => {
+                extraLoaded = true;
+                renderFeed(currentFilter);
+
+                loadBtn.disabled = false;
+                loadBtn.innerHTML = '<span class="material-symbols-outlined text-sm">check_circle</span> Toutes les nouveautés sont affichées';
+                loadBtn.disabled = true;
+                loadBtn.classList.add('opacity-50', 'cursor-not-allowed');
+
+                // Mise à jour du statut live
+                document.getElementById('status-text').textContent = 'Système opérationnel à 99.9%. Dernière sync : à l\'instant. 6 articles chargés.';
+            }, 1200);
+        });
+
+        // ============================================
+        // BOUTON NOTIFICATIONS
+        // ============================================
+        notifyBtn.addEventListener('click', () => {
+            const badge = document.getElementById('notify-badge');
+            if (badge) badge.style.display = 'none';
+
+            const popup = document.createElement('div');
+            popup.className = 'fixed inset-0 z-[100] flex items-center justify-center bg-black/50 backdrop-blur-sm';
+            popup.innerHTML = `
+                <div class="glass-panel rounded-2xl p-8 max-w-md mx-4 text-center border border-white/10">
+                    <span class="material-symbols-outlined text-primary text-5xl mb-4 block">notifications_active</span>
+                    <h3 class="text-white text-xl font-bold mb-2">Notifications</h3>
+                    <p class="text-slate-400 mb-6">Vous n'avez pas de nouvelles notifications pour le moment. Revenez bientôt !</p>
+                    <button id="close-popup" class="px-6 py-2.5 bg-primary text-white rounded-lg font-semibold hover:bg-primary-dark transition-all">Fermer</button>
+                </div>
+            `;
+            document.body.appendChild(popup);
+
+            popup.addEventListener('click', (e) => {
+                if (e.target === popup || e.target.id === 'close-popup') {
+                    popup.remove();
+                }
+            });
+        });
+
+        // ============================================
+        // BOUTON HERO "LIRE L'ANALYSE"
+        // ============================================
+        heroBtn.addEventListener('click', () => {
+            const popup = document.createElement('div');
+            popup.className = 'fixed inset-0 z-[100] flex items-center justify-center bg-black/50 backdrop-blur-sm';
+            popup.innerHTML = `
+                <div class="glass-panel rounded-2xl p-8 max-w-lg mx-4 border border-white/10">
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-red-500/10 text-red-400 border border-red-500/20 tracking-wider">À LA UNE</span>
+                    </div>
+                    <h3 class="text-white text-2xl font-bold mb-4">Gemini 3.1 Pro + Medium Thinking Mode</h3>
+                    <div class="text-slate-400 text-sm leading-relaxed space-y-3">
+                        <p>Le 18 février 2026, Antigravity a reçu une mise à jour majeure de son modèle principal vers <strong class="text-white">Gemini 3.1 Pro</strong>. Les améliorations clés :</p>
+                        <ul class="list-disc list-inside space-y-1 text-slate-300">
+                            <li><strong>Medium Thinking Mode</strong> : Un nouveau mode de raisonnement équilibré entre vitesse et profondeur d'analyse</li>
+                            <li><strong>Score ARC-AGI 2</strong> : Atteint 77.1%, un bond significatif en intelligence générale</li>
+                            <li><strong>Code-Based Animation</strong> : Génération de SVG animés directement depuis un prompt texte</li>
+                            <li><strong>Planification améliorée</strong> : Meilleure décomposition des tâches complexes</li>
+                        </ul>
+                        <p>Antigravity supporte aussi Claude Sonnet 4.6, Claude Opus 4.6 et GPT-OSS-120B. La version 1.18.4 est disponible pour Windows, macOS et Linux.</p>
+                    </div>
+                    <button id="close-hero-popup" class="mt-6 px-6 py-2.5 bg-primary text-white rounded-lg font-semibold hover:bg-primary-dark transition-all w-full">Fermer</button>
+                </div>
+            `;
+            document.body.appendChild(popup);
+
+            popup.addEventListener('click', (e) => {
+                if (e.target === popup || e.target.id === 'close-hero-popup') {
+                    popup.remove();
+                }
+            });
+        });
+
+        // ============================================
+        // MISE À JOUR AUTOMATIQUE DE L'HEURE
+        // ============================================
+        setInterval(() => {
+            const now = new Date();
+            const timeStr = now.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
+            const statusEl = document.getElementById('status-text');
+            if (statusEl) {
+                const count = getAllNews().length;
+                statusEl.textContent = `Système opérationnel à 99.9%. Dernière sync : ${timeStr}. ${count} articles chargés.`;
+            }
+        }, 30000);
+    </script>
+
+    <!-- Footer -->
+    <footer class="glass-header mt-12 py-8 px-4 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex items-center gap-3">
+                <div class="h-8 flex items-center">
+                    <img src="../logo_uimm_placeholder.jpg" alt="Logo UIMM"
+                        class="h-full object-contain rounded opacity-70">
+                </div>
+                <span class="text-slate-400 text-sm font-medium">Pôle Formation UIMM - CVDL</span>
+            </div>
+            <div class="text-slate-600 text-xs text-center">
+                © 2026 ANTIGRAVITY Project — Pôle Formation UIMM - CVDL <br class="md:hidden" /> Formateur: S. JAUBERT
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>
