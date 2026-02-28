@@ -1,22 +1,8 @@
-# Plan d'action : Configuration du serveur MCP NotebookLM
+# Plan d'action pour la configuration de NoteBLM sur ce PC
 
-- [x] **1. Installation et mise à jour de l'environnement**
-  - Créer un environnement virtuel avec `uv` (par ex. dans `d:\projets\Cours-IA\NoteBLM\env_mcp`).
-  - Installer `notebooklm-mcp-server` via `uv pip install`.
-- [x] **2. Correction du chemin d'accès à Chrome sous Windows**
-  - Localiser le fichier `auth_cli.py` de la librairie installée.
-  - Modifier le code pour chercher `chrome.exe` dans `C:\Program Files`, `C:\Program Files (x86)` et `%LOCALAPPDATA%`.
-- [x] **3. Création du Protocol Guard (`run_mcp.py`)**
-  - Créer l'interface Python `run_mcp.py` pour lancer l'exécutable MCP.
-  - Filtrer `stdout` pour ne conserver que du JSON valide, et rediriger le texte brut/les avertissements vers `stderr`.
-- [x] **4. Système d'authentification automatisé**
-  - Créer un flux de travail (script Python `auth_mcp.py` ou `.bat`) qui :
-    - Arrête proprement les processus Chrome en cours.
-    - Lance Chrome avec `--remote-debugging-port=9222`.
-    - Exécute `notebooklm-mcp-auth`.
-- [x] **5. Configuration MCP**
-  - Détailler la configuration `mcp_config.json` pour intégrer ce wrapper.
-- [x] **6. Vérification du succès (`test_notebooklm.py`)**
-  - Importation de `NotebookLMClient`.
-  - Exécution de `list_notebooks()`.
-  - Gestion claire du cas "Authentification expirée".
+- [x] Mettre à jour les chemins en dur (de `d:\projets...` vers `c:\Users\s.jaubert\projets...`) dans :
+  - [x] `mcp_config_example.json`
+  - [x] `walkthrough.md`
+- [x] Créer l'environnement virtuel `env_mcp` manuellement ou via script, car il n'a pas été transféré (comportement normal).
+- [x] Installer le paquet `notebooklm-mcp-server` (et ses dépendances) dans cet environnement virtuel.
+- [ ] S'assurer que les scripts d'authentification et de test fonctionnent sur cette machine (si l'utilisateur le valide).

@@ -13,14 +13,14 @@ Le serveur MCP NotebookLM a été installé et configuré avec succès dans l'en
 
 ## 2. Instructions d'Utilisation
 
-L'ensemble des fichiers réside dans `d:\projets\Cours-IA\NoteBLM`.
+L'ensemble des fichiers réside dans `c:\Users\s.jaubert\projets\Cours-IA\NoteBLM`.
 
 ### Étape A : S'authentifier auprès de Google
 
 1. Exécutez le script d'authentification en tant qu'administrateur ou dans un terminal classique :
 
    ```bash
-   python d:\projets\Cours-IA\NoteBLM\auth_mcp.py
+   python c:\Users\s.jaubert\projets\Cours-IA\NoteBLM\auth_mcp.py
    ```
 
 2. Cela va arrêter tout Chrome ouvert afin de libérer le port 9222.
@@ -32,7 +32,7 @@ L'ensemble des fichiers réside dans `d:\projets\Cours-IA\NoteBLM`.
 Lancez le script de test pour vous assurer que tout s'est bien déroulé.
 
 ```bash
-python d:\projets\Cours-IA\NoteBLM\test_notebooklm.py
+python c:\Users\s.jaubert\projets\Cours-IA\NoteBLM\test_notebooklm.py
 ```
 
 Si le script liste les noms de vos carnets de notes NotebookLM, la configuration est un succès. En cas d'"Authentification expirée", il suffira de relancer l'étape A.
@@ -48,7 +48,7 @@ Ouvrez le fichier de configuration de votre client IA (généralement `mcp.json`
       "command": "python",
       "args": [
         "-u",
-        "d:\\projets\\Cours-IA\\NoteBLM\\run_mcp.py"
+        "c:\\Users\\s.jaubert\\projets\\Cours-IA\\NoteBLM\\run_mcp.py"
       ]
     }
   }
