@@ -1,14 +1,22 @@
-# Planification: Application Nouveautés Antigravity (Via Stitch MCP)
+# Plan d'action : Configuration du serveur MCP NotebookLM
 
-## Étapes de réalisation
-
-- [x] Créer un projet dans Stitch MCP pour l'application "Nouveautés Antigravity".
-- [x] Générer une interface principale via Stitch avec un prompt détaillé incluant les règles de la charte UIMM et l'esthétique "premium".
-- [x] Récupérer le code généré par Stitch (HTML/CSS/JS).
-- [x] Sauvegarder les fichiers dans le dossier `Cours-IA/Nouveautes_Antigravity/`.
-- [x] Vérifier la conformité de l'interface vis-à-vis des exigences (logo UIMM, S. JAUBERT, design moderne).
-- [x] Documenter le projet et fermer la tâche.
-
-## Révision
-
-- En attente de réalisation.
+- [x] **1. Installation et mise à jour de l'environnement**
+  - Créer un environnement virtuel avec `uv` (par ex. dans `d:\projets\Cours-IA\NoteBLM\env_mcp`).
+  - Installer `notebooklm-mcp-server` via `uv pip install`.
+- [x] **2. Correction du chemin d'accès à Chrome sous Windows**
+  - Localiser le fichier `auth_cli.py` de la librairie installée.
+  - Modifier le code pour chercher `chrome.exe` dans `C:\Program Files`, `C:\Program Files (x86)` et `%LOCALAPPDATA%`.
+- [x] **3. Création du Protocol Guard (`run_mcp.py`)**
+  - Créer l'interface Python `run_mcp.py` pour lancer l'exécutable MCP.
+  - Filtrer `stdout` pour ne conserver que du JSON valide, et rediriger le texte brut/les avertissements vers `stderr`.
+- [x] **4. Système d'authentification automatisé**
+  - Créer un flux de travail (script Python `auth_mcp.py` ou `.bat`) qui :
+    - Arrête proprement les processus Chrome en cours.
+    - Lance Chrome avec `--remote-debugging-port=9222`.
+    - Exécute `notebooklm-mcp-auth`.
+- [x] **5. Configuration MCP**
+  - Détailler la configuration `mcp_config.json` pour intégrer ce wrapper.
+- [x] **6. Vérification du succès (`test_notebooklm.py`)**
+  - Importation de `NotebookLMClient`.
+  - Exécution de `list_notebooks()`.
+  - Gestion claire du cas "Authentification expirée".

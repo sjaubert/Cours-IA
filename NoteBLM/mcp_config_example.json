@@ -1,0 +1,11 @@
+{
+    "mcpServers": {
+        "notebooklm": {
+            "command": "python",
+            "args": [
+                "-u",
+                "d:\\projets\\Cours-IA\\NoteBLM\\run_mcp.py"
+            ]
+        }
+    }
+}
