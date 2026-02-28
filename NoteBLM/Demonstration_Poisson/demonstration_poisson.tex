@@ -1,0 +1,87 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{graphicx}
+\usepackage{geometry}
+\geometry{margin=2cm}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\includegraphics[height=1cm]{../../logo_uimm_placeholder.jpg} Pôle Formation UIMM - CVDL}
+\rhead{S. JAUBERT}
+\lfoot{Pôle Formation UIMM - CVDL}
+\rfoot{S. JAUBERT}
+
+\title{Démonstration détaillée de la formule sommatoire de Poisson}
+\author{S. JAUBERT \\ Pôle Formation UIMM - CVDL}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section*{Énoncé et Hypothèses}
+
+\paragraph*{Convention de la transformée de Fourier :}
+Pour une fonction intégrable $f \in L^1(\mathbb{R})$, on définit sa transformée de Fourier $\hat{f}$ par :
+\[ \hat{f}(\xi) = \int_{-\infty}^{\infty} f(t) e^{-2i\pi \xi t} dt \]
+
+\paragraph*{Hypothèses sur la fonction $f$ :}
+L'application de cette formule exige des conditions de régularité et de décroissance pour garantir la convergence des séries et intégrales. La démonstration classique est valide si l'on suppose que :
+\begin{enumerate}
+    \item $f : \mathbb{R} \to \mathbb{C}$ est de classe $C^1$.
+    \item La fonction $f$ et sa dérivée $f'$ décroissent suffisamment vite à l'infini, c'est-à-dire qu'il existe une constante $M > 0$ telle que $f(x) = O(1/x^2)$ et $f'(x) = O(1/x^2)$ lorsque $|x| \to +\infty$.
+\end{enumerate}
+\textit{(Note : Ces conditions sont naturellement remplies si $f$ appartient à l'espace de Schwartz $\mathcal{S}(\mathbb{R})$ des fonctions infiniment dérivables à décroissance rapide.)}
+
+\paragraph*{Énoncé de la formule :}
+Sous ces hypothèses, la formule sommatoire de Poisson stipule que la somme des valeurs de la fonction sur les entiers est égale à la somme des valeurs de sa transformée de Fourier sur les entiers :
+\[ \sum_{n \in \mathbb{Z}} f(n) = \sum_{k \in \mathbb{Z}} \hat{f}(k) \]
+
+Plus généralement, pour tout $x \in \mathbb{R}$ :
+\[ \sum_{n \in \mathbb{Z}} f(x+n) = \sum_{k \in \mathbb{Z}} \hat{f}(k)e^{2i\pi k x} \]
+
+\section*{Démonstration rigoureuse}
+
+La preuve s'articule autour de la ``périodisation'' de la fonction $f$ et de l'utilisation des séries de Fourier.
+
+\subsection*{Étape 1 : Périodisation et régularité}
+On construit une fonction $F$ en sommant une infinité de versions décalées de $f$ :
+\[ F(x) = \sum_{n=-\infty}^{\infty} f(x+n) \]
+
+Montrons d'abord que cette série converge normalement sur tout segment $[-K, K]$ (avec $K > 0$). Par hypothèse de décroissance, il existe une constante $M$ telle que $|f(x)| \leq \frac{M}{x^2}$ pour $|x|$ assez grand. Pour $x \in [-K, K]$ et $n \in \mathbb{Z}$ tel que $|n| > K+1$, on a :
+\[ |f(x+n)| \leq \frac{M}{(x+n)^2} \leq \frac{M}{(|n|-K)^2} \]
+
+Puisque la série de Riemann $\sum \frac{1}{(|n|-K)^2}$ converge, la série $\sum_{n \in \mathbb{Z}} f(x+n)$ converge normalement, et donc uniformément, sur tout segment de $\mathbb{R}$. La limite simple $F(x)$ est donc bien définie et continue.
+
+En appliquant le même raisonnement de convergence normale à la série des dérivées $\sum_{n \in \mathbb{Z}} f'(x+n)$, le théorème de dérivation des suites de fonctions nous assure que $F$ est de classe $C^1$ sur $\mathbb{R}$.
+
+De plus, $F$ est $1$-périodique. En effet, par un simple changement d'indice ($m = n+1$) :
+\[ F(x+1) = \sum_{n=-\infty}^{\infty} f(x+1+n) = \sum_{m=-\infty}^{\infty} f(x+m) = F(x) \]
+
+\subsection*{Étape 2 : Calcul des coefficients de Fourier de $F$}
+Puisque $F$ est périodique de période 1 et continue, on peut l'exprimer par sa série de Fourier. Calculons son $k$-ième coefficient de Fourier, noté $c_k(F)$ :
+\[ c_k(F) = \int_{0}^{1} F(x) e^{-2i\pi k x} dx = \int_{0}^{1} \left( \sum_{n=-\infty}^{\infty} f(x+n) \right) e^{-2i\pi k x} dx \]
+
+Grâce à la convergence normale de la série sur le segment $[0, 1]$, le théorème d'interversion série-intégrale s'applique :
+\[ c_k(F) = \sum_{n=-\infty}^{\infty} \int_{0}^{1} f(x+n) e^{-2i\pi k x} dx \]
+
+Effectuons le changement de variable $u = x+n$ (donc $dx = du$). L'intervalle d'intégration $[0, 1]$ devient $[n, n+1]$. De plus, $k$ et $n$ étant des entiers, $e^{-2i\pi k n} = 1$, ce qui donne $e^{-2i\pi k x} = e^{-2i\pi k (u-n)} = e^{-2i\pi k u}$.
+L'intégrale devient alors :
+\[ c_k(F) = \sum_{n=-\infty}^{\infty} \int_{n}^{n+1} f(u) e^{-2i\pi k u} du \]
+
+La somme infinie d'intégrales sur les intervalles adjacents $[n, n+1]$ reconstruit l'intégrale sur la droite réelle tout entière :
+\[ c_k(F) = \int_{-\infty}^{\infty} f(u) e^{-2i\pi k u} du = \hat{f}(k) \]
+
+\subsection*{Étape 3 : Théorème de Dirichlet et conclusion}
+La fonction $F$ étant périodique et de classe $C^1$, le théorème de convergence de Dirichlet (ou de convergence normale) garantit que $F(x)$ est égale en tout point à la somme de sa série de Fourier :
+\[ F(x) = \sum_{k=-\infty}^{\infty} c_k(F) e^{2i\pi k x} = \sum_{k=-\infty}^{\infty} \hat{f}(k) e^{2i\pi k x} \]
+
+Ceci démontre la version générale de la formule. En évaluant simplement cette égalité en $x = 0$, on obtient l'identité finale de Poisson :
+\[ F(0) = \sum_{n=-\infty}^{\infty} f(n) = \sum_{k=-\infty}^{\infty} \hat{f}(k) \]
+\hfill $\blacksquare$
+
+\end{document}
