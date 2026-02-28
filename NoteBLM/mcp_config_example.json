@@ -4,7 +4,7 @@
             "command": "python",
             "args": [
                 "-u",
-                "d:\\projets\\Cours-IA\\NoteBLM\\run_mcp.py"
+                "c:\\Users\\s.jaubert\\projets\\Cours-IA\\NoteBLM\\run_mcp.py"
             ]
         }
     }
