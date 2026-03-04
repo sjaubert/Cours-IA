@@ -1,0 +1,129 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{geometry}
+\geometry{margin=2cm}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Pôle Formation UIMM - CVDL}
+\rhead{S. JAUBERT}
+\lfoot{Pôle Formation UIMM - CVDL}
+\rfoot{S. JAUBERT}
+
+\title{La Formule Sommatoire de Poisson et son Rôle Central \\
+dans la Théorie de la Fonction Zêta de Riemann}
+\author{S. JAUBERT \\ Pôle Formation UIMM - CVDL}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Ce document synthétise, au niveau Master en Mathématiques, le lien profond unissant la Formule Sommatoire de Poisson à la fonction Zêta de Riemann. Il détaille l'émergence de l'équation fonctionnelle, le prolongement analytique, ainsi que l'équivalence mathématique stricte entre ces deux concepts fondamentaux de la théorie analytique des nombres.
+\end{abstract}
+
+\section{Le passage par la fonction Thêta de Jacobi (Symétrie modulaire)}
+
+La fonction Thêta de Jacobi est définie pour tout $t > 0$ par la série rapidement convergente :
+\[ \theta(t) = \sum_{n=-\infty}^{+\infty} e^{-\pi n^2 t} \]
+
+Pour en déduire son équation fonctionnelle, on applique la Formule Sommatoire de Poisson (FSP) à la fonction gaussienne. Considérons la fonction $f(x) = e^{-\pi t x^2}$ avec $t > 0$. Cette fonction appartient à l'espace de Schwartz $\mathcal{S}(\mathbb{R})$ infinitement dérivable à décroissance rapide. Sa transformée de Fourier classique est donnée par :
+\[ \hat{f}(\xi) = \int_{-\infty}^{+\infty} e^{-\pi t x^2} e^{-2i\pi x \xi} dx = \frac{1}{\sqrt{t}} e^{-\pi \xi^2 / t} \]
+
+La Formule Sommatoire de Poisson énonce que, sous ces conditions de régularité :
+\[ \sum_{n \in \mathbb{Z}} f(n) = \sum_{n \in \mathbb{Z}} \hat{f}(n) \]
+
+En évaluant cette égalité analytique pour notre gaussienne $f(x)$, on obtient immédiatement l'identité modulaire fondamentale de la fonction Thêta :
+\[ \sum_{n=-\infty}^{+\infty} e^{-\pi n^2 t} = \sum_{n=-\infty}^{+\infty} \frac{1}{\sqrt{t}} e^{-\pi n^2 / t} \]
+\[ \theta(t) = \frac{1}{\sqrt{t}} \theta\left(\frac{1}{t}\right) \]
+
+\section{Le prolongement analytique de Zêta via la transformée de Mellin}
+
+La fonction Zêta de Riemann est initialement définie par la série convergente stricte pour $\Re(s) > 1$ :
+\[ \zeta(s) = \sum_{n=1}^{\infty} n^{-s} \]
+
+Pour la relier analytiquement à $\theta(t)$, Riemann introduit la fonction Gamma d'Euler via son intégrale, et opère le changement de variable $u = \pi n^2 t \implies du = \pi n^2 dt$ :
+\[ \Gamma\left(\frac{s}{2}\right) = \int_{0}^{\infty} u^{\frac{s}{2} - 1} e^{-u} du \]
+\[ \pi^{-s/2} \Gamma\left(\frac{s}{2}\right) n^{-s} = \int_{0}^{\infty} e^{-\pi n^2 t} t^{\frac{s}{2} - 1} dt \]
+
+En sommant cette identité sur tous les entiers $n \ge 1$ (l'interversion série-intégrale étant justifiée par la convergence absolue pour $\Re(s) > 1$), Riemann relie $\zeta(s)$ à la transformée de Mellin de la fonction $\omega(t) = \sum_{n=1}^{\infty} e^{-\pi n^2 t} = \frac{\theta(t) - 1}{2}$ :
+\[ \pi^{-s/2} \Gamma\left(\frac{s}{2}\right) \zeta(s) = \int_{0}^{\infty} \omega(t) t^{\frac{s}{2} - 1} dt \]
+
+Pour obtenir le prolongement analytique à tout le plan complexe, Riemann scinde cette intégrale géométrique en deux parties distinctes : l'une de $0$ à $1$, l'autre de $1$ à $\infty$.
+\[ \int_{0}^{\infty} \omega(t) t^{\frac{s}{2} - 1} dt = \int_{0}^{1} \omega(t) t^{\frac{s}{2} - 1} dt + \int_{1}^{\infty} \omega(t) t^{\frac{s}{2} - 1} dt \]
+
+L'équation fonctionnelle modulaire de $\theta(t)$ permet de réécrire le comportement de $\omega$ près de zéro. En effet, $\theta\left(\frac{1}{t}\right) = \sqrt{t}\theta(t)$ implique $\omega\left(\frac{1}{t}\right) = t^{1/2}\omega(t) + \frac{1}{2}t^{1/2} - \frac{1}{2}$.
+Par le changement de variable $t \mapsto \frac{1}{t}$ dans l'intégrale de $0$ à $1$, on extrait structurellement les termes divergents sous la forme explicite de pôles simples :
+\[ \int_{0}^{1} \omega(t) t^{\frac{s}{2} - 1} dt = \int_{1}^{\infty} \omega\left(\frac{1}{t}\right) t^{-\frac{s}{2} - 1} dt = \int_{1}^{\infty} \left( t^{1/2}\omega(t) + \frac{1}{2}t^{1/2} - \frac{1}{2} \right) t^{-\frac{s}{2} - 1} dt \]
+\[ = \int_{1}^{\infty} \omega(t) t^{\frac{1-s}{2} - 1} dt + \frac{1}{2}\int_{1}^{\infty} t^{-\frac{s+1}{2}} dt - \frac{1}{2}\int_{1}^{\infty} t^{-\frac{s}{2}-1} dt \]
+\[ = \int_{1}^{\infty} \omega(t) t^{\frac{1-s}{2} - 1} dt + \frac{1}{s-1} - \frac{1}{s} \]
+
+On aboutit ainsi à l'expression globale :
+\[ \pi^{-s/2} \Gamma\left(\frac{s}{2}\right) \zeta(s) = \frac{1}{s(s-1)} + \int_{1}^{\infty} \omega(t) \left( t^{\frac{s}{2} - 1} + t^{\frac{1-s}{2} - 1} \right) dt \]
+
+Puisque $\omega(t) = O(e^{-\pi t})$ à l'infini, l'intégrale de droite converge absolument pour tout $s \in \mathbb{C}$. Ceci confirme ultimement que la fonction Zêta de Riemann admet un prolongement analytique (méromorphe) à l'ensemble du plan complexe, avec un seul pôle simple résiduel en $s=1$ (celui en $s=0$ étant annulé par le pôle de la fonction Gamma).
+
+\section{La preuve de l'équation fonctionnelle de Zêta}
+
+On définit classiquement la fonction Zêta complétée (fonction xi de Riemann) par :
+\[ \xi^*(s) = \pi^{-s/2} \Gamma\left(\frac{s}{2}\right) \zeta(s) \]
+(souvent multipliée par $\frac{1}{2}s(s-1)$ pour obtenir une fonction holomorphe partout).
+
+L'expression intégrale complète dérivée à l'étape précédente s'écrit formellement :
+\[ \xi^*(s) = -\frac{1}{s(1-s)} + \int_{1}^{\infty} \omega(t) \left( t^{\frac{s}{2} - 1} + t^{\frac{1-s}{2} - 1} \right) dt \]
+
+Le membre de droite de cette identité est manifestement et structurellement invariant par la substitution de $s$ par $1-s$. Cette symétrie élégante prouve directement la fameuse équation fonctionnelle de Riemann :
+\[ \xi^*(s) = \xi^*(1-s) \]
+
+Il est à noter que cette équation force analytiquement les zéros dits ``triviaux'' de $\zeta(s)$ à se situer précisément aux entiers pairs négatifs ($-2, -4, -6 \dots$) afin de compenser les pôles de la fonction $\Gamma\left(\frac{s}{2}\right)$.
+
+\section{La preuve directe par annulation des infinis (Régularisation)}
+
+Une approche alternative moderne (dans l'esprit de S. Ramanujan) exploite l'application de la FSP directement à la fonction génératrice $f(t) = 1/|t|^s$.
+Bien que la série $\sum_{n \in \mathbb{Z}} \frac{1}{|n|^s}$ soit singulière et divergente, la théorie des distributions donne un sens rigoureux à la transformée de Fourier de $|t|^{-s}$ dans la bande $0 < \Re(s) < 1$ :
+\[ \mathcal{F}\left\{ \frac{1}{|t|^s} \right\}(\xi) = \frac{\pi^{s-1/2}\Gamma\left(\frac{1-s}{2}\right)}{\Gamma\left(\frac{s}{2}\right)} \frac{1}{|\xi|^{1-s}} \]
+
+Appliquer naïvement la formule de Poisson produit une contradiction apparente : $\sum_n \frac{1}{|n|^s} = \sum_k \hat{f}(k)$ contenant des pôles en $n=0$ et $k=0$.
+Cependant, en régularisant la fonction via un paramètre $\epsilon \to 0$ (par ex. $f_\epsilon(t) = (t^2+\epsilon^2)^{-s/2}$) et en comparant les développements de Taylor de part et d'autre, une identité remarquable émerge : les termes principiellement divergents générés par le mode zéro ($k=0$) s'annulent asymptotiquement et symétriquement avec les termes d'intégration centraux.
+
+En isolant formellement les "parties finies" de ces sommes asymétriques régularisées sur $\mathbb{N}^*$, l'équation de dualité se contracte immédiatement, livrant l'équation fonctionnelle sans nécessiter le prolongement intégral complexe :
+\[ 2\zeta(s) = 2 \frac{\pi^{s-1/2}\Gamma\left(\frac{1-s}{2}\right)}{\Gamma\left(\frac{s}{2}\right)} \zeta(1-s) \]
+
+
+\section{L'équivalence mathématique stricte}
+
+L'argument de Riemann est une relation bidirectionnelle. Il est possible de démontrer la Formule Sommatoire de Poisson à partir de l'équation fonctionnelle de $\zeta(s)$.
+Soit $f \in \mathcal{S}(\mathbb{R})$ une fonction test paire. La formule d'inversion de Mellin stipule que pour $\sigma > 0$ :
+\[ f(x) = \frac{1}{2\pi i} \int_{\Re(s)=\sigma} Mf(s) |x|^{-s} ds \quad \text{où} \quad Mf(s) = \int_0^\infty f(t)t^{s-1}dt \]
+
+En sommant cette expression sur les entiers $n \ge 1$ avec $\sigma > 1$ :
+\[ \sum_{n=1}^{\infty} f(n) = \frac{1}{2\pi i} \int_{\Re(s)=\sigma > 1} \zeta(s) Mf(s) ds \]
+
+En repoussant le contour d'intégration vers la gauche sur l'axe $\Re(s) = -1$, le théorème des résidus de Cauchy intercepte deux singularités fondamentales :
+\begin{enumerate}
+    \item Le pôle géométrique de $\zeta(s)$ en $s=1$ de résidu 1, générant le terme $\int_0^\infty f(t)dt$.
+    \item Le pôle spectral de $Mf(s)$ en $s=0$, générant le terme scalaire $\zeta(0)f(0) = -\frac{1}{2}f(0)$.
+\end{enumerate}
+
+L'intégrale translatée sur $\Re(s) = -1$ est ensuite réévaluée en effectuant le changement de variable symétrique $s \mapsto 1-s$ et en injectant l'équation fonctionnelle $\zeta(1-s) \propto \zeta(s)$. Les facteurs $\Gamma$ transfèrent l'opérateur de Mellin vers $M\hat{f}(s)$. Le nouveau contour synthétise ainsi exactement $\sum_{n=1}^\infty \hat{f}(n)$.
+
+En somme, on récupère purement algébriquement l'identité discrète-continue :
+\[ \sum_{n=1}^\infty f(n) = \int_0^\infty f(t)dt - \frac{f(0)}{2} + \sum_{n=1}^\infty \hat{f}(n) \]
+Ce qui, pour les fonctions paires ($f(-n) = f(n)$), équivaut strictement à la FSP classique $\sum_{n \in \mathbb{Z}} f(n) = \sum_{k \in \mathbb{Z}} \hat{f}(k)$.
+
+\section*{Conclusion : La généralisation de Tate}
+
+Le dévoilement de cette symétrie fondamentale a atteint son summum moderne lors de la célèbre thèse de John Tate en 1950. Tate a transcendé l'analyse harmonique classique en la reformulant au niveau des \textit{anneaux d'adèles} $\mathbb{A}_K$ des corps de nombres algébriques $K$.
+Dans ce vaste espace projectif géométrique, le corps global $K$ agit classiquement comme un réseau purement discret co-compact au sein du groupe produit de ses complétions locales.
+
+En formalisant une \textbf{Formule Sommatoire de Poisson adélique globale} :
+\[ \sum_{x \in K} f(x) = \sum_{y \in K} \hat{f}(y) \]
+et en appliquant judicieusement une fonction de Schwartz-Bruhat adélique (factorisable sur les places infinies et $p$-adiques), l'intégrale zêta générale induite prouve le prolongement analytique et l'équation fonctionnelle des L-fonctions de Hecke de champ en une seule construction formelle.
+Ainsi, la FSP n'est plus perçue comme un simple outil sommatoire divergent : elle est reconnue comme la trace algébrique universelle, traduisant la dualité archimédienne et arithmétique de l'espace des nombres entiers.
+
+\end{document}
