@@ -23,6 +23,7 @@ Tous les fichiers générés (HTML, PDF, documents, supports de formation, etc.)
 
 - **En-tête / Header** : Logo + nom de la structure + nom du formateur, visible en haut de chaque page
 - **Pied de page / Footer** : Rappel du nom de la structure et du formateur
+- **Pas d'Emoji**
 
 > ⚠️ **IMPORTANT** : Ces informations doivent figurer sur TOUS les documents créés, sans exception.
 
