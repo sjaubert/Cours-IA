@@ -78,7 +78,7 @@ Le "Turbo-encabulateur" est une célèbre blague d'ingénieurs des années 1940,
 
 ### Exercice 3.2 : Modifier le comportement ("Anti-Hallucination")
 Pour contrer cela, montrez aux apprenants comment "verrouiller" le modèle.
-> *"Même question que précédemment. IMPORTANT : Si ce concept n'existe pas, demande-moi des clarifications ou indique que la question contient une erreur factuelle."*
+> *"Même question que précédemment. IMPORTANT : Si ce concept n'existe pas, s'il relève de la fiction ou s'il contient une erreur de logique physique, ton devoir est de l'indiquer immédiatement."*
 
 ---
 
