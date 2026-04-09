@@ -29,3 +29,14 @@ Ce document détaille les étapes pour la création du cours niveau Master Math�
 - Le niveau mathématique cible est respecté.
 - Les identifiants formateurs et logos sont présents sur toutes les pages.
 - Le document couvre l'intégralité des 5 points et de la conclusion demandés.
+
+# Plan d'Action : Formation Claude pour Salariés
+
+## Tâches
+
+- [x] **Étape 1 : Veille et restructuration**
+  - Adapter l'infographie de 10 jours en 4 blocs logiques (Désilotage journalier).
+- [x] **Étape 2 : Création des livrables**
+  - Générer le plan pédagogique détaillé par métier (MD et HTML).
+- [x] **Étape 3 : Refactorisation structurelle**
+  - Intégrer la formation structurée au README.md général.

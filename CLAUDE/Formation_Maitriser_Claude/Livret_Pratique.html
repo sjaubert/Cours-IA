@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Livret Pratique : Maîtriser Claude</title>
+    <style>
+        :root {
+            --primary-color: #003366;
+            --secondary-color: #f4f5f7;
+            --accent-color: #005bb5;
+            --text-color: #333333;
+            --border-color: #dddddd;
+            --font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            --code-bg: #1e1e1e;
+            --code-color: #d4d4d4;
+        }
+
+        body {
+            font-family: var(--font-family);
+            color: var(--text-color);
+            background-color: #f9f9fb;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        .header img {
+            width: 150px;
+            margin-right: 20px;
+        }
+
+        .header-content h2 {
+            margin: 0;
+            color: var(--primary-color);
+            font-size: 1.8em;
+            letter-spacing: -0.5px;
+        }
+
+        .header-content p {
+            margin: 5px 0 0;
+            font-style: italic;
+            color: #666;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            text-align: center;
+            font-size: 2.2em;
+            margin-bottom: 20px;
+        }
+
+        .intro {
+            background-color: #fff9e6;
+            padding: 15px 20px;
+            border-left: 4px solid #f1c40f;
+            border-radius: 4px;
+            margin-bottom: 40px;
+            font-weight: bold;
+        }
+
+        h2 {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 4px;
+            font-size: 1.4em;
+            margin-top: 40px;
+        }
+
+        h3 {
+            color: var(--accent-color);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+            margin-top: 25px;
+        }
+
+        pre {
+            background-color: var(--code-bg);
+            color: var(--code-color);
+            padding: 15px;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 0.9em;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+            line-height: 1.4;
+        }
+        
+        .prompt-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin: 15px 0;
+            font-style: italic;
+            color: #2c3e50;
+        }
+
+        .action-step {
+            font-weight: bold;
+            color: #d35400;
+        }
+
+        .footer {
+            margin-top: 50px;
+            border-top: 2px solid var(--border-color);
+            padding-top: 20px;
+            text-align: center;
+            color: #777;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <img src="../../logo_uimm_placeholder.jpg" alt="Logo Pôle Formation UIMM">
+        <div class="header-content">
+            <h2>Pôle Formation UIMM - CVDL</h2>
+            <p>Formateur : S. JAUBERT</p>
+        </div>
+    </div>
+
+    <h1>Livret Pratique : Exemples & Fichiers Types</h1>
+
+    <div class="intro">
+        Ce manuel accompagne la formation "Maîtriser Claude". Il contient le <strong>"COMMENT FAIRE"</strong> : les fichiers à créer, le code à copier-coller et les prompts précis à exécuter lors des ateliers.
+    </div>
+
+    <!-- BLOC 1 -->
+    <h2>💻 Bloc 1 : Le Socle d'Identité</h2>
+    <p><strong>Objectif :</strong> Ne plus jamais avoir à expliquer à Claude qui vous êtes et quelles sont vos règles métiers.</p>
+
+    <h3>Exercice 1.1 : Créer votre fichier de contraintes</h3>
+    <p>L'idée reçue est qu'il faut rédiger un long contexte à chaque nouvelle question. <strong>La réalité</strong> : Il suffit de créer un fichier (Markdown `identite.md`) et de le donner en pièce jointe au début de n'importe quel Projet Claude.</p>
+    
+    <p><span class="action-step">Action :</span> Créez un fichier texte nommé <code>identite_rh_uimm.md</code> et copiez-y très exactement ce code :</p>
+    
+<pre>
+# 1. Mon Rôle et Contexte
+Tu vas agir en tant qu'assistant de la cellule administrative et ressources humaines du Pôle Formation UIMM CVDL. 
+Ton objectif principal est la rédaction de documents de suivi, de courriers professionnels et l'ingénierie administrative. 
+L'audience est constituée soit de formateurs, soit de directeurs industriels, soit d'apprentis.
+
+# 2. Ton et Style de Voix
+Désactive ton style de chatbot habituel.
+- Ton formel, très direct et strictement professionnel.
+- Zéro langage familier, zéro jargon marketing.
+- PAS D'ÉMOJIS sous aucun prétexte. Jamais. 
+
+# 3. Format de Sortie Strict
+- Chaque texte doit être aéré : des paragraphes de 3 phrases maximum.
+- Les actions à réaliser doivent toujours être listées avec des puces.
+- Conclure systématiquement les courriers par la formule : "Le Pôle Formation UIMM reste à votre disposition."
+</pre>
+
+    <h3>Exercice 1.2 : Le Test de Conformité</h3>
+    <p>Glissez le fichier que vous venez de créer dans le chat Claude, puis lancez ce prompt :</p>
+    <div class="prompt-box">
+        "En utilisant mon fichier d'identité en pièce jointe comme référence stricte : rédige une courte relance (100 mots) destinée à trois apprentis BTS ATI (Léo, Marc, Sophie) qui n'ont pas encore rendu leur fiche navette d'entreprise pour le mois de Mars."
+    </div>
+    <p><em>Observez comment l'IA respecte le ton formel, n'utilise aucun émoji, et inclut bien la signature requise.</em></p>
+
+    <!-- BLOC 2 -->
+    <h2>🔄 Bloc 2 : L'Art du Prompt Inversé</h2>
+    <p><strong>Objectif :</strong> Si vous ne savez pas exactement quelles variables l'IA a besoin de connaître pour produire un travail d'excellence, <em>laissez-la vous questionner</em>.</p>
+
+    <h3>Exercice 2.1 : Transformation d'un brouillon technique</h3>
+    <p><span class="action-step">Action :</span> Copiez ce méta-prompt dans votre carnet de notes ou dans un fichier <code>prompt_inverse_methode.md</code>.</p>
+    
+<pre>
+Je dois rédiger un rapport d'audit technique sur une ligne de production.
+Tu es un ingénieur méthode senior. Ton but est de rédiger ce rapport pour moi de manière irréprochable.
+Cependant, mes notes actuelles sont encore vagues et incomplètes. 
+
+AVANT de rédiger le rapport, pose-moi une par une les 5 questions essentielles dont tu as absolument besoin (mesures relevées, type d'automate, pannes observées, etc.) pour que ce document soit parfait et directement utilisable dans notre documentation qualité. 
+
+Ne pose qu'UNE SEULE question à la fois et attends ma réponse avant de passer à la suivante. Agis dès que tu reçois ce message en posant la question 1.
+</pre>
+
+    <p><em>Remarque pour les apprenants : L'IA va se muer en expert. Si lors de la question 3 vous n'avez pas la donnée terrain, répondez simplement : "Je n'ai pas cette info, propose la réponse la plus standard pour ce type d'équipement." L'IA compensera.</em></p>
+
+    <!-- BLOC 3 -->
+    <h2>⚠️ Bloc 3 : L'Illusion de Raisonnement (Le "Plantage")</h2>
+    <p><strong>Objectif :</strong> Comprendre que Claude et les IA génératives n'ont pas de "bon sens". Elles modélisent statistiquement le mot suivant. S'il y a un piège, elles tombent dedans avec une confiance absolue.</p>
+
+    <h3>Exercice 3.1 : Le Piège Technique (Le "Turbo-encabulateur")</h3>
+    <p>Le "Turbo-encabulateur" est un canular inventé par des ingénieurs dans les années 40 pour parodier le jargon scientifique abscons. C'est un excellent test pour l'IA.</p>
+    
+    <p><span class="action-step">Action :</span> Copiez ce prompt et insérez-le dans une nouvelle conversation Claude :</p>
+    <div class="prompt-box">
+        "Agis comme un ingénieur industriel de très haut niveau, formateur de l'UIMM. Peux-tu m'expliquer précisément comment le 'Turbo-encabulateur polymétrique' de Rockwell Automation gère l'inversion des flux de reluctance magnétique directe dans une presse hydraulique conventionnelle ?"
+    </div>
+    
+    <p><strong>Le Debrief :</strong> Sauf si le modèle a été spécifiquement "patché" récemment contre cette blague, il est très probable qu'il vous réponde sérieusement, en utilisant un vocabulaire scientifique pointu pour lister les "avantages" de cette technologie fictive. Cela démontre physiquement le phénomène <strong>d'hallucination technologique</strong> et la nécessité irremplaçable d'un expert humain pour valider une réponse.</p>
+
+    <h3>Exercice 3.2 : Modifier le comportement ("Anti-Hallucination")</h3>
+    <p>Relancez le prompt en ajoutant ceci à la fin :</p>
+    <div class="prompt-box">
+        "ATTENTION : Si ce système relève de la fiction, ne l'existe pas, ou contient une erreur de logique physique, ton devoir est de l'indiquer immédiatement."
+    </div>
+
+    <!-- BLOC 4 -->
+    <h2>⚙️ Bloc 4 : L'Assistant Synthèse (Processus Automatisé)</h2>
+    <p><strong>Objectif :</strong> Traiter des données déstructurées issues du terrain pour les formater et les rendre prêtes à l'archivage sans effort.</p>
+
+    <h3>Exercice 4.1 : Créer le modèle ("Template") d'ingestion</h3>
+    <p><span class="action-step">Action :</span> Voici la commande type (ou Méta-Prompt) à utiliser pour n'importe quelle prise de notes vocale ou manuscrite. À enregistrer sous <code>Template_Compte_Rendu.md</code>.</p>
+
+<pre>
+Je vais te fournir ci-dessous des notes brutes, non structurées et chaotiques prises lors d'une réunion pédagogique. 
+
+Tu dois avaler cette information et générer un compte-rendu STRICT et définitif au format Markdown, reprenant exactement cette architecture :
+
+# 1. Décisions Clés Actées
+(Liste à puces claire)
+
+# 2. Plan d'Action (Matrice QQOQCP)
+| Quoi (Action) | Qui (Responsable) | Pour Quand (Délai) |
+| --- | --- | --- |
+| ... | ... | ... |
+
+# 3. Points de Blocage
+(Ce qui n'a pas pu être résolu lors de la réunion)
+
+*** RÈGLE D'OR ***  
+Si l'information "Qui" ou "Quand" n'est pas présente dans mes notes, écris "[À DÉFINIR]". N'invente jamais de noms ou de dates.
+
+Voici mes notes brutes à traiter :
+[L'APPRENANT COLLE SES NOTES EN VRAC ICI]
+</pre>
+
+    <div class="footer">
+        <p><strong>Pôle Formation UIMM - CVDL</strong> | Formateur : S. JAUBERT</p>
+        <p>Documents annexes opérationnels - Formation IA Agentique</p>
+    </div>
+</div>
+
+</body>
+</html>

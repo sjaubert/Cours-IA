@@ -1,0 +1,103 @@
+Voici comment je structurerais une montée en compétence en 1 semaine :
+
+✦ Jour 1 : installer le bon environnement
+
+ Téléchargez l’application bureau.
+
+ Pas seulement le navigateur.
+
+ Quand on veut travailler sérieusement avec Claude, il faut un environnement de travail stable.
+
+✦ Jour 2 : comprendre les bons modes
+
+ Tout le monde connaît Chat.
+
+ Très peu de gens utilisent vraiment :
+
+ → Projects pour garder le contexte
+ → Cowork pour travailler sur de vrais fichiers
+ → Code pour prototyper ou automatiser
+ → Artifacts pour produire des livrables
+
+Le vrai sujet n’est pas “Claude marche-t-il ?”
+
+Le vrai sujet est : quel mode activer selon le besoin ?
+
+✦ Jour 3 : créer vos 4 dossiers de base
+
+ Par exemple :
+
+ → À propos de moi
+ → Projets
+ → Modèles
+ → Sorties Claude
+
+Pourquoi ?
+
+Parce qu’une IA bien organisée devient vite bien meilleure qu’une IA utilisée dans le chaos.
+
+✦ Jour 4 : écrire vos 2 fichiers les plus importants
+
+ Pas 50 prompts.
+
+ 2 bons fichiers.
+
+Exemple :
+
+ → qui vous êtes / ce que vous vendez / à qui vous parlez
+ → votre ton / vos contraintes / ce que vous ne voulez jamais lire
+
+Ces 2 fichiers font souvent plus pour la qualité des réponses que 100 prompts 
+bricolés.
+
+✦ Jour 5 : arrêter de réécrire vos prompts à chaque fois
+
+Créez des structures réutilisables.
+
+Exemples :
+
+ → préparer un rendez-vous commercial
+ → transformer une réunion en plan d’action
+ → rédiger une relance client
+ → générer un post LinkedIn
+
+L’objectif n’est pas de “mieux écrire un prompt”.
+
+L’objectif est de créer des modes opératoires.
+
+✦ Jour 6 : laisser Claude vous poser des questions
+
+C’est un énorme déclic.
+
+Au lieu de dire :
+
+ “Fais-moi un post.”
+
+Dites :
+
+ “Avant d’écrire, pose-moi les questions manquantes.”
+
+Claude devient bien meilleur quand il clarifie avant d’exécuter.
+
+✦ Jour 7 : brancher Claude à votre vrai travail
+
+Connectez-le à vos outils, vos documents, vos projets, vos routines.
+
+Exemples concrets pour un dirigeant :
+
+ → préparer un rendez-vous client
+ → analyser un tableau de ventes
+ → transformer des notes en SOP
+ → structurer une offre
+ → détecter ce qui peut être automatisé
+ → créer un premier assistant métier pour l’équipe
+
+En 1 semaine, vous ne maîtriserez pas “tout Claude”.
+
+Mais vous pouvez déjà maîtriser l’essentiel :
+
+ → le bon environnement
+ → les bons modes
+ → le bon contexte
+ → les bons réflexes
+ → les premiers cas d’usage rentables
