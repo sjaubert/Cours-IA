@@ -1,0 +1,46 @@
+repos:
+  # ---------------------------------------------------------------
+  # 1. detect-secrets — bloque les NOUVEAUX secrets dans les commits
+  # ---------------------------------------------------------------
+  - repo: https://github.com/Yelp/detect-secrets
+    rev: v1.5.0
+    hooks:
+      - id: detect-secrets
+        name: "Détection de secrets (clés API, tokens, mots de passe)"
+        args:
+          - --baseline
+          - .secrets.baseline
+        # Exclure les fichiers binaires et les grands fichiers de données pédagogiques
+        exclude: >
+          (?x)^(
+            .*\.(pdf|docx|doc|xlsx|xls|pptx|zip|jpg|jpeg|png|gif|webp|mp4|mp3|exe|whl)|
+            NoteBLM/NBLM\.docx\.md|
+            Prompts.Ressources\ IA\.md|
+            .*node_modules/.*|
+            \.secrets\.baseline
+          )$
+
+  # ---------------------------------------------------------------
+  # 2. Hooks de base pré-commit-hooks
+  # ---------------------------------------------------------------
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: check-added-large-files
+        name: "Bloquer les fichiers > 50 MB"
+        args: ["--maxkb=51200"]
+      - id: check-merge-conflict
+        name: "Détecter les marqueurs de conflits git"
+      - id: check-json
+        name: "Valider la syntaxe JSON"
+        exclude: "^\\.secrets\\.baseline$"
+      - id: check-yaml
+        name: "Valider la syntaxe YAML"
+      - id: end-of-file-fixer
+        name: "Corriger la fin de fichier"
+        exclude: >
+          (?x)^(.*\.(pdf|docx|zip|jpg|jpeg|png|gif|exe|whl))$
+      - id: trailing-whitespace
+        name: "Supprimer les espaces en fin de ligne"
+        exclude: >
+          (?x)^(.*\.(pdf|docx|zip|md|html))$
