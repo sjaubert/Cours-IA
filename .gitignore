@@ -1,25 +1,134 @@
-# Environments
+# =============================================================
+#  .gitignore — sjaubert/Cours-IA
+#  Mis à jour le 12 avril 2026 — protection secrets et sécurité
+# =============================================================
+
+# ----------------------------------------------------------------
+# SECRETS & CREDENTIALS — Ne JAMAIS committer ces fichiers
+# ----------------------------------------------------------------
+
+# Fichiers d'environnement
+.env
+.env.*
+!.env.example
+!.env.template
+
+# Clés API Google / Gemini / Firebase / GCP
+google-credentials.json
+credentials.json
+client_secret*.json
+client_secrets*.json
+application_default_credentials.json
+service-account*.json
+gcloud-key*.json
+firebase-adminsdk*.json
+*-firebase-adminsdk-*.json
+token.json
+*.token
+
+# Clés et certificats
+*.pem
+*.key
+*.p12
+*.pfx
+*.cer
+*.crt
+*.der
+
+# Secrets génériques
+secrets.*
+secrets/
+config.local.*
+config.secret.*
+*.secret
+*_secret.*
+private_key*
+id_rsa
+id_ed25519
+id_ecdsa
+
+# GitHub tokens / OAuth
+.github-token
+.gh-token
+replacements.txt
+
+# Tokens de session navigateur (NotebookLM MCP)
+.notebooklm-mcp/
+
+# ----------------------------------------------------------------
+# ENVIRONNEMENTS PYTHON & VIRTUALENV
+# ----------------------------------------------------------------
 env/
 venv/
+.venv/
+ENV/
 env_mcp/
 NoteBLM/env_mcp/
-.env
-.venv
+*.egg-info/
+dist/
+build/
+pip-log.txt
 
-# Python
+# ----------------------------------------------------------------
+# PYTHON / PYCACHE
+# ----------------------------------------------------------------
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
+*.pdb
 
-# Jupyter
+# ----------------------------------------------------------------
+# JUPYTER NOTEBOOK
+# ----------------------------------------------------------------
 .ipynb_checkpoints/
+*.ipynb_checkpoints
 
-# OS
-.DS_Store
+# ----------------------------------------------------------------
+# NODE.JS
+# ----------------------------------------------------------------
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ----------------------------------------------------------------
+# SYSTEME D'EXPLOITATION
+# ----------------------------------------------------------------
+# Windows
 Thumbs.db
-.gstack/
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
 
-# gstack generated files
+# macOS
+.DS_Store
+.AppleDouble
+._*
+
+# Linux
+*~
+
+# ----------------------------------------------------------------
+# OUTILS DE DEVELOPPEMENT
+# ----------------------------------------------------------------
+.vscode/settings.json
+.vscode/launch.json
+.idea/
+
+# ----------------------------------------------------------------
+# GSTACK & AGENTS
+# ----------------------------------------------------------------
+.gstack/
 .agents/skills/gstack/node_modules/
 .agents/**/*.exe
+
+# ----------------------------------------------------------------
+# FICHIERS TEMPORAIRES ET LOGS
+# ----------------------------------------------------------------
+*.log
+*.tmp
+*.bak
+*.swp
+*.swo
+run_status.txt
