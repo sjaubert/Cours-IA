@@ -18,3 +18,8 @@ __pycache__/
 # OS
 .DS_Store
 Thumbs.db
+.gstack/
+
+# gstack generated files
+.agents/skills/gstack/node_modules/
+.agents/**/*.exe
