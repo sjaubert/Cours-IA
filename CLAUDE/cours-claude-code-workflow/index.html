@@ -1,0 +1,1736 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Masterclass Claude Code & Workflow — Pôle Formation UIMM CVDL</title>
+  <meta name="description" content="Formation professionnelle sur Claude Code : CLAUDE.md, Skills, Hooks, Permissions et workflow quotidien. Cours pédagogique pour salariés d'entreprise par S. JAUBERT." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <script>
+    // MathJax for LaTeX formulas
+    window.MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" defer></script>
+
+  <style>
+    /* ===== DESIGN TOKENS ===== */
+    :root {
+      --clr-bg: #0f1117;
+      --clr-surface: #1a1d27;
+      --clr-surface2: #22263a;
+      --clr-border: #2e3352;
+      --clr-primary: #e8673a;
+      --clr-primary-light: #ff8a5c;
+      --clr-accent: #5b8cff;
+      --clr-accent2: #a78bfa;
+      --clr-success: #34d399;
+      --clr-warning: #fbbf24;
+      --clr-danger: #f87171;
+      --clr-text: #e2e8f0;
+      --clr-text-muted: #94a3b8;
+      --clr-code-bg: #12151f;
+      --radius: 12px;
+      --radius-sm: 8px;
+      --shadow: 0 4px 24px rgba(0,0,0,0.4);
+      --shadow-glow: 0 0 30px rgba(232,103,58,0.15);
+    }
+
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--clr-bg);
+      color: var(--clr-text);
+      line-height: 1.7;
+      font-size: 16px;
+    }
+
+    /* ===== HEADER ===== */
+    .site-header {
+      background: linear-gradient(135deg, #0a0d16 0%, #131828 50%, #1a1030 100%);
+      border-bottom: 1px solid var(--clr-border);
+      padding: 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(20px);
+    }
+
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .header-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .header-logo img {
+      height: 40px;
+      border-radius: 6px;
+    }
+
+    .header-brand {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header-brand .org { font-size: 0.7rem; color: var(--clr-text-muted); letter-spacing: 0.08em; text-transform: uppercase; }
+    .header-brand .trainer { font-size: 0.85rem; font-weight: 600; color: var(--clr-primary); }
+
+    .header-title {
+      text-align: center;
+      flex: 1;
+    }
+
+    .header-title h1 {
+      font-size: clamp(0.95rem, 2.5vw, 1.3rem);
+      font-weight: 800;
+      background: linear-gradient(90deg, var(--clr-primary), var(--clr-primary-light), var(--clr-accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      white-space: nowrap;
+    }
+
+    .edition-badge {
+      background: rgba(232,103,58,0.15);
+      border: 1px solid rgba(232,103,58,0.3);
+      color: var(--clr-primary);
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      background: linear-gradient(160deg, #131828 0%, #0f1117 60%, #1a0f27 100%);
+      padding: 80px 24px 60px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at 30% 60%, rgba(232,103,58,0.07) 0%, transparent 50%),
+                  radial-gradient(circle at 70% 30%, rgba(91,140,255,0.07) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--clr-primary);
+      margin-bottom: 16px;
+    }
+
+    .hero h2 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+
+    .hero h2 span { color: var(--clr-primary); }
+
+    .hero-sub {
+      font-size: 1.1rem;
+      color: var(--clr-text-muted);
+      max-width: 620px;
+      margin: 0 auto 40px;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    .hero-tag {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--clr-border);
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      color: var(--clr-text-muted);
+      transition: all 0.2s;
+    }
+
+    .hero-tag:hover {
+      border-color: var(--clr-primary);
+      color: var(--clr-primary);
+      background: rgba(232,103,58,0.08);
+    }
+
+    /* ===== LAYOUT ===== */
+    .layout {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      max-width: 1300px;
+      margin: 0 auto;
+      gap: 0;
+    }
+
+    /* ===== SIDEBAR / TOC ===== */
+    .sidebar {
+      position: sticky;
+      top: 73px;
+      height: calc(100vh - 73px);
+      overflow-y: auto;
+      padding: 32px 20px;
+      border-right: 1px solid var(--clr-border);
+      scrollbar-width: thin;
+      scrollbar-color: var(--clr-border) transparent;
+    }
+
+    .toc-title {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--clr-text-muted);
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--clr-border);
+    }
+
+    .toc-list { list-style: none; }
+
+    .toc-list li { margin-bottom: 2px; }
+
+    .toc-list a {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: var(--radius-sm);
+      color: var(--clr-text-muted);
+      text-decoration: none;
+      font-size: 0.83rem;
+      transition: all 0.2s;
+    }
+
+    .toc-list a:hover,
+    .toc-list a.active {
+      background: rgba(232,103,58,0.1);
+      color: var(--clr-primary);
+    }
+
+    .toc-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+      height: 22px;
+      background: var(--clr-surface2);
+      border-radius: 50%;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--clr-primary);
+      flex-shrink: 0;
+    }
+
+    /* ===== MAIN CONTENT ===== */
+    .main-content {
+      padding: 48px 48px 80px;
+      max-width: 860px;
+    }
+
+    /* ===== SECTIONS ===== */
+    .section {
+      margin-bottom: 80px;
+      scroll-margin-top: 90px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 32px;
+      padding-bottom: 16px;
+      border-bottom: 2px solid var(--clr-border);
+    }
+
+    .section-number {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, var(--clr-primary), var(--clr-primary-light));
+      border-radius: 12px;
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: white;
+      flex-shrink: 0;
+      box-shadow: 0 4px 14px rgba(232,103,58,0.3);
+    }
+
+    .section-title {
+      flex: 1;
+    }
+
+    .section-title h2 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--clr-text);
+      line-height: 1.2;
+    }
+
+    .section-title .subtitle {
+      font-size: 0.85rem;
+      color: var(--clr-text-muted);
+      margin-top: 2px;
+    }
+
+    /* ===== TYPOGRAPHY ===== */
+    h3 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--clr-text);
+      margin: 32px 0 12px;
+    }
+
+    h3::before {
+      content: '▸ ';
+      color: var(--clr-primary);
+    }
+
+    p { color: var(--clr-text-muted); margin-bottom: 16px; line-height: 1.8; }
+    p strong { color: var(--clr-text); }
+
+    /* ===== ANALOGY BOX ===== */
+    .analogy {
+      background: linear-gradient(135deg, rgba(167,139,250,0.08), rgba(91,140,255,0.08));
+      border: 1px solid rgba(167,139,250,0.25);
+      border-left: 4px solid var(--clr-accent2);
+      border-radius: var(--radius);
+      padding: 18px 22px;
+      margin: 20px 0;
+      position: relative;
+    }
+
+    .analogy::before {
+      content: 'Analogie';
+      display: inline-block;
+      background: rgba(167,139,250,0.2);
+      color: var(--clr-accent2);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 2px 10px;
+      border-radius: 10px;
+      margin-bottom: 8px;
+    }
+
+    .analogy p { color: var(--clr-text); margin: 0; }
+
+    /* ===== INFO / TIP / WARNING BOXES ===== */
+    .callout {
+      border-radius: var(--radius);
+      padding: 18px 22px;
+      margin: 20px 0;
+    }
+
+    .callout-tip {
+      background: rgba(52,211,153,0.08);
+      border: 1px solid rgba(52,211,153,0.25);
+      border-left: 4px solid var(--clr-success);
+    }
+
+    .callout-tip::before {
+      content: 'Conseil';
+      display: block;
+      color: var(--clr-success);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .callout-warning {
+      background: rgba(251,191,36,0.08);
+      border: 1px solid rgba(251,191,36,0.25);
+      border-left: 4px solid var(--clr-warning);
+    }
+
+    .callout-warning::before {
+      content: 'Point clé';
+      display: block;
+      color: var(--clr-warning);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .callout p { margin: 0; color: var(--clr-text); }
+
+    /* ===== CODE BLOCKS ===== */
+    pre {
+      background: var(--clr-code-bg);
+      border: 1px solid var(--clr-border);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      overflow-x: auto;
+      margin: 20px 0;
+      position: relative;
+    }
+
+    pre .code-label {
+      position: absolute;
+      top: 8px;
+      right: 12px;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--clr-text-muted);
+      background: var(--clr-surface);
+      padding: 2px 8px;
+      border-radius: 6px;
+    }
+
+    code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.88rem;
+      line-height: 1.6;
+      color: #cdd6f4;
+    }
+
+    pre code { font-size: 0.83rem; }
+
+    /* Inline code */
+    p code, li code, td code {
+      background: var(--clr-surface2);
+      border: 1px solid var(--clr-border);
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-size: 0.82em;
+      color: var(--clr-primary-light);
+    }
+
+    /* Syntax highlight — simple colors */
+    .kw { color: #cba6f7; }   /* keyword */
+    .str { color: #a6e3a1; }  /* string */
+    .cm { color: #6c7086; font-style: italic; }  /* comment */
+    .prop { color: #89dceb; } /* property */
+    .val { color: #fab387; }  /* value */
+    .num { color: #f38ba8; }  /* number */
+    .fn { color: #89b4fa; }   /* function */
+
+    /* ===== TABLES ===== */
+    .table-wrap { overflow-x: auto; margin: 24px 0; border-radius: var(--radius); border: 1px solid var(--clr-border); }
+
+    table { width: 100%; border-collapse: collapse; }
+
+    thead { background: rgba(232,103,58,0.1); }
+
+    th {
+      padding: 12px 16px;
+      text-align: left;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--clr-primary);
+      border-bottom: 1px solid var(--clr-border);
+    }
+
+    td {
+      padding: 12px 16px;
+      font-size: 0.9rem;
+      color: var(--clr-text-muted);
+      border-bottom: 1px solid rgba(46,51,82,0.5);
+      vertical-align: top;
+    }
+
+    td strong { color: var(--clr-text); }
+
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: rgba(255,255,255,0.02); }
+
+    /* ===== CARDS ===== */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin: 24px 0;
+    }
+
+    .card {
+      background: var(--clr-surface);
+      border: 1px solid var(--clr-border);
+      border-radius: var(--radius);
+      padding: 20px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+      border-color: var(--clr-primary);
+    }
+
+    .card-icon {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+    }
+
+    .card h4 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--clr-text);
+      margin-bottom: 8px;
+    }
+
+    .card p {
+      font-size: 0.85rem;
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    /* ===== ARCHITECTURE DIAGRAM ===== */
+    .arch-diagram {
+      background: var(--clr-surface);
+      border: 1px solid var(--clr-border);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin: 24px 0;
+    }
+
+    .arch-layer {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 20px;
+      border-radius: var(--radius-sm);
+      margin-bottom: 8px;
+      transition: all 0.2s;
+      cursor: default;
+    }
+
+    .arch-layer:hover { transform: translateX(4px); }
+
+    .arch-layer:last-child { margin-bottom: 0; }
+
+    .layer-l1 { background: rgba(232,103,58,0.12); border: 1px solid rgba(232,103,58,0.3); }
+    .layer-l2 { background: rgba(91,140,255,0.12); border: 1px solid rgba(91,140,255,0.3); }
+    .layer-l3 { background: rgba(167,139,250,0.12); border: 1px solid rgba(167,139,250,0.3); }
+    .layer-l4 { background: rgba(52,211,153,0.12); border: 1px solid rgba(52,211,153,0.3); }
+
+    .layer-badge {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      font-weight: 800;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .badge-l1 { background: var(--clr-primary); color: white; }
+    .badge-l2 { background: var(--clr-accent); color: white; }
+    .badge-l3 { background: var(--clr-accent2); color: white; }
+    .badge-l4 { background: var(--clr-success); color: #0f1117; }
+
+    .layer-info h4 { font-size: 0.95rem; font-weight: 700; color: var(--clr-text); margin-bottom: 2px; }
+    .layer-info p { font-size: 0.82rem; margin: 0; }
+
+    .layer-analogy {
+      margin-left: auto;
+      font-size: 0.75rem;
+      color: var(--clr-text-muted);
+      font-style: italic;
+      text-align: right;
+      max-width: 160px;
+    }
+
+    /* ===== WORKFLOW STEPS ===== */
+    .workflow {
+      margin: 24px 0;
+    }
+
+    .workflow-step {
+      display: flex;
+      gap: 16px;
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(46,51,82,0.5);
+    }
+
+    .workflow-step:last-child { border-bottom: none; }
+
+    .step-num {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, var(--clr-primary), var(--clr-primary-light));
+      border-radius: 50%;
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: white;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .step-content h4 { font-size: 0.95rem; font-weight: 700; color: var(--clr-text); margin-bottom: 4px; }
+    .step-content p { font-size: 0.88rem; margin: 0; }
+
+    /* ===== KEYBOARD SHORTCUTS ===== */
+    .shortcuts-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 24px 0;
+    }
+
+    .shortcut-card {
+      background: var(--clr-surface);
+      border: 1px solid var(--clr-border);
+      border-radius: var(--radius-sm);
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      transition: all 0.2s;
+    }
+
+    .shortcut-card:hover {
+      border-color: var(--clr-primary);
+      background: rgba(232,103,58,0.05);
+    }
+
+    kbd {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--clr-surface2);
+      border: 1px solid var(--clr-border);
+      border-radius: 6px;
+      padding: 4px 10px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--clr-primary);
+      white-space: nowrap;
+      box-shadow: 0 2px 0 var(--clr-border);
+      flex-shrink: 0;
+    }
+
+    .shortcut-desc { font-size: 0.85rem; color: var(--clr-text-muted); }
+    .shortcut-desc strong { color: var(--clr-text); display: block; font-size: 0.88rem; }
+
+    /* ===== LISTS ===== */
+    ul, ol { margin: 16px 0 16px 0; padding-left: 0; list-style: none; }
+
+    ul li, ol li {
+      position: relative;
+      padding: 5px 0 5px 24px;
+      color: var(--clr-text-muted);
+      font-size: 0.95rem;
+    }
+
+    ul li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--clr-primary);
+      font-weight: 700;
+    }
+
+    ol { counter-reset: item; }
+    ol li::before {
+      content: counter(item) '.';
+      counter-increment: item;
+      position: absolute;
+      left: 0;
+      color: var(--clr-primary);
+      font-weight: 700;
+      font-size: 0.8rem;
+    }
+
+    li strong { color: var(--clr-text); }
+
+    /* ===== HIERARCHY VISUAL ===== */
+    .hierarchy {
+      background: var(--clr-code-bg);
+      border: 1px solid var(--clr-border);
+      border-radius: var(--radius);
+      padding: 24px 28px;
+      margin: 20px 0;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+    }
+
+    .hierarchy .h-level { color: var(--clr-text-muted); display: block; padding: 3px 0; }
+    .hierarchy .h-level span { color: var(--clr-primary); }
+    .hierarchy .h-level .h-note { color: #6c7086; }
+
+    /* ===== FOOTER ===== */
+    .site-footer {
+      background: var(--clr-surface);
+      border-top: 1px solid var(--clr-border);
+      padding: 32px 24px;
+      text-align: center;
+    }
+
+    .footer-inner {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .footer-inner .org { font-size: 0.85rem; font-weight: 600; color: var(--clr-text-muted); }
+    .footer-inner .trainer { color: var(--clr-primary); }
+    .footer-inner .edition { font-size: 0.75rem; color: #4a5568; margin-top: 6px; }
+
+    /* ===== PROGRESS BAR ===== */
+    .progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--clr-primary), var(--clr-primary-light), var(--clr-accent));
+      z-index: 9999;
+      width: 0%;
+      transition: width 0.1s linear;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .layout { grid-template-columns: 1fr; }
+      .sidebar { position: static; height: auto; border-right: none; border-bottom: 1px solid var(--clr-border); padding: 20px; }
+      .main-content { padding: 32px 20px 60px; }
+      .shortcuts-grid { grid-template-columns: 1fr; }
+      .header-inner { flex-direction: column; text-align: center; }
+    }
+
+    /* ===== ANIMATIONS ===== */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .section { animation: fadeInUp 0.5s ease both; }
+  </style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- ===== HEADER ===== -->
+<header class="site-header">
+  <div class="header-inner">
+    <div class="header-logo">
+      <img src="../../logo_uimm_placeholder.jpg" alt="Logo UIMM" />
+      <div class="header-brand">
+        <span class="org">Pole Formation UIMM - CVDL</span>
+        <span class="trainer">S. JAUBERT</span>
+      </div>
+    </div>
+    <div class="header-title">
+      <h1>Masterclass : Claude Code &amp; Workflow</h1>
+    </div>
+    <span class="edition-badge">Edition 2026</span>
+  </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <p class="hero-eyebrow">Formation IA en Entreprise</p>
+  <h2>Maitriser <span>Claude Code</span><br>de A a Z</h2>
+  <p class="hero-sub">
+    Un cours complet et pedagogique pour comprendre l'ecosysteme Claude Code :
+    memoire persistante, Skills, Hooks, permissions et workflow quotidien.
+    Aucune connaissance technique prealable requise.
+  </p>
+  <div class="hero-tags">
+    <span class="hero-tag">CLAUDE.md</span>
+    <span class="hero-tag">Hierarchie memoire</span>
+    <span class="hero-tag">Skills</span>
+    <span class="hero-tag">Hooks</span>
+    <span class="hero-tag">Permissions</span>
+    <span class="hero-tag">Architecture 4 couches</span>
+    <span class="hero-tag">Workflow quotidien</span>
+  </div>
+</section>
+
+<!-- ===== MAIN LAYOUT ===== -->
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <p class="toc-title">Table des matieres</p>
+    <ul class="toc-list">
+      <li><a href="#s1" id="toc-s1"><span class="toc-num">1</span>Premiers Pas</a></li>
+      <li><a href="#s2" id="toc-s2"><span class="toc-num">2</span>Comprendre CLAUDE.md</a></li>
+      <li><a href="#s3" id="toc-s3"><span class="toc-num">3</span>Hierarchie memoire</a></li>
+      <li><a href="#s4" id="toc-s4"><span class="toc-num">4</span>Bonnes pratiques</a></li>
+      <li><a href="#s5" id="toc-s5"><span class="toc-num">5</span>Structure des fichiers</a></li>
+      <li><a href="#s6" id="toc-s6"><span class="toc-num">6</span>Les Skills</a></li>
+      <li><a href="#s7" id="toc-s7"><span class="toc-num">7</span>Skills populaires</a></li>
+      <li><a href="#s8" id="toc-s8"><span class="toc-num">8</span>Configuration des Hooks</a></li>
+      <li><a href="#s9" id="toc-s9"><span class="toc-num">9</span>Permissions &amp; Securite</a></li>
+      <li><a href="#s10" id="toc-s10"><span class="toc-num">10</span>Architecture 4 couches</a></li>
+      <li><a href="#s11" id="toc-s11"><span class="toc-num">11</span>Workflow quotidien</a></li>
+      <li><a href="#s12" id="toc-s12"><span class="toc-num">12</span>Commandes clavier</a></li>
+    </ul>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main-content">
+
+    <!-- ===== SECTION 1 ===== -->
+    <section class="section" id="s1">
+      <div class="section-header">
+        <div class="section-number">1</div>
+        <div class="section-title">
+          <h2>Premiers Pas</h2>
+          <p class="subtitle">Installer et lancer Claude Code</p>
+        </div>
+      </div>
+
+      <h3>Qu'est-ce que Claude Code ?</h3>
+      <p>Claude Code est un <strong>assistant IA de developpement en ligne de commande</strong> (terminal). Contrairement aux chatbots classiques utilises dans un navigateur, Claude Code s'integre directement dans votre environnement de travail : il peut lire vos fichiers, proposer des modifications, executer des commandes et comprendre la structure complete de votre projet.</p>
+
+      <div class="analogy">
+        <p>Imaginez un expert consultant qui s'installe a votre bureau, ouvre votre dossier de travail, lit tous vos documents et vous aide en connaissant deja tout le contexte — plutot que de tout lui reexpliquer a chaque rencontre.</p>
+      </div>
+
+      <h3>Installation et demarrage</h3>
+      <p><strong>Prerequis :</strong> Node.js version 18 ou superieure installee sur votre machine.</p>
+
+      <pre><code><span class="cm"># Etape 1 : Installer Claude Code globalement</span>
+curl -fsSL https://claude.ai/install.sh | bash
+
+<span class="cm"># Etape 2 : Se placer dans votre dossier projet</span>
+cd votre-projet
+
+<span class="cm"># Etape 3 : Lancer Claude Code</span>
+claude
+
+<span class="cm"># Etape 4 : Initialiser la memoire du projet</span>
+/init</code></pre>
+
+      <h3>Que fait la commande <code>/init</code> ?</h3>
+      <p>La commande <code>/init</code> est une etape cruciale. Elle <strong>analyse l'integralite de votre projet</strong> (fichiers, structure, technologies) et cree automatiquement un fichier <code>CLAUDE.md</code> qui sera le point de depart de la memoire de Claude pour toutes les sessions futures.</p>
+
+      <div class="callout callout-tip">
+        <p>Toujours executer <code>/init</code> en premier dans un nouveau projet. Claude analysera votre code, vos dependances, et generera un fichier memoire pertinent que vous pourrez affiner.</p>
+      </div>
+    </section>
+
+    <!-- ===== SECTION 2 ===== -->
+    <section class="section" id="s2">
+      <div class="section-header">
+        <div class="section-number">2</div>
+        <div class="section-title">
+          <h2>Comprendre CLAUDE.md</h2>
+          <p class="subtitle">La memoire persistante de votre projet</p>
+        </div>
+      </div>
+
+      <p><code>CLAUDE.md</code> est le <strong>fichier de memoire persistante</strong> de Claude pour votre projet. Il est <strong>charge automatiquement au debut de chaque session</strong> — vous n'avez pas a tout reexpliquer a chaque fois que vous recommencez a travailler.</p>
+
+      <div class="analogy">
+        <p>C'est comme le cahier de bord d'un technicien de maintenance. Chaque fois qu'il prend son poste, il lit le cahier pour connaitre l'etat de la machine, les problemes recents, et les procedures a suivre. CLAUDE.md joue ce role pour l'IA.</p>
+      </div>
+
+      <h3>Structure recommandee</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>QUOI</th><th>POURQUOI</th><th>COMMENT</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Stack technique</td><td>Objectif de chaque composant</td><td>Commandes build/test</td></tr>
+            <tr><td>Arborescence du projet</td><td>Decisions de design</td><td>Workflows</td></tr>
+            <tr><td>Architecture generale</td><td>Contraintes metier</td><td>Points d'attention (Gotchas)</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Exemple concret : Projet de gestion de production</h3>
+      <pre><code><span class="cm"># Projet : MonApp</span>
+<span class="cm"># API REST FastAPI + SPA React + PostgreSQL</span>
+
+<span class="cm">## Objectif</span>
+Application de suivi de production pour l'atelier d'usinage.
+Permet aux operateurs de saisir les donnees de controle qualite.
+
+<span class="cm">## Stack technique</span>
+- Backend : Python FastAPI (API REST)
+- Frontend : React (interface utilisateur)
+- Base de donnees : PostgreSQL
+
+<span class="cm">## Commandes essentielles</span>
+npm run dev        <span class="cm"># Serveur de developpement</span>
+npm run test       <span class="cm"># Tests automatiques</span>
+npm run lint       <span class="cm"># Qualite du code</span>
+
+<span class="cm">## Architecture</span>
+/app     → pages Next.js (pages de l'interface)
+/lib     → utilitaires partages (fonctions communes)
+/prisma  → Schema DB et migrations
+
+<span class="cm">## Regles de travail</span>
+- Toujours ecrire les commentaires en français
+- Valider les donnees cote serveur avant insertion
+- Ne jamais stocker de mots de passe en clair
+
+<span class="cm">## Points d'attention</span>
+- La connexion PostgreSQL necessite le VPN interne
+- Les tests peuvent prendre 2-3 minutes</code></pre>
+
+      <h3>Exemple generique pour un service RH</h3>
+      <pre><code><span class="cm"># Projet : Portail RH</span>
+Application web de gestion des conges et formations
+
+<span class="cm">## Stack technique</span>
+- Microsoft SharePoint pour l'hebergement
+- Power Apps pour les formulaires
+- Power Automate pour les workflows de validation
+
+<span class="cm">## Processus metier</span>
+- Demandes de conges → validation manager → notification RH
+- Formations → inscription → validation budget → convocation
+
+<span class="cm">## Regles importantes</span>
+- RGPD : ne jamais inclure de donnees personnelles dans les logs
+- Conserver un historique des modifications</code></pre>
+    </section>
+
+    <!-- ===== SECTION 3 ===== -->
+    <section class="section" id="s3">
+      <div class="section-header">
+        <div class="section-number">3</div>
+        <div class="section-title">
+          <h2>Hierarchie Memoire</h2>
+          <p class="subtitle">Les 4 niveaux de contexte</p>
+        </div>
+      </div>
+
+      <p>Claude peut avoir plusieurs fichiers <code>CLAUDE.md</code> a differents niveaux. Ils sont <strong>tous charges simultanement</strong>, du plus global au plus specifique. Le fichier le plus local <em>affine</em> le contexte sans <em>ecraser</em> le contexte global.</p>
+
+      <div class="hierarchy">
+        <span class="h-level">~/.claude/CLAUDE.md <span class="h-note">← Niveau 1 : Global (tous vos projets)</span></span>
+        <span class="h-level">    ↓</span>
+        <span class="h-level">/monorepo/<span>CLAUDE.md</span> <span class="h-note">← Niveau 2 : Racine du depot</span></span>
+        <span class="h-level">    ↓</span>
+        <span class="h-level">/monorepo/.claude/<span>CLAUDE.md</span> <span class="h-note">← Niveau 3 : Config locale (ignoree par Git)</span></span>
+        <span class="h-level">    ↓</span>
+        <span class="h-level">/monorepo/frontend/<span>CLAUDE.md</span> <span class="h-note">← Niveau 4 : Sous-dossier (contexte limite)</span></span>
+      </div>
+
+      <h3>Regles d'or</h3>
+      <ul>
+        <li><strong>Gardez chaque fichier sous 200 lignes</strong> : Au-dela, la memoire se charge trop lentement et le contexte se dilue.</li>
+        <li><strong>Les fichiers de sous-dossier ajoutent du contexte</strong> : Ils ne remplacent pas, ils completent.</li>
+        <li><strong>N'ecrasez jamais le contexte parent</strong> : Coherence entre fichiers globaux et locaux.</li>
+      </ul>
+
+      <h3>Exemple pratique : 3 niveaux de CLAUDE.md</h3>
+      <pre><code><span class="cm"># ~/.claude/CLAUDE.md (votre profil global)</span>
+- Langue : toujours repondre en français
+- Style : commentaires en français, variables en anglais
+- Jamais de donnees sensibles dans les exemples</code></pre>
+
+      <pre><code><span class="cm"># /projet-usine/CLAUDE.md (specifique au projet)</span>
+Ce projet gere les donnees de controle qualite de la ligne 3.
+
+Technologies : Python + SQLite + Pandas
+
+Regles metier :
+- Les valeurs hors tolerance doivent declencher une alerte
+- Conserver 3 ans d'historique (obligation reglementaire)</code></pre>
+
+      <pre><code><span class="cm"># /projet-usine/rapports/CLAUDE.md (sous-dossier rapports)</span>
+Ce sous-dossier genere les rapports PDF mensuels.
+Utiliser ReportLab. Format : A4 portrait, logo en en-tete.</code></pre>
+    </section>
+
+    <!-- ===== SECTION 4 ===== -->
+    <section class="section" id="s4">
+      <div class="section-header">
+        <div class="section-number">4</div>
+        <div class="section-title">
+          <h2>Bonnes Pratiques</h2>
+          <p class="subtitle">Travailler efficacement avec Claude</p>
+        </div>
+      </div>
+
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">1</div>
+          <h4>Executez /init d'abord</h4>
+          <p>Initialisez avant de commencer. Laissez Claude analyser le projet, puis affinez ce qu'il a genere.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">2</div>
+          <h4>Soyez precis</h4>
+          <p>"Ameliore les performances de calculer_moyenne() avec NumPy" plutot que "Ameliore ce code".</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">3</div>
+          <h4>Documentez les pieges</h4>
+          <p>Les contraintes non-evidentes : "le serveur de test est lent le mardi", "ne pas utiliser la lib X".</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">4</div>
+          <h4>Referencez avec @</h4>
+          <p>Utilisez <code>@CLAUDE.md</code> pour mentionner des fichiers specifiques dans vos demandes.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">5</div>
+          <h4>Regles de workflow</h4>
+          <p>Documentez votre facon de travailler : branches Git, validations, tests avant deploiement.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">6</div>
+          <h4>Memoire concise</h4>
+          <p>50 lignes pertinentes valent mieux que 500 lignes fouillis. Revoyez et epurez regulierement.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">7</div>
+          <h4>Commitez sur Git</h4>
+          <p>Incluez CLAUDE.md dans Git pour que toute l'equipe beneficie du meme contexte partage.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SECTION 5 ===== -->
+    <section class="section" id="s5">
+      <div class="section-header">
+        <div class="section-number">5</div>
+        <div class="section-title">
+          <h2>Structure des Fichiers</h2>
+          <p class="subtitle">Arborescence standard d'un projet Claude</p>
+        </div>
+      </div>
+
+      <pre><code>votre-projet/
+├── CLAUDE.md                    <span class="cm">← Memoire persistante du projet</span>
+├── .claude/                     <span class="cm">← Dossier de configuration Claude</span>
+│   ├── settings.json            <span class="cm">← Parametres (permissions, hooks)</span>
+│   └── settings.local.json      <span class="cm">← Parametres locaux (non partages)</span>
+├── skills/                      <span class="cm">← Vos competences personnalisees</span>
+│   ├── code-review/
+│   │   └── SKILL.md             <span class="cm">← Skill : revue de code</span>
+│   └── testing/
+│       ├── SKILL.md             <span class="cm">← Skill : tests automatises</span>
+│       └── helpers.py           <span class="cm">← Fichier support du skill</span>
+├── commands/
+│   └── deploy.md                <span class="cm">← Commande : procedure de deploiement</span>
+├── agents/
+│   └── security-reviewer.md    <span class="cm">← Agent : audit de securite</span>
+└── .gitignore</code></pre>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Fichier / Dossier</th><th>Role</th><th>Analogie metier</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>CLAUDE.md</code></td><td>Memoire et regles du projet</td><td>Cahier de bord technique</td></tr>
+            <tr><td><code>.claude/settings.json</code></td><td>Permissions et hooks</td><td>Reglement interieur</td></tr>
+            <tr><td><code>skills/</code></td><td>Competences specialisees</td><td>Fiches de postes</td></tr>
+            <tr><td><code>commands/deploy.md</code></td><td>Procedures automatisees</td><td>Mode operatoire</td></tr>
+            <tr><td><code>agents/</code></td><td>Sous-experts specialises</td><td>Equipes dediees</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Exemple : fichier <code>commands/deploy.md</code></h3>
+      <pre><code><span class="cm"># Commande : Deployer en production</span>
+
+<span class="cm">## Description</span>
+Lance le processus de deploiement complet vers le serveur de production.
+
+<span class="cm">## Etapes</span>
+1. Verifier que tous les tests passent (npm run test)
+2. Construire l'application (npm run build)
+3. Verifier les variables d'environnement (NODE_ENV=production)
+4. Envoyer sur le serveur (rsync -avz dist/ serveur:/var/www/app)
+5. Redemarrer le service (sudo systemctl restart monapp)
+6. Verifier que l'application repond (http://monserveur/health)
+
+<span class="cm">## En cas d'erreur</span>
+Si l'etape 4 echoue : verifier la connexion VPN au reseau interne.
+Contacter l'administrateur systeme : poste 2847.</code></pre>
+    </section>
+
+    <!-- ===== SECTION 6 ===== -->
+    <section class="section" id="s6">
+      <div class="section-header">
+        <div class="section-number">6</div>
+        <div class="section-title">
+          <h2>Les Skills</h2>
+          <p class="subtitle">Le superpouvoir de Claude</p>
+        </div>
+      </div>
+
+      <p>Un <strong>Skill</strong> (competence) est un <strong>guide Markdown que Claude auto-invoque via le langage naturel</strong>. Quand vous demandez quelque chose, Claude cherche automatiquement s'il existe un Skill correspondant et l'utilise comme guide d'expert.</p>
+
+      <div class="analogy">
+        <p>Les Skills sont comme des <strong>fiches de procedures</strong> dans un classeur d'atelier. Quand un operateur doit effectuer une tache specifique (changer un outil, calibrer une machine), il consulte la fiche correspondante. Claude fait de meme — automatiquement.</p>
+      </div>
+
+      <h3>Deux types de Skills</h3>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">P</div>
+          <h4>Skill de projet</h4>
+          <p>Partage avec toute l'equipe via Git.</p>
+          <p style="margin-top:8px"><code>.claude/skills/&lt;nom&gt;/SKILL.md</code></p>
+        </div>
+        <div class="card">
+          <div class="card-icon">U</div>
+          <h4>Skill personnel</h4>
+          <p>Pour vous seul, sur tous vos projets.</p>
+          <p style="margin-top:8px"><code>~/.claude/skills/&lt;nom&gt;/SKILL.md</code></p>
+        </div>
+      </div>
+
+      <h3>Structure d'un SKILL.md</h3>
+      <pre><code>---
+<span class="prop">name</span>: <span class="str">nom-du-skill</span>
+<span class="prop">description</span>: <span class="str">Description PRECISE de ce que fait ce skill</span>
+              <span class="cm">← ESSENTIEL pour l'auto-activation !</span>
+<span class="prop">allowed-tools</span>: <span class="str">Read, Grep, Bash, Write</span>
+---
+
+<span class="cm"># Titre du Skill</span>
+
+<span class="cm">## Quand utiliser ce skill</span>
+[Conditions d'activation]
+
+<span class="cm">## Procedure</span>
+[Etapes detaillees]
+
+<span class="cm">## Exemples</span>
+[Exemples concrets]</code></pre>
+
+      <div class="callout callout-warning">
+        <p>Le champ <code>description</code> est <strong>essentiel pour l'auto-activation</strong>. Claude lit cette description pour decider si le skill correspond a votre demande. Une description vague signifie un skill jamais utilise.</p>
+      </div>
+
+      <h3>Exemple 1 : Skill de revue de code</h3>
+      <pre><code>---
+<span class="prop">name</span>: <span class="str">code-review</span>
+<span class="prop">description</span>: <span class="str">Effectue une revue de code professionnelle en verifiant
+              la lisibilite, la securite, les performances et
+              le respect des bonnes pratiques</span>
+<span class="prop">allowed-tools</span>: <span class="str">Read, Grep</span>
+---
+
+<span class="cm"># Revue de Code</span>
+
+<span class="cm">## Checklist de verification</span>
+- Les noms de variables sont explicites
+- Les fonctions font une seule chose
+- Les cas d'erreur sont geres
+- Pas de donnees sensibles en dur (mots de passe, cles API)
+- Les commentaires expliquent le "pourquoi", pas le "comment"
+
+<span class="cm">## Format du rapport</span>
+Pour chaque probleme trouve :
+- Fichier et ligne : localisation precise
+- Severite : Critique / Important / Mineur
+- Description : ce qui pose probleme
+- Suggestion : comment corriger</code></pre>
+
+      <h3>Exemple 2 : Skill de messages de commit Git</h3>
+      <pre><code>---
+<span class="prop">name</span>: <span class="str">commit-messages</span>
+<span class="prop">description</span>: <span class="str">Formule des messages de commit Git clairs, structures et
+              en français selon la convention Conventional Commits</span>
+<span class="prop">allowed-tools</span>: <span class="str">Bash</span>
+---
+
+<span class="cm"># Messages de Commit</span>
+
+<span class="cm">## Convention</span>
+[TYPE]: Resume court en français (max 72 caracteres)
+
+<span class="cm">## Types disponibles</span>
+- feat: nouvelle fonctionnalite
+- fix: correction de bug
+- docs: documentation uniquement
+- refactor: amelioration sans changement de comportement
+
+<span class="cm">## Exemples</span>
+feat: ajouter la validation des donnees du formulaire conges
+fix: corriger le calcul des jours ouvres lors des ponts</code></pre>
+
+      <h3>Exemple 3 : Testing Patterns (Modeles de test)</h3>
+      <pre><code>---
+<span class="prop">name</span>: <span class="str">testing-patterns</span>
+<span class="prop">description</span>: <span class="str">Jest testing patterns. Utilise describe + it + modele AAA.
+              Utilise des mocks d'usine (factory mocks)</span>
+<span class="prop">allowed-tools</span>: <span class="str">Read, Grep, Glob</span>
+---
+
+<span class="cm"># Modele de Test AAA</span>
+<span class="cm"># Arrange / Act / Assert</span>
+
+<span class="cm">## Structure</span>
+<span class="fn">describe</span>(<span class="str">'NomDeLaFonction'</span>, () => {
+  <span class="fn">it</span>(<span class="str">'doit retourner la bonne valeur'</span>, () => {
+    <span class="cm">// Arrange : preparer les donnees</span>
+    <span class="kw">const</span> donnees = [10, 20, 30];
+
+    <span class="cm">// Act : executer</span>
+    <span class="kw">const</span> resultat = <span class="fn">calculerMoyenne</span>(donnees);
+
+    <span class="cm">// Assert : verifier</span>
+    <span class="fn">expect</span>(resultat).<span class="fn">toBe</span>(20);
+  });
+});</code></pre>
+    </section>
+
+    <!-- ===== SECTION 7 ===== -->
+    <section class="section" id="s7">
+      <div class="section-header">
+        <div class="section-number">7</div>
+        <div class="section-title">
+          <h2>Skills Populaires</h2>
+          <p class="subtitle">Les competences incontournables</p>
+        </div>
+      </div>
+
+      <p>Voici les Skills les plus utilises en contexte professionnel, avec leur phrase d'activation naturelle :</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Skill</th><th>Phrase d'activation</th><th>Description</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>code-review</strong></td>
+              <td>"Fais une revue de ce fichier"</td>
+              <td>Revue de code professionnelle</td>
+            </tr>
+            <tr>
+              <td><strong>testing-patterns</strong></td>
+              <td>"Ecris des tests pour cette fonction"</td>
+              <td>Modeles de tests automatiques</td>
+            </tr>
+            <tr>
+              <td><strong>commit-messages</strong></td>
+              <td>"Propose un message de commit"</td>
+              <td>Messages Git structures et clairs</td>
+            </tr>
+            <tr>
+              <td><strong>docker-deploy</strong></td>
+              <td>"Deploie cette application avec Docker"</td>
+              <td>Deploiement containerise</td>
+            </tr>
+            <tr>
+              <td><strong>codebase-visualizer</strong></td>
+              <td>"Genere un diagramme de l'architecture"</td>
+              <td>Visualisation de la structure du code</td>
+            </tr>
+            <tr>
+              <td><strong>api-design</strong></td>
+              <td>"Conçois l'API pour ce module"</td>
+              <td>Conception d'interfaces REST</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Exemple complet : Skill docker-deploy</h3>
+      <pre><code>---
+<span class="prop">name</span>: <span class="str">docker-deploy</span>
+<span class="prop">description</span>: <span class="str">Deploie une application dans un conteneur Docker :
+              build de l'image, lancement du conteneur, verification</span>
+<span class="prop">allowed-tools</span>: <span class="str">Bash, Read</span>
+---
+
+<span class="cm"># Deploiement Docker</span>
+
+<span class="cm">## Etapes standard</span>
+1. Creer le Dockerfile si absent
+2. Builder l'image : docker build -t monapp:latest .
+3. Lancer le conteneur : docker run -d -p 80:3000 monapp:latest
+4. Verifier : docker ps && curl http://localhost/health
+
+<span class="cm">## En cas d'erreur de port</span>
+docker stop $(docker ps -q) puis relancer
+
+<span class="cm">## Variables d'environnement</span>
+Utiliser un fichier .env (jamais en dur dans la commande)</code></pre>
+    </section>
+
+    <!-- ===== SECTION 8 ===== -->
+    <section class="section" id="s8">
+      <div class="section-header">
+        <div class="section-number">8</div>
+        <div class="section-title">
+          <h2>Configuration des Hooks</h2>
+          <p class="subtitle">Automatiser la securite et le controle</p>
+        </div>
+      </div>
+
+      <p>Un <strong>Hook</strong> est un <strong>callback deterministe</strong> : un script qui s'execute <strong>automatiquement</strong> a des moments precis de l'interaction avec Claude — independamment de ce que vous demandez.</p>
+
+      <div class="analogy">
+        <p>Les Hooks sont comme les <strong>procedures de securite</strong> dans une usine : des controles qui s'executent automatiquement a des etapes definies, independamment de l'operateur. Avant de demarrer la machine (PreToolUse), apres son arret (PostToolUse), ou pour une notification.</p>
+      </div>
+
+      <h3>Les 3 types de Hooks</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Type</th><th>Quand ?</th><th>Utilisation typique</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>PreToolUse</strong></td>
+              <td>Avant qu'un outil soit utilise</td>
+              <td>Verifications de securite</td>
+            </tr>
+            <tr>
+              <td><strong>PostToolUse</strong></td>
+              <td>Apres qu'un outil a ete utilise</td>
+              <td>Nettoyage, journalisation</td>
+            </tr>
+            <tr>
+              <td><strong>Notification</strong></td>
+              <td>Pour envoyer des alertes</td>
+              <td>Notifier sur Teams / Slack</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Configuration dans <code>.claude/settings.json</code></h3>
+      <pre><code>{
+  <span class="prop">"hooks"</span>: {
+    <span class="prop">"PreToolUse"</span>: [
+      {
+        <span class="prop">"matcher"</span>: <span class="str">"Bash"</span>,  <span class="cm">← s'active avant TOUTE commande Bash</span>
+        <span class="prop">"hooks"</span>: [
+          {
+            <span class="prop">"type"</span>: <span class="str">"command"</span>,
+            <span class="prop">"command"</span>: <span class="str">"scripts/securite.sh"</span>,
+            <span class="prop">"timeout"</span>: <span class="num">5</span>  <span class="cm">← timeout 5 secondes</span>
+          }
+        ]
+      }
+    ]
+  }
+}</code></pre>
+
+      <h3>Codes de sortie (Exit codes)</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Code</th><th>Signification</th><th>Exemple</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>0</code></td><td>Autoriser l'action</td><td>Tout est OK, continuer</td></tr>
+            <tr><td><code>2</code></td><td>Bloquer l'action</td><td>Operation non autorisee</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Exemple : Script de securite</h3>
+      <pre><code>#!/bin/bash
+<span class="cm"># scripts/securite.sh</span>
+<span class="cm"># Vérifie que Claude ne modifie pas des fichiers critiques</span>
+
+<span class="kw">FICHIER_CIBLE</span>=<span class="str">"$1"</span>
+<span class="kw">FICHIERS_PROTEGES</span>=(<span class="str">"config/production.env"</span> <span class="str">"secrets/"</span> <span class="str">"backup/"</span>)
+
+<span class="kw">for</span> protected <span class="kw">in</span> <span class="str">"${FICHIERS_PROTEGES[@]}"</span>; <span class="kw">do</span>
+    <span class="kw">if</span> [[ <span class="str">"$FICHIER_CIBLE"</span> == *<span class="str">"$protected"</span>* ]]; <span class="kw">then</span>
+        <span class="fn">echo</span> <span class="str">"ERREUR : Modification interdite sur $protected"</span>
+        <span class="fn">exit</span> <span class="num">2</span>  <span class="cm">← Bloquer l'action</span>
+    <span class="kw">fi</span>
+<span class="kw">done</span>
+
+<span class="fn">exit</span> <span class="num">0</span>  <span class="cm">← Autoriser l'action</span></code></pre>
+    </section>
+
+    <!-- ===== SECTION 9 ===== -->
+    <section class="section" id="s9">
+      <div class="section-header">
+        <div class="section-number">9</div>
+        <div class="section-title">
+          <h2>Permissions &amp; Securite</h2>
+          <p class="subtitle">Controler ce que Claude peut faire</p>
+        </div>
+      </div>
+
+      <p>Claude ne peut acceder qu'aux ressources que vous lui autorisez explicitement. La configuration des permissions se fait dans <code>.claude/settings.json</code>.</p>
+
+      <div class="analogy">
+        <p>C'est comme les <strong>droits d'acces par badge</strong> dans un immeuble de bureaux. Une carte peut ouvrir certaines portes (autorisees) mais pas d'autres (refusees). On ne donne pas les cles de toute l'usine a tout le monde.</p>
+      </div>
+
+      <h3>Structure des permissions</h3>
+      <pre><code>{
+  <span class="prop">"permissions"</span>: {
+    <span class="prop">"allow"</span>: [
+      <span class="str">"Read:*"</span>,            <span class="cm">← Lire tous les fichiers</span>
+      <span class="str">"Bash:git:*"</span>,        <span class="cm">← Executer toutes les commandes git</span>
+      <span class="str">"Write:*:*:*.md"</span>    <span class="cm">← Ecrire uniquement les .md</span>
+    ],
+    <span class="prop">"deny"</span>: [
+      <span class="str">"Read:env:*"</span>,        <span class="cm">← INTERDIT : variables d'environnement</span>
+      <span class="str">"Bash:sudo:*"</span>        <span class="cm">← INTERDIT : commandes administrateur</span>
+    ]
+  }
+}</code></pre>
+
+      <h3>Exemple : Politique de securite pour une PME</h3>
+      <pre><code>{
+  <span class="prop">"permissions"</span>: {
+    <span class="prop">"allow"</span>: [
+      <span class="str">"Read:*"</span>,
+      <span class="str">"Bash:npm:*"</span>,
+      <span class="str">"Bash:git:*"</span>,
+      <span class="str">"Write:src:*"</span>,
+      <span class="str">"Write:docs:*"</span>
+    ],
+    <span class="prop">"deny"</span>: [
+      <span class="str">"Read:*.env"</span>,
+      <span class="str">"Read:secrets:*"</span>,
+      <span class="str">"Bash:sudo:*"</span>,
+      <span class="str">"Bash:rm:-rf:*"</span>,
+      <span class="str">"Write:config/production:*"</span>
+    ]
+  }
+}</code></pre>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Autorise</th><th>Interdit</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Lire tous les fichiers du projet</td><td>Lire les fichiers .env (mots de passe)</td></tr>
+            <tr><td>Lancer npm (scripts, packages)</td><td>Acceder au dossier secrets</td></tr>
+            <tr><td>Utiliser git (commit, push, pull)</td><td>Utiliser sudo (droits admin)</td></tr>
+            <tr><td>Ecrire dans src/ et docs/</td><td>Supprimer des dossiers entiers</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ===== SECTION 10 ===== -->
+    <section class="section" id="s10">
+      <div class="section-header">
+        <div class="section-number">10</div>
+        <div class="section-title">
+          <h2>Architecture en 4 Couches</h2>
+          <p class="subtitle">Comment Claude fonctionne en profondeur</p>
+        </div>
+      </div>
+
+      <p>Claude Code fonctionne selon une architecture en 4 couches superposees, chacune avec un role precis et complementaire :</p>
+
+      <div class="arch-diagram">
+        <div class="arch-layer layer-l1">
+          <div class="layer-badge badge-l1">L1</div>
+          <div class="layer-info">
+            <h4>CLAUDE.md — Contexte et regles persistants</h4>
+            <p>Charge a chaque session. Ne change pas entre les conversations.</p>
+          </div>
+          <div class="layer-analogy">Cahier de bord de l'equipe</div>
+        </div>
+        <div class="arch-layer layer-l2">
+          <div class="layer-badge badge-l2">L2</div>
+          <div class="layer-info">
+            <h4>Skills — Packs de connaissances auto-invoques</h4>
+            <p>Active uniquement quand pertinent. Expertise specialisee a la demande.</p>
+          </div>
+          <div class="layer-analogy">Fiches de procedures metier</div>
+        </div>
+        <div class="arch-layer layer-l3">
+          <div class="layer-badge badge-l3">L3</div>
+          <div class="layer-info">
+            <h4>Hooks — Passerelles de securite et automatisation</h4>
+            <p>S'executent a chaque evenement defini. Independants de Claude.</p>
+          </div>
+          <div class="layer-analogy">Capteurs de securite</div>
+        </div>
+        <div class="arch-layer layer-l4">
+          <div class="layer-badge badge-l4">L4</div>
+          <div class="layer-info">
+            <h4>Agents — Sous-agents avec leur propre contexte</h4>
+            <p>Taches complexes deleguees. Contexte propre et independant.</p>
+          </div>
+          <div class="layer-analogy">Sous-traitants specialises</div>
+        </div>
+      </div>
+
+      <h3>Synergie des couches — Exemple concret</h3>
+      <p>Voici comment les 4 couches collaborent lors d'une simple demande :</p>
+      <pre><code><span class="cm">Vous demandez : "Deploie la nouvelle version en production"</span>
+
+<span class="cm">→ L1 (CLAUDE.md) :</span>
+  Charge le contexte : stack technique, serveur de prod, credentials
+  
+<span class="cm">→ L2 (Skill docker-deploy) :</span>
+  Auto-invoque le skill de deploiement Docker
+  Suit la procedure definie pas a pas
+  
+<span class="cm">→ L3 (Hook PreToolUse) :</span>
+  Verifie que les tests passent avant tout deploiement
+  Bloque si un test echoue (exit code 2)
+  
+<span class="cm">→ L4 (Agent security-reviewer) :</span>
+  Analyse le code a deployer pour detecter des vulnerabilites
+  Rapport genere en parallele</code></pre>
+    </section>
+
+    <!-- ===== SECTION 11 ===== -->
+    <section class="section" id="s11">
+      <div class="section-header">
+        <div class="section-number">11</div>
+        <div class="section-title">
+          <h2>Workflow Quotidien</h2>
+          <p class="subtitle">La routine optimale avec Claude Code</p>
+        </div>
+      </div>
+
+      <div class="workflow">
+        <div class="workflow-step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <h4>Ouvrir le projet</h4>
+            <p><code>cd mon-projet &amp;&amp; claude</code> — Claude charge automatiquement CLAUDE.md et retrouve le contexte.</p>
+          </div>
+        </div>
+        <div class="workflow-step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <h4>Activer le Mode Plan — <kbd>Shift + Tab + Tab</kbd></h4>
+            <p>Claude presente un plan d'action avant d'executer. Il reflechit avant d'agir. Vous validez le plan, puis il travaille.</p>
+          </div>
+        </div>
+        <div class="workflow-step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <h4>Decrire votre intention</h4>
+            <p>Etre precis et concret. Exemple : "Ajoute un formulaire de validation des donnees de controle qualite. La valeur doit etre dans la plage [0.95, 1.05] et afficher un message d'erreur rouge si ce n'est pas le cas."</p>
+          </div>
+        </div>
+        <div class="workflow-step">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <h4>Acceptation automatique — <kbd>Shift + Tab</kbd></h4>
+            <p>Active l'acceptation automatique : Claude peut executer les operations approuvees sans vous demander a chaque fois.</p>
+          </div>
+        </div>
+        <div class="workflow-step">
+          <div class="step-num">5</div>
+          <div class="step-content">
+            <h4>Compresser le contexte — <code>/compact</code></h4>
+            <p>Apres une longue session, <code>/compact</code> resument les echanges pour liberer de l'espace memoire. Comme une synthese de reunion en cours de seance.</p>
+          </div>
+        </div>
+        <div class="workflow-step">
+          <div class="step-num">6</div>
+          <div class="step-content">
+            <h4>Rewind — <kbd>Esc Esc</kbd></h4>
+            <p>Si Claude s'ecarte de ce que vous vouliez, double-Esc revient en arriere pour reformuler. L'equivalent d'un Ctrl+Z intelligent.</p>
+          </div>
+        </div>
+        <div class="workflow-step">
+          <div class="step-num">7</div>
+          <div class="step-content">
+            <h4>Committer frequemment</h4>
+            <p><code>git commit -m "feat: ajouter la validation du formulaire QC"</code> — Chaque fonctionnalite terminee = un commit. Sauvegarde et possibilite d'annuler.</p>
+          </div>
+        </div>
+        <div class="workflow-step">
+          <div class="step-num">8</div>
+          <div class="step-content">
+            <h4>Une session par fonctionnalite</h4>
+            <p>Pour garder la memoire de contexte propre, commencez une nouvelle session Claude pour chaque nouvelle fonctionnalite.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SECTION 12 ===== -->
+    <section class="section" id="s12">
+      <div class="section-header">
+        <div class="section-number">12</div>
+        <div class="section-title">
+          <h2>Commandes Clavier</h2>
+          <p class="subtitle">Reference rapide des raccourcis essentiels</p>
+        </div>
+      </div>
+
+      <div class="shortcuts-grid">
+        <div class="shortcut-card">
+          <kbd>/init</kbd>
+          <div class="shortcut-desc">
+            <strong>Generer CLAUDE.md</strong>
+            Au demarrage d'un nouveau projet
+          </div>
+        </div>
+        <div class="shortcut-card">
+          <kbd>/doccat</kbd>
+          <div class="shortcut-desc">
+            <strong>Verifier l'installation</strong>
+            En cas de probleme de configuration
+          </div>
+        </div>
+        <div class="shortcut-card">
+          <kbd>/compact</kbd>
+          <div class="shortcut-desc">
+            <strong>Compresser le contexte</strong>
+            Quand la session dure longtemps
+          </div>
+        </div>
+        <div class="shortcut-card">
+          <kbd>Shift + Tab</kbd>
+          <div class="shortcut-desc">
+            <strong>Changer de mode</strong>
+            Acceptation automatique des actions
+          </div>
+        </div>
+        <div class="shortcut-card">
+          <kbd>Tab</kbd>
+          <div class="shortcut-desc">
+            <strong>Pensee etendue</strong>
+            Raisonnement approfondi pour problemes complexes
+          </div>
+        </div>
+        <div class="shortcut-card">
+          <kbd>Esc Esc</kbd>
+          <div class="shortcut-desc">
+            <strong>Rewind</strong>
+            Revenir en arriere et reformuler
+          </div>
+        </div>
+        <div class="shortcut-card">
+          <kbd>Shift + Tab + Tab</kbd>
+          <div class="shortcut-desc">
+            <strong>Mode Plan</strong>
+            Claude planifie avant d'agir
+          </div>
+        </div>
+        <div class="shortcut-card">
+          <kbd>Ctrl + C</kbd>
+          <div class="shortcut-desc">
+            <strong>Interrompre</strong>
+            Stopper une action en cours
+          </div>
+        </div>
+      </div>
+
+      <h3>Explication de la Pensee Etendue</h3>
+      <div class="analogy">
+        <p>La pensee etendue (touche <kbd>Tab</kbd>) permet a Claude de <strong>raisonner plus longuement et en profondeur</strong> avant de repondre. C'est la difference entre demander la reponse immediate a un expert, ou lui donner 15 minutes pour reflechir au tableau blanc. La deuxieme option produit une reponse plus reflechie — mais prend plus de temps.</p>
+      </div>
+
+      <h3>Conclusion : ce que vous avez acquis</h3>
+      <div class="card-grid">
+        <div class="card">
+          <h4>CLAUDE.md</h4>
+          <p>La memoire persistante qui evite de tout reexpliquer</p>
+        </div>
+        <div class="card">
+          <h4>Hierarchie</h4>
+          <p>Global → projet → local → sous-dossier</p>
+        </div>
+        <div class="card">
+          <h4>Skills</h4>
+          <p>Guides Markdown auto-invoques pour expertise specialisee</p>
+        </div>
+        <div class="card">
+          <h4>Hooks</h4>
+          <p>Controles de securite automatiques avant/apres chaque action</p>
+        </div>
+        <div class="card">
+          <h4>Permissions</h4>
+          <p>Definir precisement ce que Claude peut ou ne peut pas faire</p>
+        </div>
+        <div class="card">
+          <h4>Workflow</h4>
+          <p>La routine optimale pour travailler efficacement</p>
+        </div>
+      </div>
+
+      <div class="callout callout-tip" style="margin-top:32px">
+        <p>Prochaines etapes recommandees : 1) Creer votre premier CLAUDE.md avec <code>/init</code>, 2) Rediger un Skill adapte a votre metier, 3) Configurer les permissions selon votre politique de securite, 4) Partager CLAUDE.md avec votre equipe via Git.</p>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- ===== FOOTER ===== -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <p><img src="../../logo_uimm_placeholder.jpg" alt="Logo UIMM" style="height:32px; vertical-align:middle; margin-right:12px; border-radius:4px;" />
+    <span class="org">Pole Formation <span class="trainer">UIMM - CVDL</span> | Formateur : <span class="trainer">S. JAUBERT</span></span></p>
+    <p class="edition">Formation IA en Entreprise — Masterclass Claude Code & Workflow — Edition 2026</p>
+  </div>
+</footer>
+
+<script>
+  // ===== PROGRESS BAR =====
+  const bar = document.getElementById('progressBar');
+  window.addEventListener('scroll', () => {
+    const max = document.body.scrollHeight - window.innerHeight;
+    bar.style.width = (window.scrollY / max * 100) + '%';
+  });
+
+  // ===== ACTIVE TOC LINK =====
+  const sections = document.querySelectorAll('.section');
+  const tocLinks = document.querySelectorAll('.toc-list a');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = 'toc-' + entry.target.id;
+        tocLinks.forEach(l => l.classList.remove('active'));
+        const active = document.getElementById(id);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+
+  sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>

@@ -76,6 +76,7 @@
 - **[Formation "Agents et Skills IA" (2 jours)](00-Formation/IA_Skills/Formation_Skills/Plan_Formation_Skills.md)** - Programme complet pour transformer des utilisateurs occasionnels en experts de l'automatisation via les Skills (installation, diagnostic d'amnésie des LLMs, ateliers par métiers et paramétrage d'agents IA personnalisés). [Voir le Guide de l'Apprenant](00-Formation/IA_Skills/Formation_Skills/Guide_Apprenant_Skills.md).
 - **[Formation Maîtriser Claude pour les Salariés (4 Blocs) - Syllabus](CLAUDE/Formation_Maitriser_Claude/plan_de_formation.html)** - Plan d'ingénierie pédagogique restructuré pour les salariés (formateurs, administratifs, ingénieurs).
 - **[Livret Pratique - Maîtriser Claude (Exercices & Prompts)](CLAUDE/Formation_Maitriser_Claude/Livret_Pratique.html)** - Manuel de l'apprenant : contient pas-à-pas les exercices, fichiers Markdown (identité, contraintes) et invites d'entraînement contre les hallucinations.
+- **[Masterclass : Claude Code & Workflow](CLAUDE/cours-claude-code-workflow/index.html)** — Cours pédagogique complet (12 modules) sur l'écosystème Claude Code : CLAUDE.md et mémoire persistante, hiérarchie de contexte, Skills (guides auto-invoqués), Hooks de sécurité, permissions, architecture en 4 couches et workflow quotidien. Format HTML interactif avec table des matières active, exemples génériques et analogies métier. [Version Markdown](CLAUDE/cours-claude-code-workflow/cours_claude_code_workflow.md)
 
 ### Comprendre les Fondamentaux de l'IA
 
