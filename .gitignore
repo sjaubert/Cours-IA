@@ -132,3 +132,29 @@ $RECYCLE.BIN/
 *.swp
 *.swo
 run_status.txt
+
+# ----------------------------------------------------------------
+# LOURDS / DOCUMENTS POUR OPTIMISATION SYNC (Ajouté)
+# ----------------------------------------------------------------
+*.pdf
+*.docx
+*.pptx
+*.xlsx
+*.odt
+*.ods
+*.odp
+
+# Archives
+*.zip
+*.tar.gz
+*.rar
+*.7z
+
+# Media
+*.mp4
+*.mov
+*.mp3
+*.wav
+
+# Test
+app_Test/

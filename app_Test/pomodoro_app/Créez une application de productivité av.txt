@@ -1,2 +1,0 @@
-Créez une application de productivité avec un minuteur Pomodoro. 
-Donnez-lui une esthétique apaisante.
