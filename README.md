@@ -72,11 +72,17 @@
 - **[Formation Prompt Engineering - Programme d'une Journée](Formation-Journee-PromptEngineering/README.md)** - Formation complète sur le Prompt Engineering avec 3 ateliers interactifs : Les 6 Piliers, Exercices Pratiques, et Techniques Avancées
 - **[Formation Prompt Engineering pour la Maintenance Industrielle](00-Formation/Formation_Prompt/Formation_Prompt_Maintenance_Etudiants.html)** - Formation de 4 heures pour étudiants Bachelor Maintenance avec cas d'usage réalistes, travaux de groupe et sensibilisation aux biais de l'IA
 - **[Activité NotebookLM](NoteBLM/index.html)** - Formation complète sur NotebookLM pour professionnels de l'industrie : présentation interactive, TP pratique (prise en main presse hydraulique), et ressources documentaires professionnelles (manuels, normes ISO, templates)
-- **[Formation NotebookLM — Parcours Progressif 7H](NoteBLM/Formation_7H/parcours_formation.html)** - Programme de formation de 7 heures structuré autour de 5 shifts cognitifs progressifs : comprendre l'espace clos, maîtriser le questionnement contraint, vérifier les citations, produire en boucle créative, et penser en méta-patterns. Inclut un [guide formateur](NoteBLM/Formation_7H/guide_formateur.html) et des [fiches activités imprimables](NoteBLM/Formation_7H/fiches_activites.html)
+- **[Formation NotebookLM — Parcours Progressif 7H](NoteBLM/Formation_7H/parcours_formation.html)** - Programme de formation de 7 heures structuré autour de 5 shifts cognitifs progressifs. Inclut un [guide formateur](NoteBLM/Formation_7H/guide_formateur.html) et des [fiches activités imprimables](NoteBLM/Formation_7H/fiches_activites.html)
+  - [Module 1 — Comprendre NotebookLM](NoteBLM/Formation_7H/M1_comprendre_nblm.html) — *Shift : l'espace clos, la qualité vient des sources*
+  - [Module 2 — L'art de questionner](NoteBLM/Formation_7H/M2_art_questionner.html) — *Shift : contraindre la question pour augmenter sa puissance*
+  - [Module 3 — Vérifier et citer](NoteBLM/Formation_7H/M3_verifier_citer.html) — *Shift : l'IA hallucine, la citation ancre*
+  - [Module 4 — Produire en boucle créative](NoteBLM/Formation_7H/M4_produire_boucler.html) — *Shift : itérer, reformater, exporter*
+  - [Module 5 — Penser avec NotebookLM](NoteBLM/Formation_7H/M5_penser_avec_nblm.html) — *Shift : les méta-patterns, l'outil de pensée durable*
 - **[Formation "Agents et Skills IA" (2 jours)](00-Formation/IA_Skills/Formation_Skills/Plan_Formation_Skills.md)** - Programme complet pour transformer des utilisateurs occasionnels en experts de l'automatisation via les Skills (installation, diagnostic d'amnésie des LLMs, ateliers par métiers et paramétrage d'agents IA personnalisés). [Voir le Guide de l'Apprenant](00-Formation/IA_Skills/Formation_Skills/Guide_Apprenant_Skills.md).
 - **[Formation Maîtriser Claude pour les Salariés (4 Blocs) - Syllabus](CLAUDE/Formation_Maitriser_Claude/plan_de_formation.html)** - Plan d'ingénierie pédagogique restructuré pour les salariés (formateurs, administratifs, ingénieurs).
 - **[Livret Pratique - Maîtriser Claude (Exercices & Prompts)](CLAUDE/Formation_Maitriser_Claude/Livret_Pratique.html)** - Manuel de l'apprenant : contient pas-à-pas les exercices, fichiers Markdown (identité, contraintes) et invites d'entraînement contre les hallucinations.
 - **[Masterclass : Claude Code & Workflow](CLAUDE/cours-claude-code-workflow/index.html)** — Cours pédagogique complet (12 modules) sur l'écosystème Claude Code : CLAUDE.md et mémoire persistante, hiérarchie de contexte, Skills (guides auto-invoqués), Hooks de sécurité, permissions, architecture en 4 couches et workflow quotidien. Format HTML interactif avec table des matières active, exemples génériques et analogies métier. [Version Markdown](CLAUDE/cours-claude-code-workflow/cours_claude_code_workflow.md)
+- **[Cours IA pour l'Industrie](cours_IA_industrie.docx)** - Support de cours Word complet (DOCX) dédié aux usages de l'Intelligence Artificielle dans le contexte industriel. Destiné aux salariés et techniciens, ce document traite des applications concrètes de l'IA en maintenance, qualité, production et documentation technique.
 
 ### Comprendre les Fondamentaux de l'IA
 
@@ -163,4 +169,4 @@ Formation sur l'Intelligence Artificielle et ses applications
 
 ---
 
-*Dernière mise à jour : Décembre 2024*
+*Dernière mise à jour : Mai 2026*

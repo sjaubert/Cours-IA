@@ -404,10 +404,72 @@
         </ul>
 
         <div class="alert alert-warning">
-            <strong>⚠️ Attention : documents personnels</strong>
-            <p>Prévenez les participants que les documents chargés dans NBLM sont traités par Google.
-                S'ils travaillent avec des données sensibles/confidentielles, ils peuvent utiliser des documents
-                internes non critiques ou les documents de référence fournis.</p>
+            <strong>⚠️ Confidentialité & données — à traiter explicitement en M1</strong>
+            <p><strong>Ce point mérite 5 minutes de traitement explicite en début de Module 1</strong>, pas seulement une note dans votre guide. Dans un contexte industriel, les participants vont spontanément vouloir charger des documents sensibles (rapports qualité, procédures, audits, données clients). Voici ce qu'il faut dire clairement :</p>
+            <ul style="margin: 10px 0 0 20px; line-height: 2;">
+                <li><strong>Google traite les documents uploadés</strong> pour améliorer ses modèles (sauf paramètre désactivé dans les réglages du compte). Les données ne sont pas « anonymes ».</li>
+                <li><strong>Règle pratique pour la formation :</strong> utiliser uniquement des documents publics, des documents internes non confidentiels, ou les documents de référence fournis.</li>
+                <li><strong>En usage professionnel réel :</strong> vérifier avec la DSI et le service juridique si l'usage de NotebookLM est conforme à la politique de données de l'entreprise. Certaines entreprises ont des accords Google Workspace qui offrent des garanties supplémentaires.</li>
+                <li><strong>Catégories à ne jamais uploader :</strong> données personnelles (RGPD), secrets commerciaux, brevets en cours, données clients identifiables, documents sous clause de confidentialité.</li>
+            </ul>
+            <p style="margin-top: 10px;"><strong>Alternative si besoin :</strong> NotebookLM for Enterprise (Google Workspace) offre des garanties de confidentialité renforcées. À mentionner aux participants en contexte industriel.</p>
+        </div>
+
+        <!-- ═══ PLAN B TECHNIQUE ═══ -->
+        <h2>🔧 Plan B — Gestion des aléas techniques</h2>
+        <p style="margin-bottom: 20px; color: var(--text-muted);">Dans une salle de formation industrielle, les problèmes techniques sont quasi inévitables. Préparez ces scénarios à l'avance.</p>
+
+        <table class="timing-table">
+            <thead>
+                <tr>
+                    <th>Problème</th>
+                    <th>Cause probable</th>
+                    <th>Solution immédiate</th>
+                    <th>Plan B si persistant</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Wi-Fi saturé</strong> (lenteur générale)</td>
+                    <td>12+ participants uploadant simultanément</td>
+                    <td>Décaler les uploads : 3 groupes de 4, chacun à 2 min d'intervalle</td>
+                    <td>Pré-importer vous-même les documents sur 2-3 notebooks de démonstration partagés</td>
+                </tr>
+                <tr style="background: #F8FAFC;">
+                    <td><strong>Import PDF échoué</strong></td>
+                    <td>PDF protégé, trop lourd (&gt;200 Mo), scan non OCR</td>
+                    <td>Proposer l'URL du document si disponible en ligne. Ou convertir en Google Doc.</td>
+                    <td>Utiliser le document de référence commun fourni par le formateur</td>
+                </tr>
+                <tr>
+                    <td><strong>Compte Google inexistant</strong></td>
+                    <td>Participant sans compte personnel / compte bloqué entreprise</td>
+                    <td>Créer un compte Google gratuit en 2 min (prévoir la procédure imprimée)</td>
+                    <td>Binômer le participant avec quelqu'un qui a un compte fonctionnel</td>
+                </tr>
+                <tr style="background: #F8FAFC;">
+                    <td><strong>NBLM ne répond pas</strong></td>
+                    <td>Surcharge serveur Google (rare mais possible)</td>
+                    <td>Attendre 1-2 min. Recharger la page.</td>
+                    <td>Passer à l'activité suivante, revenir dessus après la pause</td>
+                </tr>
+                <tr>
+                    <td><strong>NotebookLM a changé d'interface</strong></td>
+                    <td>Mise à jour Google (fréquentes)</td>
+                    <td>Adapter les consignes à l'interface actuelle. L'outil change mais les concepts restent.</td>
+                    <td>Insister sur la logique (sources → questions → vérification) plutôt que sur les boutons exacts</td>
+                </tr>
+                <tr style="background: #F8FAFC;">
+                    <td><strong>Participant très en retard</strong> sur le groupe</td>
+                    <td>Rythme individuel variable</td>
+                    <td>Le binômer avec un participant rapide dès l'activité suivante</td>
+                    <td>Lui proposer les fiches activités à compléter en autonomie après la formation</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="tip" style="margin-top: 20px;">
+            <strong>💡 Préparation anti-panne (J-1) :</strong> Créez vous-même 2 notebooks pré-chargés avec le document de référence et sauvegardez les liens. En cas de panne Wi-Fi généralisée, vous pouvez faire une démonstration en mode projection pendant que les participants lisent les fiches activités.
         </div>
 
         <!-- ═══ TIMING ═══ -->
@@ -693,10 +755,95 @@
             </ul>
         </div>
 
-        <div style="text-align: center; margin: 40px 0;">
+        <!-- ═══ ÉVALUATION DES ACQUIS ═══ -->
+        <h2>📊 Évaluation des acquis</h2>
+        <p style="margin-bottom: 20px; color: var(--text-muted);">Deux temps d'évaluation pour encadrer la journée — test de positionnement en ouverture, évaluation finale en clôture.</p>
+
+        <div class="card" style="border-left: 4px solid #4F46E5;">
+            <h4>🔍 Test de positionnement — Début de journée (5 min)</h4>
+            <p style="margin-bottom: 12px;">À distribuer ou projeter avant l'ice-breaker. Objectif : calibrer votre animation en fonction du niveau réel du groupe.</p>
+            <p>4 questions rapides à réponse orale ou sur fiche :</p>
+            <ol style="margin: 10px 0 0 20px; line-height: 2.2;">
+                <li>Avez-vous déjà utilisé NotebookLM ? (Jamais / 1-2 fois / Régulièrement)</li>
+                <li>Quelle est selon vous la principale différence entre NotebookLM et ChatGPT ? (Réponse libre)</li>
+                <li>Dans votre travail, quel type de document vous fait perdre le plus de temps à chercher une information ?</li>
+                <li>Qu'espérez-vous savoir faire à la fin de cette journée ?</li>
+            </ol>
+            <p style="margin-top: 12px; color: var(--text-muted);"><em>→ Utilisez les réponses pour choisir les exemples les plus pertinents et adapter la profondeur des explications.</em></p>
+        </div>
+
+        <div class="card" style="border-left: 4px solid #10B981; margin-top: 20px;">
+            <h4>✅ Grille d'évaluation finale — Clôture (10 min)</h4>
+            <p style="margin-bottom: 12px;">À distribuer en fin de Module 5. Le participant s'auto-évalue sur les 5 shifts. Vous conservez une copie pour le suivi.</p>
+            <table style="width: 100%; border-collapse: collapse; font-size: 0.9em;">
+                <thead>
+                    <tr style="background: #1E293B; color: white;">
+                        <th style="padding: 10px; text-align: left;">Compétence acquise</th>
+                        <th style="padding: 10px; text-align: center;">Pas encore</th>
+                        <th style="padding: 10px; text-align: center;">En cours</th>
+                        <th style="padding: 10px; text-align: center;">Acquis</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="border-bottom: 1px solid #E2E8F0;">
+                        <td style="padding: 10px;">Je comprends que NBLM travaille uniquement avec mes sources</td>
+                        <td style="padding: 10px; text-align: center;">○</td>
+                        <td style="padding: 10px; text-align: center;">○</td>
+                        <td style="padding: 10px; text-align: center;">○</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #E2E8F0; background: #F8FAFC;">
+                        <td style="padding: 10px;">Je sais formuler une question contrainte qui cible une section précise</td>
+                        <td style="padding: 10px; text-align: center;">○</td>
+                        <td style="padding: 10px; text-align: center;">○</td>
+                        <td style="padding: 10px; text-align: center;">○</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #E2E8F0;">
+                        <td style="padding: 10px;">Je clique systématiquement sur les citations pour vérifier</td>
+                        <td style="padding: 10px; text-align: center;">○</td>
+                        <td style="padding: 10px; text-align: center;">○</td>
+                        <td style="padding: 10px; text-align: center;">○</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #E2E8F0; background: #F8FAFC;">
+                        <td style="padding: 10px;">J'ai produit un livrable professionnel utilisable dès lundi</td>
+                        <td style="padding: 10px; text-align: center;">○</td>
+                        <td style="padding: 10px; text-align: center;">○</td>
+                        <td style="padding: 10px; text-align: center;">○</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #E2E8F0;">
+                        <td style="padding: 10px;">J'ai rédigé mon protocole personnel de travail avec NBLM</td>
+                        <td style="padding: 10px; text-align: center;">○</td>
+                        <td style="padding: 10px; text-align: center;">○</td>
+                        <td style="padding: 10px; text-align: center;">○</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p style="margin-top: 14px;"><strong>Questions ouvertes :</strong></p>
+            <ul style="margin: 8px 0 0 20px; line-height: 2;">
+                <li>Quel module a été le plus difficile pour vous ? Pourquoi ?</li>
+                <li>Quelle est la première chose que vous ferez avec NotebookLM dès demain ?</li>
+                <li>Recommanderiez-vous cette formation à un collègue ? (Note /5 : ___)</li>
+            </ul>
+        </div>
+
+        <div class="card" style="border-left: 4px solid #F59E0B; margin-top: 20px;">
+            <h4>📋 Critères de réussite de la journée (pour le formateur)</h4>
+            <ul style="margin: 8px 0 0 20px; line-height: 2.2;">
+                <li>✅ 100% des participants ont un notebook fonctionnel avec au moins 1 source</li>
+                <li>✅ 100% ont cliqué sur au moins 3 citations (vérification systématique acquise)</li>
+                <li>✅ 80%+ ont produit un livrable concret dans le Module 4</li>
+                <li>✅ 80%+ ont rédigé leur plan d'action personnel</li>
+                <li>✅ Zéro participant n'a passé la journée en mode spectateur</li>
+            </ul>
+        </div>
+
+        <div style="text-align: center; margin: 40px 0; display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
             <a href="parcours_formation.html"
                 style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 30px; background: linear-gradient(135deg, #059669, #10B981); color: white; text-decoration: none; border-radius: 10px; font-weight: 600;">
                 ← Retour au parcours complet
+            </a>
+            <a href="evaluation_acquis.html"
+                style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 30px; background: linear-gradient(135deg, #4F46E5, #7C3AED); color: white; text-decoration: none; border-radius: 10px; font-weight: 600;">
+                📊 Fiche d'évaluation →
             </a>
         </div>
     </div>
