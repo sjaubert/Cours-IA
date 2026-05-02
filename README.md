@@ -82,6 +82,13 @@
 - **[Formation Maîtriser Claude pour les Salariés (4 Blocs) - Syllabus](CLAUDE/Formation_Maitriser_Claude/plan_de_formation.html)** - Plan d'ingénierie pédagogique restructuré pour les salariés (formateurs, administratifs, ingénieurs).
 - **[Livret Pratique - Maîtriser Claude (Exercices & Prompts)](CLAUDE/Formation_Maitriser_Claude/Livret_Pratique.html)** - Manuel de l'apprenant : contient pas-à-pas les exercices, fichiers Markdown (identité, contraintes) et invites d'entraînement contre les hallucinations.
 - **[Masterclass : Claude Code & Workflow](CLAUDE/cours-claude-code-workflow/index.html)** — Cours pédagogique complet (12 modules) sur l'écosystème Claude Code : CLAUDE.md et mémoire persistante, hiérarchie de contexte, Skills (guides auto-invoqués), Hooks de sécurité, permissions, architecture en 4 couches et workflow quotidien. Format HTML interactif avec table des matières active, exemples génériques et analogies métier. [Version Markdown](CLAUDE/cours-claude-code-workflow/cours_claude_code_workflow.md)
+- **[Formation IA Avancée — Maîtriser l'Écosystème Claude Code (2 jours)](cours-claude-code-ia/README.md)** — Formation complète de 14h (6 modules) basée sur l'analyse de 15 dépôts GitHub de référence. Public : salariés de l'industrie (tous profils). Couvre l'IA agentique, les concepts fondamentaux, les cas d'usage métier et les bonnes pratiques.
+  - [Module 1 — Introduction à l'IA Agentique](cours-claude-code-ia/01-introduction-ia-agentique.md) — *De l'assistant à l'agent : contexte, enjeux, paradigme (1h30)*
+  - [Module 2 — Concepts Fondamentaux](cours-claude-code-ia/02-concepts-fondamentaux.md) — *Glossaire illustré, architecture d'un agent (2h)*
+  - [Module 3 — Les 15 Ressources GitHub](cours-claude-code-ia/03-ressources-github.md) — *Analyse détaillée des dépôts de référence (3h)*
+  - [Module 4 — Cas d'Usage Métier](cours-claude-code-ia/04-cas-usage-metiers.md) — *Scénarios concrets par profil professionnel (3h)*
+  - [Module 5 — Méthodologies Pratiques](cours-claude-code-ia/05-methodologies-pratiques.md) — *Workflows, TDD agentique, bonnes pratiques (2h)*
+  - [Module 6 — Guide de Démarrage](cours-claude-code-ia/06-guide-demarrage.md) — *Feuille de route personnalisée, exercices (2h)*
 - **[Cours IA pour l'Industrie](cours_IA_industrie.docx)** - Support de cours Word complet (DOCX) dédié aux usages de l'Intelligence Artificielle dans le contexte industriel. Destiné aux salariés et techniciens, ce document traite des applications concrètes de l'IA en maintenance, qualité, production et documentation technique.
 
 ### Comprendre les Fondamentaux de l'IA
