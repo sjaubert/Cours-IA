@@ -1,0 +1,1428 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Créer des Skills pour Claude – Cours de formation</title>
+  <style>
+    :root {
+      --primary: #D97706;
+      --primary-light: #FEF3C7;
+      --accent: #1E40AF;
+      --accent-light: #EFF6FF;
+      --dark: #1F2937;
+      --gray: #6B7280;
+      --light: #F9FAFB;
+      --border: #E5E7EB;
+      --success: #065F46;
+      --success-bg: #ECFDF5;
+      --danger: #991B1B;
+      --danger-bg: #FEF2F2;
+      --code-bg: #1E293B;
+      --code-color: #E2E8F0;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #F3F4F6;
+      color: var(--dark);
+      line-height: 1.7;
+    }
+
+    /* Header */
+    header {
+      background: linear-gradient(135deg, #1F2937 0%, #374151 100%);
+      color: white;
+      padding: 48px 40px 36px;
+      position: relative;
+      overflow: hidden;
+    }
+    header::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 220px; height: 220px;
+      background: rgba(217,119,6,0.15);
+      border-radius: 50%;
+    }
+    header .badge {
+      display: inline-block;
+      background: var(--primary);
+      color: white;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 16px;
+    }
+    header h1 {
+      font-size: 2.4rem;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+    header h1 span { color: var(--primary); }
+    header p {
+      font-size: 1.05rem;
+      color: #D1D5DB;
+      max-width: 680px;
+      margin-bottom: 24px;
+    }
+    .header-meta {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      font-size: 0.88rem;
+      color: #9CA3AF;
+    }
+    .header-meta span { display: flex; align-items: center; gap: 6px; }
+
+    /* Layout */
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 32px 24px;
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+
+    /* Sidebar nav */
+    .sidebar {
+      position: sticky;
+      top: 24px;
+    }
+    .sidebar nav {
+      background: white;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      padding: 20px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+    .sidebar nav h3 {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 12px;
+    }
+    .sidebar nav a {
+      display: block;
+      padding: 7px 10px;
+      color: var(--dark);
+      text-decoration: none;
+      font-size: 0.88rem;
+      border-radius: 6px;
+      transition: background 0.15s;
+      border-left: 3px solid transparent;
+    }
+    .sidebar nav a:hover { background: var(--light); border-left-color: var(--primary); }
+    .sidebar nav a.chapter {
+      font-weight: 700;
+      margin-top: 10px;
+      color: var(--accent);
+    }
+    .sidebar nav a.sub { padding-left: 20px; color: var(--gray); font-size: 0.83rem; }
+
+    /* Main content */
+    main { min-width: 0; }
+
+    /* Sections */
+    .section {
+      background: white;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      padding: 36px 40px;
+      margin-bottom: 28px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    }
+
+    .chapter-label {
+      display: inline-block;
+      background: var(--primary);
+      color: white;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 20px;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      font-size: 1.65rem;
+      font-weight: 800;
+      color: var(--dark);
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+    h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--dark);
+      margin: 28px 0 10px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid var(--border);
+    }
+    h4 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin: 20px 0 8px;
+    }
+    .subtitle {
+      color: var(--gray);
+      font-size: 1rem;
+      margin-bottom: 24px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+    p { margin-bottom: 14px; }
+
+    ul, ol {
+      margin: 10px 0 16px 24px;
+    }
+    li { margin-bottom: 6px; }
+
+    /* Callout boxes */
+    .callout {
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin: 20px 0;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+    .callout-icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 2px; }
+    .callout-body { flex: 1; }
+    .callout-body strong { display: block; margin-bottom: 4px; font-size: 0.95rem; }
+    .callout-body p { margin: 0; font-size: 0.92rem; }
+
+    .callout.info { background: var(--accent-light); border-left: 4px solid var(--accent); }
+    .callout.tip { background: var(--primary-light); border-left: 4px solid var(--primary); }
+    .callout.success { background: var(--success-bg); border-left: 4px solid #10B981; }
+    .callout.warning { background: #FFFBEB; border-left: 4px solid #F59E0B; }
+    .callout.danger { background: var(--danger-bg); border-left: 4px solid #EF4444; }
+
+    /* Code blocks */
+    pre {
+      background: var(--code-bg);
+      color: var(--code-color);
+      border-radius: 8px;
+      padding: 20px 24px;
+      margin: 16px 0;
+      overflow-x: auto;
+      font-size: 0.85rem;
+      line-height: 1.6;
+    }
+    code {
+      font-family: 'Cascadia Code', 'Fira Code', 'Courier New', monospace;
+    }
+    p code, li code {
+      background: #F1F5F9;
+      color: #1E293B;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.88em;
+    }
+    .code-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #0F172A;
+      color: #94A3B8;
+      font-size: 0.75rem;
+      padding: 8px 16px;
+      border-radius: 8px 8px 0 0;
+      font-family: monospace;
+      margin-bottom: -8px;
+    }
+
+    /* Good/Bad comparison */
+    .compare {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 16px 0;
+    }
+    .compare-box {
+      border-radius: 8px;
+      padding: 16px;
+      border: 1px solid;
+    }
+    .compare-box.good { background: var(--success-bg); border-color: #10B981; }
+    .compare-box.bad { background: var(--danger-bg); border-color: #EF4444; }
+    .compare-box .label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .compare-box.good .label { color: var(--success); }
+    .compare-box.bad .label { color: var(--danger); }
+    .compare-box pre {
+      margin: 0;
+      font-size: 0.8rem;
+      background: rgba(0,0,0,0.06);
+      color: var(--dark);
+      padding: 12px;
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+      font-size: 0.92rem;
+    }
+    th {
+      background: var(--dark);
+      color: white;
+      text-align: left;
+      padding: 10px 14px;
+      font-weight: 600;
+      font-size: 0.85rem;
+    }
+    td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    tr:nth-child(even) td { background: var(--light); }
+    tr:last-child td { border-bottom: none; }
+
+    /* Cards */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin: 20px 0;
+    }
+    .card {
+      background: var(--light);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px;
+      text-align: center;
+    }
+    .card .icon { font-size: 2rem; margin-bottom: 8px; }
+    .card strong { display: block; font-size: 0.95rem; margin-bottom: 4px; }
+    .card p { font-size: 0.83rem; color: var(--gray); margin: 0; }
+
+    /* Category cards */
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin: 20px 0;
+    }
+    .category-card {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .category-card .cat-header {
+      padding: 14px 20px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .cat-1 .cat-header { background: #DBEAFE; color: #1E3A8A; }
+    .cat-2 .cat-header { background: #D1FAE5; color: #064E3B; }
+    .cat-3 .cat-header { background: #EDE9FE; color: #4C1D95; }
+    .category-card .cat-body { padding: 14px 20px; font-size: 0.88rem; }
+    .category-card .cat-body em { display: block; color: var(--gray); font-style: italic; margin-bottom: 8px; }
+    .category-card .cat-body ul { margin-left: 16px; }
+    .category-card .cat-body li { margin-bottom: 4px; }
+
+    /* Steps */
+    .steps {
+      counter-reset: step;
+      margin: 20px 0;
+    }
+    .step {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 20px;
+      align-items: flex-start;
+    }
+    .step-num {
+      width: 36px;
+      height: 36px;
+      background: var(--primary);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+    .step-content strong { display: block; margin-bottom: 4px; font-size: 0.95rem; }
+    .step-content p { margin: 0; font-size: 0.9rem; color: var(--gray); }
+
+    /* Checklist */
+    .checklist { list-style: none; margin: 10px 0; padding: 0; }
+    .checklist li {
+      padding: 6px 0;
+      padding-left: 28px;
+      position: relative;
+      font-size: 0.92rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .checklist li:last-child { border-bottom: none; }
+    .checklist li::before {
+      content: '☐';
+      position: absolute;
+      left: 0;
+      color: var(--primary);
+      font-size: 1rem;
+    }
+
+    /* Links */
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .link-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--accent-light);
+      border: 1px solid #BFDBFE;
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin: 8px 0;
+      text-decoration: none;
+      color: var(--dark);
+      transition: background 0.15s;
+    }
+    .link-card:hover { background: #DBEAFE; text-decoration: none; }
+    .link-card .link-icon { font-size: 1.2rem; }
+    .link-card .link-text { font-size: 0.9rem; }
+    .link-card .link-text strong { display: block; color: var(--accent); }
+    .link-card .link-text span { color: var(--gray); font-size: 0.82rem; }
+
+    /* Diagram */
+    .diagram {
+      background: var(--light);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 24px;
+      text-align: center;
+      margin: 20px 0;
+    }
+    .diagram .d-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin: 8px 0;
+      flex-wrap: wrap;
+    }
+    .d-box {
+      background: white;
+      border: 2px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 18px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      min-width: 120px;
+    }
+    .d-box.primary { border-color: var(--primary); background: var(--primary-light); }
+    .d-box.accent { border-color: var(--accent); background: var(--accent-light); }
+    .d-arrow { font-size: 1.5rem; color: var(--gray); }
+
+    /* Quiz */
+    .quiz {
+      background: var(--primary-light);
+      border-left: 4px solid var(--primary);
+      border-radius: 8px;
+      padding: 20px 24px;
+      margin: 24px 0;
+    }
+    .quiz h4 { color: var(--dark); margin-top: 0; border: none; padding: 0; }
+    .quiz ol { margin-left: 20px; }
+    .quiz li { margin-bottom: 8px; font-size: 0.92rem; }
+
+    /* Footer */
+    footer {
+      background: var(--dark);
+      color: #9CA3AF;
+      text-align: center;
+      padding: 28px;
+      font-size: 0.85rem;
+      margin-top: 20px;
+    }
+    footer strong { color: white; }
+
+    /* Progress bar */
+    .progress-bar {
+      background: var(--border);
+      border-radius: 20px;
+      height: 6px;
+      margin: 12px 0 24px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary), #F59E0B);
+      border-radius: 20px;
+    }
+
+    @media (max-width: 800px) {
+      .container { grid-template-columns: 1fr; }
+      .sidebar { position: static; }
+      .compare { grid-template-columns: 1fr; }
+      header h1 { font-size: 1.7rem; }
+      .section { padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════
+     HEADER
+═══════════════════════════════════════════════════════ -->
+<header>
+  <div class="badge">Formation IA – Module Skills</div>
+  <h1>Créer des <span>Skills</span> pour Claude</h1>
+  <p>Guide pratique complet pour apprendre à concevoir, tester et partager vos propres compétences personnalisées pour l'IA Claude — sans être développeur.</p>
+  <div class="header-meta">
+    <span>📚 6 chapitres</span>
+    <span>⏱ Durée estimée : 2h30</span>
+    <span>🎯 Niveau : Débutant</span>
+    <span>📄 Basé sur : <em>The Complete Guide to Building Skills</em> – Anthropic</span>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════════════════════
+     CONTAINER
+═══════════════════════════════════════════════════════ -->
+<div class="container">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <nav>
+      <h3>Sommaire</h3>
+      <a href="#intro">🎯 Introduction</a>
+      <a href="#chap1" class="chapter">Chap. 1 – Fondamentaux</a>
+      <a href="#definition" class="sub">Qu'est-ce qu'une skill ?</a>
+      <a href="#structure" class="sub">Structure d'une skill</a>
+      <a href="#principes" class="sub">Principes de conception</a>
+      <a href="#chap2" class="chapter">Chap. 2 – Planification</a>
+      <a href="#usecases" class="sub">Cas d'usage</a>
+      <a href="#categories" class="sub">3 catégories</a>
+      <a href="#criteres" class="sub">Critères de succès</a>
+      <a href="#chap3" class="chapter">Chap. 3 – Rédiger SKILL.md</a>
+      <a href="#yaml" class="sub">Le frontmatter YAML</a>
+      <a href="#instructions" class="sub">Les instructions</a>
+      <a href="#exemples-yaml" class="sub">Exemples complets</a>
+      <a href="#chap4" class="chapter">Chap. 4 – Tester</a>
+      <a href="#types-tests" class="sub">3 types de tests</a>
+      <a href="#iteration" class="sub">Itération</a>
+      <a href="#chap5" class="chapter">Chap. 5 – Distribuer</a>
+      <a href="#comment-partager" class="sub">Comment partager</a>
+      <a href="#patterns" class="sub">Patterns avancés</a>
+      <a href="#chap6" class="chapter">Chap. 6 – Résolution</a>
+      <a href="#troubleshooting" class="sub">Problèmes courants</a>
+      <a href="#ressources" class="sub">🔗 Ressources</a>
+    </nav>
+  </aside>
+
+  <!-- MAIN -->
+  <main>
+
+    <!-- ── INTRODUCTION ── -->
+    <section class="section" id="intro">
+      <span class="chapter-label">Introduction</span>
+      <h2>Bienvenue dans ce cours</h2>
+      <p class="subtitle">Ce que vous allez apprendre, pourquoi c'est utile, et comment aborder ce guide.</p>
+
+      <p>Imaginez que vous avez un assistant très capable, mais à qui vous devez <em>réexpliquer</em> vos préférences, vos méthodes de travail et votre vocabulaire métier à chaque nouvelle conversation. Frustrant, non ?</p>
+
+      <p><strong>Les Skills (compétences) pour Claude</strong> résolvent exactement ce problème. Ce sont des instructions packagées une seule fois, que Claude charge automatiquement quand le besoin se présente. Vous enseignez une fois, vous bénéficiez à chaque utilisation.</p>
+
+      <div class="cards">
+        <div class="card">
+          <div class="icon">🔁</div>
+          <strong>Workflows répétables</strong>
+          <p>Automatisez des processus en plusieurs étapes que vous faites régulièrement.</p>
+        </div>
+        <div class="card">
+          <div class="icon">🎯</div>
+          <strong>Cohérence garantie</strong>
+          <p>Mêmes méthodes, mêmes résultats, même style à chaque fois.</p>
+        </div>
+        <div class="card">
+          <div class="icon">🚀</div>
+          <strong>Gain de temps</strong>
+          <p>Fini le copier-coller de prompts. La skill s'active seule.</p>
+        </div>
+        <div class="card">
+          <div class="icon">🤝</div>
+          <strong>Partage en équipe</strong>
+          <p>Déployez vos skills pour toute votre organisation.</p>
+        </div>
+      </div>
+
+      <div class="callout tip">
+        <div class="callout-icon">⏱</div>
+        <div class="callout-body">
+          <strong>Objectif de ce cours</strong>
+          <p>À la fin de ce cours, vous serez capable de créer une skill fonctionnelle en une seule session de travail — comptez environ 15 à 30 minutes pour votre première skill.</p>
+        </div>
+      </div>
+
+      <h3>Deux chemins selon votre profil</h3>
+      <div class="compare">
+        <div class="compare-box good">
+          <div class="label">✅ Profil A – Skills standalone</div>
+          <pre>Vous voulez que Claude
+suive VOS workflows.
+→ Chapitres 1, 2, 3, 4</pre>
+        </div>
+        <div class="compare-box good" style="border-color:#8B5CF6; background:#F5F3FF;">
+          <div class="label" style="color:#5B21B6;">🔌 Profil B – Intégration MCP</div>
+          <pre>Vous avez un serveur MCP
+et voulez l'enrichir.
+→ Tous les chapitres</pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── CHAPITRE 1 ── -->
+    <section class="section" id="chap1">
+      <span class="chapter-label">Chapitre 1</span>
+      <h2>Les Fondamentaux</h2>
+      <p class="subtitle">Comprendre ce qu'est une skill, comment elle s'organise et les principes qui la rendent efficace.</p>
+
+      <h3 id="definition">Qu'est-ce qu'une skill ?</h3>
+      <p>Une skill est <strong>un dossier contenant des instructions en Markdown</strong> qui apprend à Claude comment gérer des tâches ou des workflows spécifiques. C'est tout. Pas de code complexe obligatoire, pas de serveur à déployer pour commencer.</p>
+
+      <div class="callout info">
+        <div class="callout-icon">💡</div>
+        <div class="callout-body">
+          <strong>Analogie culinaire</strong>
+          <p>Si Claude est un chef cuisinier professionnel avec tous les ustensiles (ses capacités natives), <em>une skill est une recette</em> : elle indique exactement quoi faire, dans quel ordre, avec quels ingrédients.</p>
+        </div>
+      </div>
+
+      <p><strong>Cas d'usage typiques :</strong></p>
+      <ul>
+        <li>Générer des designs frontend depuis des spécifications</li>
+        <li>Conduire des recherches avec une méthodologie constante</li>
+        <li>Créer des documents qui suivent le guide de style de votre équipe</li>
+        <li>Orchestrer des processus en plusieurs étapes</li>
+        <li>Planifier des sprints de projet</li>
+      </ul>
+
+      <h3 id="structure">Structure d'un dossier de skill</h3>
+
+      <div class="code-label"><span>📁 Structure de dossier</span><span>kebab-case obligatoire</span></div>
+      <pre><code>ma-skill-nom/
+├── SKILL.md          ← Obligatoire – fichier principal
+├── scripts/          ← Optionnel – code exécutable
+│   ├── traiter_data.py
+│   └── valider.sh
+├── references/       ← Optionnel – documentation complémentaire
+│   ├── guide-api.md
+│   └── exemples/
+└── assets/           ← Optionnel – modèles, polices, icônes
+    └── modele-rapport.md</code></pre>
+
+      <div class="callout warning">
+        <div class="callout-icon">⚠️</div>
+        <div class="callout-body">
+          <strong>Règles critiques sur les noms</strong>
+          <p>Le fichier principal doit s'appeler <strong>exactement</strong> <code>SKILL.md</code> (sensible à la casse). Le dossier doit utiliser le format <code>kebab-case</code> : <code>mon-projet-skill</code> et non <code>Mon Projet Skill</code> ni <code>mon_projet_skill</code>.</p>
+        </div>
+      </div>
+
+      <h3 id="principes">Principes de conception</h3>
+
+      <h4>1. Divulgation progressive (Progressive Disclosure)</h4>
+      <p>Les skills utilisent un système à 3 niveaux pour optimiser l'utilisation de la mémoire de Claude :</p>
+
+      <div class="diagram">
+        <div class="d-row">
+          <div class="d-box primary">Niveau 1 – Frontmatter YAML<br><small>Toujours chargé</small></div>
+          <div class="d-arrow">→</div>
+          <span style="font-size:0.82rem;color:var(--gray);">Claude sait <em>quand</em> activer la skill</span>
+        </div>
+        <div class="d-row">
+          <div class="d-box accent">Niveau 2 – Corps SKILL.md<br><small>Chargé si pertinent</small></div>
+          <div class="d-arrow">→</div>
+          <span style="font-size:0.82rem;color:var(--gray);">Instructions complètes et guidance</span>
+        </div>
+        <div class="d-row">
+          <div class="d-box">Niveau 3 – Fichiers liés<br><small>Chargés si nécessaire</small></div>
+          <div class="d-arrow">→</div>
+          <span style="font-size:0.82rem;color:var(--gray);">Documentation, exemples, références</span>
+        </div>
+      </div>
+
+      <h4>2. Composabilité</h4>
+      <p>Claude peut charger <strong>plusieurs skills simultanément</strong>. Votre skill doit fonctionner correctement aux côtés d'autres skills, sans supposer qu'elle est la seule disponible.</p>
+
+      <h4>3. Portabilité</h4>
+      <p>Les skills fonctionnent <strong>identiquement</strong> sur Claude.ai, Claude Code et via l'API. Créez-en une, utilisez-la partout.</p>
+    </section>
+
+    <!-- ── CHAPITRE 2 ── -->
+    <section class="section" id="chap2">
+      <span class="chapter-label">Chapitre 2</span>
+      <h2>Planification et Conception</h2>
+      <p class="subtitle">Avant d'écrire la moindre ligne, identifiez clairement vos besoins.</p>
+
+      <h3 id="usecases">Commencer par les cas d'usage</h3>
+      <p>Avant d'écrire quoi que ce soit, identifiez <strong>2 à 3 cas d'usage concrets</strong> que votre skill doit couvrir. Un bon cas d'usage répond à ces questions :</p>
+
+      <div class="callout info">
+        <div class="callout-icon">🤔</div>
+        <div class="callout-body">
+          <strong>Questions à se poser</strong>
+          <p>• Qu'est-ce que l'utilisateur veut accomplir ?<br>
+          • Quelles étapes multiples ce processus requiert-il ?<br>
+          • Quels outils sont nécessaires (natifs ou MCP) ?<br>
+          • Quel savoir-faire ou quelles bonnes pratiques faut-il intégrer ?</p>
+        </div>
+      </div>
+
+      <h4>Exemple bien défini : Planification de Sprint</h4>
+      <div class="code-label"><span>📋 Cas d'usage</span></div>
+      <pre><code>Cas d'usage : Planification de sprint projet
+Déclencheur : L'utilisateur dit "aide-moi à planifier ce sprint"
+              ou "crée les tâches du sprint"
+
+Étapes :
+  1. Récupérer l'état actuel du projet (via Linear/Jira)
+  2. Analyser la vélocité et la capacité de l'équipe
+  3. Suggérer une priorisation des tâches
+  4. Créer les tâches avec les bons labels et estimations
+
+Résultat attendu : Sprint entièrement planifié, tâches créées</code></pre>
+
+      <h3 id="categories">Les 3 catégories de skills</h3>
+      <div class="category-grid">
+        <div class="category-card cat-1">
+          <div class="cat-header">📄 Catégorie 1 – Création de documents</div>
+          <div class="cat-body">
+            <em>Créer des outputs cohérents et de haute qualité</em>
+            <strong>Exemples :</strong>
+            <ul>
+              <li>Skill <code>docx</code> pour des rapports Word</li>
+              <li>Skill <code>pptx</code> pour des présentations</li>
+              <li>Skill <code>frontend-design</code> pour des interfaces</li>
+            </ul>
+            <strong>Techniques clés :</strong>
+            <ul>
+              <li>Guides de style intégrés</li>
+              <li>Structures de modèles</li>
+              <li>Checklists de qualité</li>
+            </ul>
+          </div>
+        </div>
+        <div class="category-card cat-2">
+          <div class="cat-header">⚙️ Catégorie 2 – Automatisation de workflows</div>
+          <div class="cat-body">
+            <em>Processus en plusieurs étapes avec méthodologie constante</em>
+            <strong>Exemple réel :</strong> <code>skill-creator</code>
+            <p style="margin:8px 0;font-size:0.83rem;">"Guide interactif pour créer de nouvelles skills."</p>
+            <strong>Techniques clés :</strong>
+            <ul>
+              <li>Workflow avec portes de validation</li>
+              <li>Modèles pour structures communes</li>
+              <li>Boucles d'amélioration itérative</li>
+            </ul>
+          </div>
+        </div>
+        <div class="category-card cat-3">
+          <div class="cat-header">🔌 Catégorie 3 – Amélioration MCP</div>
+          <div class="cat-body">
+            <em>Guidance de workflow pour enrichir un serveur MCP</em>
+            <strong>Exemple réel :</strong> <code>sentry-code-review</code>
+            <p style="margin:8px 0;font-size:0.83rem;">"Analyse et corrige automatiquement les bugs dans les Pull Requests via Sentry MCP."</p>
+            <strong>Techniques clés :</strong>
+            <ul>
+              <li>Coordonne plusieurs appels MCP</li>
+              <li>Expertise métier intégrée</li>
+              <li>Gestion des erreurs MCP courantes</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <h3 id="criteres">Définir les critères de succès</h3>
+      <p>Comment saurez-vous que votre skill fonctionne ? Fixez des objectifs mesurables <em>avant</em> de commencer :</p>
+
+      <table>
+        <thead>
+          <tr><th>Métrique</th><th>Objectif cible</th><th>Comment mesurer</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Taux de déclenchement</td>
+            <td>≥ 90% des requêtes pertinentes</td>
+            <td>Tester 10–20 requêtes variées et compter les activations automatiques</td>
+          </tr>
+          <tr>
+            <td>Appels API échoués</td>
+            <td>0 échec par workflow</td>
+            <td>Surveiller les logs du serveur MCP pendant les tests</td>
+          </tr>
+          <tr>
+            <td>Autonomie de Claude</td>
+            <td>Pas de relance nécessaire</td>
+            <td>Tester si un nouvel utilisateur réussit du premier coup</td>
+          </tr>
+          <tr>
+            <td>Cohérence des résultats</td>
+            <td>Structure identique à chaque fois</td>
+            <td>Répéter la même requête 3–5 fois et comparer</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ── CHAPITRE 3 ── -->
+    <section class="section" id="chap3">
+      <span class="chapter-label">Chapitre 3</span>
+      <h2>Rédiger votre SKILL.md</h2>
+      <p class="subtitle">Le cœur de toute skill : apprendre à structurer le fichier que Claude va lire.</p>
+
+      <h3 id="yaml">Le frontmatter YAML</h3>
+      <p>Le frontmatter YAML est <strong>la partie la plus importante</strong> de votre skill. C'est lui qui permet à Claude de décider quand activer la skill, sans charger son contenu complet.</p>
+
+      <div class="code-label"><span>SKILL.md</span><span>Format minimum obligatoire</span></div>
+      <pre><code>---
+name: mon-skill-nom
+description: Ce que ça fait et quand l'utiliser. Inclure des phrases déclencheurs spécifiques.
+---
+
+# Le corps de la skill commence ici...</code></pre>
+
+      <h4>Champs du frontmatter</h4>
+      <table>
+        <thead>
+          <tr><th>Champ</th><th>Obligatoire ?</th><th>Règles</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>name</code></td>
+            <td>✅ Oui</td>
+            <td>Format kebab-case uniquement, pas de majuscules ni espaces. Doit correspondre au nom du dossier.</td>
+          </tr>
+          <tr>
+            <td><code>description</code></td>
+            <td>✅ Oui</td>
+            <td>Doit contenir QUOI (ce que ça fait) ET QUAND (phrases déclencheurs). Max 1024 caractères. Pas de balises XML.</td>
+          </tr>
+          <tr>
+            <td><code>license</code></td>
+            <td>❌ Non</td>
+            <td>Utile si open-source : MIT, Apache-2.0…</td>
+          </tr>
+          <tr>
+            <td><code>compatibility</code></td>
+            <td>❌ Non</td>
+            <td>Environnements requis, packages système, accès réseau. Max 500 caractères.</td>
+          </tr>
+          <tr>
+            <td><code>metadata</code></td>
+            <td>❌ Non</td>
+            <td>Paires clé-valeur libres : auteur, version, mcp-server…</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout danger">
+        <div class="callout-icon">🚫</div>
+        <div class="callout-body">
+          <strong>Interdit dans le frontmatter</strong>
+          <p>• Balises XML avec <code>&lt;</code> ou <code>&gt;</code> (risque de sécurité – injection de prompts)<br>
+          • Noms contenant "claude" ou "anthropic" (réservés par Anthropic)</p>
+        </div>
+      </div>
+
+      <h4>La description : c'est crucial !</h4>
+      <p>La description est lue <em>en permanence</em> dans le contexte système de Claude. C'est elle qui décide si votre skill sera activée. Rédigez-la avec soin :</p>
+
+      <div class="compare">
+        <div class="compare-box bad">
+          <div class="label">❌ Mauvais exemples</div>
+          <pre>description: Aide avec les projets.
+
+# Trop vague
+description: Crée des documents sophistiqués.
+
+# Pas de déclencheurs
+description: Implémente le modèle d'entité
+avec relations hiérarchiques.
+# Trop technique, aucun déclencheur utilisateur</pre>
+        </div>
+        <div class="compare-box good">
+          <div class="label">✅ Bons exemples</div>
+          <pre>description: Gère les workflows de projet
+Linear : planification de sprint, création
+de tâches, suivi de statut. Utiliser quand
+l'utilisateur mentionne "sprint", "tâches
+Linear", "planification projet" ou demande
+à "créer des tickets".
+
+description: Analyse les fichiers design
+Figma et génère la documentation pour les
+développeurs. Utiliser quand l'utilisateur
+uploade des fichiers .fig, demande des
+"specs design" ou un "handoff design-code".</pre>
+        </div>
+      </div>
+
+      <div class="callout tip">
+        <div class="callout-icon">🧪</div>
+        <div class="callout-body">
+          <strong>Astuce de diagnostic</strong>
+          <p>Demandez à Claude : <em>"Quand utiliseriez-vous la skill [nom] ?"</em> — Claude va citer votre description. Ajustez selon ce qui manque.</p>
+        </div>
+      </div>
+
+      <h3 id="instructions">Rédiger les instructions</h3>
+      <p>Après le frontmatter, rédigez les instructions en Markdown. Voici la structure recommandée :</p>
+
+      <div class="code-label"><span>SKILL.md</span><span>Structure recommandée</span></div>
+      <pre><code>---
+name: mon-workflow
+description: [...]
+---
+
+# Ma Skill
+
+## Instructions
+
+### Étape 1 : [Première étape]
+Explication claire de ce qui se passe.
+
+### Étape 2 : [Deuxième étape]
+Lancer `python scripts/valider.py --input {fichier}` pour vérifier.
+Si la validation échoue, problèmes courants :
+- Champs obligatoires manquants
+- Format de date incorrect (utiliser AAAA-MM-JJ)
+
+## Exemples
+
+### Exemple 1 : [Scénario courant]
+L'utilisateur dit : "Configurer un nouvel espace marketing"
+
+Actions :
+1. Récupérer les projets existants via MCP
+2. Créer un nouveau projet avec les paramètres fournis
+
+Résultat : Projet créé avec lien de confirmation
+
+## Résolution de problèmes
+
+### Erreur : [Message d'erreur courant]
+Cause : [Pourquoi ça arrive]
+Solution : [Comment corriger]</code></pre>
+
+      <h4>Bonnes pratiques pour les instructions</h4>
+
+      <div class="compare">
+        <div class="compare-box bad">
+          <div class="label">❌ Trop vague</div>
+          <pre>Validez les données avant
+de continuer.</pre>
+        </div>
+        <div class="compare-box good">
+          <div class="label">✅ Précis et actionnable</div>
+          <pre>Lancer `python scripts/validate.py
+--input {filename}` pour vérifier.
+Si échec, problèmes courants :
+- Champs manquants (à ajouter dans le CSV)
+- Formats de date invalides (AAAA-MM-JJ)</pre>
+        </div>
+      </div>
+
+      <h3 id="exemples-yaml">Exemples complets de frontmatter</h3>
+
+      <div class="code-label"><span>Exemple 1 – Skill minimaliste</span></div>
+      <pre><code>---
+name: redaction-compte-rendu
+description: Rédige un compte-rendu de réunion structuré.
+  Utiliser quand l'utilisateur dit "rédige le compte-rendu",
+  "génère le CR de la réunion" ou "résume les points de la réunion".
+---</code></pre>
+
+      <div class="code-label"><span>Exemple 2 – Skill complète avec métadonnées</span></div>
+      <pre><code>---
+name: onboarding-client-payflow
+description: Workflow complet d'onboarding client pour PayFlow.
+  Gère la création de compte, la configuration du paiement et la
+  gestion des abonnements. Utiliser quand l'utilisateur dit
+  "nouveau client", "configurer abonnement" ou "créer compte PayFlow".
+license: MIT
+compatibility: Nécessite le serveur MCP PayFlow connecté.
+  Testé sur Claude.ai et Claude Code.
+metadata:
+  author: Équipe PayFlow
+  version: 1.2.0
+  mcp-server: payflow
+  category: onboarding
+  support: support@payflow.com
+---</code></pre>
+    </section>
+
+    <!-- ── CHAPITRE 4 ── -->
+    <section class="section" id="chap4">
+      <span class="chapter-label">Chapitre 4</span>
+      <h2>Tester et Itérer</h2>
+      <p class="subtitle">Une skill non testée est une skill qui échouera au mauvais moment. Voici comment valider.</p>
+
+      <h3 id="types-tests">Les 3 types de tests essentiels</h3>
+
+      <h4>1. Tests de déclenchement</h4>
+      <p><strong>Objectif :</strong> S'assurer que la skill se charge au bon moment (ni trop souvent, ni pas assez).</p>
+      <div class="code-label"><span>Exemple de suite de tests de déclenchement</span></div>
+      <pre><code># ✅ Doit déclencher la skill :
+- "Aide-moi à configurer un nouvel espace ProjectHub"
+- "Je dois créer un projet dans ProjectHub"
+- "Initialiser un projet ProjectHub pour le Q4"
+
+# ❌ Ne doit PAS déclencher la skill :
+- "Quelle est la météo à Paris ?"
+- "Aide-moi à écrire du code Python"
+- "Crée un tableur" (sauf si la skill gère les tableurs)</code></pre>
+
+      <h4>2. Tests fonctionnels</h4>
+      <p><strong>Objectif :</strong> Vérifier que la skill produit les bons outputs.</p>
+      <div class="code-label"><span>Structure d'un test fonctionnel</span></div>
+      <pre><code>Test : Créer un projet avec 5 tâches
+Données : Nom "Planning Q4", 5 descriptions de tâches
+
+Quand : La skill exécute le workflow
+Alors :
+  - Projet créé dans ProjectHub
+  - 5 tâches créées avec les bonnes propriétés
+  - Toutes les tâches liées au projet
+  - Aucune erreur API</code></pre>
+
+      <h4>3. Comparaison de performance</h4>
+      <p><strong>Objectif :</strong> Prouver que la skill améliore les résultats.</p>
+
+      <table>
+        <thead>
+          <tr><th>Mesure</th><th>Sans skill</th><th>Avec skill</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Instructions par session</td>
+            <td>Répétées à chaque fois</td>
+            <td>0 (automatique)</td>
+          </tr>
+          <tr>
+            <td>Messages aller-retour</td>
+            <td>15 échanges</td>
+            <td>2 questions de clarification</td>
+          </tr>
+          <tr>
+            <td>Appels API échoués</td>
+            <td>3 échecs avec retry</td>
+            <td>0 échec</td>
+          </tr>
+          <tr>
+            <td>Tokens consommés</td>
+            <td>~12 000</td>
+            <td>~6 000</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 id="iteration">Stratégie d'itération</h3>
+
+      <div class="callout tip">
+        <div class="callout-icon">🎯</div>
+        <div class="callout-body">
+          <strong>Pro tip : Itérez sur une tâche à la fois</strong>
+          <p>Les meilleurs créateurs de skills itèrent sur <em>une seule tâche difficile</em> jusqu'à ce que Claude réussisse, puis extraient cette approche dans une skill. C'est beaucoup plus rapide que de tester un large éventail de cas dès le départ.</p>
+        </div>
+      </div>
+
+      <h4>Signaux d'alerte à surveiller</h4>
+      <div class="compare">
+        <div class="compare-box bad">
+          <div class="label">⬇️ Sous-déclenchement</div>
+          <pre>Symptômes :
+- La skill ne se charge pas
+- Les utilisateurs l'activent manuellement
+- Questions support "quand utiliser X ?"
+
+Solution : Ajoutez plus de phrases
+déclencheurs, surtout les termes
+techniques et les synonymes.</pre>
+        </div>
+        <div class="compare-box" style="background:#FFFBEB; border-color:#F59E0B;">
+          <div class="label" style="color:#92400E;">⬆️ Sur-déclenchement</div>
+          <pre>Symptômes :
+- Skill chargée pour des sujets non liés
+- Les utilisateurs la désactivent
+- Confusion sur son périmètre
+
+Solution : Ajoutez des déclencheurs
+négatifs, précisez le périmètre dans
+la description.</pre>
+        </div>
+      </div>
+
+      <div class="code-label"><span>Exemple de déclencheur négatif</span></div>
+      <pre><code>description: Analyse statistique avancée de fichiers CSV.
+  Utiliser pour la modélisation statistique, la régression, le clustering.
+  NE PAS utiliser pour l'exploration de données simple (utiliser la skill
+  data-viz à la place).</code></pre>
+    </section>
+
+    <!-- ── CHAPITRE 5 ── -->
+    <section class="section" id="chap5">
+      <span class="chapter-label">Chapitre 5</span>
+      <h2>Distribuer et Partager</h2>
+      <p class="subtitle">Comment rendre votre skill accessible à d'autres utilisateurs et équipes.</p>
+
+      <h3 id="comment-partager">Comment distribuer une skill</h3>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <strong>Télécharger le dossier de skill</strong>
+            <p>Cloner le repo GitHub ou télécharger le ZIP de la skill.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <strong>Installer dans Claude</strong>
+            <p>Ouvrir Claude.ai → Paramètres → Capacités → Skills → Uploader la skill (dossier zippé).</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <strong>Activer la skill</strong>
+            <p>Basculer l'interrupteur de la skill et vérifier que le serveur MCP est bien connecté si nécessaire.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <strong>Tester</strong>
+            <p>Demander à Claude : "Configure un nouveau projet dans [Votre Service]" et vérifier que la skill s'active.</p>
+          </div>
+        </div>
+      </div>
+
+      <h4>Déploiement au niveau organisation</h4>
+      <div class="callout success">
+        <div class="callout-icon">🏢</div>
+        <div class="callout-body">
+          <strong>Déploiement entreprise (disponible depuis décembre 2025)</strong>
+          <p>Les administrateurs peuvent déployer des skills pour tous les collaborateurs de l'organisation depuis les paramètres d'administration. Les mises à jour sont automatiques et la gestion est centralisée.</p>
+        </div>
+      </div>
+
+      <h4>Utilisation via l'API</h4>
+      <table>
+        <thead>
+          <tr><th>Cas d'usage</th><th>Meilleure surface</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Utilisateurs finaux interagissant avec les skills</td><td>Claude.ai / Claude Code</td></tr>
+          <tr><td>Tests manuels pendant le développement</td><td>Claude.ai / Claude Code</td></tr>
+          <tr><td>Applications utilisant les skills par programmation</td><td>API</td></tr>
+          <tr><td>Déploiements en production à grande échelle</td><td>API</td></tr>
+          <tr><td>Pipelines automatisés et systèmes d'agents</td><td>API</td></tr>
+        </tbody>
+      </table>
+
+      <h3 id="patterns">Patterns avancés</h3>
+
+      <h4>Pattern 1 – Orchestration séquentielle</h4>
+      <p>Idéal quand vos utilisateurs ont besoin de processus en plusieurs étapes dans un ordre précis.</p>
+      <div class="code-label"><span>Exemple : Onboarding client</span></div>
+      <pre><code>## Workflow : Onboarder un Nouveau Client
+
+### Étape 1 : Créer le compte
+Appel MCP : `create_customer`
+Paramètres : nom, email, entreprise
+
+### Étape 2 : Configurer le paiement
+Appel MCP : `setup_payment_method`
+Attendre : vérification du moyen de paiement
+
+### Étape 3 : Créer l'abonnement
+Appel MCP : `create_subscription`
+Paramètres : plan_id, customer_id (de l'Étape 1)
+
+### Étape 4 : Envoyer l'email de bienvenue
+Appel MCP : `send_email`
+Modèle : welcome_email_template</code></pre>
+
+      <h4>Pattern 2 – Coordination Multi-MCP</h4>
+      <p>Pour les workflows qui couvrent plusieurs services différents.</p>
+      <div class="code-label"><span>Exemple : Handoff Design → Développement</span></div>
+      <pre><code>### Phase 1 : Export Design (Figma MCP)
+1. Exporter les assets design depuis Figma
+2. Générer les spécifications design
+
+### Phase 2 : Stockage (Drive MCP)
+1. Créer le dossier projet dans Drive
+2. Uploader tous les assets
+
+### Phase 3 : Création de tâches (Linear MCP)
+1. Créer les tâches de développement
+2. Attacher les liens d'assets aux tâches
+
+### Phase 4 : Notification (Slack MCP)
+1. Poster le résumé dans #engineering</code></pre>
+
+      <h4>Pattern 3 – Intelligence Métier Spécialisée</h4>
+      <p>Quand votre skill apporte de l'expertise au-delà du simple accès aux outils.</p>
+      <div class="code-label"><span>Exemple : Conformité paiements</span></div>
+      <pre><code>## Traitement de Paiement avec Conformité
+
+### Avant le Traitement (Vérification Conformité)
+1. Récupérer les détails de la transaction via MCP
+2. Appliquer les règles de conformité :
+   - Vérifier les listes de sanctions
+   - Vérifier les autorisations de juridiction
+   - Évaluer le niveau de risque
+3. Documenter la décision de conformité
+
+### Traitement
+SI conformité validée :
+  - Appeler l'outil de traitement MCP
+  - Appliquer les vérifications anti-fraude appropriées
+SINON :
+  - Signaler pour révision manuelle
+  - Créer un dossier de conformité</code></pre>
+    </section>
+
+    <!-- ── CHAPITRE 6 ── -->
+    <section class="section" id="chap6">
+      <span class="chapter-label">Chapitre 6</span>
+      <h2>Résolution de Problèmes</h2>
+      <p class="subtitle">Les erreurs courantes et comment les corriger rapidement.</p>
+
+      <h3 id="troubleshooting">Problèmes courants</h3>
+
+      <h4>🔴 La skill ne s'uploade pas</h4>
+      <div class="callout danger">
+        <div class="callout-icon">❗</div>
+        <div class="callout-body">
+          <strong>Erreur : "Could not find SKILL.md in uploaded folder"</strong>
+          <p><strong>Cause :</strong> Le fichier ne s'appelle pas exactement SKILL.md.<br>
+          <strong>Solution :</strong> Renommer en SKILL.md (sensible à la casse). Vérifier avec <code>ls -la</code> que le fichier est bien nommé.</p>
+        </div>
+      </div>
+
+      <div class="callout danger">
+        <div class="callout-icon">❗</div>
+        <div class="callout-body">
+          <strong>Erreur : "Invalid frontmatter" ou "Invalid skill name"</strong>
+          <p><strong>Causes fréquentes :</strong></p>
+          <div class="compare" style="margin-top:10px;">
+            <div class="compare-box bad">
+              <div class="label">❌ Mauvais</div>
+              <pre>name: My Cool Skill
+# espaces et majuscules
+
+description: "Fait des choses
+# guillemet non fermé
+
+name: my-skill
+description: Fait des choses
+# délimiteurs --- manquants</pre>
+            </div>
+            <div class="compare-box good">
+              <div class="label">✅ Correct</div>
+              <pre>---
+name: my-cool-skill
+description: Fait des choses.
+  Utiliser quand...
+---</pre>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h4>🟡 La skill ne se déclenche pas</h4>
+      <div class="callout warning">
+        <div class="callout-icon">⚠️</div>
+        <div class="callout-body">
+          <strong>Symptôme : La skill ne se charge jamais automatiquement</strong>
+          <p><strong>Solutions :</strong><br>
+          • La description est-elle trop générique ? ("Aide avec les projets" ne fonctionnera pas)<br>
+          • Inclut-elle des phrases déclencheurs que les utilisateurs prononceraient vraiment ?<br>
+          • Mentionne-t-elle les types de fichiers si pertinent ?<br><br>
+          <strong>Diagnostic rapide :</strong> Demandez à Claude "Quand utiliseriez-vous la skill [nom] ?" — il va citer votre description et vous indiquer ce qui manque.</p>
+        </div>
+      </div>
+
+      <h4>🟠 Les instructions ne sont pas suivies</h4>
+      <div class="callout warning">
+        <div class="callout-icon">⚠️</div>
+        <div class="callout-body">
+          <strong>Symptôme : Claude charge la skill mais ne suit pas les instructions</strong>
+          <p><strong>Causes courantes :</strong></p>
+          <ul>
+            <li><strong>Instructions trop longues</strong> → Raccourcissez, utilisez des listes et des numéros. Déplacez les détails dans <code>references/</code>.</li>
+            <li><strong>Instructions enfouies</strong> → Mettez les points critiques en haut. Utilisez <code>## IMPORTANT</code> ou <code>## CRITIQUE</code>.</li>
+            <li><strong>Langage ambigu</strong> → Remplacez "valider correctement" par "CRITIQUE : avant d'appeler create_project, vérifier que le nom n'est pas vide et qu'au moins un membre est assigné."</li>
+            <li><strong>"Paresse" du modèle</strong> → Ajoutez : "Prenez le temps de faire cela minutieusement. La qualité prime sur la vitesse."</li>
+          </ul>
+        </div>
+      </div>
+
+      <h4>🔵 Problèmes de connexion MCP</h4>
+      <div class="callout info">
+        <div class="callout-icon">🔌</div>
+        <div class="callout-body">
+          <strong>Symptôme : La skill se charge mais les appels MCP échouent</strong>
+          <p><strong>Checklist :</strong><br>
+          1. Vérifier que le serveur MCP est connecté : Paramètres → Extensions → [Votre Service] (doit afficher "Connecté")<br>
+          2. Vérifier l'authentification : clés API valides, permissions correctes, tokens OAuth rafraîchis<br>
+          3. Tester le MCP indépendamment : "Utilise le MCP [Service] pour récupérer mes projets" (sans la skill)<br>
+          4. Vérifier les noms d'outils (sensibles à la casse) dans la documentation de votre serveur MCP</p>
+        </div>
+      </div>
+
+      <h3 id="ressources">📚 Ressources et Liens</h3>
+      <p>Pour aller plus loin, voici les ressources officielles d'Anthropic :</p>
+
+      <a class="link-card" href="https://docs.claude.com/en/docs/claude-code/skills-overview" target="_blank">
+        <span class="link-icon">📖</span>
+        <span class="link-text">
+          <strong>Documentation officielle des Skills</strong>
+          <span>docs.claude.com — Guide complet en anglais</span>
+        </span>
+      </a>
+      <a class="link-card" href="https://docs.claude.com/en/docs/agents-and-tools/skills-quickstart" target="_blank">
+        <span class="link-icon">🚀</span>
+        <span class="link-text">
+          <strong>Skills API Quickstart</strong>
+          <span>Démarrer rapidement avec l'API Skills</span>
+        </span>
+      </a>
+      <a class="link-card" href="https://github.com/anthropics/skills" target="_blank">
+        <span class="link-icon">💻</span>
+        <span class="link-text">
+          <strong>Dépôt GitHub anthropics/skills</strong>
+          <span>Skills créées par Anthropic, librement modifiables</span>
+        </span>
+      </a>
+      <a class="link-card" href="https://www.anthropic.com/engineering/equipping-agents-for-the-real-world" target="_blank">
+        <span class="link-icon">🔬</span>
+        <span class="link-text">
+          <strong>Blog Engineering : Equipping Agents for the Real World</strong>
+          <span>Article technique sur la conception des skills</span>
+        </span>
+      </a>
+      <a class="link-card" href="https://discord.gg/claude-developers" target="_blank">
+        <span class="link-icon">💬</span>
+        <span class="link-text">
+          <strong>Communauté Claude Developers Discord</strong>
+          <span>Poser vos questions techniques, obtenir de l'aide</span>
+        </span>
+      </a>
+      <a class="link-card" href="https://github.com/anthropics/skills/issues" target="_blank">
+        <span class="link-icon">🐛</span>
+        <span class="link-text">
+          <strong>Signaler un bug : GitHub Issues</strong>
+          <span>anthropics/skills — Inclure : nom skill, message d'erreur, étapes de reproduction</span>
+        </span>
+      </a>
+    </section>
+
+    <!-- ── CHECKLIST FINALE ── -->
+    <section class="section">
+      <span class="chapter-label">Référence rapide</span>
+      <h2>✅ Checklist Avant Publication</h2>
+      <p class="subtitle">Utilisez cette liste pour valider votre skill avant de la partager.</p>
+
+      <h3>Avant de commencer</h3>
+      <ul class="checklist">
+        <li>2–3 cas d'usage concrets identifiés</li>
+        <li>Outils nécessaires listés (natifs ou MCP)</li>
+        <li>Ce guide et les skills d'exemple relus</li>
+        <li>Structure du dossier planifiée</li>
+      </ul>
+
+      <h3>Pendant le développement</h3>
+      <ul class="checklist">
+        <li>Dossier nommé en kebab-case</li>
+        <li>Fichier SKILL.md existe (orthographe exacte)</li>
+        <li>Frontmatter YAML avec délimiteurs <code>---</code></li>
+        <li>Champ <code>name</code> : kebab-case, pas d'espaces ni de majuscules</li>
+        <li>Description inclut QUOI et QUAND (avec phrases déclencheurs)</li>
+        <li>Pas de balises XML (<code>&lt;</code> <code>&gt;</code>) dans le frontmatter</li>
+        <li>Instructions claires et actionnables</li>
+        <li>Gestion des erreurs incluse</li>
+        <li>Exemples fournis</li>
+        <li>Références aux fichiers liés clairement indiquées</li>
+      </ul>
+
+      <h3>Avant l'upload</h3>
+      <ul class="checklist">
+        <li>Tests de déclenchement réussis sur requêtes évidentes</li>
+        <li>Tests sur requêtes paraphrasées</li>
+        <li>Vérification que la skill ne se déclenche pas sur des sujets non liés</li>
+        <li>Tests fonctionnels réussis</li>
+        <li>Intégration d'outils vérifiée (si applicable)</li>
+        <li>Dossier compressé en .zip</li>
+      </ul>
+
+      <h3>Après l'upload</h3>
+      <ul class="checklist">
+        <li>Tester dans de vraies conversations</li>
+        <li>Surveiller le sous/sur-déclenchement</li>
+        <li>Collecter les retours utilisateurs</li>
+        <li>Itérer sur la description et les instructions</li>
+        <li>Mettre à jour la version dans les métadonnées</li>
+      </ul>
+
+      <div class="quiz">
+        <h4>🧠 Quiz de révision</h4>
+        <p>Testez votre compréhension du cours :</p>
+        <ol>
+          <li>Quel fichier est absolument obligatoire dans tout dossier de skill ?</li>
+          <li>Que doit contenir la description pour que Claude sache quand activer la skill ?</li>
+          <li>Pourquoi ne faut-il pas utiliser de balises XML dans le frontmatter ?</li>
+          <li>Quelle est la différence entre les 3 catégories de skills ?</li>
+          <li>Comment diagnostiquer rapidement si le déclenchement fonctionne correctement ?</li>
+        </ol>
+        <p style="margin-top:12px;font-size:0.85rem;color:var(--gray);">
+          <em>Réponses : (1) SKILL.md — (2) QUOI + QUAND avec phrases déclencheurs — (3) Risque d'injection de prompts — (4) Création de docs / Automatisation workflows / Amélioration MCP — (5) Demander à Claude "Quand utiliseriez-vous la skill X ?"</em>
+        </p>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>Cours <strong>"Créer des Skills pour Claude"</strong> — Formation IA Agentique</p>
+  <p style="margin-top:6px;">Basé sur <em>The Complete Guide to Building Skills</em> · Anthropic · 2025</p>
+  <p style="margin-top:6px;">Auteur : S. JAUBERT · Pôle Formation UIMM-CVDL</p>
+</footer>
+
+</body>
+</html>
