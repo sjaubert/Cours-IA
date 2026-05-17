@@ -137,7 +137,6 @@ run_status.txt
 # LOURDS / DOCUMENTS POUR OPTIMISATION SYNC (Ajouté)
 # ----------------------------------------------------------------
 *.pdf
-*.docx
 *.pptx
 *.xlsx
 *.odt
