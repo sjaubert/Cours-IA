@@ -123,7 +123,13 @@ Activités autonomes (approche par cas) :
 
 - [Syllabus — Maîtriser Claude (4 blocs)](CLAUDE/Formation_Maitriser_Claude/plan_de_formation.html) — **Pratique** | HTML | Plan d'ingénierie pédagogique restructuré pour salariés : formateurs, administratifs, ingénieurs <sub>*(avr. 2026)*</sub>
 - [Livret Pratique — Maîtriser Claude](CLAUDE/Formation_Maitriser_Claude/Livret_Pratique.html) — **Pratique** | HTML | Manuel apprenant : exercices pas à pas, fichiers Markdown (identité, contraintes), prompts contre les hallucinations <sub>*(avr. 2026)*</sub>
-- [Construire un agent IA avec Claude — Plan de formation](CLAUDE/plan_formation_agent_claude.html) — **Avancé** | HTML | Parcours 6 semaines en 4 étapes progressives : agent mono-outil, tests mesurables, multi-outils + mémoire, affinage et mise en production — cas d'usage RH, administratif, comptabilité <sub>*(mai 2026)*</sub>
+- [Construire un agent IA avec Claude — Plan de formation](CLAUDE/formation-agent-ia/plan_formation_agent_claude.html) — **Avancé** | HTML | Parcours 6 semaines en 4 étapes progressives : agent mono-outil, tests mesurables, multi-outils + mémoire, affinage et mise en production — cas d'usage RH, administratif, comptabilité <sub>*(mai 2026)*</sub>
+  - [Semaine 1 — Découvrir les agents IA avec Claude.ai](CLAUDE/formation-agent-ia/semaine1.html) — Guide formateur + fiche apprenant + activités · Niveau A · 2h30
+  - [Semaine 2 — Premier agent HTML avec recherche web](CLAUDE/formation-agent-ia/semaine2.html) — Clé API, prompt système, web_search · Niveau B · 2h30
+  - [Semaine 3 — Mesurer et améliorer la qualité](CLAUDE/formation-agent-ia/semaine3.html) — Grille 5 critères, scénarios de test, OODA · 2×1h
+  - [Semaine 4 — Connecter Drive et Agenda via MCP](CLAUDE/formation-agent-ia/semaine4.html) — MCP Google, workflows multi-outils · 1h30
+  - [Semaine 5 — Gmail, mémoire et workflows automatisés](CLAUDE/formation-agent-ia/semaine5.html) — MCP Gmail, mémoire conversationnelle · 1h30
+  - [Semaine 6 — Évaluation finale et mise en production](CLAUDE/formation-agent-ia/semaine6.html) — Bilan scores, catalogue erreurs, checklist production · 2×1h
 
 ### Claude Code — Architecture et écosystème
 

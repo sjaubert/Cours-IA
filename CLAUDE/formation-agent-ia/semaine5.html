@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Semaine 5 — Gmail, mémoire conversationnelle et workflows automatisés</title>
+  <style>
+    :root {
+      --bleu:   #1a3a5c;
+      --bleu2:  #2563a8;
+      --vert:   #16a34a;
+      --orange: #d97706;
+      --rouge:  #dc2626;
+      --violet: #7c3aed;
+      --gris:   #f1f5f9;
+      --gris2:  #e2e8f0;
+      --texte:  #1e293b;
+      --clair:  #ffffff;
+      --ombre:  rgba(0,0,0,0.08);
+      --teal:   #0d9488;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f4f8; color: var(--texte); line-height: 1.65; font-size: 15px; }
+
+    .nav-bar { background: var(--bleu); padding: 0.7rem 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
+    .nav-bar a { color: rgba(255,255,255,0.85); text-decoration: none; font-size: 13px; padding: 4px 12px; border: 1px solid rgba(255,255,255,0.25); border-radius: 20px; }
+    .nav-bar a:hover { background: rgba(255,255,255,0.15); color: white; }
+    .nav-bar .nav-plan { font-weight: 700; border-color: rgba(255,255,255,0.5); }
+
+    header { background: linear-gradient(135deg, var(--teal) 0%, #0f766e 100%); color: white; padding: 2.2rem 2rem 1.8rem; text-align: center; }
+    .header-badge { display: inline-block; background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.35); border-radius: 20px; padding: 3px 14px; font-size: 12px; letter-spacing: .05em; text-transform: uppercase; margin-bottom: 0.8rem; }
+    header h1 { font-size: 1.8rem; font-weight: 700; margin-bottom: 0.3rem; }
+    header p.sous-titre { font-size: 1rem; opacity: 0.88; margin-bottom: 1rem; }
+    .header-meta { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; font-size: 13px; opacity: 0.82; }
+    .header-meta span { display: flex; align-items: center; gap: 5px; }
+
+    .container { max-width: 960px; margin: 0 auto; padding: 2rem 1.5rem; }
+    .section-titre { font-size: 1.2rem; font-weight: 700; color: var(--bleu); padding-bottom: 0.5rem; border-bottom: 2px solid var(--gris2); margin-bottom: 1.2rem; margin-top: 2rem; display: flex; align-items: center; gap: 10px; }
+
+    details.guide { background: white; border-radius: 10px; box-shadow: 0 2px 8px var(--ombre); margin-bottom: 1.5rem; overflow: hidden; }
+    details.guide summary { padding: 1rem 1.4rem; cursor: pointer; display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1rem; color: var(--bleu); background: #f0fdfa; border-left: 5px solid var(--teal); list-style: none; user-select: none; }
+    details.guide summary::-webkit-details-marker { display: none; }
+    details.guide summary::after { content: " ▼"; font-size: 11px; margin-left: auto; color: var(--teal); }
+    details.guide[open] summary::after { content: " ▲"; }
+    details.guide .guide-body { padding: 1.4rem; }
+
+    .timing-list { list-style: none; padding: 0; }
+    .timing-list li { display: flex; gap: 1rem; padding: 0.7rem 0; border-bottom: 1px solid var(--gris2); align-items: flex-start; }
+    .timing-list li:last-child { border-bottom: none; }
+    .timing-tag { background: var(--teal); color: white; border-radius: 12px; padding: 2px 10px; font-size: 12px; font-weight: 600; white-space: nowrap; flex-shrink: 0; margin-top: 2px; }
+    .timing-desc { font-size: 14px; }
+    .timing-desc strong { display: block; margin-bottom: 2px; }
+
+    .conseil { background: #f0fdfa; border-left: 4px solid var(--teal); border-radius: 6px; padding: 0.8rem 1rem; font-size: 14px; margin: 0.8rem 0; }
+    .conseil strong { color: #0f766e; display: block; margin-bottom: 3px; }
+    .alerte { background: #fef2f2; border-left: 4px solid var(--rouge); border-radius: 6px; padding: 0.8rem 1rem; font-size: 14px; margin: 0.8rem 0; }
+    .alerte strong { color: #991b1b; display: block; margin-bottom: 3px; }
+    .info { background: #eff6ff; border-left: 4px solid var(--bleu2); border-radius: 6px; padding: 0.8rem 1rem; font-size: 14px; margin: 0.8rem 0; }
+    .info strong { color: var(--bleu2); display: block; margin-bottom: 3px; }
+
+    .fiche { background: white; border-radius: 10px; box-shadow: 0 2px 8px var(--ombre); padding: 1.4rem; margin-bottom: 1.5rem; }
+    .fiche h3 { font-size: 1rem; font-weight: 700; color: var(--bleu); margin-bottom: 0.8rem; }
+
+    .objectifs { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 1rem; }
+    .objectif-pill { background: var(--gris); border-radius: 20px; padding: 5px 14px; font-size: 13px; }
+    .objectif-pill.vert   { background: #dcfce7; color: #166534; }
+    .objectif-pill.bleu   { background: #dbeafe; color: #1e40af; }
+    .objectif-pill.teal   { background: #ccfbf1; color: #134e4a; }
+
+    .concept-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 0.8rem; margin-bottom: 1rem; }
+    .concept-card { background: var(--gris); border-radius: 8px; padding: 0.9rem 1rem; }
+    .concept-card .terme { font-weight: 700; font-size: 14px; margin-bottom: 4px; }
+    .concept-card .def { font-size: 13px; color: #475569; }
+
+    .activite-card { background: white; border-radius: 10px; box-shadow: 0 2px 8px var(--ombre); margin-bottom: 1.5rem; overflow: hidden; }
+    .activite-header { padding: 0.9rem 1.3rem; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid var(--gris2); }
+    .activite-num { background: var(--teal); color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; flex-shrink: 0; }
+    .activite-info h3 { font-size: 1rem; font-weight: 700; }
+    .activite-info .meta { font-size: 12px; color: #64748b; margin-top: 2px; display: flex; gap: 10px; flex-wrap: wrap; }
+    .activite-body { padding: 1.2rem 1.3rem; }
+
+    .etapes-activite { list-style: none; padding: 0; }
+    .etapes-activite li { padding: 0.6rem 0; border-bottom: 1px solid var(--gris); font-size: 14px; display: flex; gap: 0.8rem; align-items: flex-start; }
+    .etapes-activite li:last-child { border-bottom: none; }
+    .etape-n { background: var(--teal); color: white; width: 22px; height: 22px; border-radius: 50%; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+
+    .workflow-steps {
+      display: flex;
+      gap: 0;
+      flex-wrap: wrap;
+      margin: 0.8rem 0;
+    }
+    .workflow-step {
+      background: white;
+      border: 1px solid var(--gris2);
+      border-radius: 8px;
+      padding: 0.8rem;
+      flex: 1;
+      min-width: 140px;
+      text-align: center;
+      position: relative;
+    }
+    .workflow-step .step-icon { font-size: 1.5rem; display: block; margin-bottom: 4px; }
+    .workflow-step .step-label { font-size: 12.5px; font-weight: 600; }
+    .workflow-step .step-desc { font-size: 11.5px; color: #64748b; margin-top: 3px; }
+    .workflow-arrow { display: flex; align-items: center; padding: 0 4px; color: #94a3b8; font-size: 1.2rem; }
+
+    .prompt-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: #64748b; margin-bottom: 4px; display: block; margin-top: 1rem; }
+    .code-block { background: #0f172a; color: #e2e8f0; border-radius: 8px; padding: 1rem 1.2rem; font-family: 'Consolas','Courier New',monospace; font-size: 12.5px; line-height: 1.6; overflow-x: auto; margin: 0.6rem 0; }
+    .code-block .cmt { color: #64748b; }
+    .code-block .kw  { color: #93c5fd; }
+    .code-block .str { color: #86efac; }
+
+    .en-clair { background: #f0fdfa; border: 1px solid #99f6e4; border-radius: 8px; padding: 0.9rem 1.1rem; margin: 0.6rem 0; font-size: 14px; }
+    .en-clair strong { color: var(--teal); display: block; margin-bottom: 3px; }
+
+    .a-retenir { background: #f0fdfa; border: 1px solid #99f6e4; border-radius: 8px; padding: 1rem 1.2rem; margin-top: 1rem; }
+    .a-retenir h4 { font-size: 13px; text-transform: uppercase; letter-spacing: .05em; color: var(--teal); margin-bottom: 0.5rem; font-weight: 700; }
+    .a-retenir ul { padding-left: 1.3rem; font-size: 14px; }
+    .a-retenir ul li { margin-bottom: 4px; }
+
+    footer { text-align: center; padding: 1.5rem; font-size: 12px; color: #94a3b8; border-top: 1px solid var(--gris2); margin-top: 2rem; }
+  </style>
+</head>
+<body>
+
+<nav class="nav-bar">
+  <a href="semaine4.html">← Semaine 4</a>
+  <a class="nav-plan" href="plan_formation_agent_claude.html">📋 Plan général</a>
+  <a href="semaine6.html">Semaine 6 →</a>
+</nav>
+
+<header>
+  <div class="header-badge">Étape 3 · Semaine 5 sur 6</div>
+  <h1>Gmail, mémoire et workflows automatisés</h1>
+  <p class="sous-titre">Connecter l'email, garder le fil des échanges, enchaîner les actions automatiquement</p>
+  <div class="header-meta">
+    <span>⏱ 1 h 30 en présentiel</span>
+    <span>👥 Profils mixtes</span>
+    <span>🔵 Niveau B/C — MCP Gmail</span>
+  </div>
+</header>
+
+<div class="container">
+
+  <h2 class="section-titre">🎓 Guide formateur</h2>
+
+  <details class="guide" open>
+    <summary>📋 Déroulé de la séance (1 h 30)</summary>
+    <div class="guide-body">
+      <ul class="timing-list">
+        <li>
+          <span class="timing-tag">0:00 – 0:15</span>
+          <div class="timing-desc">
+            <strong>Rappel semaine 4 + introduction Gmail MCP (15 min)</strong>
+            Résumez rapidement : Drive = fichiers, Agenda = temps. Aujourd'hui = emails. Posez la question : <em>« Combien de temps passez-vous par semaine à traiter vos emails ? »</em>. Note les réponses au tableau — le gain potentiel devient concret.
+          </div>
+        </li>
+        <li>
+          <span class="timing-tag">0:15 – 0:35</span>
+          <div class="timing-desc">
+            <strong>Démo : agent de tri et réponse automatique (20 min)</strong>
+            Montrez un agent qui lit les emails non lus, les classe par priorité, propose des réponses types, et peut en envoyer certaines automatiquement. Insistez sur la notion de <strong>validation humaine</strong> avant l'envoi automatique.
+          </div>
+        </li>
+        <li>
+          <span class="timing-tag">0:35 – 1:10</span>
+          <div class="timing-desc">
+            <strong>Activités pratiques (35 min)</strong>
+            Activités 1 et 2 ci-dessous. Le formateur circule. L'activité 2 sur la mémoire conversationnelle peut se faire en binôme.
+          </div>
+        </li>
+        <li>
+          <span class="timing-tag">1:10 – 1:30</span>
+          <div class="timing-desc">
+            <strong>Discussion : éthique et limites de l'automatisation des emails (20 min)</strong>
+            Questions à soumettre au groupe : Jusqu'où laisser Claude envoyer des mails en votre nom ? Comment signaler dans un mail qu'il est assisté par IA ? Quels types de mails ne doivent JAMAIS être délégués à un agent ?
+          </div>
+        </li>
+      </ul>
+
+      <div class="alerte">
+        <strong>⚠️ Point éthique important — à traiter en séance</strong>
+        L'automatisation des emails soulève des questions de responsabilité. Si Claude envoie un mail en votre nom avec une erreur, vous en êtes responsable. Insistez : toujours valider avant l'envoi, et pour les communications sensibles (conflits, licenciements, engagements financiers), jamais d'envoi automatique.
+      </div>
+
+      <div class="conseil">
+        <strong>💡 Angle pédagogique recommandé</strong>
+        Présentez le MCP Gmail non pas comme un outil pour « éviter de lire ses mails » mais pour « traiter plus vite les mails à faible valeur ajoutée et dégager du temps pour les échanges importants ». Le framing fait toute la différence dans l'adhésion des stagiaires.
+      </div>
+    </div>
+  </details>
+
+  <h2 class="section-titre">📄 Fiche apprenant</h2>
+
+  <div class="fiche">
+    <h3>🎯 Ce que vous allez savoir faire à la fin de cette séance</h3>
+    <div class="objectifs">
+      <span class="objectif-pill vert">✓ Comprendre ce que Claude peut faire avec vos emails</span>
+      <span class="objectif-pill vert">✓ Utiliser la mémoire conversationnelle dans un agent</span>
+      <span class="objectif-pill bleu">✓ Concevoir un workflow email → action automatique</span>
+      <span class="objectif-pill teal">✓ Définir les limites éthiques de l'automatisation</span>
+    </div>
+  </div>
+
+  <div class="fiche">
+    <h3>📧 Ce que Claude peut faire avec Gmail (via MCP)</h3>
+    <div class="info">
+      <strong>✅ Actions autorisées et recommandées</strong>
+      Lire et résumer les emails non lus · Trier par priorité · Proposer des brouillons de réponse · Identifier les emails nécessitant une action · Extraire des dates, chiffres, demandes · Créer des événements Agenda depuis un email · Archiver ou étiqueter automatiquement
+    </div>
+    <div class="alerte">
+      <strong>⛔ Actions à valider impérativement avant exécution</strong>
+      Envoyer un email en votre nom · Répondre à un client ou fournisseur · Supprimer des emails · Partager des informations confidentielles contenues dans un email
+    </div>
+  </div>
+
+  <div class="fiche">
+    <h3>🧠 La mémoire conversationnelle — comment ça marche ?</h3>
+    <p style="font-size:14px; margin-bottom:1rem;">La mémoire conversationnelle est la capacité de Claude à se souvenir de ce qui a été dit <strong>dans la même conversation</strong>. Dans votre fichier HTML agent, c'est l'array <code>conversationHistory</code> qui stocke chaque échange et le renvoie à Claude à chaque nouvelle question.</p>
+
+    <div class="workflow-steps">
+      <div class="workflow-step">
+        <span class="step-icon">💬</span>
+        <div class="step-label">Vous posez Q1</div>
+        <div class="step-desc">« Qui est Marie Dupont ? »</div>
+      </div>
+      <div class="workflow-arrow">→</div>
+      <div class="workflow-step">
+        <span class="step-icon">🧠</span>
+        <div class="step-label">Claude répond</div>
+        <div class="step-desc">Stocké dans la mémoire</div>
+      </div>
+      <div class="workflow-arrow">→</div>
+      <div class="workflow-step">
+        <span class="step-icon">💬</span>
+        <div class="step-label">Vous posez Q2</div>
+        <div class="step-desc">« Rédige-lui un mail »</div>
+      </div>
+      <div class="workflow-arrow">→</div>
+      <div class="workflow-step">
+        <span class="step-icon">✉️</span>
+        <div class="step-label">Claude utilise Q1</div>
+        <div class="step-desc">Sans que vous le répétiez</div>
+      </div>
+    </div>
+
+    <div class="conseil">
+      <strong>💡 Limite à connaître</strong>
+      La mémoire ne dure que le temps de la conversation. Si vous fermez l'onglet et rouvrez le fichier HTML, l'historique est perdu. Pour une mémoire qui persiste entre les sessions, il faut une base de données externe — c'est un sujet avancé (niveau C).
+    </div>
+  </div>
+
+  <div class="fiche">
+    <h3>🧩 Concepts clés</h3>
+    <div class="concept-grid">
+      <div class="concept-card">
+        <div class="terme">📧 MCP Gmail</div>
+        <div class="def">Protocole qui connecte Claude à votre boîte Gmail. Claude peut lire, trier, rédiger et (si autorisé) envoyer des emails en votre nom.</div>
+      </div>
+      <div class="concept-card">
+        <div class="terme">🧠 Mémoire conversationnelle</div>
+        <div class="def">Historique des échanges passés dans une conversation, transmis à Claude à chaque message pour qu'il garde le contexte.</div>
+      </div>
+      <div class="concept-card">
+        <div class="terme">🔄 Workflow</div>
+        <div class="def">Enchaînement automatique d'actions : lire un email → extraire une information → créer un événement → envoyer un accusé de réception.</div>
+      </div>
+      <div class="concept-card">
+        <div class="terme">✅ Validation humaine</div>
+        <div class="def">Étape obligatoire avant qu'un agent envoie une communication au nom de l'utilisateur. Principe clé : l'humain reste responsable de ce qui part.</div>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="section-titre">🛠️ Activités pratiques</h2>
+
+  <!-- ACTIVITÉ 1 -->
+  <div class="activite-card">
+    <div class="activite-header">
+      <div class="activite-num">1</div>
+      <div class="activite-info">
+        <h3>Trier et résumer ses emails non lus</h3>
+        <div class="meta"><span>⏱ 20 min</span><span>🔵 MCP Gmail</span><span>👤 Individuel (sur poste démo)</span></div>
+      </div>
+    </div>
+    <div class="activite-body">
+      <p style="font-size:14px; margin-bottom:1rem;">En utilisant l'agent configuré avec le MCP Gmail, vous allez trier et prioriser une boîte de réception exemple (fournie par le formateur avec des emails fictifs).</p>
+
+      <p class="prompt-label">Requête de tri et priorisation</p>
+      <div class="code-block"><span class="cmt">// Étape 1 : lire et classer les emails non lus</span>
+Lis mes 20 derniers emails non lus.
+
+Classe-les en 3 catégories :
+🔴 URGENT : nécessite une action aujourd'hui
+🟡 IMPORTANT : nécessite une action cette semaine
+🟢 INFO : aucune action requise, peut être archivé
+
+Pour chaque email urgent et important, indique :
+- Expéditeur et objet
+- Ce qu'il faut faire exactement
+- Date limite si mentionnée</div>
+
+      <p class="prompt-label" style="margin-top:1rem;">Requête de rédaction de réponse</p>
+      <div class="code-block"><span class="cmt">// Étape 2 : rédiger une réponse (sans envoyer)</span>
+Pour l'email de [nom de l'expéditeur] concernant [objet],
+rédige une réponse professionnelle qui :
+- Accuse réception de sa demande
+- Indique que je traiterai cela avant vendredi
+- Demande les pièces justificatives manquantes listées
+  dans son email
+
+Ton : professionnel et cordial. Longueur : 5-8 lignes maximum.
+
+⚠️ NE PAS ENVOYER — me soumettre le brouillon d'abord.</div>
+
+      <div class="en-clair">
+        <strong>💡 Bonne pratique : toujours préciser « ne pas envoyer »</strong>
+        Même si votre agent n'est pas configuré pour envoyer automatiquement, prenez l'habitude d'inclure cette mention. Elle vous protège et clarifie votre intention — vous validez chaque communication avant qu'elle parte.
+      </div>
+    </div>
+  </div>
+
+  <!-- ACTIVITÉ 2 -->
+  <div class="activite-card">
+    <div class="activite-header">
+      <div class="activite-num">2</div>
+      <div class="activite-info">
+        <h3>Concevoir son premier workflow automatisé</h3>
+        <div class="meta"><span>⏱ 30 min</span><span>🔵 Niveaux B/C</span><span>👥 En binôme</span></div>
+      </div>
+    </div>
+    <div class="activite-body">
+      <p style="font-size:14px; margin-bottom:1rem;">Un <strong>workflow</strong> est une suite d'actions déclenchée par un événement. Exemple : « Quand je reçois un email de candidature → extraire les infos → créer une fiche dans Drive → planifier un entretien dans Agenda ».</p>
+
+      <p style="font-size:14px; font-weight:600; margin-bottom:0.8rem;">📋 Construisez votre workflow en 3 étapes :</p>
+
+      <div class="prompt-box" style="background:#0f172a; color:#e2e8f0; border-radius:8px; padding:1rem 1.2rem; font-family:'Consolas','Courier New',monospace; font-size:12.5px; line-height:1.7; margin-bottom:0.8rem; white-space:pre-wrap;">ÉTAPE 1 — Définir le déclencheur
+Quel événement déclenche le workflow ?
+□ Réception d'un email avec un mot-clé spécifique
+□ Email d'un expéditeur précis (client, fournisseur…)
+□ Email avec une pièce jointe d'un certain type
+□ Autre : _________________________________
+
+ÉTAPE 2 — Définir les actions
+Que doit faire Claude automatiquement ?
+□ Lire et résumer l'email
+□ Extraire des données (montant, date, nom…)
+□ Créer un fichier dans Drive
+□ Ajouter un événement à l'Agenda
+□ Rédiger un brouillon de réponse
+□ Autre : _________________________________
+
+ÉTAPE 3 — Définir les points de validation humaine
+Qu'est-ce que Claude doit soumettre à votre approbation
+avant d'exécuter ?
+□ Toutes les actions
+□ Seulement les envois d'email
+□ Seulement les créations de documents
+□ Aucune (tout automatisé)</div>
+
+      <p style="font-size:14px; font-weight:600; margin-bottom:0.6rem;">Exemples de workflows métier :</p>
+
+      <ul class="etapes-activite">
+        <li><span class="etape-n">🟢</span><span><strong>RH :</strong> Email candidature reçu → extraire CV + coordonnées → créer fiche candidat dans Drive → proposer créneau entretien dans Agenda</span></li>
+        <li><span class="etape-n">🔵</span><span><strong>Compta :</strong> Email facture reçue → extraire montant + date + fournisseur → mettre à jour suivi des factures dans Drive → créer rappel paiement Agenda</span></li>
+        <li><span class="etape-n">🟣</span><span><strong>Manager :</strong> Email incident de production reçu → classer par niveau de gravité → notifier les bonnes personnes par email → créer ticket de suivi Drive</span></li>
+      </ul>
+
+      <div class="a-retenir">
+        <h4>📌 Ce que vous emportez de cette semaine</h4>
+        <ul>
+          <li>Gmail + Drive + Agenda = un agent qui couvre l'essentiel du travail administratif quotidien</li>
+          <li>La mémoire conversationnelle = Claude garde le fil d'une conversation, mais pas d'une session à l'autre</li>
+          <li>Règle d'or : toujours valider avant qu'un email parte en votre nom</li>
+          <li>La semaine prochaine (dernière !) : mesurer les progrès, corriger les erreurs et préparer la mise en production</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  Formation « Maîtriser Claude et l'IA Agentique » · Pôle Formation UIMM-CVDL · Auteur : S. Jaubert · Mai 2026
+</footer>
+</body>
+</html>

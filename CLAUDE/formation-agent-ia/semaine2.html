@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Semaine 2 — Premier agent HTML avec recherche web</title>
+  <style>
+    :root {
+      --bleu:   #1a3a5c;
+      --bleu2:  #2563a8;
+      --vert:   #16a34a;
+      --orange: #d97706;
+      --rouge:  #dc2626;
+      --violet: #7c3aed;
+      --gris:   #f1f5f9;
+      --gris2:  #e2e8f0;
+      --texte:  #1e293b;
+      --clair:  #ffffff;
+      --ombre:  rgba(0,0,0,0.08);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f4f8; color: var(--texte); line-height: 1.65; font-size: 15px; }
+
+    .nav-bar { background: var(--bleu); padding: 0.7rem 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
+    .nav-bar a { color: rgba(255,255,255,0.85); text-decoration: none; font-size: 13px; padding: 4px 12px; border: 1px solid rgba(255,255,255,0.25); border-radius: 20px; transition: background 0.2s; }
+    .nav-bar a:hover { background: rgba(255,255,255,0.15); color: white; }
+    .nav-bar .nav-plan { font-weight: 700; border-color: rgba(255,255,255,0.5); }
+
+    header { background: linear-gradient(135deg, var(--bleu2) 0%, #1d4ed8 100%); color: white; padding: 2.2rem 2rem 1.8rem; text-align: center; }
+    .header-badge { display: inline-block; background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.35); border-radius: 20px; padding: 3px 14px; font-size: 12px; letter-spacing: .05em; text-transform: uppercase; margin-bottom: 0.8rem; }
+    header h1 { font-size: 1.8rem; font-weight: 700; margin-bottom: 0.3rem; }
+    header p.sous-titre { font-size: 1rem; opacity: 0.88; margin-bottom: 1rem; }
+    .header-meta { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; font-size: 13px; opacity: 0.82; }
+    .header-meta span { display: flex; align-items: center; gap: 5px; }
+
+    .container { max-width: 960px; margin: 0 auto; padding: 2rem 1.5rem; }
+
+    .section-titre { font-size: 1.2rem; font-weight: 700; color: var(--bleu); padding-bottom: 0.5rem; border-bottom: 2px solid var(--gris2); margin-bottom: 1.2rem; margin-top: 2rem; display: flex; align-items: center; gap: 10px; }
+
+    details.guide { background: white; border-radius: 10px; box-shadow: 0 2px 8px var(--ombre); margin-bottom: 1.5rem; overflow: hidden; }
+    details.guide summary { padding: 1rem 1.4rem; cursor: pointer; display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1rem; color: var(--bleu); background: #eff6ff; border-left: 5px solid var(--bleu2); list-style: none; user-select: none; }
+    details.guide summary::-webkit-details-marker { display: none; }
+    details.guide summary::after { content: " ▼"; font-size: 11px; margin-left: auto; color: var(--bleu2); }
+    details.guide[open] summary::after { content: " ▲"; }
+    details.guide .guide-body { padding: 1.4rem; }
+
+    .timing-list { list-style: none; padding: 0; }
+    .timing-list li { display: flex; gap: 1rem; padding: 0.7rem 0; border-bottom: 1px solid var(--gris2); align-items: flex-start; }
+    .timing-list li:last-child { border-bottom: none; }
+    .timing-tag { background: var(--bleu); color: white; border-radius: 12px; padding: 2px 10px; font-size: 12px; font-weight: 600; white-space: nowrap; flex-shrink: 0; margin-top: 2px; }
+    .timing-desc { font-size: 14px; }
+    .timing-desc strong { display: block; margin-bottom: 2px; }
+
+    .conseil { background: #eff6ff; border-left: 4px solid var(--bleu2); border-radius: 6px; padding: 0.8rem 1rem; font-size: 14px; margin: 0.8rem 0; }
+    .conseil strong { color: var(--bleu2); display: block; margin-bottom: 3px; }
+    .alerte { background: #fff7ed; border-left: 4px solid var(--orange); border-radius: 6px; padding: 0.8rem 1rem; font-size: 14px; margin: 0.8rem 0; }
+    .alerte strong { color: #92400e; display: block; margin-bottom: 3px; }
+
+    .fiche { background: white; border-radius: 10px; box-shadow: 0 2px 8px var(--ombre); padding: 1.4rem; margin-bottom: 1.5rem; }
+    .fiche h3 { font-size: 1rem; font-weight: 700; color: var(--bleu); margin-bottom: 0.8rem; }
+
+    .objectifs { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 1rem; }
+    .objectif-pill { background: var(--gris); border-radius: 20px; padding: 5px 14px; font-size: 13px; }
+    .objectif-pill.vert  { background: #dcfce7; color: #166534; }
+    .objectif-pill.bleu  { background: #dbeafe; color: #1e40af; }
+    .objectif-pill.orange{ background: #ffedd5; color: #9a3412; }
+
+    .concept-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.8rem; margin-bottom: 1rem; }
+    .concept-card { background: var(--gris); border-radius: 8px; padding: 0.9rem 1rem; }
+    .concept-card .terme { font-weight: 700; font-size: 14px; margin-bottom: 4px; }
+    .concept-card .def { font-size: 13px; color: #475569; }
+
+    .activite-card { background: white; border-radius: 10px; box-shadow: 0 2px 8px var(--ombre); margin-bottom: 1.5rem; overflow: hidden; }
+    .activite-header { padding: 0.9rem 1.3rem; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid var(--gris2); }
+    .activite-num { background: var(--bleu2); color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; flex-shrink: 0; }
+    .activite-info h3 { font-size: 1rem; font-weight: 700; }
+    .activite-info .meta { font-size: 12px; color: #64748b; margin-top: 2px; display: flex; gap: 10px; flex-wrap: wrap; }
+    .activite-body { padding: 1.2rem 1.3rem; }
+
+    .etapes-activite { list-style: none; padding: 0; }
+    .etapes-activite li { padding: 0.6rem 0; border-bottom: 1px solid var(--gris); font-size: 14px; display: flex; gap: 0.8rem; align-items: flex-start; }
+    .etapes-activite li:last-child { border-bottom: none; }
+    .etape-n { background: var(--bleu2); color: white; width: 22px; height: 22px; border-radius: 50%; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+
+    .prompt-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: #64748b; margin-bottom: 4px; display: block; margin-top: 1rem; }
+    .code-block { background: #0f172a; color: #e2e8f0; border-radius: 8px; padding: 1rem 1.2rem; font-family: 'Consolas', 'Courier New', monospace; font-size: 12.5px; line-height: 1.6; overflow-x: auto; margin: 0.6rem 0; }
+    .code-block .cmt { color: #64748b; }
+    .code-block .kw  { color: #93c5fd; }
+    .code-block .str { color: #86efac; }
+    .code-block .num { color: #fbbf24; }
+
+    .en-clair { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 0.9rem 1.1rem; margin: 0.6rem 0; font-size: 14px; }
+    .en-clair strong { color: var(--vert); display: block; margin-bottom: 3px; }
+
+    .a-retenir { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 1rem 1.2rem; margin-top: 1rem; }
+    .a-retenir h4 { font-size: 13px; text-transform: uppercase; letter-spacing: .05em; color: var(--vert); margin-bottom: 0.5rem; font-weight: 700; }
+    .a-retenir ul { padding-left: 1.3rem; font-size: 14px; }
+    .a-retenir ul li { margin-bottom: 4px; }
+
+    .env-badge { display: inline-block; background: #dbeafe; color: #1e40af; border-radius: 12px; padding: 3px 12px; font-size: 12px; font-weight: 700; margin-bottom: 0.8rem; }
+
+    footer { text-align: center; padding: 1.5rem; font-size: 12px; color: #94a3b8; border-top: 1px solid var(--gris2); margin-top: 2rem; }
+  </style>
+</head>
+<body>
+
+<nav class="nav-bar">
+  <a href="semaine1.html">← Semaine 1</a>
+  <a class="nav-plan" href="plan_formation_agent_claude.html">📋 Plan général</a>
+  <a href="semaine3.html">Semaine 3 →</a>
+</nav>
+
+<header>
+  <div class="header-badge">Étape 1 · Semaine 2 sur 6</div>
+  <h1>Premier agent HTML avec recherche web</h1>
+  <p class="sous-titre">Construire un agent fonctionnel dans un fichier HTML — aucune installation requise</p>
+  <div class="header-meta">
+    <span>⏱ 2 h 30 en présentiel</span>
+    <span>👥 Profils mixtes</span>
+    <span>🔵 Niveau B — Fichier HTML local</span>
+  </div>
+</header>
+
+<div class="container">
+
+  <h2 class="section-titre"><span class="icone">🎓</span> Guide formateur</h2>
+
+  <details class="guide" open>
+    <summary>📋 Déroulé de la séance (2 h 30)</summary>
+    <div class="guide-body">
+      <ul class="timing-list">
+        <li>
+          <span class="timing-tag">0:00 – 0:20</span>
+          <div class="timing-desc">
+            <strong>Rappel semaine 1 + introduction niveau B (20 min)</strong>
+            Question d'ouverture : <em>« Avez-vous utilisé Claude dans la semaine ? Qu'est-ce qui a bien marché ? »</em>. Expliquez la différence entre niveau A (navigateur) et niveau B (fichier HTML avec clé API). Montrez que le fichier agent.html s'ouvre comme n'importe quel fichier — pas de serveur, pas d'installation.
+          </div>
+        </li>
+        <li>
+          <span class="timing-tag">0:20 – 0:50</span>
+          <div class="timing-desc">
+            <strong>Démo formateur : anatomie du fichier agent.html (30 min)</strong>
+            Ouvrez le fichier agent_base.html (fourni dans les ressources) sur le vidéoprojecteur. Expliquez les 4 zones : saisie de la clé API, zone de prompt, bouton « Envoyer », zone de réponse. Montrez comment la clé API est stockée localement dans le navigateur (localStorage) — elle ne part jamais sur internet sauf vers Anthropic.
+          </div>
+        </li>
+        <li>
+          <span class="timing-tag">0:50 – 1:35</span>
+          <div class="timing-desc">
+            <strong>Activité 1 : personnaliser son agent avec un prompt système (45 min)</strong>
+            Chaque stagiaire ouvre le fichier sur son poste, saisit sa clé API, et modifie le prompt système pour son métier. Le formateur circule.
+          </div>
+        </li>
+        <li>
+          <span class="timing-tag">1:35 – 1:45</span>
+          <div class="timing-desc"><strong>Pause (10 min)</strong></div>
+        </li>
+        <li>
+          <span class="timing-tag">1:45 – 2:20</span>
+          <div class="timing-desc">
+            <strong>Activité 2 : activer la recherche web (web_search) (35 min)</strong>
+            Montrez comment ajouter l'outil web_search au fichier HTML. Les stagiaires testent avec des requêtes d'actualité professionnelle.
+          </div>
+        </li>
+        <li>
+          <span class="timing-tag">2:20 – 2:30</span>
+          <div class="timing-desc">
+            <strong>Débrief collectif (10 min)</strong>
+            Question : <em>« Quelle différence avez-vous notée entre une réponse avec et sans web_search ? »</em>
+          </div>
+        </li>
+      </ul>
+
+      <div class="conseil">
+        <strong>🔑 Gestion des clés API</strong>
+        Idéalement, fournissez une clé API de test avec un budget limité (5-10 $) pour la formation. Chaque stagiaire peut aussi créer son propre compte Anthropic (console.anthropic.com) et obtenir sa clé gratuitement avec un crédit de départ. La clé est au format <code>sk-ant-api03-…</code>.
+      </div>
+
+      <div class="alerte">
+        <strong>⚠️ Point de vigilance : sécurité de la clé API</strong>
+        Insistez sur ce point : la clé API ne doit jamais être partagée, publiée sur internet ou mise dans un mail. Dans le fichier HTML, elle est stockée dans le navigateur local uniquement. Si un stagiaire la partage par erreur, il peut la révoquer immédiatement sur console.anthropic.com.
+      </div>
+
+      <div class="conseil">
+        <strong>🖥️ Matériel nécessaire</strong>
+        Fichier <code>agent_base.html</code> distribué sur clé USB ou partagé sur réseau local · Clés API Anthropic (une par stagiaire ou partagée) · Navigateur Chrome ou Firefox récent.
+      </div>
+    </div>
+  </details>
+
+  <h2 class="section-titre"><span class="icone">📄</span> Fiche apprenant</h2>
+
+  <div class="fiche">
+    <h3>🎯 Ce que vous allez savoir faire à la fin de cette séance</h3>
+    <div class="objectifs">
+      <span class="objectif-pill vert">✓ Ouvrir et utiliser un fichier agent HTML</span>
+      <span class="objectif-pill vert">✓ Configurer une clé API Anthropic dans le fichier</span>
+      <span class="objectif-pill bleu">✓ Écrire un prompt système adapté à votre métier</span>
+      <span class="objectif-pill bleu">✓ Interroger Claude avec accès à la recherche web</span>
+      <span class="objectif-pill orange">✓ Comprendre la différence entre les niveaux A et B</span>
+    </div>
+  </div>
+
+  <div class="fiche">
+    <h3>🧩 Les concepts clés de cette semaine</h3>
+    <div class="concept-grid">
+      <div class="concept-card">
+        <div class="terme">🔑 Clé API</div>
+        <div class="def">Mot de passe unique qui identifie votre application auprès d'Anthropic. Elle permet au fichier HTML d'envoyer des questions à Claude.</div>
+      </div>
+      <div class="concept-card">
+        <div class="terme">📝 Prompt système</div>
+        <div class="def">Instruction permanente que Claude reçoit avant votre question. C'est là que vous définissez son rôle, sa personnalité, ses limites.</div>
+      </div>
+      <div class="concept-card">
+        <div class="terme">🌐 web_search</div>
+        <div class="def">Outil qui permet à Claude de chercher des informations récentes sur internet avant de répondre — comme un moteur de recherche intégré.</div>
+      </div>
+      <div class="concept-card">
+        <div class="terme">📦 localStorage</div>
+        <div class="def">Espace de stockage dans votre navigateur. La clé API y est sauvegardée localement — elle ne quitte jamais votre ordinateur sauf pour contacter Anthropic.</div>
+      </div>
+      <div class="concept-card">
+        <div class="terme">🔵 Niveau B</div>
+        <div class="def">Agent dans un fichier HTML local. Plus puissant que le niveau A (accès à l'API, mémoire de conversation), mais sans installation de logiciel.</div>
+      </div>
+      <div class="concept-card">
+        <div class="terme">💬 Messages</div>
+        <div class="def">L'historique de la conversation envoyé à Claude à chaque message. C'est ce qui lui permet de « se souvenir » des échanges précédents.</div>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="section-titre"><span class="icone">🛠️</span> Activités pratiques</h2>
+
+  <!-- ACTIVITÉ 1 -->
+  <div class="activite-card">
+    <div class="activite-header">
+      <div class="activite-num">1</div>
+      <div class="activite-info">
+        <h3>Personnaliser son agent avec un prompt système</h3>
+        <div class="meta">
+          <span>⏱ 45 min</span>
+          <span>🔵 Niveau B — Fichier HTML</span>
+          <span>👤 Individuel</span>
+        </div>
+      </div>
+    </div>
+    <div class="activite-body">
+      <span class="env-badge">🔵 Fichier agent_base.html</span>
+      <p style="font-size:14px; margin-bottom:1rem;">Vous allez ouvrir le fichier <code>agent_base.html</code> fourni par le formateur, saisir votre clé API, puis modifier le prompt système pour créer votre propre assistant métier.</p>
+
+      <p class="prompt-label">Zone à modifier dans le fichier HTML — prompt système RH</p>
+      <div class="code-block"><span class="cmt">// Trouvez cette ligne dans le fichier et remplacez le texte entre guillemets :</span>
+<span class="kw">const</span> SYSTEM_PROMPT = <span class="str">`Tu es un assistant RH expert spécialisé dans le droit
+du travail français et la gestion des ressources humaines
+pour les PME industrielles.
+
+Tu réponds toujours en français, de façon précise et
+professionnelle. Si une information peut avoir évolué
+récemment (loi, jurisprudence), tu le signales.
+
+Tu ne donnes jamais de conseil juridique engageant — tu
+orientes vers un avocat ou l'inspection du travail pour
+les cas complexes.`</span>;</div>
+
+      <div class="en-clair">
+        <strong>💡 En clair, ce que fait ce code</strong>
+        Ce texte est une « instruction permanente » envoyée à Claude avant chaque conversation. Imaginez que vous briefez un nouveau collaborateur sur son rôle avant qu'il prenne son premier appel. Claude lira ces instructions à chaque fois que vous lui poserez une question.
+      </div>
+
+      <p class="prompt-label" style="margin-top:1rem;">Version Comptabilité</p>
+      <div class="code-block"><span class="kw">const</span> SYSTEM_PROMPT = <span class="str">`Tu es un assistant comptable et fiscal pour PME françaises.
+Tu maîtrises le plan comptable général, la TVA, les
+déclarations fiscales courantes et la gestion de trésorerie.
+
+Tu réponds en français, avec des exemples concrets. Tu
+signales toujours si une règle fiscale a pu évoluer et
+recommandes de vérifier avec l'expert-comptable pour les
+situations complexes.`</span>;</div>
+
+      <p class="prompt-label" style="margin-top:1rem;">Version Manager / Production</p>
+      <div class="code-block"><span class="kw">const</span> SYSTEM_PROMPT = <span class="str">`Tu es un assistant pour responsable d'atelier dans
+l'industrie manufacturière. Tu maîtrises le lean
+management, la sécurité au travail, la gestion de
+production et l'amélioration continue.
+
+Tu proposes des solutions pratiques, directement
+applicables en atelier. Tu utilises un langage simple
+et opérationnel, sans jargon excessif.`</span>;</div>
+
+      <div style="margin-top:1.2rem;">
+        <p style="font-size:14px; font-weight:600; margin-bottom:0.6rem;">📋 Étapes à suivre :</p>
+        <ul class="etapes-activite">
+          <li><span class="etape-n">1</span><span>Ouvrez le fichier <code>agent_base.html</code> dans votre navigateur (double-clic).</span></li>
+          <li><span class="etape-n">2</span><span>Dans la zone « Clé API », saisissez votre clé (format <code>sk-ant-…</code>) et cliquez « Sauvegarder ».</span></li>
+          <li><span class="etape-n">3</span><span>Cliquez sur « ⚙️ Modifier le prompt système » et collez le texte correspondant à votre profil.</span></li>
+          <li><span class="etape-n">4</span><span>Posez 3 questions professionnelles concrètes et évaluez la qualité des réponses.</span></li>
+          <li><span class="etape-n">5</span><span>Modifiez une phrase du prompt système et observez comment les réponses changent.</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ACTIVITÉ 2 -->
+  <div class="activite-card">
+    <div class="activite-header">
+      <div class="activite-num">2</div>
+      <div class="activite-info">
+        <h3>Activer la recherche web (web_search)</h3>
+        <div class="meta">
+          <span>⏱ 35 min</span>
+          <span>🔵 Niveau B — Fichier HTML</span>
+          <span>👥 En binôme puis individuel</span>
+        </div>
+      </div>
+    </div>
+    <div class="activite-body">
+      <p style="font-size:14px; margin-bottom:0.8rem;">L'outil <strong>web_search</strong> permet à Claude d'aller chercher des informations récentes sur internet avant de répondre. Sans cet outil, Claude ne connaît que ce qu'il a appris pendant son entraînement (données jusqu'à début 2025 environ).</p>
+
+      <p class="prompt-label">Extrait du fichier HTML — activation de web_search</p>
+      <div class="code-block"><span class="cmt">// Dans la configuration de l'appel à l'API Claude :</span>
+<span class="kw">const</span> response = <span class="kw">await</span> fetch(<span class="str">'https://api.anthropic.com/v1/messages'</span>, {
+  method: <span class="str">'POST'</span>,
+  headers: {
+    <span class="str">'x-api-key'</span>: apiKey,
+    <span class="str">'anthropic-version'</span>: <span class="str">'2023-06-01'</span>,
+    <span class="str">'content-type'</span>: <span class="str">'application/json'</span>,
+    <span class="str">'anthropic-beta'</span>: <span class="str">'web-search-2025-03-05'</span>  <span class="cmt">// ← active le web_search</span>
+  },
+  body: JSON.stringify({
+    model: <span class="str">'claude-sonnet-4-6'</span>,
+    max_tokens: <span class="num">2048</span>,
+    tools: [{ type: <span class="str">'web_search_20250305'</span>, name: <span class="str">'web_search'</span> }],
+    system: SYSTEM_PROMPT,
+    messages: conversationHistory
+  })
+});</div>
+
+      <div class="en-clair">
+        <strong>💡 En clair, ce que fait ce code</strong>
+        Ces quelques lignes donnent à Claude un accès à un moteur de recherche. Quand vous posez une question sur l'actualité (nouvelle loi, taux de TVA modifié, indice de prix…), Claude va d'abord chercher sur le web, puis synthétiser les résultats dans sa réponse — comme le ferait un assistant qui vérifie l'information avant de vous répondre.
+      </div>
+
+      <div style="margin-top:1rem;">
+        <p style="font-size:14px; font-weight:600; margin-bottom:0.6rem;">📋 Questions test à poser à votre agent (avec web_search activé) :</p>
+        <ul class="etapes-activite">
+          <li><span class="etape-n">🟢</span><span><strong>RH :</strong> « Quel est le montant du SMIC horaire brut en vigueur aujourd'hui en France ? »</span></li>
+          <li><span class="etape-n">🔵</span><span><strong>Compta :</strong> « Quels sont les taux de TVA applicables en France en 2026 ? »</span></li>
+          <li><span class="etape-n">🟣</span><span><strong>Manager :</strong> « Quelles sont les dernières évolutions réglementaires en matière de sécurité au travail dans l'industrie française ? »</span></li>
+          <li><span class="etape-n">+</span><span><strong>Tous :</strong> Posez la même question sans web_search (en commentant la ligne <code>tools</code>) et comparez les deux réponses.</span></li>
+        </ul>
+      </div>
+
+      <div class="a-retenir">
+        <h4>📌 Ce que vous emportez de cette séance</h4>
+        <ul>
+          <li>Un agent HTML fonctionnel, personnalisé pour votre métier — vous pouvez l'utiliser dès demain</li>
+          <li>web_search = Claude avec accès à l'actualité. Sans web_search = Claude avec ses connaissances jusqu'à début 2025</li>
+          <li>La semaine prochaine : comment mesurer et améliorer la qualité des réponses de votre agent</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESSOURCES -->
+  <div class="fiche">
+    <h3>📦 Fichier fourni cette semaine</h3>
+    <p style="font-size:14px; margin-bottom:0.8rem;">Le fichier <code>agent_base.html</code> est distribué par le formateur. Il contient :</p>
+    <ul style="font-size:14px; padding-left:1.4rem; line-height:2;">
+      <li>Interface graphique complète (zone de saisie, zone de réponse)</li>
+      <li>Gestion sécurisée de la clé API dans le navigateur</li>
+      <li>Mémoire de conversation (Claude se souvient de vos messages précédents)</li>
+      <li>Bouton d'activation/désactivation de web_search</li>
+      <li>Paramètre de prompt système modifiable sans toucher au code</li>
+    </ul>
+    <div class="conseil" style="margin-top:0.8rem;">
+      <strong>💡 Pas besoin de comprendre tout le code</strong>
+      Vous n'aurez à modifier que 2 zones dans le fichier : le prompt système (texte) et éventuellement le nom du modèle. Tout le reste fonctionne comme une boîte noire.
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  Formation « Maîtriser Claude et l'IA Agentique » · Pôle Formation UIMM-CVDL · Auteur : S. Jaubert · Mai 2026
+</footer>
+
+</body>
+</html>

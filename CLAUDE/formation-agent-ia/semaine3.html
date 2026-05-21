@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Semaine 3 — Mesurer et améliorer la qualité des réponses</title>
+  <style>
+    :root {
+      --bleu:   #1a3a5c;
+      --bleu2:  #2563a8;
+      --vert:   #16a34a;
+      --orange: #d97706;
+      --rouge:  #dc2626;
+      --violet: #7c3aed;
+      --gris:   #f1f5f9;
+      --gris2:  #e2e8f0;
+      --texte:  #1e293b;
+      --clair:  #ffffff;
+      --ombre:  rgba(0,0,0,0.08);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f4f8; color: var(--texte); line-height: 1.65; font-size: 15px; }
+
+    .nav-bar { background: var(--bleu); padding: 0.7rem 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
+    .nav-bar a { color: rgba(255,255,255,0.85); text-decoration: none; font-size: 13px; padding: 4px 12px; border: 1px solid rgba(255,255,255,0.25); border-radius: 20px; }
+    .nav-bar a:hover { background: rgba(255,255,255,0.15); color: white; }
+    .nav-bar .nav-plan { font-weight: 700; border-color: rgba(255,255,255,0.5); }
+
+    header { background: linear-gradient(135deg, var(--orange) 0%, #b45309 100%); color: white; padding: 2.2rem 2rem 1.8rem; text-align: center; }
+    .header-badge { display: inline-block; background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.35); border-radius: 20px; padding: 3px 14px; font-size: 12px; letter-spacing: .05em; text-transform: uppercase; margin-bottom: 0.8rem; }
+    header h1 { font-size: 1.8rem; font-weight: 700; margin-bottom: 0.3rem; }
+    header p.sous-titre { font-size: 1rem; opacity: 0.88; margin-bottom: 1rem; }
+    .header-meta { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; font-size: 13px; opacity: 0.82; }
+    .header-meta span { display: flex; align-items: center; gap: 5px; }
+
+    .container { max-width: 960px; margin: 0 auto; padding: 2rem 1.5rem; }
+    .section-titre { font-size: 1.2rem; font-weight: 700; color: var(--bleu); padding-bottom: 0.5rem; border-bottom: 2px solid var(--gris2); margin-bottom: 1.2rem; margin-top: 2rem; display: flex; align-items: center; gap: 10px; }
+
+    details.guide { background: white; border-radius: 10px; box-shadow: 0 2px 8px var(--ombre); margin-bottom: 1.5rem; overflow: hidden; }
+    details.guide summary { padding: 1rem 1.4rem; cursor: pointer; display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1rem; color: var(--bleu); background: #fff7ed; border-left: 5px solid var(--orange); list-style: none; user-select: none; }
+    details.guide summary::-webkit-details-marker { display: none; }
+    details.guide summary::after { content: " ▼"; font-size: 11px; margin-left: auto; color: var(--orange); }
+    details.guide[open] summary::after { content: " ▲"; }
+    details.guide .guide-body { padding: 1.4rem; }
+
+    .timing-list { list-style: none; padding: 0; }
+    .timing-list li { display: flex; gap: 1rem; padding: 0.7rem 0; border-bottom: 1px solid var(--gris2); align-items: flex-start; }
+    .timing-list li:last-child { border-bottom: none; }
+    .timing-tag { background: var(--orange); color: white; border-radius: 12px; padding: 2px 10px; font-size: 12px; font-weight: 600; white-space: nowrap; flex-shrink: 0; margin-top: 2px; }
+    .timing-desc { font-size: 14px; }
+    .timing-desc strong { display: block; margin-bottom: 2px; }
+
+    .conseil { background: #fff7ed; border-left: 4px solid var(--orange); border-radius: 6px; padding: 0.8rem 1rem; font-size: 14px; margin: 0.8rem 0; }
+    .conseil strong { color: #92400e; display: block; margin-bottom: 3px; }
+    .alerte { background: #fef2f2; border-left: 4px solid var(--rouge); border-radius: 6px; padding: 0.8rem 1rem; font-size: 14px; margin: 0.8rem 0; }
+    .alerte strong { color: #991b1b; display: block; margin-bottom: 3px; }
+    .info { background: #eff6ff; border-left: 4px solid var(--bleu2); border-radius: 6px; padding: 0.8rem 1rem; font-size: 14px; margin: 0.8rem 0; }
+    .info strong { color: var(--bleu2); display: block; margin-bottom: 3px; }
+
+    .fiche { background: white; border-radius: 10px; box-shadow: 0 2px 8px var(--ombre); padding: 1.4rem; margin-bottom: 1.5rem; }
+    .fiche h3 { font-size: 1rem; font-weight: 700; color: var(--bleu); margin-bottom: 0.8rem; }
+
+    .objectifs { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 1rem; }
+    .objectif-pill { background: var(--gris); border-radius: 20px; padding: 5px 14px; font-size: 13px; }
+    .objectif-pill.vert   { background: #dcfce7; color: #166534; }
+    .objectif-pill.bleu   { background: #dbeafe; color: #1e40af; }
+    .objectif-pill.orange { background: #ffedd5; color: #9a3412; }
+
+    .concept-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.8rem; margin-bottom: 1rem; }
+    .concept-card { background: var(--gris); border-radius: 8px; padding: 0.9rem 1rem; }
+    .concept-card .terme { font-weight: 700; font-size: 14px; margin-bottom: 4px; }
+    .concept-card .def { font-size: 13px; color: #475569; }
+
+    .activite-card { background: white; border-radius: 10px; box-shadow: 0 2px 8px var(--ombre); margin-bottom: 1.5rem; overflow: hidden; }
+    .activite-header { padding: 0.9rem 1.3rem; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid var(--gris2); }
+    .activite-num { background: var(--orange); color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; flex-shrink: 0; }
+    .activite-info h3 { font-size: 1rem; font-weight: 700; }
+    .activite-info .meta { font-size: 12px; color: #64748b; margin-top: 2px; display: flex; gap: 10px; flex-wrap: wrap; }
+    .activite-body { padding: 1.2rem 1.3rem; }
+
+    .etapes-activite { list-style: none; padding: 0; }
+    .etapes-activite li { padding: 0.6rem 0; border-bottom: 1px solid var(--gris); font-size: 14px; display: flex; gap: 0.8rem; align-items: flex-start; }
+    .etapes-activite li:last-child { border-bottom: none; }
+    .etape-n { background: var(--orange); color: white; width: 22px; height: 22px; border-radius: 50%; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+
+    /* GRILLE DE QUALITÉ */
+    .grille-table { width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px var(--ombre); font-size: 13.5px; margin: 0.8rem 0; }
+    .grille-table thead tr { background: #334155; color: white; }
+    .grille-table th, .grille-table td { padding: 0.65rem 0.9rem; text-align: left; border-bottom: 1px solid var(--gris2); }
+    .grille-table tbody tr:last-child td { border-bottom: none; }
+    .grille-table tbody tr:hover { background: var(--gris); }
+    .score-col { text-align: center; font-weight: 700; }
+    .score-0 { color: var(--rouge); }
+    .score-1 { color: var(--orange); }
+    .score-2 { color: #84cc16; }
+    .score-3 { color: var(--vert); }
+
+    /* TABLEAU SCÉNARIOS */
+    .scenario-table { width: 100%; border-collapse: collapse; font-size: 13.5px; margin: 0.8rem 0; }
+    .scenario-table th { background: var(--bleu); color: white; padding: 0.6rem 0.9rem; text-align: left; }
+    .scenario-table td { padding: 0.6rem 0.9rem; border-bottom: 1px solid var(--gris2); vertical-align: top; }
+    .scenario-table tr:nth-child(even) td { background: var(--gris); }
+
+    .prompt-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: #64748b; margin-bottom: 4px; display: block; margin-top: 1rem; }
+    .prompt-box { background: #0f172a; color: #e2e8f0; border-radius: 8px; padding: 1rem 1.2rem; font-family: 'Consolas','Courier New',monospace; font-size: 13px; line-height: 1.7; margin: 0.6rem 0; white-space: pre-wrap; }
+
+    .a-retenir { background: #fff7ed; border: 1px solid #fed7aa; border-radius: 8px; padding: 1rem 1.2rem; margin-top: 1rem; }
+    .a-retenir h4 { font-size: 13px; text-transform: uppercase; letter-spacing: .05em; color: var(--orange); margin-bottom: 0.5rem; font-weight: 700; }
+    .a-retenir ul { padding-left: 1.3rem; font-size: 14px; }
+    .a-retenir ul li { margin-bottom: 4px; }
+
+    footer { text-align: center; padding: 1.5rem; font-size: 12px; color: #94a3b8; border-top: 1px solid var(--gris2); margin-top: 2rem; }
+  </style>
+</head>
+<body>
+
+<nav class="nav-bar">
+  <a href="semaine2.html">← Semaine 2</a>
+  <a class="nav-plan" href="plan_formation_agent_claude.html">📋 Plan général</a>
+  <a href="semaine4.html">Semaine 4 →</a>
+</nav>
+
+<header>
+  <div class="header-badge">Étape 2 · Semaine 3 sur 6</div>
+  <h1>Mesurer et améliorer la qualité</h1>
+  <p class="sous-titre">Construire une grille d'évaluation et des scénarios de test pour son agent</p>
+  <div class="header-meta">
+    <span>⏱ 2 × 1 h (2 demi-journées)</span>
+    <span>👥 Profils mixtes</span>
+    <span>🔵 Niveau B — Fichier HTML</span>
+  </div>
+</header>
+
+<div class="container">
+
+  <h2 class="section-titre">🎓 Guide formateur</h2>
+
+  <details class="guide" open>
+    <summary>📋 Déroulé — Séance 3A (1 h) : Construire sa grille de qualité</summary>
+    <div class="guide-body">
+      <ul class="timing-list">
+        <li>
+          <span class="timing-tag">0:00 – 0:15</span>
+          <div class="timing-desc">
+            <strong>Introduction : pourquoi mesurer ? (15 min)</strong>
+            Posez la question : <em>« Votre agent de la semaine 2 — vous faites confiance à 100 % à ses réponses ? »</em> Amenez l'idée que sans critères objectifs, il est impossible de savoir si on améliore ou si on dégrade. Montrez un exemple concret de réponse ambiguë.
+          </div>
+        </li>
+        <li>
+          <span class="timing-tag">0:15 – 0:40</span>
+          <div class="timing-desc">
+            <strong>Présentation de la grille de qualité (25 min)</strong>
+            Présentez les 5 critères (voir fiche apprenant). Évaluez ensemble 2 réponses de Claude sur la même question avec et sans prompt système — comparez les scores.
+          </div>
+        </li>
+        <li>
+          <span class="timing-tag">0:40 – 1:00</span>
+          <div class="timing-desc">
+            <strong>Activité 1 : évaluer 3 réponses de son agent (20 min)</strong>
+            Chaque stagiaire pose 3 questions à son agent et remplit la grille pour chaque réponse.
+          </div>
+        </li>
+      </ul>
+      <div class="conseil">
+        <strong>💡 Conseil pédagogique</strong>
+        La grille n'est pas un outil de punition — c'est un outil de progression. Insistez : un score de 6/15 n'est pas un échec, c'est un point de départ. La semaine 6 montrera comment améliorer systématiquement ces scores.
+      </div>
+    </div>
+  </details>
+
+  <details class="guide">
+    <summary>📋 Déroulé — Séance 3B (1 h) : Scénarios de test et prompt engineering</summary>
+    <div class="guide-body">
+      <ul class="timing-list">
+        <li>
+          <span class="timing-tag">0:00 – 0:20</span>
+          <div class="timing-desc">
+            <strong>Rappel 3A + introduction aux scénarios de test (20 min)</strong>
+            Un « scénario de test » = une question type que l'on repose régulièrement pour vérifier que l'agent maintient sa qualité. Analogie : les contrôles qualité en production.
+          </div>
+        </li>
+        <li>
+          <span class="timing-tag">0:20 – 0:45</span>
+          <div class="timing-desc">
+            <strong>Activité 2 : créer sa bibliothèque de 5 scénarios de test (25 min)</strong>
+            Chaque stagiaire rédige 5 questions-tests représentatives de son usage quotidien. Ces questions serviront de référence pour toute la suite de la formation.
+          </div>
+        </li>
+        <li>
+          <span class="timing-tag">0:45 – 1:00</span>
+          <div class="timing-desc">
+            <strong>Activité 3 : améliorer un prompt système grâce aux scores (15 min)</strong>
+            Les stagiaires identifient le critère le plus faible de leur grille et modifient le prompt système pour l'améliorer, puis réévaluent.
+          </div>
+        </li>
+      </ul>
+      <div class="conseil">
+        <strong>🎯 Objectif de la double séance</strong>
+        À la fin de la semaine 3, chaque stagiaire doit avoir : une grille de qualité remplie pour son agent, 5 scénarios de test documentés, et un prompt système amélioré par rapport à la semaine 2.
+      </div>
+    </div>
+  </details>
+
+  <h2 class="section-titre">📄 Fiche apprenant</h2>
+
+  <div class="fiche">
+    <h3>🎯 Ce que vous allez savoir faire à la fin de cette semaine</h3>
+    <div class="objectifs">
+      <span class="objectif-pill vert">✓ Évaluer objectivement une réponse de Claude</span>
+      <span class="objectif-pill vert">✓ Utiliser une grille de qualité à 5 critères</span>
+      <span class="objectif-pill bleu">✓ Constituer une bibliothèque de scénarios de test</span>
+      <span class="objectif-pill bleu">✓ Améliorer son prompt système de façon mesurable</span>
+      <span class="objectif-pill orange">✓ Distinguer une réponse correcte d'une hallucination</span>
+    </div>
+  </div>
+
+  <div class="fiche">
+    <h3>📊 La grille de qualité — 5 critères, score sur 15</h3>
+    <p style="font-size:14px; margin-bottom:0.8rem;">Pour chaque réponse de votre agent, attribuez un score de 0 à 3 sur chacun des 5 critères :</p>
+    <table class="grille-table">
+      <thead>
+        <tr>
+          <th>Critère</th>
+          <th>0 — Insuffisant</th>
+          <th>1 — Partiel</th>
+          <th>2 — Correct</th>
+          <th>3 — Excellent</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Pertinence</strong><br><small>La réponse répond-elle à la question posée ?</small></td>
+          <td>Hors sujet</td>
+          <td>Partiellement</td>
+          <td>Oui, globalement</td>
+          <td>Précisément et complètement</td>
+        </tr>
+        <tr>
+          <td><strong>Exactitude</strong><br><small>Les informations sont-elles vérifiables et correctes ?</small></td>
+          <td>Erreur grave ou invention</td>
+          <td>Approximatif</td>
+          <td>Correct mais incomplet</td>
+          <td>Précis et vérifiable</td>
+        </tr>
+        <tr>
+          <td><strong>Clarté</strong><br><small>Est-ce facilement compréhensible par le destinataire ?</small></td>
+          <td>Incompréhensible</td>
+          <td>Difficile à lire</td>
+          <td>Clair avec effort</td>
+          <td>Immédiatement clair</td>
+        </tr>
+        <tr>
+          <td><strong>Format</strong><br><small>La mise en forme est-elle adaptée à l'usage prévu ?</small></td>
+          <td>Inadapté</td>
+          <td>Utilisable avec retouches</td>
+          <td>Adapté</td>
+          <td>Parfaitement adapté</td>
+        </tr>
+        <tr>
+          <td><strong>Prudence</strong><br><small>Claude signale-t-il ses incertitudes ?</small></td>
+          <td>Aucune nuance</td>
+          <td>Vague</td>
+          <td>Signale les limites</td>
+          <td>Transparent sur ce qu'il ignore</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="info">
+      <strong>📌 Interprétation du score total</strong>
+      0–5 : agent à retravailler en priorité · 6–9 : utilisable avec relecture obligatoire · 10–12 : bon niveau, à peaufiner · 13–15 : agent de qualité production
+    </div>
+  </div>
+
+  <div class="fiche">
+    <h3>🧩 Concepts clés de cette semaine</h3>
+    <div class="concept-grid">
+      <div class="concept-card">
+        <div class="terme">📊 Grille d'évaluation</div>
+        <div class="def">Outil structuré pour noter objectivement une réponse selon plusieurs critères. Évite le jugement « c'est bien / c'est nul ».</div>
+      </div>
+      <div class="concept-card">
+        <div class="terme">🧪 Scénario de test</div>
+        <div class="def">Question type représentative d'un usage réel, que l'on repose régulièrement pour surveiller la qualité de l'agent dans le temps.</div>
+      </div>
+      <div class="concept-card">
+        <div class="terme">🌀 Hallucination</div>
+        <div class="def">Quand Claude invente une information fausse avec l'air d'être sûr de lui. Le critère « Exactitude » de la grille est là pour le détecter.</div>
+      </div>
+      <div class="concept-card">
+        <div class="terme">⚙️ Prompt engineering</div>
+        <div class="def">L'art d'améliorer son prompt système de façon itérative : tester → mesurer → modifier → retester. Même principe que l'amélioration continue en production.</div>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="section-titre">🛠️ Activités pratiques</h2>
+
+  <!-- ACTIVITÉ 1 -->
+  <div class="activite-card">
+    <div class="activite-header">
+      <div class="activite-num">1</div>
+      <div class="activite-info">
+        <h3>Évaluer 3 réponses de son agent avec la grille</h3>
+        <div class="meta"><span>⏱ 20 min</span><span>🔵 Niveau B</span><span>👤 Individuel</span></div>
+      </div>
+    </div>
+    <div class="activite-body">
+      <p style="font-size:14px; margin-bottom:1rem;">Posez les 3 questions ci-dessous à votre agent HTML (semaine 2). Pour chaque réponse, remplissez la grille de qualité et calculez votre score total.</p>
+
+      <table class="scenario-table">
+        <thead><tr><th>Profil</th><th>Question 1</th><th>Question 2</th><th>Question 3</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>🟢 RH</td>
+            <td>Quelles sont les conditions légales pour mettre un salarié en chômage partiel ?</td>
+            <td>Rédige un courrier de convocation à entretien préalable au licenciement.</td>
+            <td>Quelle est la durée légale du préavis pour un cadre avec 5 ans d'ancienneté ?</td>
+          </tr>
+          <tr>
+            <td>🔵 Compta</td>
+            <td>Comment comptabiliser une facture d'achat avec TVA déductible à 20 % ?</td>
+            <td>Quels sont les délais de paiement légaux entre professionnels en France ?</td>
+            <td>Explique la différence entre charge et immobilisation pour l'achat d'un ordinateur.</td>
+          </tr>
+          <tr>
+            <td>🟣 Manager</td>
+            <td>Comment gérer un conflit entre deux opérateurs sur le planning de week-end ?</td>
+            <td>Quels indicateurs de sécurité dois-je afficher obligatoirement dans mon atelier ?</td>
+            <td>Propose un plan d'action pour réduire le taux d'absentéisme de 15 % en 6 mois.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div style="margin-top:1rem;">
+        <p style="font-size:14px; font-weight:600; margin-bottom:0.6rem;">📋 Pour chaque réponse :</p>
+        <ul class="etapes-activite">
+          <li><span class="etape-n">1</span><span>Copiez la question dans votre agent HTML et envoyez-la.</span></li>
+          <li><span class="etape-n">2</span><span>Lisez attentivement la réponse, sans chercher à la corriger immédiatement.</span></li>
+          <li><span class="etape-n">3</span><span>Notez un score de 0 à 3 pour chacun des 5 critères (grille ci-dessus).</span></li>
+          <li><span class="etape-n">4</span><span>Identifiez le critère le plus faible — c'est votre priorité d'amélioration.</span></li>
+          <li><span class="etape-n">5</span><span>Comparez vos scores avec votre voisin sur la même question.</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ACTIVITÉ 2 -->
+  <div class="activite-card">
+    <div class="activite-header">
+      <div class="activite-num">2</div>
+      <div class="activite-info">
+        <h3>Construire sa bibliothèque de 5 scénarios de test</h3>
+        <div class="meta"><span>⏱ 25 min</span><span>🔵 Niveau B</span><span>👤 Individuel</span></div>
+      </div>
+    </div>
+    <div class="activite-body">
+      <p style="font-size:14px; margin-bottom:1rem;">Vous allez constituer votre propre banque de questions-tests, représentatives de votre travail réel. Ces 5 questions deviennent votre « étalon » : vous les reposerez à chaque fois que vous modifiez votre agent pour vérifier que la qualité s'est améliorée.</p>
+
+      <p class="prompt-label">Modèle de fiche scénario de test (à compléter pour chacun de vos 5 scénarios)</p>
+      <div class="prompt-box">SCÉNARIO DE TEST N°__
+
+Question posée :
+(Écrivez ici la question exacte que vous envoyez à l'agent)
+
+Contexte d'usage :
+(Dans quelle situation réelle poseriez-vous cette question ?)
+
+Réponse attendue — critères de succès :
+- Pertinence : ___________________________
+- Exactitude : ___________________________
+- Clarté : ______________________________
+- Format : ______________________________
+- Prudence : ____________________________
+
+Score obtenu aujourd'hui : ___ / 15
+Score cible (semaine 6) :   ___ / 15</div>
+
+      <div class="conseil">
+        <strong>💡 Comment choisir ses 5 scénarios ?</strong>
+        Choisissez des questions que vous poseriez réellement dans votre travail, pas des questions hypothétiques. Variez : une question simple (vérification factuelle), deux questions de rédaction, une question d'analyse, une question sur un cas délicat ou ambigu.
+      </div>
+    </div>
+  </div>
+
+  <!-- ACTIVITÉ 3 -->
+  <div class="activite-card">
+    <div class="activite-header">
+      <div class="activite-num">3</div>
+      <div class="activite-info">
+        <h3>Améliorer son prompt système grâce aux scores</h3>
+        <div class="meta"><span>⏱ 15 min</span><span>🔵 Niveau B</span><span>👥 En binôme</span></div>
+      </div>
+    </div>
+    <div class="activite-body">
+      <p style="font-size:14px; margin-bottom:0.8rem;">Regardez votre critère le plus faible dans la grille. Le tableau ci-dessous vous propose une correction ciblée à ajouter à votre prompt système.</p>
+
+      <table class="scenario-table">
+        <thead><tr><th>Critère faible</th><th>Ajout à faire dans le prompt système</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>Pertinence</strong></td>
+            <td><em>« Si ma question ne concerne pas ton domaine d'expertise, dis-le et redirige-moi vers la bonne ressource plutôt que d'inventer une réponse. »</em></td>
+          </tr>
+          <tr>
+            <td><strong>Exactitude</strong></td>
+            <td><em>« Si tu n'es pas certain d'une information réglementaire ou chiffrée, indique-le explicitement avec la mention [À VÉRIFIER]. »</em></td>
+          </tr>
+          <tr>
+            <td><strong>Clarté</strong></td>
+            <td><em>« Mon interlocuteur n'est pas spécialiste. Utilise des phrases courtes, évite le jargon, et illustre avec un exemple concret quand c'est utile. »</em></td>
+          </tr>
+          <tr>
+            <td><strong>Format</strong></td>
+            <td><em>« Sauf demande contraire, structure tes réponses avec : un résumé en 2 lignes, puis les détails en bullet points. »</em></td>
+          </tr>
+          <tr>
+            <td><strong>Prudence</strong></td>
+            <td><em>« Rappelle systématiquement que tes réponses sont informatives et ne remplacent pas l'avis d'un professionnel (juriste, comptable, médecin…). »</em></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div style="margin-top:1rem;">
+        <p style="font-size:14px; font-weight:600; margin-bottom:0.6rem;">📋 Étapes :</p>
+        <ul class="etapes-activite">
+          <li><span class="etape-n">1</span><span>Identifiez votre critère le plus faible (celui avec le score moyen le plus bas sur vos 3 tests).</span></li>
+          <li><span class="etape-n">2</span><span>Copiez la correction correspondante dans le tableau ci-dessus.</span></li>
+          <li><span class="etape-n">3</span><span>Ajoutez-la à la fin de votre prompt système dans le fichier HTML.</span></li>
+          <li><span class="etape-n">4</span><span>Reposez la question qui avait eu le score le plus faible. Réévaluez avec la grille.</span></li>
+          <li><span class="etape-n">5</span><span>Le score a-t-il augmenté ? De combien de points ?</span></li>
+        </ul>
+      </div>
+
+      <div class="a-retenir">
+        <h4>📌 Ce que vous emportez de cette semaine</h4>
+        <ul>
+          <li>Une grille de qualité à 5 critères, applicable à n'importe quel agent IA</li>
+          <li>5 scénarios de test documentés, votre référence pour la suite</li>
+          <li>La méthode : tester → mesurer → modifier le prompt → retester</li>
+          <li>La semaine prochaine : connecter Claude à vos outils (Drive, Agenda) via les MCP</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  Formation « Maîtriser Claude et l'IA Agentique » · Pôle Formation UIMM-CVDL · Auteur : S. Jaubert · Mai 2026
+</footer>
+</body>
+</html>

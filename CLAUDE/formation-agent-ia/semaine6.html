@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Semaine 6 — Évaluation finale, OODA et mise en production</title>
+  <style>
+    :root {
+      --bleu:   #1a3a5c;
+      --bleu2:  #2563a8;
+      --vert:   #16a34a;
+      --orange: #d97706;
+      --rouge:  #dc2626;
+      --violet: #7c3aed;
+      --gris:   #f1f5f9;
+      --gris2:  #e2e8f0;
+      --texte:  #1e293b;
+      --clair:  #ffffff;
+      --ombre:  rgba(0,0,0,0.08);
+      --indigo: #4338ca;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f4f8; color: var(--texte); line-height: 1.65; font-size: 15px; }
+
+    .nav-bar { background: var(--bleu); padding: 0.7rem 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
+    .nav-bar a { color: rgba(255,255,255,0.85); text-decoration: none; font-size: 13px; padding: 4px 12px; border: 1px solid rgba(255,255,255,0.25); border-radius: 20px; }
+    .nav-bar a:hover { background: rgba(255,255,255,0.15); color: white; }
+    .nav-bar .nav-plan { font-weight: 700; border-color: rgba(255,255,255,0.5); }
+    .nav-bar .nav-disabled { opacity: 0.35; pointer-events: none; }
+
+    header { background: linear-gradient(135deg, var(--bleu) 0%, var(--indigo) 100%); color: white; padding: 2.2rem 2rem 1.8rem; text-align: center; }
+    .header-badge { display: inline-block; background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.35); border-radius: 20px; padding: 3px 14px; font-size: 12px; letter-spacing: .05em; text-transform: uppercase; margin-bottom: 0.8rem; }
+    header h1 { font-size: 1.8rem; font-weight: 700; margin-bottom: 0.3rem; }
+    header p.sous-titre { font-size: 1rem; opacity: 0.88; margin-bottom: 1rem; }
+    .header-meta { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; font-size: 13px; opacity: 0.82; }
+    .header-meta span { display: flex; align-items: center; gap: 5px; }
+
+    .container { max-width: 960px; margin: 0 auto; padding: 2rem 1.5rem; }
+    .section-titre { font-size: 1.2rem; font-weight: 700; color: var(--bleu); padding-bottom: 0.5rem; border-bottom: 2px solid var(--gris2); margin-bottom: 1.2rem; margin-top: 2rem; display: flex; align-items: center; gap: 10px; }
+
+    details.guide { background: white; border-radius: 10px; box-shadow: 0 2px 8px var(--ombre); margin-bottom: 1.5rem; overflow: hidden; }
+    details.guide summary { padding: 1rem 1.4rem; cursor: pointer; display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1rem; color: var(--bleu); background: #eef2ff; border-left: 5px solid var(--indigo); list-style: none; user-select: none; }
+    details.guide summary::-webkit-details-marker { display: none; }
+    details.guide summary::after { content: " ▼"; font-size: 11px; margin-left: auto; color: var(--indigo); }
+    details.guide[open] summary::after { content: " ▲"; }
+    details.guide .guide-body { padding: 1.4rem; }
+
+    .timing-list { list-style: none; padding: 0; }
+    .timing-list li { display: flex; gap: 1rem; padding: 0.7rem 0; border-bottom: 1px solid var(--gris2); align-items: flex-start; }
+    .timing-list li:last-child { border-bottom: none; }
+    .timing-tag { background: var(--indigo); color: white; border-radius: 12px; padding: 2px 10px; font-size: 12px; font-weight: 600; white-space: nowrap; flex-shrink: 0; margin-top: 2px; }
+    .timing-desc { font-size: 14px; }
+    .timing-desc strong { display: block; margin-bottom: 2px; }
+
+    .conseil { background: #eef2ff; border-left: 4px solid var(--indigo); border-radius: 6px; padding: 0.8rem 1rem; font-size: 14px; margin: 0.8rem 0; }
+    .conseil strong { color: var(--indigo); display: block; margin-bottom: 3px; }
+    .alerte { background: #fef2f2; border-left: 4px solid var(--rouge); border-radius: 6px; padding: 0.8rem 1rem; font-size: 14px; margin: 0.8rem 0; }
+    .alerte strong { color: #991b1b; display: block; margin-bottom: 3px; }
+    .success { background: #f0fdf4; border-left: 4px solid var(--vert); border-radius: 6px; padding: 0.8rem 1rem; font-size: 14px; margin: 0.8rem 0; }
+    .success strong { color: #166534; display: block; margin-bottom: 3px; }
+
+    .fiche { background: white; border-radius: 10px; box-shadow: 0 2px 8px var(--ombre); padding: 1.4rem; margin-bottom: 1.5rem; }
+    .fiche h3 { font-size: 1rem; font-weight: 700; color: var(--bleu); margin-bottom: 0.8rem; }
+
+    .objectifs { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 1rem; }
+    .objectif-pill { background: var(--gris); border-radius: 20px; padding: 5px 14px; font-size: 13px; }
+    .objectif-pill.vert  { background: #dcfce7; color: #166534; }
+    .objectif-pill.bleu  { background: #dbeafe; color: #1e40af; }
+    .objectif-pill.indigo{ background: #e0e7ff; color: #3730a3; }
+
+    .activite-card { background: white; border-radius: 10px; box-shadow: 0 2px 8px var(--ombre); margin-bottom: 1.5rem; overflow: hidden; }
+    .activite-header { padding: 0.9rem 1.3rem; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid var(--gris2); }
+    .activite-num { background: var(--indigo); color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; flex-shrink: 0; }
+    .activite-info h3 { font-size: 1rem; font-weight: 700; }
+    .activite-info .meta { font-size: 12px; color: #64748b; margin-top: 2px; display: flex; gap: 10px; flex-wrap: wrap; }
+    .activite-body { padding: 1.2rem 1.3rem; }
+
+    .etapes-activite { list-style: none; padding: 0; }
+    .etapes-activite li { padding: 0.6rem 0; border-bottom: 1px solid var(--gris); font-size: 14px; display: flex; gap: 0.8rem; align-items: flex-start; }
+    .etapes-activite li:last-child { border-bottom: none; }
+    .etape-n { background: var(--indigo); color: white; width: 22px; height: 22px; border-radius: 50%; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+
+    /* OODA CYCLE */
+    .ooda-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.8rem;
+      margin: 1rem 0;
+    }
+    .ooda-card {
+      border-radius: 10px;
+      padding: 1rem;
+      position: relative;
+    }
+    .ooda-card.observer  { background: #dbeafe; border: 1px solid #93c5fd; }
+    .ooda-card.orienter  { background: #dcfce7; border: 1px solid #86efac; }
+    .ooda-card.decider   { background: #ffedd5; border: 1px solid #fdba74; }
+    .ooda-card.agir      { background: #ede9fe; border: 1px solid #c4b5fd; }
+    .ooda-letter { font-size: 2rem; font-weight: 900; opacity: 0.2; position: absolute; top: 0.5rem; right: 0.8rem; }
+    .ooda-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+    .ooda-card p { font-size: 13px; }
+    .ooda-card .exemple { font-size: 12.5px; margin-top: 4px; color: #475569; font-style: italic; }
+
+    /* ERREURS */
+    .erreur-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.8rem; margin: 0.8rem 0; }
+    .erreur-card { background: #fff7ed; border: 1px solid #fed7aa; border-radius: 8px; padding: 1rem; }
+    .erreur-card h4 { font-size: 13px; font-weight: 700; color: #9a3412; margin-bottom: 0.4rem; }
+    .erreur-card .symptome { font-size: 12.5px; color: #7c2d12; margin-bottom: 0.4rem; }
+    .erreur-card .correction { font-size: 12.5px; color: #166534; background: #f0fdf4; border-radius: 4px; padding: 4px 6px; }
+
+    /* CHECKLIST PROD */
+    .checklist { background: white; border-radius: 8px; box-shadow: 0 2px 8px var(--ombre); padding: 1.2rem 1.4rem; }
+    .checklist h4 { font-size: 14px; font-weight: 700; margin-bottom: 0.8rem; color: var(--bleu); }
+    .check-group { margin-bottom: 1rem; }
+    .check-group-title { font-size: 12px; text-transform: uppercase; letter-spacing: .05em; color: #64748b; font-weight: 700; margin-bottom: 0.4rem; }
+    .check-item { display: flex; align-items: flex-start; gap: 0.6rem; padding: 4px 0; font-size: 14px; }
+    .check-item input[type=checkbox] { width: 16px; height: 16px; margin-top: 2px; flex-shrink: 0; accent-color: var(--vert); }
+
+    /* TABLEAU SCORES */
+    .score-table { width: 100%; border-collapse: collapse; font-size: 13.5px; margin: 0.8rem 0; }
+    .score-table th { background: var(--bleu); color: white; padding: 0.6rem 0.9rem; text-align: left; }
+    .score-table td { padding: 0.6rem 0.9rem; border-bottom: 1px solid var(--gris2); }
+    .score-table tr:nth-child(even) td { background: var(--gris); }
+    .score-delta-pos { color: var(--vert); font-weight: 700; }
+    .score-delta-neg { color: var(--rouge); font-weight: 700; }
+
+    .prompt-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: #64748b; margin-bottom: 4px; display: block; margin-top: 1rem; }
+
+    /* CERTIFICAT */
+    .certificat {
+      background: linear-gradient(135deg, var(--bleu) 0%, var(--indigo) 100%);
+      color: white;
+      border-radius: 12px;
+      padding: 2rem;
+      text-align: center;
+      margin: 1.5rem 0;
+    }
+    .certificat h3 { font-size: 1.3rem; margin-bottom: 0.5rem; }
+    .certificat p { opacity: 0.88; font-size: 14px; margin-bottom: 1rem; }
+    .competences-acquises {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: center;
+    }
+    .comp-pill {
+      background: rgba(255,255,255,0.2);
+      border: 1px solid rgba(255,255,255,0.35);
+      border-radius: 20px;
+      padding: 5px 14px;
+      font-size: 12.5px;
+    }
+
+    footer { text-align: center; padding: 1.5rem; font-size: 12px; color: #94a3b8; border-top: 1px solid var(--gris2); margin-top: 2rem; }
+  </style>
+</head>
+<body>
+
+<nav class="nav-bar">
+  <a href="semaine5.html">← Semaine 5</a>
+  <a class="nav-plan" href="plan_formation_agent_claude.html">📋 Plan général</a>
+  <span class="nav-disabled">Fin de formation →</span>
+</nav>
+
+<header>
+  <div class="header-badge">Étape 4 · Semaine 6 sur 6 — Séance finale</div>
+  <h1>Évaluation, OODA et mise en production</h1>
+  <p class="sous-titre">Mesurer les progrès, corriger les erreurs types et valider son agent pour un usage réel</p>
+  <div class="header-meta">
+    <span>⏱ 2 × 1 h (bilan + validation)</span>
+    <span>👥 Tous profils</span>
+    <span>🎓 Bilan de formation</span>
+  </div>
+</header>
+
+<div class="container">
+
+  <h2 class="section-titre">🎓 Guide formateur</h2>
+
+  <details class="guide" open>
+    <summary>📋 Déroulé — Séance 6A (1 h) : Bilan et corrections</summary>
+    <div class="guide-body">
+      <ul class="timing-list">
+        <li>
+          <span class="timing-tag">0:00 – 0:20</span>
+          <div class="timing-desc">
+            <strong>Retour sur les scores semaine 3 vs. aujourd'hui (20 min)</strong>
+            Chaque stagiaire repose ses 5 scénarios de test (semaine 3) à son agent amélioré. Ils comparent les scores dans le tableau d'évolution ci-dessous. Animez un tour de table : <em>« Quel est votre plus grand progrès ? »</em>
+          </div>
+        </li>
+        <li>
+          <span class="timing-tag">0:20 – 0:40</span>
+          <div class="timing-desc">
+            <strong>Catalogue des erreurs types et corrections OODA (20 min)</strong>
+            Présentez le catalogue des 6 erreurs les plus fréquentes. Montrez comment le cycle OODA permet de corriger chacune de façon méthodique.
+          </div>
+        </li>
+        <li>
+          <span class="timing-tag">0:40 – 1:00</span>
+          <div class="timing-desc">
+            <strong>Activité 1 : diagnostiquer et corriger une erreur de son agent (20 min)</strong>
+            Chaque stagiaire identifie son erreur persistante (celle qui revient dans ses scores) et applique la correction OODA correspondante.
+          </div>
+        </li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="guide">
+    <summary>📋 Déroulé — Séance 6B (1 h) : Validation production et clôture</summary>
+    <div class="guide-body">
+      <ul class="timing-list">
+        <li>
+          <span class="timing-tag">0:00 – 0:30</span>
+          <div class="timing-desc">
+            <strong>Activité 2 : checklist de validation production (30 min)</strong>
+            Chaque stagiaire complète la checklist de mise en production pour son agent. Échangez en binôme : chacun valide la checklist de l'autre.
+          </div>
+        </li>
+        <li>
+          <span class="timing-tag">0:30 – 0:50</span>
+          <div class="timing-desc">
+            <strong>Présentation des agents — 2 min chacun (20 min)</strong>
+            Chaque stagiaire présente brièvement son agent : ce qu'il fait, son score de qualité actuel, un exemple de requête. Format : démo live ou description orale.
+          </div>
+        </li>
+        <li>
+          <span class="timing-tag">0:50 – 1:00</span>
+          <div class="timing-desc">
+            <strong>Clôture et perspectives (10 min)</strong>
+            Distribuez le récapitulatif des compétences acquises. Indiquez les ressources pour aller plus loin (Claude Code, niveau C, automatisation avancée).
+          </div>
+        </li>
+      </ul>
+
+      <div class="success">
+        <strong>✅ Indicateur de réussite de la formation</strong>
+        Un stagiaire a réussi si : son agent obtient un score moyen ≥ 10/15 sur ses 5 scénarios de test, il peut expliquer à un collègue ce qu'est un MCP, et il a identifié au moins 1 cas d'usage concret applicable dès la semaine prochaine dans son poste.
+      </div>
+    </div>
+  </details>
+
+  <h2 class="section-titre">📄 Fiche apprenant</h2>
+
+  <div class="fiche">
+    <h3>🎯 Objectifs de cette dernière séance</h3>
+    <div class="objectifs">
+      <span class="objectif-pill vert">✓ Mesurer ses progrès depuis la semaine 3</span>
+      <span class="objectif-pill vert">✓ Appliquer le cycle OODA pour améliorer son agent</span>
+      <span class="objectif-pill bleu">✓ Valider son agent avec la checklist de production</span>
+      <span class="objectif-pill indigo">✓ Identifier ses prochaines étapes de développement</span>
+    </div>
+  </div>
+
+  <div class="fiche">
+    <h3>🔄 Le cycle OODA appliqué à l'amélioration d'un agent</h3>
+    <p style="font-size:14px; margin-bottom:1rem;">OODA est une méthode de décision rapide (issue du monde militaire, adoptée par l'industrie) : Observer → Orienter → Décider → Agir. Appliquée à un agent IA, elle devient une boucle d'amélioration continue.</p>
+
+    <div class="ooda-grid">
+      <div class="ooda-card observer">
+        <div class="ooda-letter">O</div>
+        <h4>👁️ Observer</h4>
+        <p>Analysez les réponses de votre agent sans jugement. Que s'est-il passé exactement ?</p>
+        <p class="exemple">Ex : « Claude a donné un taux de TVA de 5,5 % sur un produit taxé à 20 %. »</p>
+      </div>
+      <div class="ooda-card orienter">
+        <div class="ooda-letter">O</div>
+        <h4>🧭 Orienter</h4>
+        <p>Identifiez la cause racine de l'erreur. Est-ce le prompt ? Le modèle ? L'outil ?</p>
+        <p class="exemple">Ex : « Le prompt système ne précise pas que les taux de TVA doivent être vérifiés avec web_search. »</p>
+      </div>
+      <div class="ooda-card decider">
+        <div class="ooda-letter">D</div>
+        <h4>🎯 Décider</h4>
+        <p>Choisissez une action corrective précise et testable.</p>
+        <p class="exemple">Ex : « Ajouter dans le prompt : "Pour tout taux ou chiffre réglementaire, utilise web_search pour vérifier." »</p>
+      </div>
+      <div class="ooda-card agir">
+        <div class="ooda-letter">A</div>
+        <h4>⚡ Agir</h4>
+        <p>Appliquez la correction, reposez exactement le même test, comparez les scores.</p>
+        <p class="exemple">Ex : « Score exactitude : 1/3 → 3/3 après ajout de l'instruction web_search. »</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="fiche">
+    <h3>⚠️ Catalogue des 6 erreurs les plus fréquentes</h3>
+    <div class="erreur-grid">
+      <div class="erreur-card">
+        <h4>1. Hallucination de chiffre</h4>
+        <p class="symptome">Claude donne un taux, un montant ou une date sans le vérifier</p>
+        <p class="correction">✅ Correction : activer web_search + ajouter « [À VÉRIFIER] » dans le prompt</p>
+      </div>
+      <div class="erreur-card">
+        <h4>2. Réponse hors rôle</h4>
+        <p class="symptome">Claude répond à des questions hors de son domaine défini</p>
+        <p class="correction">✅ Correction : ajouter dans le prompt « Si la question dépasse ton domaine, dis-le explicitement »</p>
+      </div>
+      <div class="erreur-card">
+        <h4>3. Format inadapté</h4>
+        <p class="symptome">Réponse en prose alors qu'un tableau est attendu, ou inversement</p>
+        <p class="correction">✅ Correction : préciser dans le prompt le format par défaut attendu</p>
+      </div>
+      <div class="erreur-card">
+        <h4>4. Réponse trop longue</h4>
+        <p class="symptome">Claude développe plus que nécessaire, noie l'essentiel</p>
+        <p class="correction">✅ Correction : ajouter « Résumé en 5 lignes maximum, sauf demande contraire »</p>
+      </div>
+      <div class="erreur-card">
+        <h4>5. Perte de contexte</h4>
+        <p class="symptome">Claude « oublie » des informations données plus tôt dans la conversation</p>
+        <p class="correction">✅ Correction : vérifier que conversationHistory est bien transmis · Résumer le contexte en début de session longue</p>
+      </div>
+      <div class="erreur-card">
+        <h4>6. Excès de prudence</h4>
+        <p class="symptome">Claude refuse de répondre ou sur-nuance des questions simples</p>
+        <p class="correction">✅ Correction : clarifier dans le prompt les cas où il peut répondre sans réserve</p>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="section-titre">🛠️ Activités pratiques</h2>
+
+  <!-- ACTIVITÉ 1 -->
+  <div class="activite-card">
+    <div class="activite-header">
+      <div class="activite-num">1</div>
+      <div class="activite-info">
+        <h3>Mesurer ses progrès — Bilan des scores</h3>
+        <div class="meta"><span>⏱ 25 min</span><span>📊 Grille de qualité</span><span>👤 Individuel</span></div>
+      </div>
+    </div>
+    <div class="activite-body">
+      <p style="font-size:14px; margin-bottom:1rem;">Reposez vos 5 scénarios de test (rédigés en semaine 3) à votre agent actuel. Remplissez le tableau de comparaison ci-dessous.</p>
+
+      <table class="score-table">
+        <thead>
+          <tr>
+            <th>Scénario</th>
+            <th>Score S3</th>
+            <th>Score S6</th>
+            <th>Évolution</th>
+            <th>Critère amélioré</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Scénario 1</td><td>__ / 15</td><td>__ / 15</td><td class="score-delta-pos">+__</td><td></td></tr>
+          <tr><td>Scénario 2</td><td>__ / 15</td><td>__ / 15</td><td class="score-delta-pos">+__</td><td></td></tr>
+          <tr><td>Scénario 3</td><td>__ / 15</td><td>__ / 15</td><td class="score-delta-pos">+__</td><td></td></tr>
+          <tr><td>Scénario 4</td><td>__ / 15</td><td>__ / 15</td><td class="score-delta-pos">+__</td><td></td></tr>
+          <tr><td>Scénario 5</td><td>__ / 15</td><td>__ / 15</td><td class="score-delta-pos">+__</td><td></td></tr>
+          <tr style="background:#f0fdf4;"><td><strong>Moyenne</strong></td><td><strong>__ / 15</strong></td><td><strong>__ / 15</strong></td><td class="score-delta-pos"><strong>+__</strong></td><td></td></tr>
+        </tbody>
+      </table>
+
+      <ul class="etapes-activite" style="margin-top:1rem;">
+        <li><span class="etape-n">1</span><span>Copiez chacun de vos 5 scénarios de test dans votre agent.</span></li>
+        <li><span class="etape-n">2</span><span>Évaluez avec la grille à 5 critères (semaine 3) et notez le score.</span></li>
+        <li><span class="etape-n">3</span><span>Comparez avec vos scores de la semaine 3. Calculez l'évolution.</span></li>
+        <li><span class="etape-n">4</span><span>Identifiez le scénario où la progression est la plus faible — c'est votre priorité OODA.</span></li>
+        <li><span class="etape-n">5</span><span>Appliquez un cycle OODA complet sur ce scénario.</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ACTIVITÉ 2 -->
+  <div class="activite-card">
+    <div class="activite-header">
+      <div class="activite-num">2</div>
+      <div class="activite-info">
+        <h3>Checklist de mise en production</h3>
+        <div class="meta"><span>⏱ 20 min</span><span>✅ Validation</span><span>👥 En binôme</span></div>
+      </div>
+    </div>
+    <div class="activite-body">
+      <p style="font-size:14px; margin-bottom:1rem;">Avant de déployer votre agent dans votre travail réel, validez chaque point de cette checklist. Faites valider par un collègue (échangez vos checklists).</p>
+
+      <div class="checklist">
+        <div class="check-group">
+          <div class="check-group-title">🎯 Fonctionnement de base</div>
+          <div class="check-item"><input type="checkbox"><span>Mon agent répond correctement à mes 5 scénarios de test (score moyen ≥ 10/15)</span></div>
+          <div class="check-item"><input type="checkbox"><span>Le prompt système est rédigé en français, clair et sans ambiguïté</span></div>
+          <div class="check-item"><input type="checkbox"><span>J'ai testé avec des questions hors-sujet — l'agent les refuse correctement</span></div>
+          <div class="check-item"><input type="checkbox"><span>web_search est activé si l'agent a besoin d'informations récentes</span></div>
+        </div>
+        <div class="check-group">
+          <div class="check-group-title">🔐 Sécurité et données</div>
+          <div class="check-item"><input type="checkbox"><span>Ma clé API n'est pas visible dans le code source partagé</span></div>
+          <div class="check-item"><input type="checkbox"><span>L'agent ne traite pas de données personnelles sensibles (RGPD)</span></div>
+          <div class="check-item"><input type="checkbox"><span>Si l'agent a accès à Gmail/Drive, les droits accordés sont limités au strict nécessaire</span></div>
+          <div class="check-item"><input type="checkbox"><span>J'ai informé mon responsable qu'un agent IA accède à certains outils de l'entreprise</span></div>
+        </div>
+        <div class="check-group">
+          <div class="check-group-title">📋 Gouvernance et qualité</div>
+          <div class="check-item"><input type="checkbox"><span>J'ai documenté ce que fait l'agent (fiche de 1 page pour mes collègues)</span></div>
+          <div class="check-item"><input type="checkbox"><span>J'ai planifié une revue mensuelle des scores de qualité</span></div>
+          <div class="check-item"><input type="checkbox"><span>Je sais comment mettre l'agent en pause si une erreur grave est détectée</span></div>
+          <div class="check-item"><input type="checkbox"><span>Les réponses générées par Claude sont relues avant d'être envoyées à des tiers</span></div>
+        </div>
+        <div class="check-group">
+          <div class="check-group-title">🚀 Mise en service</div>
+          <div class="check-item"><input type="checkbox"><span>J'ai testé l'agent avec 2 collègues qui ne connaissent pas Claude</span></div>
+          <div class="check-item"><input type="checkbox"><span>J'ai un fichier de backup de mon prompt système</span></div>
+          <div class="check-item"><input type="checkbox"><span>Je sais où mettre à jour le modèle si une nouvelle version de Claude est disponible</span></div>
+        </div>
+      </div>
+
+      <div class="conseil" style="margin-top:1rem;">
+        <strong>💡 Score de maturité</strong>
+        13–15 cases cochées : prêt pour la production · 10–12 : presque prêt, quelques ajustements · &lt; 10 : reprendre quelques points avant le déploiement
+      </div>
+    </div>
+  </div>
+
+  <!-- BILAN DE COMPÉTENCES -->
+  <div class="certificat">
+    <h3>🎓 Compétences acquises — Formation complète</h3>
+    <p>À l'issue de ces 6 semaines, vous maîtrisez :</p>
+    <div class="competences-acquises">
+      <span class="comp-pill">✓ Prompting efficace</span>
+      <span class="comp-pill">✓ Agent Claude.ai (niveau A)</span>
+      <span class="comp-pill">✓ Agent HTML + API (niveau B)</span>
+      <span class="comp-pill">✓ Recherche web en temps réel</span>
+      <span class="comp-pill">✓ Grille qualité à 5 critères</span>
+      <span class="comp-pill">✓ Scénarios de test</span>
+      <span class="comp-pill">✓ MCP Drive + Agenda + Gmail</span>
+      <span class="comp-pill">✓ Mémoire conversationnelle</span>
+      <span class="comp-pill">✓ Workflows automatisés</span>
+      <span class="comp-pill">✓ Cycle OODA d'amélioration</span>
+      <span class="comp-pill">✓ Checklist de production</span>
+      <span class="comp-pill">✓ Gouvernance IA</span>
+    </div>
+  </div>
+
+  <div class="fiche">
+    <h3>🚀 Pour aller plus loin</h3>
+    <div class="etapes-activite" style="margin-top:0.5rem;">
+      <li style="border-bottom:1px solid var(--gris2); padding:0.8rem 0;"><span style="font-size:1.2rem;">📘</span><span><strong>Niveau C — Node.js</strong> : agents avec mémoire persistante en base de données, tâches planifiées (cron), intégrations Slack/Teams. Recommandé pour les profils techniques.</span></li>
+      <li style="border-bottom:1px solid var(--gris2); padding:0.8rem 0;"><span style="font-size:1.2rem;">🛠️</span><span><strong>Claude Code</strong> : interface CLI pour déléguer des tâches de développement et d'automatisation à Claude directement depuis un terminal.</span></li>
+      <li style="padding:0.8rem 0;"><span style="font-size:1.2rem;">📋</span><span><strong>Masterclass Workflow</strong> : cours dédié à l'orchestration d'agents IA dans des workflows métier complexes (multi-agents, boucles de décision, reporting automatique).</span></li>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  Formation « Maîtriser Claude et l'IA Agentique » · Pôle Formation UIMM-CVDL · Auteur : S. Jaubert · Mai 2026
+</footer>
+</body>
+</html>

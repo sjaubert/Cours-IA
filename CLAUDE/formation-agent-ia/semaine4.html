@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Semaine 4 — Connecter Claude à Google Drive et Agenda</title>
+  <style>
+    :root {
+      --bleu:   #1a3a5c;
+      --bleu2:  #2563a8;
+      --vert:   #16a34a;
+      --orange: #d97706;
+      --rouge:  #dc2626;
+      --violet: #7c3aed;
+      --gris:   #f1f5f9;
+      --gris2:  #e2e8f0;
+      --texte:  #1e293b;
+      --clair:  #ffffff;
+      --ombre:  rgba(0,0,0,0.08);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f4f8; color: var(--texte); line-height: 1.65; font-size: 15px; }
+
+    .nav-bar { background: var(--bleu); padding: 0.7rem 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
+    .nav-bar a { color: rgba(255,255,255,0.85); text-decoration: none; font-size: 13px; padding: 4px 12px; border: 1px solid rgba(255,255,255,0.25); border-radius: 20px; }
+    .nav-bar a:hover { background: rgba(255,255,255,0.15); color: white; }
+    .nav-bar .nav-plan { font-weight: 700; border-color: rgba(255,255,255,0.5); }
+
+    header { background: linear-gradient(135deg, var(--bleu2) 0%, var(--violet) 100%); color: white; padding: 2.2rem 2rem 1.8rem; text-align: center; }
+    .header-badge { display: inline-block; background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.35); border-radius: 20px; padding: 3px 14px; font-size: 12px; letter-spacing: .05em; text-transform: uppercase; margin-bottom: 0.8rem; }
+    header h1 { font-size: 1.8rem; font-weight: 700; margin-bottom: 0.3rem; }
+    header p.sous-titre { font-size: 1rem; opacity: 0.88; margin-bottom: 1rem; }
+    .header-meta { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; font-size: 13px; opacity: 0.82; }
+    .header-meta span { display: flex; align-items: center; gap: 5px; }
+
+    .container { max-width: 960px; margin: 0 auto; padding: 2rem 1.5rem; }
+    .section-titre { font-size: 1.2rem; font-weight: 700; color: var(--bleu); padding-bottom: 0.5rem; border-bottom: 2px solid var(--gris2); margin-bottom: 1.2rem; margin-top: 2rem; display: flex; align-items: center; gap: 10px; }
+
+    details.guide { background: white; border-radius: 10px; box-shadow: 0 2px 8px var(--ombre); margin-bottom: 1.5rem; overflow: hidden; }
+    details.guide summary { padding: 1rem 1.4rem; cursor: pointer; display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1rem; color: var(--bleu); background: #f5f3ff; border-left: 5px solid var(--violet); list-style: none; user-select: none; }
+    details.guide summary::-webkit-details-marker { display: none; }
+    details.guide summary::after { content: " ▼"; font-size: 11px; margin-left: auto; color: var(--violet); }
+    details.guide[open] summary::after { content: " ▲"; }
+    details.guide .guide-body { padding: 1.4rem; }
+
+    .timing-list { list-style: none; padding: 0; }
+    .timing-list li { display: flex; gap: 1rem; padding: 0.7rem 0; border-bottom: 1px solid var(--gris2); align-items: flex-start; }
+    .timing-list li:last-child { border-bottom: none; }
+    .timing-tag { background: var(--violet); color: white; border-radius: 12px; padding: 2px 10px; font-size: 12px; font-weight: 600; white-space: nowrap; flex-shrink: 0; margin-top: 2px; }
+    .timing-desc { font-size: 14px; }
+    .timing-desc strong { display: block; margin-bottom: 2px; }
+
+    .conseil { background: #f5f3ff; border-left: 4px solid var(--violet); border-radius: 6px; padding: 0.8rem 1rem; font-size: 14px; margin: 0.8rem 0; }
+    .conseil strong { color: #5b21b6; display: block; margin-bottom: 3px; }
+    .alerte { background: #fef2f2; border-left: 4px solid var(--rouge); border-radius: 6px; padding: 0.8rem 1rem; font-size: 14px; margin: 0.8rem 0; }
+    .alerte strong { color: #991b1b; display: block; margin-bottom: 3px; }
+    .info { background: #eff6ff; border-left: 4px solid var(--bleu2); border-radius: 6px; padding: 0.8rem 1rem; font-size: 14px; margin: 0.8rem 0; }
+    .info strong { color: var(--bleu2); display: block; margin-bottom: 3px; }
+
+    .fiche { background: white; border-radius: 10px; box-shadow: 0 2px 8px var(--ombre); padding: 1.4rem; margin-bottom: 1.5rem; }
+    .fiche h3 { font-size: 1rem; font-weight: 700; color: var(--bleu); margin-bottom: 0.8rem; }
+
+    .objectifs { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 1rem; }
+    .objectif-pill { background: var(--gris); border-radius: 20px; padding: 5px 14px; font-size: 13px; }
+    .objectif-pill.vert   { background: #dcfce7; color: #166534; }
+    .objectif-pill.bleu   { background: #dbeafe; color: #1e40af; }
+    .objectif-pill.violet { background: #ede9fe; color: #5b21b6; }
+
+    .concept-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 0.8rem; margin-bottom: 1rem; }
+    .concept-card { background: var(--gris); border-radius: 8px; padding: 0.9rem 1rem; }
+    .concept-card .terme { font-weight: 700; font-size: 14px; margin-bottom: 4px; }
+    .concept-card .def { font-size: 13px; color: #475569; }
+
+    .activite-card { background: white; border-radius: 10px; box-shadow: 0 2px 8px var(--ombre); margin-bottom: 1.5rem; overflow: hidden; }
+    .activite-header { padding: 0.9rem 1.3rem; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid var(--gris2); }
+    .activite-num { background: var(--violet); color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; flex-shrink: 0; }
+    .activite-info h3 { font-size: 1rem; font-weight: 700; }
+    .activite-info .meta { font-size: 12px; color: #64748b; margin-top: 2px; display: flex; gap: 10px; flex-wrap: wrap; }
+    .activite-body { padding: 1.2rem 1.3rem; }
+
+    .etapes-activite { list-style: none; padding: 0; }
+    .etapes-activite li { padding: 0.6rem 0; border-bottom: 1px solid var(--gris); font-size: 14px; display: flex; gap: 0.8rem; align-items: flex-start; }
+    .etapes-activite li:last-child { border-bottom: none; }
+    .etape-n { background: var(--violet); color: white; width: 22px; height: 22px; border-radius: 50%; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+
+    .mcp-schema {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      background: var(--gris);
+      border-radius: 10px;
+      padding: 1.2rem;
+      margin: 0.8rem 0;
+      font-size: 14px;
+    }
+    .mcp-box {
+      background: white;
+      border-radius: 8px;
+      padding: 0.6rem 1rem;
+      text-align: center;
+      box-shadow: 0 1px 4px var(--ombre);
+      font-weight: 600;
+    }
+    .mcp-arrow { font-size: 1.3rem; color: #94a3b8; }
+
+    .prompt-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: #64748b; margin-bottom: 4px; display: block; margin-top: 1rem; }
+    .code-block { background: #0f172a; color: #e2e8f0; border-radius: 8px; padding: 1rem 1.2rem; font-family: 'Consolas','Courier New',monospace; font-size: 12.5px; line-height: 1.6; overflow-x: auto; margin: 0.6rem 0; }
+    .code-block .cmt { color: #64748b; }
+    .code-block .kw  { color: #93c5fd; }
+    .code-block .str { color: #86efac; }
+
+    .en-clair { background: #f5f3ff; border: 1px solid #ddd6fe; border-radius: 8px; padding: 0.9rem 1.1rem; margin: 0.6rem 0; font-size: 14px; }
+    .en-clair strong { color: var(--violet); display: block; margin-bottom: 3px; }
+
+    .a-retenir { background: #f5f3ff; border: 1px solid #ddd6fe; border-radius: 8px; padding: 1rem 1.2rem; margin-top: 1rem; }
+    .a-retenir h4 { font-size: 13px; text-transform: uppercase; letter-spacing: .05em; color: var(--violet); margin-bottom: 0.5rem; font-weight: 700; }
+    .a-retenir ul { padding-left: 1.3rem; font-size: 14px; }
+    .a-retenir ul li { margin-bottom: 4px; }
+
+    footer { text-align: center; padding: 1.5rem; font-size: 12px; color: #94a3b8; border-top: 1px solid var(--gris2); margin-top: 2rem; }
+  </style>
+</head>
+<body>
+
+<nav class="nav-bar">
+  <a href="semaine3.html">← Semaine 3</a>
+  <a class="nav-plan" href="plan_formation_agent_claude.html">📋 Plan général</a>
+  <a href="semaine5.html">Semaine 5 →</a>
+</nav>
+
+<header>
+  <div class="header-badge">Étape 3 · Semaine 4 sur 6</div>
+  <h1>Connecter Claude à Drive et Agenda</h1>
+  <p class="sous-titre">Les MCP — protocoles qui donnent à votre agent accès à vos outils d'entreprise</p>
+  <div class="header-meta">
+    <span>⏱ 1 h 30 en présentiel</span>
+    <span>👥 Profils mixtes</span>
+    <span>🔵 Niveau B/C — MCP Google</span>
+  </div>
+</header>
+
+<div class="container">
+
+  <h2 class="section-titre">🎓 Guide formateur</h2>
+
+  <details class="guide" open>
+    <summary>📋 Déroulé de la séance (1 h 30)</summary>
+    <div class="guide-body">
+      <ul class="timing-list">
+        <li>
+          <span class="timing-tag">0:00 – 0:20</span>
+          <div class="timing-desc">
+            <strong>Introduction aux MCP — « la prise universelle » (20 min)</strong>
+            Utilisez l'analogie : un MCP, c'est comme une prise universelle entre Claude et vos outils. Claude ne sait pas lire vos fichiers Drive par défaut — le MCP est le câble qui crée la connexion. Montrez le schéma de flux ci-dessous. Pas de live coding : expliquez ce que fait chaque bloc.
+          </div>
+        </li>
+        <li>
+          <span class="timing-tag">0:20 – 0:45</span>
+          <div class="timing-desc">
+            <strong>Démonstration formateur — agent Drive en action (25 min)</strong>
+            Le formateur (ou un poste de démonstration préconfiguré) montre un agent capable de : lister les fichiers d'un dossier Drive partagé, résumer un document, créer un événement Agenda. Les stagiaires observent et notent les cas d'usage dans leur métier.
+          </div>
+        </li>
+        <li>
+          <span class="timing-tag">0:45 – 1:20</span>
+          <div class="timing-desc">
+            <strong>Activités pratiques guidées (35 min)</strong>
+            Les stagiaires travaillent sur les 2 activités ci-dessous. Le formateur circule. Priorité à la compréhension du flux plutôt qu'à la configuration technique (qui est pré-faite).
+          </div>
+        </li>
+        <li>
+          <span class="timing-tag">1:20 – 1:30</span>
+          <div class="timing-desc">
+            <strong>Débrief et questions (10 min)</strong>
+            Question clé : <em>« Dans votre métier, quel outil connecté à Claude vous ferait gagner le plus de temps ? »</em>
+          </div>
+        </li>
+      </ul>
+
+      <div class="alerte">
+        <strong>⚠️ Prérequis technique important</strong>
+        La configuration des MCP Google nécessite un serveur MCP préconfiguré (Drive MCP, Calendar MCP). Pour la formation, deux options : (A) utiliser Claude Desktop avec les MCP installés sur le poste formateur en mode démo, ou (B) utiliser un serveur MCP mutualisé accessible sur le réseau local. Prévoir 30 min de setup technique avant la séance.
+      </div>
+
+      <div class="conseil">
+        <strong>🎭 Approche recommandée pour les non-techniciens</strong>
+        Ne cherchez pas à faire configurer les MCP par les stagiaires eux-mêmes lors de cette séance. L'objectif est qu'ils <em>comprennent ce que font</em> les MCP et qu'ils sachent <em>formuler les requêtes</em> à l'agent — pas qu'ils sachent les installer. La configuration technique reste l'affaire des DSI.
+      </div>
+    </div>
+  </details>
+
+  <h2 class="section-titre">📄 Fiche apprenant</h2>
+
+  <div class="fiche">
+    <h3>🎯 Ce que vous allez comprendre et savoir faire</h3>
+    <div class="objectifs">
+      <span class="objectif-pill vert">✓ Comprendre ce qu'est un MCP</span>
+      <span class="objectif-pill vert">✓ Savoir ce que Claude peut faire avec Drive et Agenda</span>
+      <span class="objectif-pill bleu">✓ Formuler des requêtes vers un agent multi-outils</span>
+      <span class="objectif-pill violet">✓ Identifier 2 cas d'usage MCP dans votre métier</span>
+    </div>
+  </div>
+
+  <div class="fiche">
+    <h3>🔌 MCP — Comment ça fonctionne ?</h3>
+    <p style="font-size:14px; margin-bottom:1rem;">Un <strong>MCP (Model Context Protocol)</strong> est un protocole standard qui permet à Claude de communiquer avec des applications extérieures. Sans MCP, Claude ne peut pas lire vos fichiers Drive, créer des événements dans votre Agenda ou envoyer des mails — même si vous le lui demandez.</p>
+
+    <div class="mcp-schema">
+      <div class="mcp-box">🧠<br>Claude<br><small style="font-weight:400;color:#64748b;">Votre agent</small></div>
+      <div class="mcp-arrow">⟺</div>
+      <div class="mcp-box">🔌<br>MCP<br><small style="font-weight:400;color:#64748b;">Le câble</small></div>
+      <div class="mcp-arrow">⟺</div>
+      <div class="mcp-box">📁<br>Drive<br><small style="font-weight:400;color:#64748b;">Vos fichiers</small></div>
+      <div class="mcp-arrow">+</div>
+      <div class="mcp-box">📅<br>Agenda<br><small style="font-weight:400;color:#64748b;">Vos rendez-vous</small></div>
+    </div>
+
+    <div class="info">
+      <strong>📌 Ce que Claude peut faire avec Drive (via MCP)</strong>
+      Lister les fichiers d'un dossier · Lire le contenu d'un document · Rechercher un fichier par nom ou contenu · Créer un nouveau document · Résumer un rapport · Extraire des données d'une feuille de calcul
+    </div>
+    <div class="info">
+      <strong>📌 Ce que Claude peut faire avec Agenda Google (via MCP)</strong>
+      Lister vos événements du jour ou de la semaine · Créer un rendez-vous · Déplacer un événement · Vérifier les disponibilités · Envoyer une invitation
+    </div>
+  </div>
+
+  <div class="fiche">
+    <h3>🧩 Concepts clés</h3>
+    <div class="concept-grid">
+      <div class="concept-card">
+        <div class="terme">🔌 MCP</div>
+        <div class="def">Model Context Protocol — protocole standard qui connecte Claude à des outils extérieurs. Chaque outil a son propre MCP (Drive, Agenda, Gmail, Slack…).</div>
+      </div>
+      <div class="concept-card">
+        <div class="terme">🛠️ Outil (tool)</div>
+        <div class="def">Fonction spécifique qu'un MCP met à disposition de Claude. Exemples : <em>list_files</em>, <em>read_document</em>, <em>create_event</em>.</div>
+      </div>
+      <div class="concept-card">
+        <div class="terme">🔐 OAuth</div>
+        <div class="def">Système d'autorisation qui permet à Claude d'accéder à votre Drive sans connaître votre mot de passe. Vous autorisez l'accès une fois, l'autorisation est stockée.</div>
+      </div>
+      <div class="concept-card">
+        <div class="terme">📋 Agent multi-outils</div>
+        <div class="def">Agent capable d'utiliser plusieurs MCP en même temps : lire un fichier Drive, extraire des dates, créer des événements Agenda — tout ça dans une seule requête.</div>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="section-titre">🛠️ Activités pratiques</h2>
+
+  <!-- ACTIVITÉ 1 -->
+  <div class="activite-card">
+    <div class="activite-header">
+      <div class="activite-num">1</div>
+      <div class="activite-info">
+        <h3>Interroger l'agent sur un dossier Drive partagé</h3>
+        <div class="meta"><span>⏱ 20 min</span><span>🔵 MCP Drive</span><span>👤 Individuel (sur poste démo)</span></div>
+      </div>
+    </div>
+    <div class="activite-body">
+      <p style="font-size:14px; margin-bottom:1rem;">Le formateur a préparé un dossier Drive partagé avec des documents exemples (contrats, rapports, factures…). Vous allez utiliser l'agent configuré avec le MCP Drive pour interroger ces documents.</p>
+
+      <p class="prompt-label">Requêtes à tester sur l'agent Drive</p>
+      <div class="code-block"><span class="cmt">// Requête 1 — Lister les fichiers disponibles</span>
+Liste tous les fichiers dans le dossier partagé "Formation-MCP".
+Pour chaque fichier, indique son type et sa date de modification.
+
+<span class="cmt">// Requête 2 — Lire et résumer un document</span>
+Lis le fichier "rapport_mensuel_avril.docx" et fais-moi
+un résumé en 5 points clés, avec les chiffres importants.
+
+<span class="cmt">// Requête 3 — Recherche thématique (RH)</span>
+Dans tous les documents du dossier, trouve les mentions
+de "congés payés" ou "arrêt maladie" et liste les
+décisions ou procédures associées.
+
+<span class="cmt">// Requête 4 — Extraction de données (Compta)</span>
+Dans la feuille de calcul "suivi_factures_2026.xlsx",
+liste toutes les factures dont le statut est "impayé"
+et dont le montant dépasse 1000 €.</div>
+
+      <div class="en-clair">
+        <strong>💡 Ce qui se passe techniquement</strong>
+        Quand vous envoyez une requête, Claude lit votre message, identifie qu'il a besoin d'accéder à Drive, appelle le MCP Drive avec les bonnes instructions, reçoit le contenu du fichier, puis formule sa réponse. Tout ça se passe en quelques secondes, de façon invisible pour vous.
+      </div>
+
+      <div style="margin-top:1rem;">
+        <p style="font-size:14px; font-weight:600; margin-bottom:0.6rem;">📋 Étapes :</p>
+        <ul class="etapes-activite">
+          <li><span class="etape-n">1</span><span>Ouvrez l'agent configuré avec le MCP Drive (lien fourni par le formateur).</span></li>
+          <li><span class="etape-n">2</span><span>Testez chacune des 4 requêtes ci-dessus. Notez le temps de réponse.</span></li>
+          <li><span class="etape-n">3</span><span>Inventez votre propre requête liée à votre métier et testez-la.</span></li>
+          <li><span class="etape-n">4</span><span>Évaluez la réponse avec votre grille de qualité (semaine 3). Quel score ?</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ACTIVITÉ 2 -->
+  <div class="activite-card">
+    <div class="activite-header">
+      <div class="activite-num">2</div>
+      <div class="activite-info">
+        <h3>Créer des événements Agenda à partir de documents</h3>
+        <div class="meta"><span>⏱ 25 min</span><span>🔵 MCP Drive + Agenda</span><span>👥 En binôme</span></div>
+      </div>
+    </div>
+    <div class="activite-body">
+      <p style="font-size:14px; margin-bottom:1rem;">Cas d'usage multi-outils : l'agent lit un document Drive (compte-rendu de réunion, planning) et crée automatiquement les événements correspondants dans Google Agenda.</p>
+
+      <p class="prompt-label">Requête multi-outils : Drive → Agenda</p>
+      <div class="code-block"><span class="cmt">// Exemple de requête combinée Drive + Calendar</span>
+Lis le fichier "CR_reunion_planification_mai.docx"
+dans le dossier Formation-MCP.
+
+Extrais toutes les actions décidées avec leur responsable
+et leur date limite.
+
+Pour chaque action, crée un événement dans mon agenda
+Google avec :
+- Titre : "[ACTION] " + description courte
+- Date : la date limite mentionnée dans le CR
+- Description : le contexte complet de l'action
+- Durée : 30 minutes (rappel de suivi)
+
+Si une date est manquante ou ambiguë, demande-moi
+de confirmer avant de créer l'événement.</div>
+
+      <div class="conseil">
+        <strong>🎯 Pourquoi c'est puissant</strong>
+        En une seule requête, l'agent a lu un document, extrait des informations structurées, et créé plusieurs événements dans un autre outil. Ce qui vous aurait pris 20-30 minutes (lire le CR, noter les actions, créer les rappels manuellement) est fait en 30 secondes. C'est ça, un agent multi-outils.
+      </div>
+
+      <div style="margin-top:1rem;">
+        <p style="font-size:14px; font-weight:600; margin-bottom:0.6rem;">📋 Variantes à tester selon votre profil :</p>
+        <ul class="etapes-activite">
+          <li><span class="etape-n">🟢</span><span><strong>RH :</strong> « Lis le planning des entretiens annuels et crée un événement Agenda pour chaque entretien avec le nom du salarié en titre. »</span></li>
+          <li><span class="etape-n">🔵</span><span><strong>Compta :</strong> « Lis le tableau des échéances fiscales et crée un rappel Agenda 5 jours avant chaque deadline. »</span></li>
+          <li><span class="etape-n">🟣</span><span><strong>Manager :</strong> « Lis le planning de maintenance préventive et crée un événement hebdomadaire récurrent pour chaque machine. »</span></li>
+        </ul>
+      </div>
+
+      <div class="a-retenir">
+        <h4>📌 Ce que vous emportez de cette semaine</h4>
+        <ul>
+          <li>Un MCP = une connexion entre Claude et un outil. Chaque outil a son MCP.</li>
+          <li>Claude peut enchaîner plusieurs outils dans une seule requête (lire Drive → créer Agenda)</li>
+          <li>La configuration des MCP se fait une fois par l'équipe technique — ensuite, l'utilisateur n'a qu'à formuler sa requête en langage naturel</li>
+          <li>La semaine prochaine : Gmail + mémoire conversationnelle pour des agents encore plus autonomes</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  Formation « Maîtriser Claude et l'IA Agentique » · Pôle Formation UIMM-CVDL · Auteur : S. Jaubert · Mai 2026
+</footer>
+</body>
+</html>

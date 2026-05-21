@@ -407,6 +407,54 @@
       line-height: 1.5;
     }
 
+
+    /* ── PROGRAMME SEMAINES ──────────────────────────────────── */
+    .semaines-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 1rem;
+      margin-bottom: 0.5rem;
+    }
+    .semaine-card {
+      background: var(--clair);
+      border-radius: 10px;
+      box-shadow: 0 2px 8px var(--ombre);
+      overflow: hidden;
+      text-decoration: none;
+      color: var(--texte);
+      display: block;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .semaine-card:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,0.12); }
+    .semaine-card .sk-header {
+      padding: 0.85rem 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .semaine-card .sk-num {
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      color: white;
+      font-weight: 800;
+      font-size: 14px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .semaine-card .sk-titre { font-weight: 700; font-size: 14px; }
+    .semaine-card .sk-sous  { font-size: 12px; color: #64748b; }
+    .semaine-card .sk-body  { padding: 0.75rem 1.1rem 1rem; font-size: 13px; border-top: 1px solid var(--gris2); }
+    .semaine-card .sk-meta  { display: flex; gap: 0.8rem; flex-wrap: wrap; font-size: 12px; color: #64748b; margin-bottom: 0.4rem; }
+    .semaine-card .sk-link  { font-size: 12.5px; color: var(--bleu2); font-weight: 600; }
+    .sk-etape-1 .sk-num { background: var(--vert); }
+    .sk-etape-1 .sk-header { background: #f0fdf4; }
+    .sk-etape-2 .sk-num { background: var(--orange); }
+    .sk-etape-2 .sk-header { background: #fff7ed; }
+    .sk-etape-3 .sk-num { background: var(--bleu2); }
+    .sk-etape-3 .sk-header { background: #eff6ff; }
+    .sk-etape-4 .sk-num { background: #4338ca; }
+    .sk-etape-4 .sk-header { background: #eef2ff; }
+
     /* ── RESSOURCES ──────────────────────────────────────────── */
     .ressources-grid {
       display: grid;
@@ -991,6 +1039,107 @@
       </div>
     </div>
 
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════ PROGRAMME SEMAINES -->
+  <section>
+    <h2><span class="numero">5</span> Programme détaillé — Semaine par semaine</h2>
+    <p style="font-size:14px; margin-bottom:1.2rem;">Cliquez sur une semaine pour accéder au guide complet du formateur, à la fiche apprenant et aux activités pratiques prêtes à l'emploi.</p>
+
+    <div class="semaines-grid">
+
+      <a class="semaine-card sk-etape-1" href="semaine1.html">
+        <div class="sk-header">
+          <div class="sk-num">S1</div>
+          <div>
+            <div class="sk-titre">Découvrir les agents IA</div>
+            <div class="sk-sous">Étape 1 · Claude.ai sans code</div>
+          </div>
+        </div>
+        <div class="sk-body">
+          <div class="sk-meta"><span>⏱ 2 h 30</span><span>🌿 Niveau A</span><span>👥 Profils mixtes</span></div>
+          Premier contact avec Claude · Prompts avec rôle · Artefacts réutilisables · Cas RH, compta, managers
+          <div class="sk-link" style="margin-top:0.5rem;">→ Ouvrir le module</div>
+        </div>
+      </a>
+
+      <a class="semaine-card sk-etape-1" href="semaine2.html">
+        <div class="sk-header">
+          <div class="sk-num">S2</div>
+          <div>
+            <div class="sk-titre">Premier agent HTML</div>
+            <div class="sk-sous">Étape 1 · Fichier HTML + API</div>
+          </div>
+        </div>
+        <div class="sk-body">
+          <div class="sk-meta"><span>⏱ 2 h 30</span><span>🔵 Niveau B</span><span>👥 Profils mixtes</span></div>
+          Clé API Anthropic · Prompt système métier · Recherche web en temps réel · Agent personnalisé
+          <div class="sk-link" style="margin-top:0.5rem;">→ Ouvrir le module</div>
+        </div>
+      </a>
+
+      <a class="semaine-card sk-etape-2" href="semaine3.html">
+        <div class="sk-header">
+          <div class="sk-num">S3</div>
+          <div>
+            <div class="sk-titre">Mesurer la qualité</div>
+            <div class="sk-sous">Étape 2 · Grille de tests</div>
+          </div>
+        </div>
+        <div class="sk-body">
+          <div class="sk-meta"><span>⏱ 2 × 1 h</span><span>🔵 Niveau B</span><span>👥 Profils mixtes</span></div>
+          Grille 5 critères · 5 scénarios de test · Amélioration ciblée du prompt système · Score /15
+          <div class="sk-link" style="margin-top:0.5rem;">→ Ouvrir le module</div>
+        </div>
+      </a>
+
+      <a class="semaine-card sk-etape-3" href="semaine4.html">
+        <div class="sk-header">
+          <div class="sk-num">S4</div>
+          <div>
+            <div class="sk-titre">Drive et Agenda</div>
+            <div class="sk-sous">Étape 3 · MCP Google</div>
+          </div>
+        </div>
+        <div class="sk-body">
+          <div class="sk-meta"><span>⏱ 1 h 30</span><span>🔵 Niveau B/C</span><span>👥 Profils mixtes</span></div>
+          MCP Drive · Lecture et résumé de documents · MCP Agenda · Workflows multi-outils
+          <div class="sk-link" style="margin-top:0.5rem;">→ Ouvrir le module</div>
+        </div>
+      </a>
+
+      <a class="semaine-card sk-etape-3" href="semaine5.html">
+        <div class="sk-header">
+          <div class="sk-num">S5</div>
+          <div>
+            <div class="sk-titre">Gmail et mémoire</div>
+            <div class="sk-sous">Étape 3 · MCP Gmail + conversations</div>
+          </div>
+        </div>
+        <div class="sk-body">
+          <div class="sk-meta"><span>⏱ 1 h 30</span><span>🔵 Niveau B/C</span><span>👥 Profils mixtes</span></div>
+          MCP Gmail · Tri et réponse emails · Mémoire conversationnelle · Workflows automatisés
+          <div class="sk-link" style="margin-top:0.5rem;">→ Ouvrir le module</div>
+        </div>
+      </a>
+
+      <a class="semaine-card sk-etape-4" href="semaine6.html">
+        <div class="sk-header">
+          <div class="sk-num">S6</div>
+          <div>
+            <div class="sk-titre">Évaluation et production</div>
+            <div class="sk-sous">Étape 4 · OODA + validation</div>
+          </div>
+        </div>
+        <div class="sk-body">
+          <div class="sk-meta"><span>⏱ 2 × 1 h</span><span>🎓 Bilan</span><span>👥 Tous profils</span></div>
+          Bilan des scores · Cycle OODA · Catalogue des 6 erreurs · Checklist de mise en production
+          <div class="sk-link" style="margin-top:0.5rem;">→ Ouvrir le module</div>
+        </div>
+      </a>
+
+    </div>
   </section>
 
   <!-- ═══════════════════════════════════════════ RESSOURCES -->
