@@ -123,6 +123,7 @@ Activités autonomes (approche par cas) :
 
 - [Syllabus — Maîtriser Claude (4 blocs)](CLAUDE/Formation_Maitriser_Claude/plan_de_formation.html) — **Pratique** | HTML | Plan d'ingénierie pédagogique restructuré pour salariés : formateurs, administratifs, ingénieurs
 - [Livret Pratique — Maîtriser Claude](CLAUDE/Formation_Maitriser_Claude/Livret_Pratique.html) — **Pratique** | HTML | Manuel apprenant : exercices pas à pas, fichiers Markdown (identité, contraintes), prompts contre les hallucinations
+- [Construire un agent IA avec Claude — Plan de formation](CLAUDE/plan_formation_agent_claude.html) — **Avancé** | HTML | Parcours 6 semaines en 4 étapes progressives : agent mono-outil, tests mesurables, multi-outils + mémoire, affinage et mise en production — cas d'usage RH, administratif, comptabilité
 
 ### Claude Code — Architecture et écosystème
 

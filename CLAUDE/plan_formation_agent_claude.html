@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plan de formation — Construire un agent IA avec Claude</title>
+  <style>
+    :root {
+      --bleu:    #1a3a5c;
+      --bleu2:   #2563a8;
+      --vert:    #16a34a;
+      --orange:  #d97706;
+      --rouge:   #dc2626;
+      --violet:  #7c3aed;
+      --gris:    #f1f5f9;
+      --gris2:   #e2e8f0;
+      --texte:   #1e293b;
+      --clair:   #ffffff;
+      --ombre:   rgba(0,0,0,0.08);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f0f4f8;
+      color: var(--texte);
+      line-height: 1.65;
+      font-size: 15px;
+    }
+
+    /* ── HEADER ─────────────────────────────────────────────── */
+    header {
+      background: linear-gradient(135deg, var(--bleu) 0%, var(--bleu2) 100%);
+      color: var(--clair);
+      padding: 2.5rem 2rem 2rem;
+      text-align: center;
+    }
+    header .badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 20px;
+      padding: 4px 16px;
+      font-size: 12px;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+      letter-spacing: -0.02em;
+    }
+    header p.sous-titre {
+      font-size: 1.05rem;
+      opacity: 0.85;
+      margin-bottom: 1.2rem;
+    }
+    header .meta {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      font-size: 13px;
+      opacity: 0.8;
+    }
+    header .meta span { display: flex; align-items: center; gap: 6px; }
+
+    /* ── LAYOUT ──────────────────────────────────────────────── */
+    .container { max-width: 960px; margin: 0 auto; padding: 2rem 1.5rem; }
+
+    /* ── PROMESSE ────────────────────────────────────────────── */
+    .promesse {
+      background: var(--clair);
+      border-left: 5px solid var(--bleu2);
+      border-radius: 8px;
+      padding: 1.4rem 1.6rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 2px 8px var(--ombre);
+    }
+    .promesse h2 { font-size: 1rem; color: var(--bleu2); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 0.6rem; }
+    .promesse p { font-size: 1rem; }
+    .promesse ul { margin-top: 0.6rem; padding-left: 1.4rem; }
+    .promesse ul li { margin-bottom: 0.25rem; }
+
+    /* ── SECTIONS ────────────────────────────────────────────── */
+    section { margin-bottom: 2.5rem; }
+    section > h2 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--bleu);
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--gris2);
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    section > h2 .numero {
+      background: var(--bleu);
+      color: white;
+      border-radius: 50%;
+      width: 30px; height: 30px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px;
+      flex-shrink: 0;
+    }
+
+    /* ── TABLE VUE D'ENSEMBLE ────────────────────────────────── */
+    .table-overview {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--clair);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px var(--ombre);
+      margin-bottom: 1.5rem;
+    }
+    .table-overview thead tr { background: var(--bleu); color: white; }
+    .table-overview th, .table-overview td {
+      padding: 0.75rem 1rem;
+      text-align: left;
+    }
+    .table-overview tbody tr:nth-child(even) { background: var(--gris); }
+    .table-overview tbody tr:hover { background: #dbeafe; }
+    .niveau-badge {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .niv-debutant  { background: #dcfce7; color: #166534; }
+    .niv-inter     { background: #fef9c3; color: #854d0e; }
+    .niv-avance    { background: #fee2e2; color: #991b1b; }
+    .niv-expert    { background: #ede9fe; color: #5b21b6; }
+
+    /* ── CARDS ENVIRONNEMENTS ────────────────────────────────── */
+    .env-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .env-card {
+      background: var(--clair);
+      border-radius: 10px;
+      box-shadow: 0 2px 8px var(--ombre);
+      overflow: hidden;
+    }
+    .env-card .env-header {
+      padding: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .env-card.lvl-a .env-header { background: #ecfdf5; }
+    .env-card.lvl-b .env-header { background: #eff6ff; }
+    .env-card.lvl-c .env-header { background: #faf5ff; }
+    .env-card .env-lettre {
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+    .lvl-a .env-lettre { background: var(--vert);  color: white; }
+    .lvl-b .env-lettre { background: var(--bleu2); color: white; }
+    .lvl-c .env-lettre { background: var(--violet);color: white; }
+    .env-card .env-titre { font-weight: 700; font-size: 1rem; }
+    .env-card .env-sous  { font-size: 12px; color: #64748b; }
+    .env-card .env-body  { padding: 0.9rem 1rem; font-size: 13.5px; }
+    .env-card .tag-public {
+      background: var(--gris);
+      border-radius: 4px;
+      padding: 2px 8px;
+      font-size: 12px;
+      display: inline-block;
+      margin-bottom: 0.5rem;
+    }
+    .check-list { list-style: none; padding: 0; }
+    .check-list li { padding: 2px 0; }
+    .check-list li::before { content: "✓ "; color: var(--vert); font-weight: 700; }
+    .cross-list li::before { content: "⚠ "; color: var(--orange); }
+
+    /* ── TABLE CHOIX ENVIRONNEMENT ───────────────────────────── */
+    .table-choix {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--clair);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px var(--ombre);
+      font-size: 13.5px;
+      margin-bottom: 0.5rem;
+    }
+    .table-choix thead tr { background: #334155; color: white; }
+    .table-choix th, .table-choix td { padding: 0.6rem 0.8rem; text-align: center; }
+    .table-choix td:first-child { text-align: left; font-weight: 600; }
+    .table-choix tbody tr:nth-child(even) { background: var(--gris); }
+    .ok   { color: var(--vert);   font-size: 1.1rem; }
+    .warn { color: var(--orange); font-size: 1rem; }
+    .non  { color: var(--rouge);  font-size: 1.1rem; }
+
+    /* ── ÉTAPES ──────────────────────────────────────────────── */
+    .etape-card {
+      background: var(--clair);
+      border-radius: 10px;
+      box-shadow: 0 2px 8px var(--ombre);
+      margin-bottom: 1.5rem;
+      overflow: hidden;
+    }
+    .etape-header {
+      padding: 1rem 1.4rem;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      border-bottom: 1px solid var(--gris2);
+    }
+    .etape-1 .etape-header { border-left: 5px solid var(--vert); }
+    .etape-2 .etape-header { border-left: 5px solid var(--orange); }
+    .etape-3 .etape-header { border-left: 5px solid var(--bleu2); }
+    .etape-4 .etape-header { border-left: 5px solid var(--violet); }
+    .etape-num {
+      font-size: 2rem;
+      font-weight: 900;
+      line-height: 1;
+      opacity: 0.15;
+      font-variant-numeric: tabular-nums;
+    }
+    .etape-1 .etape-num { color: var(--vert); }
+    .etape-2 .etape-num { color: var(--orange); }
+    .etape-3 .etape-num { color: var(--bleu2); }
+    .etape-4 .etape-num { color: var(--violet); }
+    .etape-info { flex: 1; }
+    .etape-info h3 { font-size: 1.1rem; font-weight: 700; }
+    .etape-meta { font-size: 12px; color: #64748b; margin-top: 2px; display: flex; gap: 12px; flex-wrap: wrap; }
+    .etape-body { padding: 1.2rem 1.4rem; }
+
+    .objectifs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 1rem;
+    }
+    .objectif-pill {
+      background: var(--gris);
+      border-radius: 20px;
+      padding: 4px 12px;
+      font-size: 12.5px;
+    }
+
+    .cas-usage {
+      background: var(--gris);
+      border-radius: 8px;
+      padding: 1rem 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .cas-usage h4 { font-size: 13px; text-transform: uppercase; letter-spacing: .05em; color: #64748b; margin-bottom: 0.4rem; }
+    .cas-usage p { font-size: 14px; }
+
+    /* ── BLOC CODE ───────────────────────────────────────────── */
+    .code-block {
+      background: #0f172a;
+      color: #e2e8f0;
+      border-radius: 8px;
+      padding: 1rem 1.2rem;
+      font-family: 'Consolas', 'Courier New', monospace;
+      font-size: 12.5px;
+      line-height: 1.6;
+      overflow-x: auto;
+      margin: 0.8rem 0;
+    }
+    .code-block .comment { color: #64748b; }
+    .code-block .keyword { color: #93c5fd; }
+    .code-block .string  { color: #86efac; }
+    .code-block .prompt-sys {
+      background: #1e293b;
+      border-radius: 6px;
+      padding: 0.8rem 1rem;
+      font-style: italic;
+      color: #cbd5e1;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    /* ── TABLEAU MÉTRIQUES ───────────────────────────────────── */
+    .table-metriques {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--clair);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px var(--ombre);
+      font-size: 13.5px;
+      margin: 0.8rem 0;
+    }
+    .table-metriques thead tr { background: #334155; color: white; }
+    .table-metriques th, .table-metriques td { padding: 0.6rem 1rem; text-align: left; }
+    .table-metriques tbody tr:nth-child(even) { background: var(--gris); }
+    .cible { font-weight: 700; color: var(--vert); }
+
+    /* ── ERREURS ─────────────────────────────────────────────── */
+    .erreur-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin: 0.8rem 0;
+    }
+    .erreur-card {
+      background: #fff7ed;
+      border: 1px solid #fed7aa;
+      border-radius: 8px;
+      padding: 1rem;
+    }
+    .erreur-card h4 { font-size: 13px; font-weight: 700; color: #9a3412; margin-bottom: 0.4rem; }
+    .erreur-card p  { font-size: 12.5px; color: #7c2d12; }
+
+    /* ── CHECKLIST ───────────────────────────────────────────── */
+    .checklist {
+      background: var(--clair);
+      border-radius: 8px;
+      box-shadow: 0 2px 8px var(--ombre);
+      padding: 1.2rem 1.4rem;
+    }
+    .checklist h4 { font-size: 14px; font-weight: 700; margin-bottom: 0.8rem; color: var(--bleu); }
+    .checklist-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 6px;
+    }
+    .checklist-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 13.5px;
+      padding: 4px 0;
+    }
+    .checklist-item .box {
+      width: 16px; height: 16px;
+      border: 2px solid #94a3b8;
+      border-radius: 3px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    /* ── ALERTE / CONSEIL ────────────────────────────────────── */
+    .alerte {
+      border-radius: 8px;
+      padding: 0.9rem 1.1rem;
+      margin: 0.8rem 0;
+      font-size: 13.5px;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+    .alerte-info    { background: #eff6ff; border-left: 4px solid var(--bleu2); }
+    .alerte-danger  { background: #fff1f2; border-left: 4px solid var(--rouge); }
+    .alerte-conseil { background: #f0fdf4; border-left: 4px solid var(--vert); }
+    .alerte .ico { font-size: 1.1rem; flex-shrink: 0; }
+
+    /* ── GLOSSAIRE ──────────────────────────────────────────── */
+    .glossaire {
+      background: var(--clair);
+      border-radius: 10px;
+      box-shadow: 0 2px 8px var(--ombre);
+      padding: 1.4rem 1.6rem;
+      margin-bottom: 2rem;
+    }
+    .glossaire h2 {
+      font-size: 1rem;
+      color: var(--bleu);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .glossaire-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 8px;
+    }
+    .glossaire-item {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      background: var(--gris);
+      border-radius: 8px;
+      padding: 0.7rem 0.9rem;
+    }
+    .glossaire-item .terme {
+      font-weight: 700;
+      font-size: 13px;
+      color: var(--bleu2);
+      white-space: nowrap;
+      flex-shrink: 0;
+      min-width: 120px;
+    }
+    .glossaire-item .def {
+      font-size: 12.5px;
+      color: #475569;
+      line-height: 1.5;
+    }
+
+    /* ── RESSOURCES ──────────────────────────────────────────── */
+    .ressources-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+    }
+    .ressource-card {
+      background: var(--clair);
+      border-radius: 8px;
+      box-shadow: 0 2px 8px var(--ombre);
+      padding: 1rem 1.2rem;
+    }
+    .ressource-card h4 { font-size: 13.5px; font-weight: 700; margin-bottom: 0.5rem; }
+    .ressource-card a  { color: var(--bleu2); text-decoration: none; font-size: 13px; display: block; margin-bottom: 0.25rem; }
+    .ressource-card a:hover { text-decoration: underline; }
+
+    /* ── FOOTER ──────────────────────────────────────────────── */
+    footer {
+      background: var(--bleu);
+      color: rgba(255,255,255,0.7);
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 13px;
+      margin-top: 2rem;
+    }
+    footer strong { color: white; }
+
+    /* ── PRINT ───────────────────────────────────────────────── */
+    @media print {
+      body { background: white; font-size: 12px; }
+      header { background: #1a3a5c !important; -webkit-print-color-adjust: exact; }
+      .etape-card, .env-card, .checklist, .ressource-card { break-inside: avoid; }
+    }
+
+    @media (max-width: 600px) {
+      header h1 { font-size: 1.5rem; }
+      .env-grid { grid-template-columns: 1fr; }
+      .erreur-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════ HEADER -->
+<header>
+  <div class="badge">Pôle Formation UIMM-CVDL — S. Jaubert</div>
+  <h1>Construire un agent IA avec Claude</h1>
+  <p class="sous-titre">4 étapes progressives — Cas d'usage professionnels et administratifs</p>
+  <div class="meta">
+    <span>⏱ 6 semaines</span>
+    <span>🎯 4 étapes</span>
+    <span>👤 Public non-développeur</span>
+    <span>📅 Mai 2026</span>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- ═══════════════════════════════════════════ PROMESSE PÉDAGOGIQUE -->
+  <div class="promesse">
+    <h2>🎯 À l'issue de cette formation, vous saurez…</h2>
+    <p>Créer, tester et améliorer un <strong>agent IA professionnel</strong> capable d'effectuer des tâches automatisées (veille réglementaire, rédaction de courriers, gestion de documents) — sans avoir besoin d'être développeur.</p>
+    <ul>
+      <li>Appeler l'intelligence artificielle Claude depuis une interface simple</li>
+      <li>Rédiger des instructions précises qui guident l'agent efficacement</li>
+      <li>Connecter l'agent à vos outils métier (Drive, Calendar, messagerie)</li>
+      <li>Mesurer et améliorer les résultats de manière rigoureuse</li>
+    </ul>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ GLOSSAIRE -->
+  <div class="glossaire">
+    <h2>📖 Lexique — Termes techniques expliqués</h2>
+    <p style="font-size:13px; color:#64748b; margin-bottom:0.9rem;">Référez-vous à ce lexique chaque fois qu'un terme vous semble obscur.</p>
+    <div class="glossaire-grid">
+      <div class="glossaire-item">
+        <span class="terme">API</span>
+        <span class="def">Interface de communication entre deux logiciels. C'est ce qui permet à votre outil de « parler » à Claude.</span>
+      </div>
+      <div class="glossaire-item">
+        <span class="terme">Clé API</span>
+        <span class="def">Mot de passe personnel qui autorise votre outil à utiliser Claude. Ne jamais la partager ni la mettre dans un e-mail.</span>
+      </div>
+      <div class="glossaire-item">
+        <span class="terme">MCP</span>
+        <span class="def"><em>Model Context Protocol</em> — protocole qui connecte Claude à vos outils (Drive, Calendar, Gmail…). C'est le « câble » entre l'agent et vos applications.</span>
+      </div>
+      <div class="glossaire-item">
+        <span class="terme">Variable d'environnement</span>
+        <span class="def">Information secrète stockée dans votre système, hors du code. Permet de garder la clé API invisible dans le fichier.</span>
+      </div>
+      <div class="glossaire-item">
+        <span class="terme">Prompt</span>
+        <span class="def">Instruction ou question donnée à l'agent. Un <em>prompt système</em> est l'instruction permanente qui définit son rôle.</span>
+      </div>
+      <div class="glossaire-item">
+        <span class="terme">Parsing</span>
+        <span class="def">Extraction et lecture structurée d'une réponse. Ex : isoler uniquement le texte parmi d'autres données renvoyées.</span>
+      </div>
+      <div class="glossaire-item">
+        <span class="terme">Cron</span>
+        <span class="def">Système de planification automatique. Ex : « lance cette action tous les matins à 8h ».</span>
+      </div>
+      <div class="glossaire-item">
+        <span class="terme">Hallucination</span>
+        <span class="def">Quand l'IA invente une information qui n'existe pas (chiffre, date, référence légale…). L'erreur la plus critique.</span>
+      </div>
+      <div class="glossaire-item">
+        <span class="terme">Artefact</span>
+        <span class="def">Dans Claude.ai, mini-application générée et exécutée directement dans la conversation, sans installation.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ VUE D'ENSEMBLE -->
+  <section>
+    <h2><span class="numero">→</span> Vue d'ensemble du parcours</h2>
+    <table class="table-overview">
+      <thead>
+        <tr>
+          <th>Étape</th>
+          <th>Thème</th>
+          <th>Durée</th>
+          <th>Niveau</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>1</strong></td>
+          <td>Agent mono-outil : recherche web + résumé automatique</td>
+          <td>Semaines 1–2</td>
+          <td><span class="niveau-badge niv-debutant">Débutant</span></td>
+        </tr>
+        <tr>
+          <td><strong>2</strong></td>
+          <td>Tests avec critères précis et mesurables</td>
+          <td>Semaines 2–3</td>
+          <td><span class="niveau-badge niv-inter">Intermédiaire</span></td>
+        </tr>
+        <tr>
+          <td><strong>3</strong></td>
+          <td>Ajout progressif d'outils et mémoire conversationnelle</td>
+          <td>Semaines 3–5</td>
+          <td><span class="niveau-badge niv-avance">Avancé</span></td>
+        </tr>
+        <tr>
+          <td><strong>4</strong></td>
+          <td>Évaluation des erreurs et affinage des instructions</td>
+          <td>Semaines 5–6</td>
+          <td><span class="niveau-badge niv-expert">Expert</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ AVANT DE COMMENCER -->
+  <section>
+    <h2><span class="numero">0</span> Avant de commencer — Quel environnement utiliser ?</h2>
+
+    <p style="margin-bottom:1rem; font-size:14px;">Tout au long de cette formation, vous rencontrerez des exemples de code. <strong>Inutile de savoir programmer</strong> : choisissez l'environnement qui correspond à votre profil, et utilisez-le tout au long du parcours.</p>
+
+    <div class="env-grid">
+      <!-- Niveau A -->
+      <div class="env-card lvl-a">
+        <div class="env-header">
+          <div class="env-lettre">A</div>
+          <div>
+            <div class="env-titre">Claude.ai — Artefact interactif</div>
+            <div class="env-sous">Aucune installation requise</div>
+          </div>
+        </div>
+        <div class="env-body">
+          <span class="tag-public">👤 Tous les profils</span>
+          <p style="margin-bottom:0.6rem; font-size:13px;">Vous décrivez à Claude ce que vous voulez, il génère et exécute l'agent directement dans la conversation. Pas de clé API à gérer.</p>
+          <ul class="check-list" style="font-size:13px;">
+            <li>Zéro installation</li>
+            <li>Résultats immédiats</li>
+            <li>Idéal pour apprendre</li>
+          </ul>
+          <p style="font-size:12px; color:#64748b; margin-top:0.5rem;">⚠ Données non enregistrées entre sessions</p>
+        </div>
+      </div>
+
+      <!-- Niveau B -->
+      <div class="env-card lvl-b">
+        <div class="env-header">
+          <div class="env-lettre">B</div>
+          <div>
+            <div class="env-titre">Fichier HTML — Navigateur</div>
+            <div class="env-sous">Juste un éditeur de texte</div>
+          </div>
+        </div>
+        <div class="env-body">
+          <span class="tag-public">👤 Non-développeurs à l'aise avec l'informatique</span>
+          <p style="margin-bottom:0.6rem; font-size:13px;">Vous créez un fichier texte <code>.html</code>, vous y collez le code fourni, et vous l'ouvrez dans votre navigateur. Nécessite une clé API personnelle.</p>
+          <ul class="check-list" style="font-size:13px;">
+            <li>Vous contrôlez le code</li>
+            <li>Testable avec vos données réelles</li>
+            <li>Partage facile en équipe</li>
+          </ul>
+          <p style="font-size:12px; color:#64748b; margin-top:0.5rem;">⚠ Clé API visible dans le fichier — ne pas partager</p>
+        </div>
+      </div>
+
+      <!-- Niveau C -->
+      <div class="env-card lvl-c">
+        <div class="env-header">
+          <div class="env-lettre">C</div>
+          <div>
+            <div class="env-titre">Node.js — Ligne de commande</div>
+            <div class="env-sous">Installation requise</div>
+          </div>
+        </div>
+        <div class="env-body">
+          <span class="tag-public">👤 Profils techniques / chefs de projet avancés</span>
+          <p style="margin-bottom:0.6rem; font-size:13px;">Environnement professionnel complet : connexion à des bases de données, automatisation planifiée, déploiement en production.</p>
+          <ul class="check-list" style="font-size:13px;">
+            <li>Clé API sécurisée</li>
+            <li>Adapté à la production</li>
+            <li>Travail en équipe (Git)</li>
+          </ul>
+          <p style="font-size:12px; color:#64748b; margin-top:0.5rem;">⚠ Nécessite des notions de terminal</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tableau récapitulatif choix -->
+    <table class="table-choix">
+      <thead>
+        <tr>
+          <th>Étape</th>
+          <th>A — Claude.ai</th>
+          <th>B — HTML</th>
+          <th>C — Node.js</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Étape 1 — Mono-outil</td>
+          <td class="ok">✅ Recommandé</td>
+          <td class="ok">✅ Possible</td>
+          <td class="ok">✅ Possible</td>
+        </tr>
+        <tr>
+          <td>Étape 2 — Tests mesurables</td>
+          <td class="ok">✅ Recommandé</td>
+          <td class="ok">✅ Recommandé</td>
+          <td class="ok">✅ Possible</td>
+        </tr>
+        <tr>
+          <td>Étape 3 — Multi-outils + mémoire</td>
+          <td class="warn">⚠ Limité</td>
+          <td class="ok">✅ Recommandé</td>
+          <td class="ok">✅ Recommandé</td>
+        </tr>
+        <tr>
+          <td>Étape 4 — Évaluation + production</td>
+          <td class="non">❌ Insuffisant</td>
+          <td class="warn">⚠ Limité</td>
+          <td class="ok">✅ Indispensable</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="alerte alerte-conseil">
+      <span class="ico">💡</span>
+      <span><strong>Conseil :</strong> Si vous débutez, commencez en Niveau A. Vous passerez au Niveau B dès l'Étape 2, et au Niveau C seulement si votre projet requiert une mise en production.</span>
+    </div>
+
+    <div class="alerte alerte-info">
+      <span class="ico">🤖</span>
+      <span><strong>Modèle utilisé dans les exemples de code :</strong> Tous les exemples de ce document utilisent <code style="background:#dbeafe; padding:1px 6px; border-radius:4px; font-size:12px;">claude-sonnet-4-6</code>, le modèle Claude Sonnet actuel (2026). Si vous avez un code plus ancien mentionnant <code style="background:#fee2e2; padding:1px 6px; border-radius:4px; font-size:12px;">claude-sonnet-4-20250514</code> ou similaire, remplacez-le par cette valeur à jour.</span>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ ÉTAPE 1 -->
+  <section>
+    <h2><span class="numero">1</span> Les quatre étapes de la formation</h2>
+
+    <!-- ÉTAPE 1 -->
+    <div class="etape-card etape-1">
+      <div class="etape-header">
+        <div class="etape-num">01</div>
+        <div class="etape-info">
+          <h3>Agent mono-outil — Recherche web + résumé automatique</h3>
+          <div class="etape-meta">
+            <span>⏱ Semaines 1–2</span>
+            <span><span class="niveau-badge niv-debutant">Débutant</span></span>
+            <span>🎓 Exercices : 45 min</span>
+          </div>
+        </div>
+      </div>
+      <div class="etape-body">
+
+        <p style="margin-bottom:0.8rem; font-size:14px;">Vous construisez votre premier agent IA capable de <strong>chercher sur le web et de résumer automatiquement</strong> les résultats. L'agent utilise un seul outil : la recherche web.</p>
+
+        <div class="objectifs">
+          <span class="objectif-pill">📌 Appeler Claude via une interface simple</span>
+          <span class="objectif-pill">📌 Écrire des instructions efficaces</span>
+          <span class="objectif-pill">📌 Lire la réponse de l'agent</span>
+          <span class="objectif-pill">📌 Gérer les erreurs courantes</span>
+        </div>
+
+        <div class="cas-usage">
+          <h4>💼 Cas d'usage professionnel — Veille réglementaire RH</h4>
+          <p>Une PME souhaite <strong>automatiser sa veille sur le droit du travail</strong>. L'agent consulte des sources officielles (Légifrance, service-public.fr) et produit un résumé en 3 points avec les actions à prendre.</p>
+        </div>
+
+        <p style="font-size:14px; margin-bottom:0.6rem;"><strong>Exemple d'instructions données à l'agent (prompt système) :</strong></p>
+        <div class="code-block">
+          <div class="prompt-sys">
+            Tu es un assistant juridique RH spécialisé dans le droit du travail français.<br>
+            Ton rôle est de surveiller les évolutions réglementaires pour une PME de 50 salariés.<br><br>
+            Pour chaque recherche, tu dois :<br>
+            1. Identifier les sources officielles (Légifrance, service-public.fr, URSSAF)<br>
+            2. Résumer le changement en 3 points maximum, en langage accessible<br>
+            3. Indiquer la date d'entrée en vigueur et les actions à prendre<br>
+            4. Préciser si tu n'es pas certain d'une information<br><br>
+            Ne jamais inventer de références légales. Si tu n'es pas sûr, dis-le.
+          </div>
+        </div>
+
+        <p style="font-size:13.5px; margin: 0.8rem 0;"><strong>Autres cas d'usage possibles à ce niveau :</strong></p>
+        <ul style="font-size:13.5px; padding-left:1.4rem; margin-bottom:0.8rem;">
+          <li><strong>Administratif :</strong> Synthèse quotidienne du Journal Officiel</li>
+          <li><strong>Comptabilité :</strong> Veille sur les taux TVA et seuils fiscaux</li>
+          <li><strong>Achats :</strong> Résumé des actualités sur les fournisseurs clés</li>
+        </ul>
+
+        <div class="alerte alerte-info">
+          <span class="ico">📝</span>
+          <div>
+            <strong>Exercice pratique :</strong> Tester l'agent avec ces 3 questions et comparer les réponses :<br>
+            1. « Quelles sont les règles du temps de travail pour les cadres en 2025 ? »<br>
+            2. « Montant du SMIC en vigueur ? »<br>
+            3. « Conditions pour bénéficier du dispositif FNE-Formation ? »
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ÉTAPE 2 -->
+    <div class="etape-card etape-2">
+      <div class="etape-header">
+        <div class="etape-num">02</div>
+        <div class="etape-info">
+          <h3>Tests avec critères précis et mesurables</h3>
+          <div class="etape-meta">
+            <span>⏱ Semaines 2–3</span>
+            <span><span class="niveau-badge niv-inter">Intermédiaire</span></span>
+            <span>🎓 Exercices : 1h</span>
+          </div>
+        </div>
+      </div>
+      <div class="etape-body">
+
+        <p style="margin-bottom:0.8rem; font-size:14px;">Vous apprenez à <strong>mesurer objectivement la qualité</strong> des réponses de votre agent. Pas d'instinct : des critères clairs, des tests répétables, et des objectifs chiffrés.</p>
+
+        <div class="objectifs">
+          <span class="objectif-pill">📌 Définir des critères de réussite</span>
+          <span class="objectif-pill">📌 Concevoir des scénarios de test</span>
+          <span class="objectif-pill">📌 Identifier les réponses hors périmètre</span>
+          <span class="objectif-pill">📌 Détecter les inventions de l'agent</span>
+        </div>
+
+        <p style="font-size:14px; margin-bottom:0.7rem;"><strong>Objectifs de qualité à viser :</strong></p>
+        <table class="table-metriques">
+          <thead>
+            <tr><th>Ce qu'on mesure</th><th>Cible recommandée</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Pertinence des réponses (évaluation humaine)</td><td class="cible">&gt; 85 %</td></tr>
+            <tr><td>Temps de réponse moyen</td><td class="cible">&lt; 3 secondes</td></tr>
+            <tr><td>Réponses hors sujet</td><td class="cible">&lt; 5 %</td></tr>
+            <tr><td>Informations inventées par l'agent</td><td class="cible">0 % toléré</td></tr>
+          </tbody>
+        </table>
+
+        <div class="cas-usage">
+          <h4>💼 Cas d'usage professionnel — Rédaction de courriers administratifs</h4>
+          <p>Un agent qui <strong>rédige des courriers officiels</strong> pour une collectivité locale. Chaque courrier est évalué selon 5 critères : formule de politesse, structure, présence de marqueurs [À COMPLÉTER], longueur (150–250 mots), ton formel.</p>
+        </div>
+
+        <div class="alerte alerte-danger">
+          <span class="ico">🚨</span>
+          <div>
+            <strong>Signaux d'alerte à surveiller :</strong><br>
+            • Score &lt; 70 % → retravailler les instructions<br>
+            • Aucun [À COMPLÉTER] sur des informations manquantes → risque d'invention<br>
+            • Réponses quasi-identiques à des questions différentes → manque de contexte
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ÉTAPE 3 -->
+    <div class="etape-card etape-3">
+      <div class="etape-header">
+        <div class="etape-num">03</div>
+        <div class="etape-info">
+          <h3>Ajout progressif d'outils et mémoire conversationnelle</h3>
+          <div class="etape-meta">
+            <span>⏱ Semaines 3–5</span>
+            <span><span class="niveau-badge niv-avance">Avancé</span></span>
+            <span>🎓 Exercices : 2 × 1h</span>
+          </div>
+        </div>
+      </div>
+      <div class="etape-body">
+
+        <p style="margin-bottom:0.8rem; font-size:14px;">Vous connectez progressivement votre agent à vos outils du quotidien (stockage de documents, agenda, messagerie) et lui donnez une <strong>mémoire</strong> pour se souvenir des échanges précédents.</p>
+
+        <div class="objectifs">
+          <span class="objectif-pill">📌 Connecter Drive / Calendar / Gmail</span>
+          <span class="objectif-pill">📌 Définir l'ordre de priorité des outils</span>
+          <span class="objectif-pill">📌 Activer la mémoire conversationnelle</span>
+          <span class="objectif-pill">📌 Sécuriser les actions irréversibles</span>
+        </div>
+
+        <p style="font-size:14px; margin-bottom:0.6rem;"><strong>Programme semaine par semaine :</strong></p>
+        <ul style="font-size:13.5px; padding-left:1.4rem; margin-bottom:0.9rem;">
+          <li><strong>Semaine 3 :</strong> Google Drive uniquement. 5 tests de recherche de documents.</li>
+          <li><strong>Semaine 3 (fin) :</strong> Ajouter Google Calendar. Vérifier que l'agent choisit le bon outil.</li>
+          <li><strong>Semaine 4 :</strong> Gmail en lecture seule. Pas d'envoi automatique.</li>
+          <li><strong>Semaine 4 (fin) :</strong> Envoi d'e-mails uniquement après confirmation explicite.</li>
+          <li><strong>Semaine 5 :</strong> Mémoire conversationnelle — l'agent se souvient des échanges précédents.</li>
+        </ul>
+
+        <div class="cas-usage">
+          <h4>💼 Cas d'usage — Assistant RH multi-outils</h4>
+          <p>L'agent gère plusieurs actions en séquence : chercher un contrat dans Drive, planifier un entretien dans l'agenda, puis envoyer une convocation par mail — mais <strong>jamais sans confirmation</strong> pour les actions irréversibles.</p>
+        </div>
+
+        <p style="font-size:14px; margin:0.8rem 0 0.5rem;"><strong>Instructions données à l'agent (extrait) :</strong></p>
+        <div class="code-block">
+          <div class="prompt-sys">
+            Tu es l'assistant RH de l'entreprise.<br><br>
+            Ordre de priorité des outils :<br>
+            1. Drive → si la demande porte sur un document, un contrat, une politique RH<br>
+            2. Calendar → si la demande porte sur des dates ou des disponibilités<br>
+            3. Gmail → uniquement si demandé explicitement, après confirmation<br><br>
+            Règles de sécurité :<br>
+            — Aucune action irréversible sans confirmation explicite<br>
+            — Indiquer quelle source tu consultes à chaque étape<br>
+            — Si l'information est introuvable, le dire clairement
+          </div>
+        </div>
+
+        <div class="alerte alerte-danger" style="margin-bottom:0.8rem;">
+          <span class="ico">⚙️</span>
+          <div>
+            <strong>Note MCP — connexion aux outils :</strong> Les exemples de code de cette étape utilisent des adresses de serveurs illustratives. En pratique, les URLs réelles dépendent de votre déploiement MCP. Contactez votre administrateur système ou consultez la documentation de votre fournisseur pour obtenir les bonnes adresses avant de tester.
+          </div>
+        </div>
+
+        <div class="alerte alerte-info">
+          <span class="ico">📝</span>
+          <div>
+            <strong>Tests multi-outils à exécuter :</strong><br>
+            Q1 (→ Drive) : « Quelle est notre politique de télétravail ? »<br>
+            Q2 (→ Calendar) : « Quand a lieu le prochain CODIR ? »<br>
+            Q3 (ambiguë) : « Prépare la réunion RH de vendredi. »<br>
+            <em>Attendu sur Q3 : l'agent demande une clarification (créer l'événement ? envoyer les convocations ? rédiger l'ordre du jour ?)</em>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ÉTAPE 4 -->
+    <div class="etape-card etape-4">
+      <div class="etape-header">
+        <div class="etape-num">04</div>
+        <div class="etape-info">
+          <h3>Évaluation des erreurs et affinage des instructions</h3>
+          <div class="etape-meta">
+            <span>⏱ Semaines 5–6</span>
+            <span><span class="niveau-badge niv-expert">Expert</span></span>
+            <span>🎓 Exercices : 1h30</span>
+          </div>
+        </div>
+      </div>
+      <div class="etape-body">
+
+        <p style="margin-bottom:0.8rem; font-size:14px;">Vous apprenez à <strong>diagnostiquer et corriger les erreurs typiques</strong> d'un agent IA, et à affiner ses instructions de manière méthodique jusqu'à obtenir un résultat fiable.</p>
+
+        <div class="objectifs">
+          <span class="objectif-pill">📌 Identifier les 4 erreurs fréquentes</span>
+          <span class="objectif-pill">📌 Corriger via les instructions</span>
+          <span class="objectif-pill">📌 Itérer selon un cycle structuré</span>
+          <span class="objectif-pill">📌 Valider avant mise en production</span>
+        </div>
+
+        <p style="font-size:14px; margin-bottom:0.7rem;"><strong>Les 4 erreurs les plus fréquentes — et leurs corrections :</strong></p>
+
+        <div class="erreur-grid">
+          <div class="erreur-card">
+            <h4>🎭 Erreur 1 — Hallucination</h4>
+            <p>L'agent invente des chiffres ou des références légales qui n'existent pas.</p>
+            <p style="margin-top:0.4rem; font-style:italic;">→ Correction : lui demander d'écrire [DONNÉE MANQUANTE] plutôt que d'estimer.</p>
+          </div>
+          <div class="erreur-card">
+            <h4>🔀 Erreur 2 — Mauvais outil</h4>
+            <p>L'agent cherche dans la messagerie au lieu du Drive, ou inversement.</p>
+            <p style="margin-top:0.4rem; font-style:italic;">→ Correction : définir clairement l'ordre de priorité des outils dans les instructions.</p>
+          </div>
+          <div class="erreur-card">
+            <h4>🔁 Erreur 3 — Boucle infinie</h4>
+            <p>L'agent tourne en rond et ne trouve pas de réponse, sans jamais s'arrêter.</p>
+            <p style="margin-top:0.4rem; font-style:italic;">→ Correction : fixer un nombre maximum d'essais (ex : 5 tentatives maximum).</p>
+          </div>
+          <div class="erreur-card">
+            <h4>🚫 Erreur 4 — Hors périmètre</h4>
+            <p>L'agent répond à des questions qui ne le concernent pas.</p>
+            <p style="margin-top:0.4rem; font-style:italic;">→ Correction : définir explicitement son domaine et la formule de refus poli.</p>
+          </div>
+        </div>
+
+        <p style="font-size:14px; margin:1rem 0 0.5rem;"><strong>Illustration — Évolution des instructions d'un agent comptable :</strong></p>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1rem;">
+          <div>
+            <p style="font-size:12px; color:#94a3b8; margin-bottom:4px;">VERSION 1 — trop vague ❌</p>
+            <div class="code-block" style="margin:0;">
+              <div class="prompt-sys" style="font-size:12px;">
+                Tu es un assistant comptable.<br>Aide à gérer les factures.
+              </div>
+            </div>
+          </div>
+          <div>
+            <p style="font-size:12px; color:#86efac; margin-bottom:4px;">VERSION 3 — après corrections ✅</p>
+            <div class="code-block" style="margin:0;">
+              <div class="prompt-sys" style="font-size:12px;">
+                Tu es un assistant comptable pour une TPE.<br><br>
+                — Montants : toujours 2 décimales (ex: 1 234,56 €)<br>
+                — Facture ambiguë → demander clarification AVANT<br>
+                — Distinguer HT / TTC / TVA dans chaque réponse<br>
+                — Montant absent → écrire MONTANT MANQUANT<br>
+                — Toujours rappeler le numéro de facture et la date
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p style="font-size:14px; margin-bottom:0.6rem;"><strong>Cycle d'amélioration continue — en 4 étapes :</strong></p>
+        <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-bottom:1rem;">
+          <div style="background:#1e3a5f; color:white; border-radius:8px; padding:0.8rem; text-align:center; font-size:13px;">
+            <div style="font-size:1.3rem; margin-bottom:4px;">🔍</div>
+            <strong>Observer</strong>
+            <p style="font-size:12px; opacity:0.8; margin-top:4px;">Collecter les réponses insatisfaisantes</p>
+          </div>
+          <div style="background:#1e4a3f; color:white; border-radius:8px; padding:0.8rem; text-align:center; font-size:13px;">
+            <div style="font-size:1.3rem; margin-bottom:4px;">🧭</div>
+            <strong>Orienter</strong>
+            <p style="font-size:12px; opacity:0.8; margin-top:4px;">Catégoriser le type d'erreur</p>
+          </div>
+          <div style="background:#3a1e4a; color:white; border-radius:8px; padding:0.8rem; text-align:center; font-size:13px;">
+            <div style="font-size:1.3rem; margin-bottom:4px;">⚡</div>
+            <strong>Décider</strong>
+            <p style="font-size:12px; opacity:0.8; margin-top:4px;">Prioriser le correctif le plus urgent</p>
+          </div>
+          <div style="background:#4a2e1e; color:white; border-radius:8px; padding:0.8rem; text-align:center; font-size:13px;">
+            <div style="font-size:1.3rem; margin-bottom:4px;">✏️</div>
+            <strong>Agir</strong>
+            <p style="font-size:12px; opacity:0.8; margin-top:4px;">Modifier les instructions et relancer les tests</p>
+          </div>
+        </div>
+
+        <!-- Checklist -->
+        <div class="checklist">
+          <h4>✅ Checklist de validation avant mise en production</h4>
+          <div class="checklist-grid">
+            <div class="checklist-item"><div class="box"></div><span>Score moyen &gt; 85 % sur la batterie de tests</span></div>
+            <div class="checklist-item"><div class="box"></div><span>Zéro information inventée sur 20 tests variés</span></div>
+            <div class="checklist-item"><div class="box"></div><span>L'agent demande une clarification face aux questions ambiguës</span></div>
+            <div class="checklist-item"><div class="box"></div><span>L'agent refuse d'agir sans confirmation sur les actions irréversibles</span></div>
+            <div class="checklist-item"><div class="box"></div><span>Le nombre maximum de tentatives est configuré</span></div>
+            <div class="checklist-item"><div class="box"></div><span>Le périmètre est respecté (tests avec questions hors domaine)</span></div>
+            <div class="checklist-item"><div class="box"></div><span>La mémoire fonctionne sur au moins 5 échanges</span></div>
+            <div class="checklist-item"><div class="box"></div><span>Les erreurs sont enregistrées et catégorisées automatiquement</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ═══════════════════════════════════════════ RESSOURCES -->
+  <section>
+    <h2><span class="numero">→</span> Ressources pour aller plus loin</h2>
+    <div class="ressources-grid">
+      <div class="ressource-card">
+        <h4>📖 Documentation Claude</h4>
+        <a href="https://docs.claude.ai" target="_blank">docs.claude.ai</a>
+        <a href="https://docs.anthropic.com" target="_blank">docs.anthropic.com</a>
+        <p style="font-size:12px; color:#64748b; margin-top:0.4rem;">Référence officielle de l'API Claude et du protocole MCP</p>
+      </div>
+      <div class="ressource-card">
+        <h4>🎯 Guide de prompting</h4>
+        <a href="https://docs.claude.com/en/docs/build-with-claude/prompt-engineering/overview" target="_blank">Guide Prompt Engineering →</a>
+        <p style="font-size:12px; color:#64748b; margin-top:0.4rem;">Techniques pour écrire des instructions efficaces à destination de Claude</p>
+      </div>
+      <div class="ressource-card">
+        <h4>🔧 Obtenir une clé API</h4>
+        <a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a>
+        <p style="font-size:12px; color:#64748b; margin-top:0.4rem;">Créer un compte, générer et gérer ses clés API Anthropic</p>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /container -->
+
+<footer>
+  <strong>Pôle Formation UIMM-CVDL</strong> — Formateur : S. Jaubert<br>
+  Formation « Maîtriser Claude et l'IA Agentique » — Plan généré avec Claude — Mai 2026
+</footer>
+
+</body>
+</html>
