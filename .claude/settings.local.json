@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(git -C \"c:\\\\Users\\\\s.jaubert\\\\projets\\\\Cours-IA\" diff HEAD Cours-IA.code-workspace)",
+      "PowerShell(git -C \"c:\\\\Users\\\\s.jaubert\\\\projets\\\\Cours-IA\" diff --cached Cours-IA.code-workspace)",
+      "PowerShell(git -C \"c:\\\\Users\\\\s.jaubert\\\\projets\\\\Cours-IA\" diff Cours-IA.code-workspace)",
+      "PowerShell(git -C \"c:\\\\Users\\\\s.jaubert\\\\projets\\\\Cours-IA\" add Cours-IA.code-workspace)",
+      "PowerShell(git -C \"c:\\\\Users\\\\s.jaubert\\\\projets\\\\Cours-IA\" status)"
+    ]
+  }
+}
