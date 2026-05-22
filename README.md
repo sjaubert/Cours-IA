@@ -146,6 +146,10 @@ Activités autonomes (approche par cas) :
 
 - [Guide débutants Claude Code](CLAUDE/guide-claude-code-debutants/guide-complet.md) — **Pratique** | MD | Prise en main progressive de Claude Code pour non-développeurs <sub>*(mai 2026)*</sub>
 
+### Plugins et MCP
+
+- [Fiche procédurale — Les plugins Claude](CLAUDE/Fiche_Procedurale_Plugins_Claude.md) — **Pratique** | MD | Types de plugins (MCP, Skills, Commands, Hooks), installation dans Claude Code et l'application bureau, dix plugins principaux avec cas d'usage, recommandations par profil <sub>*(mai 2026)*</sub>
+
 ### Skills
 
 - [Formation Agents et Skills IA — Programme 2 jours](00-Formation/IA_Skills/Formation_Skills/Plan_Formation_Skills.md) — **Avancé** | MD | Transformer des utilisateurs occasionnels en experts de l'automatisation : installation, diagnostic amnésie LLMs, ateliers par métiers, paramétrage d'agents personnalisés <sub>*(mars 2026)*</sub>

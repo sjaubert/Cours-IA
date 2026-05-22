@@ -1,3 +1,8 @@
+---
+output:
+  word_document: default
+  html_document: default
+---
 # Fiche procédurale — Les plugins Claude
 
 **Auteur :** S. Jaubert  
@@ -11,14 +16,44 @@
 
 Ce document est issu d'une source orientée **Claude Code**, l'outil en ligne de commande d'Anthropic. Les commandes d'installation présentées (de la forme `claude plugin install ...`) s'appliquent exclusivement à cet environnement CLI.
 
-**Ces commandes ne fonctionnent pas dans l'application Claude bureau (Cowork).** Les deux produits disposent de mécanismes de gestion de plugins indépendants.
+**Ces commandes ne fonctionnent pas dans l'application Claude bureau.** Les deux produits disposent de mécanismes de gestion de plugins indépendants.
 
 | Environnement | Mode d'installation des plugins |
 |---|---|
 | Claude Code (terminal) | Commande `claude plugin install ...` |
-| Application Claude bureau / Cowork | Interface graphique de l'application |
+| Application Claude bureau / Cowork | Interface graphique — Paramètres > Extensions |
 
-Pour les utilisateurs de l'application Claude bureau, les plugins s'activent depuis le panneau latéral de l'application, sans passer par une ligne de commande. Les concepts décrits dans cette fiche restent valables (types de plugins, utilités, protocole MCP), mais la procédure d'installation diffère.
+Les concepts décrits dans cette fiche restent valables dans les deux environnements (types de plugins, utilités, protocole MCP). Seule la procédure d'installation diffère.
+
+### Installer un plugin dans l'application Claude bureau
+
+L'application Claude bureau propose deux mécanismes complémentaires.
+
+**1. Le répertoire de connecteurs (Connectors Directory)**
+
+Anthropic met à disposition un catalogue d'outils validés, accessible à l'adresse [claude.ai/directory](https://claude.ai/directory) ou depuis l'application via Paramètres > Extensions > Parcourir les extensions. On y trouve des connecteurs vers des services externes (Google Workspace, Slack, GitHub, etc.) et des extensions desktop.
+
+Procedure :
+
+1. Ouvrir l'application Claude bureau.
+2. Aller dans Paramètres > Extensions.
+3. Cliquer sur "Parcourir les extensions" pour consulter le catalogue officiel.
+4. Cliquer sur "Connecter" (pour un connecteur web) ou "Installer" (pour une extension desktop).
+5. Suivre les étapes d'authentification si le service externe le requiert.
+
+Note : les connecteurs vers des services distants (Google, Slack, etc.) sont réservés aux abonnements payants.
+
+**2. Les extensions desktop au format .mcpb**
+
+Une extension desktop est un fichier `.mcpb` (MCP Bundle) qui regroupe un serveur MCP et toutes ses dépendances en un seul paquet installable, sans configuration manuelle de fichiers JSON. C'est l'équivalent d'une extension de navigateur, appliqué à Claude.
+
+Procedure :
+
+1. Récupérer le fichier `.mcpb` auprès de son auteur ou via le catalogue officiel.
+2. Dans l'application Claude bureau : Paramètres > Extensions > Installer une extension.
+3. Sélectionner le fichier `.mcpb` et suivre les invites de configuration.
+
+Le catalogue officiel des extensions est également consultable sur [anthropic.com/partners/mcp](https://www.anthropic.com/news/connectors-directory).
 
 ---
 
@@ -44,9 +79,11 @@ Il existe quatre catégories de plugins dans l'écosystème Claude.
 
 ---
 
-## 3. Procédure d'installation générale
+## 3. Procédure d'installation générale (Claude Code — terminal uniquement)
 
-L'installation d'un plugin Claude s'effectue via la ligne de commande avec la syntaxe suivante :
+Les commandes suivantes s'appliquent exclusivement à **Claude Code**, l'outil en ligne de commande. Pour l'application Claude bureau, se reporter à la section "Avertissement préalable" ci-dessus.
+
+L'installation s'effectue via la commande :
 
 ```bash
 claude plugin install <nom-du-plugin>@<source>
