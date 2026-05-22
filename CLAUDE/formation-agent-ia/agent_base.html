@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mon Agent IA — Formation Claude</title>
+  <style>
+    :root {
+      --bleu:   #1a3a5c;
+      --bleu2:  #2563a8;
+      --vert:   #16a34a;
+      --orange: #d97706;
+      --rouge:  #dc2626;
+      --gris:   #f1f5f9;
+      --gris2:  #e2e8f0;
+      --texte:  #1e293b;
+      --ombre:  rgba(0,0,0,0.08);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f0f4f8;
+      color: var(--texte);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ─── EN-TÊTE ─────────────────────────────────────────────── */
+    header {
+      background: linear-gradient(135deg, var(--bleu) 0%, var(--bleu2) 100%);
+      color: white;
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .header-left h1 { font-size: 1.2rem; font-weight: 700; }
+    .header-left p  { font-size: 12px; opacity: 0.8; margin-top: 2px; }
+    .header-badge {
+      background: rgba(255,255,255,0.18);
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 20px;
+      padding: 4px 14px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .status-dot {
+      display: inline-block;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: #ef4444;
+      margin-right: 5px;
+      vertical-align: middle;
+      transition: background 0.3s;
+    }
+    .status-dot.active { background: #22c55e; }
+
+    /* ─── LAYOUT PRINCIPAL ────────────────────────────────────── */
+    .main-layout {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 0;
+      height: calc(100vh - 62px);
+    }
+
+    /* ─── PANNEAU GAUCHE : CONFIGURATION ─────────────────────── */
+    .panel-config {
+      background: white;
+      border-right: 1px solid var(--gris2);
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
+    .panel-section {
+      padding: 1rem 1.2rem;
+      border-bottom: 1px solid var(--gris2);
+    }
+    .panel-section h2 {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: #64748b;
+      margin-bottom: 0.7rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    label { font-size: 13px; font-weight: 600; color: var(--texte); display: block; margin-bottom: 4px; }
+    input[type="text"], input[type="password"], textarea, select {
+      width: 100%;
+      border: 1px solid var(--gris2);
+      border-radius: 6px;
+      padding: 7px 10px;
+      font-size: 13px;
+      font-family: inherit;
+      color: var(--texte);
+      background: #f8fafc;
+      outline: none;
+      transition: border 0.2s;
+    }
+    input:focus, textarea:focus, select:focus { border-color: var(--bleu2); background: white; }
+    textarea { resize: vertical; min-height: 120px; line-height: 1.5; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      border: none;
+      border-radius: 6px;
+      padding: 7px 14px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.1s;
+    }
+    .btn:hover { opacity: 0.87; }
+    .btn:active { transform: scale(0.97); }
+    .btn-bleu   { background: var(--bleu2);  color: white; }
+    .btn-vert   { background: var(--vert);   color: white; }
+    .btn-gris   { background: var(--gris2);  color: var(--texte); }
+    .btn-rouge  { background: #fee2e2;       color: var(--rouge); }
+    .btn-full   { width: 100%; margin-top: 6px; }
+    .btn-sm     { padding: 5px 10px; font-size: 12px; }
+
+    /* Clé API */
+    .api-row { display: flex; gap: 6px; align-items: flex-end; }
+    .api-row input { flex: 1; }
+    #apiStatus {
+      font-size: 12px;
+      margin-top: 5px;
+      padding: 4px 8px;
+      border-radius: 5px;
+      display: none;
+    }
+    #apiStatus.ok  { background: #dcfce7; color: #166534; display: block; }
+    #apiStatus.err { background: #fee2e2; color: #991b1b; display: block; }
+
+    /* Toggle web_search */
+    .toggle-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.6rem 0;
+    }
+    .toggle-label { font-size: 13px; font-weight: 600; }
+    .toggle-sub   { font-size: 11px; color: #64748b; display: block; margin-top: 1px; }
+    .toggle-switch {
+      position: relative;
+      width: 40px; height: 22px;
+      flex-shrink: 0;
+    }
+    .toggle-switch input { opacity: 0; width: 0; height: 0; }
+    .toggle-track {
+      position: absolute; inset: 0;
+      background: var(--gris2);
+      border-radius: 11px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .toggle-track::after {
+      content: '';
+      position: absolute;
+      left: 3px; top: 3px;
+      width: 16px; height: 16px;
+      border-radius: 50%;
+      background: white;
+      transition: transform 0.2s;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    }
+    .toggle-switch input:checked + .toggle-track { background: var(--bleu2); }
+    .toggle-switch input:checked + .toggle-track::after { transform: translateX(18px); }
+
+    /* Modèle */
+    .model-info { font-size: 11px; color: #64748b; margin-top: 5px; }
+
+    /* Profil rapide */
+    .profil-btn {
+      display: block;
+      width: 100%;
+      text-align: left;
+      background: var(--gris);
+      border: 1px solid var(--gris2);
+      border-radius: 6px;
+      padding: 6px 10px;
+      font-size: 12px;
+      cursor: pointer;
+      margin-bottom: 5px;
+      transition: background 0.2s;
+    }
+    .profil-btn:hover { background: #dbeafe; border-color: var(--bleu2); }
+    .profil-btn strong { display: block; font-size: 13px; }
+
+    /* Reset */
+    .reset-section { margin-top: auto; padding: 1rem 1.2rem; }
+
+    /* ─── ZONE DE CHAT ────────────────────────────────────────── */
+    .chat-area {
+      display: flex;
+      flex-direction: column;
+      background: #f8fafc;
+      overflow: hidden;
+    }
+    .chat-topbar {
+      background: white;
+      border-bottom: 1px solid var(--gris2);
+      padding: 0.7rem 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+    .chat-topbar-info { font-size: 13px; font-weight: 600; color: var(--bleu); }
+    .chat-topbar-sub  { font-size: 11px; color: #64748b; margin-top: 1px; }
+
+    .messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1.2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    /* Message bulles */
+    .msg {
+      max-width: 80%;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .msg-user { align-self: flex-end; align-items: flex-end; }
+    .msg-assistant { align-self: flex-start; align-items: flex-start; }
+    .msg-role {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      color: #94a3b8;
+    }
+    .msg-bubble {
+      border-radius: 12px;
+      padding: 0.8rem 1rem;
+      font-size: 14px;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    .msg-user .msg-bubble {
+      background: var(--bleu2);
+      color: white;
+      border-bottom-right-radius: 4px;
+    }
+    .msg-assistant .msg-bubble {
+      background: white;
+      border: 1px solid var(--gris2);
+      color: var(--texte);
+      border-bottom-left-radius: 4px;
+      box-shadow: 0 1px 4px var(--ombre);
+    }
+    .msg-assistant .msg-bubble.thinking {
+      color: #94a3b8;
+      font-style: italic;
+    }
+    .msg-web-badge {
+      font-size: 11px;
+      background: #dbeafe;
+      color: #1e40af;
+      border-radius: 10px;
+      padding: 2px 8px;
+      font-weight: 600;
+    }
+
+    /* Message d'accueil */
+    .welcome-msg {
+      align-self: center;
+      text-align: center;
+      padding: 2rem 1.5rem;
+      max-width: 400px;
+      color: #64748b;
+    }
+    .welcome-icon { font-size: 2.5rem; margin-bottom: 0.8rem; }
+    .welcome-msg h3 { font-size: 1rem; color: var(--bleu); margin-bottom: 0.4rem; }
+    .welcome-msg p  { font-size: 13px; line-height: 1.6; }
+
+    /* Barre de saisie */
+    .input-bar {
+      background: white;
+      border-top: 1px solid var(--gris2);
+      padding: 0.8rem 1.2rem;
+    }
+    .input-row {
+      display: flex;
+      gap: 8px;
+      align-items: flex-end;
+    }
+    #userInput {
+      flex: 1;
+      border: 1px solid var(--gris2);
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 14px;
+      font-family: inherit;
+      resize: none;
+      min-height: 42px;
+      max-height: 150px;
+      overflow-y: auto;
+      outline: none;
+      transition: border 0.2s;
+      line-height: 1.5;
+    }
+    #userInput:focus { border-color: var(--bleu2); }
+    #sendBtn {
+      background: var(--bleu2);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      width: 42px;
+      height: 42px;
+      font-size: 18px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: opacity 0.2s;
+    }
+    #sendBtn:hover { opacity: 0.85; }
+    #sendBtn:disabled { opacity: 0.4; cursor: not-allowed; }
+    .input-hint {
+      font-size: 11px;
+      color: #94a3b8;
+      margin-top: 5px;
+      text-align: right;
+    }
+
+    /* ─── RESPONSIVE ──────────────────────────────────────────── */
+    @media (max-width: 650px) {
+      .main-layout {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr;
+        height: auto;
+        min-height: calc(100vh - 62px);
+      }
+      .panel-config { border-right: none; border-bottom: 1px solid var(--gris2); }
+      .chat-area { min-height: 60vh; }
+      .msg { max-width: 90%; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════ EN-TÊTE ═══════════════════════════════════════════ -->
+<header>
+  <div class="header-left">
+    <h1>🤖 Mon Agent IA</h1>
+    <p>Formation — Construire un agent IA avec Claude</p>
+  </div>
+  <div>
+    <span class="status-dot" id="statusDot"></span>
+    <span class="header-badge" id="statusLabel">Non configuré</span>
+  </div>
+</header>
+
+<!-- ═══════════ MISE EN PAGE PRINCIPALE ══════════════════════════ -->
+<div class="main-layout">
+
+  <!-- ─── PANNEAU GAUCHE ─────────────────────────────────────── -->
+  <aside class="panel-config">
+
+    <!-- Clé API -->
+    <div class="panel-section">
+      <h2>🔑 Clé API Anthropic</h2>
+      <label for="apiKey">Votre clé API</label>
+      <div class="api-row">
+        <input type="password" id="apiKey" placeholder="sk-ant-api03-…" autocomplete="off">
+        <button class="btn btn-bleu btn-sm" onclick="saveApiKey()">Sauvegarder</button>
+      </div>
+      <div id="apiStatus"></div>
+      <p class="model-info" style="margin-top:6px;">
+        💡 La clé est stockée uniquement dans votre navigateur (localStorage). Elle n'est jamais transmise ailleurs que vers Anthropic.
+      </p>
+    </div>
+
+    <!-- Prompt système -->
+    <div class="panel-section">
+      <h2>⚙️ Prompt système (rôle de l'agent)</h2>
+      <label for="systemPrompt">Définissez le comportement de votre assistant</label>
+      <textarea id="systemPrompt" rows="6" placeholder="Ex : Tu es un assistant RH spécialisé dans le droit du travail français. Tu réponds de manière précise, professionnelle et concise. Tu demandes des précisions si la question est ambiguë.">Tu es un assistant professionnel compétent et bienveillant. Tu réponds en français, de manière précise et concise. Si une question est ambiguë, tu demandes une clarification avant de répondre.</textarea>
+      <button class="btn btn-gris btn-full btn-sm" onclick="applySystemPrompt()">✅ Appliquer et réinitialiser la conversation</button>
+    </div>
+
+    <!-- Profils rapides -->
+    <div class="panel-section">
+      <h2>👤 Profils rapides</h2>
+      <p style="font-size:12px; color:#64748b; margin-bottom:0.6rem;">Cliquez pour charger un prompt système prédéfini :</p>
+
+      <button class="profil-btn" onclick="loadProfil('rh')">
+        <strong>🏢 Assistant RH</strong>
+        Droit du travail, recrutement, congés
+      </button>
+      <button class="profil-btn" onclick="loadProfil('compta')">
+        <strong>💰 Assistant Comptabilité</strong>
+        Facturation, TVA, clôture comptable
+      </button>
+      <button class="profil-btn" onclick="loadProfil('manager')">
+        <strong>📊 Assistant Manager</strong>
+        Réunions, reporting, communication d'équipe
+      </button>
+      <button class="profil-btn" onclick="loadProfil('formation')">
+        <strong>🎓 Assistant Formation</strong>
+        Plans de formation, OPCO, compétences
+      </button>
+    </div>
+
+    <!-- Recherche web -->
+    <div class="panel-section">
+      <h2>🌐 Recherche web</h2>
+      <div class="toggle-row">
+        <div>
+          <span class="toggle-label">Activer web_search</span>
+          <span class="toggle-sub">Claude pourra interroger internet en temps réel</span>
+        </div>
+        <label class="toggle-switch">
+          <input type="checkbox" id="webSearch" onchange="updateStatus()">
+          <span class="toggle-track"></span>
+        </label>
+      </div>
+      <p style="font-size:11px; color:#94a3b8; margin-top:4px;">⚠️ Nécessite un abonnement Claude API avec accès web_search (bêta Anthropic).</p>
+    </div>
+
+    <!-- Modèle -->
+    <div class="panel-section">
+      <h2>🧠 Modèle</h2>
+      <label for="modelSelect">Modèle Claude</label>
+      <select id="modelSelect">
+        <option value="claude-sonnet-4-5" selected>claude-sonnet-4-5 (recommandé)</option>
+        <option value="claude-haiku-4-5-20251001">claude-haiku-4-5 (rapide, économique)</option>
+        <option value="claude-opus-4-6">claude-opus-4-6 (le plus puissant)</option>
+      </select>
+      <p class="model-info" style="margin-top:5px;">Le modèle Sonnet offre le meilleur équilibre qualité / coût pour une utilisation professionnelle.</p>
+    </div>
+
+    <!-- Réinitialiser -->
+    <div class="reset-section">
+      <button class="btn btn-rouge btn-full" onclick="clearConversation()">🗑️ Effacer la conversation</button>
+    </div>
+
+  </aside>
+
+  <!-- ─── ZONE CHAT ───────────────────────────────────────────── -->
+  <section class="chat-area">
+
+    <div class="chat-topbar">
+      <div>
+        <div class="chat-topbar-info" id="chatTopbarTitle">Conversation</div>
+        <div class="chat-topbar-sub" id="chatTopbarSub">Configurez votre clé API pour commencer</div>
+      </div>
+      <button class="btn btn-gris btn-sm" onclick="copyConversation()" title="Copier la conversation">📋 Copier</button>
+    </div>
+
+    <div class="messages" id="messages">
+      <div class="welcome-msg" id="welcomeMsg">
+        <div class="welcome-icon">💬</div>
+        <h3>Prêt à démarrer !</h3>
+        <p>
+          1. Saisissez votre clé API et cliquez <strong>Sauvegarder</strong>.<br>
+          2. Choisissez un profil ou écrivez votre propre prompt système.<br>
+          3. Tapez votre première question ci-dessous.
+        </p>
+      </div>
+    </div>
+
+    <div class="input-bar">
+      <div class="input-row">
+        <textarea id="userInput" placeholder="Posez votre question…" rows="1"
+          onkeydown="handleKey(event)" oninput="autoResize(this)"></textarea>
+        <button id="sendBtn" onclick="sendMessage()" title="Envoyer (Entrée)">➤</button>
+      </div>
+      <div class="input-hint">Entrée pour envoyer · Maj+Entrée pour un saut de ligne</div>
+    </div>
+
+  </section>
+
+</div>
+
+<!-- ═══════════ JAVASCRIPT ════════════════════════════════════════ -->
+<script>
+// ─── État de l'application ────────────────────────────────────
+let conversationHistory = [];
+let isLoading = false;
+
+// ─── Profils prédéfinis ───────────────────────────────────────
+const PROFILS = {
+  rh: `Tu es un assistant RH spécialisé dans la gestion des ressources humaines en France.
+Tu maîtrises le droit du travail français, les conventions collectives, la gestion des congés, le recrutement et la formation professionnelle.
+Tu réponds de manière précise, professionnelle et bienveillante.
+Si une question dépasse ton domaine ou nécessite un avis juridique formel, tu le signales clairement.
+Tu réponds toujours en français.`,
+
+  compta: `Tu es un assistant comptable spécialisé dans la comptabilité d'entreprise française.
+Tu maîtrises la facturation, la TVA, les clôtures comptables, les notes de frais et les déclarations fiscales.
+Tu utilises un langage professionnel mais accessible.
+Pour toute question nécessitant un avis d'expert-comptable officiel, tu le précises.
+Tu réponds toujours en français.`,
+
+  manager: `Tu es un assistant managérial pour les responsables d'équipe.
+Tu aides à préparer des réunions, rédiger des comptes rendus, structurer des rapports, et communiquer efficacement avec son équipe.
+Tu proposes des formulations claires, des modèles réutilisables et des conseils pratiques.
+Tu réponds toujours en français de manière concise et actionnable.`,
+
+  formation: `Tu es un assistant spécialisé en ingénierie de formation professionnelle.
+Tu maîtrises les plans de développement des compétences, les financements OPCO, la réglementation formation (CPF, Qualiopi), et la conception pédagogique.
+Tu aides à rédiger des cahiers des charges, des programmes de formation et des bilans pédagogiques.
+Tu réponds toujours en français avec rigueur et clarté.`
+};
+
+// ─── Initialisation ───────────────────────────────────────────
+window.addEventListener('DOMContentLoaded', () => {
+  const savedKey = localStorage.getItem('claude_api_key');
+  if (savedKey) {
+    document.getElementById('apiKey').value = savedKey;
+    showApiStatus('✅ Clé API chargée depuis le navigateur', 'ok');
+  }
+  const savedPrompt = localStorage.getItem('claude_system_prompt');
+  if (savedPrompt) {
+    document.getElementById('systemPrompt').value = savedPrompt;
+  }
+  const savedModel = localStorage.getItem('claude_model');
+  if (savedModel) {
+    document.getElementById('modelSelect').value = savedModel;
+  }
+  updateStatus();
+});
+
+// ─── Clé API ──────────────────────────────────────────────────
+function saveApiKey() {
+  const key = document.getElementById('apiKey').value.trim();
+  if (!key.startsWith('sk-ant-')) {
+    showApiStatus('⚠️ Format incorrect. La clé doit commencer par sk-ant-', 'err');
+    return;
+  }
+  localStorage.setItem('claude_api_key', key);
+  showApiStatus('✅ Clé sauvegardée dans votre navigateur', 'ok');
+  updateStatus();
+}
+
+function showApiStatus(msg, type) {
+  const el = document.getElementById('apiStatus');
+  el.textContent = msg;
+  el.className = type;
+}
+
+// ─── Prompt système ───────────────────────────────────────────
+function applySystemPrompt() {
+  const prompt = document.getElementById('systemPrompt').value.trim();
+  localStorage.setItem('claude_system_prompt', prompt);
+  clearConversation(false);
+  updateStatus();
+}
+
+function loadProfil(id) {
+  document.getElementById('systemPrompt').value = PROFILS[id];
+  localStorage.setItem('claude_system_prompt', PROFILS[id]);
+  clearConversation(false);
+  appendSystemMsg(`Profil chargé. Conversation réinitialisée. Posez votre première question !`);
+  updateStatus();
+}
+
+// ─── Statut barre d'en-tête ───────────────────────────────────
+function updateStatus() {
+  const hasKey = !!localStorage.getItem('claude_api_key');
+  const webOn  = document.getElementById('webSearch').checked;
+  const dot    = document.getElementById('statusDot');
+  const label  = document.getElementById('statusLabel');
+  const sub    = document.getElementById('chatTopbarSub');
+
+  if (hasKey) {
+    dot.classList.add('active');
+    label.textContent = webOn ? 'Prêt — Web activé' : 'Prêt';
+    sub.textContent = webOn
+      ? 'Agent configuré · Recherche web activée'
+      : 'Agent configuré · Posez votre question';
+  } else {
+    dot.classList.remove('active');
+    label.textContent = 'Non configuré';
+    sub.textContent = 'Configurez votre clé API pour commencer';
+  }
+}
+
+// ─── Envoi de message ─────────────────────────────────────────
+async function sendMessage() {
+  if (isLoading) return;
+
+  const apiKey = localStorage.getItem('claude_api_key');
+  if (!apiKey) {
+    appendSystemMsg('⚠️ Veuillez d\'abord saisir et sauvegarder votre clé API.');
+    return;
+  }
+
+  const input = document.getElementById('userInput');
+  const text  = input.value.trim();
+  if (!text) return;
+
+  input.value = '';
+  autoResize(input);
+  hideWelcome();
+
+  // Message utilisateur
+  appendMessage('user', text);
+  conversationHistory.push({ role: 'user', content: text });
+
+  // Indicateur de chargement
+  const loadingId = appendMessage('assistant', '…', true);
+  isLoading = true;
+  document.getElementById('sendBtn').disabled = true;
+
+  try {
+    const systemPrompt = document.getElementById('systemPrompt').value.trim();
+    const model        = document.getElementById('modelSelect').value;
+    const webSearch    = document.getElementById('webSearch').checked;
+
+    // Construction du body
+    const body = {
+      model,
+      max_tokens: 1024,
+      system: systemPrompt || 'Tu es un assistant professionnel utile. Tu réponds en français.',
+      messages: conversationHistory
+    };
+
+    // Ajout de l'outil web_search si activé
+    if (webSearch) {
+      body.tools = [{
+        type: 'web_search_20250305',
+        name: 'web_search',
+        max_uses: 3
+      }];
+    }
+
+    const headers = {
+      'content-type': 'application/json',
+      'x-api-key': apiKey,
+      'anthropic-version': '2023-06-01',
+      'anthropic-dangerous-direct-browser-calls': 'true'
+    };
+    if (webSearch) {
+      headers['anthropic-beta'] = 'web-search-2025-03-05';
+    }
+
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers,
+      body: JSON.stringify(body)
+    });
+
+    if (!response.ok) {
+      const err = await response.json().catch(() => ({}));
+      throw new Error(err.error?.message || `Erreur HTTP ${response.status}`);
+    }
+
+    const data = await response.json();
+
+    // Extraction du texte de la réponse
+    let replyText = '';
+    let usedWeb   = false;
+    if (data.content && Array.isArray(data.content)) {
+      for (const block of data.content) {
+        if (block.type === 'text') {
+          replyText += block.text;
+        } else if (block.type === 'tool_use' && block.name === 'web_search') {
+          usedWeb = true;
+        }
+      }
+    }
+    if (!replyText) replyText = '(réponse vide)';
+
+    // Mise à jour du message en attente
+    updateMessage(loadingId, replyText, usedWeb);
+
+    // Ajout à l'historique
+    conversationHistory.push({ role: 'assistant', content: replyText });
+
+    // Sauvegarde modèle
+    localStorage.setItem('claude_model', model);
+
+  } catch (err) {
+    updateMessage(loadingId, `❌ Erreur : ${err.message}`, false, true);
+    // On retire le dernier message utilisateur de l'historique pour permettre de réessayer
+    conversationHistory.pop();
+  }
+
+  isLoading = false;
+  document.getElementById('sendBtn').disabled = false;
+  document.getElementById('userInput').focus();
+}
+
+// ─── Gestion de l'interface de chat ──────────────────────────
+let msgCounter = 0;
+
+function appendMessage(role, text, isLoading = false) {
+  const id  = 'msg-' + (++msgCounter);
+  const div = document.createElement('div');
+  div.className = `msg msg-${role}`;
+  div.id = id;
+  div.innerHTML = `
+    <span class="msg-role">${role === 'user' ? 'Vous' : 'Assistant'}</span>
+    <div class="msg-bubble${isLoading ? ' thinking' : ''}">${escHtml(text)}</div>
+  `;
+  document.getElementById('messages').appendChild(div);
+  scrollToBottom();
+  return id;
+}
+
+function updateMessage(id, text, usedWeb = false, isError = false) {
+  const div = document.getElementById(id);
+  if (!div) return;
+  const bubble = div.querySelector('.msg-bubble');
+  bubble.classList.remove('thinking');
+  if (isError) {
+    bubble.style.background = '#fee2e2';
+    bubble.style.borderColor = '#fca5a5';
+    bubble.style.color = '#991b1b';
+  }
+  let html = escHtml(text);
+  if (usedWeb) {
+    html = `<span class="msg-web-badge">🌐 Recherche web effectuée</span>\n\n` + html;
+  }
+  bubble.innerHTML = html;
+  scrollToBottom();
+}
+
+function appendSystemMsg(text) {
+  hideWelcome();
+  const div = document.createElement('div');
+  div.style.cssText = 'align-self:center; font-size:12px; color:#94a3b8; text-align:center; padding:4px 0;';
+  div.textContent = text;
+  document.getElementById('messages').appendChild(div);
+  scrollToBottom();
+}
+
+function hideWelcome() {
+  const w = document.getElementById('welcomeMsg');
+  if (w) w.remove();
+}
+
+function scrollToBottom() {
+  const m = document.getElementById('messages');
+  m.scrollTop = m.scrollHeight;
+}
+
+function escHtml(text) {
+  return text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/\n/g, '<br>');
+}
+
+// ─── Effacer la conversation ──────────────────────────────────
+function clearConversation(showMsg = true) {
+  conversationHistory = [];
+  const container = document.getElementById('messages');
+  container.innerHTML = '';
+  if (showMsg) {
+    appendSystemMsg('Conversation effacée. Posez votre première question !');
+  }
+}
+
+// ─── Copier la conversation ───────────────────────────────────
+function copyConversation() {
+  if (conversationHistory.length === 0) {
+    alert('La conversation est vide.');
+    return;
+  }
+  const text = conversationHistory
+    .map(m => `[${m.role === 'user' ? 'VOUS' : 'ASSISTANT'}]\n${m.content}`)
+    .join('\n\n---\n\n');
+  navigator.clipboard.writeText(text)
+    .then(() => alert('Conversation copiée dans le presse-papiers !'))
+    .catch(() => alert('Impossible de copier. Sélectionnez manuellement le texte.'));
+}
+
+// ─── Raccourcis clavier ───────────────────────────────────────
+function handleKey(e) {
+  if (e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault();
+    sendMessage();
+  }
+}
+
+function autoResize(el) {
+  el.style.height = 'auto';
+  el.style.height = Math.min(el.scrollHeight, 150) + 'px';
+}
+</script>
+
+</body>
+</html>
