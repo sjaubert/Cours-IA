@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Formation IA – Proposition d'animation et cahier des charges</title>
+<style>
+  :root {
+    --bleu-uimm: #1F4E79;
+    --bleu-clair: #2E75B6;
+    --orange: #C55A11;
+    --vert: #375623;
+    --gris-clair: #F2F2F2;
+    --gris-moyen: #D9D9D9;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    color: #222;
+    background: #fff;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 24px 48px;
+  }
+
+  /* En-tête */
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 0 10px;
+    border-bottom: 3px solid var(--bleu-clair);
+    margin-bottom: 32px;
+  }
+  header .org { font-weight: bold; color: var(--bleu-uimm); font-size: 15px; }
+  header .subtitle { color: #888; font-size: 12px; }
+
+  /* Page de titre */
+  .title-block {
+    background: var(--bleu-uimm);
+    color: #fff;
+    text-align: center;
+    padding: 32px 24px 20px;
+    margin-bottom: 8px;
+  }
+  .title-block h1 { font-size: 28px; font-weight: bold; letter-spacing: 1px; margin-bottom: 6px; }
+  .title-block .jour { font-size: 16px; color: var(--gris-moyen); margin-bottom: 0; }
+  .title-band {
+    background: var(--bleu-clair);
+    color: #fff;
+    text-align: center;
+    padding: 10px 24px 12px;
+    font-style: italic;
+    font-size: 14px;
+    margin-bottom: 28px;
+  }
+
+  /* Tableau de garde */
+  table.garde {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 36px;
+  }
+  table.garde td {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    font-size: 13px;
+  }
+  table.garde tr:nth-child(odd) td { background: var(--gris-clair); }
+  table.garde td:first-child { font-weight: bold; width: 160px; }
+
+  /* Titres de section */
+  .section-title {
+    background: var(--bleu-uimm);
+    color: #fff;
+    font-weight: bold;
+    font-size: 15px;
+    padding: 10px 16px;
+    margin: 36px 0 18px;
+  }
+  .section-title.bleu-clair { background: var(--bleu-clair); }
+  .section-title.orange { background: var(--orange); }
+
+  h3 {
+    color: var(--bleu-clair);
+    font-size: 15px;
+    border-bottom: 2px solid var(--bleu-clair);
+    padding-bottom: 4px;
+    margin: 28px 0 12px;
+  }
+  h4 {
+    color: var(--bleu-uimm);
+    font-size: 14px;
+    margin: 22px 0 10px;
+  }
+
+  /* Tableaux de données */
+  table.data {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 18px;
+    font-size: 13px;
+  }
+  table.data th {
+    background: var(--bleu-uimm);
+    color: #fff;
+    font-weight: bold;
+    padding: 8px 10px;
+    text-align: left;
+    border: 1px solid #aaa;
+  }
+  table.data td {
+    padding: 7px 10px;
+    border: 1px solid #ccc;
+    vertical-align: top;
+  }
+  table.data tr:nth-child(even) td { background: #fff; }
+  table.data tr:nth-child(odd) td { background: var(--gris-clair); }
+  table.data .bold { font-weight: bold; }
+  table.data .vert { color: var(--vert); font-weight: bold; }
+  table.data .orange { color: var(--orange); font-weight: bold; }
+
+  /* Encadrés */
+  .note-box {
+    border-left: 6px solid #F4B942;
+    border-top: 1px solid #F4B942;
+    border-bottom: 1px solid #F4B942;
+    border-right: 1px solid #F4B942;
+    background: #FFF8E1;
+    padding: 12px 16px;
+    margin: 14px 0;
+    font-style: italic;
+    font-size: 13px;
+  }
+  .green-box {
+    border-left: 8px solid var(--vert);
+    border-top: 2px solid var(--vert);
+    border-bottom: 2px solid var(--vert);
+    border-right: 2px solid var(--vert);
+    background: #EBF5EB;
+    padding: 16px 20px;
+    margin: 14px 0;
+    font-size: 13px;
+  }
+  .green-box p { margin-bottom: 8px; }
+  .green-box p:last-child { margin-bottom: 0; }
+  .warn-text { color: var(--orange); font-weight: bold; font-size: 13px; margin: 10px 0; }
+
+  /* Listes */
+  ul.doc-list {
+    margin: 8px 0 12px 20px;
+    padding: 0;
+  }
+  ul.doc-list li { margin-bottom: 6px; font-size: 13px; }
+
+  /* Liens */
+  a { color: var(--bleu-clair); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* Paragraphes */
+  p { margin: 8px 0; font-size: 13px; line-height: 1.6; }
+
+  /* Pied de page */
+  footer {
+    border-top: 1px solid var(--gris-moyen);
+    text-align: center;
+    color: #888;
+    font-size: 11px;
+    padding-top: 14px;
+    margin-top: 48px;
+  }
+
+  /* Séparateur de page */
+  .page-break { border: none; border-top: 2px dashed var(--gris-moyen); margin: 40px 0; }
+
+  /* Navigation interne */
+  nav.toc {
+    background: var(--gris-clair);
+    border-left: 4px solid var(--bleu-clair);
+    padding: 16px 20px;
+    margin-bottom: 32px;
+    font-size: 13px;
+  }
+  nav.toc strong { display: block; margin-bottom: 8px; color: var(--bleu-uimm); }
+  nav.toc a { display: inline-block; margin: 2px 0; color: var(--bleu-clair); }
+</style>
+</head>
+<body>
+
+<header>
+  <span class="org">Pôle Formation UIMM Centre-Val de Loire</span>
+  <span class="subtitle">Formation Intelligence Artificielle</span>
+</header>
+
+<nav class="toc">
+  <strong>Sommaire</strong>
+  <a href="#partie1">Partie 1 – Proposition d'animation</a> &nbsp;|&nbsp;
+  <a href="#jour1">Jour 1 – Comprendre et Explorer</a> &nbsp;|&nbsp;
+  <a href="#jour2">Jour 2 – Limites et Intégration</a> &nbsp;|&nbsp;
+  <a href="#partie2">Partie 2 – Cahier des charges</a> &nbsp;|&nbsp;
+  <a href="#s21">2.1 Équipements</a> &nbsp;|&nbsp;
+  <a href="#s22">2.2 Scénario A – Cloud</a> &nbsp;|&nbsp;
+  <a href="#s23">2.3 Scénario B – Ollama</a> &nbsp;|&nbsp;
+  <a href="#partie3">Partie 3 – Comparaison</a> &nbsp;|&nbsp;
+  <a href="#annexe">Annexe – Ressources</a>
+</nav>
+
+<div class="title-block">
+  <p style="color:#ccc;font-size:12px;margin-bottom:8px;">PÔLE FORMATION UIMM CENTRE-VAL DE LOIRE</p>
+  <h1>FORMATION INTELLIGENCE ARTIFICIELLE</h1>
+  <p class="jour">2 jours – Public industrie</p>
+</div>
+<div class="title-band">Proposition d'animation et cahier des charges ressources</div>
+
+<table class="garde">
+  <tr><td>Auteur</td><td>S. JAUBERT – Formateur Mathématiques et Organisation Industrielle</td></tr>
+  <tr><td>Date</td><td>Mai 2026</td></tr>
+  <tr><td>Destinataire</td><td>Direction – Pôle Formation UIMM CVDL</td></tr>
+  <tr><td>Objet</td><td>Proposition d'animation + Cahier des charges ressources IA</td></tr>
+</table>
+
+<hr class="page-break">
+
+<!-- ======================================================= PARTIE 1 -->
+<div class="section-title" id="partie1">PARTIE 1 – PROPOSITION D'ANIMATION DE LA FORMATION</div>
+
+<p>La formation Intelligence Artificielle référencée au catalogue AFPI est construite sur 2 jours (14 heures effectives). Elle répond directement au programme publié sur le site du Pôle Formation et s'appuie sur un corpus de ressources pédagogiques déjà constitué : supports HTML interactifs, ateliers guidés, guides formateur, activités métier.</p>
+<p>Le public cible est mixte : salariés de l'industrie toutes fonctions confondues (techniciens de maintenance, agents de production, fonctions administratives, commerciaux, RH, managers). Aucun prérequis technique n'est exigé.</p>
+
+<h4>Vue d'ensemble des 2 jours</h4>
+<table class="data">
+  <tr><th>Élément</th><th>Détail</th></tr>
+  <tr><td>Durée totale</td><td>2 jours – 14 heures effectives</td></tr>
+  <tr><td>Public</td><td>Mixte : techniciens, managers, RH, fonctions support – sans prérequis</td></tr>
+  <tr><td>Outils utilisés</td><td>NotebookLM (Google) + Gemini, Claude, Antigravity – démonstrations formateur</td></tr>
+  <tr><td>Livrable stagiaire</td><td>Attestation de capacités + Carnet de prompts personnalisé</td></tr>
+  <tr><td>Modalité</td><td>Présentiel – 1 poste informatique par stagiaire</td></tr>
+  <tr><td>Méthode</td><td>Participative et démonstrative – alternance théorie / pratique (40 % / 60 %)</td></tr>
+</table>
+
+<!-- JOUR 1 -->
+<div class="section-title bleu-clair" id="jour1">JOUR 1 – Comprendre et Explorer l'IA (7 heures)</div>
+
+<h3>Module 1 – Comprendre les fondamentaux de l'IA (1h30)</h3>
+<p>Démystifier l'IA, distinguer les concepts clés, replacer les outils actuels dans leur contexte historique.</p>
+<table class="data">
+  <tr><th>Séquence</th><th>Contenu</th><th>Durée</th></tr>
+  <tr><td>Accueil / cadrage</td><td>Tour de table, représentations initiales, brise-glace « Qu'est-ce que l'IA pour vous ? »</td><td>30 min</td></tr>
+  <tr><td>Fondamentaux IA</td><td>IA symbolique vs IA apprenante, Machine Learning, Deep Learning, réseaux de neurones, paradigme ML vs programmation traditionnelle</td><td>45 min</td></tr>
+  <tr><td>Activité : Le Tri Intégral</td><td>Étude de cas papier : identification de features biaisées dans un jeu de données. Découverte du biais en amont de l'IA.</td><td>20 min</td></tr>
+  <tr><td>Synthèse M1</td><td>Quiz express de consolidation</td><td>15 min</td></tr>
+</table>
+
+<h3>Module 2 – Explorer les IA génératives (1h30)</h3>
+<p>Comprendre le fonctionnement d'un LLM, prendre en main un outil génératif, découvrir l'écosystème.</p>
+<table class="data">
+  <tr><th>Séquence</th><th>Contenu</th><th>Durée</th></tr>
+  <tr><td>Fonctionnement LLM</td><td>Tokens, fenêtre de contexte, température, hallucination, RAG – les 5 concepts clés du Top 10 %</td><td>30 min</td></tr>
+  <tr><td>Panorama des outils</td><td>Gemini, Claude, Copilot, Mistral, DALL-E, Midjourney, ElevenLabs… selon les métiers – positionnement de chaque famille d'outils</td><td>20 min</td></tr>
+  <tr><td>Démo guidée en direct</td><td>Connexion sur Gemini ou Claude, comparaison avec/sans contexte, test de l'hallucination, réglage température – démonstration <a href="../IA-Education/antigravity_tutorial.html">Antigravity</a> en complément</td><td>40 min</td></tr>
+</table>
+
+<h3>Module 3 – Maîtriser le Prompt Engineering (2h30 répartis sur J1 et J2)</h3>
+<p>S'approprier les techniques de prompting, de la structure de base aux techniques avancées.</p>
+<p>Supports utilisés :
+  <a href="../Formation-Journee-PromptEngineering/Atelier1_6Piliers.html">Atelier 1 – Les 6 Piliers</a> |
+  <a href="../Formation-Journee-PromptEngineering/Atelier2_Exercices_Pratiques.html">Atelier 2 – Exercices pratiques</a> |
+  <a href="../IA-Education/Guide_Interactif_Prompt.html">Guide Interactif Prompt</a>
+</p>
+<table class="data">
+  <tr><th>Séquence</th><th>Contenu</th><th>Durée</th></tr>
+  <tr>
+    <td>Anatomie d'un prompt</td>
+    <td>Les 6 piliers : Rôle, Contexte, Tâche, Contraintes, Format, Étapes critiques</td>
+    <td>30 min</td>
+  </tr>
+  <tr>
+    <td><a href="../Formation-Journee-PromptEngineering/Atelier1_6Piliers.html">Atelier 1 – 6 Piliers</a>
+      <br><small><a href="../Formation-Journee-PromptEngineering/Atelier1_Corriges_Formateur.md">Corrigés formateur</a></small></td>
+    <td>Exercices d'identification et construction de prompts – support interactif HTML</td>
+    <td>30 min</td>
+  </tr>
+  <tr>
+    <td><a href="../Formation-Journee-PromptEngineering/Atelier2_Exercices_Pratiques.html">Atelier 2 – Pratique</a>
+      <br><small><a href="../Formation-Journee-PromptEngineering/Atelier2_Corriges_Formateur.md">Corrigés formateur</a></small></td>
+    <td>5 exercices progressifs : e-mail, procédure qualité, quiz, rapport de synthèse, cas métier</td>
+    <td>30 min</td>
+  </tr>
+  <tr>
+    <td>Pitch IA en binôme</td>
+    <td>Chaque binôme choisit un outil IA (Gemini, Claude ou Antigravity), prépare et présente en 5 min : fonctionnement, démo, cas métier, limite principale</td>
+    <td>60 min</td>
+  </tr>
+</table>
+
+<!-- JOUR 2 -->
+<div class="section-title bleu-clair" id="jour2">JOUR 2 – Identifier les limites et intégrer l'IA (7 heures)</div>
+
+<h3>Module 4 (partie 1) – Limites et pièges de l'IA (1h30)</h3>
+<p>Support : <a href="Activites-Biais/index.html">Formation IA – Les Biais</a> | <a href="Activites-Biais/guide_formateur.html">Guide formateur</a></p>
+<table class="data">
+  <tr><th>Séquence</th><th>Contenu</th><th>Durée</th></tr>
+  <tr><td>Théorie : biais et hallucination</td><td>Anatomie des biais algorithmiques, mécanismes de l'hallucination, limites techniques (knowledge cutoff, mémoire), enjeux RGPD et IA Act européen</td><td>40 min</td></tr>
+  <tr>
+    <td>Ateliers biais (3 activités)</td>
+    <td>
+      <a href="Activites-Biais/activite1_biais_cognitifs.html">Activité 1 – Biais cognitifs fondamentaux</a><br>
+      <a href="Activites-Biais/activite4_biais_confirmation.html">Activité 4 – Biais de confirmation</a><br>
+      <a href="Activites-Biais/activite6_jeu_role.html">Activité 6 – Jeu de rôle décision</a>
+    </td>
+    <td>45 min</td>
+  </tr>
+  <tr><td>Débriefing collectif</td><td>Synthèse et posture critique face aux outputs LLM</td><td>15 min</td></tr>
+</table>
+
+<h3>Module 4 (partie 2) – Faire face aux évolutions rapides (1h30)</h3>
+<table class="data">
+  <tr><th>Séquence</th><th>Contenu</th><th>Durée</th></tr>
+  <tr><td>IA Agentique</td><td>Différence chatbot vs agent, planification, outils, standard MCP – la révolution en cours</td><td>30 min</td></tr>
+  <tr>
+    <td>Usages industriels concrets</td>
+    <td>Maintenance prédictive, assistant diagnostic, génération de procédures, documentation technique automatisée<br>
+    Supports :
+    <a href="../Formation_IA_Usages_Industrie_UIMM-CVDL/A1_Analyse_Donnees_GMAO/README.md">A1 – GMAO</a> |
+    <a href="../Formation_IA_Usages_Industrie_UIMM-CVDL/A2_Assistant_Diagnostic/README.md">A2 – Diagnostic</a> |
+    <a href="../Formation_IA_Usages_Industrie_UIMM-CVDL/A3_Procedures_Securite/README.md">A3 – Sécurité</a></td>
+    <td>30 min</td>
+  </tr>
+  <tr>
+    <td>Démo NotebookLM (outil phare)</td>
+    <td>Chaque participant importe son propre document professionnel – questions avec sources, génération de FAQ, podcast audio sur son document interne<br>
+    Support : <a href="../NoteBLM/index.html">Présentation NotebookLM</a></td>
+    <td>30 min</td>
+  </tr>
+</table>
+
+<h3>Atelier de synthèse + techniques avancées (1h45)</h3>
+<table class="data">
+  <tr><th>Séquence</th><th>Contenu</th><th>Durée</th></tr>
+  <tr>
+    <td><a href="../Formation-Journee-PromptEngineering/Atelier3_Techniques_Avancees.html">Atelier 3 – Techniques avancées</a>
+      <br><small><a href="../Formation-Journee-PromptEngineering/Atelier3_Corriges_Formateur.md">Corrigés formateur</a></small></td>
+    <td>Chain-of-Thought, Few-Shot, Roleplay structuré, prompts système – support HTML interactif</td>
+    <td>45 min</td>
+  </tr>
+  <tr><td>Mise en situation métier</td><td>Chaque participant formule et teste un prompt sur son propre contexte professionnel (via Gemini ou Claude), itération collective</td><td>30 min</td></tr>
+  <tr>
+    <td>NotebookLM + veille IA</td>
+    <td>Fonctions avancées NotebookLM, routine de veille IA personnalisée gratuite, 3 réflexes à adopter<br>
+    Support : <a href="../NoteBLM/Manuel_Eleve_NotebookLM.docx">Manuel élève NotebookLM (DOCX)</a></td>
+    <td>30 min</td>
+  </tr>
+</table>
+
+<h3>Synthèse, évaluation et clôture (45 min)</h3>
+<ul class="doc-list">
+  <li>Quiz final : 15 questions couvrant les 4 modules (QCM, Vrai/Faux, association terminologie)</li>
+  <li>Bilan collectif : 1 outil à utiliser dès demain, 1 engagement concret noté</li>
+  <li>Remise des livrables : attestation de capacités, <a href="Fiche_Apprenant_Carnet_de_Prompts.docx">carnet de prompts personnalisé</a>, <a href="Fiche_Apprenant_CheatSheet_Prompt.docx">cheat sheet prompt engineering</a></li>
+</ul>
+
+<div class="note-box">
+  Point d'attention clé : les participants doivent être informés AVANT la formation d'apporter un document professionnel (procédure, notice, rapport, référentiel) pour l'atelier NotebookLM du Jour 2. Ce document reste confidentiel et n'est utilisé que sur leur propre poste.
+</div>
+
+<hr class="page-break">
+
+<!-- ======================================================= PARTIE 2 -->
+<div class="section-title" id="partie2">PARTIE 2 – CAHIER DES CHARGES : RESSOURCES NÉCESSAIRES</div>
+
+<p>Animer une formation sur l'Intelligence Artificielle sans accès à des outils IA performants est incohérent avec le contenu enseigné. Le formateur doit démontrer en direct, et les stagiaires doivent pratiquer. Cette partie détaille les ressources nécessaires selon deux scénarios : solution cloud (payante) et solution locale (open source).</p>
+
+<!-- 2.1 -->
+<h4 id="s21">2.1  Équipements informatiques (communs aux deux scénarios)</h4>
+<table class="data">
+  <tr><th>Équipement</th><th>Spécification minimale</th><th>Spécification recommandée</th><th>Criticité</th></tr>
+  <tr><td>Poste stagiaire</td><td>Core i5 / 8 Go RAM / SSD / Windows 10</td><td>Core i7 / 16 Go RAM / SSD / Win 11</td><td class="bold">Obligatoire</td></tr>
+  <tr><td>1 poste par stagiaire</td><td>Requis par la fiche AFPI – pas de mutualisation possible</td><td>–</td><td class="bold">Obligatoire</td></tr>
+  <tr><td>Connexion internet</td><td>10 Mbps par poste (accès outils cloud)</td><td>Fibre dédiée salle formation</td><td class="bold">Obligatoire</td></tr>
+  <tr><td>Vidéoprojecteur / écran</td><td>1080p minimum – visible depuis tous les postes</td><td>4K interactif ou écran tactile 65″</td><td class="bold">Obligatoire</td></tr>
+  <tr><td>Poste formateur</td><td>Core i7 / 16 Go RAM – connecté au vidéoprojecteur</td><td>Core i9 / 32 Go / GPU dédié si démo locale</td><td class="bold">Obligatoire</td></tr>
+  <tr><td>Comptes utilisateurs</td><td>1 compte Google par stagiaire (Gmail) pour NotebookLM</td><td>Comptes créés et testés avant le Jour 1</td><td class="bold">Obligatoire</td></tr>
+  <tr><td>Tableau blanc / paperboard</td><td>Pour les ateliers de groupe et brise-glace</td><td>–</td><td>Recommandé</td></tr>
+  <tr><td>Impression couleur</td><td>Carnet de prompts + cheat sheet (2 documents A4 par stagiaire)</td><td>–</td><td>Recommandé</td></tr>
+</table>
+
+<!-- 2.2 -->
+<h4 id="s22">2.2  Scénario A – Solutions IA cloud (abonnements payants)</h4>
+<p>Ce scénario est le plus simple à déployer. Il ne nécessite aucun investissement matériel supplémentaire.</p>
+
+<h3>2.2.1  Pour le formateur – abonnement individuel</h3>
+<p>Le formateur doit disposer d'un accès premium pour les démonstrations en direct. Un compte gratuit est insuffisant : limites de contexte, throttling, indisponibilité en période de charge.</p>
+<table class="data">
+  <tr><th>Solution</th><th>Tarif mensuel</th><th>Points forts pour la formation</th><th>Recommandation</th></tr>
+  <tr>
+    <td>Claude Pro (Anthropic)</td>
+    <td>20 €/mois</td>
+    <td>Fenêtre de contexte 200 000 tokens, accès Claude Sonnet et Opus, débit stable en journée de formation</td>
+    <td class="vert">Recommandé formateur</td>
+  </tr>
+  <tr>
+    <td>Gemini Advanced (Google)</td>
+    <td>22 €/mois</td>
+    <td>Intégration Google Workspace native, pertinent si parc Google existant – inclut Google One AI Premium (NotebookLM compris)</td>
+    <td class="vert">Recommandé formateur</td>
+  </tr>
+  <tr>
+    <td>Copilot Pro (Microsoft)</td>
+    <td>22 €/mois</td>
+    <td>Intégration Office 365, pertinent si parc Microsoft en salle</td>
+    <td>Optionnel</td>
+  </tr>
+</table>
+<div class="note-box">
+  Budget formateur minimum : 1 abonnement Claude Pro (20 €/mois) + 1 abonnement Gemini Advanced (22 €/mois) pour couvrir les deux écosystèmes principaux en démonstration comparée. Soit 42 €/mois. NotebookLM reste gratuit avec un compte Google standard.
+</div>
+
+<h3>2.2.2  Pour les stagiaires – options par session</h3>
+<p>Trois niveaux d'équipement sont possibles selon le budget alloué par session :</p>
+<table class="data">
+  <tr><th>Option</th><th>Description</th><th>Coût par session (12 stagiaires)</th><th>Qualité</th></tr>
+  <tr>
+    <td class="bold">Option 1 – Comptes gratuits</td>
+    <td>Gemini Free ou Claude Free (tier gratuit). Suffisant pour les ateliers de base. Limite : quota de messages journalier, modèle allégé sur le tier gratuit.</td>
+    <td>0 €</td>
+    <td>Acceptable</td>
+  </tr>
+  <tr>
+    <td class="bold">Option 2 – Claude Teams (min. 5 users)</td>
+    <td>25 €/user/mois. Accès Claude Sonnet, historique isolé, aucune réutilisation des données pour entraînement. Adapté si déploiement récurrent sur plusieurs sessions.</td>
+    <td>~ 300 €/mois pour 12 users</td>
+    <td class="vert">Optimale</td>
+  </tr>
+  <tr>
+    <td class="bold">Option 3 – Google Workspace + Gemini for Workspace</td>
+    <td>Licences Gemini for Workspace (tarif Education / entreprise négociable). Pertinent si le site dispose déjà d'un parc Google.</td>
+    <td>Variable – à négocier selon accord cadre</td>
+    <td class="vert">Optimale</td>
+  </tr>
+</table>
+<div class="note-box">
+  Recommandation pragmatique : pour une session d'initiation, l'Option 1 (comptes gratuits Gemini / Claude) couvre 80 % des ateliers. La valeur ajoutée des options premium est surtout perceptible pour des publics techniciens avancés ou des mises en situation sur des cas complexes.
+</div>
+
+<h3>2.2.3  Récapitulatif budgétaire – Scénario A</h3>
+<table class="data">
+  <tr><th>Poste</th><th>Périodicité</th><th>Montant estimé</th></tr>
+  <tr><td>Abonnement Claude Pro (formateur)</td><td>Mensuel</td><td>20 €/mois</td></tr>
+  <tr><td>Abonnement Gemini Advanced (formateur)</td><td>Mensuel</td><td>22 €/mois</td></tr>
+  <tr><td>Licences stagiaires – Option 1 (comptes gratuits)</td><td>Par session</td><td>0 €</td></tr>
+  <tr><td>Licences stagiaires – Option 2 Claude Teams (12 users)</td><td>Par session de 2 jours</td><td>~ 300 €/session</td></tr>
+  <tr><td>Impression supports stagiaires</td><td>Par session (12 stagiaires)</td><td>~ 15 €/session</td></tr>
+  <tr><td class="bold">TOTAL MINIMUM (stagiaires en comptes gratuits)</td><td>Mensuel</td><td class="bold">42 €/mois</td></tr>
+  <tr><td class="bold">TOTAL OPTIMAL (formateur + licences stagiaires)</td><td>Par session</td><td class="vert">~ 360 €/session</td></tr>
+</table>
+
+<hr class="page-break">
+
+<!-- 2.3 -->
+<div class="section-title orange" id="s23">2.3  Scénario B – Solution IA locale avec Ollama (open source, sans abonnement)</div>
+
+<p>Ce scénario permet d'exécuter un LLM localement, sans connexion internet et sans coût d'abonnement récurrent. Il est particulièrement pertinent pour les formations en site industriel avec restrictions réseau, ou pour garantir la confidentialité absolue des données traitées.</p>
+<p class="warn-text">Avertissement : ce scénario est exigeant en matériel et nécessite des compétences techniques pour le déploiement.</p>
+
+<h3>2.3.1  Exigences matériel selon le modèle</h3>
+<table class="data">
+  <tr><th>Modèle recommandé</th><th>Paramètres</th><th>RAM minimale</th><th>GPU recommandé</th><th>Qualité / usage</th></tr>
+  <tr><td>Mistral 7B Instruct</td><td>7B</td><td>8 Go RAM</td><td>GPU 6 Go VRAM ou CPU 12 cœurs</td><td>Rapide, acceptable pour initiation</td></tr>
+  <tr>
+    <td class="bold">Llama 3.1 8B (config. recommandée)</td>
+    <td>8B</td>
+    <td>16 Go RAM</td>
+    <td class="bold">GPU 8 Go VRAM (RTX 3070 / 4060)</td>
+    <td class="vert">Très bon rapport qualité/ressources</td>
+  </tr>
+  <tr><td>Phi-4 (Microsoft)</td><td>14B</td><td>32 Go RAM</td><td>GPU 16 Go VRAM (ex : RTX 4080)</td><td>Bon équilibre taille / performance</td></tr>
+  <tr><td>Gemma 2 27B (Google)</td><td>27B</td><td>32 Go RAM</td><td>GPU 24 Go VRAM (ex : RTX 4090)</td><td>Bonne qualité instruction, proche modèles cloud basiques</td></tr>
+  <tr><td>Llama 3.3 70B</td><td>70B</td><td>64 Go RAM</td><td>GPU 48 Go VRAM (2× RTX 3090 ou A6000)</td><td>Qualité proche cloud – matériel très coûteux</td></tr>
+</table>
+<div class="note-box">
+  Conclusion matériel : pour une salle de formation avec 1 serveur partagé, Llama 3.1 8B sur machine avec GPU RTX 3070 (8 Go VRAM) offre un rapport qualité/coût acceptable. Pour une qualité équivalente aux outils cloud grand public, un GPU 24 Go minimum est requis. Coût d'un serveur complet : 2 000 à 3 000 €.
+</div>
+
+<h3>2.3.2  Architecture déployable en salle de formation</h3>
+<table class="data">
+  <tr><th>Configuration</th><th>Description</th><th>Coût matériel estimé</th></tr>
+  <tr>
+    <td class="bold">Config. 1 : Serveur partagé (recommandée)</td>
+    <td>1 serveur dédié avec GPU. Ollama + Open WebUI installés. Les stagiaires accèdent via leur navigateur en réseau local. Aucun GPU requis sur les postes stagiaires.</td>
+    <td class="bold">1 500 – 2 500 € (serveur GPU)</td>
+  </tr>
+  <tr>
+    <td>Config. 2 : Poste formateur uniquement (démo seule)</td>
+    <td>Ollama installé sur le poste formateur pour les démonstrations. Les ateliers stagiaires utilisent les comptes cloud gratuits (Gemini Free / Claude Free).<br>
+    Guide : <a href="../Accomplish/01_Guide_Installation_Ollama_Accomplish.docx">Guide installation Ollama (DOCX)</a></td>
+    <td>300 – 800 € (upgrade GPU poste formateur)</td>
+  </tr>
+  <tr>
+    <td>Config. 3 : Poste par poste (déconseillée)</td>
+    <td>Ollama installé sur chaque poste stagiaire. Nécessite un GPU sur chaque machine. Complexité et coût prohibitifs.</td>
+    <td>Coût × 12 – non viable</td>
+  </tr>
+</table>
+
+<h3>2.3.3  Logiciels nécessaires (tous gratuits et open source)</h3>
+<table class="data">
+  <tr><th>Logiciel</th><th>Rôle</th><th>URL</th></tr>
+  <tr><td>Ollama</td><td>Serveur LLM local – téléchargement et gestion des modèles</td><td>ollama.com</td></tr>
+  <tr><td>Open WebUI</td><td>Interface web pour interagir avec Ollama (équivalent interface chat locale)</td><td>openwebui.com</td></tr>
+  <tr><td>Docker (optionnel)</td><td>Simplifie le déploiement d'Open WebUI</td><td>docker.com</td></tr>
+  <tr><td>Python 3.10+</td><td>Nécessaire pour les ateliers de scripting et d'analyse de données</td><td>python.org</td></tr>
+  <tr><td>VS Code (optionnel)</td><td>Éditeur recommandé pour les ateliers avancés</td><td>code.visualstudio.com</td></tr>
+</table>
+
+<h3>2.3.4  Contraintes et points de vigilance</h3>
+<ul class="doc-list">
+  <li><strong>Temps d'installation :</strong> prévoir 2 à 4 heures pour configurer le serveur, télécharger les modèles (3 à 40 Go selon le modèle) et tester l'accès réseau depuis tous les postes stagiaires.</li>
+  <li><strong>Compétences techniques requises :</strong> le formateur ou un technicien informatique doit maîtriser l'installation en ligne de commande. Le guide est disponible ici : <a href="../Accomplish/01_Guide_Installation_Ollama_Accomplish.docx">01_Guide_Installation_Ollama_Accomplish.docx</a></li>
+  <li><strong>Absence de NotebookLM local :</strong> NotebookLM est un service Google sans équivalent open source mature à ce jour. Ce module nécessitera toujours une connexion internet, même en scénario Ollama.</li>
+  <li><strong>Performances inférieures aux modèles cloud :</strong> un LLM local de 7 à 8 milliards de paramètres est moins performant que Claude Sonnet ou Gemini Pro sur les tâches complexes. Cela peut être exploité pédagogiquement (illustration des limites) mais peut générer de la frustration sur les ateliers avancés.</li>
+  <li><strong>Avantage confidentialité :</strong> aucune donnée ne quitte le réseau interne. Atout décisif pour les sites industriels avec données sensibles (plans de production, procédures internes, données GMAO).</li>
+</ul>
+
+<h3>2.3.5  Récapitulatif budgétaire – Scénario B</h3>
+<table class="data">
+  <tr><th>Poste</th><th>Montant estimé</th></tr>
+  <tr><td>Serveur dédié GPU (RTX 4060/4070 + 32 Go RAM + SSD 2 To)</td><td>1 500 – 2 500 € (investissement unique)</td></tr>
+  <tr><td>Logiciels (Ollama, Open WebUI, Python, VS Code)</td><td>0 € (open source)</td></tr>
+  <tr><td>Abonnements IA (uniquement si NotebookLM requis)</td><td>Connexion internet existante – gratuit</td></tr>
+  <tr><td>Maintenance et mises à jour des modèles</td><td>0 € (téléchargement manuel)</td></tr>
+  <tr><td class="bold">COÛT RÉCURRENT APRÈS INVESTISSEMENT</td><td class="bold">0 €/mois</td></tr>
+  <tr><td class="bold">INVESTISSEMENT INITIAL</td><td class="orange">1 500 – 2 500 € (amorti sur 3 à 4 ans, soit &lt; 50 €/mois)</td></tr>
+</table>
+
+<hr class="page-break">
+
+<!-- ======================================================= PARTIE 3 -->
+<div class="section-title" id="partie3">PARTIE 3 – COMPARAISON ET RECOMMANDATION</div>
+
+<table class="data">
+  <tr><th>Critère</th><th>Scénario A – Cloud payant</th><th>Scénario B – Ollama local</th></tr>
+  <tr><td>Coût de démarrage</td><td>0 € (abonnement mensuel)</td><td>1 500 – 2 500 € (matériel)</td></tr>
+  <tr><td>Coût récurrent</td><td>42 – 360 €/mois selon options</td><td>0 € après investissement initial</td></tr>
+  <tr><td>Qualité des modèles</td><td>État de l'art (Claude Sonnet, Gemini Pro)</td><td>Correcte à bonne (Llama 3.1 8B)</td></tr>
+  <tr><td>Facilité de déploiement</td><td>Très simple – compte + navigateur</td><td>Complexe – technicien requis à l'installation</td></tr>
+  <tr><td>Confidentialité des données</td><td>Données envoyées vers des serveurs hors UE</td><td>Données 100 % locales, zéro transfert</td></tr>
+  <tr><td>Accès hors ligne</td><td>Impossible</td><td>Possible</td></tr>
+  <tr><td>NotebookLM disponible</td><td>Oui (Google – gratuit)</td><td>Non (service Google uniquement)</td></tr>
+  <tr><td>Maintenance continue</td><td>Aucune</td><td>Mises à jour manuelles périodiques</td></tr>
+  <tr><td>Représentation de l'état de l'art</td><td>Oui – outils utilisés en entreprise</td><td>Partielle – modèles moins puissants</td></tr>
+  <tr><td class="bold">Recommandation</td><td class="vert">Scénario optimal pour démarrer</td><td>Complément pertinent – sites industriels sensibles</td></tr>
+</table>
+
+<h4>Recommandation pour la direction</h4>
+<div class="green-box">
+  <p><strong style="color:var(--vert)">Phase 1 (démarrage immédiat) : Scénario A avec comptes gratuits pour les stagiaires</strong></p>
+  <p>Le formateur souscrit à Claude Pro + Gemini Advanced (42 €/mois). Les stagiaires utilisent des comptes Gemini Free ou Claude Free. Cette configuration couvre 100 % des objectifs de la fiche AFPI pour un coût minimal. Déployable immédiatement, sans investissement matériel.</p>
+  <p>&nbsp;</p>
+  <p><strong style="color:var(--bleu-clair)">Phase 2 (après 2 à 3 sessions) : évaluation de la montée en charge</strong></p>
+  <p>Si le volume de sessions le justifie, ou si des formations sont organisées en site industriel avec restrictions réseau : acquisition d'un serveur GPU (1 500 – 2 500 €) pour le Scénario B en complément. L'investissement devient rentable dès la 5e session environ.</p>
+</div>
+
+<hr class="page-break">
+
+<!-- ======================================================= ANNEXE -->
+<div class="section-title" id="annexe">ANNEXE – Ressources pédagogiques déjà disponibles</div>
+
+<p>Le dépôt de ressources Cours-IA contient l'intégralité du matériel pédagogique nécessaire à l'animation. Aucun achat de contenu n'est requis.</p>
+
+<table class="data">
+  <tr><th>Dossier / Fichier</th><th>Contenu</th><th>Usage</th></tr>
+  <tr>
+    <td><a href="Plan_Formation_IA_AFPI.md">00-Formation/Plan_Formation_IA_AFPI.md</a></td>
+    <td>Plan détaillé heure par heure – V3.0 validé le 22/04/2026</td>
+    <td>Référence principale formateur</td>
+  </tr>
+  <tr>
+    <td>Formation-Journee-PromptEngineering/<br>
+      <small>
+        <a href="../Formation-Journee-PromptEngineering/Atelier1_6Piliers.html">Atelier 1 – 6 Piliers</a> |
+        <a href="../Formation-Journee-PromptEngineering/Atelier2_Exercices_Pratiques.html">Atelier 2</a> |
+        <a href="../Formation-Journee-PromptEngineering/Atelier3_Techniques_Avancees.html">Atelier 3</a><br>
+        <a href="../Formation-Journee-PromptEngineering/Atelier1_Corriges_Formateur.md">Corrigés A1</a> |
+        <a href="../Formation-Journee-PromptEngineering/Atelier2_Corriges_Formateur.md">Corrigés A2</a> |
+        <a href="../Formation-Journee-PromptEngineering/Atelier3_Corriges_Formateur.md">Corrigés A3</a>
+      </small>
+    </td>
+    <td>3 ateliers HTML interactifs + corrigés formateur (1 700+ lignes)</td>
+    <td>Ateliers Jour 1 et Jour 2</td>
+  </tr>
+  <tr>
+    <td>00-Formation/Activites-Biais/<br>
+      <small>
+        <a href="Activites-Biais/index.html">Index</a> |
+        <a href="Activites-Biais/guide_formateur.html">Guide formateur</a>
+      </small>
+    </td>
+    <td>6 activités HTML + guide formateur</td>
+    <td>Module 4 – Jour 2</td>
+  </tr>
+  <tr>
+    <td>Formation_IA_Usages_Industrie_UIMM-CVDL/<br>
+      <small>
+        <a href="../Formation_IA_Usages_Industrie_UIMM-CVDL/README.md">Vue d'ensemble</a> |
+        <a href="../Formation_IA_Usages_Industrie_UIMM-CVDL/A1_Analyse_Donnees_GMAO/README.md">A1 GMAO</a> |
+        <a href="../Formation_IA_Usages_Industrie_UIMM-CVDL/A2_Assistant_Diagnostic/README.md">A2 Diagnostic</a> |
+        <a href="../Formation_IA_Usages_Industrie_UIMM-CVDL/A3_Procedures_Securite/README.md">A3 Sécurité</a> |
+        <a href="../Formation_IA_Usages_Industrie_UIMM-CVDL/A4_Maintenance_Predictive/README.md">A4 Prédictive</a> |
+        <a href="../Formation_IA_Usages_Industrie_UIMM-CVDL/A5_Documentation_Technique/README.md">A5 Documentation</a> |
+        <a href="../Formation_IA_Usages_Industrie_UIMM-CVDL/A6_Diagnostic_Panne_Intermittente/instructions_apprenant.md">A6 Panne</a>
+      </small>
+    </td>
+    <td>6 activités métier maintenance industrielle (GMAO, diagnostic, sécurité…)</td>
+    <td>Cas d'usage techniciens</td>
+  </tr>
+  <tr>
+    <td>Formation_V1/<br>
+      <small>
+        <a href="../Formation_V1/Module1_Introduction_IA_Generative_Enjeux_Industriels.html">Module 1</a> |
+        <a href="../Formation_V1/Module_2_Risques_Ethique_Confidentialite.html">Module 2</a> |
+        <a href="../Formation_V1/Module_3_Le_C%C5%93ur_Competence_Principes_Prompt_Engineering.html">Module 3</a> |
+        <a href="../Formation_V1/Module_4_Techniques_Avancees_Prompting.html">Module 4</a> |
+        <a href="../Formation_V1/Module_5_Atelier_Cas_Usage_Metiers.html">Module 5</a> |
+        <a href="../Formation_V1/Module_6_Strategie_Entreprise-Les_7_Lecons_de_Adoption.html">Module 6</a> |
+        <a href="../Formation_V1/Module_7_IA_Avancee_Workflows_Agents_Autonomes.html">Module 7</a> |
+        <a href="../Formation_V1/Module_8_Synthese_Feuille_de_Route.html">Module 8</a>
+      </small>
+    </td>
+    <td>8 modules HTML complets (version de référence)</td>
+    <td>Approfondissement formateur</td>
+  </tr>
+  <tr>
+    <td>NoteBLM/<br>
+      <small>
+        <a href="../NoteBLM/index.html">Présentation NotebookLM</a> |
+        <a href="../NoteBLM/Manuel_Eleve_NotebookLM.docx">Manuel élève (DOCX)</a>
+      </small>
+    </td>
+    <td>Manuel élève NotebookLM + guide d'utilisation avancé</td>
+    <td>Module NotebookLM – Jour 2</td>
+  </tr>
+  <tr>
+    <td>Accomplish/<br>
+      <small>
+        <a href="../Accomplish/01_Guide_Installation_Ollama_Accomplish.docx">Guide installation Ollama</a> |
+        <a href="../Accomplish/02_Guide_Formateur_Corriges.docx">Guide formateur</a> |
+        <a href="../Accomplish/03_Fiches_Stagiaires_Par_Metier.docx">Fiches par métier</a> |
+        <a href="../Accomplish/04_Politique_Utilisation_IA.docx">Politique IA entreprise</a>
+      </small>
+    </td>
+    <td>Guide installation Ollama + fiches stagiaires par métier + politique IA entreprise</td>
+    <td>Scénario B + cas d'usage métier</td>
+  </tr>
+  <tr>
+    <td>IA-Education/<br>
+      <small>
+        <a href="../IA-Education/Guide_Interactif_Prompt.html">Guide Interactif Prompt</a> |
+        <a href="../IA-Education/antigravity_tutorial.html">Tutoriel Antigravity</a>
+      </small>
+    </td>
+    <td>Tutoriels, démos interactives, tableau de bord, guides Google Workspace</td>
+    <td>Ressources complémentaires</td>
+  </tr>
+  <tr>
+    <td><a href="Fiche_Apprenant_Carnet_de_Prompts.docx">Fiche_Apprenant_Carnet_de_Prompts.docx</a></td>
+    <td>Livret stagiaire à imprimer – distribué Jour 1 matin</td>
+    <td>Document imprimé</td>
+  </tr>
+  <tr>
+    <td><a href="Fiche_Apprenant_CheatSheet_Prompt.docx">Fiche_Apprenant_CheatSheet_Prompt.docx</a></td>
+    <td>Aide-mémoire prompting à imprimer – distribué Jour 2 matin</td>
+    <td>Document imprimé</td>
+  </tr>
+</table>
+
+<footer>
+  <p>Document établi par S. JAUBERT – Formateur IA – Mai 2026</p>
+  <p>Pôle Formation UIMM Centre-Val de Loire</p>
+</footer>
+
+</body>
+</html>
