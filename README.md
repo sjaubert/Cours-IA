@@ -238,7 +238,7 @@ Cinq scénarios clés en main pour animer des ateliers en Formation Continue :
 
 - [Initiation IA 7H](00-Formation/Initiation_IA/Initiation_IA_7H.md) — **Découverte** | MD | Programme complet d'une journée d'initiation à l'IA, tous publics <sub>*(avr. 2026)*</sub>
 - [Carnet de Prompts IA](00-Formation/Initiation_IA/Carnet_de_prompts_IA.md) — **Découverte** | MD | Recueil de prompts commentés pour débuter en autonomie <sub>*(avr. 2026)*</sub>
-- [Plan Formation IA — AFPI](00-Formation/Plan_Formation_IA_AFPI.md) — MD | Dispositif de formation IA adapté au contexte AFPI <sub>*(avr. 2026)*</sub>
+- [Plan Formation IA — AFPI](00-Formation/Plan_Formation_IA_AFPI.html) — HTML | Dispositif de formation IA adapté au contexte AFPI <sub>*(avr. 2026)*</sub>
 - [Proposition d'animation et cahier des charges](00-Formation/Proposition_Formation_IA_CahierDesCharges.html) — HTML | Programme 2 jours, public mixte industrie, outils Gemini/Claude/Antigravity/NotebookLM — cahier des charges équipements et abonnements, scénarios cloud et Ollama local <sub>*(mai 2026)*</sub>
   - [Version Word (.docx)](00-Formation/Proposition_Formation_IA_CahierDesCharges.docx)
 
