@@ -67,6 +67,9 @@ NoteBLM/env_mcp/
 *.egg-info/
 dist/
 build/
+# Exception : dossiers dist des projets Vite/GitHub Pages
+!00-Formation/prompt_flow_uimm/dist/
+!00-Formation/prompt_flow_uimm/dist/**
 pip-log.txt
 
 # ----------------------------------------------------------------
