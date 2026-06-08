@@ -146,6 +146,11 @@ Activités autonomes (approche par cas) :
 
 - [Guide débutants Claude Code](CLAUDE/guide-claude-code-debutants/guide-complet.md) — **Pratique** | MD | Prise en main progressive de Claude Code pour non-développeurs <sub>*(mai 2026)*</sub>
 
+### Workflows avancés
+
+- [TP — Workflows avancés Claude Code : maîtriser le contexte](CLAUDE/TP_Workflow_Avance_Claude_Code/README.md) — **Avancé** | MD | Demi-journée (3h30), ancrage industrie/maintenance : hooks vs CLAUDE.md, sous-agents et isolation de contexte, séparation spec/implémentation, /compact et /clear, Skills de convention, migration fan-out, git worktree. Dépôt fil rouge manipulable + corrigés formateur <sub>*(juin 2026)*</sub>
+  - [Fiche apprenant — 8 exercices](CLAUDE/TP_Workflow_Avance_Claude_Code/fiche_apprenant.md) | [Guide formateur](CLAUDE/TP_Workflow_Avance_Claude_Code/guide_formateur.md)
+
 ### Plugins et MCP
 
 - [Fiche procédurale — Les plugins Claude](CLAUDE/Fiche_Procedurale_Plugins_Claude.md) — **Pratique** | MD | Types de plugins (MCP, Skills, Commands, Hooks), installation dans Claude Code et l'application bureau, dix plugins principaux avec cas d'usage, recommandations par profil <sub>*(mai 2026)*</sub>
@@ -266,4 +271,4 @@ Formation sur l'Intelligence Artificielle et ses applications industrielles
 
 ---
 
-*Dernière mise à jour : Mai 2026*
+*Dernière mise à jour : Juin 2026*

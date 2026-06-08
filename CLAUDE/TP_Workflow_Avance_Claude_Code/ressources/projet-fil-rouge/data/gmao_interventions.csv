@@ -1,0 +1,15 @@
+date,equipement,type_intervention,duree_h,cout_euro,recurrence
+2026-01-05,PH-200,corrective,3.5,420,oui
+2026-01-08,CV-12,preventive,1.0,90,non
+2026-01-12,PH-200,corrective,4.0,510,oui
+2026-01-15,CP-04,preventive,2.0,160,non
+2026-01-19,PH-200,corrective,2.5,300,oui
+2026-01-22,VAR-08,corrective,1.5,210,non
+2026-01-26,CV-12,corrective,3.0,380,oui
+2026-02-02,PH-200,corrective,5.0,640,oui
+2026-02-06,PD-03,preventive,1.0,75,non
+2026-02-09,CV-12,corrective,2.5,340,oui
+2026-02-13,RB-15,corrective,6.0,920,non
+2026-02-17,PH-200,corrective,3.0,395,oui
+2026-02-20,CP-04,corrective,2.0,250,non
+2026-02-24,CV-12,corrective,3.5,470,oui
