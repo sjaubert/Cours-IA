@@ -26,6 +26,3 @@ Load identity: [persona-gstack-plan-design-review.md](/.agents/rules/persona-gst
 1. Update `TODOS.md` with design debt (a11y, deferred states).
 2. Generate the Completion Summary and display the Review Readiness Dashboard.
 3. Update the `## GSTACK REVIEW REPORT` in the plan file.
-
-
-

@@ -16,6 +16,3 @@ Load identity: [persona-gstack-setup-deploy.md](/.agents/rules/persona-gstack-se
 1. Write/Update the **## Deploy Configuration** section in `README.md`.
 2. Verify the configuration by testing health checks and status commands.
 3. Display the Deploy Configuration Summary.
-
-
-

@@ -34,4 +34,3 @@ This workflow is governed by [.agents/rules/persona-gstack-investigate.md](/.age
 ## Phase 6: Verification & Report
 1. Perform fresh verification of the original bug scenario.
 2. Output a structured **DEBUG REPORT** including Symptom, Root Cause, Fix, and Evidence.
-

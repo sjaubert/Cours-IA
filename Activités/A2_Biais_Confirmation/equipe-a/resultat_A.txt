@@ -1,2 +1,1 @@
 Je vais générer le rapport démontrant l'impact positif du télétravail sur la productivité et le sauvegarder dans `resultat_A.txt`.
-

@@ -24,7 +24,7 @@ echo Creating %num_files% files...
 for /l %%i in (1, 1, %num_files%) do (
     REM --- Generate random file name ---
     set "filename=file_%%i"
-   
+
     REM --- Get random extension ---
     set /a "rand_ext_index=!RANDOM! %% %count%"
     set "random_ext=!ext[%rand_ext_index%]!"

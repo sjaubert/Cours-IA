@@ -29,6 +29,3 @@ Load identity: [persona-gstack-plan-ceo-review.md](/.agents/rules/persona-gstack
 ## Phase 5: Reporting & Handoff
 1. Produce THE REQUIRED OUTPUTS: "NOT in scope", "What already exists", `TODOS.md` updates.
 2. Display the Completion Summary and update the Review Readiness Dashboard in the plan file.
-
-
-

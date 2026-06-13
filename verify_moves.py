@@ -20,7 +20,7 @@ def extract_text_docx(docx_path):
 def verify_file(filepath):
     ext = os.path.splitext(filepath)[1].lower()
     content = ""
-    
+
     try:
         if ext == '.docx':
             content = extract_text_docx(filepath)

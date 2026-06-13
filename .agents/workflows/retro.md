@@ -29,6 +29,3 @@ If `/retro global` is invoked:
 1. **Discovery:** Run the global discovery script across the local filesystem.
 2. **Aggregation:** Run the data gathering phase for each discovered repository.
 3. **Synthesis:** Produce a cross-project executive summary.
-
-
-

@@ -10,9 +10,9 @@ from datetime import datetime
 
 def generer_rapport():
     """Génère un rapport annuel détaillé et réaliste"""
-    
+
     rapport = []
-    
+
     # En-tête
     rapport.append("=" * 80)
     rapport.append("RAPPORT ANNUEL 2023")
@@ -20,7 +20,7 @@ def generer_rapport():
     rapport.append("Document d'Enregistrement Universel")
     rapport.append("=" * 80)
     rapport.append("\n" * 3)
-    
+
     # Table des matières
     rapport.append("TABLE DES MATIÈRES")
     rapport.append("-" * 80)
@@ -36,7 +36,7 @@ def generer_rapport():
     rapport.append("10. PERSPECTIVES ET STRATÉGIE 2024")
     rapport.append("11. ANNEXES ET DONNÉES COMPLÉMENTAIRES")
     rapport.append("\n" * 3)
-    
+
     # 1. MESSAGE DU PRÉSIDENT
     rapport.append("\n" + "=" * 80)
     rapport.append("1. MESSAGE DU PRÉSIDENT")
@@ -132,7 +132,7 @@ Ensemble, nous construisons le leader technologique européen de demain.
 Jean-Philippe MOREAU
 Président-Directeur Général
 """)
-    
+
     # 2. PRÉSENTATION DU GROUPE
     rapport.append("\n" + "=" * 80)
     rapport.append("2. PRÉSENTATION DU GROUPE")
@@ -461,14 +461,14 @@ Capitalisation boursière : 6,87 Mds €
     rapport.append("\n" + "=" * 80)
     rapport.append("4. ANALYSE FINANCIÈRE DÉTAILLÉE")
     rapport.append("=" * 80 + "\n")
-    
+
     # Générer des tableaux financiers détaillés
     for annee in range(2019, 2024):
         ca = 1450 + (annee - 2019) * 190 + random.randint(-20, 40)
         ebitda = int(ca * 0.19)
         resultat_op = int(ca * 0.13)
         resultat_net = int(ca * 0.09)
-        
+
         rapport.append(f"\nANNÉE {annee}")
         rapport.append(f"Chiffre d'affaires : {ca} M€")
         rapport.append(f"EBITDA : {ebitda} M€ ({int(ebitda/ca*100)}%)")
@@ -476,7 +476,7 @@ Capitalisation boursière : 6,87 Mds €
         rapport.append(f"Résultat net : {resultat_net} M€")
         rapport.append(f"Free cash-flow : {int(resultat_net * 1.3)} M€")
         rapport.append("")
-    
+
     rapport.append("""
 4.1 COMPTE DE RÉSULTAT CONSOLIDÉ (en millions d'euros)
 
@@ -743,18 +743,18 @@ en maintenant une structure financière solide et flexible.
     rapport.append("\n" + "=" * 80)
     rapport.append("5. ACTIVITÉS ET PERFORMANCES PAR DIVISION")
     rapport.append("=" * 80 + "\n")
-    
+
     divisions = [
         "Enterprise Solutions Division",
         "Cloud & Infrastructure Division",
         "AI & Analytics Division",
         "Cybersecurity Division"
     ]
-    
+
     for div in divisions:
         rapport.append(f"\n5.{divisions.index(div)+1} {div.upper()}\n")
         rapport.append(f"{'=' * 60}\n")
-        
+
         # Générer du contenu détaillé pour chaque division
         for i in range(15):
             rapport.append(f"Section {i+1} : Performance détaillée trimestre {(i%4)+1}")
@@ -773,24 +773,24 @@ en maintenant une structure financière solide et flexible.
         "10. PERSPECTIVES ET STRATÉGIE 2024",
         "11. ANNEXES ET DONNÉES COMPLÉMENTAIRES"
     ]
-    
+
     for section in sections:
         rapport.append("\n" + "=" * 80)
         rapport.append(section)
         rapport.append("=" * 80 + "\n")
-        
+
         # Générer du contenu substantiel
         for paragraphe in range(30):
             rapport.append(f"\n{section.split('.')[1].strip()} - Sous-section {paragraphe + 1}")
             rapport.append("-" * 60)
-            
+
             # Générer plusieurs lignes de contenu
             for ligne in range(random.randint(8, 15)):
                 rapport.append(f"Analyse détaillée point {ligne + 1} : Données et métriques")
                 rapport.append(f"Indicateur de performance : {random.randint(50, 250)} unités")
                 rapport.append(f"Évolution par rapport à N-1 : {random.choice(['+', '-'])}{random.randint(2, 35)}%")
             rapport.append("")
-    
+
     # Footer
     rapport.append("\n" * 3)
     rapport.append("=" * 80)
@@ -798,27 +798,27 @@ en maintenant une structure financière solide et flexible.
     rapport.append(f"Document généré le {datetime.now().strftime('%d/%m/%Y à %H:%M')}")
     rapport.append("DigiTech Solutions S.A. - Tous droits réservés")
     rapport.append("=" * 80)
-    
+
     return "\n".join(rapport)
 
 def main():
     print("Génération du rapport annuel substantiel...")
     print("Cela peut prendre quelques secondes...")
-    
+
     rapport_complet = generer_rapport()
-    
+
     # Sauvegarder le rapport
     fichier_sortie = "data/Rapport_Annuel.txt"
-    
+
     with open(fichier_sortie, 'w', encoding='utf-8') as f:
         f.write(rapport_complet)
-    
+
     # Statistiques
     nb_lignes = rapport_complet.count('\n')
     nb_caracteres = len(rapport_complet)
     nb_mots = len(rapport_complet.split())
     nb_pages_estimees = nb_caracteres // 3000  # ~3000 caractères par page
-    
+
     print(f"\n✅ Rapport généré avec succès !")
     print(f"📄 Fichier : {fichier_sortie}")
     print(f"📊 Statistiques :")

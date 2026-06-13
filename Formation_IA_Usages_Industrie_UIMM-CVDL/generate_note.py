@@ -4,7 +4,7 @@ from docx.enum.text import WD_ALIGN_PARAGRAPH
 
 def create_note():
     doc = Document()
-    
+
     # Titre principal
     title = doc.add_heading('Note de Synthèse : L\'Art du Prompting avec Antigravity', 0)
     title.alignment = WD_ALIGN_PARAGRAPH.CENTER
@@ -16,7 +16,7 @@ def create_note():
     doc.add_heading('1. La Structure ROLE/CTCF', level=1)
     p = doc.add_paragraph()
     p.add_run('Pour obtenir une réponse exploitable en maintenance, structurez votre prompt selon ces 5 piliers :').italic = True
-    
+
     doc.add_paragraph('Rôle : Qui est l\'IA ? (ex: "Tu es un expert en maintenance électromécanique").', style='List Bullet')
     doc.add_paragraph('Contexte : Quel est l\'environnement ? (ex: "Sur une ligne de conditionnement, le moteur M2 s\'arrête de manière aléatoire").', style='List Bullet')
     doc.add_paragraph('Tâche : Que doit faire l\'IA ? (ex: "Analyse ces logs et propose 3 hypothèses de pannes").', style='List Bullet')
@@ -33,7 +33,7 @@ def create_note():
     # Section 3 : Usage Spécifique en IDE (Antigravity)
     doc.add_heading('3. L\'Assistance dans l\'IDE Antigravity', level=1)
     doc.add_paragraph("L'IDE offre une dimension supplémentaire grâce à la connaissance du code et des données du projet :")
-    
+
     doc.add_paragraph('Utilisation du Contexte : Ouvrez les fichiers pertinents dans vos onglets. Antigravity "voit" votre code et vos fichiers de données (CSV, JSON).', style='List Bullet')
     doc.add_paragraph('Bibliothèques Spécifiques : Utilisez l\'IA pour générer des scripts d\'analyse avec Pandas ou Matplotlib (ex: "Aide-moi à tracer une courbe de courant à partir de @logs_convoyeur.csv").', style='List Bullet')
     doc.add_paragraph('Débogage Guidé : En cas d\'erreur de script de maintenance, demandez "Pourquoi ce calcul de MTBF me donne une erreur de division par zéro ?"', style='List Bullet')

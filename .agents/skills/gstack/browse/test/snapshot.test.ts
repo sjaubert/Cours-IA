@@ -221,10 +221,10 @@ describe('Ref staleness detection', () => {
     const refMatch = buttonLine!.match(/@(e\d+)/);
     expect(refMatch).toBeDefined();
     const ref = `@${refMatch![1]}`;
-    
+
     // Remove the button from DOM (simulates SPA re-render)
     await handleReadCommand('js', ['document.querySelector("button[type=submit]").remove()'], bm);
-    
+
     // Try to click — should get descriptive staleness error
     try {
       await handleWriteCommand('click', [ref], bm);

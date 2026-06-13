@@ -47,7 +47,7 @@ Exemple :
  → qui vous êtes / ce que vous vendez / à qui vous parlez
  → votre ton / vos contraintes / ce que vous ne voulez jamais lire
 
-Ces 2 fichiers font souvent plus pour la qualité des réponses que 100 prompts 
+Ces 2 fichiers font souvent plus pour la qualité des réponses que 100 prompts
 bricolés.
 
 ✦ Jour 5 : arrêter de réécrire vos prompts à chaque fois

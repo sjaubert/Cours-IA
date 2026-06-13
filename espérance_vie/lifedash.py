@@ -48,13 +48,13 @@ data = load_data()
 # Ne poursuit que si les données ont été chargées avec succès
 if not data.empty:
     # Création des contrôles dans la fenêtre principale
-    
+
     # Obtenir la liste unique des pays/entités
     entity_list = sorted(data["Country"].unique())
-    
+
     # Zones géographiques présélectionnées
     default_selections = ["World", "Americas", "Asia", "Europe"]
-    
+
     # Contrôle de sélection multiple pour les pays/entités
     selected_entities = st.multiselect(
         "Choisissez les pays, groupes de pays ou zones géographiques :",
@@ -64,7 +64,7 @@ if not data.empty:
 
     # Obtenir les années min et max pour le curseur
     min_year, max_year = int(data["Year"].min()), int(data["Year"].max())
-    
+
     # Contrôle de curseur pour la période
     selected_years = st.slider(
         "Sélectionnez une période :",
@@ -107,17 +107,17 @@ if not data.empty:
 
             elif display_mode == "Individuel":
                 st.subheader("Graphiques individuels")
-                
+
                 # Définir le nombre de colonnes
                 max_cols = 4
-                
+
                 # Créer une grille de colonnes
                 cols = st.columns(max_cols)
-                
+
                 # Itérer sur chaque entité sélectionnée pour créer un graphique
                 for i, entity in enumerate(selected_entities):
                     entity_data = filtered_data[filtered_data["Country"] == entity]
-                    
+
                     if not entity_data.empty:
                         # Placer chaque graphique dans une colonne
                         with cols[i % max_cols]:

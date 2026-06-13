@@ -22,7 +22,7 @@ def analyze_trends(file_path):
 
     # Conversion du timestamp
     df['Timestamp'] = pd.to_datetime(df['Timestamp'])
-    
+
     # Conversion en nombres pour la régression (jours depuis le début)
     start_date = df['Timestamp'].min()
     df['Days'] = (df['Timestamp'] - start_date).dt.total_seconds() / (24 * 3600)
@@ -30,31 +30,31 @@ def analyze_trends(file_path):
     # Préparation des graphiques
     fig, axes = plt.subplots(3, 1, figsize=(12, 15), sharex=True)
     plt.subplots_adjust(hspace=0.4)
-    
+
     results = []
 
     for i, (col, threshold) in enumerate(THRESHOLDS.items()):
         ax = axes[i]
-        
+
         # Données
         X = df['Days'].values
         y = df[col].values
-        
+
         # Régression linéaire (y = ax + b)
         slope, intercept = np.polyfit(X, y, 1)
-        
+
         # Tendance
         trend = "Croissante" if slope > 0 else "Décroissante"
-        
+
         # Projection
         date_depassement = None
         days_to_threshold = None
-        
+
         if slope > 0 and intercept < threshold:
             # Seuil atteint quand ax + b = threshold => x = (threshold - b) / a
             days_to_threshold = (threshold - intercept) / slope
             date_depassement = start_date + pd.Timedelta(days=days_to_threshold)
-        
+
         # Sauvegarde des résultats
         results.append({
             'Paramètre': col,
@@ -65,24 +65,24 @@ def analyze_trends(file_path):
         })
 
         # --- Visualisation ---
-        
+
         # Nuage de points (données réelles) - on en affiche un sous-ensemble pour la lisibilité si trop de points
         ax.scatter(df['Timestamp'], y, alpha=0.3, s=1, label='Données réelles', color='gray')
-        
+
         # Ligne de régression (étendue pour montrer le futur si dépassement prévu)
         max_days = X.max()
         if days_to_threshold and days_to_threshold > max_days:
             max_days = days_to_threshold * 1.1 # Étendre un peu après le seuil
-            
+
         X_plot = np.linspace(0, max_days, 100)
         y_plot = slope * X_plot + intercept
         dates_plot = [start_date + pd.Timedelta(days=d) for d in X_plot]
-        
+
         ax.plot(dates_plot, y_plot, color='red', linewidth=2, label=f'Tendance (pente={slope:.4f})')
-        
+
         # Ligne de seuil
         ax.axhline(y=threshold, color='orange', linestyle='--', linewidth=2, label=f'Seuil ({threshold})')
-        
+
         # Marqueur dépassement
         if date_depassement:
             ax.axvline(x=date_depassement, color='purple', linestyle=':', label='Dépassement prévu')
@@ -98,7 +98,7 @@ def analyze_trends(file_path):
     axes[-1].xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d'))
     axes[-1].xaxis.set_major_locator(mdates.MonthLocator())
     plt.xticks(rotation=45)
-    
+
     print("\n--- RÉSULTATS DE L'ANALYSE ---")
     for res in results:
         print(f"\nParamètre : {res['Paramètre']}")

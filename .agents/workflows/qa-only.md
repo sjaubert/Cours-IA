@@ -23,6 +23,3 @@ Load identity: [persona-gstack-qa-only.md](/.agents/rules/persona-gstack-qa-only
 2. Save the `baseline.json` for future regression testing.
 3. Write the Structured Report to `.gstack/qa-reports/` and `./.gstack/projects/`.
 4. **Note:** Never fix bugs in this workflow.
-
-
-

@@ -51,4 +51,3 @@ gemini skills reload
 1. Summarize updated upstream commit/version and changed skill areas.
 2. List any merge conflicts resolved manually.
 3. Provide next action if additional migration is required.
-

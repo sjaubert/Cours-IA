@@ -12,7 +12,7 @@ st.set_page_config(
 # Titre principal
 st.title("🤖 Analyse des Installations de Robots Industriels (2011-2023)")
 st.markdown("""
-Cette application présente une analyse interactive des données de l'International Federation of Robotics (IFR) 
+Cette application présente une analyse interactive des données de l'International Federation of Robotics (IFR)
 concernant les installations annuelles de robots industriels.
 """)
 
@@ -55,7 +55,7 @@ selected_countries = st.sidebar.multiselect(
 
 # Filtrage des données
 df_filtered = df[
-    (df['Year'] >= selected_years[0]) & 
+    (df['Year'] >= selected_years[0]) &
     (df['Year'] <= selected_years[1])
 ]
 
@@ -67,17 +67,17 @@ df_world = df_filtered[df_filtered['Entity'] == 'World']
 
 if not df_world.empty:
     fig_world = px.line(
-        df_world, 
-        x='Year', 
+        df_world,
+        x='Year',
         y='Annual industrial robots installed',
         markers=True,
         title="Installations annuelles de robots dans le monde"
     )
     fig_world.update_layout(yaxis_title="Nombre de robots")
     st.plotly_chart(fig_world, use_container_width=True)
-    
+
     st.info(f"""
-    **Observation** : On observe une tendance haussière. 
+    **Observation** : On observe une tendance haussière.
     En {max_year}, le nombre d'installations a atteint {df_world[df_world['Year'] == max_year]['Annual industrial robots installed'].values[0]:,.0f}.
     """)
 else:
@@ -100,7 +100,7 @@ if not df_countries.empty:
     )
     fig_countries.update_layout(yaxis_title="Nombre de robots")
     st.plotly_chart(fig_countries, use_container_width=True)
-    
+
     st.markdown("""
     *   **La Chine** montre généralement une croissance exponentielle.
     *   **Les autres pays** (Japon, Corée du Sud, USA, Allemagne) montrent une croissance plus modérée.
@@ -122,7 +122,7 @@ if not df_countries.empty:
     )
     fig_area.update_layout(yaxis_title="Nombre de robots (Cumulé)")
     st.plotly_chart(fig_area, use_container_width=True)
-    
+
     st.markdown("Ce graphique permet de visualiser la dominance croissante de certains acteurs comme la Chine.")
 
 # --- Section 4: Situation en 2023 (ou dernière année sélectionnée) ---
@@ -130,7 +130,7 @@ last_year = selected_years[1]
 st.header(f"4. Situation en {last_year}")
 
 df_last_year = df[
-    (df['Year'] == last_year) & 
+    (df['Year'] == last_year) &
     (df['Entity'].isin(selected_countries))
 ].sort_values(by='Annual industrial robots installed', ascending=False)
 
@@ -146,14 +146,14 @@ if not df_last_year.empty:
     fig_bar.update_traces(texttemplate='%{text:.2s}', textposition='outside')
     fig_bar.update_layout(yaxis_title="Nombre de robots", showlegend=False)
     st.plotly_chart(fig_bar, use_container_width=True)
-    
+
     top_country = df_last_year.iloc[0]
     st.success(f"**Leader en {last_year}** : {top_country['Entity']} avec {top_country['Annual industrial robots installed']:,} installations.")
 
 # --- Conclusion ---
 st.header("Conclusion")
 st.markdown("""
-L'analyse des données montre que la **Chine** est devenue un acteur incontournable de la robotisation industrielle, 
+L'analyse des données montre que la **Chine** est devenue un acteur incontournable de la robotisation industrielle,
 dépassant largement les autres puissances historiques.
 """)
 

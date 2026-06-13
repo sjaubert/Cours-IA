@@ -42,20 +42,20 @@ def nettoyer_date(date_str):
     """Convertit différents formats de dates en datetime"""
     if pd.isna(date_str):
         return pd.NaT
-    
+
     formats = [
         "%Y-%m-%d",      # 2024-01-15
         "%d/%m/%Y",      # 15/01/2024
         "%d-%m-%Y",      # 15-01-2024
         "%d.%m.%Y",      # 15.01.2024
     ]
-    
+
     for fmt in formats:
         try:
             return pd.to_datetime(date_str, format=fmt)
         except:
             continue
-    
+
     return pd.NaT
 
 df['Date'] = df['Date'].apply(nettoyer_date)
@@ -66,23 +66,23 @@ def nettoyer_duree(duree_str):
     """Convertit différents formats de durées en heures (float)"""
     if pd.isna(duree_str):
         return np.nan
-    
+
     duree_str = str(duree_str).strip()
-    
+
     # Format : "3h30" ou "3h00"
     if 'h' in duree_str:
         parts = duree_str.split('h')
         heures = float(parts[0])
         minutes = float(parts[1]) if len(parts) > 1 and parts[1] else 0
         return heures + minutes / 60
-    
+
     # Format : "3:30"
     if ':' in duree_str:
         parts = duree_str.split(':')
         heures = float(parts[0])
         minutes = float(parts[1]) if len(parts) > 1 else 0
         return heures + minutes / 60
-    
+
     # Format : "3.5" ou "3"
     try:
         return float(duree_str)
@@ -118,7 +118,7 @@ def normaliser_type_panne(type_panne):
     """Normalise le type de panne"""
     if pd.isna(type_panne):
         return "Non renseigné"
-    
+
     type_clean = type_panne.lower().strip()
     return dictionnaire_pannes.get(type_clean, type_panne)
 
@@ -130,11 +130,11 @@ def normaliser_technicien(nom):
     """Unifie les variations de noms de techniciens"""
     if pd.isna(nom):
         return "Non assigné"
-    
+
     # Supprimer les abréviations (M., S., etc.)
     nom = nom.replace("M. ", "").replace("S.", "Sophie").replace("A. ", "Alexandre ")
     nom = nom.replace("T.", "Thomas ").replace("N.", "Nicolas ").replace("I. ", "Isabelle ")
-    
+
     # Normaliser les casses
     if nom.isupper():
         # Si tout en majuscules, supposer que c'est un nom de famille
@@ -145,14 +145,14 @@ def normaliser_technicien(nom):
             "SIMON": "Marie Simon",
         }
         return noms_complets.get(nom, nom.title())
-    
+
     if nom.islower():
         return nom.title()
-    
+
     # Corriger les accents manquants connus
     if "Celine" in nom:
         return "Céline Lefebvre"
-    
+
     return nom
 
 df['Technicien'] = df['Technicien'].apply(normaliser_technicien)
@@ -245,7 +245,7 @@ ax2.axhline(y=80, color='green', linestyle='--', linewidth=2, label='Seuil 80%')
 ax2.legend(loc='lower right')
 
 # Titre
-plt.title('Diagramme de Pareto - Temps d\'arrêt par machine (2024)', 
+plt.title('Diagramme de Pareto - Temps d\'arrêt par machine (2024)',
           fontsize=14, fontweight='bold', pad=20)
 
 plt.tight_layout()
@@ -274,7 +274,7 @@ print(pannes_par_type.to_string(index=False))
 fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 5))
 
 # Camembert : nombre de pannes
-ax1.pie(pannes_par_type['Nb_Pannes'], labels=pannes_par_type['Type_Panne'], 
+ax1.pie(pannes_par_type['Nb_Pannes'], labels=pannes_par_type['Type_Panne'],
         autopct='%1.1f%%', startangle=90)
 ax1.set_title('Répartition du nombre de pannes par type', fontweight='bold')
 
@@ -307,7 +307,7 @@ rapport = f"""# Rapport d'Analyse GMAO - Année 2024
 
 Analyse réalisée sur **{len(df)} interventions** de maintenance enregistrées en 2024 sur un parc de **{len(stats_machines)} machines**.
 
-**Temps d'arrêt total** : {temps_total:.0f} heures  
+**Temps d'arrêt total** : {temps_total:.0f} heures
 **Coût estimé** : {cout_total:,.0f} € (base 500€/h)
 
 ---

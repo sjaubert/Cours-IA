@@ -23,6 +23,3 @@ Load identity: [persona-gstack-design-consultation.md](/.agents/rules/persona-gs
 2. Iterate based on visual feedback until the system is approved.
 3. Write `DESIGN.md` to the repository root as the source of truth.
 4. Update `README.md` with instructions to follow `DESIGN.md`.
-
-
-

@@ -12,6 +12,3 @@ Load identity: [persona-gstack-freeze.md](/.agents/rules/persona-gstack-freeze.m
 1. Inform the user that edits are now restricted.
 2. Mention that `Edit` and `Write` outside this path will be blocked by the session hook.
 3. Provide instructions on how to change or remove the boundary.
-
-
-

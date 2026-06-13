@@ -22,6 +22,3 @@ Load identity: [persona-gstack-office-hours.md](/.agents/rules/persona-gstack-of
 1. Synthesize **Founder Signals** observed.
 2. Write the comprehensive Design Doc to `./.gstack/projects/`.
 3. Provide the closing YC-style feedback (The Assignment + What I Noticed).
-
-
-

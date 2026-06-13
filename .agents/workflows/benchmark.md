@@ -28,4 +28,3 @@ This workflow is governed by [.agents/rules/persona-gstack-benchmark.md](/.agent
 ## Phase 5: Trend & Report
 1. (Optional) Show trends from historical benchmark data.
 2. Write report to Markdown and JSON formats.
-

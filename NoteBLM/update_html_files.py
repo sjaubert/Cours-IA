@@ -3,11 +3,11 @@ import os
 
 def remove_emojis_and_add_header(filepath, has_slides=False):
     """Remove emojis and add UIMM header to HTML file"""
-    
+
     # Read file
     with open(filepath, 'r', encoding='utf-8') as f:
         content = f.read()
-    
+
     # Emoji pattern (comprehensive)
     emoji_pattern = re.compile(
         r'[\U00010000-\U0010ffff]|'
@@ -16,14 +16,14 @@ def remove_emojis_and_add_header(filepath, has_slides=False):
         r'[\u2011-\u26ff\U0001f900-\U0001f9ff\U0001f600-\U0001f64f]',
         re.UNICODE
     )
-    
+
     # Count emojis
     emojis_found = len(re.findall(emoji_pattern, content))
     print(f"{os.path.basename(filepath)}: Found {emojis_found} emojis")
-    
+
     # Remove emojis
     content_no_emoji = emoji_pattern.sub('', content)
-    
+
     # Add UIMM header CSS if not present
     if '.uimm-header' not in content_no_emoji:
         # Find the closing of style tag
@@ -53,7 +53,7 @@ def remove_emojis_and_add_header(filepath, has_slides=False):
         }
     '''
             content_no_emoji = content_no_emoji[:style_close_pos] + uimm_css + content_no_emoji[style_close_pos:]
-    
+
     # Add UIMM header HTML
     if has_slides:
         # For presentation with slides - add after presentation div
@@ -79,11 +79,11 @@ def remove_emojis_and_add_header(filepath, has_slides=False):
 
         '''
             content_no_emoji = content_no_emoji.replace('<div class="container">', header_html)
-    
+
     # Write back
     with open(filepath, 'w', encoding='utf-8') as f:
         f.write(content_no_emoji)
-    
+
     print(f"{os.path.basename(filepath)}: Updated successfully!")
     return emojis_found
 

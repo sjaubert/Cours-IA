@@ -33,4 +33,3 @@ This workflow is governed by [.agents/rules/persona-gstack-codex.md](/.agents/ru
 ## Phase 3: Synthesis
 1. Display the full output verbatim.
 2. Provide Antigravity's own synthesis and flag any disagreements.
-

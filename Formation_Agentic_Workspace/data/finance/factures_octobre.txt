@@ -305,4 +305,3 @@ Client: HR Innovations
 Montant HT: 1450.00 €
 TVA (20%): 290.00 €
 Montant TTC: 1740.00 €
-

@@ -30,4 +30,3 @@ This workflow is governed by [.agents/rules/persona-gstack-canary.md](/.agents/r
 1. Final verdict: **HEALTHY**, **DEGRADED**, or **BROKEN**.
 2. Save summary to `.gstack/canary-reports/`.
 3. Offer to update baseline with new "healthy" screenshots.
-

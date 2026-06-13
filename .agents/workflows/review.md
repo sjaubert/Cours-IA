@@ -25,6 +25,3 @@ Load identity: [persona-gstack-review.md](/.agents/rules/persona-gstack-review.m
 1. Cross-reference against `TODOS.md` and check for documentation staleness.
 2. Run auto-scaled Adversarial Review (Step 5.7) based on diff size (Codex/Antigravity subagent).
 3. Synthesize findings and report final status: **DONE**, **DONE_WITH_CONCERNS**, **BLOCKED**, or **NEEDS_CONTEXT**.
-
-
-

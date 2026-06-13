@@ -12,4 +12,3 @@ Load identity: [persona-gstack-setup-browser-cookies.md](/.agents/rules/persona-
 1. Wait for user confirmation of domain selection.
 2. Run `$B cookies` to verify imported counts.
 3. Display the summary of active cookie domains.
-

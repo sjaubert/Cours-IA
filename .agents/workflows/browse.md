@@ -23,4 +23,3 @@ This workflow is governed by [.agents/rules/persona-gstack-browse.md](/.agents/r
 
 ## Phase 4: Visual Artifacts
 1. All generated screenshots MUST be displayed to the user via the Read tool.
-

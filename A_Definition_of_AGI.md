@@ -4603,5 +4603,3 @@ simple reaction time, choice reaction time, inspection time, comparison speed, a
 
 
 57
-
-

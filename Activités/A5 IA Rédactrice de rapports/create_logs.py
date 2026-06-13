@@ -57,25 +57,25 @@ lignes.append(["Date", "MachineID", "DureeArretMinutes", "TypePanne", "NaturePan
 for i in range(NOMBRE_ENTREES):
     # Choisir une machine (biaisé)
     machine = random.choices(MACHINES, weights=MACHINE_WEIGHTS, k=1)[0]
-    
+
     # Choisir un type de panne (biaisé)
     type_panne = random.choices(PANNE_TYPES, weights=PANNE_TYPE_WEIGHTS, k=1)[0]
-    
+
     # Obtenir les détails liés à la panne
     details = PANNE_DETAILS[type_panne]
-    
+
     # Choisir une nature de panne
     nature_panne = random.choice(details["natures"])
-    
+
     # Choisir l'équipe
     equipe = details["equipe"]
-    
+
     # Définir la durée (biaisée par type)
     duree = random.randint(details["duree_min"], details["duree_max"])
-    
+
     # Générer une date aléatoire sur les 30 derniers jours
     date_panne = DATE_DEBUT + timedelta(days=random.randint(0, 29), hours=random.randint(0, 23), minutes=random.randint(0, 59))
-    
+
     lignes.append([
         date_panne.strftime("%Y-%m-%d %H:%M"),
         machine,

@@ -16,10 +16,10 @@ def clean_duration(val):
     """Nettoie et convertit la durée en heures (float)."""
     if pd.isna(val) or val == '' or val == '-':
         return np.nan
-    
+
     val = str(val).strip().lower()
     val = val.replace(',', '.')
-    
+
     # Cas "33.0.25" -> "33.25" (typo spécifique)
     if re.match(r'^\d+\.0\.\d+$', val):
         parts = val.split('.')
@@ -32,12 +32,12 @@ def clean_duration(val):
         hours = float(parts[0]) if parts[0] else 0
         minutes = float(parts[1]) if len(parts) > 1 and parts[1] else 0
         return hours + minutes / 60.0
-    
+
     # Cas "9:45"
     if ':' in val:
         parts = val.split(':')
         return float(parts[0]) + float(parts[1]) / 60.0
-    
+
     try:
         return float(val)
     except ValueError:
@@ -47,9 +47,9 @@ def clean_technician(name):
     """Normalise les noms des techniciens."""
     if pd.isna(name) or name in ['-', 'N/A', 'Aucune', '']:
         return "Non Spécifié"
-    
+
     name = str(name).strip().title()
-    
+
     # Mapping des alias connus
     mapping = {
         "M. Dupont": "Martin Dupont",
@@ -60,7 +60,7 @@ def clean_technician(name):
         "N.Michel": "Nicolas Michel",
         "Rodriguez": "Pierre Rodriguez" # Assumption based on other entries
     }
-    
+
     return mapping.get(name, name)
 
 def clean_failure_type(val):
@@ -84,19 +84,19 @@ def load_data():
     # On essaie de convertir avec dayfirst=True pour gérer le format DD/MM/YYYY prédominant en France
     # errors='coerce' va transformer les formats inconnus en NaT
     df['Date_Clean'] = pd.to_datetime(df['Date'], dayfirst=True, errors='coerce')
-    
+
     # 2. Nettoyage des Durées
     df['Duree_Heures'] = df['Duree_Arret_h'].apply(clean_duration)
-    
+
     # 3. Nettoyage Techniciens
     df['Technicien_Clean'] = df['Technicien'].apply(clean_technician)
-    
+
     # 4. Nettoyage Types de Panne
     df['Type_Panne_Clean'] = df['Type_Panne'].apply(clean_failure_type)
-    
+
     # Suppression des lignes avec Date ou Durée invalides pour l'analyse
     df_clean = df.dropna(subset=['Date_Clean', 'Duree_Heures'])
-    
+
     return df_clean
 
 # --- CHARGEMENT DES DONNÉES ---
@@ -164,25 +164,25 @@ with col_g1:
     st.subheader("Pareto des Machines (Temps d'Arrêt)")
     # Group by Machine and sum duration
     machine_stats = df_filtered.groupby('ID_Machine')['Duree_Heures'].sum().sort_values(ascending=False)
-    
+
     # Pareto calculation
     pareto_df = pd.DataFrame({'Duree': machine_stats})
     pareto_df['Cumul'] = pareto_df['Duree'].cumsum()
     pareto_df['Pourcentage_Cumul'] = 100 * pareto_df['Cumul'] / pareto_df['Duree'].sum()
-    
+
     # Plot
     fig, ax1 = plt.subplots()
     ax1.bar(pareto_df.index, pareto_df['Duree'], color='C0')
     ax1.set_ylabel("Temps d'arrêt (h)", color='C0')
     ax1.tick_params(axis='y', labelcolor='C0')
     plt.xticks(rotation=45, ha='right')
-    
+
     ax2 = ax1.twinx()
     ax2.plot(pareto_df.index, pareto_df['Pourcentage_Cumul'], color='C1', marker='o', ms=4)
     ax2.set_ylabel("Pourcentage Cumulé (%)", color='C1')
     ax2.tick_params(axis='y', labelcolor='C1')
     ax2.axhline(80, color='r', linestyle='--', alpha=0.5)
-    
+
     st.pyplot(fig)
 
 with col_g2:

@@ -577,27 +577,27 @@ body {
         flex-direction: column;
         text-align: center;
     }
-    
+
     .header-text h1 {
         font-size: 1.5rem;
     }
-    
+
     .logo {
         height: 50px;
     }
-    
+
     .playground-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .preset-buttons {
         justify-content: center;
     }
-    
+
     .intro-card h2 {
         font-size: 1.5rem;
     }
-    
+
     .parameters-section h2,
     .playground-section h2,
     .cheatsheet-section h2 {

@@ -77,7 +77,7 @@ function typeCode(code) {
             } else {
                 codeDisplay.innerText += char;
             }
-            
+
             // Simple syntax highlighting hack (very basic)
             codeDisplay.innerHTML = codeDisplay.innerHTML
                 .replace(/import/g, '<span class="keyword">import</span>')
@@ -111,7 +111,7 @@ function runScenario(type) {
 
     // Clear previous state
     codeDisplay.innerHTML = '<span class="comment">// En attente...</span>';
-    
+
     // 1. User Message
     addMessage(scenario.userMessage, 'user');
 
@@ -119,7 +119,7 @@ function runScenario(type) {
     setTimeout(() => {
         // 3. AI Response
         addMessage(scenario.aiResponse, 'ai');
-        
+
         // 4. Code Generation
         setTimeout(() => {
             // Use the simple typing effect, then replace with highlighted HTML at the end

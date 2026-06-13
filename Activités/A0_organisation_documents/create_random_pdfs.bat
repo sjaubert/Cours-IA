@@ -21,7 +21,7 @@ for /L %%i in (1,1,50) do (
     set "randomString=!random!!random!"
 
     set "fileName=!year!-!monthStr!-!dayStr!_!randomString!.pdf"
-    
+
     echo Creating !fileName!
     type nul > "%outputDir%\!fileName!"
 )

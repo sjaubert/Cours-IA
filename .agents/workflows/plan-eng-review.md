@@ -23,6 +23,3 @@ Load identity: [persona-gstack-plan-eng-review.md](/.agents/rules/persona-gstack
 2. Update `TODOS.md` with deferred work.
 3. Generate the Completion Summary and display the Review Readiness Dashboard.
 4. Update the plan file with the `## GSTACK REVIEW REPORT` section.
-
-
-

@@ -27,7 +27,7 @@ MACHINES = [
 
 TYPES_PANNES = [
     "Panne Mécanique",
-    "Panne Électrique", 
+    "Panne Électrique",
     "Panne Pneumatique",
     "Panne Hydraulique",
     "Défaut Lubrification",
@@ -104,7 +104,7 @@ def generer_date_aleatoire():
     delta = fin - debut
     jours = random.randint(0, delta.days)
     date = debut + timedelta(days=jours)
-    
+
     # 5% de formats hétérogènes
     if random.random() < 0.05:
         formats = [
@@ -114,14 +114,14 @@ def generer_date_aleatoire():
             date.strftime("%d.%m.%Y"),  # points
         ]
         return random.choice(formats)
-    
+
     return date.strftime("%Y-%m-%d")
 
 def generer_duree_arret():
     """Génère une durée d'arrêt avec formats variés"""
     heures = random.randint(0, 48)
     minutes = random.choice([0, 15, 30, 45])
-    
+
     # 10% de formats hétérogènes
     if random.random() < 0.10:
         formats = [
@@ -132,7 +132,7 @@ def generer_duree_arret():
             f"{heures} heures {minutes} min",
         ]
         return random.choice(formats)
-    
+
     return f"{heures + minutes/60:.2f}"
 
 def choisir_type_panne():
@@ -150,18 +150,18 @@ def choisir_technicien():
 def generer_pieces():
     """Génère 0 à 3 pièces changées"""
     nb_pieces = random.choices([0, 1, 2, 3], weights=[10, 50, 30, 10])[0]
-    
+
     if nb_pieces == 0:
         # 5% de données manquantes représentées différemment
         return random.choice(["", "N/A", "-", "Aucune"])
-    
+
     pieces = random.sample(PIECES, nb_pieces)
     # 5% avec séparateur différent
     if random.random() < 0.05:
         sep = random.choice([" | ", " / ", "; ", " - "])
     else:
         sep = ", "
-    
+
     return sep.join(pieces)
 
 def generer_ligne(id_intervention):
@@ -172,13 +172,13 @@ def generer_ligne(id_intervention):
     duree_arret = generer_duree_arret()
     technicien = choisir_technicien()
     pieces = generer_pieces()
-    
+
     # 5% de données complètement manquantes pour certains champs
     if random.random() < 0.05:
         pieces = ""
     if random.random() < 0.02:
         type_panne = ""
-    
+
     return {
         "ID_Intervention": f"INT-{str(id_intervention).zfill(5)}",
         "Date": date,
@@ -192,23 +192,23 @@ def generer_ligne(id_intervention):
 def main():
     """Fonction principale"""
     print(f"Génération de {NB_LIGNES} interventions...")
-    
+
     # Entêtes
-    colonnes = ["ID_Intervention", "Date", "ID_Machine", "Type_Panne", 
+    colonnes = ["ID_Intervention", "Date", "ID_Machine", "Type_Panne",
                 "Duree_Arret_h", "Technicien", "Pieces_Changees"]
-    
+
     # Génération des données
     with open(FICHIER_SORTIE, 'w', newline='', encoding='utf-8') as fichier:
         writer = csv.DictWriter(fichier, fieldnames=colonnes)
         writer.writeheader()
-        
+
         for i in range(1, NB_LIGNES + 1):
             ligne = generer_ligne(i)
             writer.writerow(ligne)
-            
+
             if i % 500 == 0:
                 print(f"  {i} lignes générées...")
-    
+
     print(f"\n✓ Fichier '{FICHIER_SORTIE}' créé avec succès !")
     print(f"  Nombre de lignes : {NB_LIGNES}")
     print(f"  Machines différentes : {len(MACHINES)}")

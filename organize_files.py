@@ -21,13 +21,13 @@ def extract_text_docx(docx_path):
 
 def file_contains_keywords(filepath):
     # Check filename first (optional, but good for robust sorting if content fails)
-    # The prompt says "content", so strictly we should check content, 
+    # The prompt says "content", so strictly we should check content,
     # but often filename is a strong indicator of content "about" something.
     # We will prioritize content check.
-    
+
     content = ""
     ext = os.path.splitext(filepath)[1].lower()
-    
+
     try:
         if ext == '.docx':
             content = extract_text_docx(filepath)
@@ -41,7 +41,7 @@ def file_contains_keywords(filepath):
                     if kw.encode('utf-8') in raw:
                         return True
                     # Also check for simple ASCII representation if keywords were not accented
-                    # But our keywords have accents. 
+                    # But our keywords have accents.
                     # Let's try latin-1 too just in case
                     if kw.encode('latin-1', errors='ignore') in raw:
                         return True
@@ -58,7 +58,7 @@ def file_contains_keywords(filepath):
     for kw in KEYWORDS:
         if normalize(kw) in content_lower:
             return True
-            
+
     return False
 
 def main():
@@ -69,17 +69,17 @@ def main():
     for filename in os.listdir('.'):
         if filename == CURRENT_SCRIPT or filename.startswith('.'):
             continue
-        
+
         filepath = os.path.join('.', filename)
-        
+
         if not os.path.isfile(filepath):
             continue
-            
+
         if file_contains_keywords(filepath):
             print(f"Moving {filename}...")
             shutil.move(filepath, os.path.join(TARGET_DIR, filename))
             files_moved += 1
-            
+
     print(f"Operation complete. Moved {files_moved} files.")
 
 if __name__ == "__main__":

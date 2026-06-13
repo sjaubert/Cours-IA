@@ -91,4 +91,3 @@ Analyze the total diff and group into coherent, independently valid units:
 - A logic file and its test MUST be in the same commit.
 - Each commit must pass tests independently (dependencies first).
 - Use `git commit -m` directly in the native terminal.
-

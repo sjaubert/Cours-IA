@@ -23,6 +23,3 @@ Load identity: [persona-gstack-design-review.md](/.agents/rules/persona-gstack-d
 1. Compile the Design Audit Report with letter grades (A-F) and headline scores (Design Score + AI Slop Score).
 2. Write `design-baseline.json` for future regression detection.
 3. Report status: **DONE**, **DONE_WITH_CONCERNS**, **BLOCKED**, or **NEEDS_CONTEXT**.
-
-
-

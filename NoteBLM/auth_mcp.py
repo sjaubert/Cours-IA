@@ -51,7 +51,7 @@ def run_notebooklm_auth():
         if not os.path.exists(auth_exe):
             print("Error: Cannot find notebooklm-mcp-auth executable.", file=sys.stderr)
             return 1
-    
+
     print("\nRunning notebooklm-mcp-auth...")
     print("Please follow the instructions on the newly opened Chrome browser if prompted.")
     process = subprocess.Popen([auth_exe, "--port", "9222"])
@@ -63,17 +63,17 @@ def main():
     if not chrome_exe:
         print("Error: Could not find chrome.exe on this system.", file=sys.stderr)
         sys.exit(1)
-        
+
     kill_chrome()
     launch_chrome_with_debugging(chrome_exe)
-    
+
     code = run_notebooklm_auth()
     if code == 0:
         print("\n=== Authentication flow finished successfully! ===")
         print("Your tokens have been captured. Note that you may need to re-run this script when they expire.")
     else:
         print("\n=== Authentication flow ended with an error. ===", file=sys.stderr)
-        
+
     sys.exit(code)
 
 if __name__ == "__main__":

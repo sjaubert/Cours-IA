@@ -13,6 +13,3 @@ Load identity: [persona-gstack-guard.md](/.agents/rules/persona-gstack-guard.md)
    - Destructive command warnings (from `/careful`).
    - Edit boundary enforcement (from `/freeze`).
 3. Provide instructions on how to manage or deactivate the guard.
-
-
-

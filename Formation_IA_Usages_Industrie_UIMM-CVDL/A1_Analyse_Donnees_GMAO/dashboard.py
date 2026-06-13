@@ -22,9 +22,9 @@ def parse_duration(duration_str):
     """
     if pd.isna(duration_str) or duration_str == '' or duration_str == '-':
         return 0.0
-    
+
     duration_str = str(duration_str).strip().lower().replace(',', '.')
-    
+
     try:
         # Format: Float (e.g., "11.75")
         return float(duration_str)
@@ -51,7 +51,7 @@ def parse_duration(duration_str):
         hours = float(match_text.group(1))
         minutes = float(match_text.group(2)) if match_text.group(2) else 0
         return hours + minutes / 60.0
-        
+
     # Format: "45 min" (without hours)
     match_min = re.search(r'(\d+)\s*min', duration_str)
     if match_min:
@@ -62,17 +62,17 @@ def parse_duration(duration_str):
 @st.cache_data
 def load_data(file_path):
     df = pd.read_csv(file_path)
-    
+
     # 1. Clean Dates
     # Handle mixed formats like "2024-09-04", "26-01-2024", "03.02.2024"
     df['Date'] = pd.to_datetime(df['Date'], dayfirst=True, errors='coerce')
-    
+
     # 2. Clean Durations
     df['Duree_Arret_h_Clean'] = df['Duree_Arret_h'].apply(parse_duration)
-    
+
     # 3. Clean Failure Types
     df['Type_Panne'] = df['Type_Panne'].fillna('Inconnu').str.title().str.strip()
-    
+
     return df
 
 FILE_PATH = "interventions_2024.csv"
@@ -125,7 +125,7 @@ filtered_df = df.copy()
 # Filter by Date
 if start_date and end_date:
     filtered_df = filtered_df[
-        (filtered_df['Date'].dt.date >= start_date) & 
+        (filtered_df['Date'].dt.date >= start_date) &
         (filtered_df['Date'].dt.date <= end_date)
     ]
 
@@ -167,10 +167,10 @@ machine_stats['MTTR (h)'] = machine_stats['Temps_Arret_Total'] / machine_stats['
 # Calculate MTBF (Mean Time Between Failures)
 # Formula: (Total Time - Total Downtime) / Number of Failures
 # Result in Days for readability (as requested)
-# Note: Using fixed HOURS_IN_YEAR might need adjustment if filtering by short date range, 
+# Note: Using fixed HOURS_IN_YEAR might need adjustment if filtering by short date range,
 # but keeping standard definition for now or we could use the time range duration.
 # For simplicity in this context, we'll keep the annual base or adjust if needed.
-# Let's stick to the standard annual view for MTBF to avoid confusion, 
+# Let's stick to the standard annual view for MTBF to avoid confusion,
 # or note that it's "Annualized MTBF" if the period is shorter.
 machine_stats['MTBF (jours)'] = ((HOURS_IN_YEAR - machine_stats['Temps_Arret_Total']) / machine_stats['Nombre_Interventions']) / 24
 
@@ -195,7 +195,7 @@ with col2:
     total_downtime = machine_stats['Temps_Arret_Total'].sum()
     total_interventions = machine_stats['Nombre_Interventions'].sum()
     avg_mttr = total_downtime / total_interventions if total_interventions > 0 else 0
-    
+
     st.metric("Temps d'arrêt total (h)", f"{total_downtime:.2f}")
     st.metric("Nombre d'interventions", f"{total_interventions}")
     st.metric("MTTR Moyen Global (h)", f"{avg_mttr:.2f}")

@@ -24,6 +24,3 @@ Load identity: [persona-gstack-cso.md](/.agents/rules/persona-gstack-cso.md)
 
 ## Disclaimer
 Always include: **"This tool is not a substitute for a professional security audit."**
-
-
-

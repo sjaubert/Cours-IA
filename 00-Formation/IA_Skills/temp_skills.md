@@ -189,4 +189,3 @@ If you dont have clear, repeatable workflows, Skills wont save you. But if y
 Were still in the early days here. Skills just launched in mid-October 2025, and there are rough edges. But the core idea  making AI customization modular, portable, and composable  feels fundamentally right.
 Its the difference between hiring an intern who forgets everything overnight and building an actual team member who learns your organizations way of working. And honestly, its about time.
 Now if youll excuse me, I have about 15 repetitive workflows I need to turn into Skills before someone on my team asks me to write that same damn prompt again.
-

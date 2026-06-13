@@ -20,4 +20,3 @@ This workflow is governed by [.agents/rules/persona-gstack-careful.md](/.agents/
 
 ## Phase 3: Deactivation
 1. End the session to deactivate the hooks.
-

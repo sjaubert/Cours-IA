@@ -46,7 +46,7 @@ for i, col in enumerate(colonnes):
     # 5. Afficher sur les graphiques
     plt.subplot(3, 1, i + 1)
     plt.plot(df['Timestamp'], df[col], label='Données normales', color='blue', linewidth=0.5)
-    
+
     # Mettre en évidence les anomalies
     if not anomalies.empty:
         plt.scatter(anomalies['Timestamp'], anomalies[col], color='red', label='Anomalies', zorder=5)

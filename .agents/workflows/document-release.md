@@ -27,6 +27,3 @@ Load identity: [persona-gstack-document-release.md](/.agents/rules/persona-gstac
 1. Commit modified docs with message `docs: update project documentation for vX.Y.Z.W`.
 2. Update PR body with the Documentation section and diff preview.
 3. Display the Structured Doc Health Summary.
-
-
-

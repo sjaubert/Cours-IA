@@ -35,6 +35,3 @@ When a workflow is invoked, load the matching source skill file and follow it ex
 - `/guard` -> `/gstack-origin/guard/SKILL.md`
 - `/unfreeze` -> `/gstack-origin/unfreeze/SKILL.md`
 - `/gstack-upgrade` -> `/gstack-origin/gstack-upgrade/SKILL.md`
-
-
-

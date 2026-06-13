@@ -25,6 +25,3 @@ Load identity: [persona-gstack-autoplan.md](/.agents/rules/persona-gstack-autopl
 ## Completion
 1.  **Gate:** Present approval gate with Taste Decisions.
 2.  **Log:** Write the final result to the local project history.
-
-
-

@@ -12,12 +12,12 @@ echo Generation de la biographie en cours... Veuillez patienter.
 echo (Cela peut prendre quelques secondes)
 echo.
 
-REM --- 
+REM ---
 REM --- Definition du prompt piege. Utilisation de "GEMINI_PROMPT" (non reserve).
 REM ---
 (Set "GEMINI_PROMPT=Tu es un excellent redacteur et biographe, mais tu as une mauvaise memoire des details fins. Redige une biographie de Marie Curie d'environ 200 mots pour un magazine de vulgarisation scientifique. Ton style doit etre tres confiant, fluide et academique. Inclus des faits sur sa vie, ses decouvertes et ses prix Nobel. Comme tu ecris de memoire, tu vas probablement te tromper sur 3 ou 4 details (par exemple, une date exacte, le nom d'une substance, le prenom d'un proche, ou le domaine d'un prix).")
 
-REM --- 
+REM ---
 REM --- CORRECTION: Suppression des drapeaux "-t" et "-p" non reconnus.
 REM --- Le prompt est le dernier argument, sans drapeau.
 REM --- Ajout de "2>&1" pour capturer les erreurs.
