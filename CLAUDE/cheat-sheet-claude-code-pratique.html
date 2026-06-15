@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cheat Sheet - Claude Code : trouver les bons outils et travailler en pro</title>
+<style>
+  :root {
+    --bleu: #1a3a5c;
+    --bleu-clair: #2c6394;
+    --gris: #4a4a4a;
+    --gris-clair: #f4f6f8;
+    --bordure: #d7dde3;
+    --accent: #b8860b;
+    --code-bg: #1e2a36;
+    --code-fg: #e8eef4;
+    --vert: #2e7d4f;
+    --rouge: #a23b3b;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: "Segoe UI", Calibri, Arial, sans-serif;
+    color: var(--gris);
+    line-height: 1.5;
+    margin: 0;
+    padding: 0;
+    background: #fff;
+    font-size: 13px;
+  }
+  .page {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 28px 34px 48px;
+  }
+  header.titre {
+    border-bottom: 3px solid var(--bleu);
+    padding-bottom: 14px;
+    margin-bottom: 20px;
+  }
+  header.titre h1 {
+    color: var(--bleu);
+    font-size: 24px;
+    margin: 0 0 4px;
+  }
+  header.titre .sous {
+    color: var(--bleu-clair);
+    font-size: 14px;
+    font-weight: 600;
+  }
+  header.titre .meta {
+    font-size: 11px;
+    color: #7a7a7a;
+    margin-top: 6px;
+  }
+  h2.section {
+    color: #fff;
+    background: var(--bleu);
+    padding: 7px 12px;
+    font-size: 16px;
+    margin: 28px 0 14px;
+    border-radius: 3px;
+  }
+  h3 {
+    color: var(--bleu);
+    font-size: 14px;
+    margin: 18px 0 6px;
+    border-left: 4px solid var(--accent);
+    padding-left: 8px;
+  }
+  p { margin: 6px 0; }
+  .intro {
+    background: var(--gris-clair);
+    border: 1px solid var(--bordure);
+    border-radius: 4px;
+    padding: 12px 16px;
+    margin-bottom: 18px;
+    font-size: 12.5px;
+  }
+  code, pre {
+    font-family: "Consolas", "Courier New", monospace;
+  }
+  pre {
+    background: var(--code-bg);
+    color: var(--code-fg);
+    padding: 10px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    overflow-x: auto;
+    margin: 6px 0;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+  pre .cmt { color: #8aa6bd; }
+  code.inline {
+    background: #e8edf2;
+    color: var(--bleu);
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-size: 11.5px;
+  }
+  .carte {
+    border: 1px solid var(--bordure);
+    border-radius: 5px;
+    padding: 12px 14px;
+    margin-bottom: 14px;
+    background: #fff;
+    page-break-inside: avoid;
+  }
+  .carte .num {
+    display: inline-block;
+    background: var(--bleu-clair);
+    color: #fff;
+    width: 22px;
+    height: 22px;
+    line-height: 22px;
+    text-align: center;
+    border-radius: 50%;
+    font-weight: 700;
+    font-size: 12px;
+    margin-right: 8px;
+  }
+  .carte h4 {
+    display: inline;
+    color: var(--bleu);
+    font-size: 14px;
+  }
+  .usage {
+    background: #f0f5f0;
+    border-left: 3px solid var(--vert);
+    padding: 6px 10px;
+    margin-top: 8px;
+    font-size: 12px;
+  }
+  .usage strong { color: var(--vert); }
+  .avant-apres {
+    display: flex;
+    gap: 10px;
+    margin: 8px 0;
+  }
+  .avant-apres > div {
+    flex: 1;
+    border-radius: 4px;
+    padding: 7px 10px;
+    font-size: 11.5px;
+  }
+  .amateur { background: #fbeaea; border: 1px solid #e6c3c3; }
+  .pro { background: #eaf3ec; border: 1px solid #c0ddc8; }
+  .amateur b { color: var(--rouge); }
+  .pro b { color: var(--vert); }
+  .grille {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px 0;
+    font-size: 12px;
+  }
+  th, td {
+    border: 1px solid var(--bordure);
+    padding: 6px 9px;
+    text-align: left;
+    vertical-align: top;
+  }
+  th { background: var(--bleu); color: #fff; font-weight: 600; }
+  tr:nth-child(even) td { background: var(--gris-clair); }
+  .encadre-cle {
+    background: #fff8e6;
+    border: 1px solid #e6d28a;
+    border-radius: 4px;
+    padding: 10px 14px;
+    margin: 14px 0;
+    font-size: 12.5px;
+  }
+  .encadre-cle b { color: var(--accent); }
+  .glossaire dt { font-weight: 700; color: var(--bleu); margin-top: 6px; }
+  .glossaire dd { margin: 0 0 4px 0; font-size: 12px; }
+  footer {
+    margin-top: 30px;
+    border-top: 2px solid var(--bordure);
+    padding-top: 10px;
+    font-size: 10.5px;
+    color: #7a7a7a;
+  }
+  @media print {
+    body { font-size: 11px; }
+    .page { padding: 0; max-width: 100%; }
+    h2.section { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    pre, th, .carte, .amateur, .pro, .usage, .encadre-cle, .intro { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    @page { margin: 12mm; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+<header class="titre">
+  <h1>Claude Code en pratique : trouver les bons outils et travailler comme un pro</h1>
+  <div class="sous">Cheat sheet operationnelle - Formation a l'IA agentique</div>
+  <div class="meta">Pole Formation UIMM-CVDL - S. JAUBERT - Document de reference a conserver pres du poste de travail</div>
+</header>
+
+<div class="intro">
+  <p style="margin-top:0"><b>A qui s'adresse ce document.</b> A toute personne qui commence a utiliser Claude Code (l'assistant IA qui travaille dans un terminal, c'est-a-dire la fenetre ou l'on tape des commandes texte). Aucune competence informatique avancee n'est requise : chaque astuce est expliquee en langage clair, avec la commande exacte a recopier et un cas d'usage concret.</p>
+  <p style="margin-bottom:0"><b>Comment lire les commandes.</b> Tout ce qui apparait sur <span style="background:#1e2a36;color:#e8eef4;padding:1px 5px;border-radius:3px;">fond sombre</span> se tape (ou se copie-colle) dans le terminal, puis on valide avec la touche Entree. Le symbole <code class="inline">|</code> (barre verticale) et le symbole <code class="inline">&gt;</code> (chevron) sont expliques dans le glossaire en fin de document.</p>
+</div>
+
+<!-- ======================= PARTIE 1 ======================= -->
+<h2 class="section">Partie 1 - Trouver le bon outil sans le connaitre par avance</h2>
+
+<p>Claude Code peut etre enrichi par des <b>skills</b> (des modules de competences specialises) et des <b>connecteurs MCP</b> (des ponts vers vos logiciels : messagerie, CRM, gestion de projet, etc.). Le probleme n'est pas qu'ils manquent : c'est qu'on ne sait pas lequel installer, ni si on possede deja l'equivalent. D'ou une perte de temps frequente.</p>
+
+<div class="carte">
+  <p style="margin-top:0"><span class="num">A</span><h4>Installer le seul outil qui trouve tous les autres : <code class="inline">find-skills</code></h4></p>
+  <p>Une seule installation rend l'ensemble du catalogue consultable. On decrit ensuite ce que l'on veut faire <b>en francais courant</b>, et l'outil propose les modules les plus pertinents, classes par fiabilite.</p>
+  <pre>npx skills add vercel-labs/skills@find-skills</pre>
+  <p style="margin-bottom:4px"><b>La bonne facon de formuler sa demande :</b> decrire le <u>resultat voulu</u>, pas le nom d'un outil.</p>
+  <div class="avant-apres">
+    <div class="amateur"><b>A eviter</b><br>"trouve-moi un skill Apollo"</div>
+    <div class="pro"><b>Recommande</b><br>"j'ai besoin de rechercher des decideurs dans des entreprises financees, par secteur et par fonction"</div>
+  </div>
+  <div class="usage"><strong>Cas d'usage formation/industrie :</strong> "trouve un module qui transforme un compte rendu de reunion en liste d'actions", ou "je veux extraire les tableaux d'un PDF de specifications". Plus l'intention est precise, plus la reponse est utile.</div>
+</div>
+
+<div class="carte">
+  <p style="margin-top:0"><span class="num">B</span><h4>Lire le nombre d'installations avant d'installer</h4></p>
+  <p>Le catalogue est ouvert : n'importe qui peut publier. Le seul signal honnete de qualite est le nombre de personnes qui ont installe l'outil et l'ont garde.</p>
+  <table>
+    <tr><th>Nombre d'installations</th><th>Interpretation</th></tr>
+    <tr><td>Moins de 50</td><td>Peu eprouve. Vous etes proche du statut de testeur. Verifiez le depot avant d'installer.</td></tr>
+    <tr><td>Plus de 100</td><td>Des personnes autres que l'auteur l'ont trouve assez utile pour l'adopter. Signal plus rassurant.</td></tr>
+  </table>
+  <p style="margin-bottom:0"><b>Reflexe de verification</b> avant d'installer un module peu telecharge : regarder la date du dernier commit (derniere mise a jour). S'il n'a pas bouge depuis six mois, sans activite ni etoiles, la reponse est non.</p>
+</div>
+
+<div class="encadre-cle">
+  <b>Le reflexe a retenir.</b> Avant d'installer quoi que ce soit, demandez a Claude : "ai-je deja de quoi faire cela ?". Bien souvent un connecteur deja en place fait le travail, et une installation supplementaire est inutile. <code class="inline">find-skills</code> verifie justement ce que vous possedez deja avant de proposer du neuf.
+</div>
+
+<!-- ======================= PARTIE 2 ======================= -->
+<h2 class="section">Partie 2 - Les 13 astuces qui font la difference dans le terminal</h2>
+
+<p>Toutes ces astuces reposent sur des principes simples et anciens (les "tuyaux" entre logiciels, la redirection vers un fichier, les raccourcis). Combinees a Claude, elles accelerent fortement le travail. Pour chaque astuce : la facon debutante, la facon pro, et un cas concret.</p>
+
+<div class="grille">
+
+  <div class="carte">
+    <p style="margin-top:0"><span class="num">1</span><h4>Lancer une commande sans quitter Claude : le <code class="inline">!</code></h4></p>
+    <div class="avant-apres">
+      <div class="amateur"><b>Debutant</b><br>Quitte Claude, ouvre un autre terminal, puis revient expliquer ce qui s'est passe.</div>
+      <div class="pro"><b>Pro</b><br>Tape <code class="inline">!</code> suivi de la commande, sans quitter la session.</div>
+    </div>
+    <pre>! npm run build
+! git status</pre>
+    <p>Le resultat reste sous les yeux de Claude, qui peut reagir immediatement. On ne perd jamais le fil de la conversation.</p>
+    <div class="usage"><strong>Cas d'usage :</strong> verifier l'etat d'un dossier ou relancer une operation sans interrompre l'echange en cours.</div>
+  </div>
+
+  <div class="carte">
+    <p style="margin-top:0"><span class="num">2</span><h4>Envoyer une erreur directement a Claude</h4></p>
+    <div class="avant-apres">
+      <div class="amateur"><b>Debutant</b><br>Copie le message d'erreur, le colle dans Claude et ecrit "corrige ca".</div>
+      <div class="pro"><b>Pro</b><br>Envoie la sortie d'erreur d'un seul geste.</div>
+    </div>
+    <pre>npm run build 2&gt;&amp;1 | claude -p "corrige ces erreurs"</pre>
+    <p>Claude lit le message <u>exact</u> (et non votre reformulation), avec les numeros de ligne. C'est plus rapide et plus precis.</p>
+    <div class="usage"><strong>Cas d'usage :</strong> un programme echoue avec un message incomprehensible : on le transmet tel quel a Claude pour diagnostic.</div>
+  </div>
+
+  <div class="carte">
+    <p style="margin-top:0"><span class="num">3</span><h4>Mode rapide (sans conversation) : <code class="inline">claude -p</code></h4></p>
+    <div class="avant-apres">
+      <div class="amateur"><b>Debutant</b><br>Ouvre une session complete meme pour une question d'une ligne.</div>
+      <div class="pro"><b>Pro</b><br>Utilise <code class="inline">-p</code> pour une reponse unique et immediate.</div>
+    </div>
+    <pre>claude -p "explique ce que fait ce code"
+claude -p "genere un fichier .gitignore pour un projet Python"</pre>
+    <p>Le drapeau <code class="inline">-p</code> (pour "print", afficher) traite la demande, affiche la reponse et s'arrete. Ideal pour une explication ou une recherche ponctuelle.</p>
+    <div class="usage"><strong>Cas d'usage :</strong> obtenir une definition, un exemple ou un petit fichier sans lancer tout un echange.</div>
+  </div>
+
+  <div class="carte">
+    <p style="margin-top:0"><span class="num">4</span><h4>Reprendre une session : <code class="inline">--resume</code></h4></p>
+    <div class="avant-apres">
+      <div class="amateur"><b>Debutant</b><br>Recommence de zero et re-explique tout le contexte a chaque fois.</div>
+      <div class="pro"><b>Pro</b><br>Reprend la veille exactement la ou il s'etait arrete.</div>
+    </div>
+    <pre>claude --resume</pre>
+    <p>Recharge la derniere conversation : le contexte, les decisions et les fichiers sont toujours la.</p>
+    <div class="usage"><strong>Cas d'usage :</strong> un dossier traite sur plusieurs jours. Le lendemain, Claude se souvient de ce qui a ete tente et de ce qui a fonctionne.</div>
+  </div>
+
+  <div class="carte">
+    <p style="margin-top:0"><span class="num">5</span><h4>Enchainer Claude avec d'autres outils</h4></p>
+    <div class="avant-apres">
+      <div class="amateur"><b>Debutant</b><br>Lance chaque outil separement et recopie le resultat de l'un dans l'autre.</div>
+      <div class="pro"><b>Pro</b><br>Relie les outils en une seule commande.</div>
+    </div>
+    <pre>git diff | claude -p "relis ces modifications"
+cat agenda.txt | claude -p "resume les points cles"</pre>
+    <p>Le symbole <code class="inline">|</code> (le "tuyau") fait passer le resultat d'un outil dans Claude. Tout ce qui produit du texte peut etre analyse.</p>
+    <div class="usage"><strong>Cas d'usage :</strong> journaux de bord, sorties de tests, fichiers de configuration, exports... tout texte devient analysable.</div>
+  </div>
+
+  <div class="carte">
+    <p style="margin-top:0"><span class="num">6</span><h4>Creer des raccourcis (alias) pour les taches repetitives</h4></p>
+    <div class="avant-apres">
+      <div class="amateur"><b>Debutant</b><br>Retape la commande complete a chaque fois.</div>
+      <div class="pro"><b>Pro</b><br>Cree un raccourci de deux lettres.</div>
+    </div>
+    <pre><span class="cmt"># A ajouter une fois dans le fichier ~/.bashrc</span>
+alias cr='git diff | claude -p "relis ce code"'
+alias cs='claude -p "resume ce projet en 3 phrases"'</pre>
+    <p>Apres rechargement, taper <code class="inline">cr</code> suffit. Les gains de temps se cumulent sur des centaines d'usages.</p>
+    <div class="usage"><strong>Cas d'usage :</strong> automatiser un controle ou un resume que l'on declenche plusieurs fois par jour.</div>
+  </div>
+
+  <div class="carte">
+    <p style="margin-top:0"><span class="num">7</span><h4>Donner les vraies donnees Git a Claude</h4></p>
+    <div class="avant-apres">
+      <div class="amateur"><b>Debutant</b><br>Demande "qu'est-ce que j'ai change ?" et attend.</div>
+      <div class="pro"><b>Pro</b><br>Fournit directement l'historique reel.</div>
+    </div>
+    <pre>git log --oneline -10 | claude -p "resume ces changements"</pre>
+    <p>Claude travaille sur les donnees exactes, sans deviner a partir des dates de fichiers.</p>
+    <div class="usage"><strong>Cas d'usage :</strong> produire un compte rendu fidele des evolutions recentes d'un projet versionne.</div>
+  </div>
+
+  <div class="carte">
+    <p style="margin-top:0"><span class="num">8</span><h4>Integrer Claude dans des scripts automatises</h4></p>
+    <div class="avant-apres">
+      <div class="amateur"><b>Debutant</b><br>Ne sait pas comment utiliser Claude en automatique.</div>
+      <div class="pro"><b>Pro</b><br>Utilise <code class="inline">--print</code> dans des scripts ou des taches planifiees.</div>
+    </div>
+    <pre><span class="cmt"># Controle quotidien planifie (exemple)</span>
+claude -p "fais un bilan rapide de ce projet" &gt; bilan.txt</pre>
+    <p>En mode <code class="inline">--print</code>, Claude se comporte comme n'importe quel outil : il recoit une entree, produit un texte. On peut donc l'inclure dans une tache recurrente.</p>
+    <div class="usage"><strong>Cas d'usage :</strong> un bilan automatique chaque matin, ecrit dans un fichier, sans intervention.</div>
+  </div>
+
+  <div class="carte">
+    <p style="margin-top:0"><span class="num">9</span><h4>Lancer une tache longue en arriere-plan : le <code class="inline">!</code></h4></p>
+    <div class="avant-apres">
+      <div class="amateur"><b>Debutant</b><br>Ouvre un autre onglet pour une commande qui tourne longtemps.</div>
+      <div class="pro"><b>Pro</b><br>Lance la commande avec <code class="inline">!</code> et continue a discuter.</div>
+    </div>
+    <pre>! npm run test -- --watch</pre>
+    <p>La commande tourne en fond pendant que l'on poursuit l'echange. Claude peut s'y referer ensuite.</p>
+    <div class="usage"><strong>Cas d'usage :</strong> un serveur de test qui se recharge tout seul pendant que Claude apporte des modifications.</div>
+  </div>
+
+  <div class="carte">
+    <p style="margin-top:0"><span class="num">10</span><h4>Memoriser ses reglages une bonne fois pour toutes</h4></p>
+    <div class="avant-apres">
+      <div class="amateur"><b>Debutant</b><br>Reconfigure sa cle d'acces a chaque nouveau terminal.</div>
+      <div class="pro"><b>Pro</b><br>L'enregistre une fois dans son profil et n'y pense plus.</div>
+    </div>
+    <pre><span class="cmt"># A ajouter une fois dans ~/.bashrc</span>
+alias cc='claude'</pre>
+    <p>Un raccourci de deux lettres economise des milliers de frappes sur un mois.</p>
+    <div class="usage"><strong>Cas d'usage :</strong> lancer Claude avec <code class="inline">cc</code> au lieu de <code class="inline">claude</code> a chaque fois.</div>
+  </div>
+
+  <div class="carte">
+    <p style="margin-top:0"><span class="num">11</span><h4>Donner plusieurs instructions en une seule fois</h4></p>
+    <div class="avant-apres">
+      <div class="amateur"><b>Debutant</b><br>Envoie une instruction, attend, puis la suivante.</div>
+      <div class="pro"><b>Pro</b><br>Enchaine la sequence complete dans une seule demande.</div>
+    </div>
+    <pre>claude -p "lance les tests, corrige ceux qui echouent,
+puis relance jusqu'a ce que tout passe"</pre>
+    <p>Claude execute la suite de maniere autonome : chaque etape nourrit la suivante.</p>
+    <div class="usage"><strong>Cas d'usage :</strong> deleguer une procedure en plusieurs etapes plutot que de la piloter pas a pas.</div>
+  </div>
+
+  <div class="carte">
+    <p style="margin-top:0"><span class="num">12</span><h4>Enregistrer la reponse de Claude dans un fichier</h4></p>
+    <div class="avant-apres">
+      <div class="amateur"><b>Debutant</b><br>Copie la reponse et la colle manuellement dans un fichier.</div>
+      <div class="pro"><b>Pro</b><br>Redirige la sortie vers un fichier d'un seul geste.</div>
+    </div>
+    <pre>claude -p "redige un mode d'emploi du projet" &gt; LISEZMOI.md</pre>
+    <p>Le chevron <code class="inline">&gt;</code> ecrit la reponse directement dans le fichier. Avec <code class="inline">&gt;&gt;</code>, on ajoute a la suite d'un fichier existant.</p>
+    <div class="usage"><strong>Cas d'usage :</strong> generer une note, un mode d'emploi ou un modele de document pret a l'emploi.</div>
+  </div>
+
+  <div class="carte">
+    <p style="margin-top:0"><span class="num">13</span><h4>Faire lire les vrais fichiers a Claude : <code class="inline">cat</code></h4></p>
+    <div class="avant-apres">
+      <div class="amateur"><b>Debutant</b><br>Decrit ses fichiers avec des mots.</div>
+      <div class="pro"><b>Pro</b><br>Fournit les fichiers reels en entree.</div>
+    </div>
+    <pre>cat notes.txt compte-rendu.txt | claude -p "synthetise ces documents"</pre>
+    <p>Claude lit le contenu reel, sans interpreter une description. Le symbole <code class="inline">*</code> permet de transmettre tout un lot de fichiers d'un coup.</p>
+    <div class="usage"><strong>Cas d'usage :</strong> reunir plusieurs documents pour en faire une synthese unique. <b>A noter :</b> pour de tres gros volumes, preferer la session interactive, ou Claude lit les fichiers de facon selective.</div>
+  </div>
+
+</div>
+
+<!-- ======================= GLOSSAIRE ======================= -->
+<h2 class="section">Glossaire express - les symboles a connaitre</h2>
+<dl class="glossaire">
+  <dt>Terminal</dt>
+  <dd>La fenetre dans laquelle on tape des commandes texte plutot que de cliquer. C'est la qu'on dialogue avec Claude Code.</dd>
+  <dt>! (point d'exclamation)</dt>
+  <dd>Place devant une commande, il l'execute sans quitter Claude (astuces 1 et 9).</dd>
+  <dt>| (barre verticale, "le tuyau")</dt>
+  <dd>Fait passer le resultat d'un outil dans un autre. Exemple : <code class="inline">git diff | claude -p "..."</code> envoie les modifications a Claude.</dd>
+  <dt>&gt; et &gt;&gt; (chevrons)</dt>
+  <dd><code class="inline">&gt;</code> ecrit le resultat dans un fichier (en remplacant son contenu). <code class="inline">&gt;&gt;</code> ajoute a la fin sans effacer.</dd>
+  <dt>2&gt;&amp;1</dt>
+  <dd>Capture a la fois les messages normaux et les messages d'erreur, pour tout transmettre a Claude (astuce 2).</dd>
+  <dt>-p ou --print</dt>
+  <dd>Mode rapide : Claude repond une fois et s'arrete, sans ouvrir de conversation (astuces 3, 8, 12).</dd>
+  <dt>alias</dt>
+  <dd>Un raccourci personnel : on remplace une commande longue par quelques lettres (astuces 6 et 10).</dd>
+  <dt>cat</dt>
+  <dd>Commande qui affiche le contenu d'un fichier ; ici, elle sert a transmettre ce contenu a Claude (astuce 13).</dd>
+  <dt>skill / connecteur MCP</dt>
+  <dd>Un skill est un module de competence ajoute a Claude. Un connecteur MCP est un pont vers un logiciel existant (messagerie, gestion de projet, CRM...).</dd>
+</dl>
+
+<div class="encadre-cle">
+  <b>Le principe a garder en tete.</b> La difference entre un usage debutant et un usage avance ne tient pas a des astuces d'IA, mais a quelques reflexes simples : relier les outils entre eux (le tuyau), enregistrer les resultats (le chevron), creer des raccourcis, et donner a Claude les <u>vraies</u> donnees plutot qu'une description. Commencez par maitriser deux ou trois de ces gestes, le reste viendra naturellement.
+</div>
+
+<footer>
+  Document pedagogique etabli a partir de deux articles de reference : "I Installed One Skill. Now Claude Code Finds Every Other Skill For Me" et "13 Claude Code Bash Tricks That Separate Pros from Amateurs". Adapte et vulgarise pour un public non technique. Pole Formation UIMM-CVDL - S. JAUBERT.
+</footer>
+
+</div>
+</body>
+</html>

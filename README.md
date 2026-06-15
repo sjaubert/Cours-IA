@@ -155,6 +155,11 @@ Activités autonomes (approche par cas) :
 
 - [Fiche procédurale — Les plugins Claude](CLAUDE/Fiche_Procedurale_Plugins_Claude.md) — **Pratique** | MD | Types de plugins (MCP, Skills, Commands, Hooks), installation dans Claude Code et l'application bureau, dix plugins principaux avec cas d'usage, recommandations par profil <sub>*(mai 2026)*</sub>
 
+### Aide-mémoire opérationnel
+
+- [Cheat Sheet — Claude Code en pratique](CLAUDE/cheat-sheet-claude-code-pratique.html) — **Découverte** | HTML + PDF | Aide-mémoire vulgarisé pour public non technique : trouver le bon outil avec `find-skills` (décrire le résultat, lire le nombre d'installations) et les 13 astuces bash essentielles (format débutant/pro avec cas d'usage et glossaire des symboles) <sub>*(juin 2026)*</sub>
+  - [Version PDF imprimable](CLAUDE/cheat-sheet-claude-code-pratique.pdf)
+
 ### Skills
 
 - [Formation Agents et Skills IA — Programme 2 jours](00-Formation/IA_Skills/Formation_Skills/Plan_Formation_Skills.md) — **Avancé** | MD | Transformer des utilisateurs occasionnels en experts de l'automatisation : installation, diagnostic amnésie LLMs, ateliers par métiers, paramétrage d'agents personnalisés <sub>*(mars 2026)*</sub>
@@ -271,4 +276,4 @@ Formation sur l'Intelligence Artificielle et ses applications industrielles
 
 ---
 
-*Dernière mise à jour : Juin 2026*
+*Dernière mise à jour : 15 juin 2026*
