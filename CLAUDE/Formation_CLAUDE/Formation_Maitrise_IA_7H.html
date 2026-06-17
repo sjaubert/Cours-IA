@@ -1,0 +1,1976 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maîtrise de l'IA — Formation 7H | Pôle Formation UIMM-CVDL</title>
+  <meta name="description" content="Support de cours complet pour la formation Maîtrise de l'IA (7H) — Cadre et fondements, basé sur le programme AI Fluency d'Anthropic. S. JAUBERT — Pôle Formation UIMM-CVDL.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <script>
+    MathJax = {
+      tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" defer></script>
+  <style>
+    :root {
+      --primary:    #1e3a5f;
+      --accent:     #2e7dd1;
+      --accent-light: #4a9ede;
+      --gold:       #c8941a;
+      --gold-light: #f0b429;
+      --bg:         #f5f7fa;
+      --surface:    #ffffff;
+      --surface2:   #eef2f7;
+      --text:       #1a2940;
+      --text-muted: #5a6b84;
+      --border:     #d0dae8;
+      --green:      #16a34a;
+      --red:        #dc2626;
+      --purple:     #7c3aed;
+      --teal:       #0891b2;
+      --shadow:     0 2px 12px rgba(30,58,95,0.10);
+      --radius:     10px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    /* =========== HEADER =========== */
+    .site-header {
+      background: linear-gradient(135deg, var(--primary) 0%, #2a4d7a 100%);
+      color: #fff;
+      padding: 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 3px 16px rgba(30,58,95,0.30);
+    }
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 32px;
+      gap: 16px;
+    }
+    .header-logo-block {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .header-logo-block img {
+      height: 52px;
+      border-radius: 6px;
+      background: #fff;
+      padding: 4px;
+    }
+    .header-org {
+      display: flex;
+      flex-direction: column;
+    }
+    .header-org .org-name {
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      color: #fff;
+    }
+    .header-org .trainer {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.75);
+      font-weight: 400;
+    }
+    .header-title {
+      text-align: right;
+      flex: 1;
+    }
+    .header-title h1 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--gold-light);
+      line-height: 1.3;
+    }
+    .header-title .subtitle {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.65);
+      font-weight: 400;
+    }
+
+    /* =========== HERO =========== */
+    .hero {
+      background: linear-gradient(160deg, #1e3a5f 0%, #2e5fa3 55%, #1a6b8a 100%);
+      color: #fff;
+      padding: 60px 32px 52px;
+      text-align: center;
+    }
+    .hero .badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 20px;
+      padding: 5px 18px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 22px;
+      color: var(--gold-light);
+    }
+    .hero h2 {
+      font-size: 2.6rem;
+      font-weight: 800;
+      line-height: 1.18;
+      margin-bottom: 16px;
+      max-width: 760px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .hero h2 span { color: var(--gold-light); }
+    .hero p {
+      font-size: 1.08rem;
+      color: rgba(255,255,255,0.80);
+      max-width: 680px;
+      margin: 0 auto 30px;
+    }
+    .hero-meta {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+    .hero-meta .meta-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+    .hero-meta .meta-value {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--gold-light);
+    }
+    .hero-meta .meta-label {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.70);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    /* =========== NAV TABS =========== */
+    .nav-tabs {
+      background: var(--surface);
+      border-bottom: 2px solid var(--border);
+      position: sticky;
+      top: 82px;
+      z-index: 90;
+      box-shadow: 0 2px 8px rgba(30,58,95,0.07);
+    }
+    .nav-tabs-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      gap: 0;
+      overflow-x: auto;
+      padding: 0 16px;
+    }
+    .tab-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 14px 20px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      border-bottom: 3px solid transparent;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+    .tab-btn:hover { color: var(--accent); }
+    .tab-btn.active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+      font-weight: 600;
+    }
+
+    /* =========== MAIN LAYOUT =========== */
+    .main-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 24px 60px;
+    }
+
+    /* =========== TAB SECTIONS =========== */
+    .tab-section { display: none; }
+    .tab-section.active { display: block; }
+
+    /* =========== CARDS =========== */
+    .card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      padding: 28px;
+      margin-bottom: 24px;
+    }
+    .card-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .card-title .icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-light));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    /* =========== TIMELINE / PLANNING =========== */
+    .timeline {
+      position: relative;
+      padding-left: 32px;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 13px;
+      top: 0; bottom: 0;
+      width: 3px;
+      background: linear-gradient(to bottom, var(--accent), var(--accent-light));
+      border-radius: 2px;
+    }
+    .timeline-item {
+      position: relative;
+      margin-bottom: 28px;
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -25px;
+      top: 8px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 3px solid var(--surface);
+      box-shadow: 0 0 0 2px var(--accent);
+    }
+    .timeline-time {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 4px;
+    }
+    .timeline-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 6px;
+    }
+    .timeline-desc {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+    }
+    .timeline-tags {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+    .tag {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 12px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+    .tag-theorie { background: #dbeafe; color: #1e40af; }
+    .tag-pratique { background: #dcfce7; color: #166534; }
+    .tag-video { background: #fce7f3; color: #9d174d; }
+    .tag-pause { background: #fef3c7; color: #92400e; }
+    .tag-atelier { background: #ede9fe; color: #5b21b6; }
+
+    /* =========== 4D FRAMEWORK =========== */
+    .d4-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-top: 20px;
+    }
+    .d4-card {
+      border-radius: var(--radius);
+      padding: 22px;
+      border: 2px solid transparent;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .d4-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    }
+    .d4-delegation  { background: linear-gradient(135deg,#eff6ff,#dbeafe); border-color:#bfdbfe; }
+    .d4-description { background: linear-gradient(135deg,#f0fdf4,#dcfce7); border-color:#bbf7d0; }
+    .d4-discernement{ background: linear-gradient(135deg,#fdf4ff,#f3e8ff); border-color:#e9d5ff; }
+    .d4-diligence   { background: linear-gradient(135deg,#fff7ed,#ffedd5); border-color:#fed7aa; }
+    .d4-letter {
+      font-size: 2.4rem;
+      font-weight: 900;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .d4-delegation .d4-letter  { color: #1d4ed8; }
+    .d4-description .d4-letter { color: #15803d; }
+    .d4-discernement .d4-letter{ color: #7c3aed; }
+    .d4-diligence .d4-letter   { color: #c2410c; }
+    .d4-name {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--primary);
+    }
+    .d4-desc {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* =========== MODULES =========== */
+    .module-header {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: #fff;
+      border-radius: var(--radius) var(--radius) 0 0;
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .module-number {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      border: 2px solid rgba(255,255,255,0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+    .module-info h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .module-info .module-meta {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.75);
+    }
+    .module-body {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-top: none;
+      border-radius: 0 0 var(--radius) var(--radius);
+      padding: 24px;
+      margin-bottom: 28px;
+    }
+    .module-block {
+      margin-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 20px;
+    }
+    .module-block:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .block-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 10px;
+    }
+
+    /* =========== VIDEO RESOURCES =========== */
+    .video-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      background: var(--surface2);
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin-bottom: 10px;
+      border: 1px solid var(--border);
+      text-decoration: none;
+      color: inherit;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .video-card:hover {
+      box-shadow: 0 4px 16px rgba(46,125,209,0.18);
+      transform: translateY(-1px);
+    }
+    .video-thumb {
+      width: 48px;
+      height: 48px;
+      background: #ff0000;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+    .video-info .video-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+    .video-info .video-source {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    /* =========== EXERCISES =========== */
+    .exercise-box {
+      background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+      border: 1px solid #bae6fd;
+      border-left: 4px solid var(--accent);
+      border-radius: var(--radius);
+      padding: 20px 22px;
+      margin-bottom: 16px;
+    }
+    .exercise-box.green {
+      background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+      border-color: #bbf7d0;
+      border-left-color: var(--green);
+    }
+    .exercise-box.purple {
+      background: linear-gradient(135deg, #fdf4ff, #f3e8ff);
+      border-color: #e9d5ff;
+      border-left-color: var(--purple);
+    }
+    .exercise-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .exercise-badge {
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .exercise-badge.green { background: var(--green); }
+    .exercise-badge.purple { background: var(--purple); }
+    .exercise-title {
+      font-weight: 700;
+      font-size: 0.98rem;
+      color: var(--primary);
+    }
+    .exercise-duration {
+      margin-left: auto;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    /* =========== KEY POINTS =========== */
+    .key-points {
+      background: var(--surface2);
+      border-radius: var(--radius);
+      padding: 18px 22px;
+      margin-top: 14px;
+    }
+    .key-points h4 {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 10px;
+    }
+    .key-points ul {
+      padding-left: 18px;
+    }
+    .key-points li {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+    .key-points li strong { color: var(--text); }
+
+    /* =========== ALERT BOXES =========== */
+    .alert {
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-bottom: 16px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .alert-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 2px; }
+    .alert-content { font-size: 0.9rem; line-height: 1.5; }
+    .alert-content strong { display: block; font-weight: 700; margin-bottom: 4px; }
+    .alert-info  { background:#dbeafe; border:1px solid #93c5fd; color:#1e3a8a; }
+    .alert-warn  { background:#fef3c7; border:1px solid #fcd34d; color:#78350f; }
+    .alert-tip   { background:#d1fae5; border:1px solid #6ee7b7; color:#064e3b; }
+    .alert-note  { background:#ede9fe; border:1px solid #c4b5fd; color:#3730a3; }
+
+    /* =========== 3 MODES VISUALIZATION =========== */
+    .modes-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+      margin: 20px 0;
+    }
+    .mode-card {
+      border-radius: var(--radius);
+      padding: 20px;
+      text-align: center;
+    }
+    .mode-auto      { background: linear-gradient(135deg,#f0fdf4,#dcfce7); border:1px solid #bbf7d0; }
+    .mode-augment   { background: linear-gradient(135deg,#eff6ff,#dbeafe); border:1px solid #bfdbfe; }
+    .mode-agence    { background: linear-gradient(135deg,#fdf4ff,#f3e8ff); border:1px solid #e9d5ff; }
+    .mode-icon {
+      font-size: 2rem;
+      margin-bottom: 8px;
+    }
+    .mode-title {
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--primary);
+      margin-bottom: 6px;
+    }
+    .mode-desc {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    /* =========== EVALUATION =========== */
+    .eval-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .eval-item {
+      background: var(--surface2);
+      border-radius: 8px;
+      padding: 16px;
+      border: 1px solid var(--border);
+    }
+    .eval-item h4 {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+    .eval-item ul {
+      padding-left: 16px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    .eval-item li { margin-bottom: 4px; }
+
+    /* =========== FOOTER =========== */
+    footer {
+      background: var(--primary);
+      color: rgba(255,255,255,0.80);
+      text-align: center;
+      padding: 24px 32px;
+      font-size: 0.82rem;
+    }
+    footer strong { color: #fff; }
+    footer a { color: var(--gold-light); text-decoration: none; }
+
+    /* =========== TABLE =========== */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+      margin: 12px 0;
+    }
+    th {
+      background: var(--primary);
+      color: #fff;
+      padding: 10px 14px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 0.82rem;
+    }
+    td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+    }
+    tr:nth-child(even) td { background: var(--surface2); }
+    tr:hover td { background: #e8f0fb; }
+
+    /* =========== PRINT =========== */
+    @media print {
+      .site-header, .nav-tabs { position: static; }
+      .tab-section { display: block !important; }
+      .nav-tabs { display: none; }
+      body { font-size: 13px; }
+      .hero h2 { font-size: 1.8rem; }
+    }
+
+    /* =========== RESPONSIVE =========== */
+    @media (max-width: 768px) {
+      .d4-grid, .modes-grid, .eval-grid { grid-template-columns: 1fr; }
+      .hero h2 { font-size: 1.7rem; }
+      .header-inner { padding: 10px 16px; }
+      .main-content { padding: 24px 16px 48px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ======= HEADER ======= -->
+<header class="site-header">
+  <div class="header-inner">
+    <div class="header-logo-block">
+      <img src="../../logo_uimm_placeholder.jpg" alt="Logo UIMM">
+      <div class="header-org">
+        <span class="org-name">Pole Formation UIMM - CVDL</span>
+        <span class="trainer">Formateur : S. JAUBERT</span>
+      </div>
+    </div>
+    <div class="header-title">
+      <h1>Maitrise de l'IA — Formation 7H</h1>
+      <div class="subtitle">Cadre, Fondements et Pratiques — Programme AI Fluency / Anthropic</div>
+    </div>
+  </div>
+</header>
+
+<!-- ======= HERO ======= -->
+<section class="hero">
+  <div class="badge">Formation Professionnelle Continue</div>
+  <h2>Collaborer efficacement avec l'<span>Intelligence Artificielle</span></h2>
+  <p>Une journee complete pour developper votre maitrise de l'IA : comprendre, deleguer, decrire, evaluer et agir de maniere responsable.</p>
+  <div class="hero-meta">
+    <div class="meta-item">
+      <span class="meta-value">7H</span>
+      <span class="meta-label">Duree totale</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-value">5</span>
+      <span class="meta-label">Modules</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-value">10</span>
+      <span class="meta-label">Ressources video</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-value">4D</span>
+      <span class="meta-label">Cadre de maitrise</span>
+    </div>
+  </div>
+</section>
+
+<!-- ======= NAV TABS ======= -->
+<nav class="nav-tabs">
+  <div class="nav-tabs-inner">
+    <button class="tab-btn active" onclick="showTab('programme')">Programme</button>
+    <button class="tab-btn" onclick="showTab('module1')">Module 1 — Fondements</button>
+    <button class="tab-btn" onclick="showTab('module2')">Module 2 — IA Generative</button>
+    <button class="tab-btn" onclick="showTab('module3')">Module 3 — Delegation et Description</button>
+    <button class="tab-btn" onclick="showTab('module4')">Module 4 — Discernement et Diligence</button>
+    <button class="tab-btn" onclick="showTab('module5')">Module 5 — Projet et Bilan</button>
+    <button class="tab-btn" onclick="showTab('ressources')">Ressources</button>
+    <button class="tab-btn" onclick="showTab('evaluation')">Evaluation</button>
+  </div>
+</nav>
+
+<!-- ======= MAIN ======= -->
+<main class="main-content">
+
+  <!-- ====== PROGRAMME ====== -->
+  <section id="programme" class="tab-section active">
+
+    <div class="card">
+      <div class="card-title">
+        <div class="icon">A</div>
+        Objectifs de la formation
+      </div>
+      <p>Cette formation vise a developper une <strong>collaboration pertinente avec l'IA</strong>, au-dela de la simple utilisation d'outils. A l'issue de la journee, chaque participant disposera :</p>
+      <div class="key-points" style="margin-top:12px;">
+        <ul>
+          <li>D'un <strong>cadre theorique solide</strong> pour comprendre ce qu'est l'IA generative et comment elle fonctionne</li>
+          <li>De la <strong>methode 4D</strong> (Delegation, Description, Discernement, Diligence) pour interagir efficacement</li>
+          <li>De <strong>competences pratiques</strong> acquises a travers des ateliers concrets</li>
+          <li>D'une capacite a <strong>evaluer et diffuser</strong> de maniere responsable le travail assiste par l'IA</li>
+          <li>D'une reflexion sur les <strong>enjeux ethiques et professionnels</strong> de l'IA</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <div class="icon">P</div>
+        Planning de la journee (7 heures)
+      </div>
+      <div class="timeline">
+
+        <div class="timeline-item">
+          <div class="timeline-time">08h30 — 09h00 &nbsp;|&nbsp; 30 min</div>
+          <div class="timeline-title">Accueil et tour de table</div>
+          <div class="timeline-desc">Presentation des participants, du formateur et des objectifs de la journee. Questionnaire de positionnement initial.</div>
+          <div class="timeline-tags"><span class="tag tag-theorie">Introduction</span></div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-time">09h00 — 10h30 &nbsp;|&nbsp; 1h30</div>
+          <div class="timeline-title">Module 1 — Pourquoi maitriser l'IA ? Le cadre 4D</div>
+          <div class="timeline-desc">Introduction a la maitrise de l'IA, les 3 modes d'interaction (automatisation, augmentation, agence) et le cadre des 4D.</div>
+          <div class="timeline-tags">
+            <span class="tag tag-theorie">Theorie</span>
+            <span class="tag tag-video">Videos Anthropic</span>
+            <span class="tag tag-pratique">Discussion</span>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-time">10h30 — 10h45 &nbsp;|&nbsp; 15 min</div>
+          <div class="timeline-title">Pause</div>
+          <div class="timeline-tags"><span class="tag tag-pause">Pause</span></div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-time">10h45 — 12h15 &nbsp;|&nbsp; 1h30</div>
+          <div class="timeline-title">Module 2 — L'IA generative : fonctionnement et limites</div>
+          <div class="timeline-desc">Comprendre l'IA generative : pre-entrainement, ajustement fin. Capacites et limitations : fenetre de contexte, coupure de donnees, sorties non deterministes.</div>
+          <div class="timeline-tags">
+            <span class="tag tag-theorie">Theorie</span>
+            <span class="tag tag-video">Videos Anthropic</span>
+            <span class="tag tag-pratique">Exercices</span>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-time">12h15 — 13h30 &nbsp;|&nbsp; 1h15</div>
+          <div class="timeline-title">Dejeuner</div>
+          <div class="timeline-tags"><span class="tag tag-pause">Pause</span></div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-time">13h30 — 15h00 &nbsp;|&nbsp; 1h30</div>
+          <div class="timeline-title">Module 3 — Delegation et Description</div>
+          <div class="timeline-desc">Apprendre a deleguer intelligemment les taches a l'IA. Maitriser l'art de la description : produit, processus, performance. Techniques d'invite efficaces.</div>
+          <div class="timeline-tags">
+            <span class="tag tag-theorie">Theorie</span>
+            <span class="tag tag-video">Videos Anthropic</span>
+            <span class="tag tag-atelier">Ateliers pratiques</span>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-time">15h00 — 15h15 &nbsp;|&nbsp; 15 min</div>
+          <div class="timeline-title">Pause</div>
+          <div class="timeline-tags"><span class="tag tag-pause">Pause</span></div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-time">15h15 — 16h45 &nbsp;|&nbsp; 1h30</div>
+          <div class="timeline-title">Module 4 — Discernement et Diligence</div>
+          <div class="timeline-desc">Evaluer les resultats de l'IA avec un regard critique (produit, processus, performance). La diligence : responsabilite, transparence et ethique.</div>
+          <div class="timeline-tags">
+            <span class="tag tag-theorie">Theorie</span>
+            <span class="tag tag-video">Videos Anthropic</span>
+            <span class="tag tag-atelier">Ateliers pratiques</span>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-time">16h45 — 17h30 &nbsp;|&nbsp; 45 min</div>
+          <div class="timeline-title">Module 5 — Projet fil rouge et bilan</div>
+          <div class="timeline-desc">Mise en pratique integrale du cadre 4D sur un projet reel. Bilan de journee, questions-reponses, plan d'action personnel.</div>
+          <div class="timeline-tags">
+            <span class="tag tag-atelier">Projet</span>
+            <span class="tag tag-pratique">Bilan</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <div class="icon">S</div>
+        Synthese du programme
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Module</th>
+            <th>Contenu cle</th>
+            <th>Duree</th>
+            <th>Approche</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Accueil</strong></td>
+            <td>Tour de table, positionnement</td>
+            <td>30 min</td>
+            <td>Dialogue</td>
+          </tr>
+          <tr>
+            <td><strong>M1 — Fondements</strong></td>
+            <td>Maitrise IA, 3 modes, cadre 4D</td>
+            <td>1h30</td>
+            <td>Theorie + Video</td>
+          </tr>
+          <tr>
+            <td><strong>M2 — IA Generative</strong></td>
+            <td>Fonctionnement, capacites, limites</td>
+            <td>1h30</td>
+            <td>Theorie + Exercices</td>
+          </tr>
+          <tr>
+            <td><strong>M3 — Delegation / Description</strong></td>
+            <td>Deleguer, decrire, techniques d'invite</td>
+            <td>1h30</td>
+            <td>Ateliers</td>
+          </tr>
+          <tr>
+            <td><strong>M4 — Discernement / Diligence</strong></td>
+            <td>Evaluation critique, responsabilite, ethique</td>
+            <td>1h30</td>
+            <td>Ateliers</td>
+          </tr>
+          <tr>
+            <td><strong>M5 — Projet + Bilan</strong></td>
+            <td>Application integrale, plan d'action</td>
+            <td>45 min</td>
+            <td>Projet + Bilan</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <div class="icon">O</div>
+        Le cadre 4D — Vue d'ensemble
+      </div>
+      <p style="margin-bottom:4px;">Le cadre de maitrise de l'IA repose sur <strong>quatre competences fondamentales</strong> qui s'appliquent dans tous les modes d'interaction avec l'IA :</p>
+      <div class="d4-grid">
+        <div class="d4-card d4-delegation">
+          <div class="d4-letter">D</div>
+          <div class="d4-name">Delegation</div>
+          <div class="d4-desc">Choisir intelligemment quelles taches confier a l'IA et lesquelles realiser soi-meme. Comprendre ses propres objectifs et les capacites de la plateforme.</div>
+        </div>
+        <div class="d4-card d4-description">
+          <div class="d4-letter">D</div>
+          <div class="d4-name">Description</div>
+          <div class="d4-desc">Communiquer clairement avec les systemes d'IA. Decrire le produit attendu, le processus souhaite et la performance attendue de la collaboration.</div>
+        </div>
+        <div class="d4-card d4-discernement">
+          <div class="d4-letter">D</div>
+          <div class="d4-name">Discernement</div>
+          <div class="d4-desc">Evaluer les resultats et les comportements de l'IA avec un regard critique. Distinguer ce qui est utile de ce qui necessite correction ou rejet.</div>
+        </div>
+        <div class="d4-card d4-diligence">
+          <div class="d4-letter">D</div>
+          <div class="d4-name">Diligence</div>
+          <div class="d4-desc">Assurer une interaction responsable avec l'IA. Assumer la responsabilite des resultats produits, etre transparent et veiller a l'equite.</div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ====== MODULE 1 ====== -->
+  <section id="module1" class="tab-section">
+
+    <div class="module-header">
+      <div class="module-number">1</div>
+      <div class="module-info">
+        <h3>Pourquoi maitriser l'IA ? Le cadre 4D</h3>
+        <div class="module-meta">09h00 — 10h30 &nbsp;|&nbsp; 1h30 &nbsp;|&nbsp; Theorie + Videos + Discussion</div>
+      </div>
+    </div>
+    <div class="module-body">
+
+      <div class="module-block">
+        <div class="block-title">Objectifs du module</div>
+        <ul style="padding-left:18px; font-size:0.92rem; color:var(--text-muted);">
+          <li>Comprendre ce que signifie reellement "maitriser" l'IA</li>
+          <li>Identifier les 3 modes d'interaction avec l'IA</li>
+          <li>Decouvrir et s'approprier le cadre 4D</li>
+          <li>Identifier ses propres attentes vis-a-vis de l'IA</li>
+        </ul>
+      </div>
+
+      <div class="module-block">
+        <div class="block-title">1.1 — Qu'est-ce que la maitrise de l'IA ?</div>
+        <p style="font-size:0.93rem; margin-bottom:12px;">La <strong>maitrise de l'IA</strong> ne consiste pas a connaitre les details techniques des algorithmes. Il s'agit de la capacite a collaborer avec les systemes d'IA de maniere :</p>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:12px 0;">
+          <div style="background:#eff6ff; border:1px solid #bfdbfe; border-radius:8px; padding:12px;">
+            <strong style="color:#1d4ed8;">Efficace</strong>
+            <p style="font-size:0.83rem; color:#374151; margin-top:4px;">Obtenir les resultats voulus avec un minimum de friction</p>
+          </div>
+          <div style="background:#f0fdf4; border:1px solid #bbf7d0; border-radius:8px; padding:12px;">
+            <strong style="color:#15803d;">Efficiente</strong>
+            <p style="font-size:0.83rem; color:#374151; margin-top:4px;">Optimiser le temps et les ressources consacres a la collaboration</p>
+          </div>
+          <div style="background:#fdf4ff; border:1px solid #e9d5ff; border-radius:8px; padding:12px;">
+            <strong style="color:#7c3aed;">Ethique</strong>
+            <p style="font-size:0.83rem; color:#374151; margin-top:4px;">Respecter les valeurs, la vie privee et les droits des personnes</p>
+          </div>
+          <div style="background:#fff7ed; border:1px solid #fed7aa; border-radius:8px; padding:12px;">
+            <strong style="color:#c2410c;">Surete</strong>
+            <p style="font-size:0.83rem; color:#374151; margin-top:4px;">Eviter les risques et assumer la responsabilite des outputs</p>
+          </div>
+        </div>
+
+        <div class="alert alert-info">
+          <span class="alert-icon">i</span>
+          <div class="alert-content">
+            <strong>Point cle</strong>
+            Ce cours se concentre sur la <em>collaboration homme-IA</em>, pas seulement sur la comprehension technique de l'IA. L'objectif est de developper des competences durables, independantes des evolutions futures des outils.
+          </div>
+        </div>
+      </div>
+
+      <div class="module-block">
+        <div class="block-title">1.2 — Les 3 modes d'interaction avec l'IA</div>
+        <div class="modes-grid">
+          <div class="mode-card mode-auto">
+            <div class="mode-icon">&#x1F916;</div>
+            <div class="mode-title">Automatisation</div>
+            <div class="mode-desc">L'IA execute des taches specifiques selon vos instructions. Vous definissez la tache, l'IA l'execute.</div>
+          </div>
+          <div class="mode-card mode-augment">
+            <div class="mode-icon">&#x1F91D;</div>
+            <div class="mode-title">Augmentation</div>
+            <div class="mode-desc">Vous et l'IA collaborez en tant que partenaires de reflexion creative et d'execution des taches.</div>
+          </div>
+          <div class="mode-card mode-agence">
+            <div class="mode-icon">&#x1F3AF;</div>
+            <div class="mode-title">Agence</div>
+            <div class="mode-desc">Vous configurez l'IA pour qu'elle travaille de maniere autonome en votre nom, en shaping ses connaissances.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="module-block">
+        <div class="block-title">1.3 — Le cadre 4D en detail</div>
+        <div class="d4-grid">
+          <div class="d4-card d4-delegation">
+            <div class="d4-letter">D1</div>
+            <div class="d4-name">Delegation</div>
+            <div class="d4-desc">Conscience du probleme, conscience de la plateforme, delegation de la tache. Quoi confier a l'IA et quoi conserver pour soi-meme.</div>
+          </div>
+          <div class="d4-card d4-description">
+            <div class="d4-letter">D2</div>
+            <div class="d4-name">Description</div>
+            <div class="d4-desc">Decrire le <strong>Produit</strong> (ce que vous voulez), le <strong>Processus</strong> (comment l'IA doit proceder) et la <strong>Performance</strong> (comment l'IA doit interagir).</div>
+          </div>
+          <div class="d4-card d4-discernement">
+            <div class="d4-letter">D3</div>
+            <div class="d4-name">Discernement</div>
+            <div class="d4-desc">Evaluer le <strong>Produit</strong> (la qualite du resultat), le <strong>Processus</strong> (la demarche adoptee) et la <strong>Performance</strong> (la qualite de l'interaction).</div>
+          </div>
+          <div class="d4-card d4-diligence">
+            <div class="d4-letter">D4</div>
+            <div class="d4-name">Diligence</div>
+            <div class="d4-desc">Responsabilite de creation, transparence sur le role de l'IA, diligence dans le deploiement. Equite, honnetete et redevabilite.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="module-block">
+        <div class="block-title">Videos du module</div>
+        <a href="https://youtu.be/4szRHy_CT7s" target="_blank" class="video-card">
+          <div class="video-thumb">&#x25B6;</div>
+          <div class="video-info">
+            <div class="video-title">Lecon 2A : Pourquoi la maitrise de l'IA ? — AI Fluency: Framework &amp; Foundations</div>
+            <div class="video-source">Anthropic — Chaine YouTube officielle | Duree approx. 8-12 min</div>
+          </div>
+        </a>
+        <a href="https://youtu.be/W4Ua6XFfX9w" target="_blank" class="video-card">
+          <div class="video-thumb">&#x25B6;</div>
+          <div class="video-info">
+            <div class="video-title">Lecon 2B : Le cadre 4D — AI Fluency: Framework &amp; Foundations</div>
+            <div class="video-source">Anthropic — Chaine YouTube officielle | Duree approx. 8-12 min</div>
+          </div>
+        </a>
+      </div>
+
+      <div class="module-block">
+        <div class="block-title">Exercice — Reflexion initiale</div>
+        <div class="exercise-box">
+          <div class="exercise-header">
+            <span class="exercise-badge">Reflexion</span>
+            <span class="exercise-title">Vos experiences avec l'IA</span>
+            <span class="exercise-duration">10 minutes</span>
+          </div>
+          <p style="font-size:0.9rem;">Avant de poursuivre, prenez un moment pour reflechir a vos propres experiences avec l'IA :</p>
+          <ul style="padding-left:18px; font-size:0.88rem; color:var(--text-muted); margin-top:8px;">
+            <li>Quels defis avez-vous rencontres lorsque vous avez utilise l'IA pour atteindre des objectifs specifiques ?</li>
+            <li>Quelles possibilites de collaboration en matiere d'IA vous enthousiasment le plus ?</li>
+            <li>Parmi les 4D, lequel vous semble le plus naturel ? Lequel devrait etre developpe ?</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="key-points">
+        <h4>Points cles a retenir — Module 1</h4>
+        <ul>
+          <li>La maitrise de l'IA = collaborer <strong>efficacement, efficacement, ethiquement et en securite</strong></li>
+          <li>Il existe <strong>3 modes</strong> : Automatisation, Augmentation, Agence</li>
+          <li>Le cadre <strong>4D</strong> : Delegation, Description, Discernement, Diligence</li>
+          <li>Ces competences restent pertinentes malgre l'evolution des outils</li>
+        </ul>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ====== MODULE 2 ====== -->
+  <section id="module2" class="tab-section">
+
+    <div class="module-header" style="background: linear-gradient(135deg, #064e3b, #059669);">
+      <div class="module-number">2</div>
+      <div class="module-info">
+        <h3>L'IA generative : fonctionnement et limites</h3>
+        <div class="module-meta">10h45 — 12h15 &nbsp;|&nbsp; 1h30 &nbsp;|&nbsp; Theorie + Videos + Exercices</div>
+      </div>
+    </div>
+    <div class="module-body">
+
+      <div class="module-block">
+        <div class="block-title">Objectifs du module</div>
+        <ul style="padding-left:18px; font-size:0.92rem; color:var(--text-muted);">
+          <li>Comprendre ce qu'est l'IA generative et en quoi elle differe de l'IA analytique</li>
+          <li>Saisir le role des algorithmes, des donnees et de la puissance de calcul</li>
+          <li>Identifier les capacites et les limitations des modeles de langage</li>
+          <li>Prendre en compte la fenetre de contexte et la coupure temporelle des donnees</li>
+        </ul>
+      </div>
+
+      <div class="module-block">
+        <div class="block-title">2.1 — Qu'est-ce que l'IA generative ?</div>
+        <p style="font-size:0.93rem; margin-bottom:12px;">L'IA generative se distingue de l'IA analytique par sa capacite a <strong>creer du nouveau contenu</strong> plutot que de simplement analyser l'existant.</p>
+
+        <div class="alert alert-info">
+          <span class="alert-icon">i</span>
+          <div class="alert-content">
+            <strong>Analogie</strong>
+            Si l'IA analytique est comme un expert qui classe et evalue des documents existants, l'IA generative est comme un auteur capable de rediger de nouveaux documents en s'inspirant de tout ce qu'il a lu.
+          </div>
+        </div>
+
+        <p style="font-size:0.93rem; margin:12px 0;">Les 3 ingredients fondamentaux de l'IA moderne :</p>
+        <table>
+          <thead><tr><th>Ingredient</th><th>Role</th><th>Exemple</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>Algorithmes</strong></td>
+              <td>Architecture du modele (ex: Transformer)</td>
+              <td>Reseaux de neurones, attention</td>
+            </tr>
+            <tr>
+              <td><strong>Donnees</strong></td>
+              <td>Corpus d'entrainement massif</td>
+              <td>Textes internet, livres, code...</td>
+            </tr>
+            <tr>
+              <td><strong>Puissance de calcul</strong></td>
+              <td>GPU/TPU necessaires a l'entrainement</td>
+              <td>Centres de donnees specialises</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p style="font-size:0.93rem; margin-top:14px;">Les deux etapes cles de la creation d'un modele :</p>
+        <div style="display:flex; gap:12px; margin-top:10px;">
+          <div style="flex:1; background:#eff6ff; border:1px solid #bfdbfe; border-radius:8px; padding:14px;">
+            <strong style="color:#1d4ed8; display:block; margin-bottom:6px;">1. Pre-entrainement</strong>
+            <p style="font-size:0.83rem; color:#374151;">Le modele apprend a predire le prochain mot/token sur des milliards de textes. Il acquiert une representation du monde.</p>
+          </div>
+          <div style="flex:1; background:#f0fdf4; border:1px solid #bbf7d0; border-radius:8px; padding:14px;">
+            <strong style="color:#15803d; display:block; margin-bottom:6px;">2. Ajustement fin (Fine-tuning)</strong>
+            <p style="font-size:0.83rem; color:#374151;">Le modele est specialise et aligne sur des comportements utiles, sans danger et honnetes (RLHF, Constitutional AI...).</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="module-block">
+        <div class="block-title">2.2 — Capacites des modeles de langage</div>
+        <p style="font-size:0.93rem; margin-bottom:10px;">Ce que l'IA generative fait <strong>bien</strong> :</p>
+        <ul style="padding-left:18px; font-size:0.9rem; color:var(--text-muted);">
+          <li>Synthese et resume de grandes quantites de texte</li>
+          <li>Redaction, reformulation, traduction</li>
+          <li>Generation de code informatique et debogage</li>
+          <li>Brainstorming et generation d'idees</li>
+          <li>Explication de concepts complexes</li>
+          <li>Questions-reponses sur des sujets connus</li>
+          <li>Transformation de formats (JSON, tableau, prose...)</li>
+        </ul>
+      </div>
+
+      <div class="module-block">
+        <div class="block-title">2.3 — Limitations importantes</div>
+        <div class="alert alert-warn">
+          <span class="alert-icon">!</span>
+          <div class="alert-content">
+            <strong>Limitations critiques a connaitre</strong>
+            Comprendre ces limitations permet d'eviter des erreurs dans l'utilisation professionnelle de l'IA.
+          </div>
+        </div>
+
+        <table style="margin-top:10px;">
+          <thead><tr><th>Limitation</th><th>Description</th><th>Implication pratique</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>Coupure temporelle</strong></td>
+              <td>Le modele n'a pas acces aux evenements posterieurs a sa date d'entrainement</td>
+              <td>Verifier les informations recentes aupres de sources actuelles</td>
+            </tr>
+            <tr>
+              <td><strong>Fenetre de contexte</strong></td>
+              <td>Memoire limitee a la conversation en cours</td>
+              <td>Fournir le contexte necessaire a chaque echange important</td>
+            </tr>
+            <tr>
+              <td><strong>Non-determinisme</strong></td>
+              <td>Deux prompts identiques peuvent produire des reponses differentes</td>
+              <td>Ne pas supposer la reproductibilite exacte des resultats</td>
+            </tr>
+            <tr>
+              <td><strong>Hallucinations</strong></td>
+              <td>Le modele peut inventer des faits avec confiance apparente</td>
+              <td>Toujours verifier les informations factuelles importantes</td>
+            </tr>
+            <tr>
+              <td><strong>Biais</strong></td>
+              <td>Reflete les biais presents dans les donnees d'entrainement</td>
+              <td>Exercer un regard critique sur les outputs sensibles</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="module-block">
+        <div class="block-title">Videos du module</div>
+        <a href="https://youtu.be/RyvXxApfHkk" target="_blank" class="video-card">
+          <div class="video-thumb">&#x25B6;</div>
+          <div class="video-info">
+            <div class="video-title">Lecon 3A : Qu'est-ce que l'IA generative ? (Approfondissement)</div>
+            <div class="video-source">Anthropic — Drew Bent explique les algorithmes, donnees et puissance de calcul | Duree approx. 10-15 min</div>
+          </div>
+        </a>
+        <a href="https://youtu.be/W5cga7xipRI" target="_blank" class="video-card">
+          <div class="video-thumb">&#x25B6;</div>
+          <div class="video-info">
+            <div class="video-title">Lecon 3B : Capacites et limitations — AI Fluency: Framework &amp; Foundations</div>
+            <div class="video-source">Anthropic — Drew Bent : coupure de donnees, fenetre de contexte, non-determinisme | Duree approx. 10-15 min</div>
+          </div>
+        </a>
+      </div>
+
+      <div class="module-block">
+        <div class="block-title">Ateliers pratiques du module</div>
+
+        <div class="exercise-box green">
+          <div class="exercise-header">
+            <span class="exercise-badge green">Exercice 1</span>
+            <span class="exercise-title">Explorer un sujet que vous maitrisez</span>
+            <span class="exercise-duration">10 minutes</span>
+          </div>
+          <p style="font-size:0.9rem; margin-bottom:10px;">Discutez pendant 5 a 10 minutes avec Claude d'un sujet que vous connaissez bien et que vous maitrisez professionnellement.</p>
+          <p style="font-size:0.88rem; color:var(--text-muted);"><strong>Observez :</strong> Quand l'IA enrichit votre reflexion ? Quand devez-vous la corriger ? Quand votre expertise vous permet d'evaluer ses reponses ?</p>
+        </div>
+
+        <div class="exercise-box green">
+          <div class="exercise-header">
+            <span class="exercise-badge green">Exercice 2</span>
+            <span class="exercise-title">Apprendre quelque chose de nouveau</span>
+            <span class="exercise-duration">10 minutes</span>
+          </div>
+          <p style="font-size:0.9rem; margin-bottom:10px;">Demandez a Claude de vous expliquer un sujet que vous ne connaissez pas bien. Comparez avec l'exercice precedent.</p>
+          <p style="font-size:0.88rem; color:var(--text-muted);"><strong>Observez :</strong> Quand l'IA offre des explications utiles ? Quand faudrait-il verifier ses affirmations ?</p>
+        </div>
+      </div>
+
+      <div class="key-points">
+        <h4>Points cles a retenir — Module 2</h4>
+        <ul>
+          <li>L'IA generative <strong>cree du contenu nouveau</strong> (vs. analyse de l'existant)</li>
+          <li>Elle repose sur <strong>algorithmes + donnees + puissance de calcul</strong></li>
+          <li>Deux etapes : <strong>pre-entrainement</strong> et <strong>ajustement fin</strong></li>
+          <li>Limitations cles : coupure temporelle, fenetre de contexte, non-determinisme, hallucinations</li>
+          <li>Il faut toujours <strong>verifier les faits importants</strong> et ne pas supposer l'infaillibilite</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ====== MODULE 3 ====== -->
+  <section id="module3" class="tab-section">
+
+    <div class="module-header" style="background: linear-gradient(135deg, #3b0764, #7c3aed);">
+      <div class="module-number">3</div>
+      <div class="module-info">
+        <h3>Delegation et Description</h3>
+        <div class="module-meta">13h30 — 15h00 &nbsp;|&nbsp; 1h30 &nbsp;|&nbsp; Theorie + Videos + Ateliers</div>
+      </div>
+    </div>
+    <div class="module-body">
+
+      <div class="module-block">
+        <div class="block-title">Objectifs du module</div>
+        <ul style="padding-left:18px; font-size:0.92rem; color:var(--text-muted);">
+          <li>Maitriser les 3 elements de la delegation : conscience du probleme, de la plateforme, de la tache</li>
+          <li>Apprendre a formuler des descriptions precises : Produit, Processus, Performance</li>
+          <li>Mettre en pratique 6 techniques fondamentales d'invite efficace</li>
+          <li>Construire des prompts professionnels adaptes a son metier</li>
+        </ul>
+      </div>
+
+      <div class="module-block">
+        <div class="block-title">3.1 — La Delegation : choisir quoi confier a l'IA</div>
+        <p style="font-size:0.93rem; margin-bottom:12px;">La delegation est la competence qui consiste a <strong>decider strategiquement</strong> ce que l'on confie a l'IA et ce que l'on conserve pour soi.</p>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; margin:14px 0;">
+          <div style="background:#eff6ff; border:1px solid #bfdbfe; border-radius:8px; padding:14px; text-align:center;">
+            <div style="font-size:1.5rem; margin-bottom:6px;">&#x1F9E0;</div>
+            <strong style="color:#1d4ed8; display:block; margin-bottom:5px;">Conscience du Probleme</strong>
+            <p style="font-size:0.8rem; color:#374151;">Definir clairement son objectif avant de deleguer</p>
+          </div>
+          <div style="background:#f0fdf4; border:1px solid #bbf7d0; border-radius:8px; padding:14px; text-align:center;">
+            <div style="font-size:1.5rem; margin-bottom:6px;">&#x1F4BB;</div>
+            <strong style="color:#15803d; display:block; margin-bottom:5px;">Conscience de la Plateforme</strong>
+            <p style="font-size:0.8rem; color:#374151;">Comprendre les forces et limites de l'outil utilise</p>
+          </div>
+          <div style="background:#fdf4ff; border:1px solid #e9d5ff; border-radius:8px; padding:14px; text-align:center;">
+            <div style="font-size:1.5rem; margin-bottom:6px;">&#x1F3AF;</div>
+            <strong style="color:#7c3aed; display:block; margin-bottom:5px;">Delegation de la Tache</strong>
+            <p style="font-size:0.8rem; color:#374151;">Repartir le travail humain / IA de facon optimale</p>
+          </div>
+        </div>
+
+        <div class="alert alert-tip">
+          <span class="alert-icon">&#x2713;</span>
+          <div class="alert-content">
+            <strong>Questions a se poser avant de deleguer</strong>
+            Quel est mon objectif final ? Quelles sont les competences uniques que j'apporte (jugement, valeurs, relation client) ? Qu'est-ce que l'IA peut faire plus rapidement ou mieux que moi sur cette tache specifique ?
+          </div>
+        </div>
+      </div>
+
+      <div class="module-block">
+        <div class="block-title">3.2 — La Description : communiquer clairement avec l'IA</div>
+        <p style="font-size:0.93rem; margin-bottom:12px;">La description efficace se decompose en <strong>trois dimensions</strong> :</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Dimension</th>
+              <th>Question cle</th>
+              <th>Exemple concret</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Produit</strong></td>
+              <td>Quel est le livrable attendu ?</td>
+              <td>"Redige un email de 3 paragraphes, en francais, sur un ton professionnel mais chaleureux..."</td>
+            </tr>
+            <tr>
+              <td><strong>Processus</strong></td>
+              <td>Comment l'IA doit-elle proceder ?</td>
+              <td>"Commence par analyser le probleme, propose 3 approches, puis developpe la plus pertinente..."</td>
+            </tr>
+            <tr>
+              <td><strong>Performance</strong></td>
+              <td>Comment interagir pendant la tache ?</td>
+              <td>"Pose-moi des questions si tu n'es pas certain, sois concis et direct, challenge mes idees..."</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="module-block">
+        <div class="block-title">3.3 — 6 techniques fondamentales d'invite efficace</div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:12px;">
+          <div style="background:var(--surface2); border:1px solid var(--border); border-radius:8px; padding:14px;">
+            <strong style="color:var(--primary); display:block; margin-bottom:6px;">1. Fournir du contexte</strong>
+            <p style="font-size:0.83rem; color:var(--text-muted);">Expliquer votre role, la situation et l'objectif. Plus l'IA comprend le contexte, plus les reponses sont pertinentes.</p>
+            <code style="font-size:0.78rem; background:#fff; padding:4px 8px; border-radius:4px; display:block; margin-top:6px; border:1px solid #ddd;">Je suis technicien de maintenance dans une usine automobile...</code>
+          </div>
+          <div style="background:var(--surface2); border:1px solid var(--border); border-radius:8px; padding:14px;">
+            <strong style="color:var(--primary); display:block; margin-bottom:6px;">2. Utiliser des exemples</strong>
+            <p style="font-size:0.83rem; color:var(--text-muted);">Montrer un exemple du resultat attendu guide l'IA bien plus efficacement que de le decrire.</p>
+            <code style="font-size:0.78rem; background:#fff; padding:4px 8px; border-radius:4px; display:block; margin-top:6px; border:1px solid #ddd;">Voici un exemple de rapport que j'ai ecrit : [...]</code>
+          </div>
+          <div style="background:var(--surface2); border:1px solid var(--border); border-radius:8px; padding:14px;">
+            <strong style="color:var(--primary); display:block; margin-bottom:6px;">3. Decomposer les taches complexes</strong>
+            <p style="font-size:0.83rem; color:var(--text-muted);">Diviser une demande complexe en etapes successives pour obtenir de meilleurs resultats.</p>
+            <code style="font-size:0.78rem; background:#fff; padding:4px 8px; border-radius:4px; display:block; margin-top:6px; border:1px solid #ddd;">D'abord fais X, puis fais Y, enfin fais Z...</code>
+          </div>
+          <div style="background:var(--surface2); border:1px solid var(--border); border-radius:8px; padding:14px;">
+            <strong style="color:var(--primary); display:block; margin-bottom:6px;">4. Preciser le format</strong>
+            <p style="font-size:0.83rem; color:var(--text-muted);">Indiquer explicitement le format souhaite (liste, tableau, paragraphes, longueur, langue...).</p>
+            <code style="font-size:0.78rem; background:#fff; padding:4px 8px; border-radius:4px; display:block; margin-top:6px; border:1px solid #ddd;">Reponds sous forme de tableau avec 3 colonnes...</code>
+          </div>
+          <div style="background:var(--surface2); border:1px solid var(--border); border-radius:8px; padding:14px;">
+            <strong style="color:var(--primary); display:block; margin-bottom:6px;">5. Definir un persona</strong>
+            <p style="font-size:0.83rem; color:var(--text-muted);">Demander a l'IA d'adopter un role ou une expertise specifique oriente fortement les reponses.</p>
+            <code style="font-size:0.78rem; background:#fff; padding:4px 8px; border-radius:4px; display:block; margin-top:6px; border:1px solid #ddd;">Agis comme un expert en securite industrielle...</code>
+          </div>
+          <div style="background:var(--surface2); border:1px solid var(--border); border-radius:8px; padding:14px;">
+            <strong style="color:var(--primary); display:block; margin-bottom:6px;">6. Iterer et affiner</strong>
+            <p style="font-size:0.83rem; color:var(--text-muted);">Traiter chaque echange comme une conversation : donner des retours, affiner progressivement.</p>
+            <code style="font-size:0.78rem; background:#fff; padding:4px 8px; border-radius:4px; display:block; margin-top:6px; border:1px solid #ddd;">C'est bien, mais peux-tu rendre la conclusion plus percutante ?</code>
+          </div>
+        </div>
+      </div>
+
+      <div class="module-block">
+        <div class="block-title">Videos du module</div>
+        <a href="https://youtu.be/EljzyfdYkrc" target="_blank" class="video-card">
+          <div class="video-thumb">&#x25B6;</div>
+          <div class="video-info">
+            <div class="video-title">Lecon 4 : Examen approfondi de la delegation — AI Fluency</div>
+            <div class="video-source">Anthropic — Conscience du probleme, de la plateforme, delegation de la tache | Duree approx. 10-15 min</div>
+          </div>
+        </a>
+        <a href="https://youtu.be/DmgujoZ1mmk" target="_blank" class="video-card">
+          <div class="video-thumb">&#x25B6;</div>
+          <div class="video-info">
+            <div class="video-title">Lecon 6 : Examen approfondi de la description — AI Fluency</div>
+            <div class="video-source">Anthropic — Produit, Processus, Performance | Duree approx. 10-15 min</div>
+          </div>
+        </a>
+        <a href="https://youtu.be/2YCaBqP8muw" target="_blank" class="video-card">
+          <div class="video-thumb">&#x25B6;</div>
+          <div class="video-info">
+            <div class="video-title">Lecon 7 : Techniques d'invite efficaces (approfondissement) — AI Fluency</div>
+            <div class="video-source">Anthropic — 6 techniques fondamentales de prompting | Duree approx. 10-15 min</div>
+          </div>
+        </a>
+      </div>
+
+      <div class="module-block">
+        <div class="block-title">Ateliers pratiques du module</div>
+
+        <div class="exercise-box purple">
+          <div class="exercise-header">
+            <span class="exercise-badge purple">Atelier 1</span>
+            <span class="exercise-title">Appliquer les 4D — Scenario professionnel</span>
+            <span class="exercise-duration">20 minutes</span>
+          </div>
+          <p style="font-size:0.9rem; margin-bottom:10px;">Choisissez l'un de ces scenarios et reflechissez a la facon d'appliquer le cadre 4D :</p>
+          <ul style="padding-left:18px; font-size:0.88rem; color:var(--text-muted);">
+            <li><strong>Projet communication :</strong> Rediger une serie d'emails pour une campagne interne</li>
+            <li><strong>Projet analyse :</strong> Analyser un rapport de production ou de maintenance</li>
+            <li><strong>Projet documentation :</strong> Creer une procedure technique ou une fiche securite</li>
+          </ul>
+          <p style="font-size:0.83rem; margin-top:10px; color:var(--text-muted);">Pour chaque scenario : <strong>Delegation</strong> (qui fait quoi ?), <strong>Description</strong> (comment communiquer les attentes ?), <strong>Discernement</strong> (comment evaluer le resultat ?), <strong>Diligence</strong> (quelles responsabilites ?)</p>
+        </div>
+
+        <div class="exercise-box purple">
+          <div class="exercise-header">
+            <span class="exercise-badge purple">Atelier 2</span>
+            <span class="exercise-title">Construire un prompt professionnel</span>
+            <span class="exercise-duration">15 minutes</span>
+          </div>
+          <p style="font-size:0.9rem; margin-bottom:10px;">En utilisant les 6 techniques et la structure Produit/Processus/Performance, construisez un prompt pour une tache de votre metier. Testez-le et comparez avec un prompt basique.</p>
+          <p style="font-size:0.83rem; color:var(--text-muted);">Partagez vos resultats avec le groupe et identifiez ensemble les elements qui font la difference.</p>
+        </div>
+      </div>
+
+      <div class="key-points">
+        <h4>Points cles a retenir — Module 3</h4>
+        <ul>
+          <li>La delegation repose sur 3 elements : <strong>conscience du probleme, de la plateforme, et de la tache</strong></li>
+          <li>Une description efficace couvre : <strong>Produit, Processus et Performance</strong></li>
+          <li>6 techniques cles : contexte, exemples, decomposition, format, persona, iteration</li>
+          <li>La <strong>boucle Description-Discernement</strong> est la methode de base pour iterer efficacement</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ====== MODULE 4 ====== -->
+  <section id="module4" class="tab-section">
+
+    <div class="module-header" style="background: linear-gradient(135deg, #7f1d1d, #dc2626);">
+      <div class="module-number">4</div>
+      <div class="module-info">
+        <h3>Discernement et Diligence</h3>
+        <div class="module-meta">15h15 — 16h45 &nbsp;|&nbsp; 1h30 &nbsp;|&nbsp; Theorie + Videos + Ateliers</div>
+      </div>
+    </div>
+    <div class="module-body">
+
+      <div class="module-block">
+        <div class="block-title">Objectifs du module</div>
+        <ul style="padding-left:18px; font-size:0.92rem; color:var(--text-muted);">
+          <li>Maitriser les 3 niveaux d'evaluation des outputs IA (Produit, Processus, Performance)</li>
+          <li>Developper un regard critique sur les resultats de l'IA</li>
+          <li>Comprendre les 3 dimensions de la diligence (Creation, Transparence, Deploiement)</li>
+          <li>Identifier les responsabilites ethiques lors de l'utilisation professionnelle de l'IA</li>
+        </ul>
+      </div>
+
+      <div class="module-block">
+        <div class="block-title">4.1 — Le Discernement : evaluer les resultats de l'IA</div>
+        <p style="font-size:0.93rem; margin-bottom:12px;">Le discernement consiste a <strong>evaluer avec precision</strong> ce que l'IA produit pour determiner si cela repond reellement a vos besoins.</p>
+
+        <table>
+          <thead>
+            <tr><th>Niveau</th><th>Question</th><th>Ce qu'on evalue</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Discernement Produit</strong></td>
+              <td>Le resultat est-il bon ?</td>
+              <td>Qualite, exactitude, pertinence, completude du livrable</td>
+            </tr>
+            <tr>
+              <td><strong>Discernement Processus</strong></td>
+              <td>La demarche est-elle adequate ?</td>
+              <td>Logique suivie, methode utilisee, raisonnement visible</td>
+            </tr>
+            <tr>
+              <td><strong>Discernement Performance</strong></td>
+              <td>L'interaction est-elle utile ?</td>
+              <td>Ton, style, comportement collaboratif de l'IA</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="alert alert-note">
+          <span class="alert-icon">&#x1F4A1;</span>
+          <div class="alert-content">
+            <strong>La boucle Description-Discernement</strong>
+            Chaque tache doit suivre ce cycle : Decrire clairement → Recevoir le resultat → Evaluer avec discernement → Affiner la description → Recommencer jusqu'a satisfaction.
+          </div>
+        </div>
+      </div>
+
+      <div class="module-block">
+        <div class="block-title">4.2 — Grille d'evaluation pratique des outputs IA</div>
+
+        <div class="eval-grid">
+          <div class="eval-item" style="border-left: 4px solid var(--accent);">
+            <h4>Verifier l'exactitude factuelle</h4>
+            <ul>
+              <li>Les faits sont-ils verifiables ?</li>
+              <li>Y a-t-il des affirmations suspectes ?</li>
+              <li>Les chiffres sont-ils corrects ?</li>
+              <li>Les sources sont-elles citees ?</li>
+            </ul>
+          </div>
+          <div class="eval-item" style="border-left: 4px solid var(--green);">
+            <h4>Evaluer la pertinence</h4>
+            <ul>
+              <li>Repond a mon besoin reel ?</li>
+              <li>Adapte a mon contexte ?</li>
+              <li>Le niveau de detail est adequat ?</li>
+              <li>Le ton est approprie ?</li>
+            </ul>
+          </div>
+          <div class="eval-item" style="border-left: 4px solid var(--purple);">
+            <h4>Detecter les biais</h4>
+            <ul>
+              <li>Perspective trop etroite ?</li>
+              <li>Manque d'objectivite ?</li>
+              <li>Stereotypes ou generalites ?</li>
+              <li>Omettre des elements importants ?</li>
+            </ul>
+          </div>
+          <div class="eval-item" style="border-left: 4px solid var(--gold);">
+            <h4>Evaluer l'impact</h4>
+            <ul>
+              <li>Risque si je diffuse cela ?</li>
+              <li>Qui peut etre affecte ?</li>
+              <li>Valeur ajoutee reelle ?</li>
+              <li>Besoin d'expert humain ?</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="module-block">
+        <div class="block-title">4.3 — La Diligence : collaboration responsable avec l'IA</div>
+        <p style="font-size:0.93rem; margin-bottom:12px;">La diligence consiste a <strong>assumer la responsabilite</strong> de ce que nous faisons avec l'IA et de la facon dont nous le faisons.</p>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; margin:14px 0;">
+          <div style="background:#fff7ed; border:1px solid #fed7aa; border-radius:8px; padding:16px;">
+            <div style="font-size:1.4rem; margin-bottom:8px;">&#x1F6E0;</div>
+            <strong style="color:#c2410c; display:block; margin-bottom:6px;">Diligence de Creation</strong>
+            <p style="font-size:0.82rem; color:#374151;">Etre critique envers les systemes d'IA. Verifier, ameliorer et ne jamais diffuser sans revision humaine.</p>
+          </div>
+          <div style="background:#fdf4ff; border:1px solid #e9d5ff; border-radius:8px; padding:16px;">
+            <div style="font-size:1.4rem; margin-bottom:8px;">&#x1F50D;</div>
+            <strong style="color:#7c3aed; display:block; margin-bottom:6px;">Transparence</strong>
+            <p style="font-size:0.82rem; color:#374151;">Etre honnete sur le role de l'IA. Informer les parties prenantes de l'utilisation de l'IA si cela est pertinent.</p>
+          </div>
+          <div style="background:#eff6ff; border:1px solid #bfdbfe; border-radius:8px; padding:16px;">
+            <div style="font-size:1.4rem; margin-bottom:8px;">&#x1F3DB;</div>
+            <strong style="color:#1d4ed8; display:block; margin-bottom:6px;">Diligence de Deploiement</strong>
+            <p style="font-size:0.82rem; color:#374151;">S'assurer de l'equite et de la redevabilite. Prendre en compte l'impact sur les autres et l'organisation.</p>
+          </div>
+        </div>
+
+        <div class="alert alert-warn">
+          <span class="alert-icon">!</span>
+          <div class="alert-content">
+            <strong>Responsabilite finale</strong>
+            Quelle que soit la contribution de l'IA, <em>la responsabilite du resultat final appartient toujours a l'humain</em>. "L'IA me l'a dit" n'est pas une excuse acceptable dans un contexte professionnel.
+          </div>
+        </div>
+      </div>
+
+      <div class="module-block">
+        <div class="block-title">Videos du module</div>
+        <a href="https://youtu.be/Y0KidGr9Z2Y" target="_blank" class="video-card">
+          <div class="video-thumb">&#x25B6;</div>
+          <div class="video-info">
+            <div class="video-title">Lecon 8 : Le discernement — un regard plus approfondi — AI Fluency</div>
+            <div class="video-source">Anthropic — Discernement Produit, Processus, Performance | Duree approx. 10-15 min</div>
+          </div>
+        </a>
+        <a href="https://youtu.be/QbLf2zb3oPc" target="_blank" class="video-card">
+          <div class="video-thumb">&#x25B6;</div>
+          <div class="video-info">
+            <div class="video-title">Lecon 10 : Examen approfondi de la diligence — AI Fluency</div>
+            <div class="video-source">Anthropic — Creation, transparence, deploiement responsable | Duree approx. 10-15 min</div>
+          </div>
+        </a>
+      </div>
+
+      <div class="module-block">
+        <div class="block-title">Ateliers pratiques du module</div>
+
+        <div class="exercise-box" style="border-left-color: #dc2626; background: linear-gradient(135deg,#fff1f2,#ffe4e6); border-color:#fecdd3;">
+          <div class="exercise-header">
+            <span class="exercise-badge" style="background:#dc2626;">Atelier 3</span>
+            <span class="exercise-title">Evaluer et affiner — Boucle Description-Discernement</span>
+            <span class="exercise-duration">25 minutes</span>
+          </div>
+          <p style="font-size:0.9rem; margin-bottom:10px;">Travaillez sur le projet de votre choix en appliquant la boucle :</p>
+          <ol style="padding-left:18px; font-size:0.88rem; color:var(--text-muted); margin-bottom:10px;">
+            <li>Decrire clairement la tache (Produit + Processus + Performance)</li>
+            <li>Evaluer le resultat recu (Discernement)</li>
+            <li>Donner votre feedback et affiner votre description</li>
+            <li>Repeter jusqu'au resultat satisfaisant</li>
+          </ol>
+          <p style="font-size:0.83rem; color:var(--text-muted);">Notez ce qui a fonctionne et ce qui n'a pas fonctionne.</p>
+        </div>
+
+        <div class="exercise-box" style="border-left-color: #dc2626; background: linear-gradient(135deg,#fff1f2,#ffe4e6); border-color:#fecdd3;">
+          <div class="exercise-header">
+            <span class="exercise-badge" style="background:#dc2626;">Atelier 4</span>
+            <span class="exercise-title">Analyse ethique d'un cas reel</span>
+            <span class="exercise-duration">15 minutes</span>
+          </div>
+          <p style="font-size:0.9rem; margin-bottom:10px;">En groupe, analysez un cas d'utilisation de l'IA dans votre secteur :</p>
+          <ul style="padding-left:18px; font-size:0.88rem; color:var(--text-muted);">
+            <li>Quelles informations confidentielles ne doit-on pas partager avec l'IA ?</li>
+            <li>Dans quels cas doit-on signaler a un client/collegue que l'IA a ete utilisee ?</li>
+            <li>Comment s'assurer que la decision finale reste humaine ?</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="key-points">
+        <h4>Points cles a retenir — Module 4</h4>
+        <ul>
+          <li>Evaluer les outputs sur 3 niveaux : <strong>Produit, Processus, Performance</strong></li>
+          <li>La <strong>boucle Description-Discernement</strong> est le moteur d'une collaboration efficace</li>
+          <li>La diligence implique : <strong>Creation critique, Transparence, Deploiement responsable</strong></li>
+          <li>La responsabilite du resultat final <strong>appartient toujours a l'humain</strong></li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ====== MODULE 5 ====== -->
+  <section id="module5" class="tab-section">
+
+    <div class="module-header" style="background: linear-gradient(135deg, #78350f, #d97706);">
+      <div class="module-number">5</div>
+      <div class="module-info">
+        <h3>Projet fil rouge et Bilan de formation</h3>
+        <div class="module-meta">16h45 — 17h30 &nbsp;|&nbsp; 45 minutes &nbsp;|&nbsp; Projet + Bilan</div>
+      </div>
+    </div>
+    <div class="module-body">
+
+      <div class="module-block">
+        <div class="block-title">5.1 — Projet d'application integrale</div>
+        <p style="font-size:0.93rem; margin-bottom:12px;">Il est maintenant temps de mettre en pratique <strong>l'ensemble du cadre 4D</strong> sur un projet reel ou simulant un cas professionnel concret.</p>
+
+        <div class="exercise-box" style="border-left-color: #d97706; background: linear-gradient(135deg,#fffbeb,#fef3c7); border-color:#fde68a;">
+          <div class="exercise-header">
+            <span class="exercise-badge" style="background:#d97706;">Projet Final</span>
+            <span class="exercise-title">Application complete du cadre 4D</span>
+            <span class="exercise-duration">30 minutes</span>
+          </div>
+
+          <p style="font-size:0.9rem; font-weight:600; margin-bottom:10px;">Etape 1 — Delegation : Planifier votre projet</p>
+          <ul style="padding-left:18px; font-size:0.88rem; color:var(--text-muted); margin-bottom:14px;">
+            <li>Choisissez un projet concret (rapport, procedure, communication, analyse...)</li>
+            <li>Identifiez les taches qui beneficieront de l'expertise humaine, des capacites IA ou de la collaboration</li>
+            <li>Decidez de la repartition du travail</li>
+          </ul>
+
+          <p style="font-size:0.9rem; font-weight:600; margin-bottom:10px;">Etape 2 — Description : Preparer votre approche</p>
+          <ul style="padding-left:18px; font-size:0.88rem; color:var(--text-muted); margin-bottom:14px;">
+            <li>Definissez votre description Produit : Quels livrables ? Quel format ? Quel niveau de detail ?</li>
+            <li>Definissez votre description Processus : Comment l'IA doit-elle proceder ?</li>
+            <li>Definissez votre description Performance : Quel type d'interaction souhaitez-vous ?</li>
+          </ul>
+
+          <p style="font-size:0.9rem; font-weight:600; margin-bottom:10px;">Etape 3 — Execution avec boucles Description-Discernement</p>
+          <ul style="padding-left:18px; font-size:0.88rem; color:var(--text-muted); margin-bottom:14px;">
+            <li>Travaillez avec l'IA en appliquant systematiquement les 6 techniques d'invite</li>
+            <li>Evaluez chaque resultat (Produit, Processus, Performance)</li>
+            <li>Affinez vos descriptions selon votre discernement</li>
+            <li>Integrez votre expertise humaine aux etapes cles</li>
+          </ul>
+
+          <p style="font-size:0.9rem; font-weight:600; margin-bottom:10px;">Etape 4 — Diligence : Validation et responsabilite</p>
+          <ul style="padding-left:18px; font-size:0.88rem; color:var(--text-muted);">
+            <li>Revisez l'integralite du travail produit</li>
+            <li>Evaluez ce qui peut etre diffuse, ce qui necessite une revision</li>
+            <li>Determinez votre niveau de transparence sur l'utilisation de l'IA</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="module-block">
+        <div class="block-title">5.2 — Video de conclusion</div>
+        <a href="https://youtu.be/ytEN_iAk09c" target="_blank" class="video-card">
+          <div class="video-thumb">&#x25B6;</div>
+          <div class="video-info">
+            <div class="video-title">Lecon 11 : Conclusion du cours AI Fluency — Cadre et Fondements</div>
+            <div class="video-source">Anthropic — Prof. Rick Dakan : synthese des 4D, application globale | Duree approx. 8-12 min</div>
+          </div>
+        </a>
+      </div>
+
+      <div class="module-block">
+        <div class="block-title">5.3 — Reflexion finale et plan d'action personnel</div>
+        <div class="exercise-box green">
+          <div class="exercise-header">
+            <span class="exercise-badge green">Reflexion finale</span>
+            <span class="exercise-title">Mon plan d'action pour les 30 prochains jours</span>
+            <span class="exercise-duration">10 minutes</span>
+          </div>
+          <p style="font-size:0.9rem; margin-bottom:10px;">Avant de partir, chaque participant formule son plan d'action personnel :</p>
+          <ul style="padding-left:18px; font-size:0.88rem; color:var(--text-muted);">
+            <li><strong>1 tache concrete</strong> que je vais deleguer a l'IA des cette semaine</li>
+            <li><strong>1 competence des 4D</strong> que je vais travailler en priorite</li>
+            <li><strong>1 limite</strong> que je vais respecter dans mon usage de l'IA</li>
+            <li><strong>1 personne</strong> a qui je vais partager ce que j'ai appris</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="module-block">
+        <div class="block-title">5.4 — Bilan de la formation</div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+          <div>
+            <p style="font-size:0.92rem; font-weight:600; margin-bottom:10px;">Ce que nous avons vu ensemble :</p>
+            <ul style="padding-left:18px; font-size:0.88rem; color:var(--text-muted);">
+              <li>La definition de la maitrise de l'IA (4E)</li>
+              <li>Les 3 modes d'interaction (Automatisation, Augmentation, Agence)</li>
+              <li>Le fonctionnement de l'IA generative</li>
+              <li>Les capacites et limitations critiques</li>
+              <li>La <strong>Delegation</strong> strategique</li>
+              <li>La <strong>Description</strong> efficace (3P + 6 techniques)</li>
+              <li>Le <strong>Discernement</strong> critique (3 niveaux)</li>
+              <li>La <strong>Diligence</strong> responsable</li>
+            </ul>
+          </div>
+          <div>
+            <p style="font-size:0.92rem; font-weight:600; margin-bottom:10px;">Vos prochaines etapes :</p>
+            <ul style="padding-left:18px; font-size:0.88rem; color:var(--text-muted);">
+              <li>Pratiquer regulierement avec Claude ou votre IA de reference</li>
+              <li>Appliquer la boucle Description-Discernement</li>
+              <li>Consulter le cours complet en ligne : <a href="https://www.anthropic.com/ai-fluency" target="_blank" style="color:var(--accent);">anthropic.com/ai-fluency</a></li>
+              <li>Partager vos experiences avec vos collegues</li>
+              <li>Rester curieux et experimenter</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ====== RESSOURCES ====== -->
+  <section id="ressources" class="tab-section">
+
+    <div class="card">
+      <div class="card-title">
+        <div class="icon">V</div>
+        Toutes les videos du cours (Anthropic — AI Fluency)
+      </div>
+      <p style="margin-bottom:16px; font-size:0.9rem; color:var(--text-muted);">Ces 10 videos constituent les ressources pedagogiques du cours "AI Fluency: Framework &amp; Foundations" developpe par <strong>Anthropic</strong>, le Prof. Rick Dakan et le Prof. Joseph Feller. Licence CC BY-NC-SA 4.0.</p>
+
+      <a href="https://youtu.be/4szRHy_CT7s" target="_blank" class="video-card">
+        <div class="video-thumb">&#x25B6;</div>
+        <div class="video-info">
+          <div class="video-title">Lecon 2A — Pourquoi la maitrise de l'IA ?</div>
+          <div class="video-source">Anthropic | Les 3 modes d'interaction, introduction aux 4D</div>
+        </div>
+      </a>
+
+      <a href="https://youtu.be/W4Ua6XFfX9w" target="_blank" class="video-card">
+        <div class="video-thumb">&#x25B6;</div>
+        <div class="video-info">
+          <div class="video-title">Lecon 2B — Le cadre 4D</div>
+          <div class="video-source">Anthropic | Rick Dakan : Delegation, Description, Discernement, Diligence</div>
+        </div>
+      </a>
+
+      <a href="https://youtu.be/RyvXxApfHkk" target="_blank" class="video-card">
+        <div class="video-thumb">&#x25B6;</div>
+        <div class="video-info">
+          <div class="video-title">Lecon 3A — Qu'est-ce que l'IA generative ? (Approfondissement)</div>
+          <div class="video-source">Anthropic | Drew Bent : algorithmes, donnees, puissance de calcul, creation de contenu</div>
+        </div>
+      </a>
+
+      <a href="https://youtu.be/W5cga7xipRI" target="_blank" class="video-card">
+        <div class="video-thumb">&#x25B6;</div>
+        <div class="video-info">
+          <div class="video-title">Lecon 3B — Capacites et limitations de l'IA</div>
+          <div class="video-source">Anthropic | Drew Bent : coupure temporelle, fenetre de contexte, non-determinisme</div>
+        </div>
+      </a>
+
+      <a href="https://youtu.be/EljzyfdYkrc" target="_blank" class="video-card">
+        <div class="video-thumb">&#x25B6;</div>
+        <div class="video-info">
+          <div class="video-title">Lecon 4 — Examen approfondi de la Delegation</div>
+          <div class="video-source">Anthropic | Conscience du probleme, de la plateforme, delegation de la tache</div>
+        </div>
+      </a>
+
+      <a href="https://youtu.be/DmgujoZ1mmk" target="_blank" class="video-card">
+        <div class="video-thumb">&#x25B6;</div>
+        <div class="video-info">
+          <div class="video-title">Lecon 6 — Examen approfondi de la Description</div>
+          <div class="video-source">Anthropic | Produit, Processus, Performance — decrire efficacement ses objectifs</div>
+        </div>
+      </a>
+
+      <a href="https://youtu.be/2YCaBqP8muw" target="_blank" class="video-card">
+        <div class="video-thumb">&#x25B6;</div>
+        <div class="video-info">
+          <div class="video-title">Lecon 7 — Techniques d'invite efficaces (approfondissement)</div>
+          <div class="video-source">Anthropic | 6 techniques fondamentales : contexte, exemples, decomposition, format, persona, iteration</div>
+        </div>
+      </a>
+
+      <a href="https://youtu.be/Y0KidGr9Z2Y" target="_blank" class="video-card">
+        <div class="video-thumb">&#x25B6;</div>
+        <div class="video-info">
+          <div class="video-title">Lecon 8 — Le Discernement : un regard plus approfondi</div>
+          <div class="video-source">Anthropic | Evaluation du Produit, Processus et Performance des outputs IA</div>
+        </div>
+      </a>
+
+      <a href="https://youtu.be/QbLf2zb3oPc" target="_blank" class="video-card">
+        <div class="video-thumb">&#x25B6;</div>
+        <div class="video-info">
+          <div class="video-title">Lecon 10 — Examen approfondi de la Diligence</div>
+          <div class="video-source">Anthropic | Responsabilite, transparence, ethique de l'IA</div>
+        </div>
+      </a>
+
+      <a href="https://youtu.be/ytEN_iAk09c" target="_blank" class="video-card">
+        <div class="video-thumb">&#x25B6;</div>
+        <div class="video-info">
+          <div class="video-title">Lecon 11 — Conclusion du cours AI Fluency</div>
+          <div class="video-source">Anthropic | Prof. Rick Dakan : synthese des 4 competences fondamentales</div>
+        </div>
+      </a>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <div class="icon">L</div>
+        Liens et ressources complementaires
+      </div>
+      <ul style="padding-left:18px; font-size:0.92rem;">
+        <li style="margin-bottom:8px;"><a href="https://www.anthropic.com/ai-fluency" target="_blank" style="color:var(--accent);">anthropic.com/ai-fluency</a> — Cours complet AI Fluency gratuit (videos + exercices + ressources)</li>
+        <li style="margin-bottom:8px;"><a href="https://claude.ai" target="_blank" style="color:var(--accent);">claude.ai</a> — Acces gratuit a Claude (outil IA d'Anthropic utilise dans ce cours)</li>
+        <li style="margin-bottom:8px;"><strong>Formateur :</strong> S. JAUBERT — Pole Formation UIMM - CVDL</li>
+      </ul>
+    </div>
+
+  </section>
+
+  <!-- ====== EVALUATION ====== -->
+  <section id="evaluation" class="tab-section">
+
+    <div class="card">
+      <div class="card-title">
+        <div class="icon">E</div>
+        Modalites d'evaluation
+      </div>
+
+      <div class="module-block">
+        <div class="block-title">Evaluation formative (tout au long de la journee)</div>
+        <div class="eval-grid">
+          <div class="eval-item">
+            <h4>Questionnaire de positionnement initial</h4>
+            <ul>
+              <li>Experience avec l'IA</li>
+              <li>Usages actuels</li>
+              <li>Attentes vis-a-vis de la formation</li>
+            </ul>
+          </div>
+          <div class="eval-item">
+            <h4>Ateliers pratiques</h4>
+            <ul>
+              <li>4 ateliers evalues en groupe</li>
+              <li>Feedback immediat du formateur</li>
+              <li>Partage des retours d'experience</li>
+            </ul>
+          </div>
+          <div class="eval-item">
+            <h4>Projet fil rouge</h4>
+            <ul>
+              <li>Application complete du cadre 4D</li>
+              <li>Restitution en fin de session</li>
+              <li>Evaluation par les pairs</li>
+            </ul>
+          </div>
+          <div class="eval-item">
+            <h4>Plan d'action personnel</h4>
+            <ul>
+              <li>1 tache a deleguer</li>
+              <li>1 priorite de developpement</li>
+              <li>1 engagement concret</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="module-block">
+        <div class="block-title">Grille de competences — Cadre 4D</div>
+        <table>
+          <thead>
+            <tr>
+              <th>Competence</th>
+              <th>Debutant</th>
+              <th>En progression</th>
+              <th>Maitrise</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Delegation</strong></td>
+              <td>Confie tout a l'IA sans reflexion</td>
+              <td>Identifie quelques taches delegables</td>
+              <td>Repartit strategiquement humain/IA</td>
+            </tr>
+            <tr>
+              <td><strong>Description</strong></td>
+              <td>Prompts vagues et generiques</td>
+              <td>Fournit du contexte de base</td>
+              <td>Formule Produit + Processus + Performance</td>
+            </tr>
+            <tr>
+              <td><strong>Discernement</strong></td>
+              <td>Accepte tout ce que l'IA produit</td>
+              <td>Verifie les informations cles</td>
+              <td>Evalue Produit + Processus + Performance</td>
+            </tr>
+            <tr>
+              <td><strong>Diligence</strong></td>
+              <td>Diffuse sans revision</td>
+              <td>Revise avant diffusion</td>
+              <td>Assure transparence et redevabilite</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="module-block">
+        <div class="block-title">Questionnaire d'evaluation de la formation (fin de journee)</div>
+        <div class="exercise-box green">
+          <p style="font-size:0.9rem; margin-bottom:10px;">A la fin de la formation, chaque participant repondra a :</p>
+          <ul style="padding-left:18px; font-size:0.88rem; color:var(--text-muted);">
+            <li>Note de satisfaction globale (1-5)</li>
+            <li>Ce que j'ai appris de plus utile</li>
+            <li>Ce que j'aurais voulu approfondir</li>
+            <li>Comment je vais utiliser ce que j'ai appris</li>
+            <li>Recommanderais-je cette formation a un collegue ? (oui/non + pourquoi)</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+</main>
+
+<!-- ======= FOOTER ======= -->
+<footer>
+  <p><strong>Pole Formation UIMM - CVDL</strong> &nbsp;|&nbsp; Formateur : <strong>S. JAUBERT</strong></p>
+  <p style="margin-top:6px;">Formation "Maitrise de l'IA" — 7H &nbsp;|&nbsp; Contenu base sur le programme <a href="https://www.anthropic.com/ai-fluency" target="_blank">AI Fluency d'Anthropic</a> (CC BY-NC-SA 4.0)</p>
+  <p style="margin-top:6px; font-size:0.75rem; color:rgba(255,255,255,0.50);">Document pedagogique a usage interne — Pole Formation UIMM - CVDL</p>
+</footer>
+
+<script>
+  function showTab(id) {
+    document.querySelectorAll('.tab-section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    event.target.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+</body>
+</html>

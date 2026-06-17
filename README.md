@@ -121,6 +121,8 @@ Activités autonomes (approche par cas) :
 
 ### Maîtriser Claude — Formations structurées
 
+- [Maitrise de l'IA — Formation 7H (Cadre & Fondements)](CLAUDE/Formation_CLAUDE/Formation_Maitrise_IA_7H.html) — **Découverte** | HTML | Journée complète basée sur le programme *AI Fluency* d'Anthropic : cadre 4D (Délégation, Description, Discernement, Diligence), 3 modes d'interaction, fonctionnement de l'IA générative, 10 vidéos ressources, 4 ateliers pratiques et projet fil rouge — public salariés tous niveaux <sub>*(juin 2026)*</sub>
+
 - [Syllabus — Maîtriser Claude (4 blocs)](CLAUDE/Formation_Maitriser_Claude/plan_de_formation.html) — **Pratique** | HTML | Plan d'ingénierie pédagogique restructuré pour salariés : formateurs, administratifs, ingénieurs <sub>*(avr. 2026)*</sub>
 - [Livret Pratique — Maîtriser Claude](CLAUDE/Formation_Maitriser_Claude/Livret_Pratique.html) — **Pratique** | HTML | Manuel apprenant : exercices pas à pas, fichiers Markdown (identité, contraintes), prompts contre les hallucinations <sub>*(avr. 2026)*</sub>
 - [Construire un agent IA avec Claude — Plan de formation](CLAUDE/formation-agent-ia/plan_formation_agent_claude.html) — **Avancé** | HTML | Parcours 6 semaines en 4 étapes progressives : agent mono-outil, tests mesurables, multi-outils + mémoire, affinage et mise en production — cas d'usage RH, administratif, comptabilité <sub>*(mai 2026)*</sub>
