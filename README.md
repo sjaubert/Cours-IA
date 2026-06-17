@@ -163,7 +163,7 @@ Activités autonomes (approche par cas) :
 ### Skills
 
 - [Formation — Créer des skills pour Claude (1 jour)](CLAUDE/Formation_Creer_des_Skills/LISEZMOI.md) — **Pratique** | DOCX + PDF | Journée 7h autonome (aucune vidéo requise), public mixte non-développeurs et techniques : 6 modules, livret stagiaire, support formateur, cahier de 4 TP guidés + corrigés et compétences SKILL.md d'exemple — Claude Code et application bureau <sub>*(juin 2026)*</sub>
-  - [Support formateur](CLAUDE/Formation_Creer_des_Skills/Support_formateur_Creer_des_Skills.docx) | [Livret stagiaire](CLAUDE/Formation_Creer_des_Skills/Livret_stagiaire_Creer_des_Skills.docx) ([PDF](CLAUDE/Formation_Creer_des_Skills/Livret_stagiaire_Creer_des_Skills.pdf)) | [Cahier de TP](CLAUDE/Formation_Creer_des_Skills/Travaux_pratiques/Cahier_TP_Creer_des_Skills.docx)
+  - [Support formateur](CLAUDE/Formation_Creer_des_Skills/Support_formateur_Creer_des_Skills.docx) | [Livret stagiaire](CLAUDE/Formation_Creer_des_Skills/Livret_stagiaire_Creer_des_Skills.docx) | [Cahier de TP](CLAUDE/Formation_Creer_des_Skills/Travaux_pratiques/Cahier_TP_Creer_des_Skills.docx)
 
 - [Formation Agents et Skills IA — Programme 2 jours](00-Formation/IA_Skills/Formation_Skills/Plan_Formation_Skills.md) — **Avancé** | MD | Transformer des utilisateurs occasionnels en experts de l'automatisation : installation, diagnostic amnésie LLMs, ateliers par métiers, paramétrage d'agents personnalisés <sub>*(mars 2026)*</sub>
   - [Guide Apprenant — Skills](00-Formation/IA_Skills/Formation_Skills/Guide_Apprenant_Skills.md) <sub>*(mars 2026)*</sub>
