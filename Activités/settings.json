@@ -48,7 +48,7 @@
           "heygen-mcp"
         ],
         "env": {
-          "HEYGEN_API_KEY": "M2E3M2IyYjgzNTVlNGYzNzlkNGM5NzRjOGUwNDkwNjEtMTc1MTY5OTI0OA=="
+          "HEYGEN_API_KEY": "${HEYGEN_API_KEY}"
         }
       }
     }

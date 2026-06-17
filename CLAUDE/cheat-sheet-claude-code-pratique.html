@@ -198,236 +198,236 @@
 
 <header class="titre">
   <h1>Claude Code en pratique : trouver les bons outils et travailler comme un pro</h1>
-  <div class="sous">Cheat sheet operationnelle - Formation a l'IA agentique</div>
-  <div class="meta">Pole Formation UIMM-CVDL - S. JAUBERT - Document de reference a conserver pres du poste de travail</div>
+  <div class="sous">Cheat sheet opérationnelle - Formation à l'IA agentique</div>
+  <div class="meta">Pôle Formation UIMM-CVDL - S. JAUBERT - Document de référence à conserver près du poste de travail</div>
 </header>
 
 <div class="intro">
-  <p style="margin-top:0"><b>A qui s'adresse ce document.</b> A toute personne qui commence a utiliser Claude Code (l'assistant IA qui travaille dans un terminal, c'est-a-dire la fenetre ou l'on tape des commandes texte). Aucune competence informatique avancee n'est requise : chaque astuce est expliquee en langage clair, avec la commande exacte a recopier et un cas d'usage concret.</p>
-  <p style="margin-bottom:0"><b>Comment lire les commandes.</b> Tout ce qui apparait sur <span style="background:#1e2a36;color:#e8eef4;padding:1px 5px;border-radius:3px;">fond sombre</span> se tape (ou se copie-colle) dans le terminal, puis on valide avec la touche Entree. Le symbole <code class="inline">|</code> (barre verticale) et le symbole <code class="inline">&gt;</code> (chevron) sont expliques dans le glossaire en fin de document.</p>
+  <p style="margin-top:0"><b>À qui s'adresse ce document.</b> À toute personne qui commence à utiliser Claude Code (l'assistant IA qui travaille dans un terminal, c'est-à-dire la fenêtre où l'on tape des commandes texte). Aucune compétence informatique avancée n'est requise : chaque astuce est expliquée en langage clair, avec la commande exacte à recopier et un cas d'usage concret.</p>
+  <p style="margin-bottom:0"><b>Comment lire les commandes.</b> Tout ce qui apparaît sur <span style="background:#1e2a36;color:#e8eef4;padding:1px 5px;border-radius:3px;">fond sombre</span> se tape (ou se copie-colle) dans le terminal, puis on valide avec la touche Entrée. Le symbole <code class="inline">|</code> (barre verticale) et le symbole <code class="inline">&gt;</code> (chevron) sont expliqués dans le glossaire en fin de document.</p>
 </div>
 
 <!-- ======================= PARTIE 1 ======================= -->
-<h2 class="section">Partie 1 - Trouver le bon outil sans le connaitre par avance</h2>
+<h2 class="section">Partie 1 - Trouver le bon outil sans le connaître à l'avance</h2>
 
-<p>Claude Code peut etre enrichi par des <b>skills</b> (des modules de competences specialises) et des <b>connecteurs MCP</b> (des ponts vers vos logiciels : messagerie, CRM, gestion de projet, etc.). Le probleme n'est pas qu'ils manquent : c'est qu'on ne sait pas lequel installer, ni si on possede deja l'equivalent. D'ou une perte de temps frequente.</p>
+<p>Claude Code peut être enrichi par des <b>skills</b> (des modules de compétences spécialisés) et des <b>connecteurs MCP</b> (des ponts vers vos logiciels : messagerie, CRM, gestion de projet, etc.). Le problème n'est pas qu'ils manquent : c'est qu'on ne sait pas lequel installer, ni si on possède déjà l'équivalent. D'où une perte de temps fréquente.</p>
 
 <div class="carte">
   <p style="margin-top:0"><span class="num">A</span><h4>Installer le seul outil qui trouve tous les autres : <code class="inline">find-skills</code></h4></p>
-  <p>Une seule installation rend l'ensemble du catalogue consultable. On decrit ensuite ce que l'on veut faire <b>en francais courant</b>, et l'outil propose les modules les plus pertinents, classes par fiabilite.</p>
+  <p>Une seule installation rend l'ensemble du catalogue consultable. On décrit ensuite ce que l'on veut faire <b>en français courant</b>, et l'outil propose les modules les plus pertinents, classés par fiabilité.</p>
   <pre>npx skills add vercel-labs/skills@find-skills</pre>
-  <p style="margin-bottom:4px"><b>La bonne facon de formuler sa demande :</b> decrire le <u>resultat voulu</u>, pas le nom d'un outil.</p>
+  <p style="margin-bottom:4px"><b>La bonne façon de formuler sa demande :</b> décrire le <u>résultat voulu</u>, pas le nom d'un outil.</p>
   <div class="avant-apres">
-    <div class="amateur"><b>A eviter</b><br>"trouve-moi un skill Apollo"</div>
-    <div class="pro"><b>Recommande</b><br>"j'ai besoin de rechercher des decideurs dans des entreprises financees, par secteur et par fonction"</div>
+    <div class="amateur"><b>À éviter</b><br>"trouve-moi un skill Apollo"</div>
+    <div class="pro"><b>Recommandé</b><br>"j'ai besoin de rechercher des décideurs dans des entreprises financées, par secteur et par fonction"</div>
   </div>
-  <div class="usage"><strong>Cas d'usage formation/industrie :</strong> "trouve un module qui transforme un compte rendu de reunion en liste d'actions", ou "je veux extraire les tableaux d'un PDF de specifications". Plus l'intention est precise, plus la reponse est utile.</div>
+  <div class="usage"><strong>Cas d'usage formation/industrie :</strong> "trouve un module qui transforme un compte rendu de réunion en liste d'actions", ou "je veux extraire les tableaux d'un PDF de spécifications". Plus l'intention est précise, plus la réponse est utile.</div>
 </div>
 
 <div class="carte">
   <p style="margin-top:0"><span class="num">B</span><h4>Lire le nombre d'installations avant d'installer</h4></p>
-  <p>Le catalogue est ouvert : n'importe qui peut publier. Le seul signal honnete de qualite est le nombre de personnes qui ont installe l'outil et l'ont garde.</p>
+  <p>Le catalogue est ouvert : n'importe qui peut publier. Le seul signal honnête de qualité est le nombre de personnes qui ont installé l'outil et l'ont gardé.</p>
   <table>
-    <tr><th>Nombre d'installations</th><th>Interpretation</th></tr>
-    <tr><td>Moins de 50</td><td>Peu eprouve. Vous etes proche du statut de testeur. Verifiez le depot avant d'installer.</td></tr>
-    <tr><td>Plus de 100</td><td>Des personnes autres que l'auteur l'ont trouve assez utile pour l'adopter. Signal plus rassurant.</td></tr>
+    <tr><th>Nombre d'installations</th><th>Interprétation</th></tr>
+    <tr><td>Moins de 50</td><td>Peu éprouvé. Vous êtes proche du statut de testeur. Vérifiez le dépôt avant d'installer.</td></tr>
+    <tr><td>Plus de 100</td><td>Des personnes autres que l'auteur l'ont trouvé assez utile pour l'adopter. Signal plus rassurant.</td></tr>
   </table>
-  <p style="margin-bottom:0"><b>Reflexe de verification</b> avant d'installer un module peu telecharge : regarder la date du dernier commit (derniere mise a jour). S'il n'a pas bouge depuis six mois, sans activite ni etoiles, la reponse est non.</p>
+  <p style="margin-bottom:0"><b>Réflexe de vérification</b> avant d'installer un module peu téléchargé : regarder la date du dernier commit (dernière mise à jour). S'il n'a pas bougé depuis six mois, sans activité ni étoiles, la réponse est non.</p>
 </div>
 
 <div class="encadre-cle">
-  <b>Le reflexe a retenir.</b> Avant d'installer quoi que ce soit, demandez a Claude : "ai-je deja de quoi faire cela ?". Bien souvent un connecteur deja en place fait le travail, et une installation supplementaire est inutile. <code class="inline">find-skills</code> verifie justement ce que vous possedez deja avant de proposer du neuf.
+  <b>Le réflexe à retenir.</b> Avant d'installer quoi que ce soit, demandez à Claude : "ai-je déjà de quoi faire cela ?". Bien souvent un connecteur déjà en place fait le travail, et une installation supplémentaire est inutile. <code class="inline">find-skills</code> vérifie justement ce que vous possédez déjà avant de proposer du neuf.
 </div>
 
 <!-- ======================= PARTIE 2 ======================= -->
-<h2 class="section">Partie 2 - Les 13 astuces qui font la difference dans le terminal</h2>
+<h2 class="section">Partie 2 - Les 13 astuces qui font la différence dans le terminal</h2>
 
-<p>Toutes ces astuces reposent sur des principes simples et anciens (les "tuyaux" entre logiciels, la redirection vers un fichier, les raccourcis). Combinees a Claude, elles accelerent fortement le travail. Pour chaque astuce : la facon debutante, la facon pro, et un cas concret.</p>
+<p>Toutes ces astuces reposent sur des principes simples et anciens (les "tuyaux" entre logiciels, la redirection vers un fichier, les raccourcis). Combinées à Claude, elles accélèrent fortement le travail. Pour chaque astuce : la façon débutante, la façon pro, et un cas concret.</p>
 
 <div class="grille">
 
   <div class="carte">
     <p style="margin-top:0"><span class="num">1</span><h4>Lancer une commande sans quitter Claude : le <code class="inline">!</code></h4></p>
     <div class="avant-apres">
-      <div class="amateur"><b>Debutant</b><br>Quitte Claude, ouvre un autre terminal, puis revient expliquer ce qui s'est passe.</div>
+      <div class="amateur"><b>Débutant</b><br>Quitte Claude, ouvre un autre terminal, puis revient expliquer ce qui s'est passé.</div>
       <div class="pro"><b>Pro</b><br>Tape <code class="inline">!</code> suivi de la commande, sans quitter la session.</div>
     </div>
     <pre>! npm run build
 ! git status</pre>
-    <p>Le resultat reste sous les yeux de Claude, qui peut reagir immediatement. On ne perd jamais le fil de la conversation.</p>
-    <div class="usage"><strong>Cas d'usage :</strong> verifier l'etat d'un dossier ou relancer une operation sans interrompre l'echange en cours.</div>
+    <p>Le résultat reste sous les yeux de Claude, qui peut réagir immédiatement. On ne perd jamais le fil de la conversation.</p>
+    <div class="usage"><strong>Cas d'usage :</strong> vérifier l'état d'un dossier ou relancer une opération sans interrompre l'échange en cours.</div>
   </div>
 
   <div class="carte">
-    <p style="margin-top:0"><span class="num">2</span><h4>Envoyer une erreur directement a Claude</h4></p>
+    <p style="margin-top:0"><span class="num">2</span><h4>Envoyer une erreur directement à Claude</h4></p>
     <div class="avant-apres">
-      <div class="amateur"><b>Debutant</b><br>Copie le message d'erreur, le colle dans Claude et ecrit "corrige ca".</div>
+      <div class="amateur"><b>Débutant</b><br>Copie le message d'erreur, le colle dans Claude et écrit "corrige ça".</div>
       <div class="pro"><b>Pro</b><br>Envoie la sortie d'erreur d'un seul geste.</div>
     </div>
     <pre>npm run build 2&gt;&amp;1 | claude -p "corrige ces erreurs"</pre>
-    <p>Claude lit le message <u>exact</u> (et non votre reformulation), avec les numeros de ligne. C'est plus rapide et plus precis.</p>
-    <div class="usage"><strong>Cas d'usage :</strong> un programme echoue avec un message incomprehensible : on le transmet tel quel a Claude pour diagnostic.</div>
+    <p>Claude lit le message <u>exact</u> (et non votre reformulation), avec les numéros de ligne. C'est plus rapide et plus précis.</p>
+    <div class="usage"><strong>Cas d'usage :</strong> un programme échoue avec un message incompréhensible : on le transmet tel quel à Claude pour diagnostic.</div>
   </div>
 
   <div class="carte">
     <p style="margin-top:0"><span class="num">3</span><h4>Mode rapide (sans conversation) : <code class="inline">claude -p</code></h4></p>
     <div class="avant-apres">
-      <div class="amateur"><b>Debutant</b><br>Ouvre une session complete meme pour une question d'une ligne.</div>
-      <div class="pro"><b>Pro</b><br>Utilise <code class="inline">-p</code> pour une reponse unique et immediate.</div>
+      <div class="amateur"><b>Débutant</b><br>Ouvre une session complète même pour une question d'une ligne.</div>
+      <div class="pro"><b>Pro</b><br>Utilise <code class="inline">-p</code> pour une réponse unique et immédiate.</div>
     </div>
     <pre>claude -p "explique ce que fait ce code"
-claude -p "genere un fichier .gitignore pour un projet Python"</pre>
-    <p>Le drapeau <code class="inline">-p</code> (pour "print", afficher) traite la demande, affiche la reponse et s'arrete. Ideal pour une explication ou une recherche ponctuelle.</p>
-    <div class="usage"><strong>Cas d'usage :</strong> obtenir une definition, un exemple ou un petit fichier sans lancer tout un echange.</div>
+claude -p "génère un fichier .gitignore pour un projet Python"</pre>
+    <p>Le drapeau <code class="inline">-p</code> (pour "print", afficher) traite la demande, affiche la réponse et s'arrête. Idéal pour une explication ou une recherche ponctuelle.</p>
+    <div class="usage"><strong>Cas d'usage :</strong> obtenir une définition, un exemple ou un petit fichier sans lancer tout un échange.</div>
   </div>
 
   <div class="carte">
     <p style="margin-top:0"><span class="num">4</span><h4>Reprendre une session : <code class="inline">--resume</code></h4></p>
     <div class="avant-apres">
-      <div class="amateur"><b>Debutant</b><br>Recommence de zero et re-explique tout le contexte a chaque fois.</div>
-      <div class="pro"><b>Pro</b><br>Reprend la veille exactement la ou il s'etait arrete.</div>
+      <div class="amateur"><b>Débutant</b><br>Recommence de zéro et ré-explique tout le contexte à chaque fois.</div>
+      <div class="pro"><b>Pro</b><br>Reprend la veille exactement là où il s'était arrêté.</div>
     </div>
     <pre>claude --resume</pre>
-    <p>Recharge la derniere conversation : le contexte, les decisions et les fichiers sont toujours la.</p>
-    <div class="usage"><strong>Cas d'usage :</strong> un dossier traite sur plusieurs jours. Le lendemain, Claude se souvient de ce qui a ete tente et de ce qui a fonctionne.</div>
+    <p>Recharge la dernière conversation : le contexte, les décisions et les fichiers sont toujours là.</p>
+    <div class="usage"><strong>Cas d'usage :</strong> un dossier traité sur plusieurs jours. Le lendemain, Claude se souvient de ce qui a été tenté et de ce qui a fonctionné.</div>
   </div>
 
   <div class="carte">
-    <p style="margin-top:0"><span class="num">5</span><h4>Enchainer Claude avec d'autres outils</h4></p>
+    <p style="margin-top:0"><span class="num">5</span><h4>Enchaîner Claude avec d'autres outils</h4></p>
     <div class="avant-apres">
-      <div class="amateur"><b>Debutant</b><br>Lance chaque outil separement et recopie le resultat de l'un dans l'autre.</div>
+      <div class="amateur"><b>Débutant</b><br>Lance chaque outil séparément et recopie le résultat de l'un dans l'autre.</div>
       <div class="pro"><b>Pro</b><br>Relie les outils en une seule commande.</div>
     </div>
     <pre>git diff | claude -p "relis ces modifications"
-cat agenda.txt | claude -p "resume les points cles"</pre>
-    <p>Le symbole <code class="inline">|</code> (le "tuyau") fait passer le resultat d'un outil dans Claude. Tout ce qui produit du texte peut etre analyse.</p>
+cat agenda.txt | claude -p "résume les points clés"</pre>
+    <p>Le symbole <code class="inline">|</code> (le "tuyau") fait passer le résultat d'un outil dans Claude. Tout ce qui produit du texte peut être analysé.</p>
     <div class="usage"><strong>Cas d'usage :</strong> journaux de bord, sorties de tests, fichiers de configuration, exports... tout texte devient analysable.</div>
   </div>
 
   <div class="carte">
-    <p style="margin-top:0"><span class="num">6</span><h4>Creer des raccourcis (alias) pour les taches repetitives</h4></p>
+    <p style="margin-top:0"><span class="num">6</span><h4>Créer des raccourcis (alias) pour les tâches répétitives</h4></p>
     <div class="avant-apres">
-      <div class="amateur"><b>Debutant</b><br>Retape la commande complete a chaque fois.</div>
-      <div class="pro"><b>Pro</b><br>Cree un raccourci de deux lettres.</div>
+      <div class="amateur"><b>Débutant</b><br>Retape la commande complète à chaque fois.</div>
+      <div class="pro"><b>Pro</b><br>Crée un raccourci de deux lettres.</div>
     </div>
-    <pre><span class="cmt"># A ajouter une fois dans le fichier ~/.bashrc</span>
+    <pre><span class="cmt"># À ajouter une fois dans le fichier ~/.bashrc</span>
 alias cr='git diff | claude -p "relis ce code"'
-alias cs='claude -p "resume ce projet en 3 phrases"'</pre>
-    <p>Apres rechargement, taper <code class="inline">cr</code> suffit. Les gains de temps se cumulent sur des centaines d'usages.</p>
-    <div class="usage"><strong>Cas d'usage :</strong> automatiser un controle ou un resume que l'on declenche plusieurs fois par jour.</div>
+alias cs='claude -p "résume ce projet en 3 phrases"'</pre>
+    <p>Après rechargement, taper <code class="inline">cr</code> suffit. Les gains de temps se cumulent sur des centaines d'usages.</p>
+    <div class="usage"><strong>Cas d'usage :</strong> automatiser un contrôle ou un résumé que l'on déclenche plusieurs fois par jour.</div>
   </div>
 
   <div class="carte">
-    <p style="margin-top:0"><span class="num">7</span><h4>Donner les vraies donnees Git a Claude</h4></p>
+    <p style="margin-top:0"><span class="num">7</span><h4>Donner les vraies données Git à Claude</h4></p>
     <div class="avant-apres">
-      <div class="amateur"><b>Debutant</b><br>Demande "qu'est-ce que j'ai change ?" et attend.</div>
-      <div class="pro"><b>Pro</b><br>Fournit directement l'historique reel.</div>
+      <div class="amateur"><b>Débutant</b><br>Demande "qu'est-ce que j'ai changé ?" et attend.</div>
+      <div class="pro"><b>Pro</b><br>Fournit directement l'historique réel.</div>
     </div>
-    <pre>git log --oneline -10 | claude -p "resume ces changements"</pre>
-    <p>Claude travaille sur les donnees exactes, sans deviner a partir des dates de fichiers.</p>
-    <div class="usage"><strong>Cas d'usage :</strong> produire un compte rendu fidele des evolutions recentes d'un projet versionne.</div>
+    <pre>git log --oneline -10 | claude -p "résume ces changements"</pre>
+    <p>Claude travaille sur les données exactes, sans deviner à partir des dates de fichiers.</p>
+    <div class="usage"><strong>Cas d'usage :</strong> produire un compte rendu fidèle des évolutions récentes d'un projet versionné.</div>
   </div>
 
   <div class="carte">
-    <p style="margin-top:0"><span class="num">8</span><h4>Integrer Claude dans des scripts automatises</h4></p>
+    <p style="margin-top:0"><span class="num">8</span><h4>Intégrer Claude dans des scripts automatisés</h4></p>
     <div class="avant-apres">
-      <div class="amateur"><b>Debutant</b><br>Ne sait pas comment utiliser Claude en automatique.</div>
-      <div class="pro"><b>Pro</b><br>Utilise <code class="inline">--print</code> dans des scripts ou des taches planifiees.</div>
+      <div class="amateur"><b>Débutant</b><br>Ne sait pas comment utiliser Claude en automatique.</div>
+      <div class="pro"><b>Pro</b><br>Utilise <code class="inline">--print</code> dans des scripts ou des tâches planifiées.</div>
     </div>
-    <pre><span class="cmt"># Controle quotidien planifie (exemple)</span>
+    <pre><span class="cmt"># Contrôle quotidien planifié (exemple)</span>
 claude -p "fais un bilan rapide de ce projet" &gt; bilan.txt</pre>
-    <p>En mode <code class="inline">--print</code>, Claude se comporte comme n'importe quel outil : il recoit une entree, produit un texte. On peut donc l'inclure dans une tache recurrente.</p>
-    <div class="usage"><strong>Cas d'usage :</strong> un bilan automatique chaque matin, ecrit dans un fichier, sans intervention.</div>
+    <p>En mode <code class="inline">--print</code>, Claude se comporte comme n'importe quel outil : il reçoit une entrée, produit un texte. On peut donc l'inclure dans une tâche récurrente.</p>
+    <div class="usage"><strong>Cas d'usage :</strong> un bilan automatique chaque matin, écrit dans un fichier, sans intervention.</div>
   </div>
 
   <div class="carte">
-    <p style="margin-top:0"><span class="num">9</span><h4>Lancer une tache longue en arriere-plan : le <code class="inline">!</code></h4></p>
+    <p style="margin-top:0"><span class="num">9</span><h4>Lancer une tâche longue en arrière-plan : le <code class="inline">!</code></h4></p>
     <div class="avant-apres">
-      <div class="amateur"><b>Debutant</b><br>Ouvre un autre onglet pour une commande qui tourne longtemps.</div>
-      <div class="pro"><b>Pro</b><br>Lance la commande avec <code class="inline">!</code> et continue a discuter.</div>
+      <div class="amateur"><b>Débutant</b><br>Ouvre un autre onglet pour une commande qui tourne longtemps.</div>
+      <div class="pro"><b>Pro</b><br>Lance la commande avec <code class="inline">!</code> et continue à discuter.</div>
     </div>
     <pre>! npm run test -- --watch</pre>
-    <p>La commande tourne en fond pendant que l'on poursuit l'echange. Claude peut s'y referer ensuite.</p>
+    <p>La commande tourne en fond pendant que l'on poursuit l'échange. Claude peut s'y référer ensuite.</p>
     <div class="usage"><strong>Cas d'usage :</strong> un serveur de test qui se recharge tout seul pendant que Claude apporte des modifications.</div>
   </div>
 
   <div class="carte">
-    <p style="margin-top:0"><span class="num">10</span><h4>Memoriser ses reglages une bonne fois pour toutes</h4></p>
+    <p style="margin-top:0"><span class="num">10</span><h4>Mémoriser ses réglages une bonne fois pour toutes</h4></p>
     <div class="avant-apres">
-      <div class="amateur"><b>Debutant</b><br>Reconfigure sa cle d'acces a chaque nouveau terminal.</div>
+      <div class="amateur"><b>Débutant</b><br>Reconfigure sa clé d'accès à chaque nouveau terminal.</div>
       <div class="pro"><b>Pro</b><br>L'enregistre une fois dans son profil et n'y pense plus.</div>
     </div>
-    <pre><span class="cmt"># A ajouter une fois dans ~/.bashrc</span>
+    <pre><span class="cmt"># À ajouter une fois dans ~/.bashrc</span>
 alias cc='claude'</pre>
-    <p>Un raccourci de deux lettres economise des milliers de frappes sur un mois.</p>
-    <div class="usage"><strong>Cas d'usage :</strong> lancer Claude avec <code class="inline">cc</code> au lieu de <code class="inline">claude</code> a chaque fois.</div>
+    <p>Un raccourci de deux lettres économise des milliers de frappes sur un mois.</p>
+    <div class="usage"><strong>Cas d'usage :</strong> lancer Claude avec <code class="inline">cc</code> au lieu de <code class="inline">claude</code> à chaque fois.</div>
   </div>
 
   <div class="carte">
     <p style="margin-top:0"><span class="num">11</span><h4>Donner plusieurs instructions en une seule fois</h4></p>
     <div class="avant-apres">
-      <div class="amateur"><b>Debutant</b><br>Envoie une instruction, attend, puis la suivante.</div>
-      <div class="pro"><b>Pro</b><br>Enchaine la sequence complete dans une seule demande.</div>
+      <div class="amateur"><b>Débutant</b><br>Envoie une instruction, attend, puis la suivante.</div>
+      <div class="pro"><b>Pro</b><br>Enchaîne la séquence complète dans une seule demande.</div>
     </div>
-    <pre>claude -p "lance les tests, corrige ceux qui echouent,
-puis relance jusqu'a ce que tout passe"</pre>
-    <p>Claude execute la suite de maniere autonome : chaque etape nourrit la suivante.</p>
-    <div class="usage"><strong>Cas d'usage :</strong> deleguer une procedure en plusieurs etapes plutot que de la piloter pas a pas.</div>
+    <pre>claude -p "lance les tests, corrige ceux qui échouent,
+puis relance jusqu'à ce que tout passe"</pre>
+    <p>Claude exécute la suite de manière autonome : chaque étape nourrit la suivante.</p>
+    <div class="usage"><strong>Cas d'usage :</strong> déléguer une procédure en plusieurs étapes plutôt que de la piloter pas à pas.</div>
   </div>
 
   <div class="carte">
-    <p style="margin-top:0"><span class="num">12</span><h4>Enregistrer la reponse de Claude dans un fichier</h4></p>
+    <p style="margin-top:0"><span class="num">12</span><h4>Enregistrer la réponse de Claude dans un fichier</h4></p>
     <div class="avant-apres">
-      <div class="amateur"><b>Debutant</b><br>Copie la reponse et la colle manuellement dans un fichier.</div>
+      <div class="amateur"><b>Débutant</b><br>Copie la réponse et la colle manuellement dans un fichier.</div>
       <div class="pro"><b>Pro</b><br>Redirige la sortie vers un fichier d'un seul geste.</div>
     </div>
-    <pre>claude -p "redige un mode d'emploi du projet" &gt; LISEZMOI.md</pre>
-    <p>Le chevron <code class="inline">&gt;</code> ecrit la reponse directement dans le fichier. Avec <code class="inline">&gt;&gt;</code>, on ajoute a la suite d'un fichier existant.</p>
-    <div class="usage"><strong>Cas d'usage :</strong> generer une note, un mode d'emploi ou un modele de document pret a l'emploi.</div>
+    <pre>claude -p "rédige un mode d'emploi du projet" &gt; LISEZMOI.md</pre>
+    <p>Le chevron <code class="inline">&gt;</code> écrit la réponse directement dans le fichier. Avec <code class="inline">&gt;&gt;</code>, on ajoute à la suite d'un fichier existant.</p>
+    <div class="usage"><strong>Cas d'usage :</strong> générer une note, un mode d'emploi ou un modèle de document prêt à l'emploi.</div>
   </div>
 
   <div class="carte">
-    <p style="margin-top:0"><span class="num">13</span><h4>Faire lire les vrais fichiers a Claude : <code class="inline">cat</code></h4></p>
+    <p style="margin-top:0"><span class="num">13</span><h4>Faire lire les vrais fichiers à Claude : <code class="inline">cat</code></h4></p>
     <div class="avant-apres">
-      <div class="amateur"><b>Debutant</b><br>Decrit ses fichiers avec des mots.</div>
-      <div class="pro"><b>Pro</b><br>Fournit les fichiers reels en entree.</div>
+      <div class="amateur"><b>Débutant</b><br>Décrit ses fichiers avec des mots.</div>
+      <div class="pro"><b>Pro</b><br>Fournit les fichiers réels en entrée.</div>
     </div>
-    <pre>cat notes.txt compte-rendu.txt | claude -p "synthetise ces documents"</pre>
-    <p>Claude lit le contenu reel, sans interpreter une description. Le symbole <code class="inline">*</code> permet de transmettre tout un lot de fichiers d'un coup.</p>
-    <div class="usage"><strong>Cas d'usage :</strong> reunir plusieurs documents pour en faire une synthese unique. <b>A noter :</b> pour de tres gros volumes, preferer la session interactive, ou Claude lit les fichiers de facon selective.</div>
+    <pre>cat notes.txt compte-rendu.txt | claude -p "synthétise ces documents"</pre>
+    <p>Claude lit le contenu réel, sans interpréter une description. Le symbole <code class="inline">*</code> permet de transmettre tout un lot de fichiers d'un coup.</p>
+    <div class="usage"><strong>Cas d'usage :</strong> réunir plusieurs documents pour en faire une synthèse unique. <b>À noter :</b> pour de très gros volumes, préférer la session interactive, où Claude lit les fichiers de façon sélective.</div>
   </div>
 
 </div>
 
 <!-- ======================= GLOSSAIRE ======================= -->
-<h2 class="section">Glossaire express - les symboles a connaitre</h2>
+<h2 class="section">Glossaire express - les symboles à connaître</h2>
 <dl class="glossaire">
   <dt>Terminal</dt>
-  <dd>La fenetre dans laquelle on tape des commandes texte plutot que de cliquer. C'est la qu'on dialogue avec Claude Code.</dd>
+  <dd>La fenêtre dans laquelle on tape des commandes texte plutôt que de cliquer. C'est là qu'on dialogue avec Claude Code.</dd>
   <dt>! (point d'exclamation)</dt>
-  <dd>Place devant une commande, il l'execute sans quitter Claude (astuces 1 et 9).</dd>
+  <dd>Placé devant une commande, il l'exécute sans quitter Claude (astuces 1 et 9).</dd>
   <dt>| (barre verticale, "le tuyau")</dt>
-  <dd>Fait passer le resultat d'un outil dans un autre. Exemple : <code class="inline">git diff | claude -p "..."</code> envoie les modifications a Claude.</dd>
+  <dd>Fait passer le résultat d'un outil dans un autre. Exemple : <code class="inline">git diff | claude -p "..."</code> envoie les modifications à Claude.</dd>
   <dt>&gt; et &gt;&gt; (chevrons)</dt>
-  <dd><code class="inline">&gt;</code> ecrit le resultat dans un fichier (en remplacant son contenu). <code class="inline">&gt;&gt;</code> ajoute a la fin sans effacer.</dd>
+  <dd><code class="inline">&gt;</code> écrit le résultat dans un fichier (en remplaçant son contenu). <code class="inline">&gt;&gt;</code> ajoute à la fin sans effacer.</dd>
   <dt>2&gt;&amp;1</dt>
-  <dd>Capture a la fois les messages normaux et les messages d'erreur, pour tout transmettre a Claude (astuce 2).</dd>
+  <dd>Capture à la fois les messages normaux et les messages d'erreur, pour tout transmettre à Claude (astuce 2).</dd>
   <dt>-p ou --print</dt>
-  <dd>Mode rapide : Claude repond une fois et s'arrete, sans ouvrir de conversation (astuces 3, 8, 12).</dd>
+  <dd>Mode rapide : Claude répond une fois et s'arrête, sans ouvrir de conversation (astuces 3, 8, 12).</dd>
   <dt>alias</dt>
   <dd>Un raccourci personnel : on remplace une commande longue par quelques lettres (astuces 6 et 10).</dd>
   <dt>cat</dt>
-  <dd>Commande qui affiche le contenu d'un fichier ; ici, elle sert a transmettre ce contenu a Claude (astuce 13).</dd>
+  <dd>Commande qui affiche le contenu d'un fichier ; ici, elle sert à transmettre ce contenu à Claude (astuce 13).</dd>
   <dt>skill / connecteur MCP</dt>
-  <dd>Un skill est un module de competence ajoute a Claude. Un connecteur MCP est un pont vers un logiciel existant (messagerie, gestion de projet, CRM...).</dd>
+  <dd>Un skill est un module de compétence ajouté à Claude. Un connecteur MCP est un pont vers un logiciel existant (messagerie, gestion de projet, CRM...).</dd>
 </dl>
 
 <div class="encadre-cle">
-  <b>Le principe a garder en tete.</b> La difference entre un usage debutant et un usage avance ne tient pas a des astuces d'IA, mais a quelques reflexes simples : relier les outils entre eux (le tuyau), enregistrer les resultats (le chevron), creer des raccourcis, et donner a Claude les <u>vraies</u> donnees plutot qu'une description. Commencez par maitriser deux ou trois de ces gestes, le reste viendra naturellement.
+  <b>Le principe à garder en tête.</b> La différence entre un usage débutant et un usage avancé ne tient pas à des astuces d'IA, mais à quelques réflexes simples : relier les outils entre eux (le tuyau), enregistrer les résultats (le chevron), créer des raccourcis, et donner à Claude les <u>vraies</u> données plutôt qu'une description. Commencez par maîtriser deux ou trois de ces gestes, le reste viendra naturellement.
 </div>
 
 <footer>
-  Document pedagogique etabli a partir de deux articles de reference : "I Installed One Skill. Now Claude Code Finds Every Other Skill For Me" et "13 Claude Code Bash Tricks That Separate Pros from Amateurs". Adapte et vulgarise pour un public non technique. Pole Formation UIMM-CVDL - S. JAUBERT.
+  Document pédagogique établi à partir de deux articles de référence : "I Installed One Skill. Now Claude Code Finds Every Other Skill For Me" et "13 Claude Code Bash Tricks That Separate Pros from Amateurs". Adapté et vulgarisé pour un public non technique. Pôle Formation UIMM-CVDL - S. JAUBERT.
 </footer>
 
 </div>
