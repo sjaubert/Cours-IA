@@ -20,6 +20,7 @@ This is a training materials repository for **"Maîtriser Claude et l'IA Agentiq
 - Course documents are authored in **Markdown** then exported to **HTML**. When editing course content, edit the `.md` source — the `.html` is a rendered copy.
 - French is the language for all course content. Keep that language when editing existing documents.
 - No build system, no tests, no dependencies to install.
+- Respecte la ponctuation et les accents quand tu écris en français !!
 
 ## Behavioral Guidelines
 
