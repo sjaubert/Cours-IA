@@ -15,6 +15,7 @@
 | [5](#5-claude-code--agents-ia) | Claude Code & Agents IA | Utilisateurs avancés |
 | [6](#6-ia-appliquée-à-lindustrie) | IA appliquée à l'industrie | Techniciens, opérateurs |
 | [7](#7-ressources--outils) | Ressources & Outils | Formateurs |
+| [8](#8-ia-locale--souveraineté) | IA locale & Souveraineté | Techniciens, formateurs |
 
 ---
 
@@ -264,6 +265,18 @@ Cinq scénarios clés en main pour animer des ateliers en Formation Continue :
 
 ---
 
+## 8. IA Locale & Souveraineté
+
+### Déployer une IA 100% locale (projet expérimental 00Exp)
+
+Apprendre l'IA en mettant les mains dans la machine : faire tourner un modèle sur son poste, sans réseau, comprendre ce qui se passe et l'enseigner.
+
+- [Feuille de route — IA locale pas à pas](https://sjaubert.github.io/Cours-IA/00Exp/index.html) — **Pratique** | HTML | Matériel recommandé, Ollama et ses alternatives, modèles open source (Gemma 3, Qwen Coder, Llama 3.2), 3 paliers progressifs (démo pédagogique, assistant de code dans VS Code avec Continue, agent autonome avec Goose), cas d'usage et défis étudiants, enjeux de souveraineté, sécurité et écologie <sub>*(juin 2026)*</sub>
+  - [Version Markdown](00Exp/Feuille_de_route_IA_locale.md) | [Export imprimable](00Exp/Feuille_de_route_IA_locale.html)
+  - Fichiers d'exemple pour les démos d'agent : [dossier bac_a_sable](00Exp/bac_a_sable/)
+
+---
+
 ## Notes techniques
 
 - Navigateur recommandé : Chrome, Firefox, Edge ou Safari (version récente)
@@ -281,4 +294,4 @@ Formation sur l'Intelligence Artificielle et ses applications industrielles
 
 ---
 
-*Dernière mise à jour : 17 juin 2026*
+*Dernière mise à jour : 28 juin 2026*
