@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IA locale : feuille de route pédagogique — UIMM-CVDL</title>
+<style>
+  :root{
+    --bg:#0f1419; --panel:#1a212b; --panel2:#222c38; --txt:#e6edf3;
+    --muted:#9aa7b4; --accent:#4fa3ff; --accent2:#37d39b; --warn:#ffb454;
+    --danger:#ff6b6b; --border:#2c3845; --code:#11161d;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--txt);
+    font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.65;font-size:16px}
+  header{padding:48px 24px 32px;text-align:center;
+    background:radial-gradient(circle at 50% 0%,#1e2a3a,#0f1419 70%);
+    border-bottom:1px solid var(--border)}
+  header .tag{color:var(--accent2);font-weight:600;letter-spacing:.08em;
+    text-transform:uppercase;font-size:.78rem}
+  header h1{margin:.3em 0 .2em;font-size:2rem;line-height:1.2}
+  header p{color:var(--muted);margin:0;max-width:680px;margin-inline:auto}
+  .wrap{max-width:900px;margin:0 auto;padding:0 24px 80px}
+  nav{position:sticky;top:0;z-index:10;background:rgba(15,20,25,.92);
+    backdrop-filter:blur(8px);border-bottom:1px solid var(--border);
+    padding:12px 24px;display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+  nav a{color:var(--muted);text-decoration:none;font-size:.85rem;
+    padding:5px 11px;border-radius:7px;border:1px solid transparent}
+  nav a:hover{color:var(--txt);border-color:var(--border);background:var(--panel)}
+  section{margin-top:40px}
+  h2{font-size:1.45rem;border-left:4px solid var(--accent);padding-left:12px;
+    margin-bottom:.3em}
+  h3{font-size:1.1rem;color:var(--accent2);margin-top:1.6em}
+  .lead{color:var(--muted)}
+  .card{background:var(--panel);border:1px solid var(--border);
+    border-radius:12px;padding:20px 22px;margin:18px 0}
+  .pal{display:flex;align-items:center;gap:14px;margin-bottom:6px}
+  .num{flex:none;width:38px;height:38px;border-radius:10px;
+    display:grid;place-items:center;font-weight:700;color:#0f1419}
+  .p1 .num{background:var(--accent2)} .p2 .num{background:var(--accent)}
+  .p3 .num{background:var(--warn)}
+  .badge{display:inline-block;font-size:.72rem;padding:2px 9px;border-radius:20px;
+    border:1px solid var(--border);color:var(--muted);margin-left:8px}
+  .crit{border-left:4px solid var(--danger);background:#241a1c}
+  .crit h3{color:var(--danger);margin-top:0}
+  .ok{border-left:4px solid var(--accent2)}
+  .warnbox{border-left:4px solid var(--warn);background:#241f17}
+  .defi{border-left:4px solid #b794f6;background:#1e1a2b}
+  .defi .lbl{color:#c4a7f7;font-weight:700;text-transform:uppercase;
+    font-size:.72rem;letter-spacing:.07em;display:block;margin-bottom:4px}
+  .usecase td:first-child{color:#cfe3ff;font-style:italic}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:.92rem}
+  th,td{border:1px solid var(--border);padding:8px 11px;text-align:left;
+    vertical-align:top}
+  th{background:var(--panel2);color:var(--txt)}
+  td code,p code,li code{background:var(--code);padding:1px 6px;border-radius:5px;
+    font-size:.88em;color:var(--accent2)}
+  pre{position:relative;background:var(--code);border:1px solid var(--border);
+    border-radius:10px;padding:16px 16px;overflow:auto;margin:14px 0}
+  pre code{font-family:"SF Mono",Consolas,Monaco,monospace;font-size:.86rem;
+    color:#cfe3ff;white-space:pre}
+  .copy{position:absolute;top:8px;right:8px;background:var(--panel2);
+    color:var(--muted);border:1px solid var(--border);border-radius:6px;
+    font-size:.72rem;padding:4px 9px;cursor:pointer}
+  .copy:hover{color:var(--txt)}
+  ul{padding-left:20px} li{margin:.3em 0}
+  .foot{margin-top:50px;padding-top:20px;border-top:1px solid var(--border);
+    color:var(--muted);font-size:.85rem}
+  .foot a{color:var(--accent)}
+  strong{color:#fff}
+  .pill{font-size:.7rem;background:var(--panel2);border:1px solid var(--border);
+    border-radius:20px;padding:3px 10px;color:var(--muted);white-space:nowrap}
+</style>
+</head>
+<body>
+<header>
+  <div class="tag">Pôle Formation UIMM-CVDL — S. Jaubert</div>
+  <h1>Monter une IA locale pour comprendre et enseigner</h1>
+  <p>Apprendre par l'expérimentation, puis transmettre. Trois paliers, du portable étudiant à l'agent autonome. Document de travail, juin 2026.</p>
+</header>
+
+<nav>
+  <a href="#critique">Mise au point</a>
+  <a href="#materiel">Matériel</a>
+  <a href="#modeles">Modèles</a>
+  <a href="#p1">1. Démo</a>
+  <a href="#p2">2. Assistant code</a>
+  <a href="#p3">3. Agent</a>
+  <a href="#pieges">Pièges</a>
+</nav>
+
+<div class="wrap">
+
+<section id="critique">
+  <h2>Mise au point critique avant de commencer</h2>
+  <p class="lead">Trois avis tranchés, dont deux corrigent des documents qui circulent.</p>
+
+  <div class="card crit">
+    <h3>Le guide « Gemma 4 » est en grande partie inventé</h3>
+    <p><strong>Gemma 4 n'existe pas</strong> en juin 2026. La dernière famille est <strong>Gemma 3</strong> (mars 2025) : tailles 270M, 1B, 4B, 12B, 27B. Sont fabriqués : le « 26B-A4B MoE », le « 31B dense », l'alerte « CUDA 13.2 corruption ». Aucune source.</p>
+    <p>À garder comme cas d'étude pour ton activité « Illusion de Vérité » : un document peut avoir l'air d'un guide technique sérieux et halluciner ses chiffres. Réflexe à enseigner : vérifier le nom d'un modèle sur la source primaire <code>ollama.com/library</code>.</p>
+  </div>
+
+  <div class="card warnbox">
+    <h3>« Ollama est-il indispensable, y a-t-il plus léger ? »</h3>
+    <p>Fausse prémisse. Ollama, LM Studio, Jan et llama.cpp tournent <strong>sur le même moteur</strong> (llama.cpp), à 5 % de perf près. Le runner ne consomme pas tes ressources, <strong>le modèle chargé en mémoire les consomme</strong>.</p>
+    <p>Tu as déjà Ollama : garde-le. Ta vraie variable d'ajustement, c'est la taille et la quantification du modèle.</p>
+    <table>
+      <tr><th>Alternative</th><th>Quand la préférer</th></tr>
+      <tr><td>LM Studio</td><td>Interface graphique pour débutants, démo grand public sans terminal.</td></tr>
+      <tr><td>Jan</td><td>Confidentialité maximale, open source MIT, zéro télémétrie. Argument souveraineté.</td></tr>
+      <tr><td>llama.cpp brut</td><td>Montrer la mécanique bas niveau. Pédagogique mais aride.</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>La tension à assumer : hétérogène + agent</h3>
+    <p>Sur des portables sans GPU dédié, un agent autonome a besoin d'un modèle qui appelle des outils en JSON valide. Les petits modèles sur CPU produisent le JSON malformé décrit comme un « bug » dans les guides. Ce n'est pas un réglage, c'est une limite structurelle.</p>
+    <p><strong>Conséquence :</strong> paliers 1 et 2 pour tous. Palier 3 sur ta machine, en démonstration.</p>
+  </div>
+</section>
+
+<section id="materiel">
+  <h2>Le matériel : ce qui compte vraiment</h2>
+  <p>Trois chiffres, par ordre d'importance : <strong>1. VRAM</strong> (mémoire GPU), <strong>2. RAM</strong> système, <strong>3. CPU</strong>. Si le modèle tient en VRAM, c'est rapide. Sinon il déborde en RAM et s'effondre.</p>
+  <p class="lead">Règle 4-bit (la norme) : environ <strong>0,7 Go par milliard de paramètres</strong>, plus une marge de contexte.</p>
+  <table>
+    <tr><th>Classe</th><th>Paramètres</th><th>Empreinte 4-bit</th><th>Tient sur</th></tr>
+    <tr><td>Petit</td><td>1 à 1,5 B</td><td>~1 Go</td><td>Tout portable, même sans GPU</td></tr>
+    <tr><td>Moyen</td><td>3 à 4 B</td><td>~3 Go</td><td>Portable 8 Go RAM, petit GPU</td></tr>
+    <tr><td>Confort</td><td>7 à 8 B</td><td>~5 Go</td><td>GPU 6 Go (juste), ou 16 Go RAM en CPU</td></tr>
+    <tr><td>Lourd</td><td>12 à 14 B</td><td>~9 Go</td><td>GPU 12 Go et +</td></tr>
+    <tr><td>Très lourd</td><td>27 à 32 B</td><td>~18-20 Go</td><td>Station, GPU 24 Go</td></tr>
+  </table>
+  <div class="card warnbox">
+    <p><strong>Honnêteté :</strong> je ne connais pas le parc réel de tes étudiants. Avant de promettre un setup uniforme, fais lancer le diagnostic du palier 1 et relève VRAM et RAM. On calibre sur le plus petit dénominateur réel, pas supposé.</p>
+  </div>
+</section>
+
+<section id="modeles">
+  <h2>Choix des modèles open source</h2>
+  <table>
+    <tr><th>Famille</th><th>Variantes utiles</th><th>Pour quoi</th></tr>
+    <tr><td>Gemma 3</td><td><code>gemma3:1b</code> · <code>gemma3:4b</code> · <code>gemma3:12b</code></td><td>Généraliste, multilingue. Le 4B est le couteau suisse.</td></tr>
+    <tr><td>Qwen2.5-Coder</td><td><code>qwen2.5-coder:1.5b</code> · <code>:7b</code></td><td>Code. Le 1.5B sait faire du fill-in-the-middle (autocomplétion).</td></tr>
+    <tr><td>Qwen3</td><td><code>qwen3:4b</code> · <code>qwen3:8b</code></td><td>Récent, raisonnement, appel d'outils (agent).</td></tr>
+    <tr><td>Llama 3.2</td><td><code>llama3.2:1b</code> · <code>:3b</code></td><td>Léger, très rapide sur CPU. Idéal démo « tokens en direct ».</td></tr>
+    <tr><td>DeepSeek</td><td><code>deepseek-r1</code> (distill.)</td><td>Raisonnement, code. Plus gourmand, réserver à ta machine.</td></tr>
+  </table>
+  <div class="card warnbox">
+    <p><strong>Incertitude signalée :</strong> les tags exacts des dernières versions Qwen3-Coder évoluent vite. Vérifie le nom sur <code>ollama.com/library</code> avant un <code>pull</code>, ne recopie pas de mémoire.</p>
+  </div>
+  <p><strong>Par défaut pour démarrer :</strong> démo <code>llama3.2:1b</code> et <code>gemma3:4b</code> · autocomplétion <code>qwen2.5-coder:1.5b</code> · chat code <code>qwen2.5-coder:7b</code>.</p>
+</section>
+
+<section id="p1">
+  <h2>Palier 1 — Démo pédagogique <span class="badge">tout matériel</span></h2>
+  <div class="card p1">
+    <div class="pal"><div class="num">1</div><strong>Faire tourner, voir, mesurer, diagnostiquer</strong></div>
+    <p class="lead">L'étudiant voit une IA fonctionner sur sa machine, sans réseau, et comprend ce qui se passe.</p>
+  </div>
+
+  <h3>Vérifier et diagnostiquer le matériel</h3>
+  <pre><code>ollama --version
+nvidia-smi        # voir le GPU NVIDIA (si pilotes installés)</code><button class="copy">copier</button></pre>
+  <p>Sinon : Gestionnaire des tâches &gt; Performance &gt; GPU (mémoire dédiée) et Mémoire (RAM).</p>
+
+  <h3>Premier dialogue et tokens en direct</h3>
+  <pre><code>ollama run llama3.2:1b</code><button class="copy">copier</button></pre>
+  <p>Fais observer le <strong>défilement des tokens</strong> : le modèle ne réfléchit pas, il prédit le mot suivant, un par un. C'est le coeur de la démo.</p>
+
+  <h3>Cas d'usage à faire tester</h3>
+  <p>À copier dans l'invite <code>&gt;&gt;&gt;</code> :</p>
+  <table class="usecase">
+    <tr><th>Prompt</th><th>Ce que ça montre</th></tr>
+    <tr><td>Explique ce qu'est un octet à un élève de 3e.</td><td>Vulgarisation : le modèle s'adapte au niveau demandé.</td></tr>
+    <tr><td>Combien font 17 x 23 ? Donne seulement le résultat.</td><td>Piège : un petit modèle se trompe souvent en calcul. Vérifie à la calculatrice. Hallucination en direct.</td></tr>
+    <tr><td>Traduis en anglais technique : « régler le couple de serrage à 12 newtons-mètres ».</td><td>Traduction métier, contexte industriel.</td></tr>
+    <tr><td>Résume ce texte en 3 points : [colle un paragraphe].</td><td>Synthèse, là où les LLM excellent.</td></tr>
+  </table>
+  <p>Insiste sur le calcul : un modèle de langage prédit du texte plausible, il ne calcule pas. Lien direct avec ton activité « Illusion de Vérité ».</p>
+  <div class="card defi"><span class="lbl">Défi étudiant</span>Trouve une question simple où <code>llama3.2:1b</code> se trompe mais où <code>gemma3:4b</code> répond juste. Note les deux réponses. Conclusion : la taille du modèle change la fiabilité, pas seulement la vitesse.</div>
+
+  <h3>Mesurer (écologie et performance)</h3>
+  <p><code>/set verbose</code> n'est pas une commande Windows : c'est une commande <strong>interne à Ollama</strong>, à taper une fois entré dans le dialogue. Déroulé exact :</p>
+  <p><strong>1.</strong> Lance le modèle :</p>
+  <pre><code>ollama run gemma3:4b</code><button class="copy">copier</button></pre>
+  <p><strong>2.</strong> Ollama affiche une invite <code>&gt;&gt;&gt;</code>. <strong>3.</strong> Tape la commande, Entrée. Confirmation :</p>
+  <pre><code>&gt;&gt;&gt; /set verbose
+Set 'verbose' mode.</code><button class="copy">copier</button></pre>
+  <p><strong>4.</strong> Pose une question. <strong>5.</strong> Sous la réponse s'affiche le bloc de stats. Résultat attendu :</p>
+  <pre><code>total duration:       4.812s
+load duration:        38.7ms
+prompt eval count:    18 token(s)
+prompt eval duration: 412ms
+prompt eval rate:     43.7 tokens/s
+eval count:           96 token(s)
+eval duration:        4.3s
+eval rate:            22.3 tokens/s</code><button class="copy">copier</button></pre>
+  <p>La ligne qui compte est la dernière, <strong><code>eval rate</code></strong> : la vitesse de génération en tokens/seconde. Plus c'est haut, plus le modèle écrit vite. C'est l'indicateur à comparer entre modèles.</p>
+  <ul>
+    <li><code>total duration</code> : temps total de la requête.</li>
+    <li><code>load duration</code> : chargement du modèle en mémoire (quasi nul s'il était déjà chargé).</li>
+    <li><code>prompt eval count</code> / <code>rate</code> : tokens de ta question, vitesse de lecture.</li>
+    <li><code>eval count</code> : tokens générés dans la réponse.</li>
+  </ul>
+  <p><strong>Démo écologie :</strong> même question sur deux modèles, on compare <code>eval rate</code>. Typiquement <code>llama3.2:1b</code> ~60-100 tokens/s (léger), <code>gemma3:4b</code> ~15-30 tokens/s (plus capable, plus lourd). Chiffres variables selon la machine : à mesurer en direct, pas à annoncer d'avance. Le bon réflexe n'est pas « le plus puissant » mais « le plus petit qui fait le travail ».</p>
+  <p>Pour finir la session : <code>/set quiet</code> coupe les stats, <code>/bye</code> quitte le dialogue.</p>
+
+  <h3>Diagnostiquer les pannes</h3>
+  <pre><code>ollama list      # modèles installés
+ollama ps        # modèles chargés en mémoire
+ollama rm &lt;nom&gt;   # libérer du disque</code><button class="copy">copier</button></pre>
+  <ul>
+    <li><strong>Serveur muet</strong> : service Ollama non lancé, relancer l'application.</li>
+    <li><strong>« model not found »</strong> : faire <code>ollama pull &lt;nom&gt;</code> d'abord.</li>
+    <li><strong>Lenteur extrême</strong> : le modèle déborde de la VRAM, prendre plus petit.</li>
+  </ul>
+
+  <div class="card ok">
+    <h3>Souveraineté : la preuve par la coupure réseau</h3>
+    <p>Coupe le Wi-Fi, relance <code>ollama run gemma3:4b</code>, pose une question. Ça marche, aucune donnée ne sort. L'argument souveraineté rendu tangible.</p>
+  </div>
+</section>
+
+<section id="p2">
+  <h2>Palier 2 — Assistant de code (Continue) <span class="badge">matériel modeste</span></h2>
+  <div class="card p2">
+    <div class="pal"><div class="num">2</div><strong>Le setup exact du prof : deux modèles dans VS Code</strong></div>
+    <p class="lead">Un modèle léger pour l'autocomplétion, un plus costaud pour le chat. Gestion tokens/énergie, zéro clé API.</p>
+  </div>
+
+  <h3>Télécharger les modèles</h3>
+  <pre><code>ollama pull qwen2.5-coder:1.5b   # autocomplétion (fill-in-the-middle)
+ollama pull qwen2.5-coder:7b     # chat de code (sur ta machine)</code><button class="copy">copier</button></pre>
+  <p>Sur portable faible : remplace le chat 7B par <code>qwen2.5-coder:1.5b</code> ou <code>gemma3:4b</code>.</p>
+
+  <h3>Installer puis configurer Continue</h3>
+  <p>Extension « Continue » dans VS Code, puis fichier <code>config.yaml</code> (100 % local, aucune clé) :</p>
+  <pre><code>name: Setup local UIMM
+version: 0.0.1
+schema: v1
+models:
+  - name: Chat Code 7B
+    provider: ollama
+    model: qwen2.5-coder:7b
+    roles:
+      - chat
+      - edit
+  - name: Autocomplete 1.5B
+    provider: ollama
+    model: qwen2.5-coder:1.5b
+    roles:
+      - autocomplete</code><button class="copy">copier</button></pre>
+  <p>Vérifie aussi que <code>editor.inlineSuggest.enabled</code> est à <code>true</code> dans VS Code.</p>
+
+  <h3>Les cinq intentions pédagogiques, concrètement</h3>
+  <table>
+    <tr><td><span class="pill">écologie</span></td><td>Le 1.5B tourne en continu (autocomplétion), le 7B seulement à la demande. On ne sort le calcul lourd que si nécessaire.</td></tr>
+    <tr><td><span class="pill">sécurité</span></td><td>Aucune clé API dans cette config. Compare avec une clé cloud qui traînerait dans un fichier versionné. L'erreur classique à éviter.</td></tr>
+    <tr><td><span class="pill">disponibilité</span></td><td>Ajoute un modèle de secours dans la liste. Si l'un ne charge pas, on bascule.</td></tr>
+    <tr><td><span class="pill">démontrer</span></td><td>Garde <code>ollama ps</code> ouvert pendant que tu codes : les étudiants voient le modèle répondre en direct.</td></tr>
+    <tr><td><span class="pill">diagnostiquer</span></td><td>Pas d'autocomplétion ? Dans l'ordre : <code>ollama list</code>, <code>ollama ps</code>, <code>inlineSuggest</code>, nom du modèle dans <code>config.yaml</code>.</td></tr>
+  </table>
+
+  <h3>Cas d'usage à montrer en cours</h3>
+  <p><strong>Autocomplétion</strong> : crée <code>analyse.py</code>, commence à taper, laisse le modèle proposer la suite.</p>
+  <pre><code>import csv
+
+def moyenne_temperatures(fichier_csv):
+    # place le curseur ici, laisse l'autocomplétion proposer le corps</code><button class="copy">copier</button></pre>
+  <p><strong>Chat de code</strong> (sélectionne du code ou pose la question dans Continue) :</p>
+  <table class="usecase">
+    <tr><th>Demande au chat</th><th>Compétence travaillée</th></tr>
+    <tr><td>Explique cette expression régulière ligne par ligne.</td><td>Lecture de code existant.</td></tr>
+    <tr><td>Écris la docstring de cette fonction.</td><td>Documentation.</td></tr>
+    <tr><td>Génère des tests unitaires pytest pour cette fonction.</td><td>Test, validation.</td></tr>
+    <tr><td>Refactore cette boucle for en compréhension de liste.</td><td>Bonnes pratiques Python.</td></tr>
+    <tr><td>Ce script lit un CSV de relevés machine. Ajoute le calcul de la moyenne et de l'écart-type.</td><td>Cas industriel concret.</td></tr>
+  </table>
+  <p><strong>Réflexe esprit critique :</strong> le code généré n'est pas garanti correct. On le lit, on le teste, jamais d'exécution en aveugle. C'est le pendant « code » de l'hallucination.</p>
+  <div class="card defi"><span class="lbl">Défi étudiant</span>Fais générer une fonction qui lit un CSV de températures et signale les valeurs au-dessus d'un seuil. Puis demande les tests. Lance-les. Combien passent du premier coup ? Corrige le reste. Travailler avec une IA, ce n'est pas la croire sur parole.</div>
+</section>
+
+<section id="p3">
+  <h2>Palier 3 — Agent autonome (Goose) <span class="badge">ta machine</span></h2>
+  <div class="card p3">
+    <div class="pal"><div class="num">3</div><strong>Une IA qui agit sur tes fichiers</strong></div>
+    <p class="lead">Pas seulement répondre : créer des dossiers, lire et écrire, exécuter des tâches.</p>
+  </div>
+
+  <h3>Comment fonctionne un agent (la notion clé)</h3>
+  <p>Un agent, c'est <strong>un LLM + des outils + une boucle</strong>. Le cycle, à dessiner au tableau :</p>
+  <ol>
+    <li>Tu donnes un objectif en langage naturel.</li>
+    <li>Le LLM <strong>raisonne</strong> et choisit un outil (lire un fichier, en écrire un, lancer une commande).</li>
+    <li>L'outil <strong>s'exécute</strong> et renvoie un résultat.</li>
+    <li>Le LLM <strong>observe</strong> ce résultat et décide de l'étape suivante.</li>
+    <li>Il recommence jusqu'à atteindre l'objectif, puis s'arrête.</li>
+  </ol>
+  <p>La différence avec un chatbot tient en une phrase : <strong>le chatbot produit du texte, l'agent produit des actions.</strong> Le LLM décide, les outils agissent. Le <strong>MCP</strong> (Model Context Protocol) est le standard qui branche ces outils sur l'agent ; dans Goose ils s'appellent des « extensions ».</p>
+
+  <div class="card crit">
+    <h3>Avertissement de réalisme</h3>
+    <p>Un agent fiable a besoin d'un modèle qui appelle des outils proprement. Sur petit modèle CPU, ça échoue souvent (JSON malformé). Démo sur <strong>ta</strong> machine (GPU 6 Go mini), pas sur les portables. Modèle <code>qwen3:8b</code> ou <code>qwen2.5-coder:7b</code>, objectifs simples et vérifiables. Goose est passé sous la Linux Foundation fin 2025.</p>
+  </div>
+
+  <h3>Installer Goose (Windows, desktop)</h3>
+  <ol>
+    <li>Page officielle des versions : <code>github.com/block/goose/releases</code>.</li>
+    <li>Télécharge l'installeur Windows (<code>Goose-Setup-x.x.x.exe</code>).</li>
+    <li>Installe, ouvre l'application. Prérequis : Ollama tourne (vérifie avec <code>ollama ps</code>).</li>
+  </ol>
+
+  <h3>Configurer pas à pas</h3>
+  <ol>
+    <li>Paramètres (engrenage) &gt; <strong>Provider</strong> : choisis <strong>Ollama</strong>.</li>
+    <li><strong>URL</strong> : laisse <code>http://localhost:11434</code> (adresse locale, rien ne sort).</li>
+    <li><strong>Modèle</strong> : <code>qwen3:8b</code> (fais <code>ollama pull qwen3:8b</code> avant si besoin).</li>
+    <li><strong>Étanchéité</strong> : aucun provider cloud actif.</li>
+    <li><strong>Extensions</strong> : active <strong>File System</strong>, sinon l'agent ne lit ni n'écrit rien.</li>
+  </ol>
+
+  <div class="card warnbox">
+    <h3>Sécurité : toujours un bac à sable</h3>
+    <p>Un agent peut écraser ou supprimer des fichiers. Ne le lâche jamais sur tout le disque.</p>
+    <ul>
+      <li>Crée <code>00Exp/bac_a_sable</code> et garde tes objectifs dans ce dossier.</li>
+      <li>Sauvegarde ou commit Git avant une tâche qui modifie l'existant.</li>
+      <li>Lis ce que l'agent propose avant de valider. Il montre ses étapes, ne clique pas « oui » en aveugle.</li>
+    </ul>
+  </div>
+
+  <h3>Cinq cas d'usage progressifs</h3>
+  <p>Tous dans <code>bac_a_sable</code>. Pour les cas 3 et 5, crée d'abord les fichiers d'exemple.</p>
+
+  <div class="card">
+    <p><strong>Cas 1 — Échauffement.</strong> <em>« Crée bonjour.txt contenant la date du jour et la phrase : IA locale opérationnelle. »</em><br>Attendu : l'agent écrit le fichier. Vérifie qu'il existe et contient le texte.</p>
+    <p><strong>Cas 2 — Générer et exécuter.</strong> <em>« Crée fibonacci.py qui affiche la suite jusqu'à 20, puis exécute-le et montre la sortie. »</em><br>Attendu : il écrit, lance, renvoie la sortie réelle. Deux outils enchaînés : on voit la boucle.</p>
+    <p><strong>Cas 3 — Analyse de données machine (industriel).</strong> Crée d'abord <code>releves.csv</code> :</p>
+    <pre><code>machine,temperature
+P1,72
+P2,88
+P3,65
+P4,91
+P5,79</code><button class="copy">copier</button></pre>
+    <p><em>« Lis releves.csv. Calcule la température moyenne. Liste les machines au-dessus de 80. Écris le tout dans rapport.md. »</em><br>Attendu : lecture, calcul, filtre, écriture. Vérifie à la main : moyenne = 79, machines &gt; 80 = P2 et P4.</p>
+    <p><strong>Cas 4 — Rangement de fichiers.</strong> <em>« Range les fichiers de ce dossier dans des sous-dossiers selon leur extension : txt, py, csv. »</em><br>Attendu : il liste et déplace. Rappelle la règle du bac à sable : déplacer peut casser des chemins ailleurs.</p>
+    <p><strong>Cas 5 — Synthèse multi-documents.</strong> Crée deux ou trois petits <code>.md</code>. <em>« Lis tous les .md de ce dossier et écris une synthèse en 5 points dans synthese.md. »</em><br>Attendu : lecture multiple, agrégation, rédaction. Le cas le plus proche de ton métier de formateur.</p>
+  </div>
+
+  <h3>Diagnostiquer l'agent</h3>
+  <ul>
+    <li><strong>Il boucle ou rate un appel d'outil</strong> : modèle trop petit, passe à un 7B-8B.</li>
+    <li><strong>Rien ne s'écrit</strong> : File System non activée, ou mauvais dossier. Précise le chemin dans le prompt.</li>
+    <li><strong>Très lent</strong> : normal, chaque étape est une inférence. Réduis le modèle ou découpe la tâche.</li>
+    <li><strong>Il invente au lieu de lire</strong> : exige l'outil (« lis réellement le fichier, ne devine pas »).</li>
+  </ul>
+
+  <div class="card defi"><span class="lbl">Défi étudiant</span>Donne le cas 3 à l'agent. Vérifie sa moyenne à la main. S'est-il trompé ? A-t-il lu le fichier ou inventé les chiffres ? Conclusion : même un agent se contrôle. L'autonomie n'est pas la fiabilité.</div>
+
+  <div class="card warnbox">
+    <p><strong>Alternative honnête :</strong> le prof du post n'utilise pas Goose mais Continue. Pour un premier contact agentique, le mode agent/edit de Continue, ou Cline/Aider, suffit souvent et se débugge plus facilement. Ne complique pas si le palier 2 couvre ton besoin.</p>
+  </div>
+</section>
+
+<section id="pieges">
+  <h2>Pièges réels (pas ceux inventés par les guides)</h2>
+  <ul>
+    <li><strong>Confondre runner et modèle</strong> : changer de logiciel ne règle pas un problème de mémoire. Réduis la taille du modèle.</li>
+    <li><strong>Vouloir le plus gros modèle</strong> : contre-productif sur matériel modeste.</li>
+    <li><strong>Recopier des noms de modèles de mémoire ou depuis un PDF</strong> : vérifie sur <code>ollama.com/library</code>.</li>
+    <li><strong>Clé API dans un fichier versionné</strong> : en local pur tu n'en as pas. Si un jour tu ajoutes un modèle cloud de secours, mets la clé en variable d'environnement, jamais dans le dépôt.</li>
+    <li><strong>Promettre un setup uniforme</strong> sans connaître le parc : mesure d'abord.</li>
+  </ul>
+  <div class="card">
+    <h3>Ce que je ne sais pas, à vérifier toi-même</h3>
+    <ul>
+      <li>Le parc matériel réel de tes étudiants. À mesurer.</li>
+      <li>Les tags exacts des dernières versions Qwen3-Coder. À vérifier avant <code>pull</code>.</li>
+      <li>Le comportement de Goose sur ta machine. L'agentique locale reste plus fragile que le chat.</li>
+    </ul>
+  </div>
+</section>
+
+<div class="foot">
+  <p><strong>Sources :</strong>
+    <a href="https://ollama.com/library/gemma3">Gemma 3 / Ollama</a> ·
+    <a href="https://www.glukhov.org/llm-hosting/comparisons/hosting-llms-ollama-localai-jan-lmstudio-vllm-comparison/">Comparatif runners</a> ·
+    <a href="https://docs.continue.dev/customize/deep-dives/autocomplete">Continue autocomplete</a> ·
+    <a href="https://www.sitepoint.com/local-ai-coding-assistant-vscode-ollama-continue/">Setup Continue + Ollama</a> ·
+    <a href="https://goose-docs.ai/">Goose</a> ·
+    <a href="https://pinggy.io/blog/best_open_source_self_hosted_llms_for_coding/">Modèles code locaux 2026</a>
+  </p>
+  <p>Pôle Formation UIMM-CVDL — S. Jaubert. Document de travail, juin 2026. Rien d'inventé : les incertitudes sont signalées.</p>
+</div>
+
+</div>
+
+<script>
+document.querySelectorAll('.copy').forEach(function(b){
+  b.addEventListener('click',function(){
+    var code=b.parentElement.querySelector('code').innerText;
+    navigator.clipboard.writeText(code).then(function(){
+      var t=b.textContent;b.textContent='copié';
+      setTimeout(function(){b.textContent=t},1200);
+    });
+  });
+});
+</script>
+</body>
+</html>
