@@ -19,24 +19,9 @@ Chaque palier reprend les cinq intentions pédagogiques du post : écologie, sé
 
 ## 1. Mise au point critique avant de commencer
 
-Tu m'as demandé des avis tranchés. En voici trois, dont deux corrigent tes propres documents.
+Tu m'as demandé des avis tranchés. En voici deux qui corrigent des idées reçues avant de te lancer.
 
-### 1.1 Le guide "Gemma 4" est en grande partie inventé
-
-**Gemma 4 n'existe pas** en juin 2026. La dernière famille publiée par Google est **Gemma 3** (mars 2025), en tailles 270M, 1B, 4B, 12B, 27B.
-
-Dans ton fichier "Gemma 4", sont fabriqués :
-
-- le "Gemma 4 26B-A4B" à architecture MoE (Mixture of Experts) ;
-- le "Gemma 4 31B dense" ;
-- l'avertissement "CUDA 13.2 provoque une corruption de sortie" ;
-- les jetons `<|think|>` présentés comme propres à Gemma.
-
-Je n'ai trouvé aucune source pour ces affirmations. C'est un texte généré qui a l'apparence d'un guide technique sérieux mais qui hallucine ses chiffres. Garde-le : c'est un cas d'étude parfait pour ton activité "Illusion de Vérité". Montre à tes étudiants comment vérifier un nom de modèle sur la source primaire (`ollama.com/library`) plutôt que de faire confiance à un PDF crédible.
-
-Les deux autres guides (Gemma 2 + RTX 2060) sont eux factuellement corrects sur le fond, juste un peu datés : Gemma 2 est de 2024, Gemma 3 la remplace avantageusement.
-
-### 1.2 "Ollama est-il indispensable, y a-t-il plus léger ?" repose sur une fausse prémisse
+### 1.1 "Ollama est-il indispensable, y a-t-il plus léger ?" repose sur une fausse prémisse
 
 Ollama, LM Studio, Jan, llama.cpp tournent **tous sur le même moteur** (llama.cpp). Les écarts de vitesse sont de l'ordre de 5 %. Le runner n'est pas ce qui consomme tes ressources.
 
@@ -48,11 +33,11 @@ Quand envisager autre chose :
 
 | Outil | Quand le préférer à Ollama |
 |---|---|
-| **LM Studio** | Tu veux une interface graphique pour que des étudiants débutants choisissent et téléchargent un modèle sans terminal. Bon pour une démo grand public. |
-| **Jan** | Priorité absolue à la confidentialité et au zéro télémétrie, open source MIT. Argument fort pour ton cours souveraineté. |
-| **llama.cpp brut** | Tu veux montrer la mécanique la plus bas niveau, ou bricoler du matériel exotique. Pédagogique mais aride. |
+| [**LM Studio**](https://lmstudio.ai) | Tu veux une interface graphique pour que des étudiants débutants choisissent et téléchargent un modèle sans terminal. Bon pour une démo grand public. |
+| [**Jan**](https://www.jan.ai) | Priorité absolue à la confidentialité et au zéro télémétrie, open source. Argument fort pour ton cours souveraineté. |
+| [**llama.cpp brut**](https://github.com/ggml-org/llama.cpp) | Tu veux montrer la mécanique la plus bas niveau, ou bricoler du matériel exotique. Pédagogique mais aride. |
 
-### 1.3 La tension que tu dois assumer
+### 1.2 La tension que tu dois assumer
 
 Tu as choisi "postes étudiants hétérogènes" ET "agent autonome". Sur des portables sans carte graphique dédiée, un agent qui manipule des fichiers a besoin d'un modèle capable d'appeler des outils en produisant du JSON valide. Les petits modèles sur CPU produisent justement le JSON malformé décrit comme un bug dans tes guides. Ce n'est pas un réglage à trouver, c'est une limite structurelle des petits modèles.
 
@@ -262,7 +247,7 @@ Sur un portable étudiant faible, remplace le chat 7B par `qwen2.5-coder:1.5b` a
 
 ### 5.3 Installer Continue
 
-Dans VS Code : extension "Continue" depuis la marketplace.
+Dans VS Code : extension [Continue](https://www.continue.dev) depuis la marketplace. Documentation : [docs.continue.dev](https://docs.continue.dev).
 
 ### 5.4 Configurer (config.yaml de Continue)
 
@@ -353,11 +338,11 @@ Un agent fiable a besoin d'un modèle qui **appelle des outils proprement**. Sur
 - Modèle conseillé : `qwen3:8b` ou `qwen2.5-coder:7b`, qui gèrent mieux l'appel d'outils que les 1B-4B.
 - Pose des objectifs simples et vérifiables, pas des missions complexes en un seul prompt.
 
-Goose (par Block) est passé sous la Linux Foundation fin 2025. Il existe en application desktop et en CLI, et supporte Ollama en local.
+Goose, lancé par Block, est passé sous la Linux Foundation fin 2025 (Agentic AI Foundation) ; son dépôt a déménagé de `block/goose` vers `aaif-goose/goose`. Il existe en application desktop et en CLI, et supporte Ollama en local. Documentation : [goose-docs.ai](https://goose-docs.ai).
 
 ### 6.3 Installer Goose (Windows, version desktop)
 
-1. Va sur la page officielle des versions : `github.com/block/goose/releases`.
+1. Va sur la page officielle des versions : [github.com/aaif-goose/goose/releases](https://github.com/aaif-goose/goose/releases).
 2. Télécharge l'installeur Windows (fichier `Goose-Setup-x.x.x.exe`).
 3. Lance le `.exe`, installe, puis ouvre l'application Goose Desktop.
 
@@ -435,7 +420,7 @@ Comportement attendu : l'agent lit chaque fichier, agrège, rédige. C'est le ca
 
 ### 6.9 Alternative honnête
 
-Le prof du post n'utilise pas Goose, il utilise Continue. Pour un premier contact avec l'agentique, le mode agent/edit de Continue, ou Cline/Aider dans VS Code, suffisent souvent et se débuggent plus facilement qu'un agent desktop. Ne complique pas si le palier 2 couvre déjà ton besoin.
+Le prof du post n'utilise pas Goose, il utilise Continue. Pour un premier contact avec l'agentique, le mode agent/edit de [Continue](https://www.continue.dev), ou [Cline](https://cline.bot) / [Aider](https://aider.chat) dans VS Code, suffisent souvent et se débuggent plus facilement qu'un agent desktop. Ne complique pas si le palier 2 couvre déjà ton besoin.
 
 ---
 
@@ -443,7 +428,7 @@ Le prof du post n'utilise pas Goose, il utilise Continue. Pour un premier contac
 
 - **Confondre runner et modèle** : changer de logiciel ne réglera pas un problème de mémoire. Réduis la taille du modèle.
 - **Vouloir le plus gros modèle** : contre-productif sur matériel modeste. Le bon modèle est le plus petit qui fait le travail.
-- **Recopier des noms de modèles de mémoire ou depuis un PDF** : vérifie sur `ollama.com/library`. Le guide "Gemma 4" prouve qu'un document peut inventer des noms crédibles.
+- **Recopier des noms de modèles de mémoire ou depuis un PDF** : vérifie toujours le tag exact sur `ollama.com/library` avant un `pull`. Un document peut citer un nom de modèle qui n'existe pas.
 - **Clé API dans un fichier versionné** : en local pur tu n'en as pas, c'est un avantage sécurité. Si un jour tu ajoutes un modèle cloud de secours, mets la clé dans une variable d'environnement, jamais dans le dépôt.
 - **Promettre un setup uniforme sans connaître le parc** : mesure d'abord (palier 1, étape 4.1).
 
@@ -464,6 +449,20 @@ Je n'ai rien inventé dans ce document. Quand je n'étais pas sûr, je l'ai écr
 Commence par le palier 1 sur ta machine cette semaine. Mesure les tokens par seconde de `llama3.2:1b` et `gemma3:4b`. Quand tu as ces deux chiffres, on calibre le choix de modèle pour les étudiants, et je te prépare la version HTML pédagogique de cette feuille de route.
 
 ---
+
+## Outils mentionnés : liens officiels
+
+| Outil | Rôle | Lien officiel |
+|---|---|---|
+| Ollama | Moteur d'inférence local | https://ollama.com |
+| LM Studio | Runner local, interface graphique | https://lmstudio.ai |
+| Jan | Runner local, open source, offline | https://www.jan.ai |
+| llama.cpp | Moteur bas niveau (socle des autres) | https://github.com/ggml-org/llama.cpp |
+| Continue | Assistant de code dans VS Code | https://www.continue.dev |
+| Goose | Agent autonome | https://goose-docs.ai |
+| Cline | Agent de code dans VS Code | https://cline.bot |
+| Aider | Agent de code en terminal, orienté Git | https://aider.chat |
+| Bibliothèque de modèles Ollama | Vérifier les noms et tailles | https://ollama.com/library |
 
 ## Sources
 

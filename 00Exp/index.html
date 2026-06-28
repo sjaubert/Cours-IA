@@ -88,19 +88,14 @@
   <a href="#p2">2. Assistant code</a>
   <a href="#p3">3. Agent</a>
   <a href="#pieges">Pièges</a>
+  <a href="#liens">Liens</a>
 </nav>
 
 <div class="wrap">
 
 <section id="critique">
   <h2>Mise au point critique avant de commencer</h2>
-  <p class="lead">Trois avis tranchés, dont deux corrigent des documents qui circulent.</p>
-
-  <div class="card crit">
-    <h3>Le guide « Gemma 4 » est en grande partie inventé</h3>
-    <p><strong>Gemma 4 n'existe pas</strong> en juin 2026. La dernière famille est <strong>Gemma 3</strong> (mars 2025) : tailles 270M, 1B, 4B, 12B, 27B. Sont fabriqués : le « 26B-A4B MoE », le « 31B dense », l'alerte « CUDA 13.2 corruption ». Aucune source.</p>
-    <p>À garder comme cas d'étude pour ton activité « Illusion de Vérité » : un document peut avoir l'air d'un guide technique sérieux et halluciner ses chiffres. Réflexe à enseigner : vérifier le nom d'un modèle sur la source primaire <code>ollama.com/library</code>.</p>
-  </div>
+  <p class="lead">Deux avis tranchés qui corrigent des idées reçues avant de te lancer.</p>
 
   <div class="card warnbox">
     <h3>« Ollama est-il indispensable, y a-t-il plus léger ? »</h3>
@@ -108,9 +103,9 @@
     <p>Tu as déjà Ollama : garde-le. Ta vraie variable d'ajustement, c'est la taille et la quantification du modèle.</p>
     <table>
       <tr><th>Alternative</th><th>Quand la préférer</th></tr>
-      <tr><td>LM Studio</td><td>Interface graphique pour débutants, démo grand public sans terminal.</td></tr>
-      <tr><td>Jan</td><td>Confidentialité maximale, open source MIT, zéro télémétrie. Argument souveraineté.</td></tr>
-      <tr><td>llama.cpp brut</td><td>Montrer la mécanique bas niveau. Pédagogique mais aride.</td></tr>
+      <tr><td><a href="https://lmstudio.ai">LM Studio</a></td><td>Interface graphique pour débutants, démo grand public sans terminal.</td></tr>
+      <tr><td><a href="https://www.jan.ai">Jan</a></td><td>Confidentialité maximale, open source, zéro télémétrie. Argument souveraineté.</td></tr>
+      <tr><td><a href="https://github.com/ggml-org/llama.cpp">llama.cpp brut</a></td><td>Montrer la mécanique bas niveau. Pédagogique mais aride.</td></tr>
     </table>
   </div>
 
@@ -237,7 +232,7 @@ ollama pull qwen2.5-coder:7b     # chat de code (sur ta machine)</code><button c
   <p>Sur portable faible : remplace le chat 7B par <code>qwen2.5-coder:1.5b</code> ou <code>gemma3:4b</code>.</p>
 
   <h3>Installer puis configurer Continue</h3>
-  <p>Extension « Continue » dans VS Code, puis fichier <code>config.yaml</code> (100 % local, aucune clé) :</p>
+  <p>Extension <a href="https://www.continue.dev">Continue</a> dans VS Code (doc : <a href="https://docs.continue.dev">docs.continue.dev</a>), puis fichier <code>config.yaml</code> (100 % local, aucune clé) :</p>
   <pre><code>name: Setup local UIMM
 version: 0.0.1
 schema: v1
@@ -303,12 +298,12 @@ def moyenne_temperatures(fichier_csv):
 
   <div class="card crit">
     <h3>Avertissement de réalisme</h3>
-    <p>Un agent fiable a besoin d'un modèle qui appelle des outils proprement. Sur petit modèle CPU, ça échoue souvent (JSON malformé). Démo sur <strong>ta</strong> machine (GPU 6 Go mini), pas sur les portables. Modèle <code>qwen3:8b</code> ou <code>qwen2.5-coder:7b</code>, objectifs simples et vérifiables. Goose est passé sous la Linux Foundation fin 2025.</p>
+    <p>Un agent fiable a besoin d'un modèle qui appelle des outils proprement. Sur petit modèle CPU, ça échoue souvent (JSON malformé). Démo sur <strong>ta</strong> machine (GPU 6 Go mini), pas sur les portables. Modèle <code>qwen3:8b</code> ou <code>qwen2.5-coder:7b</code>, objectifs simples et vérifiables. Goose (lancé par Block) est passé sous la Linux Foundation fin 2025, son dépôt a déménagé vers <code>aaif-goose/goose</code>. Doc : <a href="https://goose-docs.ai">goose-docs.ai</a>.</p>
   </div>
 
   <h3>Installer Goose (Windows, desktop)</h3>
   <ol>
-    <li>Page officielle des versions : <code>github.com/block/goose/releases</code>.</li>
+    <li>Page officielle des versions : <a href="https://github.com/aaif-goose/goose/releases">github.com/aaif-goose/goose/releases</a>.</li>
     <li>Télécharge l'installeur Windows (<code>Goose-Setup-x.x.x.exe</code>).</li>
     <li>Installe, ouvre l'application. Prérequis : Ollama tourne (vérifie avec <code>ollama ps</code>).</li>
   </ol>
@@ -361,7 +356,7 @@ P5,79</code><button class="copy">copier</button></pre>
   <div class="card defi"><span class="lbl">Défi étudiant</span>Donne le cas 3 à l'agent. Vérifie sa moyenne à la main. S'est-il trompé ? A-t-il lu le fichier ou inventé les chiffres ? Conclusion : même un agent se contrôle. L'autonomie n'est pas la fiabilité.</div>
 
   <div class="card warnbox">
-    <p><strong>Alternative honnête :</strong> le prof du post n'utilise pas Goose mais Continue. Pour un premier contact agentique, le mode agent/edit de Continue, ou Cline/Aider, suffit souvent et se débugge plus facilement. Ne complique pas si le palier 2 couvre ton besoin.</p>
+    <p><strong>Alternative honnête :</strong> le prof du post n'utilise pas Goose mais Continue. Pour un premier contact agentique, le mode agent/edit de <a href="https://www.continue.dev">Continue</a>, ou <a href="https://cline.bot">Cline</a> / <a href="https://aider.chat">Aider</a>, suffit souvent et se débugge plus facilement. Ne complique pas si le palier 2 couvre ton besoin.</p>
   </div>
 </section>
 
@@ -382,6 +377,22 @@ P5,79</code><button class="copy">copier</button></pre>
       <li>Le comportement de Goose sur ta machine. L'agentique locale reste plus fragile que le chat.</li>
     </ul>
   </div>
+</section>
+
+<section id="liens">
+  <h2>Outils mentionnés : liens officiels</h2>
+  <table>
+    <tr><th>Outil</th><th>Rôle</th><th>Lien officiel</th></tr>
+    <tr><td>Ollama</td><td>Moteur d'inférence local</td><td><a href="https://ollama.com">ollama.com</a></td></tr>
+    <tr><td>LM Studio</td><td>Runner local, interface graphique</td><td><a href="https://lmstudio.ai">lmstudio.ai</a></td></tr>
+    <tr><td>Jan</td><td>Runner local, open source, offline</td><td><a href="https://www.jan.ai">jan.ai</a></td></tr>
+    <tr><td>llama.cpp</td><td>Moteur bas niveau (socle des autres)</td><td><a href="https://github.com/ggml-org/llama.cpp">github.com/ggml-org/llama.cpp</a></td></tr>
+    <tr><td>Continue</td><td>Assistant de code dans VS Code</td><td><a href="https://www.continue.dev">continue.dev</a></td></tr>
+    <tr><td>Goose</td><td>Agent autonome</td><td><a href="https://goose-docs.ai">goose-docs.ai</a></td></tr>
+    <tr><td>Cline</td><td>Agent de code dans VS Code</td><td><a href="https://cline.bot">cline.bot</a></td></tr>
+    <tr><td>Aider</td><td>Agent de code en terminal, orienté Git</td><td><a href="https://aider.chat">aider.chat</a></td></tr>
+    <tr><td>Modèles Ollama</td><td>Vérifier noms et tailles</td><td><a href="https://ollama.com/library">ollama.com/library</a></td></tr>
+  </table>
 </section>
 
 <div class="foot">
