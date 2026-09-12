@@ -31,7 +31,9 @@
 
 ### Cours magistral & Support de référence actualisé (2026)
 
-- [Introduction à l'Intelligence Artificielle (Promotion 2026)](00-Formation/cours-introduction-ia-2026/index.html) | **Découverte à Avancé** | Web App / Diaporama interactif | Support de cours complet en 4 modules : Histoire & cybernétique, Mathématiques des Transformers, Ruptures 2022-2026 (Multimodalité, Raisonnement, Systèmes agentiques & protocole MCP), Cadre réglementaire AI Act européen et Souveraineté industrielle. [Conducteur pédagogique détaillé](00-Formation/cours-introduction-ia-2026/plan_detaille_formation_ia_2026.md) <sub>*(sept. 2026)*</sub>
+- [Introduction à l'Intelligence Artificielle (Promotion 2026)](https://sjaubert.github.io/Cours-IA/00-Formation/cours-introduction-ia-2026/index.html) | **Découverte à Avancé** | Web App / Diaporama interactif | Support de cours complet en 4 modules : Histoire & cybernétique, Mathématiques des Transformers, Ruptures 2022-2026 (Multimodalité, Raisonnement, Systèmes agentiques & protocole MCP), Cadre réglementaire AI Act européen et Souveraineté industrielle <sub>*(sept. 2026)*</sub>
+  - [Version locale interactive](00-Formation/cours-introduction-ia-2026/index.html) | [Conducteur pédagogique détaillé et sourcé](00-Formation/cours-introduction-ia-2026/plan_detaille_formation_ia_2026.md)
+  - [Archive historique PPTX (déc. 2025)](00-Formation/Module%20Formation/Diaporama%20COURS%20Introduction%20IA.pptx) | [Archive PDF](00-Formation/Module%20Formation/Diaporama%20COURS%20Introduction%20IA.pdf)
 
 ### Démonstrations interactives
 
@@ -47,6 +49,7 @@
 Formation interactive en 6 activités (biais cognitifs, première impression, sélection, confirmation, culturels, jeu de rôle) :
 
 - [Formation Intelligence Artificielle : Les Biais](https://sjaubert.github.io/Cours-IA/01-comprendre-ia/activites-biais/index.html) | **Découverte** | HTML | Point d'entrée avec guide formateur et support apprenant <sub>*(déc. 2025)*</sub>
+- [Métacognition et Biais dans le Prompting](00-Formation/Module%20Formation/MÉTACOGNITION%20ET%20BIAIS%20DANS%20LE%20PROMPTING.docx) | **Pratique** | DOCX | Identifier les mécanismes cognitifs (ancrage, confirmation, cadrage) et appliquer des protocoles de dé-biaisage dans le prompting <sub>*(jan. 2026)*</sub>
 
 Activités autonomes (approche par cas) :
 
@@ -62,6 +65,8 @@ Activités autonomes (approche par cas) :
 ### Guides de référence
 
 - [Guide Interactif Art du Prompt](https://sjaubert.github.io/Cours-IA/03-outils-google/ia-education/Guide_Interactif_Prompt.html) | **Découverte** | HTML | Introduction structurée aux principes du prompting efficace <sub>*(déc. 2025)*</sub>
+- [Maîtriser l'Art du Prompt Engineering](00-Formation/Maîtriser%20l'Art%20du%20Prompt%20Engineering%20.docx) | **Pratique** | DOCX | Synthèse complète des principes, techniques avancées et meilleures pratiques de conception d'instructions pour LLM <sub>*(jan. 2026)*</sub>
+- [Cas d'usage : Démonstration de Puissance & Effet de Levier Cognitif](00-Formation/CAS%20D'USAGE%20%20DÉMONSTRATION%20DE%20PUISSANCE%20EFFET%20DE%20LEVIER%20COGNITIF.docx) | **Avancé** | DOCX | Analyse financière & stratégique assistée par RAG, extraction de données multi-sources et synthèse de notes confidentielles <sub>*(jan. 2026)*</sub>
 
 - [PromptFlow UIMM Studio](https://sjaubert.github.io/Cours-IA/02-prompt-engineering/promptflow/dist/index.html) | **Pratique** | App Web | Outil de création pédagogique pour concevoir des séquences de prompts <sub>*(déc. 2025)*</sub>
 
@@ -291,4 +296,4 @@ Formation sur l'Intelligence Artificielle et ses applications industrielles
 
 ---
 
-*Dernière mise à jour : 28 juillet 2026. Arborescence réorganisée en domaines le 28 juillet 2026. Liens vérifiés sur la nouvelle structure.*
+*Dernière mise à jour : 12 septembre 2026. Actualisation du cours magistral d'introduction à l'IA (promotion 2026 : support interactif Web, conducteur pédagogique sourcé, intégration des ruptures agentiques et du cadre réglementaire AI Act).*
