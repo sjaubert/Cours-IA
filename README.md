@@ -31,9 +31,10 @@
 
 ### Cours magistral & Support de référence actualisé (2026)
 
-- [Introduction à l'Intelligence Artificielle (Promotion 2026)](https://sjaubert.github.io/Cours-IA/00-Formation/cours-introduction-ia-2026/index.html) | **Découverte à Avancé** | Web App / Diaporama interactif | Support de cours complet en 4 modules : Histoire & cybernétique, Mathématiques des Transformers, Ruptures 2022-2026 (Multimodalité, Raisonnement, Systèmes agentiques & protocole MCP), Cadre réglementaire AI Act européen et Souveraineté industrielle <sub>*(créé en sept. 2026)*</sub>
-  - [Version locale interactive](00-Formation/cours-introduction-ia-2026/index.html) | [Conducteur pédagogique détaillé et sourcé](00-Formation/cours-introduction-ia-2026/plan_detaille_formation_ia_2026.md) <sub>*(sept. 2026)*</sub>
-  - [Archive historique PPTX](00-Formation/Module%20Formation/Diaporama%20COURS%20Introduction%20IA.pptx) | [Archive PDF](00-Formation/Module%20Formation/Diaporama%20COURS%20Introduction%20IA.pdf) <sub>*(déc. 2025)*</sub>
+- [Introduction à l'Intelligence Artificielle (Promotion 2026)](https://sjaubert.github.io/Cours-IA/00-Formation/cours-introduction-ia-2026/index.html) | **Découverte à Avancé** | Web App & Support de formation | Support de cours complet en 4 modules : Histoire & cybernétique, Mathématiques des Transformers, Ruptures 2022-2026 (Multimodalité, Raisonnement, Systèmes agentiques & protocole MCP), Cadre réglementaire AI Act européen et Souveraineté industrielle <sub>*(créé en sept. 2026)*</sub>
+  - [Diaporama PowerPoint 2026 enrichi (77 slides)](00-Formation/cours-introduction-ia-2026/Diaporama_COURS_Introduction_IA_2026.pptx) | [Version PDF haute résolution](00-Formation/cours-introduction-ia-2026/Diaporama_COURS_Introduction_IA_2026.pdf) <sub>*(sept. 2026)*</sub>
+  - [Version web interactive](00-Formation/cours-introduction-ia-2026/index.html) | [Conducteur pédagogique détaillé et sourcé](00-Formation/cours-introduction-ia-2026/plan_detaille_formation_ia_2026.md) <sub>*(sept. 2026)*</sub>
+  - [Archive historique PPTX originale (66 slides)](00-Formation/Module%20Formation/Diaporama%20COURS%20Introduction%20IA.pptx) | [Archive PDF originale](00-Formation/Module%20Formation/Diaporama%20COURS%20Introduction%20IA.pdf) <sub>*(déc. 2025)*</sub>
 
 ### Démonstrations interactives
 
