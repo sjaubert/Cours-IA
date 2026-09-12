@@ -2,6 +2,13 @@
 Script de génération du diaporama actualisé 2026 :
 00-Formation/cours-introduction-ia-2026/Diaporama_COURS_Introduction_IA_2026.pptx
 Basé sur l'original : 00-Formation/Module Formation/Diaporama COURS Introduction IA.pptx
+
+Version HARMONISÉE SUR FOND BLANC (#FFFFFF) :
+- Style clair corporate identique aux diapositives d'origine.
+- 4 Intertitres de section officiels pour les Modules 1, 2, 3 et 4.
+- Repère contextuel de module dans le bandeau de chaque diapositive.
+- 11 nouvelles diapositives de contenu avec schémas haute résolution sur fond clair.
+- Conservation intégrale de l'ancienne version.
 """
 
 import os
@@ -19,21 +26,88 @@ OUTPUT_PPTX = os.path.join(SCRIPT_DIR, "Diaporama_COURS_Introduction_IA_2026.ppt
 ASSETS_DIR = os.path.join(SCRIPT_DIR, "assets")
 LOGO_PATH = os.path.join(PROJECT_ROOT, "logo_uimm_placeholder.jpg")
 
-# Palette graphique industrielle moderne (Dark Slate & Cyan/Indigo)
-COLOR_BG = RGBColor(11, 17, 32)         # #0B1120
-COLOR_CARD_BG = RGBColor(30, 41, 59)    # #1E293B
-COLOR_IMG_BG = RGBColor(15, 23, 42)     # #0F172A
-COLOR_BORDER = RGBColor(51, 65, 85)     # #334155
-COLOR_TITLE = RGBColor(248, 250, 252)   # #F8FAFC
-COLOR_SUBTITLE = RGBColor(56, 189, 248) # #38BDF8 (Cyan)
-COLOR_TEXT = RGBColor(226, 232, 240)    # #E2E8F0
-COLOR_MUTED = RGBColor(148, 163, 184)   # #94A3B8
-COLOR_ACCENT = RGBColor(129, 140, 248)  # #818CF8 (Indigo)
-COLOR_LINK = RGBColor(96, 165, 250)     # #60A5FA (Light Blue)
+# ==============================================================================
+# PALETTE GRAPHIQUE HARMONISÉE — STYLE LIGHT / FOND BLANC (#FFFFFF)
+# ==============================================================================
+COLOR_BG = RGBColor(255, 255, 255)         # #FFFFFF (Fond Blanc Pur)
+COLOR_CARD_BG = RGBColor(248, 250, 252)    # #F8FAFC (Fond Cartouche Doux)
+COLOR_IMG_BG = RGBColor(255, 255, 255)     # #FFFFFF (Fond Schéma Blanc)
+COLOR_BORDER = RGBColor(203, 213, 225)     # #CBD5E1 (Bordure Subtile)
+COLOR_TITLE = RGBColor(15, 23, 42)         # #0F172A (Bleu Nuit Profond)
+COLOR_SUBTITLE = RGBColor(2, 132, 199)     # #0284C7 (Bleu Institutionnel UIMM)
+COLOR_TEXT = RGBColor(51, 65, 85)          # #334155 (Corps de Texte Sombre)
+COLOR_MUTED = RGBColor(100, 116, 139)      # #64748B (Gris Médian)
+COLOR_ACCENT = RGBColor(37, 99, 235)       # #2563EB (Bleu Roi)
+COLOR_LINK = RGBColor(2, 132, 199)         # #0284C7 (Lien / Source)
+
+MODULE_SECTIONS = [
+    {
+        "module_num": 1,
+        "badge": "MODULE 1",
+        "title": "DÉMYSTIFIER L'INTELLIGENCE ARTIFICIELLE",
+        "subtitle": "Histoire, concepts fondamentaux, cybernétique et formes d'intelligence",
+        "color": RGBColor(2, 132, 199),     # #0284C7
+        "bg_badge": RGBColor(240, 249, 255),
+        "bullets": [
+            "Représentations & Définitions : Qu'est-ce que l'IA pour vous ? Dépasser les mythes de la science-fiction.",
+            "Formes d'Intelligence : De la théorie des intelligences multiples (Howard Gardner) au test de Turing.",
+            "Origines Historiques : Des conférences Macy (1946-1953) et de Dartmouth (1956) aux premiers hivers de l'IA.",
+            "Les Deux Grands Courants : L'approche symbolique (règles logiques) face à l'approche connexionniste (données)."
+        ]
+    },
+    {
+        "module_num": 2,
+        "badge": "MODULE 2",
+        "title": "SOUS LE CAPOT DE L'INTELLIGENCE ARTIFICIELLE",
+        "subtitle": "Du Machine Learning aux Réseaux de Neurones et au Deep Learning",
+        "color": RGBColor(37, 99, 235),     # #2563EB
+        "bg_badge": RGBColor(239, 246, 255),
+        "bullets": [
+            "Paradigmes du Machine Learning : Apprentissage supervisé vs non-supervisé à travers l'exemple classique du dataset Iris.",
+            "Le Neurone Artificiel & le Perceptron : Poids synaptiques, biais, fonctions d'activation et descente de gradient.",
+            "La Révolution du Deep Learning (2012) : Rôle historique d'AlexNet sur ImageNet, parallélisation GPU et fin des hivers.",
+            "Grands Domaines d'Application : Vision par ordinateur, traitement du signal acoustique et modèles séquentiels."
+        ]
+    },
+    {
+        "module_num": 3,
+        "badge": "MODULE 3",
+        "title": "MUTATIONS GÉNÉRATIVES & SYSTÈMES AGENTIQUES (2022-2026)",
+        "subtitle": "L'ère des Transformers, du raisonnement délibératif et des agents industriels",
+        "color": RGBColor(124, 58, 237),    # #7C3AED
+        "bg_badge": RGBColor(250, 245, 255),
+        "bullets": [
+            "Architecture Transformer & Auto-Attention (Vaswani 2017) : Rupture majeure avec le traitement séquentiel RNN/LSTM.",
+            "IA Multimodale en Atelier : Fusion sémantique conjointe de la vision haute cadence, de l'acoustique et des capteurs.",
+            "Modèles de Raisonnement (System 1 vs System 2) : Chaîne de pensée (CoT), délibération pas-à-pas et auto-correction.",
+            "Architecture RAG Industrielle : Ancrage documentaire sécurisé des LLM sur les manuels, plans et gammes de l'usine.",
+            "Systèmes Agentiques & Protocole MCP : Standard ouvert Anthropic pour interconnecter l'IA aux ERP, GMAO et automates."
+        ]
+    },
+    {
+        "module_num": 4,
+        "badge": "MODULE 4",
+        "title": "SOUVERAINETÉ, AI ACT & POSTURE DE L'INGÉNIEUR (2024-2026)",
+        "subtitle": "Régulation européenne, frugalité industrielle et esprit critique face à la machine",
+        "color": RGBColor(5, 150, 105),     # #059669
+        "bg_badge": RGBColor(236, 253, 245),
+        "bullets": [
+            "Règlement Européen AI Act (UE 2024/1689) : Pyramide des 4 niveaux de risques et exigences des machines à haut risque.",
+            "Souveraineté Numérique & Modèles Ouverts : Les atouts d'Open-Weights (Mistral, Llama) déployés On-Premise Air-Gapped.",
+            "Déploiement Local & Frugalité : Petits modèles de langage (SLM) et quantification 4-bit/8-bit (AWQ, GGUF) sur matériel atelier.",
+            "Bilan Énergétique & Empreinte Carbone : Évaluation de la consommation électrique par requête et cycle de vie du modèle.",
+            "Éthique, Métacognition & Biais : Identifier les 4 pièges cognitifs et garantir la supervision critique Human-in-the-Loop.",
+            "Feuille de Route Opérationnelle 2026 : Le cycle méthodologique d'industrialisation en 4 étapes pour l'ingénieur et le technicien."
+        ]
+    }
+]
 
 NEW_SLIDES_DATA = [
+    # Module 3 (5 slides)
     {
-        "module": "MODULE 3 — MUTATIONS GÉNÉRATIVES & AGENTS (2022-2026)",
+        "module_num": 3,
+        "module_tag": "Module 3 : Mutations génératives & Agents",
+        "module_badge": "MODULE 3 — MUTATIONS GÉNÉRATIVES & AGENTS (2022-2026)",
         "title": "Révolution Générative & Mécanisme d'Attention des Transformers",
         "subtitle": "De la classification discriminante à la génération contextuelle",
         "image": "transformer_architecture.png",
@@ -50,7 +124,9 @@ NEW_SLIDES_DATA = [
         ]
     },
     {
-        "module": "MODULE 3 — MUTATIONS GÉNÉRATIVES & AGENTS (2022-2026)",
+        "module_num": 3,
+        "module_tag": "Module 3 : Mutations génératives & Agents",
+        "module_badge": "MODULE 3 — MUTATIONS GÉNÉRATIVES & AGENTS (2022-2026)",
         "title": "L'IA Multimodale en Atelier : Vision, Son, Capteurs & Télémétrie",
         "subtitle": "Fusion de données hétérogènes dans un même espace d'encodage",
         "image": "multimodal_industrial_ai.png",
@@ -67,7 +143,9 @@ NEW_SLIDES_DATA = [
         ]
     },
     {
-        "module": "MODULE 3 — MUTATIONS GÉNÉRATIVES & AGENTS (2022-2026)",
+        "module_num": 3,
+        "module_tag": "Module 3 : Mutations génératives & Agents",
+        "module_badge": "MODULE 3 — MUTATIONS GÉNÉRATIVES & AGENTS (2022-2026)",
         "title": "Modèles de Raisonnement & Chaîne de Pensée (System 1 vs System 2)",
         "subtitle": "Passage de la réponse réflexe au calcul logique pas-à-pas",
         "image": "reasoning_chain_of_thought.png",
@@ -84,7 +162,9 @@ NEW_SLIDES_DATA = [
         ]
     },
     {
-        "module": "MODULE 3 — MUTATIONS GÉNÉRATIVES & AGENTS (2022-2026)",
+        "module_num": 3,
+        "module_tag": "Module 3 : Mutations génératives & Agents",
+        "module_badge": "MODULE 3 — MUTATIONS GÉNÉRATIVES & AGENTS (2022-2026)",
         "title": "Architecture RAG Industrielle (Retrieval-Augmented Generation)",
         "subtitle": "Ancrage des modèles sur la documentation privée de l'usine",
         "image": "rag_architecture.png",
@@ -101,7 +181,9 @@ NEW_SLIDES_DATA = [
         ]
     },
     {
-        "module": "MODULE 3 — MUTATIONS GÉNÉRATIVES & AGENTS (2022-2026)",
+        "module_num": 3,
+        "module_tag": "Module 3 : Mutations génératives & Agents",
+        "module_badge": "MODULE 3 — MUTATIONS GÉNÉRATIVES & AGENTS (2022-2026)",
         "title": "Systèmes Agentiques & Protocole Ouvert MCP (Model Context Protocol)",
         "subtitle": "De l'assistant conversationnel à l'agent d'action interconnecté",
         "image": "mcp_protocol_architecture.png",
@@ -117,8 +199,12 @@ NEW_SLIDES_DATA = [
             ("Linux Foundation", "Open Standards for Agentic AI Systems (2025)", "https://www.linuxfoundation.org/")
         ]
     },
+
+    # Module 4 (6 slides)
     {
-        "module": "MODULE 4 — SOUVERAINETÉ, RÉGULATION & MÉTHODOLOGIE (2024-2026)",
+        "module_num": 4,
+        "module_tag": "Module 4 : Souveraineté & Posture Ingénieur",
+        "module_badge": "MODULE 4 — SOUVERAINETÉ, RÉGULATION & MÉTHODOLOGIE (2024-2026)",
         "title": "Régulation Européenne : Le Règlement AI Act (2024-2026)",
         "subtitle": "Cadre juridique contraignant et classification par niveau de risque",
         "image": "ai_act_risk_pyramid.png",
@@ -135,7 +221,9 @@ NEW_SLIDES_DATA = [
         ]
     },
     {
-        "module": "MODULE 4 — SOUVERAINETÉ, RÉGULATION & MÉTHODOLOGIE (2024-2026)",
+        "module_num": 4,
+        "module_tag": "Module 4 : Souveraineté & Posture Ingénieur",
+        "module_badge": "MODULE 4 — SOUVERAINETÉ, RÉGULATION & MÉTHODOLOGIE (2024-2026)",
         "title": "Souveraineté Numérique & Modèles Ouverts (Open-Weights)",
         "subtitle": "Maîtrise de la propriété intellectuelle et indépendance technologique",
         "image": "sovereign_open_weights_models.png",
@@ -152,7 +240,9 @@ NEW_SLIDES_DATA = [
         ]
     },
     {
-        "module": "MODULE 4 — SOUVERAINETÉ, RÉGULATION & MÉTHODOLOGIE (2024-2026)",
+        "module_num": 4,
+        "module_tag": "Module 4 : Souveraineté & Posture Ingénieur",
+        "module_badge": "MODULE 4 — SOUVERAINETÉ, RÉGULATION & MÉTHODOLOGIE (2024-2026)",
         "title": "Déploiement Local & Frugalité : SLM et Quantification Numérique",
         "subtitle": "Rendre l'IA embarquable sur matériel industriel standard",
         "image": "frugal_ai_comparison.png",
@@ -169,7 +259,9 @@ NEW_SLIDES_DATA = [
         ]
     },
     {
-        "module": "MODULE 4 — SOUVERAINETÉ, RÉGULATION & MÉTHODOLOGIE (2024-2026)",
+        "module_num": 4,
+        "module_tag": "Module 4 : Souveraineté & Posture Ingénieur",
+        "module_badge": "MODULE 4 — SOUVERAINETÉ, RÉGULATION & MÉTHODOLOGIE (2024-2026)",
         "title": "Enjeux Énergétiques & Bilan Carbone de l'IA Industrielle",
         "subtitle": "Mesurer et optimiser le coût électrique du cycle de vie des modèles",
         "image": "energy_footprint_ai.png",
@@ -186,7 +278,9 @@ NEW_SLIDES_DATA = [
         ]
     },
     {
-        "module": "MODULE 4 — SOUVERAINETÉ, RÉGULATION & MÉTHODOLOGIE (2024-2026)",
+        "module_num": 4,
+        "module_tag": "Module 4 : Souveraineté & Posture Ingénieur",
+        "module_badge": "MODULE 4 — SOUVERAINETÉ, RÉGULATION & MÉTHODOLOGIE (2024-2026)",
         "title": "Éthique & Métacognition : Les 4 Pièges Cognitifs de l'Ingénieur",
         "subtitle": "Penser avec la machine sans renoncer à l'esprit critique",
         "image": "metacognition_biases_matrix.png",
@@ -204,7 +298,9 @@ NEW_SLIDES_DATA = [
         ]
     },
     {
-        "module": "MODULE 4 — SOUVERAINETÉ, RÉGULATION & MÉTHODOLOGIE (2024-2026)",
+        "module_num": 4,
+        "module_tag": "Module 4 : Souveraineté & Posture Ingénieur",
+        "module_badge": "MODULE 4 — SOUVERAINETÉ, RÉGULATION & MÉTHODOLOGIE (2024-2026)",
         "title": "Synthèse & Feuille de Route Opérationnelle de l'Ingénieur 2026",
         "subtitle": "Cycle méthodologique en 4 étapes pour industrialiser un projet d'IA",
         "image": "industrial_ai_roadmap_2026.png",
@@ -224,7 +320,7 @@ NEW_SLIDES_DATA = [
 
 
 def update_slide_1(slide):
-    """Actualise la diapositive de couverture (titre, date et mentions UIMM)."""
+    """Actualise la diapositive de couverture (titre, date, logos et mentions UIMM)."""
     # 1. Update text shapes
     for sh in slide.shapes:
         if sh.has_text_frame:
@@ -252,108 +348,129 @@ def update_slide_1(slide):
     bp.font.color.rgb = RGBColor(15, 23, 42)
 
 
-def update_references_slide(slide, total_slides):
-    """Réorganise la diapositive finale de références en deux colonnes équilibrées."""
-    # Supprimer l'ancienne boîte de texte qui déborde
-    shapes_to_remove = []
-    for sh in slide.shapes:
-        if sh.has_text_frame and sh.top > Inches(1.5):
-            shapes_to_remove.append(sh)
-    for sh in shapes_to_remove:
-        sp_elem = sh._element
-        sp_elem.getparent().remove(sp_elem)
-
-    # Colonne 1 : Références Fondamentales & Pédagogiques
-    col1_box = slide.shapes.add_textbox(Inches(0.8), Inches(1.5), Inches(5.6), Inches(5.2))
-    c1_tf = col1_box.text_frame
-    c1_tf.word_wrap = True
-
-    h1 = c1_tf.paragraphs[0]
-    h1.text = "Références Fondamentales & Générales"
-    h1.font.name = "Calibri"
-    h1.font.size = Pt(13)
-    h1.font.bold = True
-    h1.font.color.rgb = RGBColor(15, 23, 42)
-    h1.space_after = Pt(8)
-
-    refs_fondamentales = [
-        "Conférence Yann LeCun (Collège de France) : Atteindre l'intelligence humaine",
-        "Stéphane Roder (Eyrolles) : Guide pratique de l'IA dans l'entreprise",
-        "CNRS / FIDLE : Introduction approfondie au Deep Learning",
-        "Collège de France : Colloque L'IA et ses défis scientifiques et sociétaux",
-        "Université de Genève & Inspé : Guides pratiques d'accompagnement à l'IA",
-        "DGE / Ministère : Décryptage des opportunités de l'IA pour les entreprises"
-    ]
-    for r in refs_fondamentales:
-        p = c1_tf.add_paragraph()
-        p.text = f"• {r}"
-        p.font.name = "Calibri"
-        p.font.size = Pt(10)
-        p.font.color.rgb = RGBColor(51, 65, 85)
-        p.space_after = Pt(6)
-
-    # Colonne 2 : Références Réglementaires & Techniques 2024-2026
-    col2_box = slide.shapes.add_textbox(Inches(6.8), Inches(1.5), Inches(5.6), Inches(5.2))
-    c2_tf = col2_box.text_frame
-    c2_tf.word_wrap = True
-
-    h2 = c2_tf.paragraphs[0]
-    h2.text = "Références Techniques & Normes 2024-2026"
-    h2.font.name = "Calibri"
-    h2.font.size = Pt(13)
-    h2.font.bold = True
-    h2.font.color.rgb = RGBColor(2, 132, 199)
-    h2.space_after = Pt(8)
-
-    refs_modernes = [
-        "Règlement (UE) 2024/1689 (AI Act) : Cadre légal et exigences des systèmes à haut risque",
-        "ISO/IEC 42001:2023 : Système de management de l'intelligence artificielle (SMIA)",
-        "Vaswani et al. (2017) : 'Attention Is All You Need' — Mécanisme Transformer fondateur",
-        "Anthropic (2024) : Spécification du standard ouvert MCP (Model Context Protocol)",
-        "AFNOR Spec IA (2024) : Bonnes pratiques d'ingénierie et de robustesse des modèles",
-        "ANSSI (2024) : Guide de sécurité pour l'IA générative et souveraineté des données",
-        "Luccioni et al. / AIE (2024) : Bilan énergétique et mesure de l'empreinte carbone de l'IA"
-    ]
-    for r in refs_modernes:
-        p = c2_tf.add_paragraph()
-        p.text = f"• {r}"
-        p.font.name = "Calibri"
-        p.font.size = Pt(10)
-        p.font.color.rgb = RGBColor(51, 65, 85)
-        p.space_after = Pt(6)
-
-
-def add_footer_to_slide(slide, slide_num, total_slides):
-    """Ajoute le bandeau de conformité UIMM en pied de page sur chaque diapositive."""
-    ft_box = slide.shapes.add_textbox(Inches(0.8), Inches(7.05), Inches(11.7), Inches(0.35))
-    tf = ft_box.text_frame
-    tf.word_wrap = True
-    p = tf.paragraphs[0]
-    p.text = f"Pôle Formation UIMM - CVDL  |  Formateur : S. JAUBERT  |  Formation Introduction à l'IA (2026)  |  {slide_num}/{total_slides}"
-    p.font.name = "Calibri"
-    p.font.size = Pt(8.5)
-    p.font.color.rgb = RGBColor(148, 163, 184)
-
-
-def create_modern_slide(prs, data):
-    """Crée une diapositive moderne pour les modules 3 et 4 avec richesse visuelle et sources web."""
+def create_module_divider_slide(prs, sec_data):
+    """Crée une diapositive d'intertitre officielle pour marquer l'entrée dans un Module (1, 2, 3 ou 4)."""
     blank_layout = prs.slide_layouts[6]
     slide = prs.slides.add_slide(blank_layout)
 
-    # 1. Background fill sombre élégant (#0B1120)
+    # 1. Fond blanc pur
+    bg = slide.background
+    fill = bg.fill
+    fill.solid()
+    fill.fore_color.rgb = COLOR_BG
+
+    # 2. Barre d'accentuation verticale à gauche
+    accent_bar = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, Inches(0.8), Inches(1.2), Inches(0.18), Inches(5.3))
+    accent_bar.fill.solid()
+    accent_bar.fill.fore_color.rgb = sec_data["color"]
+    accent_bar.line.fill.background()
+
+    # 3. Header institutionnel UIMM (Haut droit)
+    brand_box = slide.shapes.add_textbox(Inches(9.8), Inches(0.4), Inches(2.2), Inches(0.55))
+    brtf = brand_box.text_frame
+    brtf.word_wrap = True
+    brp1 = brtf.paragraphs[0]
+    brp1.text = "Pôle Formation UIMM - CVDL"
+    brp1.font.name = "Calibri"
+    brp1.font.size = Pt(9)
+    brp1.font.bold = True
+    brp1.font.color.rgb = COLOR_TITLE
+    brp1.alignment = PP_ALIGN.RIGHT
+
+    brp2 = brtf.add_paragraph()
+    brp2.text = "Formateur : S. JAUBERT"
+    brp2.font.name = "Calibri"
+    brp2.font.size = Pt(8.5)
+    brp2.font.color.rgb = COLOR_MUTED
+    brp2.alignment = PP_ALIGN.RIGHT
+
+    if os.path.exists(LOGO_PATH):
+        slide.shapes.add_picture(LOGO_PATH, Inches(12.15), Inches(0.35), width=Inches(0.6), height=Inches(0.64))
+
+    # 4. Badge Capsule du Module
+    badge_shape = slide.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(1.2), Inches(1.35), Inches(2.4), Inches(0.48))
+    badge_shape.fill.solid()
+    badge_shape.fill.fore_color.rgb = sec_data["bg_badge"]
+    badge_shape.line.color.rgb = sec_data["color"]
+    badge_shape.line.width = Pt(1.5)
+    btf = badge_shape.text_frame
+    bp = btf.paragraphs[0]
+    bp.text = sec_data["badge"]
+    bp.font.name = "Calibri"
+    bp.font.size = Pt(13)
+    bp.font.bold = True
+    bp.font.color.rgb = sec_data["color"]
+    bp.alignment = PP_ALIGN.CENTER
+
+    # 5. Grand Titre du Module
+    title_box = slide.shapes.add_textbox(Inches(1.2), Inches(1.95), Inches(10.5), Inches(1.1))
+    ttf = title_box.text_frame
+    ttf.word_wrap = True
+    tp = ttf.paragraphs[0]
+    tp.text = sec_data["title"]
+    tp.font.name = "Calibri"
+    tp.font.size = Pt(25)
+    tp.font.bold = True
+    tp.font.color.rgb = COLOR_TITLE
+
+    # 6. Sous-titre explicatif
+    sub_box = slide.shapes.add_textbox(Inches(1.2), Inches(3.05), Inches(10.5), Inches(0.6))
+    stf = sub_box.text_frame
+    stf.word_wrap = True
+    sp = stf.paragraphs[0]
+    sp.text = sec_data["subtitle"]
+    sp.font.name = "Calibri"
+    sp.font.size = Pt(13)
+    sp.font.italic = True
+    sp.font.color.rgb = COLOR_MUTED
+
+    # 7. Cartouche récapitulatif des objectifs d'apprentissage
+    card = slide.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(1.2), Inches(3.75), Inches(10.8), Inches(2.75))
+    card.fill.solid()
+    card.fill.fore_color.rgb = COLOR_CARD_BG
+    card.line.color.rgb = COLOR_BORDER
+    card.line.width = Pt(1.2)
+
+    ctf = card.text_frame
+    ctf.word_wrap = True
+    hp = ctf.paragraphs[0]
+    hp.text = "Grandes thématiques & compétences développées dans ce module :"
+    hp.font.name = "Calibri"
+    hp.font.size = Pt(11)
+    hp.font.bold = True
+    hp.font.color.rgb = COLOR_TITLE
+    hp.space_after = Pt(8)
+
+    for bullet in sec_data["bullets"]:
+        p = ctf.add_paragraph()
+        p.text = f"•  {bullet}"
+        p.font.name = "Calibri"
+        p.font.size = Pt(10)
+        p.font.color.rgb = COLOR_TEXT
+        p.space_after = Pt(5)
+
+    return slide
+
+
+def create_modern_slide_light(prs, data):
+    """Crée une diapositive technique de contenu sur fond blanc avec cartouches clairs et schéma haute résolution."""
+    blank_layout = prs.slide_layouts[6]
+    slide = prs.slides.add_slide(blank_layout)
+
+    # 1. Fond blanc pur (#FFFFFF)
     bg = slide.background
     fill = bg.fill
     fill.solid()
     fill.fore_color.rgb = COLOR_BG
 
     # 2. Header : Badge Module
-    badge_box = slide.shapes.add_textbox(Inches(0.8), Inches(0.35), Inches(9.2), Inches(0.3))
+    badge_box = slide.shapes.add_textbox(Inches(0.8), Inches(0.35), Inches(9.0), Inches(0.3))
     btf = badge_box.text_frame
     btf.word_wrap = True
     bp = btf.paragraphs[0]
-    bp.text = data["module"]
+    bp.text = data["module_badge"]
     bp.font.name = "Calibri"
-    bp.font.size = Pt(10.5)
+    bp.font.size = Pt(10)
     bp.font.bold = True
     bp.font.color.rgb = COLOR_SUBTITLE
 
@@ -364,12 +481,12 @@ def create_modern_slide(prs, data):
     tp = ttf.paragraphs[0]
     tp.text = data["title"]
     tp.font.name = "Calibri"
-    tp.font.size = Pt(19)
+    tp.font.size = Pt(18.5)
     tp.font.bold = True
     tp.font.color.rgb = COLOR_TITLE
 
     # 4. Header : Branding UIMM & Logo (Top Right)
-    brand_box = slide.shapes.add_textbox(Inches(10.1), Inches(0.35), Inches(2.2), Inches(0.55))
+    brand_box = slide.shapes.add_textbox(Inches(10.0), Inches(0.35), Inches(2.2), Inches(0.55))
     brtf = brand_box.text_frame
     brtf.word_wrap = True
     brp1 = brtf.paragraphs[0]
@@ -388,7 +505,7 @@ def create_modern_slide(prs, data):
     brp2.alignment = PP_ALIGN.RIGHT
 
     if os.path.exists(LOGO_PATH):
-        slide.shapes.add_picture(LOGO_PATH, Inches(12.45), Inches(0.32), width=Inches(0.55), height=Inches(0.58))
+        slide.shapes.add_picture(LOGO_PATH, Inches(12.35), Inches(0.32), width=Inches(0.55), height=Inches(0.58))
 
     # 5. Left Column : Card Container
     card_left = Inches(0.8)
@@ -409,7 +526,7 @@ def create_modern_slide(prs, data):
     sp = sft.paragraphs[0]
     sp.text = data["subtitle"]
     sp.font.name = "Calibri"
-    sp.font.size = Pt(12)
+    sp.font.size = Pt(11.5)
     sp.font.bold = True
     sp.font.color.rgb = COLOR_SUBTITLE
 
@@ -421,9 +538,9 @@ def create_modern_slide(prs, data):
         p = btf.paragraphs[0] if idx == 0 else btf.add_paragraph()
         p.text = f"•  {bullet}"
         p.font.name = "Calibri"
-        p.font.size = Pt(10.5)
+        p.font.size = Pt(10)
         p.font.color.rgb = COLOR_TEXT
-        p.space_after = Pt(7)
+        p.space_after = Pt(6)
 
     # Sources block inside Left Card (bottom)
     sources_box = slide.shapes.add_textbox(Inches(0.95), Inches(5.35), Inches(5.5), Inches(1.4))
@@ -498,8 +615,91 @@ def create_modern_slide(prs, data):
     return slide
 
 
+def update_references_slide(slide):
+    """Réorganise la diapositive finale de références en deux colonnes équilibrées sur fond clair."""
+    # Supprimer les anciennes boîtes superflues
+    shapes_to_remove = []
+    for sh in slide.shapes:
+        if sh.has_text_frame and sh.top > Inches(1.5):
+            shapes_to_remove.append(sh)
+    for sh in shapes_to_remove:
+        sp_elem = sh._element
+        sp_elem.getparent().remove(sp_elem)
+
+    # Colonne 1 : Références Fondamentales & Pédagogiques
+    col1_box = slide.shapes.add_textbox(Inches(0.8), Inches(1.5), Inches(5.6), Inches(5.2))
+    c1_tf = col1_box.text_frame
+    c1_tf.word_wrap = True
+
+    h1 = c1_tf.paragraphs[0]
+    h1.text = "Références Fondamentales & Générales"
+    h1.font.name = "Calibri"
+    h1.font.size = Pt(13)
+    h1.font.bold = True
+    h1.font.color.rgb = COLOR_TITLE
+    h1.space_after = Pt(8)
+
+    refs_fondamentales = [
+        "Conférence Yann LeCun (Collège de France) : Atteindre l'intelligence humaine",
+        "Stéphane Roder (Eyrolles) : Guide pratique de l'IA dans l'entreprise",
+        "CNRS / FIDLE : Introduction approfondie au Deep Learning",
+        "Collège de France : Colloque L'IA et ses défis scientifiques et sociétaux",
+        "Université de Genève & Inspé : Guides pratiques d'accompagnement à l'IA",
+        "DGE / Ministère : Décryptage des opportunités de l'IA pour les entreprises"
+    ]
+    for r in refs_fondamentales:
+        p = c1_tf.add_paragraph()
+        p.text = f"• {r}"
+        p.font.name = "Calibri"
+        p.font.size = Pt(10)
+        p.font.color.rgb = COLOR_TEXT
+        p.space_after = Pt(6)
+
+    # Colonne 2 : Références Réglementaires & Techniques 2024-2026
+    col2_box = slide.shapes.add_textbox(Inches(6.8), Inches(1.5), Inches(5.6), Inches(5.2))
+    c2_tf = col2_box.text_frame
+    c2_tf.word_wrap = True
+
+    h2 = c2_tf.paragraphs[0]
+    h2.text = "Références Techniques & Normes 2024-2026"
+    h2.font.name = "Calibri"
+    h2.font.size = Pt(13)
+    h2.font.bold = True
+    h2.font.color.rgb = COLOR_SUBTITLE
+    h2.space_after = Pt(8)
+
+    refs_modernes = [
+        "Règlement (UE) 2024/1689 (AI Act) : Cadre légal et exigences des systèmes à haut risque",
+        "ISO/IEC 42001:2023 : Système de management de l'intelligence artificielle (SMIA)",
+        "Vaswani et al. (2017) : 'Attention Is All You Need' — Mécanisme Transformer fondateur",
+        "Anthropic (2024) : Spécification du standard ouvert MCP (Model Context Protocol)",
+        "AFNOR Spec IA (2024) : Bonnes pratiques d'ingénierie et de robustesse des modèles",
+        "ANSSI (2024) : Guide de sécurité pour l'IA générative et souveraineté des données",
+        "Luccioni et al. / AIE (2024) : Bilan énergétique et mesure de l'empreinte carbone de l'IA"
+    ]
+    for r in refs_modernes:
+        p = c2_tf.add_paragraph()
+        p.text = f"• {r}"
+        p.font.name = "Calibri"
+        p.font.size = Pt(10)
+        p.font.color.rgb = COLOR_TEXT
+        p.space_after = Pt(6)
+
+
+def add_footer_to_slide(slide, slide_num, total_slides, module_label):
+    """Ajoute le bandeau de conformité UIMM en pied de page sur chaque diapositive avec le nom du module."""
+    ft_box = slide.shapes.add_textbox(Inches(0.8), Inches(7.05), Inches(11.7), Inches(0.35))
+    tf = ft_box.text_frame
+    tf.word_wrap = True
+    p = tf.paragraphs[0]
+    p.text = f"Pôle Formation UIMM - CVDL  |  Formateur : S. JAUBERT  |  {module_label}  |  {slide_num}/{total_slides}"
+    p.font.name = "Calibri"
+    p.font.size = Pt(8.5)
+    p.font.color.rgb = COLOR_MUTED
+
+
 def main():
-    print("=== Démarrage de la génération du diaporama 2026 ===")
+    print("=== Démarrage de la génération harmonisée du diaporama 2026 (Fond Blanc) ===")
     print(f"Original PPTX : {ORIGINAL_PPTX}")
     print(f"Output PPTX   : {OUTPUT_PPTX}")
 
@@ -510,42 +710,93 @@ def main():
     orig_count = len(prs.slides)
     print(f"Nombre de diapositives d'origine : {orig_count}")
 
-    # Total slides = 66 originales + 11 nouvelles = 77
-    total_slides = orig_count + len(NEW_SLIDES_DATA)
-
-    # 1. Mise à jour de la Diapositive 1 (Couverture)
-    print("Mise à jour de la diapositive 1...")
-    update_slide_1(prs.slides[0])
-
-    # 2. Création et insertion des 11 nouvelles diapositives
-    # Dans l'original :
-    # Indices 0..63 = slides 1..64 (Technique ML/DL)
-    # Index 64 = slide 65 (Citation philosophique de S. Jaubert)
-    # Index 65 = slide 66 (Références)
-    # On insère les 11 slides avant la slide 65 (donc à l'index 64)
-    print("Génération et insertion des 11 nouvelles diapositives illustrées...")
+    # Total calculé : 66 originales + 4 intertitres + 11 nouvelles slides de contenu = 81 slides
+    total_slides = 81
     sldIdLst = prs.slides._sldIdLst
 
-    for k, data in enumerate(NEW_SLIDES_DATA):
-        print(f"  -> Ajout slide {65 + k}/{total_slides} : {data['title'][:45]}...")
-        create_modern_slide(prs, data)
-        # Déplacer l'élément ajouté en fin de liste vers l'index 64 + k
+    # 1. Mise à jour de la Diapositive 1 (Couverture)
+    print("1. Mise à jour de la diapositive 1 (Couverture)...")
+    update_slide_1(prs.slides[0])
+
+    # 2. Insertion de l'intertitre MODULE 1 (juste après la couverture, à l'index 1)
+    print("2. Création et insertion de l'intertitre MODULE 1...")
+    create_module_divider_slide(prs, MODULE_SECTIONS[0])
+    elem_m1 = sldIdLst[-1]
+    sldIdLst.remove(elem_m1)
+    sldIdLst.insert(1, elem_m1)
+
+    # 3. Insertion de l'intertitre MODULE 2 (avant la slide 40 originale - dataset Iris)
+    # Dans l'original, slide 40 = index 39. Avec l'intertitre Module 1 inséré en index 1,
+    # cette slide se trouve désormais à l'index 40.
+    # On insère l'intertitre Module 2 à l'index 40 !
+    print("3. Création et insertion de l'intertitre MODULE 2 (avant dataset Iris)...")
+    create_module_divider_slide(prs, MODULE_SECTIONS[1])
+    elem_m2 = sldIdLst[-1]
+    sldIdLst.remove(elem_m2)
+    sldIdLst.insert(40, elem_m2)
+
+    # 4. Insertion de l'intertitre MODULE 3 (après la slide 64 originale)
+    # L'original avait 64 slides techniques. Avec les 2 intertitres insérés, la slide 64 est à l'index 65.
+    # L'index d'insertion pour Module 3 est donc 66 !
+    print("4. Création et insertion de l'intertitre MODULE 3...")
+    create_module_divider_slide(prs, MODULE_SECTIONS[2])
+    elem_m3 = sldIdLst[-1]
+    sldIdLst.remove(elem_m3)
+    sldIdLst.insert(66, elem_m3)
+
+    # 5. Insertion des 5 diapositives de contenu du MODULE 3 (indices 67 à 71)
+    print("5. Insertion des 5 diapositives de contenu du MODULE 3...")
+    for k in range(5):
+        data = NEW_SLIDES_DATA[k]
+        create_modern_slide_light(prs, data)
         new_elem = sldIdLst[-1]
         sldIdLst.remove(new_elem)
-        sldIdLst.insert(64 + k, new_elem)
+        sldIdLst.insert(67 + k, new_elem)
 
-    # 3. Actualisation de la slide de références (désormais la dernière slide, index 76 / slide 77)
-    print("Mise en page à deux colonnes de la diapositive de références...")
-    ref_slide = prs.slides[76]
-    update_references_slide(ref_slide, total_slides)
+    # 6. Insertion de l'intertitre MODULE 4 (à l'index 72)
+    print("6. Création et insertion de l'intertitre MODULE 4...")
+    create_module_divider_slide(prs, MODULE_SECTIONS[3])
+    elem_m4 = sldIdLst[-1]
+    sldIdLst.remove(elem_m4)
+    sldIdLst.insert(72, elem_m4)
 
-    # 4. Ajout propre des footers numérotés sur TOUTES les diapositives de 2 à 77
-    print("Application du bandeau de conformité UIMM sur l'ensemble des diapositives 2 à 77...")
+    # 7. Insertion des 6 diapositives de contenu du MODULE 4 (indices 73 à 78)
+    print("7. Insertion des 6 diapositives de contenu du MODULE 4...")
+    for k in range(6):
+        data = NEW_SLIDES_DATA[5 + k]
+        create_modern_slide_light(prs, data)
+        new_elem = sldIdLst[-1]
+        sldIdLst.remove(new_elem)
+        sldIdLst.insert(73 + k, new_elem)
+
+    # 8. Mise en page à deux colonnes de la slide de références (désormais à l'index 80 / slide 81)
+    print("8. Mise en page de la diapositive de références finale...")
+    ref_slide = prs.slides[80]
+    update_references_slide(ref_slide)
+
+    # 9. Application du bandeau de pied de page sur l'ensemble des 81 diapositives
+    print("9. Application des bandeaux de conformité UIMM avec repères de module...")
     for idx in range(1, len(prs.slides)):
-        add_footer_to_slide(prs.slides[idx], idx + 1, total_slides)
+        slide = prs.slides[idx]
+        slide_num = idx + 1
 
-    # 5. Sauvegarde dans le nouveau fichier
-    print(f"Sauvegarde du nouveau diaporama dans {OUTPUT_PPTX}...")
+        if 2 <= slide_num <= 40:
+            mod_label = "Module 1 : Démystifier l'IA"
+        elif 41 <= slide_num <= 66:
+            mod_label = "Module 2 : Sous le capot de l'IA"
+        elif 67 <= slide_num <= 72:
+            mod_label = "Module 3 : Mutations génératives & Agents"
+        elif 73 <= slide_num <= 79:
+            mod_label = "Module 4 : Souveraineté & Posture Ingénieur"
+        elif slide_num == 80:
+            mod_label = "Conclusion & Posture Critique"
+        else:
+            mod_label = "Références & Bibliographie"
+
+        add_footer_to_slide(slide, slide_num, total_slides, mod_label)
+
+    # 10. Sauvegarde dans le nouveau fichier
+    print(f"Sauvegarde du diaporama harmonisé dans {OUTPUT_PPTX}...")
     os.makedirs(os.path.dirname(OUTPUT_PPTX), exist_ok=True)
     prs.save(OUTPUT_PPTX)
 
