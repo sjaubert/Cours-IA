@@ -150,6 +150,13 @@ run_status.txt
 *.ods
 *.odp
 
+# Exceptions : supports pédagogiques et diaporamas de référence
+!00-Formation/cours-introduction-ia-2026/Diaporama_COURS_Introduction_IA_2026.pdf
+!00-Formation/cours-introduction-ia-2026/Diaporama_COURS_Introduction_IA_2026.pptx
+!00-Formation/Module Formation/Diaporama COURS Introduction IA.pdf
+!00-Formation/Module Formation/Diaporama COURS Introduction IA.pptx
+!05-claude/cheat-sheet-claude-code-pratique.pdf
+
 # Archives
 *.zip
 *.tar.gz
