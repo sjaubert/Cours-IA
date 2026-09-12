@@ -1,6 +1,5 @@
 
 import React from 'react';
-import logo from '../../assets/logo_uimm_placeholder.jpg';
 
 const Header = () => {
     return (
@@ -15,7 +14,7 @@ const Header = () => {
         }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
                 <img
-                    src={logo}
+                    src="./logo_uimm_placeholder.jpg"
                     alt="Pôle Formation UIMM"
                     style={{ height: '70px', borderRadius: '4px' }}
                 />
