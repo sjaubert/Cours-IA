@@ -29,6 +29,10 @@
 
 ## 1. Comprendre l'IA, fondamentaux et biais
 
+### Cours magistral & Support de référence actualisé (2026)
+
+- [Introduction à l'Intelligence Artificielle (Promotion 2026)](00-Formation/cours-introduction-ia-2026/index.html) | **Découverte à Avancé** | Web App / Diaporama interactif | Support de cours complet en 4 modules : Histoire & cybernétique, Mathématiques des Transformers, Ruptures 2022-2026 (Multimodalité, Raisonnement, Systèmes agentiques & protocole MCP), Cadre réglementaire AI Act européen et Souveraineté industrielle. [Conducteur pédagogique détaillé](00-Formation/cours-introduction-ia-2026/plan_detaille_formation_ia_2026.md) <sub>*(sept. 2026)*</sub>
+
 ### Démonstrations interactives
 
 - [Les 7 Paramètres qui Contrôlent l'IA](https://sjaubert.github.io/Cours-IA/01-comprendre-ia/parametres-ia/index.html) | **Découverte** | HTML | Expérimentation en temps réel de Temperature, Top-P, Max Tokens et leur impact sur les réponses <sub>*(déc. 2025)*</sub>

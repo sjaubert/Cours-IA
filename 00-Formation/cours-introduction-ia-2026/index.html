@@ -1,0 +1,1567 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Introduction à l'Intelligence Artificielle — Pôle Formation UIMM CVDL (2026)</title>
+  
+  <!-- Polices Google Fonts : Outfit (titres), Inter (texte), JetBrains Mono (code & formules) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- MathJax v3 pour le rendu rigoureux des formules mathématiques en LaTeX -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <style>
+    /* ==========================================================================
+       VARIABLES DE DESIGN SYSTEME — PÔLE FORMATION UIMM - CVDL
+       ========================================================================== */
+    :root {
+      --bg-main: #0a0e14;
+      --bg-surface: #111722;
+      --bg-card: #16202e;
+      --bg-card-hover: #1c293b;
+      --bg-card-alt: #131b27;
+      --border-subtle: #233044;
+      --border-focus: #3b82f6;
+      
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --text-faint: #64748b;
+      
+      --uimm-blue: #2563eb;
+      --uimm-blue-light: #60a5fa;
+      --uimm-cyan: #06b6d4;
+      --accent-emerald: #10b981;
+      --accent-amber: #f59e0b;
+      --accent-rose: #f43f5e;
+      --accent-purple: #a855f7;
+      
+      --font-display: 'Outfit', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      
+      --transition-smooth: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      --shadow-card: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.4);
+      --shadow-glow: 0 0 35px -5px rgba(37, 99, 235, 0.25);
+    }
+
+    /* Reset et structure de base */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ==========================================================================
+       BARRE SUPERIEURE PERMANENTE (HEADER OFFICIEL UIMM - CVDL)
+       ========================================================================== */
+    .official-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10, 14, 20, 0.94);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 10px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .uimm-logo-img {
+      height: 38px;
+      width: auto;
+      border-radius: 4px;
+      background: #ffffff;
+      padding: 2px 6px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .brand-meta {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-title {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--text-main);
+    }
+
+    .brand-subtitle {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      display: flex;
+      gap: 10px;
+    }
+
+    .brand-subtitle span.author {
+      color: var(--uimm-cyan);
+      font-weight: 600;
+    }
+
+    .header-controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    /* Boutons de mode */
+    .mode-switch {
+      display: flex;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 3px;
+    }
+
+    .mode-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 5px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+    }
+
+    .mode-btn.active {
+      background: var(--uimm-blue);
+      color: #ffffff;
+    }
+
+    .mode-btn:hover:not(.active) {
+      color: var(--text-main);
+    }
+
+    .action-btn {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-family: var(--font-display);
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .action-btn:hover {
+      border-color: var(--border-focus);
+      background: var(--bg-card);
+    }
+
+    /* Barre de progression des diapositives */
+    .progress-bar-container {
+      position: fixed;
+      top: 58px;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: rgba(255, 255, 255, 0.05);
+      z-index: 99;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--uimm-blue), var(--uimm-cyan));
+      transition: width 0.3s ease;
+    }
+
+    /* ==========================================================================
+       NAVIGATION PAR MODULES
+       ========================================================================== */
+    .module-nav {
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 8px 24px;
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      white-space: nowrap;
+      scrollbar-width: thin;
+    }
+
+    .module-nav-item {
+      font-family: var(--font-display);
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      padding: 5px 12px;
+      border-radius: 6px;
+      border: 1px solid transparent;
+      background: transparent;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+      text-decoration: none;
+    }
+
+    .module-nav-item:hover {
+      color: var(--text-main);
+      background: var(--bg-card);
+    }
+
+    .module-nav-item.active {
+      color: var(--uimm-cyan);
+      background: var(--bg-card);
+      border-color: var(--border-subtle);
+    }
+
+    /* ==========================================================================
+       MODE DIAPORAMA (SLIDESHOW)
+       ========================================================================== */
+    .slideshow-view {
+      display: flex;
+      flex-direction: column;
+      height: calc(100dvh - 100px);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .slide-viewport {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      position: relative;
+    }
+
+    .slide-card {
+      display: none;
+      width: 100%;
+      max-width: 1120px;
+      max-height: calc(100dvh - 170px);
+      overflow-y: auto;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: clamp(20px, 4vh, 44px);
+      box-shadow: var(--shadow-card);
+      animation: fadeInSlide 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .slide-card.active-slide {
+      display: block;
+    }
+
+    @keyframes fadeInSlide {
+      from { opacity: 0; transform: translateY(12px) scale(0.99); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    /* Barre de commande inférieure du diaporama */
+    .slide-footer-bar {
+      height: 52px;
+      background: var(--bg-surface);
+      border-top: 1px solid var(--border-subtle);
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .slide-counter {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .slide-nav-controls {
+      display: flex;
+      gap: 8px;
+    }
+
+    .nav-arrow-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      padding: 6px 16px;
+      border-radius: 8px;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+    }
+
+    .nav-arrow-btn:hover:not(:disabled) {
+      background: var(--uimm-blue);
+      border-color: var(--uimm-blue-light);
+    }
+
+    .nav-arrow-btn:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+
+    /* ==========================================================================
+       MODE DOCUMENT / SOMMAIRE (DOC VIEW)
+       ========================================================================== */
+    .document-view {
+      display: none;
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 40px 24px 100px;
+    }
+
+    .document-section {
+      margin-bottom: 60px;
+      scroll-margin-top: 120px;
+    }
+
+    .doc-slide-block {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      padding: 32px;
+      margin-bottom: 28px;
+      box-shadow: var(--shadow-card);
+    }
+
+    /* ==========================================================================
+       TYPOGRAPHIE & ELEMENTS DE CONTENU DES DIAPOSITIVES
+       ========================================================================== */
+    .slide-header-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+      padding-bottom: 12px;
+    }
+
+    .slide-module-tag {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--uimm-cyan);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .slide-num-tag {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-faint);
+    }
+
+    .slide-title {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(1.4rem, 2.8vh, 2.1rem);
+      line-height: 1.25;
+      color: #ffffff;
+      margin-bottom: 16px;
+    }
+
+    .slide-lead {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+      line-height: 1.55;
+    }
+
+    /* Grilles et composants */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 20px;
+      margin: 20px 0;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+      margin: 20px 0;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin: 20px 0;
+    }
+
+    .info-card {
+      background: var(--bg-card-alt);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 20px;
+      transition: var(--transition-smooth);
+    }
+
+    .info-card:hover {
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .info-card.highlight {
+      border-left: 4px solid var(--uimm-blue-light);
+    }
+
+    .info-card.success {
+      border-left: 4px solid var(--accent-emerald);
+    }
+
+    .info-card.warning {
+      border-left: 4px solid var(--accent-amber);
+    }
+
+    .info-card.danger {
+      border-left: 4px solid var(--accent-rose);
+    }
+
+    .info-card.purple {
+      border-left: 4px solid var(--accent-purple);
+    }
+
+    .card-title {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 1.05rem;
+      color: #ffffff;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-text {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* Tableaux structurés */
+    .table-container {
+      overflow-x: auto;
+      margin: 18px 0;
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      text-align: left;
+    }
+
+    th {
+      background: var(--bg-surface);
+      color: var(--text-main);
+      font-family: var(--font-display);
+      font-weight: 600;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    td {
+      padding: 12px 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      color: var(--text-muted);
+      vertical-align: top;
+    }
+
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: rgba(255, 255, 255, 0.02); }
+
+    /* Blocs de code & formules */
+    .code-block {
+      background: #070a0f;
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 16px;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: #e2e8f0;
+      overflow-x: auto;
+      margin: 16px 0;
+    }
+
+    .formula-box {
+      background: rgba(37, 99, 235, 0.06);
+      border: 1px solid rgba(37, 99, 235, 0.3);
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin: 16px 0;
+      text-align: center;
+    }
+
+    /* Badges & Pills */
+    .pill {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-main);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .pill.blue { background: rgba(37, 99, 235, 0.2); color: var(--uimm-blue-light); border-color: rgba(37, 99, 235, 0.4); }
+    .pill.cyan { background: rgba(6, 182, 212, 0.2); color: var(--uimm-cyan); border-color: rgba(6, 182, 212, 0.4); }
+    .pill.emerald { background: rgba(16, 185, 129, 0.2); color: var(--accent-emerald); border-color: rgba(16, 185, 129, 0.4); }
+    .pill.amber { background: rgba(245, 158, 11, 0.2); color: var(--accent-amber); border-color: rgba(245, 158, 11, 0.4); }
+    .pill.rose { background: rgba(244, 63, 94, 0.2); color: var(--accent-rose); border-color: rgba(244, 63, 94, 0.4); }
+
+    /* Boîtes de sources officielles avec liens */
+    .source-box {
+      background: rgba(6, 182, 212, 0.05);
+      border-left: 3px solid var(--uimm-cyan);
+      border-radius: 0 8px 8px 0;
+      padding: 12px 16px;
+      margin-top: 20px;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .source-box strong { color: var(--uimm-cyan); }
+    .source-link {
+      color: var(--uimm-blue-light);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      transition: var(--transition-smooth);
+    }
+    .source-link:hover { color: #ffffff; }
+
+    /* Citation finale */
+    .philosophical-quote {
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(168, 85, 247, 0.08) 100%);
+      border: 1px solid rgba(168, 85, 247, 0.3);
+      border-radius: 14px;
+      padding: 28px;
+      margin: 20px 0;
+      font-size: 1.02rem;
+      line-height: 1.7;
+      color: #e2e8f0;
+      font-style: italic;
+    }
+
+    .quote-author {
+      display: block;
+      margin-top: 14px;
+      font-style: normal;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--uimm-cyan);
+      text-align: right;
+    }
+
+    /* Listes stylisées */
+    ul.styled-list {
+      list-style: none;
+      padding-left: 0;
+      margin: 14px 0;
+    }
+
+    ul.styled-list li {
+      position: relative;
+      padding-left: 22px;
+      margin-bottom: 10px;
+      font-size: 0.93rem;
+      color: var(--text-muted);
+    }
+
+    ul.styled-list li::before {
+      content: "";
+      position: absolute;
+      left: 4px;
+      top: 10px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--uimm-cyan);
+    }
+
+    ul.styled-list li strong {
+      color: var(--text-main);
+    }
+
+    /* Pied de page officiel UIMM */
+    .official-footer {
+      background: var(--bg-surface);
+      border-top: 1px solid var(--border-subtle);
+      padding: 24px;
+      text-align: center;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .official-footer a { color: var(--uimm-cyan); text-decoration: none; }
+    .official-footer a:hover { text-decoration: underline; }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .official-header { flex-direction: column; align-items: flex-start; }
+      .header-controls { width: 100%; justify-content: space-between; margin-top: 6px; }
+      .slide-card { padding: 20px; }
+      .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================================================
+       EN-TETE OFFICIEL PERMANENT (CONFORME CHARTE UIMM - CVDL)
+       ========================================================================== -->
+  <header class="official-header">
+    <div class="brand-group">
+      <img src="../../logo_uimm_placeholder.jpg" alt="Logo Pôle Formation UIMM - CVDL" class="uimm-logo-img">
+      <div class="brand-meta">
+        <span class="brand-title">Pôle Formation UIMM - CVDL</span>
+        <span class="brand-subtitle">
+          Cours d'Introduction à l'IA · Promotion 2026 · Formateur : <span class="author">S. JAUBERT</span>
+        </span>
+      </div>
+    </div>
+    
+    <div class="header-controls">
+      <div class="mode-switch">
+        <button id="btn-mode-slideshow" class="mode-btn active" onclick="switchView('slideshow')">Diaporama</button>
+        <button id="btn-mode-doc" class="mode-btn" onclick="switchView('document')">Document complet</button>
+      </div>
+      <button class="action-btn" onclick="toggleFullScreen()" title="Plein écran (Touche F)">
+        <span>Plein écran</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Barre de progression de la présentation -->
+  <div class="progress-bar-container">
+    <div id="slide-progress" class="progress-bar"></div>
+  </div>
+
+  <!-- Barre de navigation rapide par module -->
+  <nav class="module-nav" id="module-navigation">
+    <button class="module-nav-item active" onclick="jumpToModule(1)">Module 1 : Démystifier l'IA</button>
+    <button class="module-nav-item" onclick="jumpToModule(2)">Module 2 : Sous le capot (Transformers)</button>
+    <button class="module-nav-item" onclick="jumpToModule(3)">Module 3 : Ruptures 2022-2026 (Agents & RAG)</button>
+    <button class="module-nav-item" onclick="jumpToModule(4)">Module 4 : Industrie, AI Act & Esprit Critique</button>
+  </nav>
+
+  <!-- ==========================================================================
+       VUE 1 : MODE DIAPORAMA INTERACTIF (VIEWPORT FIT)
+       ========================================================================== -->
+  <main id="view-slideshow" class="slideshow-view">
+    <div class="slide-viewport">
+
+      <!-- SLIDE 1 : TITRE & CADRAGE -->
+      <article class="slide-card active-slide" data-slide-index="1" data-module="1">
+        <div class="slide-header-meta">
+          <span class="slide-module-tag">Module 1 · Fondements & Définitions</span>
+          <span class="slide-num-tag">Diapositive 1 / 20</span>
+        </div>
+        <h1 class="slide-title">Introduction à l'Intelligence Artificielle</h1>
+        <p class="slide-lead">Des origines cybernétiques à la révolution agentique et souveraine. Document de référence pédagogique actualisé pour la promotion 2026.</p>
+        
+        <div class="grid-3">
+          <div class="info-card highlight">
+            <h3 class="card-title">Structure de formation</h3>
+            <p class="card-text"><strong>Pôle Formation UIMM - CVDL</strong><br>Campus technologique & industriel</p>
+          </div>
+          <div class="info-card highlight">
+            <h3 class="card-title">Ingénierie & Enseignement</h3>
+            <p class="card-text"><strong>S. JAUBERT</strong><br>Conception pédagogique & IA industrielle</p>
+          </div>
+          <div class="info-card highlight">
+            <h3 class="card-title">Cadre méthodologique</h3>
+            <p class="card-text">4 modules articulés : Histoire, Modélisation mathématique, Rupture 2026 et Conformité européenne.</p>
+          </div>
+        </div>
+
+        <div class="source-box">
+          <strong>Orientation :</strong> Navigation au clavier avec les flèches gauche/droite ou barre d'espace. Vous pouvez basculer à tout moment en mode « Document complet » pour l'impression ou la lecture continue.
+        </div>
+      </article>
+
+      <!-- SLIDE 2 : TOUR DE TABLE & PERCEPTIONS -->
+      <article class="slide-card" data-slide-index="2" data-module="1">
+        <div class="slide-header-meta">
+          <span class="slide-module-tag">Module 1 · Démystification</span>
+          <span class="slide-num-tag">Diapositive 2 / 20</span>
+        </div>
+        <h2 class="slide-title">C'est quoi l'IA pour vous ?</h2>
+        <p class="slide-lead">Tour de table initial : « Citez une intelligence artificielle que vous utilisez ou croisez dans votre quotidien personnel ou d'atelier. »</p>
+        
+        <div class="grid-2">
+          <div class="info-card">
+            <h3 class="card-title">Usages quotidiens spontanés</h3>
+            <ul class="styled-list">
+              <li><strong>Navigation & logistique :</strong> Waze, GPS, calcul d'itinéraires et prédiction de flux.</li>
+              <li><strong>Recommandation personnalisée :</strong> Netflix, Spotify, YouTube (filtrage collaboratif).</li>
+              <li><strong>Générateurs grand public :</strong> ChatGPT, Gemini, Copilot, Midjourney.</li>
+              <li><strong>Contrôle qualité & vision :</strong> Tri optique de pièces, reconnaissance de défauts d'usinage.</li>
+            </ul>
+          </div>
+          <div class="info-card warning">
+            <h3 class="card-title">Points de vigilance immédiats</h3>
+            <ul class="styled-list">
+              <li><strong>Confusion outil / conscience :</strong> L'IA simule des processus logico-linguistiques sans éprouver d'états de conscience.</li>
+              <li><strong>Le piège de la confiance aveugle :</strong> Une réponse syntaxiquement parfaite n'est pas nécessairement exacte.</li>
+              <li><strong>La dimension énergétique :</strong> Derrière un calcul apparemment immatériel se trouvent des centres de calcul physiques.</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <!-- SLIDE 3 : ALAN TURING & LA QUESTION OPERATIONNELLE -->
+      <article class="slide-card" data-slide-index="3" data-module="1">
+        <div class="slide-header-meta">
+          <span class="slide-module-tag">Module 1 · Histoire & Epistémologie</span>
+          <span class="slide-num-tag">Diapositive 3 / 20</span>
+        </div>
+        <h2 class="slide-title">Alan Turing (1950) : Du philosophique à l'opérationnel</h2>
+        <p class="slide-lead">En 1950, le mathématicien britannique Alan Turing évite le débat métaphysique insoluble « Les machines peuvent-elles penser ? » pour poser une question vérifiable par l'expérience.</p>
+        
+        <div class="grid-2">
+          <div class="info-card highlight">
+            <h3 class="card-title">Le jeu de l'imitation (Test de Turing)</h3>
+            <p class="card-text">Si un interrogateur humain échangeant par téléscripteur (clavier/écran) ne parvient pas à distinguer de manière fiable les réponses d'un ordinateur de celles d'un être humain, la machine peut être qualifiée d'intelligente sur le plan opérationnel.</p>
+          </div>
+          <div class="info-card">
+            <h3 class="card-title">Portée pour l'ingénieur moderne</h3>
+            <p class="card-text">L'IA est évaluée par ses <strong>performances fonctionnelles</strong> et ses résultats empiriques mesurables, sans préjuger de sa nature intérieure. Les modèles de langage modernes ont validé ce test au sens strict, révélant ses limites d'évaluation de la rationalité réelle.</p>
+          </div>
+        </div>
+
+        <div class="source-box">
+          <strong>Source primaire :</strong> Turing, A. M. (1950). <em>Computing Machinery and Intelligence</em>. Mind, 59(236), 433–460. <a class="source-link" href="https://doi.org/10.1093/mind/LIX.236.433" target="_blank" rel="noopener">Consulter l'article original sur Oxford Academic</a>.
+        </div>
+      </article>
+
+      <!-- SLIDE 4 : LES INTELLIGENCES MULTIPLES -->
+      <article class="slide-card" data-slide-index="4" data-module="1">
+        <div class="slide-header-meta">
+          <span class="slide-module-tag">Module 1 · Théorie Cognitive</span>
+          <span class="slide-num-tag">Diapositive 4 / 20</span>
+        </div>
+        <h2 class="slide-title">Howard Gardner : La théorie des intelligences multiples</h2>
+        <p class="slide-lead">En 1983, le psychologue du développement Howard Gardner démonte le mythe d'une intelligence générale unique réductible au quotient intellectuel (QI).</p>
+        
+        <div class="grid-4">
+          <div class="info-card success">
+            <span class="pill blue">Cible des LLM</span>
+            <h4 class="card-title" style="margin-top:6px;">Linguistique</h4>
+            <p class="card-text">Maîtrise syntaxique, sémantique et génération textuelle.</p>
+          </div>
+          <div class="info-card success">
+            <span class="pill blue">Cible des LLM</span>
+            <h4 class="card-title" style="margin-top:6px;">Logico-maths</h4>
+            <p class="card-text">Raisonnement déductif, calcul formel, structures de code.</p>
+          </div>
+          <div class="info-card">
+            <span class="pill cyan">Vision IA</span>
+            <h4 class="card-title" style="margin-top:6px;">Spatiale</h4>
+            <p class="card-text">Perception 3D, plans techniques, vision industrielle.</p>
+          </div>
+          <div class="info-card warning">
+            <span class="pill amber">Robotique</span>
+            <h4 class="card-title" style="margin-top:6px;">Kinesthésique</h4>
+            <p class="card-text">Coordination motrice, dextérité d'atelier, préhension d'outils.</p>
+          </div>
+        </div>
+
+        <p class="card-text" style="margin-top:10px;">Les autres formes (musicale, naturaliste, interpersonnelle, intrapersonnelle) rappellent que l'IA générative n'occupe qu'un sous-ensemble spécifique du spectre intellectuel.</p>
+
+        <div class="source-box">
+          <strong>Sources :</strong> Gardner, H. (1993). <em>Frames of Mind: The Theory of Multiple Intelligences</em>. <a class="source-link" href="https://www.howardgardner.com/multiple-intelligences" target="_blank" rel="noopener">Site officiel Howard Gardner</a> · Analyse didactique : <a class="source-link" href="https://synapses-lamap.org/2020/04/02/que-peut-on-dire-de-lidee-dintelligences-multiples-et-de-son-application-en-classe/" target="_blank" rel="noopener">Fondation La main à la pâte</a>.
+        </div>
+      </article>
+
+      <!-- SLIDE 5 : LES DEUX GRANDS PARADIGMES -->
+      <article class="slide-card" data-slide-index="5" data-module="1">
+        <div class="slide-header-meta">
+          <span class="slide-module-tag">Module 1 · Paradigmes Fondateurs</span>
+          <span class="slide-num-tag">Diapositive 5 / 20</span>
+        </div>
+        <h2 class="slide-title">Symbolique vs Connexionnisme</h2>
+        <p class="slide-lead">L'histoire de l'intelligence artificielle est rythmée par la confrontation féconde entre deux écoles épistémologiques divergentes.</p>
+        
+        <div class="grid-2">
+          <div class="info-card highlight">
+            <span class="pill blue">Approche Déductive</span>
+            <h3 class="card-title" style="margin-top:6px;">L'IA Symbolique (GOFAI)</h3>
+            <ul class="styled-list">
+              <li><strong>Principe :</strong> Modélisation explicite par des symboles discrets et des règles logiques définies par des experts ($Si \dots Alors$).</li>
+              <li><strong>Forces :</strong> Déterminisme, explicabilité totale, traçabilité des inférences.</li>
+              <li><strong>Limites :</strong> Incapacité à appréhender le monde réel imprévisible (bruit capteur, vision, langage naturel). Paradoxe de Moravec.</li>
+            </ul>
+          </div>
+          <div class="info-card success">
+            <span class="pill emerald">Approche Inductive</span>
+            <h3 class="card-title" style="margin-top:6px;">L'IA Connexionniste (Réseaux de neurones)</h3>
+            <ul class="styled-list">
+              <li><strong>Principe :</strong> Apprentissage automatique de paramètres statistiques à partir d'exemples numériques massifs.</li>
+              <li><strong>Forces :</strong> Robustesse au bruit, généralisation, performance empirique surhumaine en reconnaissance de motifs.</li>
+              <li><strong>Limites :</strong> Effet "boîte noire", besoin colossal en données d'entraînement et en puissance de calcul.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="source-box">
+          <strong>Repère historique :</strong> Conférence de Dartmouth (1956), acte de naissance de l'expression <em>Artificial Intelligence</em> (McCarthy, Minsky, Shannon, Rochester).
+        </div>
+      </article>
+
+      <!-- SLIDE 6 : HISTOIRE & HIVERS DE L'IA -->
+      <article class="slide-card" data-slide-index="6" data-module="1">
+        <div class="slide-header-meta">
+          <span class="slide-module-tag">Module 1 · Jalons Historiques</span>
+          <span class="slide-num-tag">Diapositive 6 / 20</span>
+        </div>
+        <h2 class="slide-title">Du Perceptron (1958) au Premier Hiver de l'IA (1969)</h2>
+        <p class="slide-lead">L'enthousiasme démesuré face aux premiers succès techniques a régulièrement été sanctionné par des blocages théoriques et des retraits massifs de financements.</p>
+        
+        <div class="grid-3">
+          <div class="info-card">
+            <span class="pill cyan">1958</span>
+            <h4 class="card-title" style="margin-top:6px;">Le Perceptron de Rosenblatt</h4>
+            <p class="card-text">Premier modèle formel de neurone capable d'apprendre des séparateurs linéaires sur l'ordinateur Mark I de la Navy. Annoncé à tort comme « le germe d'un cerveau conscient ».</p>
+          </div>
+          <div class="info-card danger">
+            <span class="pill rose">1969</span>
+            <h4 class="card-title" style="margin-top:6px;">Le mur du OU Exclusif (XOR)</h4>
+            <p class="card-text">Minsky et Papert démontrent mathématiquement qu'un réseau monocouche ne peut pas résoudre les fonctions non linéairement séparables. Début du premier hiver de l'IA.</p>
+          </div>
+          <div class="info-card success">
+            <span class="pill emerald">1986</span>
+            <h4 class="card-title" style="margin-top:6px;">La Rétropropagation</h4>
+            <p class="card-text">Rumelhart, Hinton et Williams popularisent l'algorithme de descente de gradient stochastique permettant d'entraîner des réseaux multicouches complexes.</p>
+          </div>
+        </div>
+
+        <div class="source-box">
+          <strong>Sources académiques :</strong> Rosenblatt (1958) <em>The Perceptron</em> · Minsky & Papert (1969) <em>Perceptrons: An Introduction to Computational Geometry</em> · Rumelhart, Hinton, Williams (1986) <a class="source-link" href="https://doi.org/10.1038/323533a0" target="_blank" rel="noopener">Nature 323, 533–536</a>.
+        </div>
+      </article>
+
+      <!-- SLIDE 7 : LE NEURONE ARTIFICIEL FORMEL -->
+      <article class="slide-card" data-slide-index="7" data-module="2">
+        <div class="slide-header-meta">
+          <span class="slide-module-tag">Module 2 · Sous le Capot</span>
+          <span class="slide-num-tag">Diapositive 7 / 20</span>
+        </div>
+        <h2 class="slide-title">Le Neurone Artificiel : Modèle Mathématique</h2>
+        <p class="slide-lead">L'unité de base d'un réseau profond est un opérateur mathématique élémentaire combinant une projection affine et un seuillage non-linéaire.</p>
+        
+        <div class="formula-box">
+          $$y = f\left(\sum_{i=1}^n w_i \cdot x_i + b\right) = f\left(\mathbf{w}^T \mathbf{x} + b\right)$$
+        </div>
+
+        <div class="grid-3">
+          <div class="info-card">
+            <h4 class="card-title">1. Vecteur d'entrées $\mathbf{x}$</h4>
+            <p class="card-text">Variables descriptives numériques (mesures de capteurs, pixels d'une image, valeurs d'un tableau technique).</p>
+          </div>
+          <div class="info-card highlight">
+            <h4 class="card-title">2. Poids $\mathbf{w}$ & Biais $b$</h4>
+            <p class="card-text">Paramètres ajustables appris lors de la phase d'entraînement par descente de gradient pour minimiser la fonction de perte.</p>
+          </div>
+          <div class="info-card success">
+            <h4 class="card-title">3. Activation $f(z)$</h4>
+            <p class="card-text">Fonction non-linéaire (ReLU, Sigmoïde, GELU) permettant au réseau d'approximer n'importe quelle surface de décision complexe.</p>
+          </div>
+        </div>
+
+        <div class="source-box">
+          <strong>Cas d'école classique :</strong> La séparation binaire sur les longueurs et largeurs de sépales du jeu de données <em>Iris</em> (Fisher, 1936), matrice d'introduction à la régression logistique.
+        </div>
+      </article>
+
+      <!-- SLIDE 8 : LE BASCULEMENT DE 2012 (DEEP LEARNING) -->
+      <article class="slide-card" data-slide-index="8" data-module="2">
+        <div class="slide-header-meta">
+          <span class="slide-module-tag">Module 2 · Deep Learning</span>
+          <span class="slide-num-tag">Diapositive 8 / 20</span>
+        </div>
+        <h2 class="slide-title">Le Tournant Majeur de 2012 : AlexNet & ImageNet</h2>
+        <p class="slide-lead">En septembre 2012, le concours mondial ImageNet marque la victoire éclatante et définitive de l'apprentissage profond sur les méthodes traditionnelles de vision artificielle.</p>
+        
+        <div class="grid-3">
+          <div class="info-card highlight">
+            <h3 class="card-title">1. Données massives</h3>
+            <p class="card-text">Base ImageNet : plus de 14 millions d'images étiquetées à la main réparties en 20 000 catégories. Le volume de données permet enfin d'entraîner des millions de paramètres sans surapprentissage immédiat.</p>
+          </div>
+          <div class="info-card success">
+            <h3 class="card-title">2. Matériel GPU NVIDIA</h3>
+            <p class="card-text">Alex Krizhevsky détourne deux cartes graphiques grand public (NVIDIA GeForce GTX 580) pour paralléliser les calculs matriciels en virgule flottante, accélérant l'entraînement d'un facteur 100.</p>
+          </div>
+          <div class="info-card purple">
+            <h3 class="card-title">3. Rupture de performance</h3>
+            <p class="card-text">Le taux d'erreur chute spectaculairement de 26 % à 15,3 %, reléguant au passé des décennies de recherche en extraction manuelle de descripteurs visuels.</p>
+          </div>
+        </div>
+
+        <div class="source-box">
+          <strong>Publication fondatrice :</strong> Krizhevsky, Sutskever, Hinton (2012). <em>ImageNet Classification with Deep Convolutional Neural Networks</em>. <a class="source-link" href="https://proceedings.neurips.cc/paper_files/paper/2012/file/c399862d3b9d6b76c8436e924a68c45b-Paper.pdf" target="_blank" rel="noopener">Télécharger le papier de recherche NeurIPS</a>.
+        </div>
+      </article>
+
+      <!-- SLIDE 9 : L'ARCHITECTURE TRANSFORMER (2017) -->
+      <article class="slide-card" data-slide-index="9" data-module="2">
+        <div class="slide-header-meta">
+          <span class="slide-module-tag">Module 2 · Transformers</span>
+          <span class="slide-num-tag">Diapositive 9 / 20</span>
+        </div>
+        <h2 class="slide-title">2017 : « Attention Is All You Need »</h2>
+        <p class="slide-lead">Publié par huit chercheurs de Google Brain, cet article révolutionne le traitement des langues et pose les fondations directes de GPT, Claude, Gemini et Mistral.</p>
+        
+        <div class="formula-box">
+          $$\text{Attention}(Q, K, V) = \text{softmax}\left(\frac{Q \cdot K^T}{\sqrt{d_k}}\right) \cdot V$$
+        </div>
+
+        <div class="grid-2">
+          <div class="info-card">
+            <h4 class="card-title">Abandon de la récurrence séquentielle (RNN)</h4>
+            <p class="card-text">Les anciens réseaux traitaient les phrases mot après mot, perdant le fil contextuel sur les textes longs et bloquant la parallélisation sur GPU.</p>
+          </div>
+          <div class="info-card highlight">
+            <h4 class="card-title">Le mécanisme d'auto-attention (Self-Attention)</h4>
+            <p class="card-text">Chaque mot calcule son degré de relation avec tous les autres mots de la phrase simultanément. Exemple : dans <em>« La machine ne pouvait pas soulever la pièce car elle était trop lourde »</em>, le pronom <em>« elle »</em> se lie mathématiquement à <em>« la pièce »</em>.</p>
+          </div>
+        </div>
+
+        <div class="source-box">
+          <strong>Référence officielle :</strong> Vaswani et al. (2017). <em>Attention Is All You Need</em>. <a class="source-link" href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noopener">Consulter sur arXiv:1706.03762</a> · Démonstration interactive : <a class="source-link" href="https://poloclub.github.io/transformer-explainer/" target="_blank" rel="noopener">Transformer Explainer (Polo Club, Georgia Tech)</a>.
+        </div>
+      </article>
+
+      <!-- SLIDE 10 : EMBEDDINGS ET GENERATION AUTO-REGRESSIVE -->
+      <article class="slide-card" data-slide-index="10" data-module="2">
+        <div class="slide-header-meta">
+          <span class="slide-module-tag">Module 2 · Mécanismes LLM</span>
+          <span class="slide-num-tag">Diapositive 10 / 20</span>
+        </div>
+        <h2 class="slide-title">De la Lettre au Vecteur : Embeddings & Probabilités</h2>
+        <p class="slide-lead">Un grand modèle de langage ne manipule pas du texte, mais navigue géométriquement dans des espaces vectoriels à très haute dimension.</p>
+        
+        <div class="grid-3">
+          <div class="info-card">
+            <span class="pill cyan">Étape 1</span>
+            <h4 class="card-title" style="margin-top:6px;">Tokenisation</h4>
+            <p class="card-text">Découpage du texte en sous-unités sémantiques (mots fréquents ou syllabes de 3-4 caractères). Chaque jeton reçoit un identifiant numérique unique.</p>
+          </div>
+          <div class="info-card highlight">
+            <span class="pill blue">Étape 2</span>
+            <h4 class="card-title" style="margin-top:6px;">Plongement sémantique</h4>
+            <p class="card-text">Chaque jeton est projeté dans un espace vectoriel dense ($\mathbb{R}^{1536}$ ou $\mathbb{R}^{4096}$). Deux concepts proches ont une distance cosinus faible.</p>
+          </div>
+          <div class="info-card success">
+            <span class="pill emerald">Étape 3</span>
+            <h4 class="card-title" style="margin-top:6px;">Prédiction auto-régressive</h4>
+            <p class="card-text">À chaque itération, le modèle calcule la distribution $P(w_t \mid w_{<t})$ et tire le jeton suivant selon sa température de sampling.</p>
+          </div>
+        </div>
+
+        <div class="formula-box">
+          $$P(w_t = k \mid w_1, \dots, w_{t-1}) = \frac{\exp(z_k / T)}{\sum_j \exp(z_j / T)}$$
+        </div>
+
+        <div class="source-box">
+          <strong>Clé pédagogique :</strong> La température $T$ régule l'entropie : à $T=0$, le modèle est déterministe et choisit toujours le token le plus probable ; à $T \ge 1$, il explore des trajectoires plus diverses mais augmente le risque d'erreur factuelle.
+        </div>
+      </article>
+
+      <!-- SLIDE 11 : LA RUPTURE 2022-2026 : MULTIMODALITE -->
+      <article class="slide-card" data-slide-index="11" data-module="3">
+        <div class="slide-header-meta">
+          <span class="slide-module-tag">Module 3 · Ruptures 2022-2026</span>
+          <span class="slide-num-tag">Diapositive 11 / 20</span>
+        </div>
+        <h2 class="slide-title">La Multimodalité Native : Sortir du Texte Brut</h2>
+        <p class="slide-lead">Entre 2022 et 2026, l'IA a franchi un cap décisif : les modèles ne traduisent plus les images en texte intermédiaire, ils ingèrent directement et conjointement tous les flux sensoriels numériques.</p>
+        
+        <div class="grid-2">
+          <div class="info-card highlight">
+            <h3 class="card-title">Applications concrètes dans l'industrie</h3>
+            <ul class="styled-list">
+              <li><strong>Plans techniques & schémas CAO :</strong> Lecture directe de cotations tolérancées, symboles hydrauliques et schémas d'armoires électriques.</li>
+              <li><strong>Contrôle qualité optique :</strong> Analyse de clichés macroscopiques pour détecter bavures, fissures de soudure ou criques thermiques.</li>
+              <li><strong>Maintenance prédictive :</strong> Analyse directe de spectrogrammes sonores et séries temporelles de capteurs vibratoires.</li>
+              <li><strong>Génération de programmes d'usinage :</strong> Conversion de spécifications techniques en blocs de code ISO / commande numérique.</li>
+            </ul>
+          </div>
+          <div class="info-card">
+            <h3 class="card-title">Les grands écosystèmes multimodaux</h3>
+            <p class="card-text">Les modèles phares contemporains traitent jusqu'à <strong>2 millions de tokens de contexte</strong> en une seule requête :</p>
+            <ul class="styled-list" style="margin-top:10px;">
+              <li><strong>Google Gemini :</strong> Gemini 2.x/3.x, modèle multimodal de bout en bout (vision, audio, code).</li>
+              <li><strong>Anthropic Claude :</strong> Claude 3.5 & 3.7 Sonnet, référence en compréhension de code et raisonnement sur schémas.</li>
+              <li><strong>OpenAI GPT-4o :</strong> Traitement audio et visuel temps réel.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="source-box">
+          <strong>Sources techniques :</strong> Google DeepMind <a class="source-link" href="https://storage.googleapis.com/deepmind-media/gemini/gemini_v1_report.pdf" target="_blank" rel="noopener">Gemini Technical Report</a> · Anthropic <a class="source-link" href="https://www.anthropic.com/research" target="_blank" rel="noopener">Claude Model Specifications & Research</a>.
+        </div>
+      </article>
+
+      <!-- SLIDE 12 : CLOUD PROPRIETAIRE VS MODELES OUVERTS -->
+      <article class="slide-card" data-slide-index="12" data-module="3">
+        <div class="slide-header-meta">
+          <span class="slide-module-tag">Module 3 · Écosystèmes & Souveraineté</span>
+          <span class="slide-num-tag">Diapositive 12 / 20</span>
+        </div>
+        <h2 class="slide-title">Modèles Propriétaires Cloud vs Modèles Ouverts Souverains</h2>
+        <p class="slide-lead">Le choix d'architecture d'une entreprise industrielle est un arbitrage stratégique entre puissance brute hébergée à l'étranger et maîtrise locale de ses données.</p>
+        
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Critère</th>
+                <th>Modèles Propriétaires Cloud (Gemini, Claude, GPT)</th>
+                <th>Modèles Ouverts / Open-Weights (Mistral, Llama, Gemma, Qwen)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Hébergement</strong></td>
+                <td>Centres de données distants (USA / Europe selon contrats)</td>
+                <td>Serveur local d'entreprise (On-premise) ou poste de travail étanche</td>
+              </tr>
+              <tr>
+                <td><strong>Confidentialité</strong></td>
+                <td>Données envoyées sur API externe ; clauses de non-réentraînement nécessaires</td>
+                <td><strong>Fuite de données impossible :</strong> aucune trame réseau ne quitte l'usine</td>
+              </tr>
+              <tr>
+                <td><strong>Coût d'exploitation</strong></td>
+                <td>Facturation au token consommé (OPEX récurrent)</td>
+                <td>Investissement matériel GPU initial (CAPEX), coût marginal nul</td>
+              </tr>
+              <tr>
+                <td><strong>Modèles de référence</strong></td>
+                <td>Claude 3.7 Sonnet, Gemini 2.0 Flash / Pro, GPT-4o</td>
+                <td><strong>Mistral Large / Codestral</strong> (France), <strong>Llama 3.3</strong> (Meta), <strong>Gemma 3</strong> (Google), <strong>Qwen 2.5</strong> (Alibaba)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="source-box">
+          <strong>Sources officielles des modèles ouverts :</strong> <a class="source-link" href="https://docs.mistral.ai/" target="_blank" rel="noopener">Documentation Mistral AI</a> · <a class="source-link" href="https://ai.meta.com/llama/" target="_blank" rel="noopener">Meta AI Llama</a> · <a class="source-link" href="https://ai.google.dev/gemma" target="_blank" rel="noopener">Google AI Gemma</a> · <a class="source-link" href="https://qwenlm.github.io/" target="_blank" rel="noopener">Qwen Team</a>.
+        </div>
+      </article>
+
+      <!-- SLIDE 13 : LE PARADIGME DU RAISONNEMENT (REASONING) -->
+      <article class="slide-card" data-slide-index="13" data-module="3">
+        <div class="slide-header-meta">
+          <span class="slide-module-tag">Module 3 · Raisonnement Avancé</span>
+          <span class="slide-num-tag">Diapositive 13 / 20</span>
+        </div>
+        <h2 class="slide-title">Le Saut Qualitatif du Raisonnement (Système 1 vs Système 2)</h2>
+        <p class="slide-lead">En 2024-2025, les chercheurs ont comblé la principale faille des LLM classiques : leur incapacité à vérifier rigoureusement leurs propres déductions logiques avant de répondre.</p>
+        
+        <div class="grid-2">
+          <div class="info-card danger">
+            <span class="pill rose">Système 1 (Kahneman)</span>
+            <h3 class="card-title" style="margin-top:6px;">LLM Classique (Génération immédiate)</h3>
+            <p class="card-text">Génère le mot suivant sans pause de calcul préalable. Très rapide et fluide, mais tombe facilement dans les pièges de calcul ou d'inversion logique (hallucination plausible).</p>
+          </div>
+          <div class="info-card success">
+            <span class="pill emerald">Système 2 (Kahneman)</span>
+            <h3 class="card-title" style="margin-top:6px;">Modèles de Raisonnement (Test-Time Compute)</h3>
+            <p class="card-text">Le modèle alloue du temps de calcul avant de formuler sa réponse : il génère des chaînes de pensée masquées, teste des hypothèses contradictoires et corrige ses erreurs internes avant d'afficher la solution finale.</p>
+          </div>
+        </div>
+
+        <div class="grid-3" style="margin-top:16px;">
+          <div class="info-card highlight">
+            <h4 class="card-title">Chain-of-Thought</h4>
+            <p class="card-text">Forcer le modèle à verbaliser ses étapes intermédiaires démultiplie sa précision en calcul scientifique.</p>
+          </div>
+          <div class="info-card highlight">
+            <h4 class="card-title">OpenAI o1 & o3</h4>
+            <p class="card-text">Apprentissage par renforcement appliqué à la recherche arborescente d'arbres de résolution mathématique.</p>
+          </div>
+          <div class="info-card highlight">
+            <h4 class="card-title">DeepSeek-R1 (2025)</h4>
+            <p class="card-text">Modèle de raisonnement ouvert prouvant que l'émergence réflexive peut être obtenue à bas coût de calcul.</p>
+          </div>
+        </div>
+
+        <div class="source-box">
+          <strong>Publications scientifiques :</strong> Wei et al. (2022) <a class="source-link" href="https://arxiv.org/abs/2201.11903" target="_blank" rel="noopener">Chain-of-Thought Prompting (arXiv:2201.11903)</a> · DeepSeek-AI (2025) <a class="source-link" href="https://arxiv.org/abs/2501.12948" target="_blank" rel="noopener">DeepSeek-R1: Incentivizing Reasoning Capability via RL (arXiv:2501.12948)</a> · OpenAI <a class="source-link" href="https://openai.com/index/learning-to-reason-with-llms/" target="_blank" rel="noopener">Learning to Reason with LLMs</a>.
+        </div>
+      </article>
+
+      <!-- SLIDE 14 : L'ARCHITECTURE RAG POUR L'INDUSTRIE -->
+      <article class="slide-card" data-slide-index="14" data-module="3">
+        <div class="slide-header-meta">
+          <span class="slide-module-tag">Module 3 · Intégration Entreprise</span>
+          <span class="slide-num-tag">Diapositive 14 / 20</span>
+        </div>
+        <h2 class="slide-title">L'Architecture RAG (Retrieval-Augmented Generation)</h2>
+        <p class="slide-lead">Comment faire répondre une IA sur les manuels de fabrication confidentiels de votre entreprise sans dépenser des millions d'euros à la ré-entraîner ?</p>
+        
+        <div class="grid-3">
+          <div class="info-card">
+            <span class="pill cyan">1. Indexation</span>
+            <h4 class="card-title" style="margin-top:6px;">Découpage & Vectorisation</h4>
+            <p class="card-text">Vos documents d'entreprise (PDF d'atelier, gammes d'usinage, normes ISO) sont découpés en blocs et encodés dans une base de données vectorielle.</p>
+          </div>
+          <div class="info-card highlight">
+            <span class="pill blue">2. Récupération</span>
+            <h4 class="card-title" style="margin-top:6px;">Recherche de similarité</h4>
+            <p class="card-text">Lors de la question du technicien, le système extrait les 3 à 5 extraits documentaires mathématiquement les plus pertinents via distance cosinus.</p>
+          </div>
+          <div class="info-card success">
+            <span class="pill emerald">3. Génération</span>
+            <h4 class="card-title" style="margin-top:6px;">Synthèse sourcée</h4>
+            <p class="card-text">Le modèle rédige sa réponse en s'appuyant exclusivement sur ces extraits exacts, éliminant quasi totalement les hallucinations.</p>
+          </div>
+        </div>
+
+        <div class="info-card warning" style="margin-top:16px;">
+          <h4 class="card-title">Bénéfice clé pour l'UIMM</h4>
+          <p class="card-text">Mise à jour instantanée : ajouter une nouvelle notice technique prend quelques secondes (simple ajout dans la base vectorielle), sans modifier le modèle.</p>
+        </div>
+
+        <div class="source-box">
+          <strong>Publication fondatrice du RAG :</strong> Lewis, P. et al. (2020). <em>Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks</em>. NeurIPS 2020. <a class="source-link" href="https://arxiv.org/abs/2005.11401" target="_blank" rel="noopener">Consulter l'article de référence sur arXiv:2005.11401</a>.
+        </div>
+      </article>
+
+      <!-- SLIDE 15 : L'IA AGENTIQUE ET LE PROTOCOLE MCP -->
+      <article class="slide-card" data-slide-index="15" data-module="3">
+        <div class="slide-header-meta">
+          <span class="slide-module-tag">Module 3 · Systèmes Agentiques</span>
+          <span class="slide-num-tag">Diapositive 15 / 20</span>
+        </div>
+        <h2 class="slide-title">Des Chatbots aux Agents Autonomes : Le Protocole MCP</h2>
+        <p class="slide-lead">L'IA ne se contente plus de disserter : elle est désormais dotée de "mains" pour exécuter des tâches techniques complexes dans les systèmes informatiques.</p>
+        
+        <div class="grid-2">
+          <div class="info-card highlight">
+            <h3 class="card-title">La boucle agentique</h3>
+            <p class="card-text">Un agent combine : <strong>Perception $\implies$ Décomposition en sous-tâches $\implies$ Appel d'outils $\implies$ Observation du résultat $\implies$ Auto-correction</strong>.</p>
+            <ul class="styled-list" style="margin-top:10px;">
+              <li>Lecture et écriture de fichiers dans le projet.</li>
+              <li>Exécution de scripts Python ou de requêtes SQL sur l'ERP.</li>
+              <li>Recherche web ciblée et interaction par terminal système.</li>
+            </ul>
+          </div>
+          <div class="info-card success">
+            <h3 class="card-title">Le protocole ouvert MCP (Model Context Protocol)</h3>
+            <p class="card-text">Créé par Anthropic fin 2024 et ouvert à toute l'industrie, <strong>MCP</strong> est l'équivalent du port USB pour les intelligences artificielles : un standard ouvert permettant de relier n'importe quel modèle à n'importe quel logiciel d'entreprise.</p>
+            <div class="code-block" style="margin-top:10px;">
+Modèle IA &lt;--- Protocole MCP standardisé ---&gt; Base SQL, Git, Serveur CAO
+            </div>
+          </div>
+        </div>
+
+        <div class="source-box">
+          <strong>Sources officielles MCP & outils agentiques :</strong> <a class="source-link" href="https://modelcontextprotocol.io/" target="_blank" rel="noopener">Spécification officielle Model Context Protocol (Anthropic)</a> · <a class="source-link" href="https://github.com/modelcontextprotocol" target="_blank" rel="noopener">Dépôt GitHub MCP</a> · Assistants d'ingénierie : <a class="source-link" href="https://docs.anthropic.com/en/docs/agents-and-tools/claude-code/overview" target="_blank" rel="noopener">Claude Code</a> · <a class="source-link" href="https://www.continue.dev" target="_blank" rel="noopener">Continue.dev</a> · <a class="source-link" href="https://block.github.io/goose/" target="_blank" rel="noopener">Goose (Block)</a>.
+        </div>
+      </article>
+
+      <!-- SLIDE 16 : LE CADRE JURIDIQUE EUROPEEN (AI ACT) -->
+      <article class="slide-card" data-slide-index="16" data-module="4">
+        <div class="slide-header-meta">
+          <span class="slide-module-tag">Module 4 · Législation & Normes</span>
+          <span class="slide-num-tag">Diapositive 16 / 20</span>
+        </div>
+        <h2 class="slide-title">L'AI Act Européen : La Pyramide des Risques</h2>
+        <p class="slide-lead">Le Règlement (UE) 2024/1689 adopté le 13 juin 2024 est le premier cadre juridique mondial harmonisé imposant des obligations juridiques contraignantes aux déployeurs d'IA.</p>
+        
+        <div class="grid-4">
+          <div class="info-card danger">
+            <span class="pill rose">1. Inacceptable</span>
+            <h4 class="card-title" style="margin-top:6px;">Interdit</h4>
+            <p class="card-text">Score social étatique, manipulation cognitive subliminale, biométrie en temps réel dans l'espace public.</p>
+          </div>
+          <div class="info-card warning">
+            <span class="pill amber">2. Haut Risque</span>
+            <h4 class="card-title" style="margin-top:6px;">Encadrement lourd</h4>
+            <p class="card-text">Composants de sécurité de machines, recrutement RH, éducation, infrastructures critiques d'énergie.</p>
+          </div>
+          <div class="info-card highlight">
+            <span class="pill cyan">3. Risque Limité</span>
+            <h4 class="card-title" style="margin-top:6px;">Transparence</h4>
+            <p class="card-text">Chatbots, deepfakes, contenus générés : obligation d'informer l'utilisateur qu'il interagit avec une IA.</p>
+          </div>
+          <div class="info-card success">
+            <span class="pill emerald">4. Risque Minimal</span>
+            <h4 class="card-title" style="margin-top:6px;">Libre usage</h4>
+            <p class="card-text">Filtres anti-spam, IA de jeux vidéo, optimisation interne d'usinage sans impact humain direct.</p>
+          </div>
+        </div>
+
+        <div class="source-box">
+          <strong>Sources juridiques officielles :</strong> <a class="source-link" href="https://eur-lex.europa.eu/eli/reg/2024/1689/oj" target="_blank" rel="noopener">Règlement (UE) 2024/1689 du Journal Officiel de l'UE</a> · Commission européenne : <a class="source-link" href="https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai" target="_blank" rel="noopener">European Artificial Intelligence Act</a> · Guide pratique national : <a class="source-link" href="https://www.cnil.fr/fr/intelligence-artificielle/ia-act" target="_blank" rel="noopener">Dossier CNIL sur l'IA Act</a> · <a class="source-link" href="https://www.entreprises.gouv.fr/fr/numerique/enjeux-du-numerique/reglement-europeen-sur-l-intelligence-artificielle-ia-act" target="_blank" rel="noopener">Direction Générale des Entreprises (DGE)</a>.
+        </div>
+      </article>
+
+      <!-- SLIDE 17 : SOUVERAINETE INDUSTRIELLE & CYBERSECURITE -->
+      <article class="slide-card" data-slide-index="17" data-module="4">
+        <div class="slide-header-meta">
+          <span class="slide-module-tag">Module 4 · Sécurité des Données</span>
+          <span class="slide-num-tag">Diapositive 17 / 20</span>
+        </div>
+        <h2 class="slide-title">Souveraineté des Données, Secret d'Affaires & Cyber</h2>
+        <p class="slide-lead">L'injection de données d'ingénierie dans des outils d'IA non maîtrisés constitue la première cause émergente d'exfiltration involontaire de propriété industrielle.</p>
+        
+        <div class="grid-2">
+          <div class="info-card danger">
+            <h3 class="card-title">Les risques critiques en entreprise</h3>
+            <ul class="styled-list">
+              <li><strong>Fuite de savoir-faire confidentiel :</strong> Copier-coller un brevet en cours de dépôt ou un code source propriétaire dans une interface web gratuite réutilisant les prompts pour l'entraînement.</li>
+              <li><strong>Injections de prompt indirectes :</strong> Un document tiers piégé (PDF, email de sous-traitant) ordonnant à l'agent de divulguer des fichiers sensibles.</li>
+              <li><strong>Dépendance extra-territoriale :</strong> Risque d'interruption unilatérale de service ou d'exposition au <em>Cloud Act</em> américain.</li>
+            </ul>
+          </div>
+          <div class="info-card success">
+            <h3 class="card-title">La parade : Le déploiement local étanche</h3>
+            <p class="card-text">L'utilisation de runners locaux open-source (tels que détaillés dans le module 07 de notre cours) permet une imperméabilité totale des données d'atelier :</p>
+            <ul class="styled-list" style="margin-top:10px;">
+              <li><strong>Ollama & llama.cpp :</strong> Exécution 100 % hors-ligne sur station de travail.</li>
+              <li><strong>Modèles compacts quantifiés (4-bit) :</strong> Mistral NeMo ou Qwen 2.5 fonctionnant sur du matériel standard sans fuite réseau.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="source-box">
+          <strong>Références en cybersécurité :</strong> <a class="source-link" href="https://genai.owasp.org/llm-top-10/" target="_blank" rel="noopener">OWASP Top 10 for Large Language Model Applications</a> · Moteurs locaux : <a class="source-link" href="https://ollama.com" target="_blank" rel="noopener">Ollama.com</a> · <a class="source-link" href="https://github.com/ggml-org/llama.cpp" target="_blank" rel="noopener">llama.cpp (GGML)</a>.
+        </div>
+      </article>
+
+      <!-- SLIDE 18 : FRUGALITE ET IMPACT ENVIRONNEMENTAL -->
+      <article class="slide-card" data-slide-index="18" data-module="4">
+        <div class="slide-header-meta">
+          <span class="slide-module-tag">Module 4 · Responsabilité Énergétique</span>
+          <span class="slide-num-tag">Diapositive 18 / 20</span>
+        </div>
+        <h2 class="slide-title">Frugalité Numérique & Impact Environnemental</h2>
+        <p class="slide-lead">Le développement massif des modèles géants engendre une pression directe et quantifiée sur les réseaux électriques et les ressources hydriques mondiales.</p>
+        
+        <div class="grid-3">
+          <div class="info-card warning">
+            <h4 class="card-title">Mégawatts & Datacenters</h4>
+            <p class="card-text">L'inférence quotidienne de milliards de requêtes réclame des clusters de calcul alimentés 24h/24 par des centrales électriques dédiées.</p>
+          </div>
+          <div class="info-card warning">
+            <h4 class="card-title">Consommation d'eau</h4>
+            <p class="card-text">Les circuits de refroidissement par évaporation des centres de données évaporent plusieurs centaines de millilitres d'eau pure par session d'échange prolongée.</p>
+          </div>
+          <div class="info-card success">
+            <h4 class="card-title">L'impératif de sobriété</h4>
+            <p class="card-text">Utiliser des petits modèles spécialisés (Small Language Models de 3B à 8B) quantifiés en 4 bits plutôt qu'un modèle géant de 400 milliards de paramètres pour une tâche simple.</p>
+          </div>
+        </div>
+
+        <div class="info-card highlight" style="margin-top:16px;">
+          <h4 class="card-title">Principe d'ingénierie UIMM</h4>
+          <p class="card-text">« Adapter la taille du modèle au besoin réel du poste de travail » : c'est à la fois un impératif économique (coût matériel), sécuritaire (exécution locale) et écologique.</p>
+        </div>
+      </article>
+
+      <!-- SLIDE 19 : METACOGNITION & POSTURE PROFESSIONNELLE -->
+      <article class="slide-card" data-slide-index="19" data-module="4">
+        <div class="slide-header-meta">
+          <span class="slide-module-tag">Module 4 · Posture & Esprit Critique</span>
+          <span class="slide-num-tag">Diapositive 19 / 20</span>
+        </div>
+        <h2 class="slide-title">Métacognition : Les Pièges Mentaux face à l'IA</h2>
+        <p class="slide-lead">Le plus grand risque de l'IA générative n'est pas qu'elle se trompe, mais qu'elle nous convainque avec aplomb de son exactitude grâce à son aisance stylistique.</p>
+        
+        <div class="grid-3">
+          <div class="info-card danger">
+            <h4 class="card-title">1. Illusion de compétence</h4>
+            <p class="card-text">L'utilisateur confond la fluidité verbale générée par la machine avec une compréhension réelle des lois physiques sous-jacentes.</p>
+          </div>
+          <div class="info-card danger">
+            <h4 class="card-title">2. Biais d'ancrage</h4>
+            <p class="card-text">Tendance à accepter la première proposition émise par le modèle comme base de travail sans challenger ses postulats.</p>
+          </div>
+          <div class="info-card danger">
+            <h4 class="card-title">3. Biais de confirmation</h4>
+            <p class="card-text">Poser une question orientée qui pousse statistiquement le modèle à abonder dans notre sens au lieu d'objectiver le problème.</p>
+          </div>
+        </div>
+
+        <div class="info-card success" style="margin-top:16px;">
+          <h4 class="card-title">Protocole de questionnement professionnel</h4>
+          <p class="card-text">Toujours demander au modèle : <em>« Présente-moi les 3 contre-arguments majeurs à ta proposition »</em> et auditer systématiquement les calculs dimensionnels avec des outils de calcul formel déterministes.</p>
+        </div>
+      </article>
+
+      <!-- SLIDE 20 : CONCLUSION PHILOSOPHIQUE (SLIDE 65) -->
+      <article class="slide-card" data-slide-index="20" data-module="4">
+        <div class="slide-header-meta">
+          <span class="slide-module-tag">Module 4 · Conclusion Pédagogique</span>
+          <span class="slide-num-tag">Diapositive 20 / 20</span>
+        </div>
+        <h2 class="slide-title">Penser avec l'IA : L'Exigence d'Élever la Pensée</h2>
+        <p class="slide-lead">Texte de clôture de la formation — S. JAUBERT</p>
+        
+        <div class="philosophical-quote">
+          « L'intelligence artificielle n'est pas un substitut à la pensée mais une épreuve qui oblige à la rehausser.<br><br>
+          On ne peut pas véritablement "penser avec" l'IA si l'on ne dispose pas soi-même d'un socle solide : un corpus de références, une bibliothèque mentale de concepts, d'auteurs et de faits. Sans cet appui, impossible de distinguer l'erreur de l'exactitude, le plausible du vrai, l'intuition féconde de l'anachronisme grossier.<br><br>
+          Celui qui délègue son entendement à la machine en sera prisonnier et cela pourrait lui être fatal : son destin sera celui de l'outil qu'il a choisi d'imiter, efficace peut-être, mais sans profondeur, sans vie.<br><br>
+          L'IA appelle donc moins à la paresse qu'à l'exigence : elle exige d'aiguiser son esprit critique, d'élargir ses savoirs, de fortifier sa culture dans des domaines où il y a peu de gains de productivité : la lecture lente, la fréquentation des classiques, la confrontation patiente aux grandes œuvres, la méditation silencieuse, l'expérience vécue.<br><br>
+          Dans un monde où, pour reprendre Jean-François Lyotard, "avoir du succès, c'est gagner du temps", quel cruel destin que de devoir encore lire un livre jusqu'au bout...<br><br>
+          <strong>L'IA est donc paradoxalement une alliée : non pas pour remplacer la pensée mais pour la rendre plus indispensable que jamais.</strong> »
+          <span class="quote-author">— S. JAUBERT · Pôle Formation UIMM - CVDL (Septembre 2026)</span>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- Barre inférieure de commande du diaporama -->
+    <footer class="slide-footer-bar">
+      <div class="slide-counter">
+        Diapositive <span id="current-slide-num">1</span> sur <span id="total-slides-num">20</span>
+      </div>
+      <div class="slide-nav-controls">
+        <button id="btn-prev" class="nav-arrow-btn" onclick="prevSlide()" title="Précédente (Flèche Gauche)">Précédente</button>
+        <button id="btn-next" class="nav-arrow-btn" onclick="nextSlide()" title="Suivante (Flèche Droite ou Espace)">Suivante</button>
+      </div>
+    </footer>
+  </main>
+
+  <!-- ==========================================================================
+       VUE 2 : MODE DOCUMENT CONTINU / SOMMAIRE
+       ========================================================================== -->
+  <main id="view-document" class="document-view">
+    <div style="margin-bottom: 40px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 20px;">
+      <h1 style="font-family: var(--font-display); font-size: 2.2rem; color: #ffffff; margin-bottom: 8px;">
+        Introduction à l'Intelligence Artificielle — Cours Intégral (2026)
+      </h1>
+      <p style="color: var(--text-muted); font-size: 1.05rem;">
+        Support pédagogique officiel · Pôle Formation UIMM - CVDL · Formateur : S. JAUBERT
+      </p>
+    </div>
+
+    <div id="document-content-target">
+      <!-- Ce conteneur sera alimenté automatiquement par le script JavaScript pour refléter l'intégralité des 20 diapositives sous forme d'articles de cours continus -->
+    </div>
+  </main>
+
+  <!-- ==========================================================================
+       PIED DE PAGE OFFICIEL UIMM - CVDL
+       ========================================================================== -->
+  <footer class="official-footer">
+    <p><strong>Pôle Formation UIMM - CVDL</strong> — Tous droits réservés · Formation dispensée par <strong>S. JAUBERT</strong> (Promotion 2026)</p>
+    <p style="margin-top: 6px;">Support technique conforme aux référentiels pédagogiques de l'UIMM · Fichier généré en HTML5 standardisé et MathJax sans dépendance externe lourde.</p>
+  </footer>
+
+  <!-- ==========================================================================
+       LOGIQUE D'INTERACTIVITE ET DE NAVIGATION JAVASCRIPT
+       ========================================================================== -->
+  <script>
+    // Variables d'état
+    let currentSlide = 1;
+    const slides = document.querySelectorAll('.slide-card');
+    const totalSlides = slides.length;
+    const progressBar = document.getElementById('slide-progress');
+    const currentNumEl = document.getElementById('current-slide-num');
+    const totalNumEl = document.getElementById('total-slides-num');
+    const btnPrev = document.getElementById('btn-prev');
+    const btnNext = document.getElementById('btn-next');
+
+    totalNumEl.textContent = totalSlides;
+
+    // Mise à jour de l'affichage de la diapositive
+    function showSlide(index) {
+      if (index < 1) index = 1;
+      if (index > totalSlides) index = totalSlides;
+      
+      currentSlide = index;
+      
+      slides.forEach((slide, i) => {
+        if (i + 1 === currentSlide) {
+          slide.classList.add('active-slide');
+          slide.scrollTop = 0; // Remettre en haut si défilement
+        } else {
+          slide.classList.remove('active-slide');
+        }
+      });
+
+      // Compteurs & Boutons
+      currentNumEl.textContent = currentSlide;
+      btnPrev.disabled = (currentSlide === 1);
+      btnNext.disabled = (currentSlide === totalSlides);
+
+      // Barre de progression
+      const progressPercent = ((currentSlide - 1) / (totalSlides - 1)) * 100;
+      progressBar.style.width = progressPercent + '%';
+
+      // Mise à jour du tag de module dans la barre supérieure
+      updateModuleNavHighlights();
+
+      // Forcer le rendu MathJax sur la diapositive active si nécessaire
+      if (window.MathJax && window.MathJax.typesetPromise) {
+        window.MathJax.typesetPromise([slides[currentSlide - 1]]).catch(function (err) {
+          console.error('MathJax typeset error: ', err.message);
+        });
+      }
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides) {
+        showSlide(currentSlide + 1);
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 1) {
+        showSlide(currentSlide - 1);
+      }
+    }
+
+    // Gestion du saut de module
+    const moduleMap = {
+      1: 1,  // Diapositive 1 : Démystifier
+      2: 7,  // Diapositive 7 : Neurone artificiel
+      3: 11, // Diapositive 11 : Ruptures 2022-2026
+      4: 16  // Diapositive 16 : AI Act & Industrie
+    };
+
+    function jumpToModule(moduleNum) {
+      if (moduleMap[moduleNum]) {
+        showSlide(moduleMap[moduleNum]);
+        if (document.getElementById('view-document').style.display === 'block') {
+          const targetSection = document.getElementById('doc-sec-' + moduleMap[moduleNum]);
+          if (targetSection) targetSection.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    }
+
+    function updateModuleNavHighlights() {
+      const currentModule = slides[currentSlide - 1].getAttribute('data-module');
+      document.querySelectorAll('.module-nav-item').forEach((btn, idx) => {
+        if (idx + 1 == currentModule) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      });
+    }
+
+    // Bascule entre Diaporama et Document Complet
+    function switchView(viewMode) {
+      const viewSlideshow = document.getElementById('view-slideshow');
+      const viewDoc = document.getElementById('view-document');
+      const btnSlide = document.getElementById('btn-mode-slideshow');
+      const btnDoc = document.getElementById('btn-mode-doc');
+
+      if (viewMode === 'slideshow') {
+        viewSlideshow.style.display = 'flex';
+        viewDoc.style.display = 'none';
+        btnSlide.classList.add('active');
+        btnDoc.classList.remove('active');
+        showSlide(currentSlide);
+      } else {
+        viewSlideshow.style.display = 'none';
+        viewDoc.style.display = 'block';
+        btnSlide.classList.remove('active');
+        btnDoc.classList.add('active');
+        populateDocumentView();
+      }
+    }
+
+    // Génération automatique du contenu document
+    let docPopulated = false;
+    function populateDocumentView() {
+      if (docPopulated) return;
+      const target = document.getElementById('document-content-target');
+      target.innerHTML = '';
+
+      slides.forEach((slide, idx) => {
+        const block = document.createElement('div');
+        block.className = 'doc-slide-block';
+        block.id = 'doc-sec-' + (idx + 1);
+        block.innerHTML = slide.innerHTML;
+        target.appendChild(block);
+      });
+
+      docPopulated = true;
+      if (window.MathJax && window.MathJax.typesetPromise) {
+        window.MathJax.typesetPromise([target]).catch(function (err) {
+          console.error(err);
+        });
+      }
+    }
+
+    // Raccourcis clavier
+    document.addEventListener('keydown', (e) => {
+      // Ignorer si on est en train de taper dans un champ de formulaire
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+        e.preventDefault();
+        nextSlide();
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        e.preventDefault();
+        prevSlide();
+      } else if (e.key === 'Home') {
+        e.preventDefault();
+        showSlide(1);
+      } else if (e.key === 'End') {
+        e.preventDefault();
+        showSlide(totalSlides);
+      } else if (e.key.toLowerCase() === 'f') {
+        toggleFullScreen();
+      }
+    });
+
+    // Plein écran
+    function toggleFullScreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch((err) => {
+          console.log(`Erreur de passage en plein écran : ${err.message}`);
+        });
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        }
+      }
+    }
+
+    // Initialisation au chargement
+    window.addEventListener('DOMContentLoaded', () => {
+      showSlide(1);
+    });
+  </script>
+</body>
+</html>
