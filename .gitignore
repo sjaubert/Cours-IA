@@ -135,6 +135,10 @@ $RECYCLE.BIN/
 *.swp
 *.swo
 run_status.txt
+.Rhistory
+*.Rhistory
+.RData
+*.RData
 
 # ----------------------------------------------------------------
 # LOURDS / DOCUMENTS POUR OPTIMISATION SYNC (Ajouté)
