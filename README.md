@@ -73,10 +73,12 @@ Activités autonomes (approche par cas) :
 
 ### Ateliers de formation
 
-- [Formation Journée Prompt Engineering](02-prompt-engineering/formation-journee/README.md) | **Pratique** | MD + HTML | Programme d'une journée avec 3 ateliers complets <sub>*(déc. 2025)*</sub>
+- [Formation Journée Prompt Engineering](02-prompt-engineering/formation-journee/README.md) | **Pratique** | MD + HTML | Programme d'une journée avec 5 ateliers complets <sub>*(sept. 2026)*</sub>
   - [Atelier 1 : Les 6 Piliers](02-prompt-engineering/formation-journee/Atelier1_6Piliers.html) | [Corrigés formateur](02-prompt-engineering/formation-journee/Atelier1_Corriges_Formateur.md)
   - [Atelier 2 : Exercices Pratiques](02-prompt-engineering/formation-journee/Atelier2_Exercices_Pratiques.html) | [Corrigés formateur](02-prompt-engineering/formation-journee/Atelier2_Corriges_Formateur.md)
   - [Atelier 3 : Techniques Avancées](02-prompt-engineering/formation-journee/Atelier3_Techniques_Avancees.html) | [Corrigés formateur](02-prompt-engineering/formation-journee/Atelier3_Corriges_Formateur.md)
+  - [Atelier 4 : Cas d'Usage Métier](02-prompt-engineering/formation-journee/Atelier4_Cas_Usage_Metier.html) | [Guide formateur](02-prompt-engineering/formation-journee/Atelier4_Cas_Usage_Metier.md) <sub>*(sept. 2026)*</sub>
+  - [Atelier 5 : Approche Critique](02-prompt-engineering/formation-journee/Atelier5_Approche_Critique.html) | [Guide formateur](02-prompt-engineering/formation-journee/Atelier5_Approche_Critique.md) <sub>*(sept. 2026)*</sub>
 
 - [Formation Prompt Engineering : Maintenance Industrielle](02-prompt-engineering/formation-prompt/Formation_Prompt_Maintenance_Etudiants.html) | **Pratique** | HTML | 4h pour étudiants Bachelor Maintenance : cas d'usage réalistes, travaux de groupe, sensibilisation aux biais <sub>*(jan. 2026)*</sub>
   - [Guide Formateur](02-prompt-engineering/formation-prompt/Formation_Prompt_Maintenance_Guide_Formateur.md)
@@ -260,6 +262,8 @@ Cinq scénarios clés en main pour animer des ateliers en Formation Continue :
 - [Plan Formation IA : AFPI](ressources/offres-et-dispositifs/Plan_Formation_IA_AFPI.md) | MD | Dispositif de formation IA adapté au contexte AFPI. [Version Word](ressources/offres-et-dispositifs/Plan_Formation_IA_AFPI.docx) <sub>*(avr. 2026)*</sub>
 - [Proposition d'animation et cahier des charges](ressources/offres-et-dispositifs/Proposition_Formation_IA_CahierDesCharges.html) | HTML | Programme 2 jours, public mixte industrie, outils Gemini/Claude/Antigravity/NotebookLM : cahier des charges équipements et abonnements, scénarios cloud et Ollama local <sub>*(mai 2026)*</sub>
   - [Version Word (.docx)](ressources/offres-et-dispositifs/Proposition_Formation_IA_CahierDesCharges.docx)
+- [Conducteur Formation IA 2 Jours](ressources/offres-et-dispositifs/Conducteur_Formation_IA_2Jours_UIMM.html) | **Découverte à Pratique** | MD + HTML | Programme officiel "Intelligence Artificielle (IA)" 2 jours (4 modules) assemblé à partir de l'Initiation IA 7H (Jour 1) et de la Formation Journée Prompt Engineering (Jour 2), tableau de correspondance module par module <sub>*(sept. 2026)*</sub>
+  - [Version Markdown](ressources/offres-et-dispositifs/Conducteur_Formation_IA_2Jours_UIMM.md)
 
 ### Références et documents transversaux
 
@@ -297,4 +301,4 @@ Formation sur l'Intelligence Artificielle et ses applications industrielles
 
 ---
 
-*Dernière mise à jour : 12 septembre 2026. Actualisation du cours magistral d'introduction à l'IA (promotion 2026 : support interactif Web, conducteur pédagogique sourcé, intégration des ruptures agentiques et du cadre réglementaire AI Act).*
+*Dernière mise à jour : 12 septembre 2026. Actualisation du cours magistral d'introduction à l'IA (promotion 2026 : support interactif Web, conducteur pédagogique sourcé, intégration des ruptures agentiques et du cadre réglementaire AI Act). Ajout des Ateliers 4 et 5 de la Formation Journée Prompt Engineering, et du Conducteur Formation IA 2 Jours assemblant le programme officiel.*

@@ -12,6 +12,8 @@ Ce dossier contient le matériel pédagogique complet pour une formation d'une j
 
 **Objectif** : Fournir aux stagiaires une excellente méthodologie et des outils immédiatement utilisables dans leur quotidien professionnel.
 
+Cette journée constitue le **Jour 2** du parcours officiel "Intelligence Artificielle (IA)" 2 jours du Pôle Formation UIMM-CVDL. Voir le [Conducteur Formation IA 2 Jours](../../ressources/offres-et-dispositifs/Conducteur_Formation_IA_2Jours_UIMM.md) pour le déroulé complet avec le Jour 1.
+
 ---
 
 ## Structure du Programme
@@ -73,27 +75,36 @@ Maîtrise de 4 techniques professionnelles :
 
 #### Atelier 4 - Cas d'Usage Métier (1h30)
 
-⚠️ **À développer**
+- **[Version Markdown (Guide Formateur)](Atelier4_Cas_Usage_Metier.md)**
+- **[Version Interactive HTML](Atelier4_Cas_Usage_Metier.html)** (Recommandée pour les stagiaires)
 
-6 scénarios métier identifiés :
+5 cas d'usage métier réels, tirés des scénarios `06-ia-industrie/cas-usage-formation-continue/` :
 
-- RH : Offres d'emploi
-- Commercial : Propositions
-- Support Client : Réponses types
-- Formation : Contenus pédagogiques
-- Qualité : Procédures et rapports
-- Communication : Contenus réseaux sociaux
+- Finance : Analyse financière & stratégique (RAG, croisement de sources)
+- Formation / Qualité : Ingénierie pédagogique & conformité (gap analysis RNCP)
+- Marketing / Communication : Transformation de contenu (webinaire → blog + LinkedIn + quiz)
+- RH : Assistant recrutement (scoring de profils, détection de biais)
+- Commercial / Data : Codage & analyse de données (Code Interpreter)
+
+**Activités** : travail en binôme sur un cas au choix, mise en commun croisée entre les 5 métiers
 
 ---
 
 #### Atelier 5 - Approche Critique (1h00)
 
-⚠️ **À développer**
+- **[Version Markdown (Guide Formateur)](Atelier5_Approche_Critique.md)**
+- **[Version Interactive HTML](Atelier5_Approche_Critique.html)** (Recommandée pour les stagiaires)
 
-- Hallucinations de l'IA
-- Biais dans les réponses
-- Vérification des informations
-- Itération et amélioration
+3 séquences de mise en évidence des pièges de l'IA, adaptées des activités `01-comprendre-ia/activites/` :
+
+- Hallucinations (biographie générée, vérification factuelle croisée)
+- Biais de confirmation (deux groupes, deux thèses opposées)
+- Biais culturel (prompt générique vs prompt orienté)
+- Synthèse transversale : itération et amélioration
+
+**Extension facultative** : illusion du raisonnement (énigme logique), pour les groupes en avance
+
+**Activités** : démonstrations en binôme et en groupe, débriefing collectif à chaque séquence
 
 ---
 
@@ -151,14 +162,18 @@ Chaque guide contient :
 - `Atelier1_6Piliers_Guide.md` (371 lignes)
 - `Atelier2_Exercices_Pratiques.md` (545 lignes)
 - `Atelier3_Techniques_Avancees.md` (786 lignes)
+- `Atelier4_Cas_Usage_Metier.md` (183 lignes)
+- `Atelier5_Approche_Critique.md` (179 lignes)
 
-**Total : Plus de 1700 lignes de contenu structuré**
+**Total : Plus de 2000 lignes de contenu structuré**
 
 ### Pages HTML Interactives
 
 - [`Atelier1_6Piliers.html`](Atelier1_6Piliers.html) - Version web avec table des matières
 - [`Atelier2_Exercices_Pratiques.html`](Atelier2_Exercices_Pratiques.html) - 5 exercices progressifs
 - [`Atelier3_Techniques_Avancees.html`](Atelier3_Techniques_Avancees.html) - 4 techniques + arbre de décision
+- [`Atelier4_Cas_Usage_Metier.html`](Atelier4_Cas_Usage_Metier.html) - 5 cas d'usage métier
+- [`Atelier5_Approche_Critique.html`](Atelier5_Approche_Critique.html) - 3 séquences + extension facultative
 
 **Optimisé pour le partage avec les stagiaires**
 
@@ -187,7 +202,7 @@ OUI - **Grilles d'auto-évaluation**
 
 ### À Compléter
 
-1. Développer les Ateliers 4 et 5
+1. Développer le Bilan & Boîte à Outils de fin de journée (1h, toujours "à développer")
 2. Créer le support de présentation (slides)
 3. Consolider le cahier d'exercices stagiaires
 4. Produire les fiches mémo imprimables

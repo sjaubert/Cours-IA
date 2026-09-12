@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atelier 4 : Cas d'Usage Métier - Pôle Formation UIMM-CVDL</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            color: white;
+            padding: 2rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .logo {
+            max-width: 120px;
+            height: auto;
+            background: white;
+            padding: 0.5rem;
+            border-radius: 8px;
+        }
+
+        .header-text h1 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .header-text p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 2rem;
+        }
+
+        .toc {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 2rem;
+            max-height: calc(100vh - 4rem);
+            overflow-y: auto;
+        }
+
+        .toc h2 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: #1e3a8a;
+            border-bottom: 2px solid #3b82f6;
+            padding-bottom: 0.5rem;
+        }
+
+        .toc ul {
+            list-style: none;
+        }
+
+        .toc ul ul {
+            margin-left: 1rem;
+        }
+
+        .toc a {
+            color: #333;
+            text-decoration: none;
+            display: block;
+            padding: 0.5rem 0;
+            transition: color 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .toc a:hover {
+            color: #3b82f6;
+            text-decoration: underline;
+        }
+
+        .content {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .content h2 {
+            color: #1e3a8a;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .content h3 {
+            color: #1e40af;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .content h4 {
+            color: #2563eb;
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .duration {
+            background: #dbeafe;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            display: inline-block;
+            margin: 1rem 0;
+            color: #1e40af;
+            font-weight: 500;
+        }
+
+        .objectives {
+            background: #f0fdf4;
+            border-left: 4px solid #22c55e;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        pre {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 4px;
+            padding: 1rem;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+
+        code {
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+
+        .exercise {
+            background: #fefce8;
+            border-left: 4px solid #eab308;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+        }
+
+        .exercise h2, .exercise h3 {
+            color: #854d0e;
+            margin-top: 0;
+        }
+
+        .correction {
+            background: #f0fdf4;
+            border: 2px solid #22c55e;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+
+        .correction h4 {
+            color: #166534;
+            margin-top: 0;
+        }
+
+        .note {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .tip {
+            background: #dbeafe;
+            border-left: 4px solid #3b82f6;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .warning {
+            background: #fee2e2;
+            border-left: 4px solid #ef4444;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        th, td {
+            border: 1px solid #e5e7eb;
+            padding: 0.5rem 0.75rem;
+            text-align: left;
+            font-size: 0.95rem;
+        }
+
+        th {
+            background: #eff6ff;
+            color: #1e3a8a;
+        }
+
+        footer {
+            background: #1e3a8a;
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 900px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+
+            .toc {
+                position: static;
+                max-height: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="header-content">
+            <img src="logo_uimm_placeholder.jpg" alt="Logo Pôle Formation UIMM-CVDL" class="logo">
+            <div class="header-text">
+                <h1>Pôle Formation UIMM-CVDL</h1>
+                <p>Atelier 4 : Cas d'Usage Métier</p>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <nav class="toc">
+            <h2>Sommaire</h2>
+            <ul>
+                <li><a href="#introduction">Introduction</a></li>
+                <li><a href="#objectifs">Objectifs Pédagogiques</a></li>
+                <li><a href="#cas1">Cas 1 - Finance</a></li>
+                <li><a href="#cas2">Cas 2 - Pédagogie</a></li>
+                <li><a href="#cas3">Cas 3 - Transformation</a></li>
+                <li><a href="#cas4">Cas 4 - RH</a></li>
+                <li><a href="#cas5">Cas 5 - Data</a></li>
+                <li><a href="#synthese">Synthèse</a></li>
+            </ul>
+        </nav>
+
+        <main class="content">
+            <h1>ATELIER 4 : Cas d'Usage Métier</h1>
+
+            <div class="duration">Durée : 1h30</div>
+
+            <h2 id="objectifs">Objectifs Pédagogiques</h2>
+            <div class="objectives">
+                <p>À la fin de cet atelier, les participants seront capables de :</p>
+                <ul>
+                    <li>Appliquer sur un cas métier réel les techniques vues aux Ateliers 1 à 3 (piliers du prompt, Few-Shot, Chain-of-Thought)</li>
+                    <li>Confronter des sources contradictoires et faire ressortir des incohérences à l'aide de l'IA</li>
+                    <li>Produire un livrable professionnel complet à partir d'un cas concret</li>
+                    <li>Identifier, en conditions réelles, les limites de l'IA rencontrées sur leur cas</li>
+                </ul>
+            </div>
+
+            <h2 id="introduction">Introduction (10 min)</h2>
+            <p>Rappel : "Vous savez maintenant construire un bon prompt et choisir la bonne technique. Voyons ce que ça donne sur un cas métier réel, avec de vrais documents."</p>
+            <p>Un cas par binôme parmi les 5 proposés ci-dessous. Chaque cas dispose d'un guide en deux parties : les instructions et prompts suggérés (destinés aux stagiaires) et les clés de lecture (réservées au formateur).</p>
+
+            <h3>Les 5 Cas d'Usage Disponibles</h3>
+            <table>
+                <tr><th>#</th><th>Cas</th><th>Métier</th><th>Compétence dominante</th></tr>
+                <tr><td>1</td><td><a href="#cas1">Analyse Financière &amp; Stratégique</a></td><td>Finance / Investissement</td><td>Croiser deux sources contradictoires (RAG)</td></tr>
+                <tr><td>2</td><td><a href="#cas2">Ingénierie Pédagogique &amp; Conformité</a></td><td>Formation / Qualité</td><td>Gap analysis entre deux référentiels</td></tr>
+                <tr><td>3</td><td><a href="#cas3">Transformation de Contenu</a></td><td>Marketing / Communication</td><td>Recyclage d'un contenu unique en formats multiples</td></tr>
+                <tr><td>4</td><td><a href="#cas4">Assistant RH &amp; Recrutement</a></td><td>RH</td><td>Scoring de profils et détection de biais</td></tr>
+                <tr><td>5</td><td><a href="#cas5">Codage &amp; Analyse de Données</a></td><td>Commercial / Data</td><td>Nettoyage et visualisation via Code Interpreter</td></tr>
+            </table>
+
+            <div class="exercise" id="cas1">
+                <h2>CAS 1 : Analyse Financière &amp; Stratégique (Finance)</h2>
+                <h3>Contexte</h3>
+                <p>Le stagiaire joue un analyste junior dans un fonds d'investissement. Il dispose de deux documents sur une même entreprise fictive (EcoTech Solutions) : un rapport annuel officiel et la transcription confidentielle d'une réunion du comité exécutif. Objectif : croiser les deux pour repérer ce que le rapport officiel dissimule, puis rédiger une note d'alerte.</h3>
+                <h3>Fichiers</h3>
+                <ul>
+                    <li><a href="../../06-ia-industrie/cas-usage-formation-continue/Cas_Usage_1_Finance/Guide_Activite.md">Guide_Activite.md</a></li>
+                    <li><a href="../../06-ia-industrie/cas-usage-formation-continue/Cas_Usage_1_Finance/Rapport_Annuel_2024.md">Rapport_Annuel_2024.md</a></li>
+                    <li><a href="../../06-ia-industrie/cas-usage-formation-continue/Cas_Usage_1_Finance/Transcription_Reunion_Strategique.txt">Transcription_Reunion_Strategique.txt</a></li>
+                </ul>
+                <div class="note">
+                    <h4>Piège Clé à Découvrir</h4>
+                    <p>Quatre écarts entre la version officielle et la réalité de la réunion (Cash Flow attribué à tort aux stocks alors qu'il s'agit d'impayés clients en Amérique Latine, usine du Vietnam présentée comme opérationnelle alors qu'elle tourne à 60 % avec 8 % de rebut, marge attribuée à l'inflation alors qu'elle vient de la perte d'un fournisseur clé, litige au Brésil sous-provisionné). Le tableau complet est dans le Guide_Activite, Partie 2.</p>
+                </div>
+            </div>
+
+            <div class="exercise" id="cas2">
+                <h2>CAS 2 : Ingénierie Pédagogique &amp; Conformité (Formation / Qualité)</h2>
+                <h3>Contexte</h3>
+                <p>Le stagiaire joue un responsable pédagogique qui doit certifier un parcours au RNCP. Il compare le référentiel de compétences officiel et le programme de formation actuel pour vérifier la couverture à 100 %.</p>
+                <h3>Fichiers</h3>
+                <ul>
+                    <li><a href="../../06-ia-industrie/cas-usage-formation-continue/Cas_Usage_2_Pedagogie/Guide_Activite_Pedagogie.md">Guide_Activite_Pedagogie.md</a></li>
+                    <li><a href="../../06-ia-industrie/cas-usage-formation-continue/Cas_Usage_2_Pedagogie/Referentiel_Competences_RNCP.md">Referentiel_Competences_RNCP.md</a></li>
+                    <li><a href="../../06-ia-industrie/cas-usage-formation-continue/Cas_Usage_2_Pedagogie/Programme_Formation_2024.md">Programme_Formation_2024.md</a></li>
+                </ul>
+                <div class="note">
+                    <h4>Piège Clé à Découvrir</h4>
+                    <p>Cinq lacunes à faire émerger (gestion budgétaire, accessibilité WCAG, conformité RGPD, stratégie SEA, veille technologique). L'IA a tendance à être trop indulgente et à déclarer le programme conforme si on ne lui demande pas explicitement une rigueur d'auditeur.</p>
+                </div>
+            </div>
+
+            <div class="exercise" id="cas3">
+                <h2>CAS 3 : Transformation de Contenu (Marketing / Communication)</h2>
+                <h3>Contexte</h3>
+                <p>Le stagiaire joue un responsable marketing qui doit recycler la transcription brute d'un webinaire technique en article de blog SEO, en trois posts LinkedIn de tons différents et en quiz de validation.</p>
+                <h3>Fichiers</h3>
+                <ul>
+                    <li><a href="../../06-ia-industrie/cas-usage-formation-continue/Cas_Usage_3_Transformation/Guide_Activite_Transformation.md">Guide_Activite_Transformation.md</a></li>
+                    <li><a href="../../06-ia-industrie/cas-usage-formation-continue/Cas_Usage_3_Transformation/Transcript_Webinaire_NoCode.txt">Transcript_Webinaire_NoCode.txt</a></li>
+                </ul>
+                <div class="note">
+                    <h4>Piège Clé à Découvrir</h4>
+                    <p>Vérifier que les trois posts ont réellement des tons différenciés, et que l'IA n'invente pas d'informations absentes du webinaire source.</p>
+                </div>
+            </div>
+
+            <div class="exercise" id="cas4">
+                <h2>CAS 4 : Assistant RH &amp; Recrutement (RH)</h2>
+                <h3>Contexte</h3>
+                <p>Le stagiaire joue un recruteur qui doit présélectionner 5 profils anonymisés pour un poste de Data Scientist senior, à partir d'une fiche de poste.</p>
+                <h3>Fichiers</h3>
+                <ul>
+                    <li><a href="../../06-ia-industrie/cas-usage-formation-continue/Cas_Usage_4_RH/Guide_Activite_RH.md">Guide_Activite_RH.md</a></li>
+                    <li><a href="../../06-ia-industrie/cas-usage-formation-continue/Cas_Usage_4_RH/Fiche_Poste_DataScientist.md">Fiche_Poste_DataScientist.md</a></li>
+                    <li><a href="../../06-ia-industrie/cas-usage-formation-continue/Cas_Usage_4_RH/Batch_CVs_Anonymes.txt">Batch_CVs_Anonymes.txt</a></li>
+                </ul>
+                <div class="note">
+                    <h4>Piège Clé à Découvrir</h4>
+                    <p>Deux profils tests : un candidat techniquement excellent mais présentant des signaux de "toxicité" en équipe, et un candidat qui multiplie les buzzwords sans compétence réelle.</p>
+                </div>
+            </div>
+
+            <div class="exercise" id="cas5">
+                <h2>CAS 5 : Codage &amp; Analyse de Données (Commercial / Data)</h2>
+                <h3>Contexte</h3>
+                <p>Le stagiaire joue un assistant commercial qui reçoit un export de ventes "sale" (dates mélangées, doublons, fautes de frappe, valeurs manquantes) et doit produire une analyse et des graphiques sans écrire de code, via le Code Interpreter de son IA.</p>
+                <h3>Fichiers</h3>
+                <ul>
+                    <li><a href="../../06-ia-industrie/cas-usage-formation-continue/Cas_Usage_5_Data/Guide_Activite_Data.md">Guide_Activite_Data.md</a></li>
+                    <li><a href="../../06-ia-industrie/cas-usage-formation-continue/Cas_Usage_5_Data/Ventes_2024_Brut.csv">Ventes_2024_Brut.csv</a></li>
+                </ul>
+                <div class="note">
+                    <h4>Piège Clé à Découvrir</h4>
+                    <p>Vérifier que l'IA a bien standardisé les deux formats de dates, fusionné les doublons, corrigé les typos de produits et proposé une stratégie pour les valeurs manquantes.</p>
+                </div>
+            </div>
+
+            <h2 id="synthese">Travail Autonome, Mise en Commun et Synthèse</h2>
+            <h3>Travail Autonome (50 min)</h3>
+            <p>Chaque binôme suit la Partie 1 de son guide avec l'outil IA de son choix (ChatGPT, Claude, Gemini, Copilot). Pour le Cas 5, un mode d'analyse de fichier / exécution de code est nécessaire.</p>
+
+            <h3>Mise en Commun Croisée (20 min)</h3>
+            <p>Chaque binôme présente en 2 à 3 minutes son cas, ce que l'IA a trouvé, et un endroit où elle s'est trompée ou a été trop indulgente.</p>
+
+            <h3>Synthèse (10 min)</h3>
+            <div class="tip">
+                <p>L'IA excelle à croiser, rédiger et structurer rapidement de gros volumes d'information. Le jugement sur la gravité, l'éthique ou la pertinence des découvertes reste humain.</p>
+            </div>
+
+            <h3>Transition vers Atelier 5</h3>
+            <blockquote>
+                <p>"Vous venez de voir l'IA à l'œuvre sur des cas réels, et parfois elle s'est trompée ou vous a trop facilement donné raison. Dans le dernier atelier de la journée, nous allons nommer précisément ces pièges pour apprendre à les repérer systématiquement."</p>
+            </blockquote>
+
+        </main>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Pôle Formation UIMM-CVDL - Tous droits réservés</p>
+        <p>Créé par S. JAUBERT</p>
+    </footer>
+</body>
+
+</html>
