@@ -31,25 +31,25 @@
 
 ### Cours magistral & Support de référence actualisé (2026)
 
-- [Introduction à l'Intelligence Artificielle (Promotion 2026)](https://sjaubert.github.io/Cours-IA/00-Formation/cours-introduction-ia-2026/index.html) | **Découverte à Avancé** | Web App / Diaporama interactif | Support de cours complet en 4 modules : Histoire & cybernétique, Mathématiques des Transformers, Ruptures 2022-2026 (Multimodalité, Raisonnement, Systèmes agentiques & protocole MCP), Cadre réglementaire AI Act européen et Souveraineté industrielle <sub>*(sept. 2026)*</sub>
-  - [Version locale interactive](00-Formation/cours-introduction-ia-2026/index.html) | [Conducteur pédagogique détaillé et sourcé](00-Formation/cours-introduction-ia-2026/plan_detaille_formation_ia_2026.md)
-  - [Archive historique PPTX (déc. 2025)](00-Formation/Module%20Formation/Diaporama%20COURS%20Introduction%20IA.pptx) | [Archive PDF](00-Formation/Module%20Formation/Diaporama%20COURS%20Introduction%20IA.pdf)
+- [Introduction à l'Intelligence Artificielle (Promotion 2026)](https://sjaubert.github.io/Cours-IA/00-Formation/cours-introduction-ia-2026/index.html) | **Découverte à Avancé** | Web App / Diaporama interactif | Support de cours complet en 4 modules : Histoire & cybernétique, Mathématiques des Transformers, Ruptures 2022-2026 (Multimodalité, Raisonnement, Systèmes agentiques & protocole MCP), Cadre réglementaire AI Act européen et Souveraineté industrielle <sub>*(créé en sept. 2026)*</sub>
+  - [Version locale interactive](00-Formation/cours-introduction-ia-2026/index.html) | [Conducteur pédagogique détaillé et sourcé](00-Formation/cours-introduction-ia-2026/plan_detaille_formation_ia_2026.md) <sub>*(sept. 2026)*</sub>
+  - [Archive historique PPTX](00-Formation/Module%20Formation/Diaporama%20COURS%20Introduction%20IA.pptx) | [Archive PDF](00-Formation/Module%20Formation/Diaporama%20COURS%20Introduction%20IA.pdf) <sub>*(déc. 2025)*</sub>
 
 ### Démonstrations interactives
 
 - [Les 7 Paramètres qui Contrôlent l'IA](https://sjaubert.github.io/Cours-IA/01-comprendre-ia/parametres-ia/index.html) | **Découverte** | HTML | Expérimentation en temps réel de Temperature, Top-P, Max Tokens et leur impact sur les réponses <sub>*(déc. 2025)*</sub>
 
 - [Visualisation Réseaux de Neurones](01-comprendre-ia/activites/A7_Reseaux_Neurones/index.html) | **Pratique** | HTML | Deux simulateurs : régression linéaire interactive et réseau de neurones avec rétropropagation configurable <sub>*(déc. 2025)*</sub>
-  - [Régression Linéaire Interactive](01-comprendre-ia/activites/A7_Reseaux_Neurones/1_regression_lineaire.html) | Manipulation de points et calcul de droite de régression
-  - [Réseau de Neurones avec Apprentissage Supervisé](01-comprendre-ia/activites/A7_Reseaux_Neurones/2_reseau_neurones.html) | Architecture configurable
-  - [Guide d'utilisation pédagogique](01-comprendre-ia/activites/A7_Reseaux_Neurones/README.md) | [Synthèse Architecture](01-comprendre-ia/activites/A7_Reseaux_Neurones/Synthese_Architecture.md) | [Guide complet](01-comprendre-ia/activites/A7_Reseaux_Neurones/Guide_Architecture_Reseaux.md)
+  - [Régression Linéaire Interactive](01-comprendre-ia/activites/A7_Reseaux_Neurones/1_regression_lineaire.html) | Manipulation de points et calcul de droite de régression <sub>*(déc. 2025)*</sub>
+  - [Réseau de Neurones avec Apprentissage Supervisé](01-comprendre-ia/activites/A7_Reseaux_Neurones/2_reseau_neurones.html) | Architecture configurable <sub>*(déc. 2025)*</sub>
+  - [Guide d'utilisation pédagogique](01-comprendre-ia/activites/A7_Reseaux_Neurones/README.md) | [Synthèse Architecture](01-comprendre-ia/activites/A7_Reseaux_Neurones/Synthese_Architecture.md) | [Guide complet](01-comprendre-ia/activites/A7_Reseaux_Neurones/Guide_Architecture_Reseaux.md) <sub>*(déc. 2025)*</sub>
 
 ### Activités sur les biais et les limites de l'IA
 
 Formation interactive en 6 activités (biais cognitifs, première impression, sélection, confirmation, culturels, jeu de rôle) :
 
 - [Formation Intelligence Artificielle : Les Biais](https://sjaubert.github.io/Cours-IA/01-comprendre-ia/activites-biais/index.html) | **Découverte** | HTML | Point d'entrée avec guide formateur et support apprenant <sub>*(déc. 2025)*</sub>
-- [Métacognition et Biais dans le Prompting](00-Formation/Module%20Formation/MÉTACOGNITION%20ET%20BIAIS%20DANS%20LE%20PROMPTING.docx) | **Pratique** | DOCX | Identifier les mécanismes cognitifs (ancrage, confirmation, cadrage) et appliquer des protocoles de dé-biaisage dans le prompting <sub>*(jan. 2026)*</sub>
+- [Métacognition et Biais dans le Prompting](00-Formation/Module%20Formation/MÉTACOGNITION%20ET%20BIAIS%20DANS%20LE%20PROMPTING.docx) | **Pratique** | DOCX | Identifier les mécanismes cognitifs (ancrage, confirmation, cadrage) et appliquer des protocoles de dé-biaisage dans le prompting <sub>*(déc. 2025)*</sub>
 
 Activités autonomes (approche par cas) :
 
@@ -65,8 +65,8 @@ Activités autonomes (approche par cas) :
 ### Guides de référence
 
 - [Guide Interactif Art du Prompt](https://sjaubert.github.io/Cours-IA/03-outils-google/ia-education/Guide_Interactif_Prompt.html) | **Découverte** | HTML | Introduction structurée aux principes du prompting efficace <sub>*(déc. 2025)*</sub>
-- [Maîtriser l'Art du Prompt Engineering](00-Formation/Maîtriser%20l'Art%20du%20Prompt%20Engineering%20.docx) | **Pratique** | DOCX | Synthèse complète des principes, techniques avancées et meilleures pratiques de conception d'instructions pour LLM <sub>*(jan. 2026)*</sub>
-- [Cas d'usage : Démonstration de Puissance & Effet de Levier Cognitif](00-Formation/CAS%20D'USAGE%20%20DÉMONSTRATION%20DE%20PUISSANCE%20EFFET%20DE%20LEVIER%20COGNITIF.docx) | **Avancé** | DOCX | Analyse financière & stratégique assistée par RAG, extraction de données multi-sources et synthèse de notes confidentielles <sub>*(jan. 2026)*</sub>
+- [Maîtriser l'Art du Prompt Engineering](00-Formation/Maîtriser%20l'Art%20du%20Prompt%20Engineering%20.docx) | **Pratique** | DOCX | Synthèse complète des principes, techniques avancées et meilleures pratiques de conception d'instructions pour LLM <sub>*(nov. 2025)*</sub>
+- [Cas d'usage : Démonstration de Puissance & Effet de Levier Cognitif](00-Formation/CAS%20D'USAGE%20%20DÉMONSTRATION%20DE%20PUISSANCE%20EFFET%20DE%20LEVIER%20COGNITIF.docx) | **Avancé** | DOCX | Analyse financière & stratégique assistée par RAG, extraction de données multi-sources et synthèse de notes confidentielles <sub>*(nov. 2025)*</sub>
 
 - [PromptFlow UIMM Studio](https://sjaubert.github.io/Cours-IA/02-prompt-engineering/promptflow/dist/index.html) | **Pratique** | App Web | Outil de création pédagogique pour concevoir des séquences de prompts <sub>*(déc. 2025)*</sub>
 
@@ -184,24 +184,24 @@ Note : plusieurs supports Skills coexistent ci-dessous. Désigne une source de r
 
 - [Cours Interactif Skills Claude Code](05-claude/cours-skills-claude.html) | **Avancé** | HTML | Cours structuré sur la création et l'usage des Skills dans Claude Code <sub>*(mai 2026)*</sub>
 
-- [Guide de référence : Claude Code Skills](05-claude/Claude%20Code%20Skills.docx) | **Avancé** | DOCX | Document de référence complet sur les Skills
-- [Plan Formation Skills Claude (v3)](05-claude/Plan_Formation_Claude_Skills_v3.docx) | **Avancé** | DOCX | Programme pédagogique révisé (version formateur)
-- [Plan Formation Skills Gemini](05-claude/Plan_Formation_GEMINI_Skills.docx) | **Avancé** | DOCX | Équivalent pour l'écosystème Gemini CLI
+- [Guide de référence : Claude Code Skills](05-claude/Claude%20Code%20Skills.docx) | **Avancé** | DOCX | Document de référence complet sur les Skills <sub>*(mai 2026)*</sub>
+- [Plan Formation Skills Claude (v3)](05-claude/Plan_Formation_Claude_Skills_v3.docx) | **Avancé** | DOCX | Programme pédagogique révisé (version formateur) <sub>*(mai 2026)*</sub>
+- [Plan Formation Skills Gemini](05-claude/Plan_Formation_GEMINI_Skills.docx) | **Avancé** | DOCX | Équivalent pour l'écosystème Gemini CLI <sub>*(mai 2026)*</sub>
 
 ### Hooks
 
-- [Guide complet : Claude Code Hooks](05-claude/A%20Complete%20Guide%20to%20Claude%20Code%20Hooks.docx) | **Avancé** | DOCX | Référence exhaustive : syntaxe, cas d'usage, sécurité, exemples
-- [Plan Formation Claude Hooks](05-claude/Plan_Formation_Claude_Hooks_v2.docx) | **Avancé** | DOCX | Programme de formation pédagogique sur les Hooks
+- [Guide complet : Claude Code Hooks](05-claude/A%20Complete%20Guide%20to%20Claude%20Code%20Hooks.docx) | **Avancé** | DOCX | Référence exhaustive : syntaxe, cas d'usage, sécurité, exemples <sub>*(mai 2026)*</sub>
+- [Plan Formation Claude Hooks](05-claude/Plan_Formation_Claude_Hooks_v2.docx) | **Avancé** | DOCX | Programme de formation pédagogique sur les Hooks <sub>*(mai 2026)*</sub>
 
 ### Cowork (délégation et automatisation)
 
 - [Guide Cowork : 12 leçons + 7 scénarios](05-claude/cowork-complete-guide/cowork-complete-guide/START-HERE.md) | **Avancé** | MD | Du premier contact avec Cowork jusqu'à l'IA comme employé autonome : délégation, organisation, recherche, création documentaire, automatisation navigateur <sub>*(avr. 2026)*</sub>
-- [Guide Cowork](05-claude/guide_cowork.docx) | **Avancé** | DOCX | Version condensée du guide Cowork
+- [Guide Cowork](05-claude/guide_cowork.docx) | **Avancé** | DOCX | Version condensée du guide Cowork <sub>*(avr. 2026)*</sub>
 
 ### Documents de référence
 
-- [Guide Claude Code CLI](05-claude/guide_claude_code_CLI.docx) | **Pratique** | DOCX | Référence complète des commandes Claude Code en ligne de commande
-- [Formation Claude Code](05-claude/Formation_Claude_Code.docx) | **Avancé** | DOCX | Support de formation générale Claude Code
+- [Guide Claude Code CLI](05-claude/guide_claude_code_CLI.docx) | **Pratique** | DOCX | Référence complète des commandes Claude Code en ligne de commande <sub>*(avr. 2026)*</sub>
+- [Formation Claude Code](05-claude/Formation_Claude_Code.docx) | **Avancé** | DOCX | Support de formation générale Claude Code <sub>*(avr. 2026)*</sub>
 
 ---
 
