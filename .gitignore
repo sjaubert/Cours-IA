@@ -70,6 +70,8 @@ build/
 # Exception : dossiers dist des projets Vite/GitHub Pages
 !00-Formation/prompt_flow_uimm/dist/
 !00-Formation/prompt_flow_uimm/dist/**
+!02-prompt-engineering/promptflow/dist/
+!02-prompt-engineering/promptflow/dist/**
 pip-log.txt
 
 # ----------------------------------------------------------------
