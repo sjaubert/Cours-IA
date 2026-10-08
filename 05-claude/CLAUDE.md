@@ -14,6 +14,7 @@ This is a training materials repository for **"Maîtriser Claude et l'IA Agentiq
 - `Structure_formation_claude.txt` — Raw notes for a 7-day learning ramp-up
 - `Guide - Veille IA automatique…pdf` — PDF guide on automated AI monitoring with Claude Code
 - `*.jpg` — Course visual assets (cheat sheet, workflow diagram)
+- `sources/` — Third-party reference articles and guides (reading material, not course supports)
 
 ## Conventions
 

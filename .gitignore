@@ -63,13 +63,10 @@ venv/
 .venv/
 ENV/
 env_mcp/
-NoteBLM/env_mcp/
 *.egg-info/
 dist/
 build/
 # Exception : dossiers dist des projets Vite/GitHub Pages
-!00-Formation/prompt_flow_uimm/dist/
-!00-Formation/prompt_flow_uimm/dist/**
 !02-prompt-engineering/promptflow/dist/
 !02-prompt-engineering/promptflow/dist/**
 pip-log.txt
@@ -173,3 +170,12 @@ run_status.txt
 
 # Test
 app_Test/
+
+# Artefacts de compilation LaTeX
+*.aux
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+
+# Dépôt tiers indépendant (possède son propre .git)
+claude-usage/
